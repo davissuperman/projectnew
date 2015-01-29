@@ -2,7 +2,8 @@
 return array (
   'site_name' => '森田药妆微信服务平台',
   'site_title' => '森田药妆',
-  'site_url' => 'http://wx.drjou.cc',
+//  'site_url' => 'http://wx.drjou.cc',
+  'site_url' => 'http://newsentian.snkculture.cn',
   'site_my' => '森田',
   'ischeckuser' => 'false',
   'ipc' => '京ICP备13051851号-2',
