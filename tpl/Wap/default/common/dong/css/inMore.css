@@ -1,0 +1,26 @@
+*{margin:0px;padding:0px;font-family:"微软雅黑"}
+html,body{width:100%;height:100%;overflow:hidden;}
+body{width:100%;height:100%;overflow-x:hidden;position:relative;background:url(../img/bg.jpg) no-repeat center top;background-size:100% 100%;}
+a{text-decoration:none;}
+.shareBox{padding-top:20px;}
+.rankTitle{width:130px;height:30px;text-align:center;line-height:30px;color:#fff;margin:10px auto;background:#1ea5b4;border-radius:20px;font-size:16px;}
+.results{color:#06518b;margin-top:10px;margin-bottom:10px;}
+.coreNum{font-weight:bold;font-size:18px;}
+.careSelf{width:75%;}
+.solidP{height:1px;}
+.blueSolid{float:left;position:absolute;left:50%;margin:auto;margin-left:-90px;width:180px;}
+.textTitle{padding:0px 15px;margin-top:5px;color:#ff0000;font-weight:bold;}
+.textFont{color:#06518b;padding:0px 15px;}
+.getMore{position:absolute;left:50%;text-align:center;margin:20px auto;}
+.cover{position:fixed;z-index:99999;width:100%;height:100%;top:0px;left:0px;background:#000;opacity:0.8;display:none;}
+.coverText{font-size:16px;font-weight:bold;color:#fff;line-height:20px;padding:0px 30px;margin-top:20px;}
+.topTipP{text-align:right;}
+.topTip{width:65px;}
+.knowImg{width:125px;}
+
+/*改动*/
+.careSelf{width:50%;}
+.textTitle{padding:0px 15px;color:#ff0000;font-weight:bold;}
+.results{color:#06518b;margin-top:5px;margin-bottom:5px;}
+.rankTitle{width:130px;height:30px;text-align:center;line-height:30px;color:#fff;margin:5px auto;background:#1ea5b4;border-radius:20px;font-size:16px;}
+

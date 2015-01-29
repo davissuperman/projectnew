@@ -1,0 +1,52 @@
+<?php $nav = "CRM"; $side = "CHAT" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Text_add.css" rel="stylesheet"/>
+ <div class="container main">
+<div class="row main">
+<include file="Crm:left"/>
+        <div class="col-md-10 main">
+            <!-- <p class="rightTop">
+                <a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+            </p>
+            <p class="artiEdit"><span class="big">新增客服</span><a href="javascript:history.go(-1);"  class="addListM">返回</a></p> -->
+            <ol class="breadcrumb">
+                    <li><a href="{pigcms::U('Chat/index',array('token'=>$token))}">CRM</a></li>
+                    <li><a href="{pigcms::U('Chat/index',array('token'=>$token))}">微客服</a></li>
+                    <li class="active"><if condition="$_GET['id']">修改<else />新增</if>客服</li>
+                  </ol>
+                  <div class="panel panel-success">
+              <div class="panel-heading">
+                <h3 class="panel-title"><if condition="$_GET['id']">修改<else />新增</if>客服</h3>
+              </div>
+              <div class="panel-body">  
+            <form class="form" method="post"   action=""  target="_top" enctype="multipart/form-data" >
+                <p class="same">
+                    <span class="Tex">工号呢称：</span>
+                    <input type="text" name="name" id="title" maxlength="10" class="circle" value="{pigcms::$serviceUser['name']}" data-rule-required="true">
+                </p>
+                <p class="example">*限制在十个字以内 </p>
+                <p class="same">
+                    <span class="Tex">登陆帐号：</span>
+                    <input type="text" name="userName" id="title" maxlength="10" class="circle" value="{pigcms::$serviceUser['userName']}" data-rule-required="true">
+                </p>
+                <p class="example">* </p>
+                <p class="same">
+                    <span class="Tex">登陆密码：</span>
+                    <input type="text" value="" class="circle" id="userPwd"  name="userPwd"/>
+                    <input type="hidden" name="token"  value="{pigcms:$token}">
+                    <input type="hidden" name="id"  value="{pigcms::$serviceUser['id']}">
+                </p>
+        </div>
+            <div class="panel-footer" style="text-align:right">
+                <input type="submit" value="保存" class="btn btn-success "/>
+                <a href="{pigcms::U('Chat/index',array('token'=>$token))}" class="btn btn-link">取消</a>
+            </div>    
+            </form>
+        </div>
+        </div>
+        </div>
+    </div>  
+
+</div>
+<include file="Public:footer"/>

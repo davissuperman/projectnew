@@ -1,0 +1,56 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Areply_index.css" rel="stylesheet"/>
+ <div class="content">
+<div class="ffBox">
+<include file="Public:left"/>
+     <div class="right">
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+                <p class="replyHeading">
+                	<span class="span1">关注时自动回复内容</span>
+                    <span class="span2">可参考右边的范例来写，拷贝到输入框后修改！</span>
+                </p>
+                
+                <div class="leftArea">
+                   <form method="post"  action="{pigcms::U('Areply/insert')}">
+                	<textarea class="areaLeft" name="content">{pigcms:$areply.content}</textarea>
+                    <p><input name="home" class="choice" type="checkbox" <if condition="$areply['home'] eq 1">checked="checked"</if> value="1"   />勾选此项请填写关键词,我们将检索关键词相关的图文信息最多回复9条信息</p>
+                    <p>关键词：<input type="text" class="tex"  value="{pigcms:$areply.keyword}" name="keyword"/>例：填写“功能”,系统会检索包含最近发布的9条信息 </p>
+                    <p style="margin-top:30px;">	<input type="submit" value="保存" class="next"/> <a href="{pigcms::U('Img/add')}"  class="btnGray vm replyButton"  >切换到图文模式</a></p> 
+                	
+                </div>
+                <ul class="rightText">
+                	<li class="liHeading">参考范例</li>
+                    <li>1.附近周边信息查询lbs</li>
+                    <li>2.音乐查询　音乐＋音乐名 例：音乐爱你一万年</li>
+                    <li>3.天气查询　城市名＋天气　例上海天气</li>
+                    <li>4.手机归属地查询  手机＋手机号码　例：手机13917778912</li>
+                    <li>5.身份证查询　身份证＋号码　　例：身份证342423198803015568</li>
+                    <li>6.公交查询　公交＋城市＋公交编号　例：上海公交774</li>
+                    <li>7.火车查询　火车＋城市＋目的地　例火车上海南京</li>
+                    <li>8.翻译 支持 及时翻译，语音翻译　翻译＋关键词 例：翻译你好</li>
+                   <li>9.更多功能请回复帮助，或者help</li>
+                   <!--  <li>9.彩票查询　彩票＋彩票名 例如:彩票双色球</li>
+                    <li>10.周公解梦　梦见+关键词　例如:梦见父母</li>
+                    <li>11.陪聊　直接输入聊天关键词即可</li>
+                    <li>12.聊天　直接输入聊天关键词即可</li>
+                    <li>13.藏头诗 藏头诗+关键词　例：藏头诗我爱你　</li>
+                    <li>14.笑话　直接发送笑话</li>
+                    <li>15.糗事　直接发送糗事</li>
+                    <li>16.快递 快递＋快递名＋快递号　例：快递顺丰117215889174</li>
+                    <li>17.健康指数查询　健康＋高，＋重　例：健康170,65</li>
+                    <li>18.朗读 朗读＋关键词　例：朗读爱微多用户营销系统</li>
+                    <li>19.计算器 计算器使用方法　例：计算50-50　，计算100*100</li>
+                    <li>20.输入价格了解爱微平台系统的价格</li>
+                    <li>21.输入服务了解爱微平台系统的售后服务</li>
+                    <li>22.输入抽奖，即可玩幸运大抽奖</li>
+                    <li>23.输入会员即可填写会员资料</li>
+                    <li>24.更多功能请回复帮助，或者help</li>--> 
+                </ul>
+      </div>
+            <!--right--end-->
+			</div>
+ </div>
+<include file="Public:footer"/>

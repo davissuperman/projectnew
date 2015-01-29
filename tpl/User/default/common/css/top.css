@@ -1,0 +1,25 @@
+*{margin:0px;padding:0px;}
+html,body{width:100%;height:100%;font-size:14px;background:#dcdcdc;}
+body{background:url(../img/topBj1.gif) repeat-x}
+ul{list-style:none;}
+a{text-decoration:none;}
+.box{width:1070px;margin:auto;}
+.top{height:42px;line-height:42px;color:#fff;}
+.topLeft{float:left;}
+.topLeft img,.topLeft span{float:left;margin-right:20px;display:inline;font-size:12px;font-weight:bold;}
+.topLeft .logo{margin-top:5px;display:inline;float:left;}
+.topRight{float:right;font-size:12px;}
+.topRight span,.topRight a{float:left}
+.topRight span.shu{color:#fff;line-height:40px;margin-right:15px;}
+.red{color:red;margin-right:15px;display:inline;}
+.common{height:44px;border-right:1px #ddd solid;}
+.common p{height:25px;}
+.common span{float:left;}
+.heading{width:1070px;height:71px;border-top:1px #c7cdd6 solid;border-bottom:1px #c7cdd6 solid;background:#f5f6f7;color:#6a6a6a;margin:20px auto;}
+.heading li{width:192px;height:58px;border-right:1px #ddd solid;float:left;padding-top:13px;padding-left:20px;}
+.heading li.last{border:0px;}
+.loginHeading{width:1050px;height:71px;line-height:71px;border-top:1px #c7cdd6 solid;border-bottom:1px #c7cdd6 solid;background:#f5f6f7;color:#6a6a6a;margin:20px auto;padding-left:20px;}
+.user{color:red;}
+.title{font-weight:bold;}
+.addTex{color:#777;font-weight:bold;font-size:20px;float:left;margin-right:20px;}
+.addtex{color:#777;font-size:14px;font-weight:bold;float:left;}

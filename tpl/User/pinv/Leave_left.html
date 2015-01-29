@@ -1,0 +1,9 @@
+<div class="col-md-2 sidebar">
+<nav id="sidebar-nav">
+	<ul class="nav nav-pills nav-stacked">
+		<li><a href="{pigcms::U('Module/promoteList',array('token'=>$token))}"><span class="glyphicon glyphicon-chevron-left"></span> 返回</a></li>
+		<li <?php if($side == "INDEX") echo 'class="active"'; ?>><a href="{pigcms::U('Leave/index?',array('token'=>$token))}">微信墙回复设置</a></li>
+		<li <?php if($side == "INFO") echo 'class="active"'; ?>><a href="{pigcms::U('Leave/info?',array('token'=>$token))}">微信墙管理</a></li>
+	</ul>
+</nav>
+</div>

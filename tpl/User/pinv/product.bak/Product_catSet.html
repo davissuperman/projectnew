@@ -1,0 +1,85 @@
+<?php $nav = "FUNCTION"; $side = "CATEGORY" ?>
+<include file="Public:head"/>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+<script src="{pigcms::RES}/js/jscolor.js" type="text/javascript"></script>
+<link type="text/css" href="{pigcms::RES}/css/Product_catSet.css" rel="stylesheet"/>
+<style type="text/css">
+*{margin:0;padding:0;list-style-type:none;}
+a,img{border:0;}
+body{font:12px/180% Arial, Helvetica, sans-serif;}
+.jscolorstyle h3{font-size:14px;margin:20px;}
+.jscolorstyle p{padding:0 0 0 40px;margin:10px 0;}
+</style>
+
+<div class="container main">
+<div class="row">
+<include file="Product:left"/> 
+              
+             <div class="col-md-10 main">
+ 				<div class="panel panel-success">
+			  <div class="panel-heading">
+				<h3 class="panel-title">商城分类设置</h3>
+			  </div>
+			  <div class="panel-body">   
+                   <form class="form" method="post" action="" enctype="multipart/form-data"> 
+    				<input type="hidden" name="id" value="{pigcms:$set.id}" /> 
+                <p class="same">
+                    <span class="Tex">中文名称：</span>
+                    <input type="text" name="name" value="{pigcms:$set.name}" class="circle"/>
+                </p>
+				<p class="same">
+                    <span class="Tex">英文名称：</span>
+                    <input type="text" name="Ename" value="{pigcms:$set.name}" class="circle"/>
+                </p>
+				<div class="keyWord">
+                 <span class="Tex">推荐：</span>
+                 <select id="catid" name="sid"><option value="0">请选择分类...</option>
+					<volist name="class" id='class'>
+					<if condition="$class['id'] eq $set[ 'id' ]">
+					<option value="{pigcms:$class.id}" selected="selected">|-{pigcms:$class.name}</option>
+					<else/>
+				 <option value="{pigcms:$class.id}">|-{pigcms:$class.name}</option></if>
+					<volist name="class[ 'son' ]" id="cla">
+						<if condition="$cla['id'] eq $set[ 'id' ]">		
+						 <option value="{pigcms:$cla.id}" selected="selected">&nbsp&nbsp&nbsp&nbsp|---{pigcms:$cla.name}</option>
+							<else/>
+							 <option value="{pigcms:$cla.id}">&nbsp&nbsp&nbsp&nbsp|---{pigcms:$cla.name}</option>
+							 </if>
+					</volist>
+				 </volist>
+				 </select>
+                </div>
+				  </p>
+				<tr>
+				<td class="label">是否为热门分类或者活动分类:</td><td>
+				<input type="radio" name="host" value="news">热卖</td>
+				<td><input type="radio" name="host" value="activ">活动</td>		
+					</tr>
+                </p>	
+                <p class="same">
+                    <span class="Tex">图片：</span>
+                    <input type="text" name="logourl" id='url' value="{pigcms:$set.logourl}" class="Scircle"/>
+					<a href="###" onclick="upyunPicUpload($(this).prev().attr('id'),'pic',700,420,'qtclsw1382672973')" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-upload"></span> 上传</a>
+                </p>
+			<p class="same">
+                  <span class="Tex">颜色选择：</span><input class="color" value="66ff00" name="color">
+                </p>
+                <p class="areBox">
+                    <span class="Tex">简介：</span>
+                   	<textarea class="areSame" name="des">{pigcms:$set.des}</textarea>
+                </p>
+             </div>
+           	  <div class="panel-footer" style="text-align:right"> 
+           	     <if condition="$isDining neq 1"><input type="hidden" value="0" name="dining" /><else/><input type="hidden" value="1" name="dining" /></if>
+      			 <input type="hidden" value="{pigcms::$parentid}" name="parentid" />
+	  			 <input type="submit" value="保存" class="btn btn-success"/>
+	  			 <a href="javascript:history.go(-1);"  class="btn btn-link">取消</a> 
+		      </div>
+		       </form>
+            </div>
+			</div>
+             </div>
+ </div>
+<include file="Public:footer"/>

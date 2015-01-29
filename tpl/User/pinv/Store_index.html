@@ -1,0 +1,69 @@
+<?php $nav = "FUNCTION"; $side = "CATEGORY"; $sideTop = "PRODUCT"; ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Product_index.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+
+<div class="container main">
+    <div class="row">
+        <include file="Store:left"/>
+        <div class="col-md-10 main">
+            <ol class="breadcrumb">
+                <li><a href="{pigcms::U('Store/index',array('token'=>$token))}">微商城</a></li>
+                <li><a href="{pigcms::U('Store/index',array('token'=>$token))}">商城管理</a></li>
+                <li class="active">商品管理</li>
+            </ol>
+
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">商品管理</h3>
+                </div>
+                <div class="panel-body">
+
+                    <div class="pull-right add-button">
+                        <a href="{pigcms::U('Store/catAdd', array('token' => $token))}" title="添加" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> 新增分类</a> <a href="{pigcms::U('Store/setting', array('token' => $token))}" title="添加" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> 商城设置</a> <!--<a href="#"  class="btn btn-success btn-sm"   ><span class="glyphicon glyphicon-wrench"></span> 支付配置</a>-->
+                    </div>
+                    <div class="clearfix"></div>
+
+           
+                        <table class="table table-striped" border="0" cellspacing="0" cellpadding="0">
+                            <thead>
+                                <tr>                               
+                                    <th width="80">分类名称</th>
+                                    <th width="200">简介</th>
+                                    <th width="100">规格</th>
+                                    <th width="90">产品外观</th>
+                                     
+                                    <th width="150" class="norightborder">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <volist name="list" id="hostlist"> 
+                                <tr>
+                                    <td>{pigcms:$hostlist.name}</td>
+                                    <td>{pigcms:$hostlist.des}</td>
+                                    <td>{pigcms:$hostlist.norms}<if condition="empty($hostlist['norms']) neq true"><span><a href="{pigcms::U('Store/norms', array('catid'=>$hostlist['id'],'token'=>$token, 'type' => 0))}">规格管理</a></span></if></td> 
+                                <td>{pigcms:$hostlist.color}<if condition="empty($hostlist['color']) neq true"><span><a href="{pigcms::U('Store/norms', array('catid'=>$hostlist['id'],'token'=>$token, 'type' => 1))}">外观管理</a></span></if></td> 
+                        
+                                <td class="norightborder">
+                                    <a href="{pigcms::U('Store/catSet',array('token'=>$token,'id'=>$hostlist['id']))}">修改</a>
+                                    <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Store/catDel',array('id'=>$hostlist['id'],'token'=>$token))}');">删除</a>
+                                    <span>&nbsp;|&nbsp;<a href="{pigcms::U('Store/product',array('catid' => $hostlist['id'],'token'=>$token))}" style="color:#f00">商品管理</a></span>
+                                </td>
+                                </tr>
+                            </volist>
+                            </tbody>
+                        </table>
+                
+                    <div class="cLine">
+                         
+                            <div class="pages">{pigcms:$page}</div>
+                        
+                         
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<include file="Public:footer"/>

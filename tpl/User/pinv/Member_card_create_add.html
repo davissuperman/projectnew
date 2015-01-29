@@ -1,0 +1,94 @@
+<?php $nav = "MEMBER"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Member_card_create_add.css" rel="stylesheet"/>
+<script  type="text/javascript" charset="utf-8">
+
+  function inputchek(obj){
+    var reg = new RegExp("^[0-9]*[1-9]*$");
+    if(!reg.test(obj.value)){
+        alert("请输入大于零的整数!");
+    }   
+  }
+
+  $("#stat").focusout(function(event) {
+      inputchek(this);
+  });
+  $("#enddate").focusout(function(event) {
+      inputchek(this);
+  });
+
+</script>
+<style>
+  .example{
+   padding-left:142px !important;
+  }
+  .text-tips{
+    margin-top:8px;
+    float: left;
+    height: 20px;
+    line-height: 20px;
+    color: #ea533f;
+    font-size: 12px;
+    width: 550px;
+    color: #999999;
+  }
+</style>
+<div class="container main">
+<div class="row">
+<include file="Member_card:left"/>
+     
+
+            <div class="col-md-10 main">
+            
+            <ol class="breadcrumb">
+			  <li><a href="{pigcms::U( 'Member_card/replyInfoSet',array( 'token'=>$token ))}">会员卡</a></li>
+			  <li><a href="{pigcms::U( 'Member_card/index',array( 'token'=>$token ))}">会员卡管理</a></li>
+			  <li><a href="{pigcms::U( 'Member_card/create',array( 'token'=>$token, 'id'=>$cid ))}">{pigcms:$thisCard.cardname} - 在线开卡</a></li>
+			  <li class="active">创建会员卡号</li>
+			</ol>
+			
+                <div class="panel panel-success">
+              <div class="panel-heading cfix">
+                <h3 class="panel-title" style="float:left; margin-right: 5px">商家开卡配置</h3>
+                <span class="get" style="font-size: 13px">本月可创建<span class="num"> {pigcms:$count} </span>张 剩余<span class="num"> {pigcms:$cancrnum} </span>张</span>    
+              </div>
+              <div class="panel-body">  
+
+            <form method="post" action="">
+                <p class="same">
+                    <span class="Tex">卡前编号：</span>
+                    <input type="text" id="title" value="" name="title" class="circle"/>
+                </p>
+                <p class="example">例：卡号BSD-110 “BSD-”就是卡前编号，可由英文、数字及中划线“-”组成。</p>
+                <div class="keyWord" style='display:none'>
+                    <span class="Tex">选择人群：</span>
+                    <input type="radio" class="rad" name="group" value="1"  checked="checked"/><span class="radTex">所有会员</span>
+                    <input type="radio" class="rad" name="group" value="2" /><span class="radTex">普通会员</span>
+                    <input type="radio" class="rad" name="group" value="3" /><span class="radTex">银卡会员</span>
+                    <input type="radio" class="rad" name="group" value="4" /><span class="radTex">金卡会员</span>
+                    <input type="radio" class="rad" name="group" value="5" /><span class="radTex">钻石会员</span>
+                </div>
+                <p class="same">
+                	<span class="Tex">生成范围：</span>
+                    <span class="arrive">起始编号:</span>
+                    <input type="text" class="Scircle" id="stat" name="stat" onClick="WdatePicker()"/>
+                    <span class="arrive">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;到</span>
+                    <input type="text" class="Scircle" id="enddate"  name="end" onClick="WdatePicker()"/>
+                </p>
+                <p class="example">例如:输入1到100会创建100张会员卡</p>
+                <p class="same">
+                	<span class="Tex">使用说明：</span>
+                	<span class="text-tips">在此说明生成会员卡的说明，每次最多生成1000张，请及时关注，会员卡是否被领取完了,全部被发放后请再次生成。 </span>
+                </p>
+                </div>
+        
+                <div class="panel-footer" style="text-align:right"> 
+                  <input type="submit" value="保存" class="btn btn-success"/>
+                  <a href="javascript:history.go(-1);"  class="btn btn-link">取消</a> 
+                </div>
+                   </form>
+		</div>
+        </div>
+        </div>
+ </div>
+<include file="Public:footer"/>

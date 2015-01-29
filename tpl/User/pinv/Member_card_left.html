@@ -1,0 +1,8 @@
+<div class="col-md-2 sidebar">
+<nav id="sidebar-nav">
+	<ul class="nav nav-pills nav-stacked">
+		<li <?php if($side == "REPLY") echo 'class="active"'; ?>><a href="{pigcms::U('Member_card/replyInfoSet',array('token'=>$token))}">会员卡回复配置</a></li>
+		<li <?php if($side == "INDEX") echo 'class="active"'; ?>><a href="{pigcms::U('Member_card/index',array('token'=>$token))}">会员卡管理</a></li>
+	</ul>
+</nav>
+</div>

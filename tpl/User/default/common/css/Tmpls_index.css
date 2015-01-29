@@ -1,0 +1,11 @@
+.right{width:837px;height:1000px;float:left;padding:0px 10px;}
+.artiEdit{height:45px;line-height:50px;border-bottom:1px #eee solid;}
+.big{font-size:16px;color:#6e6e6e;font-weight:bold;float:left;margin-right:10px;}
+.small{font-size:12px;color:#6e6e6e;float:left;}
+.list{height:36px;margin-top:10px;}
+.list li{height:36px;line-height:36px;text-align:center;width:170px;background:#f9f9f9;float:left;margin-right:10px;color:#6e6e6e;cursor:pointer;border-radius:3px;}
+.showBox{padding:15px;background:#eee;float:left;width:800px;}
+.showBox li{float:left;margin-left:25px;margin-top:10px;cursor:pointer;text-align:center;}
+.list li.clickOver{background:#eee;}
+.mold{margin-right:5px;}
+.moldTex{color:#6e6e6e;}

@@ -1,0 +1,91 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Product_index.css" rel="stylesheet"/>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+ <div class="content">
+ <div class="ffBox">
+<include file="Public:left"/>      
+     <!--right--begain-->
+           <div class="right">
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+             <p class="artiEdit"><span class="big"><if condition="$isDining neq 1">商品<else/>菜品</if>管理</a></span>
+             <form method="post" action="">
+	             <input type="hidden" name="ac" value="hotels-list">
+	             <input type="submit" value="搜索" class="searchPress"/>
+	             <input type="text" value="输入关键词搜索" class="search"/>
+             </form>
+             </p>
+                <ul class="listBox">
+                	<li><a href="{pigcms::U('Product/index',array('token'=>$token,'dining'=>$isDining))}"><if condition="$isDining neq 1">商品<else/>菜品</if>管理</a></li>
+                    <li><a href="{pigcms::U('Product/cats',array('token'=>$token,'dining'=>$isDining))}"><if condition="$isDining neq 1">商品分类<else/>菜品分类</if>管理</a></li>
+                    <li  class="onOver"><a href="{pigcms::U('Product/orders',array('token'=>$token,'dining'=>$isDining))}">订单管理</a></li>
+                    <if condition="$isDining eq 1"><li><a href="{pigcms::U('Product/tables',array('token'=>$token,'dining'=>1))}">桌台管理</a></li></if>
+						<if condition="$isDining neq 1">
+						<li><a href="{pigcms::U('Reply_info/set',array('token'=>$token,'infotype'=>'Shop'))}">商城回复配置</a></li>
+						<else/>
+						<li><a href="{pigcms::U('Reply_info/set',array('token'=>$token,'infotype'=>'Dining'))}">订餐回复配置</a></li>
+						</if>
+         
+                </ul><form method="post" action="" id="info">
+                <div class="showBox">
+                	<div>
+                        <p class="pressBox"><input type="button" value="处理订单" class="addList" onclick="$('#info').submit()"/><a href="{pigcms::U('Alipay_config/index',array('token'=>$token))}"  class="addList"  style="margin-left:10px;">支付宝配置</a></p>
+                        <table class="sheet" cellspacing="1">
+                            <tr>
+                            <th><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>
+                                <th class="firstTd">姓名</th>
+                                <th class="secondTd">电话</th>
+                                <th class="thirdTd">数量</th>
+                                <th class="forthTd">总价（元）</th>
+                                <th class="forthTd">支付否</th>
+                                <th class="forthTd">状态</th>
+                                <th class="forthTd">创建时间</th>
+                                <th class="sevenTd">操作</th>
+                            </tr>
+                              <volist name="orders" id="o"> 
+                            <tr>
+                            <td><input type="checkbox" value="{pigcms:$o.id}" class="cbitem" name="id_{pigcms:$i}"></td>
+                                <td>{pigcms:$o.truename}</td>
+                                <td>{pigcms:$o.tel}</td>
+                                <td>{pigcms:$o.total}</td>
+                                <td>{pigcms:$o.price}</td>
+                                 <td><if condition="$o.paid eq 1"><span style="color:green">已付款</span><else/><span style="color:red">未付款</span></if> / <if condition="$o.sent eq 1"><span style="color:green">已发货</span><else/><span style="color:red">未发货</span></if></td>
+                             	<td><if condition="$o.handled eq 1"><span style="color:green">已处理</span><else/><span style="color:red">未处理</span></if></td>
+                                <td>{pigcms:$o.time|date="Y-m-d H:i:s",###}</td>
+                                <td><a href="###" onclick="showIntroDetail({pigcms:$o.id})">详细</a> <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Product/deleteOrder',array('token'=>$token,'id'=>$o['id'],'dining'=>$isDining))}');">删除</a></td>
+                            </tr>
+                         </volist>  
+                        </table>
+                           <p class="page">{pigcms:$page}</p>
+                    </div>
+                    
+            	</div>
+            	<input type="hidden" name="token" value="{pigcms:$_GET['token']}" />
+</form>
+                   <script>
+function showIntroDetail(id){
+	art.dialog.open('{pigcms::U('Product/orderInfo',array('token'=>$token,'dining'=>$isDining))}&id='+id,{lock:false,title:'订单详情',width:700,height:420,yesText:'关闭',background: '#000',opacity: 0.87});
+}
+function selectall(name) {
+	var checkItems=$('.cbitem');
+	if ($("#check_box").attr('checked')==false) {
+		$.each(checkItems, function(i,val){
+			val.checked=false;
+		});
+		
+	} else {
+		$.each(checkItems, function(i,val){
+			val.checked=true;
+		});
+	}
+}
+</script>
+            </div>
+            <!--right--end-->
+            </div>   
+      
+ </div>
+<include file="Public:footer"/>

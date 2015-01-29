@@ -1,0 +1,82 @@
+<?php $nav = "BUSINESS"?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/module_list.css" rel="stylesheet"/>
+<div class="container main">
+<div class="row">
+
+
+ 		<div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title ">行业模块</h3>
+			  </div>
+			  <div class="panel-body">
+			  	<div class="pv-modules">
+			  		<ul class="pv-modules-list">
+			  			<a href="{pigcms::U('Host/index',array('token'=>$token))}">
+			  			<li>
+			  				<div class="module-left">
+				  				<span class="glyphicon glyphicon-map-marker"></span>
+				  				<span class="module-list-text">微酒店</span>
+				  			</div>
+				  			<div class="module-right">
+				  				<span class="module-list-desc">微酒店模块，让您的公众号瞬间变成在线酒店，粉丝可以在微信上查看多家分店的信息，地理位置</span>
+				  			</div>
+			  			</li>
+			  			</a>
+			  			
+			  			<a href="{pigcms::U('Diancai/index',array('token'=>$token))}">
+			  				<li>
+			  					<div class="module-left">
+			  						<span class="glyphicon glyphicon-cutlery"></span>
+					  				<span class="module-list-text">微餐饮</span>
+					  			</div>
+					  			<div class="module-right">
+					  				<span class="module-list-desc">用户在微信上可以快速购买外卖，以及订单管理、订单直接打印等功能。</span>
+					  			</div>
+			  				</li>
+			  			</a>
+			  			
+			  			<a href="{pigcms::U('Car/set',array('token'=>$token))}">
+			  				<li>
+			  					<div class="module-left">
+					  				<span class="glyphicon glyphicon-compressed"></span>
+					  				<span class="module-list-text">微汽车</span>
+					  			</div>
+					  			<div class="module-right">
+					  				<span class="module-list-desc">预约试驾、预约保养、车主关怀、在售车型和在线客服功能</span>
+					  			</div>
+			  				</li>
+			  			</a>
+			  			
+			  			<a href="{pigcms::U('Estate/index',array('token'=>$token))}">
+			  				<li>
+			  					<div class="module-left">
+					  				<span class="glyphicon glyphicon-home"></span>
+			  						<span class="module-list-text">微房产<BR/></span>
+			  					</div>
+			  					<div class="module-right">
+					  				<span class="module-list-desc">用微信平台打造的一款全新超炫酷房产官方网站</span>
+					  			</div>
+			  				</li>
+			  			</a>
+			  			
+			  			<a href="#">
+			  				<li>
+			  					<div class="module-left">
+					  				<span class="glyphicon glyphicon-heart"></span>
+			  						<span class="module-list-text">微婚庆<BR/><span style="font-size:12px">(开发中)</span></span>
+			  					</div>
+			  					<div class="module-right">
+					  				<span class="module-list-desc">微信喜帖功能，专门针对婚庆行业定制</span>
+					  			</div>
+			  				</li>
+			  			</a>
+			  			
+			  		</ul>
+			  	</div>
+              </div>
+        </div>
+
+</div>      
+</div>
+<include file="Public:footer"/>

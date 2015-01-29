@@ -1,0 +1,11 @@
+<div class="msgWrap form">
+<ul id="tags" style="width:100%">
+<li <if condition="$tab eq 'hdwhcode'">class="selectTag"</if>>
+<a href="{pigcms::U('Code/codewh',array('token'=>$token,'cname'=>$_GET['cname']))}">活动类信息维护</a> 
+			</li>
+<li <if condition="$tab eq 'cpwhcode'">class="selectTag"</if>>
+				<a href="{pigcms::U('Code/cpcodewh',array('token'=>$token,'cname'=>$_GET['cname']))}">产品类信息维护</a> 
+			</li>
+						<div class="clr" style="height:1px;background:#eee;margin-bottom:20px;"></div>
+		</ul>
+</div>

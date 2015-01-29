@@ -1,0 +1,47 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_index.css" rel="stylesheet"/>
+ <div class="content">
+ <div class="ffBox">
+<include file="Public:left"/>
+     
+    <!--right--begain-->
+            <div class="right">
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+             <!--<p class="pressBox"><a href="{pigcms::U('Yuangong/addyg',array('token'=>$token))}"     class="addList"/>添加</a></p>-->
+        
+           <table class="sheet" cellspacing="1">
+                    <tr>                      
+                        <th class="secondTd">名称</th>                     
+                        <th class="thirdTd">总评分</th>
+                        <th class="sevenTd">创建时间</th>
+                        <th  class="forthTd" >操作</th>
+                    </tr>
+                   
+					   
+					
+						 <volist name='rzt' id='item'>
+						<tr>
+					  
+							<td>{pigcms:$item.sid}</td>
+						 
+							<td>{pigcms:$item.vote}</td>
+							<td >{pigcms:$item.cdate|date="Y-m-d H:i:s",###}</td>
+							<td>
+	<!--<a href="{pigcms::U('Wdiaoyan/tplist',array('id'=>$item['cid'],'token'=>$token))}">提交信息管理</a>&nbsp;&nbsp;<a href="{pigcms::U('Wdiaoyan/xuanxadd',array('id'=>$item['cid'],'token'=>$item['token']))}">输入项管理</a>&nbsp;&nbsp;--><a href="{pigcms::U('Yuangong/ygpfupdate',array('id'=>$item['pid'],'token'=>$token))}">修改</a>&nbsp;&nbsp;<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Yuangong/ygpfdel',array('id'=>$item['pid'],'token'=>$token))}');">删除</a></td>
+						   
+						</tr>
+						</volist>
+						
+                </table>
+               
+              
+                <p class="page">{pigcms:$page}</p>
+            </div>
+            <!--right--end-->   
+            </div> 
+      
+ </div>
+<include file="Public:footer"/>

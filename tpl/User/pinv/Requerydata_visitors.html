@@ -1,0 +1,76 @@
+<?php $nav = "STATS"; $side = "VISITORS" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Text_add.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+<script src="{pigcms::RES}/flash/FusionCharts.js" type="text/javascript"></script>
+<script src="{pigcms::RES}/flash/MSLine.swf" language="javascript" type="text/javascript"></script> 
+<div class="container main">
+<div class="row">
+<include file="Requerydata:left"/>     
+    <div class="col-md-10 main">
+            <div class="panel panel-success">
+                <div class="panel-heading cfix">
+                    <h3 class="panel-title pull-left">客服统计——流量统计</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="choose-date">
+                        <a href="{pigcms::U('Requerydata/visitors',array('token'=>$token,'start'=>$nowtime,'end'=>$nowtime))}">今天</a>
+                        <a href="{pigcms::U('Requerydata/visitors',array('token'=>$token,'start'=>$yestoday,'end'=>$yestoday))}">昨天</a>
+                        <a href="{pigcms::U('Requerydata/visitors',array('token'=>$token,'start'=>$sevenDay,'end'=>$nowtime))}" href="javascript:void(0)">最近7天</a>
+                        <a href="{pigcms::U('Requerydata/visitors',array('token'=>$token,'start'=>$thirtyday,'end'=>$nowtime))}">最近30天</a>
+                        <div id="date-calendar">
+                                <form method="post" action="">
+                                    <input type="text" name="start" id="start" value="{pigcms:$start|date='Y-m-d',###}" onClick="WdatePicker()" class="form-control" style="width:102px"/><span>-</span>
+                                    <input type="text" name="end" id="end" value="{pigcms:$end|date='Y-m-d',###}" onClick="WdatePicker()" class="form-control" style="width:102px"/>
+                                    <button type="submit" class="btn btn-default" style="width:50px"/>确定</button>
+                                </form>
+                        </div>
+                        <a href="<empty name="vlist">javascript:void(0)<else/>{pigcms::U('Requerydata/visitorsImport',array( 'token'=>$token ) )}</empty>" target="_blank" style="float:right;margin-right:10px;">导出报表</a>
+                    </div>
+                    <empty name="vlist">
+                        没有满足条件的数据
+                    <else/>
+                        <div id="chartdiv1" align="center" style="background:#f9f9f9"></div>
+                        <script type="text/javascript">
+                                var chart = new FusionCharts("{pigcms::RES}/flash/MSLine.swf", "ChartId", "780", "380", "0", "1");
+                                //chart.setTransparent("false");
+                                chart.setDataXML('{pigcms:$xml}');
+                                //chart.setDataURL("data.html");
+                                chart.render("chartdiv1");
+                        </script>
+                        <table class="table table-striped" cellspacing="1" cellpadding="5">
+                            <tr>
+                                <th>日期</th>
+                                <th>访客数</th>
+                                <th>沟通次数</th> 
+                                <th>沟通比例</th> 
+                                <th>平均沟通时长</th> 
+                                <th>操作</th>                                     
+                            </tr>
+                            <volist name="vlist" id="v">
+                            <tr bgcolor="#fff" height=30>
+                                <td>{pigcms:$v.d}</td>
+                                <td>{pigcms:$v.vnum}</td>
+                                <td>{pigcms:$v.chatnum}</td>
+                                <td>{pigcms:$v.per}</td>
+                                <td>{pigcms:$v.perTime}</td>
+                                <td><if condition="$v.chatnum neq 0"><a href="{pigcms::U('Kefu/ltiaojl',array('token'=>$token))}" target="_blank">查看聊天记录</a></if></td>
+                            </tr>
+                            </volist>  
+                        </table>
+                    </empty>
+                	<p class="pages">{pigcms:$page}</p>
+            </div> 
+        </div>  
+ </div>
+ </div>
+</div>
+ <script>
+    $(function(){
+       $("#thisCondition").change(function(){
+            var matched = $("#thisCondition").val();
+            window.location.href = "/index.php?g=User&m=Requerydata&a=visitors&token={pigcms:$token}&start={pigcms:$start}&end={pigcms:$end}&matched="+matched;
+        });       
+    });
+</script>
+<include file="Public:footer"/>

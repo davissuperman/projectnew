@@ -1,0 +1,80 @@
+<?php $nav = "FUNCTION"; $side = "CATEGORY"; $sideTop = "PRODUCT"; ?>
+<include file="Public:head"/>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+<div class="container main">
+    <div class="row">
+        <include file="Store:left"/>
+        <div class="col-md-10 main">
+            <ol class="breadcrumb">
+                <li><a href="{pigcms::U('Store/index',array('token'=>$token))}">微商城</a></li>
+                <li><a href="{pigcms::U('Store/index',array('token'=>$token))}">商城管理</a></li>
+                <li class="active">商品管理</li>
+            </ol>
+
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">商品分类管理</h3>
+                </div>
+                <form class="form-horizontal"method="post" action="" enctype="multipart/form-data"> 
+                    <div class="panel-body">
+
+
+                        <input type="hidden" name="id" value="{pigcms:$set.id}" /> 
+                        <input type="hidden" name="token" value="{pigcms:$token}" /> 
+
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label">分类名称：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="name" value="{pigcms:$set.name}"   class="form-control" data-rule-required="true"  />
+                            </div>
+                            <div class="col-sm-5">
+                                 
+                            </div>							
+                        </div>
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label">分类图片：</label>
+                            <div class="col-sm-5">
+                                <input type="text" id="logourl"  name="logourl" value="{pigcms:$set.logourl}"  class="form-control" data-rule-required="true"  />
+                            </div>
+                            <div class="col-sm-5">
+                                    <a href="#" onclick="upyunPicUpload('logourl','pic',700,420,'{pigcms:$token}')" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-upload"></span>上传</a>
+                            </div>							
+                        </div>
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label">商品属性：</label>
+                            <div class="col-sm-5">
+                                <input type="text"  name="norms" value="{pigcms:$set.norms}" class="form-control" data-rule-required="true"  /> 
+                            </div>
+                            <div class="col-sm-5">
+                                如：鞋的规格是：鞋码。即填写【鞋码】
+                            </div>							
+                        </div>
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label">产品外观：</label>
+                            <div class="col-sm-5">
+                                <input type="text"  name="color" value="{pigcms:$set.color}"  class="form-control" data-rule-required="true"  /> 
+                            </div>
+                            <div class="col-sm-5">
+                                如：衣服一般有颜色,即填写【颜色】
+                            </div>							
+                        </div> 
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label">简介：</label>
+                            <div class="col-sm-10">
+                                <textarea name="des" class="form-control" data-rule-required="true"  >{pigcms:$set.des}</textarea>
+                            </div>
+
+                        </div>  
+                    </div> 
+                    <div class="panel-footer" style="text-align:right">
+
+                        <input type="hidden" name="token" value="{Pigcms:$token}" />
+                        <input type="submit" value="保存" class="btn btn-success"/>
+                        <input type="button" value="取消" class="btn btn-link" onclick="javascript:history.go(-1);"/>
+                    </div>
+                </form> 
+
+            </div></div></div> </div>
+<include file="Public:footer" />

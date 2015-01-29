@@ -1,0 +1,69 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Product_index.css" rel="stylesheet"/>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+ <div class="content">
+ <div class="ffBox">
+<include file="Public:left"/>      
+     <!--right--begain-->
+           <div class="right">
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>       
+      <form method="post" action="" id="info">
+                <div class="showBox">
+                	<div>
+                        <p class="pressBox">收货地址</p>
+                        <table class="sheet" cellspacing="1">
+                            <tr>
+                            <th><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>
+                                <th class="firstTd">联系人</th>
+                                <th class="secondTd">所在地区</th>
+                                <th class="thirdTd">详细地址</th>
+                                <th class="forthTd">手机号码</th>
+                                <th class="forthTd">创建时间</th>
+                                <th class="sevenTd">操作</th>
+                            </tr>
+                              <volist name="t" id="o"> 
+                            <tr>
+                            <td><input type="checkbox" value="{pigcms:$o.id}" class="cbitem" name="id_{pigcms:$i}"></td>
+                                <td>{pigcms:$o.name}</td>
+                                <td>{pigcms:$o.test}</td>
+                                <td>{pigcms:$o.address}</td>
+                                <td>{pigcms:$o.mobile}</td>
+                                <td>{pigcms:$o.time|date="Y-m-d H:i:s",###}</td>
+                                <td><!-- <a href="###" onclick="showIntroDetail({pigcms:$o.id})">详细</a> --> <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Product/deleteOrder',array('token'=>$token,'id'=>$o['id'],'dining'=>$isDining))}');">删除</a></td>
+                            </tr>
+                         </volist>  
+                        </table>
+                           <p class="page">{pigcms:$page}</p>
+                    </div>
+                    
+            	</div>
+            	<input type="hidden" name="token" value="{pigcms:$_GET['token']}" />
+</form>
+                   <script>
+function showIntroDetail(id){
+	art.dialog.open('{pigcms::U('Product/orderInfo',array('token'=>$token,'dining'=>$isDining))}&id='+id,{lock:false,title:'订单详情',width:700,height:420,yesText:'关闭',background: '#000',opacity: 0.87});
+}
+function selectall(name) {
+	var checkItems=$('.cbitem');
+	if ($("#check_box").attr('checked')==false) {
+		$.each(checkItems, function(i,val){
+			val.checked=false;
+		});
+		
+	} else {
+		$.each(checkItems, function(i,val){
+			val.checked=true;
+		});
+	}
+}
+</script>
+            </div>
+            <!--right--end-->
+            </div>   
+      
+ </div>
+<include file="Public:footer"/>

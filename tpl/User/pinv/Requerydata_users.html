@@ -1,0 +1,190 @@
+<?php $nav = "STATS"; $side = "USERS" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Text_add.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+<div class="container main">
+    <div class="row">
+        <include file="Requerydata:left"/>     
+        <div class="col-md-10 main">
+            <div class="panel panel-success">
+                <div class="panel-heading cfix">
+                    <h3 class="panel-title pull-left">用户统计</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="condition">
+                        指标：<select id="province">
+                            <option value="-1">全部国家和地区</option>
+                            <volist name="province" id="p">
+                                <option value="{pigcms:$p.province}" <if condition="$p.province eq $tp">selected</if> >{pigcms:$p.province}</option>
+                            </volist>
+                        </select>
+                        <select id="sex">
+                            <option value="-1">性别</option>
+                            <foreach name="sex" item="s" key="k">
+                                <option value="{pigcms:$k}" <if condition="$k eq $ts">selected</if>>{pigcms:$s}</option>{pigcms:$ts}
+                            </foreach>
+                        </select>
+                        <select id="att">
+                            <option value="-1">是否关注</option>
+                            <foreach name="att" item="a" key="ak">
+                                <option value="{pigcms:$ak}" <if condition="$ak eq $tatt">selected</if>>{pigcms:$a}</option>
+                            </foreach>
+                        </select>
+                        
+                    </div>
+                    <div id="choose-date">
+                        <a href="{pigcms::U('Requerydata/users',array('token'=>$token,'start'=>$nowtime,'end'=>$nowtime,'pro'=>$tp,'sex'=>$ts,'att'=>$tatt ))}">今天</a>
+                        <a href="{pigcms::U('Requerydata/users',array('token'=>$token,'start'=>$yestoday,'end'=>$yestoday,'pro'=>$tp,'sex'=>$ts,'att'=>$tatt ))}">昨天</a>
+                        <a href="{pigcms::U('Requerydata/users',array('token'=>$token,'start'=>$sevenDay,'end'=>$nowtime,'pro'=>$tp,'sex'=>$ts,'att'=>$tatt ))}" href="javascript:void(0)">最近7天</a>
+                        <a href="{pigcms::U('Requerydata/users',array('token'=>$token,'start'=>$thirtyday,'end'=>$nowtime,'pro'=>$tp,'sex'=>$ts,'att'=>$tatt ))}">最近30天</a>
+                        <div id="date-calendar">
+                            <form method="post" action="">
+                                <input type="text" name="start" id="start" value="{pigcms:$start|date='Y-m-d',###}" onClick="WdatePicker()" class="form-control" style="width:112px"/><span>-</span>
+                                <input type="text" name="end" id="end" value="{pigcms:$end|date='Y-m-d',###}" onClick="WdatePicker()" class="form-control" style="width:112px"/>
+                                <button type="submit" class="btn btn-default" style="width:50px"/>确定</button>
+                            </form>
+                        </div> 
+                        <empty name="users"><else/><a href="{pigcms::U('Requerydata/usersImport',array( 'token'=>$token ) )}" target="_blank" style="float:right;margin-right:10px;">导出报表</a></empty>
+                    </div>
+                    <empty name="users">
+                        没有满足条件的数据
+                        <else/>
+                        <table class="table table-striped" cellspacing="1" cellpadding="5">
+                            <tr>
+                                <th>微信ID</th>
+                                <th>微信昵称</th>
+                                <th>客户备注</th>
+                                <!--<td>绑定会员卡号</td>-->
+                                <th>性别</th>
+                                <th>关注</th>
+                                <th>地域</th>
+                                <th>所属分组</th>                                        
+                                <th>操作</th>
+                            </tr>
+                            <volist name="users" id="u">
+                                <tr>
+                                    <td>{pigcms:$u.openid}</td>
+                                    <td>{pigcms:$u.nickname}</td>
+                                    <td>{pigcms:$u.remark}</td>
+                                    <!--<td>{pigcms:$u.remark}</td>-->
+                                    <td>{pigcms:$sex[$u['sex']]}</td>
+                                    <td>{pigcms:$att[$u['subscribe']]}</td>
+                                    <td>{pigcms:$u.province}</td>
+                                    <td id="{pigcms:$u.openid}"><empty name="u['gid']">【未分组】<else/>{pigcms:$groups[$u['gid']]}</empty></td>
+                                <td>
+                                <empty name="u['gid']"><a href="javascript:void(0)"  onclick="editGroup(this, '{pigcms:$u.openid}', 0)" class="addg">添加分组</a><else/><a href="javascript:void(0)" class="editg" onclick="editGroup(this, '{pigcms:$u.openid}', {pigcms: $u.gid})">修改分组</a></empty>
+                                </td>
+
+                                </tr>
+                            </volist>  
+                        </table>
+                    </empty>
+                    <p class="pages">{pigcms:$page}</p>
+                </div>
+                <!--right--end-->  
+            </div>  
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //小bug：加载下拉表单的时候不能让当前的选中，因为下拉表单是提前加载好的
+
+    //修改分组/添加分组，加载表单框
+    function editGroup(box, openid, gid) {
+        box.style.display = 'none';
+        var addSel = "<div id='cgdiv'><select class='form-control' name='gid' style='float:left;width:105px;margin-right:5px;' id='changeS'>";
+                addSel += "<foreach name="
+        groups" item="gname" key="gk"><option value='{pigcms:$gk}'>{pigcms:$gname}</option></foreach>";
+                addSel += "</select>";
+        addSel += "<input type='submit' onclick='changeGid(\"" + openid + "\"," + gid + ")' class='btn btn-primary' style='width:50px;float:left;margin-right:0px;' value='确定'/> <input type='reset' value='返回' class='btn btn-default' onclick=quitEGid('" + openid + "'," + gid + ")></div>";
+        box.parentNode.innerHTML = addSel;
+    }
+
+    //修改分组/添加分组
+    function changeGid(openid, gid) {
+        var changeS = document.getElementById('changeS');
+        var newGid = changeS.value;
+        if (newGid == gid) {
+            alert('没有任何修改');
+            return;
+        }
+        doChangeGid(openid, newGid);
+    }
+    //通过ajax修改分组/添加分组
+    function doChangeGid(openid, newGid)
+    {
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function()
+        {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+            {
+                var res = xmlhttp.responseText;
+                if (res != 'error') {
+                    alert('修改成功');
+                    var s = document.getElementById('cgdiv');
+                    var etd = s.parentNode;
+                    var ea = document.createElement('a');
+                    ea.setAttribute('href', 'javascript:void(0)');
+                    ea.setAttribute('class', 'editg');
+                    ea.setAttribute('onclick', "editGroup(this,'" + openid + "'," + newGid + ")");
+                    ea.innerHTML = '修改分组';
+                    etd.appendChild(ea);
+                    etd.removeChild(s);
+                    etd.previousSibling.innerHTML = xmlhttp.responseText;
+                    document.getElementById(openid).innerHTML = xmlhttp.responseText;
+                } else {
+                    alert('修改失败');
+                }
+            }
+        }
+        xmlhttp.open("POST", "{pigcms::U('Requerydata/changeGroup',array('token'=>$token) )}", true);
+        xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
+        xmlhttp.send('openid=' + openid + '&gid=' + newGid);
+    }
+
+    //取消添加/修改分组
+    function quitEGid(openid, gid)
+    {
+        var s = document.getElementById('cgdiv');
+        var etd = s.parentNode;
+        var ea = document.createElement('a');
+        ea.setAttribute('href', 'javascript:void(0)');
+        ea.setAttribute('class', 'editg');
+        ea.setAttribute('onclick', "editGroup(this,'" + openid + "'," + gid + ")");
+        ea.innerHTML = '修改分组';
+        etd.appendChild(ea);
+        etd.removeChild(s);
+    }
+</script>
+
+<script>
+    $(function() {
+        //选择省
+        $("#province").change(function() {
+            var province = $("#province").val();
+            window.location.href = "/index.php?g=User&m=Requerydata&a=users&token={pigcms:$token}&start={pigcms:$start|date='Y-m-d',###}&end={pigcms:$end|date='Y-m-d',###}&pro=" + province + "&sex={pigcms:$ts}&att={pigcms:$tatt}";
+        });
+
+        //选择性别
+        $("#sex").change(function() {
+            var sex = $("#sex").val();
+            window.location.href = "/index.php?g=User&m=Requerydata&a=users&token={pigcms:$token}&start={pigcms:$start|date='Y-m-d',###}&end={pigcms:$end|date='Y-m-d',###}&pro={pigcms:$tp}&sex=" + sex + "&att={pigcms:$tatt}";
+        });
+
+        //选择性别 
+        $("#att").change(function() {
+            var att = $("#att").val();
+            window.location.href = "/index.php?g=User&m=Requerydata&a=users&token={pigcms:$token}&start={pigcms:$start|date='Y-m-d',###}&end={pigcms:$end|date='Y-m-d',###}&pro={pigcms:$tp}&sex={pigcms:$ts}&att=" + att;
+        });
+    });
+</script>
+<include file="Public:footer"/>

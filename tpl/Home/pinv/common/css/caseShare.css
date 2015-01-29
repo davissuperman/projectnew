@@ -1,0 +1,25 @@
+.content{text-align:center;}
+.content{margin:30px auto;}
+.imgBox{text-align:center;}
+.diImg{width:100%;border:0px;}
+.cotet{width:1000px;height:750px;margin:auto;}
+.cotetLeft{width:171px;float:left;}
+.cotetLeft li{height:37px;line-height:37px;text-align:center;color:#2e2e2e;cursor:pointer;font-size:14px;background:#ededed;}
+
+.cotetLeft li.overX{background:#85a93d;color:#fff;}
+.cotetRight{width:798px;float:right;padding-top:4px;margin:3px 0px;}
+.blackSolid{float:left;}
+.shopName{height:95px;line-height:95px;text-align:center;font-size:16px;background:#ededed;}
+.imgLeft{width:232px;color:#2e2e2e;float:right;margin-left:2px;}
+.imgNormal{float:left;}
+.maBox{height:405px;background:#ededed;margin-top:2px;}
+.maImg{margin-top:49px;}
+.numBox{width:140px;line-height:25px;text-align:center;padding:15px;margin-top:12px;margin-left:30px;color:#2e2e2e;font-size:16px;}
+.show1{float:left;padding-top:5px;}
+.showList{height:80px;padding-left:34px;}
+.showList li{float:left;margin-left:7px;margin-right:22px;cursor:pointer;}
+
+.caseBox{width:798px;float:right;}
+.imgShow{float:left;background:#bebebe;padding:27px 12px;}
+.imgShow img{float:left;margin-right:7px;}
+.showBox{margin-top:10px;}

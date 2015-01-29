@@ -1,0 +1,38 @@
+<include file="Public:head"/>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+<link type="text/css" href="{pigcms::RES}/css/Product_catSet.css" rel="stylesheet"/>
+ <div class="content">
+ <div class="ffBox">
+<include file="Public:left"/>      
+    <!--right--begain-->               
+             <div class="right">
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>         
+                <p class="artiEdit"><span class="big">员工部门添加</span><a href="javascript:history.go(-1);" class="addListX">返回</a></p>
+                   <form class="form" method="post" action="{pigcms::U('Yuangong/addbm',array('token'=>$token,'id'=>session('wxid')))}"> 
+    				 <input type="hidden" name="token" value="{pigcms:$_GET['token']}" class="circle"/>
+                <p class="same">
+                    <span class="Tex">名称：</span>
+                    <input type="text" name="wname" value="" class="circle"/>
+                </p>
+               <!-- <p class="same">
+                    <span class="Tex">Logo地址：</span>
+                    <input type="text" name="logourl" id='url' value="" class="Scircle"/>
+					<a href="###" onclick="upyunPicUpload($(this).prev().attr('id'),'pic',700,420,'qtclsw1382672973')" class="a_upload">上传</a>
+                </p>-->
+                <p class="areBox">
+                    <span class="Tex">简介：</span>
+                   	<textarea class="areSame" name="des"></textarea>
+                </p>
+                 <p class="pressBox"><input type="submit" value="保存" class="addList"/><input type="button" value="取消" class="addList"/></p>
+            </form>
+            
+            </div>
+             <!--/right--begain-->
+             </div>
+ </div>
+<include file="Public:footer"/>

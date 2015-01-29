@@ -1,0 +1,64 @@
+<?php $nav = "FUNCTION"; $side = "SELFFORMINDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_index.css" rel="stylesheet"/>
+<div class="container main">
+    <div class="row">
+    <include file="Selfform:left"/>
+         
+                <div class="col-md-10 main">
+                		<!-- <p class="rightTop">
+                    	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                        <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                    </p><form method="post" action=""><input type="hidden" name="ac" value="hotels-list">
+        			<p class="artiEdit"><span class="big">{pigcms:$tit}
+    </span><input type="submit" value="搜索" class="searchPress"/><input type="text" value="输入关键词搜索" name="searchkey"  class="search"/></p></form> -->
+                <div class="panel panel-success">
+                          <div class="panel-heading cfix">
+                            <h3 class="panel-title pull-left ">{pigcms:$tit}</h3>
+                            <div class="search-box pull-right">
+                                <form method="post" action="">
+                                        <input type="hidden" name="ac" value="hotels-list" >
+                                        <input type="text" placeholder="输入关键词搜索" name="searchkey" style="border:1px solid #AAAAAA;font-size:12px;padding:1px 1px 1px 3px"  />
+                                            <input type="submit" value="搜索" class="btn btn-default btn-xs"  />
+                                </form>
+                            </div>
+                          </div>
+
+              <div class="panel-body">
+                 <div class="pull-right add-button"><a href="{pigcms::U('Selfform/add',array('token'=>$token,'bid'=>$bid))}"  class="btn btn-success"/><span class="glyphicon glyphicon-plus"></span>  
+                 <if condition="$bid eq '1'">添加预约
+                 <elseif condition="$bid eq '2'"/>添加留言<else/>
+                 添加报名
+                 </if>
+                 </a></div>
+            
+               <table class="table table-striped" cellspacing="1">
+                        <tr>                      
+                            <th>名称</th>
+                            <th>关键词</th>
+                            <th>创建时间</th>
+                            <th>外链代码</th>
+                            <th  >操作</th>
+                        </tr>
+                        <volist name="list" id="item"> 
+                        <tr>
+                      
+                            <td>{pigcms:$item.name}</td>
+                            <td>{pigcms:$item.keyword}</td>
+                            <td >{pigcms:$item.time|date="Y-m-d H:i:s",###}</td>
+                            <td>{pigcms:$item.id}</td>
+                            <td>
+    <a href="{pigcms::U('Selfform/infos',array('id'=>$item['id'],'token'=>$token,'bid'=>$bid))}">提交信息管理</a>&nbsp;&nbsp;<a href="{pigcms::U('User/Selfform/inputs',array('id'=>$item['id'],'token'=>$token,'bid'=>$bid))}">输入项管理</a>&nbsp;&nbsp;<a href="{pigcms::U('Selfform/set',array('id'=>$item['id'],'token'=>$token,bid=>$_GET['bid'],'mod'=>1))}">修改</a>&nbsp;&nbsp;<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Selfform/del',array('id'=>$item['id'],'token'=>$token,'bid'=>$bid))}');">删除</a></td>
+                           
+                        </tr>
+                        </volist>
+                    </table>
+                   
+                  
+                    <p class="page">{pigcms:$page}</p>
+                    </div>
+                </div> 
+            </div>
+    </div>
+ </div>
+<include file="Public:footer"/>

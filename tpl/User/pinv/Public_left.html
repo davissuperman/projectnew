@@ -1,0 +1,194 @@
+﻿ <div class="left">
+    <ul class="leftList">
+        <li class="first"><img src="{pigcms::RES}/img/down.gif" alt="down" class="down"/>常用功能</li>
+        <li class="my"><p><span class="tranTex">功能管理</span><img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/></p>
+            <span id='markGet' style='display:none;'>{pigcms:$_GET.mark}</span>
+            <ul id='mark1'>  
+                <li><a href="{pigcms::U('Areply/index?mark=1',array('token'=>$token))}" >关注时回复</a></li>
+
+                <li><a href="{pigcms::U('Text/index?mark=1',array('token'=>$token))}" >文本回复</a></li>
+                <li><a href="{pigcms::U('Img/index?mark=1',array('token'=>$token))}" >图文回复</a></li>
+                <li><a href="{pigcms::U('Voiceresponse/index?mark=1',array('token'=>$token))}" >语音回复</a></li>
+                <li><a href="{pigcms::U('Other/index?mark=1',array('token'=>$token))}" >答不上来回复</a></li>
+                <li><a href="{pigcms::U('Company/branches?mark=1',array('token'=>$token,'isBranch'=>1))}" >LBS回复</a></li>
+
+            </ul>
+        </li>
+        <li><p><a href="{pigcms::U('Diymen/index',array('token'=>$token))}">自定义菜单</a><!--<img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/>--></p>
+        <li><p><a href="{pigcms::U('Panorama/index',array('token'=>$token))}">360°全景</a><!--<img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/>--></p>
+        <li class="my"><p><span class="tranTex">微官网</span><img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/></p>
+            <ul id='mark2'>
+                <li><a href="{pigcms::U('Home/set?mark=2',array('token'=>$token))}" >首页回复配置</a></li><!--                            
+                <li><a href="{pigcms::U('Home/plugmenu',array('token'=>$token))}" >快捷菜单</a></li>
+                -->
+
+                <if condition="$qry1.advancetpl eq 1">
+                    <li><a href="/cms/manage" target="_blank">行业微网站</a></li>
+
+                    <else/>
+                    <li style='display:none'><a href="/cms/manage1" target="_blank">新开通模块</a></li>
+                </if>
+                <li><a href="{pigcms::U('Classify/index?mark=2',array('token'=>$token))}" >分类管理</a></li>
+                <li><a href="{pigcms::U('Tmpls/index?mark=2',array('token'=>$token))}" >模板管理</a></li>
+                <li><a href="{pigcms::U('Home/plugmenu?mark=2',array('token'=>$token))}" >一键拨号与导航</a></li> 
+                <!--<li><a href="/cms/manage/index.php" >高级模板</a></li>                            
+                --><li><a href="{pigcms::U('Flash/index?mark=2',array('token'=>$token))}" >首页幻灯片</a></li>
+
+
+            </ul>
+        </li>
+        <li class="my"><p><span class="tranTex">会员卡</span><img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/></p>
+            <ul id='mark3'>
+                <li><a href="{pigcms::U('Member_card/replyInfoSet',array('token'=>$token))}" >回复设置</a></li>
+                <li><a href="{pigcms::U('Member_card/index',array('token'=>$token))}" >会员卡</a></li>
+
+            </ul>
+        </li>
+        <li  class="my"><p><span class="tranTex">推广活动</span><img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/></p>
+            <ul id='mark4'>
+                <li><a href="{pigcms::U('Lottery/index?mark=4',array('token'=>$token))}" >幸运大转盘</a></li>
+                <li><a href="{pigcms::U('Coupon/index?mark=4',array('token'=>$token))}" >优惠券</a></li>
+                <li><a href="{pigcms::U('Guajiang/index?mark=4',array('token'=>$token))}" >刮刮卡</a></li>
+                <!--<if condition="$token eq xosooe1384219311
+">
+                                            <li><a href="{pigcms::U('Choujiang/index?mark=4',array('token'=>$token))}" >抽奖序列号查看</a></li>
+                                            <else/>
+                                             <li style="display:none"><a href="{pigcms::U('Choujiang/index?mark=4',array('token'=>$token))}" >抽奖序列号查看</a></li>
+                                            </if>-->
+            </ul>
+        </li> <!-- 
+        <li><p>电商系统<img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/></p>
+            <ul>
+                <li><a href="{pigcms::U('Taobao/index',array('token'=>$token))}" >淘宝天猫电器配置</a></li>
+                <li><a href="{pigcms::U('Api/index',array('token'=>$token))}" >融合第三方</a></li>
+                <li><a href="{pigcms::U('Adma/index',array('token'=>$token))}" >DIY宣传页</a></li>
+                <li><a href="{pigcms::U('Photo/index',array('token'=>$token))}">图集(相册)</a></li>
+                <li><a href="{pigcms::U('Host/index',array('token'=>$token))}">通用订单</a></li>
+                <li><a href="{pigcms::U('Groupon/index',array('token'=>$token))}">微团购</a></li>
+                <li><a href="{pigcms::U('Product/index',array('token'=>$token))}">微商城</a></li>
+                <li><a href="{pigcms::U('Product/orders',array('token'=>$token,'dining'=>1))}">无线订餐</a></li>
+                <li><a href="{pigcms::U('Selfform/index',array('token'=>$token))}">万能表单,报名,留言,预约</a></li> 
+            </ul>
+        </li>-->  
+        <!--<li><p><a href="{pigcms::U('Taobao/index',array('token'=>$token))}">微淘宝</a><img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/></p>-->
+        <li>
+            <p><a href="{pigcms::U('Adma/index',array('token'=>$token))}">微宣传</a><!--<img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/>--></p>
+        </li>
+        <li>
+            <p><a href="{pigcms::U('Photo/index',array('token'=>$token))}">微相册</a><!--<img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/>--></p>
+        </li>
+        <li>
+            <p><a href="{pigcms::U('Host/index',array('token'=>$token))}">微酒店</a><!--<img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/>--></p>
+        </li>
+        <li>
+            <p><a href="{pigcms::U('Car/set',array('token'=>$token))}">微汽车</a><!--<img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/>--></p>
+        </li>
+        <li>
+            <p><a href="{pigcms::U('Groupon/index',array('token'=>$token))}">微团购</a><!--<img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/>--></p>
+        </li>
+        <li>
+            <p><a href="{pigcms::U('Product/index',array('token'=>$token))}">微商城</a><!--<img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/>--></p>
+        </li>
+        <li class="my">
+            <p><span class="tranTex"><a href="{pigcms::U('Dining/index',array('token'=>$token))}">微点餐</a></span><img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/></p>
+            <ul id='mark4'>
+                <li><a href="{pigcms::U('Dining/index',array('token'=>$token))}">公司设置</a></li>
+                <li><a href="{pigcms::U('Yuangong/index',array('token'=>$token))}" >菜品分类管理</a></li>
+                <li><a href="{pigcms::U('Yuangong/index',array('token'=>$token))}" >菜品管理</a></li>
+                <li><a href="{pigcms::U('Yuangong/index',array('token'=>$token))}" >订单管理</a></li>
+                <!--
+                <li><a href="{pigcms::U('Yuangong/index',array('token'=>$token))}" >桌台管理</a></li>-->
+            </ul>
+        </li>
+        <!--这是原来的微餐饮
+        <li class="my">
+            <p><span class="tranTex"><a href="{pigcms::U('Reply_info/set',array('token'=>$token))}">微餐饮</a></span><img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/></p>
+            <ul id='mark4'>
+                <li><a href="{pigcms::U('Reply_info/set',array('token'=>$token))}">公司设置</a></li>
+                <li><a href="{pigcms::U('Yuangong/index',array('token'=>$token))}" >菜品分类管理</a></li>
+                <li><a href="{pigcms::U('Yuangong/index',array('token'=>$token))}" >菜品管理</a></li>
+                <li><a href="{pigcms::U('Yuangong/index',array('token'=>$token))}" >订单管理</a></li>
+            </ul>
+        </li>-->
+        <li>
+            <p><a href="{pigcms::U('Selfform/index',array('token'=>$token,'bid'=>1))}">微预约</a><!--<img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/>--></p>
+        </li>
+        <li>
+            <p><a href="{pigcms::U('Selfform/index',array('token'=>$token,'bid'=>2))}">微留言</a><!--<img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/>--></p>
+        </li>
+        <li>
+            <p><a href="{pigcms::U('Selfform/index',array('token'=>$token,'bid'=>3))}">微报名</a><!--<img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/>--></p>
+        </li>
+        <li class="my">
+            <p><span class="tranTex"><a href="{pigcms::U('Requerydata/index',array('token'=>$token))}">微统计</a></span><img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/></p>
+            <ul id='mark4'>                       
+                <li><a href="{pigcms::U('Requerydata/index',array('token'=>$token))}">综合统计</a></li>
+                <!--
+                <li><a href="{pigcms::U('Requerydata/menuClick',array('token'=>$token))}" >自定义菜单点击统计</a></li>
+                <li><a href="#" >关键词搜索统计</a></li>-->
+            </ul>
+        </li>
+        <li><p><a href="{pigcms::U('Estate/index',array('token'=>$token))}">楼盘房产</a></p></li> 
+        <li  class="my"><p><span class="tranTex">婚庆行业</span><img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/></p>
+            <ul id='mark4'>						  
+                <li><a href="{pigcms::U('Yuangong/index',array('token'=>$token))}" >部门添加</a></li>
+                <li><a href="{pigcms::U('Yuangong/addyg',array('token'=>$token))}" >员工信息添加</a></li>
+                <li><a href="{pigcms::U('Yuangong/yglist',array('token'=>$token))}" >员工信息列表</a></li>
+                <li><a href="{pigcms::U('Wedding/index',array('token'=>$token))}" >婚庆喜帖</a></li>
+                <li><a href="{pigcms::U('Vote/tplist',array('token'=>$token))}" >投票模块</a></li>
+                <li><a href="{pigcms::U('Vote/yuyuebd',array('token'=>$token))}" >预约提交表单</a></li>                            
+            </ul>
+        </li> 
+        <li  class="my"><p><span class="tranTex">微调研</span><img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/></p>
+            <ul id='mark4'>
+                <li><a href="{pigcms::U( 'Wdiaoyan/index',array( 'token'=>$token ) )}">微调研</a></li>
+                <li><a href="{pigcms::U('Wdiaoyan/yuyuebd',array('token'=>$token))}" >添加活动选项</a></li>
+                <li><a href="{pigcms::U('Wdiaoyan/addxinxi',array('token'=>$token))}" >结束信息添加</a></li>
+
+            </ul>
+        </li>
+		 <li><p><a href="{pigcms::U('Product/orders',array('token'=>$token,'dining'=>1))}">微餐饮</a><!--<img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/>--></p></li>
+					 <li class="my">
+                        <p><span class="tranTex"><a href="{pigcms::U('Diancai/index',array('token'=>$token))}">微点餐</a></span><img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/></p>
+                        <ul id='mark4'>
+                            <li><a href="{pigcms::U('Diancai/index',array('token'=>$token))}">公司设置</a></li>
+                            <li><a href="{pigcms::U('Diancai/cpfllist',array('token'=>$token))}" >菜品分类管理</a></li>
+                            <li><a href="{pigcms::U('Diancai/caipinlist',array('token'=>$token))}" >菜品管理</a></li>
+                          
+                            <!--
+                            <li><a href="{pigcms::U('Yuangong/index',array('token'=>$token))}" >桌台管理</a></li>-->
+                        </ul>
+                    </li>
+        <li  class="my"><p><span class="tranTex">微用户管理CRM</span><img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/></p>
+            <ul id='mark4'>
+                <li><a href="{pigcms::U('Chat/index',array('token'=>$token))}">人工客服</a></li>  
+                <li><a href="{pigcms::U('Recognition/index',array('token'=>$token))}" >渠道二微码</a></li>                
+                <li><a href="{pigcms::U('Wechat_behavior/statistics',array('token'=>$token))}" >粉丝行为统计分析</a></li>
+                <li><a href="{pigcms::U('Wechat_group/index',array('token'=>$token))}" >粉丝管理</a></li>
+                <li><a href="{pigcms::U('Wechat_group/groups',array('token'=>$token))}" >分组管理</a></li>
+            </ul>
+        </li>
+        <li><p><a href="{pigcms::U('Rhjiekou/index',array('token'=>$token))}">融合第三方</a></p></li> 
+		<li  class="my"><p><span class="tranTex">商城管理</span><img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/></p>
+                        <ul id='mark4'>
+						   <li><a href="{pigcms::U( 'Product/cats',array( 'token'=>$token ) )}">商品分类</a></li>
+							<li><a href="{pigcms::U('Product/add',array('token'=>$token))}" >添加商品</a></li>
+							 <li><a href="{pigcms::U('Product/index',array('token'=>$token))}" >商品管理</a></li>
+                            <li><a href="{pigcms::U('Product/shop_index',array('token'=>$token))}" >商城首页设置</a></li>
+                        </ul>
+             </li>
+			<li  class="my"><p><span class="tranTex">交易管理</span><img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/></p>
+                        <ul id='mark4'>
+						   <li><a href="{pigcms::U( 'Product/management',array( 'token'=>$token ) )}">订单管理</a></li>
+							<li><a href="{pigcms::U('Product/take',array('token'=>$token))}" >收货地址管理</a></li>
+							 <li><a href="{pigcms::U('Product/express',array('token'=>$token))}" >快递方式管理</a></li>
+                            <li><a href="{pigcms::U('Wdiaoyan/addxinxi',array('token'=>$token))}" >收款方式管理</a></li>
+                        </ul>
+             </li>
+				<li  class="my"><p><span class="tranTex">客户管理</span><img src="{pigcms::RES}/img/trang.gif" alt="trang" class="trang"/></p>
+                        <ul id='mark4'>
+						   <li><a href="{pigcms::U( 'Product/usertake',array( 'token'=>$token ) )}">会员管理</a></li>
+                        </ul>
+             </li>	
+    </ul>
+</div>

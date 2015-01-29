@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+	<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+	<meta content="no-cache" http-equiv="pragma">
+	<meta content="0" http-equiv="expires">
+	<meta content="telephone=no, address=no" name="format-detection">
+	<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <link rel="stylesheet" type="text/css" href="{pigcms::RES}/css/leave/message.css" media="all" />
+	<script type="text/javascript" src="{pigcms::RES}/js/leave/jquery.js"></script>
+	<script type="text/javascript" src="{pigcms::RES}/js/leave/myJs.js"></script>
+	<title>微留言</title>
+</head>
+<body id="message" onselectstart="return true;" ondragstart="return false;">
+	<div class="container">
+	  	<div class="qiandaobanner">
+		  	<a href="javascript:history.go(-1);">
+		  		<img src="{pigcms:$uurl}"  />
+		  	</a>
+	  	</div>
+		<div class="cardexplain">
+			<div class="window" id="windowcenter">
+				<div id="title" class="wtitle">操作提示<span class="close" id="alertclose"></span></div>
+				<div class="content">
+					<div id="txt"></div>
+				</div>
+			</div>
+			<div class="history">
+				<div class="history-date">
+					<ul>
+						<a><h2 class="first first1" style="position: relative;">请点击留言</h2></a>
+						<li class="green bounceInDown nob ly1" style="display:none">
+							<dl>
+								<dt>
+									<input name="wxname" type="text" class="px" id="wxname1" value="" placeholder="请输入您的昵称">
+								</dt>
+								<dt>
+									<textarea name="info" class="pxtextarea" style=" height:60px;" id="info1" placeholder="请输入留言"></textarea>
+								</dt>
+								<dt><a id="showcard1" class="submit" href="javascript:void(0)">提交留言</a></dt>
+							</dl>
+						</li>			
+					<volist name="list"	 id="inf" key="k">	<li class="green bounceInDown">
+							<h3>
+								{pigcms:$inf.Otitle}...<span>{pigcms:$inf.time|date="Y-m-d H:i:s",###}</span>
+								<div class="clr"></div>
+							</h3>
+							<dl>
+								<dt class="hfinfo" date="{pigcms:$inf.lid}">{pigcms:$inf.Ttitle}</dt>
+							</dl>
+							<dl class="huifu">
+								<dt>
+									<span>
+								<a class="hhbt czan" date="{pigcms:$inf.lid}" href="javascript:void(0)">回复</a>
+										<p style="display:none;" class="hhly{pigcms:$inf.lid}">
+											<textarea name="info" class="pxtextarea hly{pigcms:$inf.lid}"></textarea> 
+										<a class="hhsubmit submit" date="{pigcms:$inf.lid}" href="javascript:void(0)">确定</a>
+										</p>
+									</span>
+								</dt>
+							</dl>
+							<volist name="in[ $inf[ 'lid' ] ]" id="l">
+								<dl class="huifu">
+								<dt><span>{pigcms:$inf.Otitle}回复：{pigcms:$l.title}																									</span></dt>
+								</dl>	
+							</volist>			
+			</li>
+			</volist>							
+					<li class="green bounceInDown nob ly2" style="display:none">
+							<dl>
+								<dt>
+									<input name="wxname" type="text" class="px" id="wxname2" value="" placeholder="请输入您的昵称">
+								</dt>
+								<dt>
+									<textarea name="info" class="pxtextarea" style=" height:60px;" id="info2" placeholder="请输入留言"></textarea>
+								</dt>
+								<dt>
+									<a id="showcard2" class="submit" href="javascript:void(0)">提交留言</a>
+								</dt>
+							</dl>
+						</li>
+						<a><h2 class="first first2" style="position: relative;">请点击留言</h2></a>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+
+<footer style="text-align:center; color:#ffd800;margin-right:20px"><a href="javascript:void(0);">©品微</a></footer><input type="hidden" id="token" value="{pigcms:$token}"/>
+<include file="Public:tongji"/>
+</body>
+</html>

@@ -1,0 +1,20 @@
+.right{width:837px;float:left;padding:0px 10px;}
+.sheet{width:100%;background:#eee;color:#6a6a6a;}
+.sheet td{background:#fff;text-align:center;height:55px;line-height:55px;}
+.sheet th{background:#f1f1f1;height:45px;line-height:45px;text-align:center;}
+.sevenTd{width:100px;}
+.artiEdit{height:33px;line-height:33px;border-bottom:1px #eee solid;margin-top:15px;}
+.big{font-size:18px;font-weight:bold;color:#6e6e6e;float:left;margin-right:10px;}
+.small{font-size:12px;color:#6e6e6e;float:left}
+.addList{float:left;width:175px;height:33px;line-height:33px;text-align:center;color:#fff;font-weight:bold;background:url(../img/apiPress.gif) no-repeat;border:0px;cursor:pointer;margin:15px 0px;}
+.addList:hover{background:url(../img/imgOver.gif) no-repeat;}
+.search{width:150px;height:20px;line-height:20px;padding-left:5px;border:1px #aaa solid;font-size:12px;color:#6e6e6e;float:right;}
+.searchPress{float:left;width:42px;height:22px;line-height:22px;text-align:center;color:#fff;font-weight:bold;background:url(../img/searchImg.gif) no-repeat;border:0px;float:right;font-size:12px;cursor:pointer;}
+.searchPress:hover{background:url(../img/searchOver.gif) no-repeat;}
+.page{text-align:right;font-size:12px;margin-top:15px;}
+.sevenTd{}
+.sevenTd a{float:left;font-size:12px;color:#6e6e6e;margin-left:7px;}
+.end{margin-right:25px;}
+.sevenTd a:hover{color:#ea533f;}
+.sheet a{color:#6a6a6a;margin-right:3px;}
+.sheet a:hover{color:#EA533F;}

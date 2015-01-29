@@ -1,0 +1,14 @@
+<div class="col-md-2 sidebar">
+<nav id="sidebar-nav">
+	<ul class="nav nav-pills nav-stacked">
+		<li <?php if($side == "AREPLY") echo 'class="active"'; ?>><a href="{pigcms::U('Areply/index?mark=1',array('token'=>$token))}">关注时回复</a></li>
+		<li <?php if($side == "TEXT") echo 'class="active"'; ?>><a href="{pigcms::U('Text/index?mark=1',array('token'=>$token))}">文本回复</a></li>
+		<li <?php if($side == "IMAGE") echo 'class="active"'; ?>><a href="{pigcms::U('Img/index?mark=1',array('token'=>$token))}"">图文回复</a></li>
+		<!--
+		<li <?php if($side == "VOICERESPONSE") echo 'class="active"'; ?>><a href="{pigcms::U('Voiceresponse/index?mark=1',array('token'=>$token))}">语音回复</a></li>
+		-->
+		<li <?php if($side == "OTHER") echo 'class="active"'; ?>><a href="{pigcms::U('Other/index?mark=1',array('token'=>$token))}">答不上来的回复</a></li>
+		
+	</ul>
+</nav>
+</div>

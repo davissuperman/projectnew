@@ -1,0 +1,97 @@
+<?php $nav = "FUNCTION"; $side = "PHOTOINDEX" ?>
+<include file="Public:head"/>
+
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+<link type="text/css" href="{pigcms::RES}/css/Photo_list_add.css" rel="stylesheet"/>
+<div class="container main">
+<div class="row">
+<include file="Photo:left"/>
+     
+            <div class="col-md-10 main">
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">上传图片</h3>
+			  </div>
+			  <div class="panel-body">
+                <div class="add-button clearfix">
+               <a href="{pigcms::U('Photo/index',array('token'=>$_GET['token']))}" class="btn btn-default btn-sm pull-left"><span class="glyphicon glyphicon-arrow-left"></span> 返回</a>
+               </div>
+           <form action="" method="post">
+            <table class="table table-striped" cellspacing="1">
+                    <tr>
+                        <th class="firstTd">名称</th>
+                        <th class="secondTd">显示顺序</th>
+                        <th class="thirdTd" title="">图片外链地址(宽720够了，高不限制)</th>
+                        <th class="forthTd">图片简单说明（可不填）</th>
+                        <th class="sevenTd">显示</th>
+                        <th class="thirdTd">操作</th>
+                    </tr>
+                    <tr>
+                    	<td><input type="text" class="case" name="title" /></td>
+                        <td><input type="text" class="caseXu" name="sort" value="1"/></td>
+                        <td><input type="text" class="case" id='url' name="picurl"/><a href="###" onclick="upyunPicUpload($(this).prev().attr('id'),'pic',700,420,'qtclsw1382672973')" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-upload"></span>上传</a><input type="hidden"   name="pid" value="{pigcms:$Think.get.id}"  /></td>
+                        <td><input type="text" class="case"  name="info"/></td>
+                        <td><input type="checkbox" name="status" value="1"  checked /></td>
+                        <td><input type="submit" id="vtype" class="btn btn-xs btn-success"  value="添加"/></td>
+                    </tr>
+                    
+                </table>
+                </form>
+                <table class="table table-striped" cellspacing="1">
+                    <tr>
+                        <th class="secondTd">图片</th>
+                        <th class="firstTd">名称</th>
+                        <th class="secondTd">显示顺序</th>
+                        <th class="thirdTd" title="">图片外链地址(宽720够了，高不限制)</th>
+                        <th class="forthTd">图片简单说明（可不填）</th>
+                        <th class="sevenTd">显示</th>
+                        <th class="thirdTd">操作</th>
+                    </tr>
+                    <volist name="photo" id="photo">
+                     <form method="post" action="{pigcms::U('Photo/list_edit',array('token'=>session('token')))}">   
+                    <tr>
+                        <td>
+                            <div style="position:relative">
+                                <img src="{pigcms:$photo.picurl}" width="50px" class="smImg">
+                                <img src="{pigcms:$photo.picurl}" class="bigImg" style="position:absolute;display:none;left:55px;top:-100px">
+                            </div>
+                        </td>
+                    	<td><input type="text" class="case" name="title" value="{pigcms:$photo.title}"  /></td>
+                        <td><input type="text" class="caseXu" name="sort"  value="{pigcms:$photo.sort}" /></td>
+                        <td><input type="text" class="case" name="picurl"  value="{pigcms:$photo.picurl}" id='url1'/><a href="###" onclick="upyunPicUpload($(this).prev().attr('id'),'pic',700,420,'qtclsw1382672973')" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-upload"></span> 上传</a></td>
+                        <td><input type="text" class="case"  name="info"  value="{pigcms:$photo.info}"/></td>
+                        <td><input type="checkbox" name="status" value="1"   <if condition="$photo['status'] eq 1">checked</if> /></td>
+                        <td>
+                         <input type="hidden"  name="id" value="{pigcms:$photo.id}"  />
+                         <input type="submit"  class="btn btn-xs btn-info"  value="修改"/>
+                         <div style="margin-top:5px"></div>
+                         <a class="btn btn-xs btn-danger" href="{pigcms::U('Photo/list_del',array('id'=>$photo['id'],'token'=>session('token')))}">删除</a>
+                        </td>
+                    </tr>
+                    </form>
+					</volist>
+                </table>
+				 <p class="page">{pigcms:$page}</p>
+			</div>
+			</div>
+            </div>
+            </div>    
+      
+ </div>
+ <script>
+    $(function(){
+        $('.smImg').mouseover(function(){
+            if($(this).width()>$(this).height())
+                $(this).next().width('400px');
+            else
+                $(this).next().height('400px');
+            $(this).next().css('display','block');
+        }).mouseout(function(){
+            $(this).next().css('display','none');
+        });
+    });
+ </script>
+<include file="Public:footer"/>

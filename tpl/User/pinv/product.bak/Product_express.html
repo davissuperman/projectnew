@@ -1,0 +1,166 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Product_index.css" rel="stylesheet"/>
+<link href="{pigcms::RES}/css/editActive.css" type="text/css" rel="stylesheet"/>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+ <div class="content">
+ <div class="ffBox">
+<include file="Public:left"/>      
+     <!--right--begain-->
+           <div class="right">
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+             <p class="artiEdit"><span class="big"><if condition="$isDining neq 1">商品<else/>菜品</if>管理</a></span>
+             <form method="post" action="">
+	             <input type="hidden" name="ac" value="hotels-list">
+	             <input type="submit" value="搜索" class="searchPress"/>
+	             <input type="text" value="输入关键词搜索" class="search"/>
+             </form>
+             </p>  
+                <div class="showBox">
+                	<div>
+                        <p class="pressBox"><input type="button" onclick="_party._manage(true)"  value="添加快递" style="margin:30px;" class="addList"/></p>
+                        <table class="sheet" cellspacing="1">
+                            <tr>
+                            <th><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>
+                                <th class="firstTd">ID</th>
+                                <th class="secondTd">快递名称</th>
+                                <th class="forthTd">排序</th>
+                                <th class="forthTd">状态</th>
+                                <th class="sevenTd">操作</th>
+                            </tr>
+                              <volist name="li" id="o"> 
+                            <tr>
+                            <td><input type="checkbox" value="{pigcms:$o.id}" class="cbitem" name="id_{pigcms:$i}"></td>
+                                <td>{pigcms:$o.id}</td>
+								<td>{pigcms:$o.name}</td>
+                                <td>{pigcms:$o.sort}</td>
+                                 <td><if condition="$o.is eq 1"><span style="color:green">√</span><else/><span style="color:red">×</span></if></td>                            	
+                                <td><a href="javascript:void(0);" onclick="_party._p(true,{pigcms:$o.id})">编辑</a> <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Product/iDe',array('token'=>$token,'id'=>$o['id']))}');">删除</a></td>
+                            </tr>
+                         </volist>  
+                        </table>
+                           <p class="page">{pigcms:$page}</p>
+                    </div>
+                     <div id="cover"></div>
+            	</div>
+            	<input type="hidden" name="token" value="{pigcms:$_GET['token']}" id="token"/>
+				<input type="hidden" id="save" value="0"/>
+    <div id="cover"></div>
+    <div id="party_pass" class="passWord">
+    	<p class="titlex">
+        	<span>添加快递</span>
+            <a class="close" onclick="_party._manage()">×</a>
+        </p>
+        <p class="imgCase">
+        	<span class="seLeft">快递名称：</span>
+            <input type="text" id="name" class="imgBox"/>
+        </p>
+		 <p class="imgCase">
+        	<span class="seLeft">快递价钱：</span>
+            <input type="text" id="price" class="imgBox"/>
+        </p>
+		 <p class="imgCase">
+        	<span class="seLeft">&nbsp&nbsp&nbsp排序值：</span>
+            <input type="text" id="sort" class="imgBox"/>
+        </p>
+        <p class="commonx">
+        	<span class="seLeft">是否启用：</span>
+            <input type="radio" class="rad" name="ra" id="r1" value="1"/>
+            <label class="radFont">是</label>
+            <input type="radio" class="rad" name="ra" id="r2" value="0"/>
+            <label class="radFont">否</label>
+        </p>    
+        <p class="btnBox">
+        	<input type="button" value="取消" class="button1" id="button2" onclick="_party._manage()"/>
+        	<input type="button" value="确定" class="button1" id="button1" onclick="_manage._post()"/>
+        </p>
+    </div>           
+         </div>
+            <!--right--end-->
+      </div>        
+ </div>
+    <script src="{pigcms::RES}/js/static1012.js"></script>
+    <script type="text/javascript">
+	var $l=function(id){return document.getElementById(id);};
+	var _party={
+	   _manage:function(show){
+		  if(show){
+			 _system._cover(true);
+			 $l("party_pass").show();
+			 $l("party_pass").center();
+			 window.onresize=function(){_system._cover(true);$l("party_pass").center();};
+			 $l("cover").onclick=function(){_party._manage();};
+		  }else{
+			 _system._cover();
+			 $l("party_pass").hide();
+			 $l("pass_pass").value="";
+		 $l("cover").onclick=null;
+		 window.onresize=null;
+		  }
+	   },
+	  _p:function(show,id){
+			 if(show){
+			 _system._cover(true);
+			 $l("party_pass").show();
+			 $l("party_pass").center();
+			 window.onresize=function(){_system._cover(true);$l("party_pass").center();};
+			 $l("cover").onclick=function(){_party._manage();};
+						edit( id );
+		  }else{
+			 _system._cover();
+			 $l("party_pass").hide();
+			 $l("pass_pass").value="";
+		 $l("cover").onclick=null;
+		 window.onresize=null;
+		  }
+	   }
+	};
+	function edit( id ){
+				var token = $( "#token" ).val();
+				$.ajax({
+					type: "POST",
+					url: "/newPS/index.php?g=User&m=Product&a=ia",
+					data: "id="+id+"&token="+token,
+					success: function(msg){
+							  var myObject = eval('(' + msg + ')');
+									$( "#name" ).val( myObject.name );
+									$( "#price" ).val( myObject.price );
+									$( "#sort" ).val( myObject.sort );
+									if( myObject.is == 1 ){
+											$( '#r1' ).attr( "checked",true );
+									}
+									if( myObject.is == 0 ){
+											$( '#r2' ).attr( "checked",true );
+									}
+									$( "#save" ).val( myObject.id );
+							}
+						});
+	}
+	$( "#button1" ).bind( 'click',function(){
+			var name=$( "#name" ).val();var price=$( "#price" ).val();var c=$( "#r1" ).val();var c1=$( "#r2" ).val();var sort=$("#sort").val();var token = $( "#token" ).val();	
+			if( $( "#r1" ).attr( "checked" ) ){
+					var radio = c;
+			}else{
+					radio = c1;
+			}
+			var save = $( "#save" ).val();
+					$.ajax({
+					type: "POST",
+					url: "/newPS/index.php?g=User&m=Product&a=expressAdd",
+					data: "name="+name+"&b="+price+"&c="+radio+"&d="+sort+"&token="+token+"&save="+save,
+					success: function(msg){
+							if( msg ){
+									alert( "添加成功" );
+									location.reload();
+								}else{
+									alert( "添加失败" );	
+								} 
+							}
+						});			
+	} );
+	
+</script>
+<include file="Public:footer"/>

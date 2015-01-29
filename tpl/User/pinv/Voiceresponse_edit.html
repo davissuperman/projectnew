@@ -1,0 +1,57 @@
+<?php $nav = "BASIC"; $side = "VOICERESPONSE" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Voiceresponse_add.css" rel="stylesheet"/>
+ <div class="container main">
+<div class="row">
+<include file="Basic:left"/>
+     
+
+            <div class="col-md-10 main">
+ 			<div class="panel panel-success">
+			  <div class="panel-heading">
+				<h3 class="panel-title">添加语音回复</h3>
+			  </div>
+			  <div class="panel-body">
+            	<form class="form" method="post"   action="{pigcms::U('Voiceresponse/upsave')}"  target="_top" enctype="multipart/form-data" >
+            	 <p class="same">
+                    <span class="Tex">关键词：</span>
+                    <input type="text" class="circle"  id="keyword" value="{pigcms:$info.keyword}" name="keyword" />
+                </p>
+                <p class="example">多个关键词请用空格格开：例如: 美丽 漂亮 好看 </p>
+               
+                <p class="same">
+                    <span class="Tex">音乐标题：</span>
+                    <input type="text" id="Title" value="{pigcms:$info.title}" name="title"  class="circle" />
+                </p>
+                <p class="example">注明：添加QQ音乐因为腾讯防盗链，后台无法试听,但微信可以播放! </p>
+                
+                <p class="example">限制200字内</p>
+                
+                <p class="same">
+                    <span class="Tex">音乐链接：</span>
+                    <input type="text"  id="musicurl" value="{pigcms:$info.musicurl}" name="musicurl" class="circle"/>
+                </p>
+                <p class="same">
+                    <span class="Tex">高品质音乐链接：</span>
+                    <input type="text" id="hqmusicurl" value="{pigcms:$info.hqmusicurl}" name="hqmusicurl" class="circle"/>
+                </p>
+                <p class="example">没有高品质音乐链接，请直接再填一遍音乐链接。（高质量音乐链接，WIFI环境优先使用该链接播放音乐） </p>
+                <p class="same">
+                    <span class="Tex">音乐描述：</span>
+                    <input type="text" id="Hfcontent" name="description" class="circle" value="{pigcms:$info.description}"/>
+                    <input type="hidden" name="id" value="{pigcms:$info.id}" />
+                </p>
+                <p class="example">请不要多于30字否则无法发送! </p>
+                </div>
+        	   <div class="panel-footer" style="text-align:right"> 
+	  		<input type="submit" value="保存" class="btn btn-success"/>
+	  		<a href="javascript:history.go(-1);"  class="btn btn-link">取消</a> 
+		      </div>
+		           </form>
+            </div>
+
+            </div>  
+            </div>
+      
+ </div>
+<include file="Public:footer"/>

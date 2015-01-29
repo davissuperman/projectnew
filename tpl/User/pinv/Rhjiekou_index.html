@@ -1,0 +1,43 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_index.css" rel="stylesheet"/>
+ <div class="content">
+ <div class="ffBox">
+<include file="Public:left"/>
+     
+    <!--right--begain-->
+            <div class="right">
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+             <p class="pressBox"><a href="{pigcms::U('Rhjiekou/jiekouadd',array('token'=>$token))}"     class="addList"/>添加</a></p>
+        
+           <table class="sheet" cellspacing="1">
+                    <tr>                      
+                        <th class="secondTd">id</th>
+                        <th class="thirdTd">关键词</th>
+                        <th class="sevenTd">接口地址</th>
+						<th class="sevenTd">创建时间</th> 
+                        <th  class="forthTd" >操作</th>
+                    </tr>
+                    <volist name="list" id="item"> 
+                    <tr>
+                   <td>{pigcms:$item.id}</td>
+                        <td>{pigcms:$item.keyword}</td>
+                        <td>{pigcms:$item.url}</td>
+                        <td >{pigcms:$item.time|date="Y-m-d H:i:s",###}</td>
+                        <td>
+<a href="{pigcms::U('Rhjiekou/xiugai',array('id'=>$item['id'],'token'=>$token))}">修改</a>&nbsp;&nbsp;<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Rhjiekou/del',array('id'=>$item['id'],'token'=>$token))}');">删除</a></td>
+                       
+                    </tr>
+                    </volist>
+                </table>
+               
+              
+                <p class="page">{pigcms:$page}</p>
+            </div>
+            <!--right--end-->   
+            </div> 
+      
+ </div>
+<include file="Public:footer"/>

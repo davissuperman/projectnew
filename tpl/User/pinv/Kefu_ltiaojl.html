@@ -1,0 +1,215 @@
+<?php $nav = "Kefu"; $side = "TMPLS" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Text_index.css" rel="stylesheet"/>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+<script src="{pigcms::RES}/js/kefu/static1012.js"></script>
+<script src="{pigcms::RES}/js/kefu/jquery.js"></script>
+<script src="{pigcms::RES}/js/kefu/editActive.js"></script>
+<script src="{pigcms::RES}/js/kefu/tanchu.js"></script>
+<style type="text/css">
+body,h2{margin:0 ; padding:0;}
+#faqbg{background-color:#666666; position:absolute; z-index:99; left:0; top:0; display:none; width:100%; height:1000px;opacity:0.5;filter: alpha(opacity=50);-moz-opacity: 0.5;}
+#faqdiv{position:absolute;width:400px; left:50%; top:50%; margin-left:-200px; height:auto; z-index:100;background-color:#fff; border:1px #8FA4F5 solid; padding:1px;}
+#faqdiv h2{ height:25px; font-size:14px; background-color:#8FA4F5; position:relative; padding-left:10px; line-height:25px;}
+#faqdiv h2 a{position:absolute; right:5px; font-size:12px; color:#FF0000}
+#faqdiv .form{padding:10px;}
+</style>
+<script type="text/javascript">
+$(function(){
+  $("#Button1").bind("click",function(){ 
+    //alert(11111);return false;
+   $("[name=item[]]:checkbox").attr("checked",true); 
+}); 
+ $("#Button2").bind("click",function(){ 
+    //alert(11111);return false;
+   $("[name=item[]]:checkbox").attr("checked",false); 
+});
+ /*$(".but").click(function(){
+  //var str = "这里是信息内容，这里是信息内容！";
+  //$(".form").html(str);
+  $("#faqbg").css({display:"block",height:$(document).height()});
+  var yscroll =document.documentElement.scrollTop;
+  $("#faqdiv").css("top","100px");
+  $("#faqdiv").css("display","block");
+  document.documentElement.scrollTop=0;
+ });*/
+
+ $(".close").click(function(){
+  $("#faqbg").css("display","none");
+  $("#faqdiv").css("display","none");
+ });
+})
+
+function dj(uid,lasttime){
+
+
+  var token=$('#token').val();
+    $.ajax({
+					type: "GET",
+					url: '{pigcms::U("Kefu/ajaxthjl")}',
+					data: "uid="+uid+'&token='+token+'&lasttime='+lasttime,
+					dataType:'html',
+					success: function(msg){
+					   
+					 	//alert(msg);return false;
+						$('#liaotian').html(msg);
+					},
+					
+			 	});
+ 
+  
+  
+  $("#faqbg").css({display:"block",height:$(document).height()});
+
+  var yscroll =document.documentElement.scrollTop;
+  $("#faqdiv").css("top","150px");
+
+  $("#faqdiv").css("display","block");
+  document.documentElement.scrollTop=0;
+
+}
+
+</script>
+ <div class="container main">
+<div class="row">
+ <include file="Kefu:left"/>
+            <div class="col-md-10">
+             <div class="panel panel-success">
+			  <div class="panel-heading">
+				<h3 class="panel-title">人工客服管理</h3>
+			  </div>
+			  <div class="panel-body">  
+			   <div class="" style="float:left">
+				  <a href="{pigcms::U('Kefu/ltiaojl',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-file"></span>聊天记录</a>
+            	  <a href="{pigcms::U('Kefu/duihualeix',array('token'=>$token))}"  class="btn btn-success">
+				  <span class="glyphicon glyphicon-file"></span>
+				  对话类型设置</a>	
+            	</div>
+			  	<!--<div class="add-button pull-right">
+			  	<div class="" style="float:left">
+            		<a href="{pigcms::U('Kefu/add',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-file"></span> 添加客服</a>
+            		<a href="{pigcms::U('Kefu/ltiaojl',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-picture"></span> 聊天记录</a>
+					<a href="{pigcms::U('Kefu/fkgl',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-picture"></span> 访客管理</a>
+            	</div>         -->
+            	<table class="table table-striped" cellspacing="1">
+                	<tr>
+                    	<th class="">登陆账号</th>
+                        <th class="">开始时间</th>
+                        <th class="">结束时间</th>
+                        <th class="">查找 </th>
+                        
+                    </tr>
+                    <form class="form" method="post"   action="{pigcms::U('Kefu/ltiaojl',array('token'=>$token))}"  target="_top" enctype="multipart/form-data" >
+                    <tr>
+                    	<td class="">
+						   <input type="hidden" value="{pigcms:$_GET['token']}" name='token'/>
+						  <select name="xz">
+					   
+							       <option value="0">所有</option>
+							     <volist name="list" id="vo">
+								   <option value="{pigcms:$vo.uid}"<if condition="$vo['uid'] eq $uidd">selected='selected'</if>>{pigcms:$vo.username}</option>
+					             </volist>
+							</select>
+						</td>
+                        <td  class='k'>
+						   <if condition="$ks neq ''">
+						    <input type="text" id="statdate" value="{pigcms:$ks}" onClick="WdatePicker()" name="statdate" class="Scircle"/>
+							<else/>
+							    <input type="text" id="statdate" value="{pigcms:$xqdate}" onClick="WdatePicker()" name="statdate" class="Scircle"/>
+							</if>
+						</td>
+
+                      
+						<td class="">
+						   <if condition="$jieshu neq ''">
+						    <input type="text" id="enddate" value="{pigcms:$jieshu}" name="enddate" onClick="WdatePicker()" class="Scircle"/>
+						  <else/>
+						   <input type="text" id="enddate" value="{pigcms:$date3}" name="enddate" onClick="WdatePicker()" class="Scircle"/>
+						  </if>
+						 </td>
+						<td class=""><input type="submit" class="btn btn-success btn-sm" value='查看' /></td>
+                    </tr>
+               
+               
+				 </form>
+
+              
+                  
+                </table>
+				<p style="padding-left:9px"><!--<input id="Button1" type="button" value="全选" />|--><!--<input id="Button2" type="button" value="反选" />-->
+				<a id="Button1" style="cursor:pointer">全选</a>|<a id="Button2" style="cursor:pointer">反选</a></div> </p>
+               
+				<form class="form" method="post"   action="{pigcms::U('Kefu/daochuquanbu',array('token'=>$token))}"  target="_top" enctype="multipart/form-data" style="margin-top:-30px">
+				
+               <if condition="$rzt eq ''">
+			        
+				 <p style="margin: 10px 15px 10px 18px; background: none repeat scroll 0% 0% rgb(249, 249, 249); height: 40px; line-height: 40px;">
+					
+					<span style="padding-left:10px">没有记录</span>
+					
+					 
+					  
+				 </p>
+				<else/>
+				    <volist name="rzt" id='vo1'>
+				  
+				 <p style="margin: 10px 15px 10px 18px; background: none repeat scroll 0% 0% rgb(249, 249, 249); height: 40px; line-height: 40px;">
+					
+					<span>
+					 <input type="checkbox"  style="margin-right: 10px; margin-left: 9px;" name="item[]" value="{pigcms:$vo1.time|date='Ymd',###}"/>	
+					 </span>
+					 <span><input type="hidden" value='{pigcms:$vo1.token}' id='token'/></span>
+                   
+					
+					 <span style="margin-left: 10px;">{pigcms:$vo1.time|date="Y-m-d",###}</span>
+					
+					 <span style="margin-bottom: 5px;">............................................................................................................................................................................................................</span>
+					
+					
+					  <if condition="$uid eq '0'">
+					   <input type="hidden" value='{pigcms:$uid}' name='uid' id='uid'/>
+					  <span><input value="查看" onclick="dj({pigcms:$uid},{pigcms:$vo1.time|date='Ymd',###})"class="btn btn-success btn-sm" type="button" /></span>
+					  <else />
+					   <input type="hidden" value='{pigcms:$vo1.uid}' name='uid' id='uid'/>
+					  <span><input value="查看" onclick="dj({pigcms:$vo1.uid},{pigcms:$vo1.time|date='Ymd',###})"class="btn btn-success btn-sm" type="button" /></span>
+					  </if>
+					  <!--<input type="button" onclick="_party._manage(true)"  value="查看" />-->
+					 
+					  
+				 </p>
+				 </volist>
+				</if>
+				
+				
+				 <p style="height:40px;line-height:40px;padding-right:45px;">
+				 <input type="submit" value="导出"  class="btn btn-danger" style="float:right;" >
+				</p>
+				
+				</form>
+				 
+				<p style="padding-left:22px;">{pigcms:$page}</p>
+               </div>
+            </div>
+         </div>   
+      </div>
+	       <div id="faqbg"></div>
+		   <div id="faqdiv" style="display:none">
+			 <h2>信息窗口<a href="#" class="close" style="padding-top:5px;color:black">关闭</a></h2>
+				<div class="form" style="height:300px;overflow-y:scroll">
+				 <form class="form" method="post"   action="{pigcms::U('Kefu/daochu')}"  target="_top" enctype="multipart/form-data" style="padding-left:0px">
+					<input type="submit" name="" class="btn btn-success btn-sm" id='dc' value="导出"/>
+				   </form>
+				<!--<p class="title">
+					<span>列表</span>
+					<a class="close" onclick="_party._manage()">×</a>
+				</p>-->
+				<div id="liaotian" style="">
+		   
+			</div>
+         </div>
+</div>
+ </div>
+
+<include file="Public:footer"/>

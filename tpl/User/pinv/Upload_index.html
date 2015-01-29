@@ -1,0 +1,29 @@
+<include file="Public:head"/>
+<div class="content">
+<div class="ffBox">
+<include file="Public:left"/>
+       <form name="form1" method="post" action="{pigcms::U('Upload/add')}" enctype='multipart/form-data'>
+           
+            <tr class="listbody_admin"> 
+                <td  height="30" align="right">图片一:</td>
+                 <input type='text' value='{pigcms:$_GET.token}' name='token'/>
+                <td>
+				   <input type='text' style='width:200px' id="ehdel_upload_text" name='imgname' />
+                    <input value='浏览' style='width:65px' onchange="ehdel_upload_text.value=this.value" type='file' name='myfile' />
+                </td>
+            </tr>
+           
+
+
+
+            <tr class="listbody_admin"> 
+                <td height="30" align="right">&nbsp;</td>
+                <td><input type="submit" name="Submit" value="确认提交" class="subbt"></td>
+            </tr>
+        </form>
+
+      
+</div>
+</div>
+
+<include file="Public:footer"/>

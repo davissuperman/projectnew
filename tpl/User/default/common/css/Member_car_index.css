@@ -1,0 +1,30 @@
+.right{width:837px;height:1000px;float:left;padding:0px 10px;}
+.artiEdit{height:38px;line-height:33px;margin-top:15px;clear:both;}
+.big{font-size:18px;font-weight:bold;color:#6e6e6e;float:left;margin-right:10px;}
+.small{font-size:12px;color:#aaa;float:left;font-weight:bold;}
+.card{float:left;}
+.cardLeft{float:left;width:270px;margin-top:25px;margin-left:10px;}
+.imgText{height:60px;line-height:60px;color:#6e6e6e;font-size:12px;padding-left:20px;}
+.same{height:35px;line-height:35px;color:#696969;margin-top:15px;}
+.Tex{height:auto;color:#676767;float:left;text-align:right;margin-right:15px;display:inline;color:#444;font-weight:bold;font-size:12px;}
+.remarkBox{height:40px;line-height:40px;}
+.circle{width:250px;height:33px;line-height:33px;float:left;border:1px #adacb4 solid;padding-left:5px;margin-right:10px;}
+.cardRight{float:left;padding-left:15px;}
+.testTex{float:left;margin-right:10px;font-size:12px;}
+.testImg{float:left;}
+.showPress{width:94px;height:33px;text-align:center;line-height:33px;color:#fff;background:url(../img/buildImg.gif) no-repeat;cursor:pointer;border:0px;}
+.showPress:hover{background:url(../img/bulidOver.gif) no-repeat;}
+.example{height:20px;line-height:20px;color:#ea533f;font-size:12px;padding-left:105px;}
+.exText{font-size:12px;color:#ea533f;}
+.remark{font-size:12px;color:#ee533f;}
+.save{width:72px;height:33px;text-align:center;line-height:33px;color:#fff;cursor:pointer;background:url(../img/savePress.gif) no-repeat;border:0px;margin-left:105px;margin-bottom:20px;float:left;}
+.save:hover{background:url(../img/saveX.gif) no-repeat;border:0px;margin-left:105px;}
+.back{width:72px;height:33px;text-align:center;line-height:33px;color:#fff;cursor:pointer;background:url(../img/savePress.gif) no-repeat;border:0px;margin-left:205px;float:left;}
+.back:hover{background:url(../img/saveX.gif) no-repeat;border:0px;}
+.cardBox{width:835px;background:#fcfcfc;border:1px #eee solid;float:left;margin-bottom:10px;}
+.bannerBox li{width:190px;float:left;margin-left:15px;margin-top:15px;}
+.bannerBox{padding-bottom:5px;float:left;background:#fcfcfc;border:1px #eee solid;}
+.look{width:190px;height:25px;line-height:25px;font-size:12px;color:#6e6e6e;text-align:center;float:left;}
+.areaBox{width:180px;height:30px;border:1px #ddd solid;padding:5px;font-size:12px;color:#6e6e6e;}
+.attent{height:25px;line-height:25px;font-size:12px;color:#ea533f;}
+.load{font-size:12px;color:#009900;float:right;margin-right:70px;}

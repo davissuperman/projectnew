@@ -1,0 +1,44 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Member_card_info.css" rel="stylesheet"/>
+ <div class="content">
+ <div class="ffBox">
+<include file="Public:left"/>
+     
+    <!--right--begain-->
+             <div class="right">
+            	<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">返回首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+                <p class="artiEdit"><span class="big">商家设置</span></p>   
+              <form action="" method="post">
+                <div class="setBox">
+                	<div class="setLeft">
+                    	<p class="setTitle">商家简介：</p>
+                        <textarea class="area"  name="info" >{pigcms:$info.info}</textarea>
+                        </br>
+                        <input type="submit" value="保存" class="save"/>
+                    </div>
+                    <div class="setRight">
+                    	<p class="same"><span class="caseText">商家logo外链地址(图片尺寸100x100)</span></br><input type="text" class="case" id="logo" name="logo" value="{pigcms:$info.logo}" /></p>
+                        <p class="same"><span class="caseText">选择分类</span></br>
+                        <select name="class" id="select">
+					<option value="1">美食餐饮</option>
+					<option value="2">休闲娱乐</option>
+					<option value="3">生活服务</option>
+					<option value="4">其他</option>
+					</select></p>
+                        <p class="same"><span class="caseText">会员卡优惠简短描述：（12个字以内）</span></br><input type="text" class="case" name="description" value="{pigcms:$info.description}"/></p>
+                        <p class="same"><span class="caseText">消费确认密码：</span></br><input type="text" class="case" value="{pigcms:$info.password}" name="password" /></br><span class="caseText">商家用来确认用户代金券，优惠券和礼品券使用的密码</span></p>
+                    </div>
+                </div>
+                
+                
+              </form>
+              
+            </div>
+            <!--right--end-->  
+            </div>  
+      
+ </div>
+<include file="Public:footer"/>

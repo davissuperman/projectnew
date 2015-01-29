@@ -1,0 +1,53 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Product_set.css" rel="stylesheet"/>
+<script type="text/javascript" src="/tpl/static/xhedit/jquery/jquery-1.4.4.min.js"></script>
+<script type="text/javascript">
+
+
+    $(function() {
+
+        $("#form").valid([
+            {name: "message", simple: "内容", require: true},
+            //{ name:"catid",message:"请选择类别",require:true},
+            //{ name:"price",type:"currency",message:"价格输入不正确"},
+            //{ name:"bianhao",message:"编号不能为空",require:true},
+            //{ name:"shoujihao",message:"手机号不能为空",require:true},
+            //{ name:"fakemembercount",type:"int",message:"报名基数只能填写整数或0"}
+
+        ], true, true);
+
+    })
+</script>
+<div class="content">
+    <div class="ffBox">
+        <include file="Public:left"/>      
+        <!--right--begain-->
+        <div class="right">
+            <div class="right">
+                <p class="rightTop">
+                    <a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+
+                <p class="artiEdit"><span class="big">修改员工总评分</p>
+                <form class="form" method="post" action="{pigcms::U('Yuangong/ygpfupdate',array('token'=>$token,'id'=>session('wxid')))}" enctype="multipart/form-data" id="form" > 
+
+                    <input type="hidden" name="token" id="token" value="{pigcms:$_GET['token']}" />
+                    <input type="hidden" name="pid" id="id" value="{pigcms:$_GET['id']}" />
+
+                    <p class="same">
+                        <span class="Tex">总评分：</span>
+                        <!--<textarea class="circle" style='width:300px;height:100px' name="message">{pigcms:$rzt.message}</textarea>-->
+                        <input type="text" name="vote" value="{pigcms:$rzt.vote}" class="circle" style='width:100px'/>
+                    </p>
+
+
+
+                    <p class="pressBox"><input type="submit" value="保存" class="addList"/></p>
+                </form>
+            </div>
+            <!--right--end-->
+        </div>   
+
+    </div>
+    <include file="Public:footer"/>

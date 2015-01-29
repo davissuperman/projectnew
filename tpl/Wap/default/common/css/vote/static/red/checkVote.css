@@ -1,0 +1,83 @@
+*{margin:0px;padding:0px;}
+html,body{width:100%;height:100%;font-size:16px;min-width:320px}
+body{background:url(../../img/topImg.png) no-repeat top #f7f7f7; background-size:100%;}
+a{text-decoration:none;}
+ul{list-style:none;}
+.clear{clear:both;}
+.box{margin:18px 12px;font-family:"微软雅黑";padding-top:15%;}
+.title{color:#333333;font-size:20px;font-weight:bold;}
+.detail{height:20px;line-height:20px;color:#7f7f7f;font-size:12px;margin-top:15px;margin-bottom:10px;}
+.time{float:left;margin-right:10px;}
+.pImg{width:100%;}
+.report{height:20px;line-height:20px;text-align:right;margin-top:10px;font-size:12px;}
+.report a{color:#7f7f7f;}
+.voteNum{margin-top:15px;margin-bottom:8px;padding-left:10px;}
+.voteNum span{float:left;font-size:12px;color:#333;}
+.sendOver{height:44px;line-height:44px;background:url(../../img/overBj.gif) repeat-x top center;font-size:18px;color:#fff;border:0px;text-align:center;width:100%;font-weight:bold;margin-top:18px;border-radius:5px;}
+.sendBtnX{height:44px;line-height:44px;background:url(../../img/sendBjR.gif) repeat-x top center;font-size:18px;color:#fff;border:0px;text-align:center;width:100%;border-radius:5px;font-weight:bold;margin-top:18px;}
+.btn{margin-top:18px;}
+.bottom{height:45px;line-height:45px;text-align:center;font-size:12px;margin-bottom:18px;color:#808080;}
+.sendBox{width:41%;text-align:center;margin-right:10px;float:left;background:url(../../img/garyRed.gif) no-repeat center top;height:45px;line-height:45px;border-radius:5px;color:#fff;padding:0px 10px;}
+.sendBtn{height:44px;line-height:44px;background:url(../../img/redBtn.gif) no-repeat top center;font-size:18px;color:#fff;border:0px;text-align:center;width:100%;border-radius:5px;font-weight:bold;margin-top:18px;}
+.share1{float:left;height:15px;margin-top:15px;}
+.share2{float:left;height:20px;margin-top:12px;}
+.shareBox{width:41%;text-align:center;float:right;background:url(../../img/garyRed.gif) no-repeat center top;height:45px;line-height:45px;border-radius:5px;color:#fff;padding:0px 10px;}
+s.green{height:10px;float:left;background:#4eb856;}
+.grayNess{height:10px;float:left;background:#e5e5e5;}
+.gGBox{width:100%;}
+.gLeft{float:left;}
+.blacBottom{height:50px;background:#1a1a1a;line-height:50px;text-align:center;color:#fff;margin:-18px -12px;}
+.checkList{border-radius:5px;font-size:14px;}
+.checkList li{height:45px;line-height:45px;border-radius:5px;background:#fff;padding:0px 10px;border:1px #ccc solid;}
+.radioText{float:left;}
+.inRadio{height:15px;width:15px;float:right;margin-top:12px;border-radius:15px;border:1px #ccc solid;}
+
+
+.numBox{border-radius:5px;margin-top:5px;}
+.num{text-align:right;word-spacing:10px;color:#808080;font-size:12px;}
+.numSame{padding:15px 6px;padding-top:12px;padding-bottom:15px;border:1px #ccc solid;border-radius:5px;background:#fff;}
+.faceRight{float:right;}
+.faceRight span{float:left;margin-top:5px;}
+.voteText{margin-right:10px;}
+.faceText{float:left;font-size:12px;margin-top:4px;}
+.face{height:30px;float:left;margin-right:5px;}
+.faceText{float:left;color:#000;}
+.green{height:6px;float:left;background:#E33422;}
+.grayNess{height:6px;float:left;background:#e5e5e5;}
+.gGBox{width:100%;margin-top:15px;}
+.gLeft{float:left;}
+.changImg{background:url(../../img/vote_sgR_no.png) no-repeat center top;float:right;height:15px;width:16px;background-size:16px 15px;margin-top:15px;}
+.changImgX{background:url(../../img/vote_sgR_yes.png) no-repeat center top;float:right;height:15px;width:16px;background-size:16px 15px;margin-top:15px;}
+.artical{height:30px;line-height:30px;margin-top:5px;padding-left:10px;font-size:12px;}
+.artical span{float:left;}
+.artical span.span1{margin-right:10px;}
+.artText{padding:10px;font-size:14px;border:1px #ccc solid;border-radius:5px;background:#fff;}
+.head{width:30px;float:left;margin-right:10px;}
+.headTex{float:left;margin-top:8px;}
+.headRight{float:right;color:#808080;}
+.aText{color:#808080;margin-top:10px;}
+.more{font-size:12px;text-align:center;color:#808080;margin-top:18px;}
+.goTop{width:45px;right:18px;bottom:20px;position:fixed;}
+.radioCheck{height:16px;width:16px;float:right;margin-top:3px;}
+.chosImg{height:15px;}
+
+
+/*评论*/
+.share2{float:left;height:18px;margin-top:12px;}
+
+.artical{height:30px;line-height:30px;margin-top:5px;padding-left:10px;font-size:12px;}
+.artical span{float:left;}
+.artical span.span1{margin-right:10px;}
+.artText{padding:10px;font-size:14px;border:1px #ccc solid;border-radius:5px;background:#fff;}
+.head{width:30px;float:left;margin-right:10px;}
+.headTex{float:left;margin-top:8px;}
+.headRight{float:right;color:#808080;font-size:12px;}
+.aText{color:#808080;margin-top:10px;}
+.more{font-size:12px;text-align:center;color:#808080;margin-top:18px;}
+.goTop{width:45px;right:18px;bottom:60px;position:fixed;}
+.samepBox{width:100%;border:1px #ccc solid;border-left:0px;border-right:0px;background:#f7f7f7;position:fixed;bottom:0px;}
+.sameP{border:1px #ccc solid;padding:10px 3px;background:#fff;border-radius:5px;margin:6px 12px;}
+.case{width:100%;height:24px;line-height:24px;font-size:16px;padding:4px 0px;margin:-9px 0px;border:0px;color:#b2b2b2;border-radius:5px;}
+.articText{height:25px;line-height:25px;font-size:16px;padding-left:12px;padding-right:12px;text-align:center;margin-top:10px;}
+.artLeftImg{width:15px;float:left;margin-top:3px;}
+.artRightImg{width:20px;float:right;margin-top:3px;}

@@ -1,0 +1,20 @@
+.right{width:837px;float:left;padding:0px 10px;}
+.artiEdit{height:50px;line-height:50px;font-size:18px;font-weight:bold;border-bottom:1px #eee solid;}
+.artiEdit span{float:left;}
+.back1{width:42px;height:22px;text-align:center;line-height:22px;color:#fff;cursor:pointer;border:0px;background:url(../img/searchImg.gif) no-repeat;float:right;margin-top:15px;margin-right:15px;}
+.back1:hover{background:url(../img/searchOver.gif) no-repeat;}
+.setBox{height:365px;padding:15px;}
+.setLeft{float:left;}
+.setRight{float:left;margin-left:35px;padding-top:10px;}
+.area{width:420px;height:220px;border:1px #ccc solid;padding:10px;font-size:12px;color:#6e6e6e;}
+.setTitle{height:30px;line-height:30px;color:#6e6e6e;}
+.save{width:72px;height:33px;text-align:center;line-height:33px;color:#fff;border:0px;background:url(../img/savePress.gif) no-repeat;margin-top:20px;cursor:pointer;}
+.save:hover{background:url(../img/saveX.gif) no-repeat;}
+.caseText{height:20px;line-height:20px;color:#6e6e6e;font-size:12px;}
+.case{height:15px;width:300px;line-height:15px;color:6e6e6e;font-size:12px;padding:5px;border:1px #ccc solid;}
+.same{margin-top:15px;}
+.big{font-size: 18px;
+font-weight: bold;
+color: #6e6e6e;
+float: left;
+margin-right: 10px;}

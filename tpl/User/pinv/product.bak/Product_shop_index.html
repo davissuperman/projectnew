@@ -1,0 +1,51 @@
+<include file="Public:head"/>
+
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+<link type="text/css" href="{pigcms::RES}/css/Photo_list_add.css" rel="stylesheet"/>
+ <div class="content">
+ <div class="ffBox">
+<include file="Public:left"/>
+     
+<!--right--begain-->
+            <div class="right">
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+               <p class="artiEdit"><span class="big">上传图片</span><a href="javascript:history.go(-1);"   class="addListX">返回</a></p>          
+                <table class="sheet" cellspacing="1">
+                    <tr>
+                        <th class="firstTd">名称</th>
+                        <th class="thirdTd" title="">图片外链地址(宽720够了，高不限制)</th>
+                        <th class="sevenTd">显示</th>
+                        <th class="thirdTd">操作</th>
+                    </tr>
+                     <form method="post" action=""> 
+					<input type="hidden" name="id" value="{pigcms:$i.id}"/>	
+                    <tr>
+                    	<td>商城首页背景图</td>
+                        <td><input type="text" class="case" name="Shopic"  value="{pigcms:$i.Shopic}" id='url1'/><a href="###" onclick="upyunPicUpload($(this).prev().attr('id'),'pic',700,420,'qtclsw1382672973')" class="a_upload">上传</a></td>
+                        <td><input type="checkbox" name="status" value="1"   <if condition="$photo['status'] eq 1">checked</if> /></td>
+                        <td><!-- <input type="hidden"   name="id" value="{pigcms:$photo.id}"  /> --><input type="submit"  class="cancel"  value="修改"/></td>
+                    </tr>
+					<tr>
+                    	<td>首页LOGO图</td>
+                        <td><input type="text" class="case" name="Shopics"  value="{pigcms:$i.Shopics}" id='url1'/><a href="###" onclick="upyunPicUpload($(this).prev().attr('id'),'pic',700,420,'qtclsw1382672973')" class="a_upload">上传</a></td>
+                        <td><input type="checkbox" name="status" value="1"   <if condition="$photo['status'] eq 1">checked</if> /></td>
+                        <td><!-- <input type="hidden"   name="id" value="{pigcms:$photo.id}"  /> --><input type="submit"  class="cancel"  value="修改"/></td>
+                    </tr>
+						<tr>
+                    	<td><input type="submit" value="保存" class="addList"/></td><input type="hidden" name="token" value="{pigcms:$token}" />                      
+                    </tr>
+                    </form>
+			
+                </table>		
+            </div>
+            <!--right--end-->    
+            </div>    
+      
+ </div>
+<include file="Public:footer"/>

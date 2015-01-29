@@ -1,0 +1,70 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Adma_index.css" rel="stylesheet"/>
+ <div class="content">
+ <div class="ffBox">
+<include file="Public:left"/>
+     
+    <!--right--begain-->
+            <div class="right">
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+            	 <p class="artiEdit">
+            	 <span class="big">第三方接口添加</span></p>
+             
+                <form class="form" method="post" action="{pigcms::U('Rhjiekou/jiekouadd')}"  enctype="multipart/form-data">
+                <div class="rightLeft">
+                	 <input type='hidden' value='{pigcms:$_GET["token"]}' name='token'/>
+                	 <input type='hidden' value='{pigcms:$_SESSION["uid"]}' name='uid'/>
+                    <p class="same">
+                        <span class="Tex">接口触发词：</span>
+                        <input type="text" name="keyword" value="" ID="etitle" class="circle"/>
+                	</p>
+					<p class="same">
+                        <span class="Tex">接口类型：</span>
+                        <input type="radio"  name="leixing" value="1"  id="ewm" class=""/>
+						<span>必须是微信xml类型。</span>
+                	</p>
+					 
+                    <p class="same">
+                        <span class="Tex">api地址：</span>
+                        <input type="text"  name="url" value=""  id="ewm" class="circle"/>
+                	</p>
+					 
+                   
+                  <!--  <p class="areaSame">
+                        <span class="Tex">融合的第三方微信api地址：</span>
+                        <textarea class="circleArea"  id="info" name="info"  onkeyup="DivFollowingText2()">{pigcms:$adma.info}</textarea>
+                	</p>
+                    <p class="example">请简单描述您的微信公众号可以给粉丝带来什么好处</br>
+尽量控制在150文字以内。</p>
+                    <p class="same">
+                        <span class="Tex">版权信息：</span>
+                        <input type="text" name="copyright" ID="copyright" value="{pigcms:$adma.copyright}" class="circle"  onkeyup="DivFollowingText3()"/>
+                	</p>
+                    <p class="example exBottom">例如：© 2001-2013 {pigcms::C('site_name')}版权所有</p>-->
+                    <p class="expBox">
+                    	<input type="submit" name="button" value="保存" class="surePress"/>
+                       
+                       
+                      <!--  <a class="lookPress" href="{pigcms::C('site_url')}/index.php/show/{pigcms:$Think.session.token}"  target="_blank">查看推广页</a>-->
+                    </p>
+                </div>
+              
+             </form>
+            </div>
+            <!--right--end-->    
+      <script type="text/javascript">
+function DivFollowingText2()
+{
+document.getElementById("jieTex").innerHTML=document.getElementById("info").value;
+}
+function DivFollowingText3()
+{
+document.getElementById("gzhcopyright").innerHTML=document.getElementById("copyright").value;
+}
+</script> 
+</div>
+ </div>
+<include file="Public:footer"/>

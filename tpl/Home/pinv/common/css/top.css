@@ -1,0 +1,12 @@
+﻿*{margin:0px;padding:0px;}
+a{text-decoration:none;}
+img{border:0px;}
+ul{list-style:none;}
+html,body{width:100%;height:100%;font-size:14px;font-family:"微软雅黑";}
+.head{height:65px;background:#2e2e2e;padding-top:18px;}
+.heading{width:1000px;height:45px;margin:auto;}
+.logo{float:left;margin-top:3px;}
+.listBox{float:right;height:32px;margin-top:5px;}
+.listBox li{width:69px;height:32px;text-align:center;line-height:32px;float:left;margin-left:29px;cursor:pointer;}
+.listBox li.over{background:url(../img/listBj.gif) no-repeat;}
+.listBox li a{width:69px;height:32px;float:left;color:#fff;}

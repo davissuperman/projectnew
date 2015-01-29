@@ -1,0 +1,32 @@
+.right{width:837px;float:left;padding:0px 10px;}
+.artiEdit{height:43px;line-height:43px;border-bottom:1px #eee solid;margin-top:15px;}
+.big{font-size:18px;font-weight:bold;color:#6e6e6e;float:left;margin-right:10px;}
+.small{font-size:12px;color:#6e6e6e;float:left}
+.addListX{float:right;width:81px;height:33px;line-height:33px;text-align:center;color:#fff;font-weight:bold;background:url(../img/look.gif) no-repeat;border:0px;cursor:pointer;margin-left:20px;}
+.addListX:hover{background:url(../img/lookOver.gif) no-repeat;}
+.addList{float:left;width:81px;height:33px;line-height:33px;text-align:center;color:#fff;font-weight:bold;background:url(../img/look.gif) no-repeat;border:0px;cursor:pointer;margin-left:20px;}
+.addList:hover{background:url(../img/lookOver.gif) no-repeat;}
+.pressBox{padding-left:150px;margin-top:10px;}
+.bgfc{background: #FCFCFC;border:1px #eee solid;border-top:0px;margin-bottom: 20px;padding: 20px;}
+.plug-menu{border-radius:36px 36px 36px 36px;box-shadow: 0 0 0 4px #FFFFFF, 0 2px 5px 4px rgba(0, 0, 0, 0.25);height: 36px;position: relative;width: 36px;}
+.plug-menu span{background: url("../img/plugmenu.png") no-repeat scroll 0 0 / 28px 28px rgba(0, 0, 0, 0);display: block;height: 28px;left: 4px;overflow: hidden;position: absolute;text-indent: -999px;top: 4px;width: 28px;}
+.sheet{width:100%;background:#eee;color:#6a6a6a;position:relative;}
+.sheet td{background:#fff;text-align:left;height:45px;padding-left:3px;padding:0px 5px;}
+.sheet th{background:#f1f1f1;height:45px;line-height:45px;text-align:center;font-weight:normal;}
+.tou{width:32px;}
+.secondTd{width:8%}
+.sevenTd{width:35%;}
+input[type="checkbox"] { display: inline !important;}
+.cfix {
+  zoom: 1;
+}
+
+.cfix:after {
+  content: '.';
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden;
+  line-height: 0;
+  overflow: hidden;
+}

@@ -1,0 +1,24 @@
+*{margin:0px;padding:0px;font-family:"微软雅黑";}
+html,body{min-width:320px;}
+a{text-decoration:none;}
+ul{list-style:none;}
+.same{position:relative;width:100%;background:#7ecef4;}
+.same2{position:relative;width:100%;background:#448aca;}
+.same3{position:relative;width:100%;background:#ff5739;}
+.same4{position:relative;width:100%;background:#f8b551;}
+.leftImg{width:69%;float:left;}
+.tuImg{float:left;width:100%;}
+.detail{width:30.6%;text-align:center;color:#171717;position:absolute;top:38%;right:0px;}
+.jiao{position:absolute;width:14px;height:14px;background:#7ecef4;left:-5px;top:14px;transform:rotate(45deg);-webkit-transform:rotate(45deg);}
+.jiao2{position:absolute;width:14px;height:14px;background:#448aca;left:-5px;top:14px;transform:rotate(45deg);-webkit-transform:rotate(45deg);}
+.jiao3{position:absolute;width:14px;height:14px;background:#ff5739;left:-5px;top:14px;transform:rotate(45deg);-webkit-transform:rotate(45deg);}
+.jiao4{position:absolute;width:14px;height:14px;background:#f8b551;left:-5px;top:14px;transform:rotate(45deg);-webkit-transform:rotate(45deg);}
+.botList{width:245px;height:30px;margin:auto;}
+.botList li a{color:#999999;}
+.botList li{float:left;color:#999999;font-size:12px;margin-right:7px;margin-top:10px;}
+.botList li:last-child{float:right;margin-right:0px;}
+.botList li:nth-child(even){line-height:14px;}
+.xieyi{text-align:center;font-size:12px;margin-top:5px;color:#171717;}
+.xieyi:not(.spec){color:#999999;}
+.xieyi:last-child{margin-bottom:18px;}
+.xiuxian:{color:white;}

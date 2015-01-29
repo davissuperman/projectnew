@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>录入信息</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link type="text/css" href="{pigcms::RES}/game/css/sign.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/game/js/jquery.js"></script>
+<script>
+$(function(){
+	var $height=window.innerHeight;
+	var browser={
+	  versions:function() {
+		var u=navigator.userAgent, app = navigator.appVersion;
+		return {//移动终端浏览器版本信息 
+		  trident: u.indexOf('Trident') > -1, //IE内核
+		  presto: u.indexOf('Presto') > -1, //opera内核
+		  webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+		  gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+		  mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), //是否为移动终端
+		  ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+		  android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+		  iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+		  iPad: u.indexOf('iPad') > -1, //是否iPad
+		  webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+		};
+	  }(),
+	  language:(navigator.browserLanguage||navigator.language).toLowerCase()
+	}
+	if(browser.versions.android){
+	 	$(".inCase").focus(function(){
+			$(".middle").css("height",$height);
+			$(".signBox").css("top","-"+"45%");
+			if($(".signBox").position().top<0)
+			{
+				$(".signBox").css("top","0px");
+			}
+		}).blur(function(){
+			$(".signBox").css("top","0px");
+		});
+	}
+})
+</script>
+  <style>
+   .deploy_ctype_tip{z-index:1001;width:100%;text-align:center;position:fixed;top:50%;margin-top:-23px;left:0;}.deploy_ctype_tip p{display:inline-block;padding:13px 24px;border:solid #d6d482 1px;background:#f5f4c5;font-size:16px;color:#8f772f;line-height:18px;border-radius:3px;}
+      </style>  
+</head>
+    <body id="tips">
+        <form   method="post" action="{pigcms::U('Doing/receive')}"  >
+            
+	<img src="{pigcms::RES}/game/img/middle.jpg" class="middle"/>
+	<div class="signBox">
+    	<p class="logoBox"><img src="{pigcms::RES}/game/img/logo.png" class="logoImg"/></p>
+        <p class="texCenter"><img src="{pigcms::RES}/game/img/signImg.png" class="topText"></p>
+        <p class="texCenter inforCase">
+        	<span>姓名：</span>
+            <input type="text" placeholder="" name="name"  id="name"  class="inCase"/>
+            <input  type="hidden" name="gid" value="{pigcms::$gid}" >
+            <input  type="hidden" name="time" value="{pigcms::$time}" >
+            <input  type="hidden" name="order" value="{pigcms::$order}" >
+            <input  type="hidden" name="number" value="{pigcms::$number}" >
+        </p>
+        <p class="texCenter inforCase">
+        	<span>手机：</span>
+            <input type="text" placeholder=""   name="tel" id="tel" class="inCase"/>
+        </p>
+         <p class="texCenter inforCase">
+        	<span>城市：</span>
+            <input type="text" placeholder=""  name="city" id="city" class="inCase"/>
+        </p>
+        <p class="texCenter inforCase">
+        	<span>地址：</span>
+            <input type="text" placeholder=""  name="addres" id="addres" class="inCase"/>
+        </p>
+        <p class="texCenter inforCase">
+        	<span>邮箱：</span>
+            <input type="text" placeholder="非必填" class="inCase" name="email" id="email" />
+        </p>
+        <p class="texCenter"><img src="{pigcms::RES}/game/img/stateImg.png" class="topText"></p>
+        <p class="texCenter"><button class="begainBtn"  type="button"  onclick="tgSubmit()" >提交</button></p>
+        </form>
+    </div>
+        
+        <script>
+            function showTip(tipTxt) {
+
+                var div = document.createElement('div');
+                div.innerHTML = '<div class="deploy_ctype_tip"><p>' + tipTxt + '</p></div>';
+                var tipNode = div.firstChild;
+                $("#tips").after(tipNode);
+                setTimeout(function() {
+                    $(tipNode).remove();
+                }, 1500);
+            }
+            function tgSubmit() {
+               
+                var name = $("#name").val();
+                if ($.trim(name) == "") {
+                    showTip('名字不能为空');
+                    return false;
+                }
+
+                var phone = $("#tel").val();
+                if ($.trim(phone) == "") {
+                    showTip('手机号错误！');
+                    return false;
+                }
+                var patrn = /^1[3|4|5|8|7][0-9]\d{4,8}$/;
+                if (!patrn.exec($.trim(phone))) {
+                    showTip('手机号错误！');
+                    return false;
+                }
+                var city = $("#city").val();
+                if ($.trim(city) == "") {
+                    showTip('城市不能为空');
+                    return false;
+                }
+                var addres = $("#addres").val();
+                if ($.trim(addres) == "") {
+                    showTip('地址不能为空');
+                    return false;
+                }
+                showTip('登记成功！');
+                setTimeout(function (){
+                     $("form").submit();
+                    return true;
+                },2000);
+                return false;
+            }
+        </script>
+</body>
+</html>

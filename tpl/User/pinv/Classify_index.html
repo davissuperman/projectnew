@@ -1,0 +1,92 @@
+<?php $nav = "HOME"; $side = "CLASSIFY" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Text_index.css" rel="stylesheet"/>
+<link type="text/css" href="{pigcms::RES}/js/sorttable/jquery-ui.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/sorttable/jquery-ui.js"></script>
+ <div class="container main">
+<div class="row">
+<include file="Home:left"/>
+     
+            <div class="col-md-10 main">
+             <div class="panel panel-success">
+			  <div class="panel-heading">
+				<h3 class="panel-title">微官网分类管理</h3>
+			  </div>
+			  <div class="panel-body">  
+			  	<div class="add-button pull-right">
+            		<a href="{pigcms::U('Classify/add')}"  class="btn btn-success"><span class="glyphicon glyphicon-file"></span> 添加分类</a>
+            		<a href="{pigcms::U('Img/add')}"  class="btn btn-success"><span class="glyphicon glyphicon-picture"></span> 添加图文</a>
+            	</div>         
+            	<table class="table table-striped" cellspacing="1">
+                    <thead>
+                	<tr>
+                        <th style="width:7%;">排序<span class="glyphicon glyphicon-question-sign hover-popover" data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="拖拉下面的箭头可以调整显示图片的先后顺序喔!"></span></th>  
+                    	<th class="" style="width:10%">分类名称</th>
+                        <th class="" style="width:10%">分类描述</th>
+                        <th class="" style="width:17%">分类图片外链地址
+                        	<span class="glyphicon glyphicon-question-sign hover-popover" data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="分类图片最佳尺寸：720*400不支持上传图片，请把图片传到腾讯微博，在这里填写图片的外链地址如果不填写分类图片地址系统将随机分配默认图片"></span>
+                        </th>
+                        <th class="" style="width:25%;">外链网站或活动
+                        	<span class="glyphicon glyphicon-question-sign hover-popover" data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="如果你想跳转到百度，就可以填写http://baidu.com。不需要跳转就不用填写，还可以外链活动，直接填写活动外链地址"></span>
+                        </th>
+                        <th class="text-center" style="width:10%">是否显示</th>
+                        <th class="text-center" style="width:10%">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <volist name="info" id="vo">
+                        <tr sort="{pigcms:$vo.sorts}" id="{pigcms:$vo.id}">
+                            <td style="cursor:move" id='sort' ><span class="glyphicon glyphicon-sort"></span></td>  
+                        	<td class="nosort"><div style="white-space:nowrap;width:100px;overflow:hidden;text-overflow:ellipsis;" title="{pigcms:$vo.name}">{pigcms:$vo.name}</div></td>
+                            <td class="nosort"> <div style="white-space:nowrap;width:100px;overflow:hidden;text-overflow:ellipsis;" title="{pigcms:$vo.info}">{pigcms:$vo.info}</div></td>
+                            <td class=" nosort"><div class="cateimg"><img src="{pigcms:$vo.img}" class="smallImg"  /><img src="{pigcms:$vo.img}" class="bigImg"  /></div></td>
+                            <td class="nosort"><div style="white-space:nowrap;width:200px;overflow:hidden;text-overflow:ellipsis;" title="{pigcms:$vo.url}">{pigcms:$vo.url}</div></td>
+                            <td class="text-center nosort"><eq name="vo.status" value="1"><span style="color:green"><span class="glyphicon glyphicon-ok"></span></span><else/><span style="color:red"><span class="glyphicon glyphicon-remove"></span></span></eq></td>
+                            <td class="text-center nosort">
+                            	<a href="{pigcms::U('Classify/edit',array('id'=>$vo['id']))}" class="hover-tooltip-edit"><span class="glyphicon glyphicon-edit"></span></a> 
+                            	<a href="javascript:drop_confirm('您确定要删除吗?', \'{pigcms::U('Classify/del',array('id'=>$vo['id']))}\');" class="hover-tooltip-trash"><span class="glyphicon glyphicon-trash danger"></span></a>
+                            </td>
+                        </tr>
+                        </volist>
+                        
+                    </tbody>
+                 <tr>
+                 </tr>
+                  
+                </table>
+                 <p  style="text-align:right">{pigcms:$page}</p>
+               </div>
+            
+            </div>
+
+            </div>   
+      </div>
+ </div>
+ <script>
+ $(function(){
+    <?php $url=U('Classify/sort',array('token'=>$_GET['token']));?>
+    $('tbody').sortable({
+        opacity: 0.6,
+        cancel:'.nosort',
+        helper: 'clone' ,
+        revert: true,
+        stop: function( event, ui ) {
+            var arr=[];
+            $('tbody tr').each(function(index, val) {
+                var obj={};
+                obj.id=$(this).attr('id');
+                obj.sort=index;
+                arr.push(obj);
+            });
+            $.ajax({
+                url: '{pigcms:$url}',
+                type: 'post',
+                dateType:'json',
+                data: {sort:JSON.stringify(arr)},
+                success:function(data){}
+            });
+        }
+    });
+ });
+ </script>
+<include file="Public:footer"/>

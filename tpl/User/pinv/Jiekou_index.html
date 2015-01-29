@@ -1,0 +1,94 @@
+<html>
+ <head>
+  <title>接口传递页面</title>
+  <meta name="Generator" content="EditPlus">
+  <meta http-equiv="content-Type" content="text/html; charset=utf-8">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  
+<link type="text/css" href="{pigcms::RES}/css/Text_add.css" rel="stylesheet"/>
+<link type="text/css" href="{pigcms::RES}/css/change-password.css" rel="stylesheet"/>
+ <script src="{pigcms::RES}/flash/FusionCharts.js" type="text/javascript"></script>
+ 
+ <script src="{pigcms::STATICS}/jquery-1.4.2.min.js" type="text/javascript"></script>
+ <script src="{pigcms::RES}/flash/MSLine.swf" language="javascript" type="text/javascript"></script>
+  <style>
+	.title{width:200px;float:left;}
+  </style>
+  <script language = "javascript">
+	
+	
+	$(function (){
+		
+		 $('#dianji').click(function(){
+		         var Touser=$('#Touser').val();     
+		         var openid=$('#openid').val();     
+		         var catetime=$('#catetime').val();     
+		         var text=$('#text').val();     
+		         var message=$('#message').val();     
+		         var Event=$('#Event').val();     
+		         var EventKey=$('#EventKey').val();    
+				 //alert(EventKey);return false;
+		         $.ajax({
+					type: "POST",
+					url: '{pigcms::U("$action/jiekou")}',
+					data: "Touser="+Touser+'&openid='+openid+'&catetime='+catetime+'&text='+text+'&message='+message+'&Event='+Event+'&EventKey='+EventKey,
+					success: function(msg){
+					 	alert(msg);return false;
+						
+					},
+					
+			 	});
+			  //alert(EventKey);return false;
+		 })
+		 
+		 
+		 
+		 return false;
+		
+
+		
+		
+
+		
+	});
+
+	
+</script>
+ </head>
+
+ <body>
+     <form method="post"   action="{pigcms::U('Jiekou/jiekou')}">
+	    <!--<p>
+			<span class="title">微信原始ID：</span>
+			<input type='text' name='Touser' id='Touser'/>
+		</p>
+		<p>
+			<span class="title">发送人请求微信的openid：</span>
+			<input type='text' name='openid' id='openid'/>
+		</p>
+	    <p>
+			<span class="title">时间：</span>
+			<input type='text' name='catetime' value='201403131005' id='catetime'/>
+		</p>
+	    <p>
+			<span class="title">msgtype类型：</span>
+			<input type='text' name='text' value='text' id='text'/>
+		</p>-->
+	    <p>
+			<span class="title">content内容：</span>
+			<input type='text' name='message' id='message'/>
+		</p>
+	    <!--<p>
+			<span class="title">Event可以为空：</span>
+			<input type='text' name='Event' id='Event'/>
+		</p>
+	    <p>
+			<span class="title">EventKey可以为空：</span>
+			<input type='text' name='EventKey' id='EventKey'/>
+		</p>-->
+        <p><input type='submit' value='点击' id='dianji1'/></tr>
+	 </form>
+ </body>
+</html>

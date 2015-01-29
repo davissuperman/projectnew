@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>会员登陆与注册{pigcms::C('site_title')} {pigcms::C('site_name')}</title>
+<link href="{pigcms::RES}/css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{pigcms::RES}/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="{pigcms::RES}/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="{pigcms::RES}/js/scrolltopcontrol.js"></script>
+<!--[if IE 6]>
+<script src="{pigcms::RES}/js/PNG.js"></script>
+<script>
+DD_belatedPNG.fix('.banner,.pic1,.pic2');
+</script>
+<![endif]-->
+</head>
+
+<body>
+<include file="Public:header"/>
+<div class="clear"></div>
+<div class="bibox">
+	<div class="commontitle">
+		<span style="font-weight:bold;float:left">在这里可以直接登陆啦！</span>
+		<span style="float:right"><a href="{pigcms::U('Index/reg')}">同一个页面也可以注册了哦</a></span>
+	</div>
+	<div class="clear" style="margin-top:10px;"></div>
+	
+	<div class="logleft">
+		
+		<ul>
+			<div style="font-weight:bold;border-bottom:1px dashed #ccc;font-size:25px;padding:5px;margin-bottom:10px">会员登录</div>
+			<form action="{pigcms::U('Users/checklogin')}" enctype="multipart/form-data" id="registerform" name="register" autocomplete="off" method="post">
+			<li>用户名：<input type="text" name="username" value="请输入用户名" style="width:180px;height:30px;" onclick="if(this.value=='请输入用户名'){this.value=''}" onblur="if(this.value==''){this.value='请输入用户名'}"></li>
+			<li>密　码：<input type="password" name="password" style="width:180px;height:30px;"></li>
+			<li><button type="submit" class="buttongreen" name="regsubmit">登陆</button>&nbsp;&nbsp;<a href="{pigcms::U('Index/regpwd')}">忘记密码</a>　</li>
+			</form>
+			<li></li>
+		</ul>
+	
+	</div>
+	<div class="logcoonter">&nbsp;</div>
+	<div class="logright">
+		<ul>
+			<div style="font-weight:bold;border-bottom:1px dashed #ccc;font-size:25px;padding:5px;margin-bottom:10px">会员注册</div>
+			<form action="{pigcms::U('Users/checkreg')}" enctype="multipart/form-data"  name="register" autocomplete="off" method="post">
+				<li>会员帐号：<input type="text" required="" value="请输入用户名" style="width:180px;height:30px;" maxlength="15" size="25" autocomplete="off" tabindex="1" name="username" onclick="if(this.value=='请输入用户名'){this.value=''}" onblur="if(this.value==''){this.value='请输入用户名'}"></li>
+				<li>用户密码：<input type="password" required="" style="width:180px;height:30px;" class="px" tabindex="1" size="25" name="password"></td>
+				<li>确认密码：<input type="password" required="" style="width:180px;height:30px;" class="px" value="" tabindex="1" size="25" name="repassword" ></li>
+				<li>电子邮箱：<input type="text" required="" value="请输入E-Mail" style="width:180px;height:30px;" class="px" tabindex="1" size="25" autocomplete="off" name="email" onclick="if(this.value=='请输入E-Mail'){this.value=''}" style="width:180px;height:30px;" onblur="if(this.value==''){this.value='请输入E-Mail'}"><br><em id="emailmore">&nbsp;</em></li>
+				<li><button type="submit" class="buttongreen" name="regsubmit">注册</button>&nbsp;&nbsp;<a href="{pigcms::U('Index/regpwd')}">忘记密码</a>　</li>
+			</form>
+			<li></li>
+		</ul>
+	</div>
+</div>
+<include file="Public:footer"/>

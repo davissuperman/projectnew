@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>排行榜</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link type="text/css" href="{pigcms::RES}/game/css/rankList.css" rel="stylesheet"/>
+</head>
+<body>
+	<div class="rankListBox">
+    	<p class="logoBox"><img src="{pigcms::RES}/game/img/logo.png" class="logoImg"/></p>
+        <p class="texCenter"><img src="{pigcms::RES}/game/img/begainText.png" class="topText"></p>
+        <p class="texCenter ranText"> 目前排名第10名的得分为：{pigcms::$one['n']}</br> 
+            <if condition="$two">
+                目前排名第3010名的得分为：{pigcms::$two['n']}</br>
+            </if>
+            你目前的得分为：{pigcms::$number} </br>即时排名：{pigcms::$order}名</br>不错哦，要再水润一点哦！加油！</p>
+        <p class="texCenter"><img src="{pigcms::RES}/game/img/listImg.png" class="listImg"></p>
+        <p class="texCenter"><img src="{pigcms::RES}/game/img/list.png" class="listImg"></p>
+        <p class="texCenter dengji"><a href="./index.php?g=Wap&m=Doing&a=receive&gid={pigcms::$gid}&time={pigcms::$tel}&order={pigcms::$order}&number={pigcms::$number}"><button class="begainBtn">登记个人信息</button></a></p>
+        <p class="texCenter"><a href="./index.php?g=Wap&m=Doing&a=share&gid={pigcms::$gid}&time={pigcms::$tel}" ><button class="begainBtn">继续拉分</button></a></p>
+    </div>
+</body>
+</html>

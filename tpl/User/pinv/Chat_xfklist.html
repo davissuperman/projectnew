@@ -1,0 +1,180 @@
+<?php $nav = "CRM"; $side = "KQ" ?>
+<include file="Public:head"/>
+
+<link rel="stylesheet" type="text/css" href="./tpl/User/default/common/css/cymain.css" />
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+  
+	  $("#Button1").bind("click",function(){ 
+		//alert(11111);return false;
+	   $(".item:checkbox").attr("checked",true); 
+	}); 
+	 $("#Button2").bind("click",function(){ 
+		//alert(22222);return false;
+	   $(".item:checkbox").attr("checked",false); 
+	});
+	
+	//批量导出
+	$('#djdc').click(function(){
+	  $('#info').attr("action","{pigcms::U('Chat/memberdc',array('token'=>$token))}");
+	   
+	})
+	//搜索
+	$('#ss').click(function(){
+	  $('#info').attr("action","{pigcms::U('Chat/member',array('token'=>$token))}");
+	   
+	})
+	$('#tc').click(function(){
+	
+	        $('#tcc').show();
+	})
+	 $('#gb').click(function(){
+	      $('#tcc').hide();
+	 
+	  })
+})
+
+</script>
+<div class="container main">
+<div class="row main">
+<include file="Crm:left"/>
+<div class="col-md-10">
+  <div class="panel panel-success">
+    <div class="panel-heading">
+      <h3 class="panel-title">礼品卡数据统计</h3>
+    </div>
+    <div class="panel-body">
+
+    <div class="msgWrap">
+    	<div class="add-button"></div>
+		<!--<form method="post"  action="{pigcms::U('Chat/drsj',array('token'=>$token))}" enctype="multipart/form-data">-->
+            
+        <!--   </form>-->
+<form method="post"  action="{pigcms::U('Chat/memberdedel',array('token'=>$token))}" id="info" >
+ 
+  <!--<table style="height:30px;line-height:30px;padding-right:45px;margin-bottom:20px">
+  <input type="hidden" name='ctoken' value='{pigcms:$_GET["token"]}' />
+  <tr> <input type="text" name="sous" class="form-control" id="" style="width:200px;float:left" value="" />
+  <input type="submit" value="搜索" id='ss' class="btn btn-success" style="float:left;margin-left:12px" >
+  </tr>
+  <input type="submit" value="批量导出" id='djdc'  class="btn btn-success" style="float:left;margin-left:12px" >
+</table>
+-->
+
+<TABLE class="table table-striped">
+<THEAD>
+ <tr>                       
+                        <th class="thirdTd">序号</th>
+                        <th class="thirdTd">活动名称</th>
+						<th class="thirdTd">卡券编号</th>
+                        <th class="thirdTd">昵称</th>
+                        <th class="thirdTd">姓名</th>
+                        <th class="thirdTd">电话号码</th>
+                        <th class="thirdTd">性别</th>
+                       <!-- <th class="thirdTd">联系地址</th>-->
+                       <th class="thirdTd">发放时间</th>
+                       <!---  <th class="thirdTd">使用时间</th>-->
+                        <th class="thirdTd">消费金额</th>
+                        <th class="thirdTd">消费渠道</th>
+                        
+                        <th class="thirdTd">卡券类型</th>
+                        
+                        
+                    </tr>
+</THEAD>
+<TBODY>
+<TR></TR>
+<volist name="list" id="vo" key='k'>
+<input type="hidden" name='token' value="{pigcms:$vo.token}" />
+				<TR>
+				
+				<TD>{pigcms:$k}</TD>
+				<TD>{pigcms:$vo.x_name}</TD>
+				<TD>{pigcms:$vo.x_number}</TD>
+				<TD>{pigcms:$vo.u_name}</TD>
+				<TD>{pigcms:$vo.u_username}</TD>
+				<TD>{pigcms:$vo.u_iphone}</TD>
+				 <if condition="$vo['u_sex'] eq 1">
+                                        <TD>男</TD>
+                                        <elseif condition="$vo['u_sex'] eq 2"/>
+                                        <TD>女</TD>
+                                        <else/>
+                                        <TD>无</TD>
+                                    </if>
+				<TD>{pigcms:$vo.cjtime|date="y-m-d",###}</TD>
+				<TD>金额暂无</TD>
+				<TD>渠道暂无</TD>
+				  <if condition="$vo['x_leix'] eq 1">
+				     <td>试用品券</td>
+					<elseif condition="$vo['x_leix'] eq 2"/>
+					<td>礼品券</td>
+					<else />
+					<td>促销券</td>
+					</if>
+				
+
+				
+				
+			
+				
+				</td>
+				</TR>
+				</volist>
+</TBODY>
+</TABLE>
+</form>
+
+</div>
+<div class="cLine">
+<div class="pageNavigator right">
+<div class="pages">{pigcms:$page}</div>
+</div>
+<div class="clr"></div>
+</div>
+          
+          </div>
+          </div>
+          </div>
+        </div>
+      </div>
+	  <!--弹出层-->
+  <!--弹出层-->
+<div class="panel panel-success" id='tcc' style="position:absolute;left:480px;top:170px;display:none">
+                	<p style="float:right;padding-right:10px;padding-top:5px;cursor:pointer" id='gb'>关闭</p>	
+               <div class="panel-body">
+			    
+                    <form method="post"  action="{pigcms::U('Chat/drsj',array('token'=>$token))}" enctype="multipart/form-data">
+                     
+                        <div>
+                           
+                            <!--<div class="col-sm-5">
+                                <input type="text" name="cpprice" style='width:150px' id="cpprice"  class="form-control" value="" data-rule-required="true"><input type="file" name="inputExcel" id="inputExcel" >
+                            </div>-->
+
+							<div class="col-sm-5">
+							 <input type='text'class="circle" id="ehdel_upload_text" name='imgname' />
+                             </div>
+							 <div class="col-sm-5" style='margin-left:30px'>
+							 <input value='浏览' style='width:65px;' onchange="ehdel_upload_text.value=this.value" type='file' name="inputExcel" id="inputExcel" />
+                             </div> 
+                        </div>
+                        
+						
+                        
+                       
+                </div>			
+                <div class="panel-footer" style="text-align:right"> 
+                   <input type="submit" value="保存" id="dj" class="btn btn-success"/>
+                   <input type="reset" value="取消"  class="btn btn-success"/>
+                    <!--<a class="btn btn-link" id='qx'>取消</a> -->
+                </div>
+				</form>
+            </div>
+
+
+
+
+<include file="Public:footer"/>

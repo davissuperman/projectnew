@@ -1,0 +1,57 @@
+<?php $nav = "CRM"; $side = "CHAT" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/cindex.css" rel="stylesheet"/>
+ <div class="container main">
+<div class="row main">
+<include file="Crm:left"/>
+        <div class="col-md-10 main">
+
+        <!--right--begain-->
+        <ol class="breadcrumb">
+                    <li><a href="{pigcms::U('Chat/index',array('token'=>$token))}">CRM</a></li>
+                    <li><a href="{pigcms::U('Chat/index',array('token'=>$token))}">微客服</a></li>
+                    <li class="active">聊天记录</li>
+                  </ol>
+        <div class="panel panel-success">
+           <div class="panel-heading">
+                <h3 class="panel-title">聊天记录</h3>
+              </div>
+              <div class="panel-body">  
+             <!-- <p class="rightTop">
+                <a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                <a href="{pigcms::U('Chat/index',array('token'=>$token))}"  class="new">返回</a>
+                         </p>
+                         <p class="replayBox"><a href="{pigcms::U('Chat/add',array('token'=>$token))}"  class="replyButton">添加客服</a><a href="{pigcms::U('Chat/chat_log',array('token'=>$token))}"  class="replyButton">聊天记录</a></p> -->
+            <table class="table table-striped" cellspacing="1"  border="0">
+                <tr>
+                    <th class="firstTd">编号</th>
+                    <th class="secondTd">客服名</th>
+                    <th class="sevenTd">登陆名</th>
+                    <th class="forthTd">状态</th>                  
+                    <th class="sixTd">内容</th>
+                    <th class="thirdTd">操作</th>
+                </tr>
+                <volist name="list" id="vo">
+                    <tr>
+                        <td> {pigcms:$i}</td>
+                        <td class= 'k'>{pigcms:$vo.keyword}</td>
+                        <td>{pigcms:$vo.userName}</td>
+                        <td>{pigcms:$vo.status}</td>
+                        <td>{pigcms:$vo.keyword}</td>
+                        <td><a href="{pigcms::U('Chat/edit',array('id'=>$vo['id'],'token'=>$token))}" class="hover-tooltip-edit"><span class="glyphicon glyphicon-edit"></span></a> <a href="{pigcms::U('Chat/del',array('id'=>$vo['id'],'token'=>$token))}" class="hover-tooltip-trash"><span class="glyphicon glyphicon-trash danger"></span></a></td>
+                    </tr>
+                </volist>
+                <tr>
+
+                    <td colspan="8" style="text-align:right">{pigcms:$page}</td>
+                </tr>
+            </table>
+
+        </div>
+        </div>
+        </div>
+        <!--right--end-->
+    </div>    
+
+</div>
+<include file="Public:footer"/>

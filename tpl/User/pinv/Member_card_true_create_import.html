@@ -1,0 +1,32 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Member_card_create.css" rel="stylesheet"/>
+<div class="content">
+ <div class="ffBox">
+    <include file="Public:left"/>
+     
+    <!--right--begain-->
+            <div class="right">
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+                <p class="artiEdit"><span class="big">导入实体卡</span></p>
+                <div id="importForm">
+                    <form action="/index.php?g=User&m=Member_card&a=true_create_insert&token={pigcms:$Think.get.token}&id={pigcms:$Think.get.id}" method="post" enctype="multipart/form-data">
+                        <input type="file" name="card_data" />
+                        <input type="submit" value="导入" />
+                    </form>
+                </div>
+                <div id="importNotice">
+                    <strong>导入说明：</strong> <a href="/tpl/User/pinv/common/true_card_import.csv">导入模版下载</a><br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<strong>步骤：</strong>选择文件——>打开——>导入。<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<strong>格式：</strong><em>.csv</em>（excel文档另存为）。<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<strong>数据格式：</strong><em>数据请严格按照模版格式填写</em>（第一列为实体卡号，第二列为验证码，第三列为卡到期时间，第四列为卡类型）。<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<strong>其他说明：</strong><em>请一定保留模版的第一行（即表头）</em>。
+                </div>                
+            </div>
+            <!--right--end-->
+            </div>    
+      
+ </div>
+<include file="Public:footer"/>

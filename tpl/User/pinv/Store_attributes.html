@@ -1,0 +1,61 @@
+<?php $nav = "FUNCTION"; $side = "CATEGORY"; $sideTop = "PRODUCT"; ?>
+<include file="Public:head"/>
+ 
+<div class="container main">
+    <div class="row">
+        <include file="Store:left"/>
+        <div class="col-md-10 main">
+            <ol class="breadcrumb">
+                <li><a href="{pigcms::U('Store/index',array('token'=>$token))}">微商城</a></li>
+                <li><a href="{pigcms::U('Store/index',array('token'=>$token))}">商城管理</a></li>
+                <li class="active">分类属性管理  </li>
+            </ol>
+          
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">分类属性管理 </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="pull-right add-button">
+                        <a href="{pigcms::U('Store/attributeAdd',array('token'=>$token,'catid'=>$catid))}" title="添加" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span>新增 {pigcms:$catData.name} 分类的属性</a><!-- <a href="{pigcms::U('Alipay_config/index',array('token'=>$token))}"  class="btn btn-success btn-sm"  style="margin-left:10px;"><span class="glyphicon glyphicon-wrench"></span> 支付宝配置</a> -->
+                    </div>
+                    <div class="clearfix"></div>
+                    <div>
+                  
+                        <div class="cLine">
+                            <div class="clr"></div>
+                        </div>
+                        <div class="msgWrap">
+                            <form method="post" action="" id="info">
+                                <table class="table table-striped" border="0" cellspacing="0" cellpadding="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="select">名称</th>
+                                            <th width="160">属性名称</th>
+                                            <th width="260">属性值</th>
+                                            <th width="150" class="norightborder">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr></tr>
+                                    <volist name="list" id="attributeData"> 
+                                        <tr>
+                                            <td> {pigcms:$catData.name} </td>
+                                            <td>{pigcms:$attributeData.name}</td>
+                                            <td>{pigcms:$attributeData.value}</td>
+                                            <td class="norightborder"><a href="{pigcms::U('Store/attributeAdd',array('token' => $token, 'id' => $attributeData['id'], 'catid' => $attributeData['catid']))}">修改</a> <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Store/attributeDel',array('id' => $attributeData['id'], 'token'=> $token, 'catid' => $attributeData['catid']))}');">删除</a></td>
+                                        </tr>
+                                    </volist>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                        <div class="cLine">
+                            <div class="pageNavigator right">
+                                <div class="pages">{pigcms:$page}</div>
+                            </div>
+                            <div class="clr"></div>
+                        </div>
+                    </div>
+                </div></div></div></div></div>
+<include file="Public:footer"/>

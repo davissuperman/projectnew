@@ -1,0 +1,130 @@
+<?php $nav = "STATS"; $side = "LBS" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Text_add.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+<!--统计图JS-->
+<script src="{pigcms::RES}/js/Chart.js"></script>
+<style>
+    .nava{
+        display: block;
+        clear: both;
+        color:#eeeeee;
+        margin: 12px 0px 0px 0px;
+        border-bottom: 1px solid #ddd;
+        padding: 0px 0px 0px 5px;
+    }
+    .nava a{
+        border: 1px solid #efefef;
+        border-width: 1px 1px 0px 1px;
+        display: inline-block;
+        height:30px;
+        line-height: 30px;
+        padding:0px 10px;
+        background: #ffffff;
+    }
+    .nava a.hover{
+        background: #f7f7f7;
+    }
+</style>
+<div class="container main">
+<div class="row">
+<include file="Requerydata:left"/>
+        <div class="col-md-10 main">
+            <ol class="breadcrumb">
+              <li><a href="{pigcms::U( 'Requerydata/menuClick',array( 'token'=>$token ))}">统计分析</a></li>
+              <li><a href="{pigcms::U( 'Requerydata/companyNav',array( 'token'=>$token,'type'=>1 ))}">LBS定位统计</a></li>
+              <li class="active"><if condition="$type eq 2">活动统计<else/>店铺导航统计</if></li>
+            </ol>
+            <div class="panel panel-success">
+                <div class="panel-heading cfix">
+                    <h3 class="panel-title pull-left"><if condition="$type eq 2">活动统计<else/>店铺导航统计</if></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="nava">
+                        <a href="{pigcms::U('Requerydata/companyNav',array('token'=>$token,'start'=>$start,'end'=>$end,'type'=>1 ))}" class="<if condition="$type eq 1">hover</if>" >店铺导航统计</a><a href="{pigcms::U('Requerydata/companyNav',array('token'=>$token,'start'=>$start,'end'=>$end,'type'=>2 ))}" class="<if condition="$type eq 2">hover</if>">活动导航统计</a>
+                    </div>
+                    <div id="choose-date">
+                        <a href="{pigcms::U('Requerydata/companyNav',array('token'=>$token,'start'=>$nowtime,'end'=>$nowtime,'type'=>$type ))}">今天</a>
+                        <a href="{pigcms::U('Requerydata/companyNav',array('token'=>$token,'start'=>$yestoday,'end'=>$yestoday,'type'=>$type ))}">昨天</a>
+                        <a href="{pigcms::U('Requerydata/companyNav',array('token'=>$token,'start'=>$sevenDay,'end'=>$nowtime,'type'=>$type ))}" href="javascript:void(0)">最近7天</a>
+                        <a href="{pigcms::U('Requerydata/companyNav',array('token'=>$token,'start'=>$thirtyday,'end'=>$nowtime,'type'=>$type ))}">最近30天</a>
+                        <div id="date-calendar">
+                                        <form method="post" action="">
+                                            <input type="text" name="start" id="start" value="{pigcms:$start}" onClick="WdatePicker()" class="form-control" style="width:102px"/><span>-</span>
+                                            <input type="text" name="end" id="end" value="{pigcms:$end}" onClick="WdatePicker()" class="form-control" style="width:102px"/>
+                                            <button type="submit" class="btn btn-default" style="width:50px"/>确定</button>
+                                        </form>
+                        </div>
+                        <a href="<empty name="nav">javascript:void(0)<else/>{pigcms::U('Requerydata/companyNavImport',array( 'token'=>$token ) )}</empty>" target="_blank" style="float:right;margin-right:10px;">导出报表</a>
+                    </div>
+                <empty name="navs">
+                    没有满足条件的数据
+                <else/>
+                <div style="display:none">
+                    <div id="canvas-title">
+                        <volist id="navtop1" name="navtop">
+                        <input value='{pigcms:$navtop1.shop_name}'/>
+                        </volist>
+                    </div>
+                    <div id="canvas-data">
+                        <volist id="navtop2" name="navtop">
+                        <input value='{pigcms:$navtop2.navnum}'/>
+                        </volist>
+                    </div>
+                </div>
+                <canvas id="canvas" height="450" width="600" style="margin-top:10px;"></canvas>
+                <script>
+                    //获得店铺名称
+                    var titles = document.getElementById("canvas-title").getElementsByTagName('input');
+                    var labels_title = [];
+                    for( var ii = 0;ii < titles.length;ii++ ){
+                        labels_title.push( titles[ii].value );
+                    }
+                    //获得店铺点击量
+                    var datas = document.getElementById("canvas-data").getElementsByTagName('input');
+                    var labels_data = [];
+                    for( var ii = 0;ii < datas.length;ii++ ){
+                        labels_data.push( datas[ii].value );
+                    }
+                    var barChartData = {
+                        labels : labels_title,
+                        datasets : [
+                            {
+                                fillColor : "#4F94CD",
+                                strokeColor : "rgba(220,220,220,1)",
+                                data : labels_data
+                            }
+                        ]
+                    }
+
+                var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Bar(barChartData);
+                </script>
+                    <table class="table table-striped" cellspacing="1" cellpadding="5">
+                        <tr>
+                            <th>店铺名称</th>                                         
+                            <th>导航次数</th>
+                        </tr>
+                        <volist id="nav" name="navs">
+                        <tr bgcolor="#fff" height=30>
+                            <td>{pigcms:$nav.shop_name}</td>              
+                            <td>{pigcms:$nav.navnum}</td>
+                        </tr>
+                        </volist>  
+                    </table>
+                </empty>
+            	<p class="pages">{pigcms:$page}</p>
+            </div>
+            <!--right--end-->  
+        </div>  
+ </div>
+ </div>
+ </div>
+ <script>
+    $(function(){
+       $("#thisCondition").change(function(){
+            var type = $("#thisCondition").val();
+            window.location.href = "/index.php?g=User&m=Requerydata&a=keywordsClick&token={pigcms:$token}&start={pigcms:$start}&end={pigcms:$end}&type="+type;
+        });       
+    });
+</script>
+<include file="Public:footer"/>

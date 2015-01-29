@@ -1,0 +1,140 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Text_add.css" rel="stylesheet"/>
+<link type="text/css" href="{pigcms::RES}/css/change-password.css" rel="stylesheet"/>
+ <script src="{pigcms::RES}/flash/FusionCharts.js" type="text/javascript"></script>
+<!-- <script src="{pigcms::RES}/flash/MSLine.swf" language="javascript" type="text/javascript"></script>   -->
+<script language = "javascript">
+	/**
+	+ 
+	*	修改登录密码
+	+-----------------------------
+	*	@param	drag 初始化
+	+	@param	PwdPoint 初始化
+	*	@param	RePwdPoint 初始化
+	+-----------------------------
+	*	@return boolean
+	+	@Author zxh. 
+	*/
+	var drag = false;		//初始化原始密码布尔
+	var PwdPoint = false;	//初始化一次密码布尔
+	var RePwdPoint = false;	//初始化二次密码布尔
+	
+	$(function (){
+		
+		$('#OldPwd').blur(function(){
+             var OldPwd = $('#OldPwd').val();
+			//alert(OldPwd);
+			if(OldPwd == ''){
+				$(this).next().html('不能为空');
+				drag = false;
+			}else if(OldPwd.length < 6 || OldPwd.length > 16){
+				$(this).next().html(' 原始密码不正确,请重新输入');
+				drag = false;
+			}else{
+			   $.ajax({
+					type: "GET",
+					url: '{pigcms::U("$action/updatepp")}',
+					data: "loginpwd="+OldPwd,
+					success: function(msg){
+					 	//alert(msg);return false;
+						if(msg == 1){
+							$('#sp').html('原密码正确');
+							drag = true;
+						}else{
+							$('#sp').html('原密码不正确');
+							drag = false;
+						}
+					},
+					
+			 	});
+			}
+		   
+		    
+		})
+		//验证一次新密码
+		$('#Pwd').blur(function (){
+			var Pwd = $(this).val();
+			if(Pwd == ''){
+				$('#sp1').html('新密码不能为空');
+				PwdPoint = false;
+			}else if(Pwd.length < 6 || Pwd.length > 16){
+				$('#sp1').html('请输入6位以上,16位以下的密码。');
+				PwdPoint = false;
+			}else{
+				$('#sp1').html('密码合格');
+				PwdPoint = true;
+			}
+		});
+
+		$('#RePwd').blur(function(){
+		   var RePwd=$('#RePwd').val();
+		   var Pwd = $('#Pwd').val();
+		   if(RePwd == ''){
+				$('#sp2').html('新密码不能为空');
+				RePwdPoint = false;
+			}else if(RePwd.length < 6 || RePwd.length > 16){
+				$('#sp2').html('请输入6位以上,16位以下的密码');
+				RePwdPoint = false;
+			}else if(RePwd !== Pwd){
+				$('#sp2').html('两次密码输入不一致,请重新输入');
+				RePwdPoint = false;
+			}else{
+				$('#sp2').html('密码合格');
+				RePwdPoint = true;
+			}
+		  
+		})
+		
+		
+
+		
+	});
+	
+	//检测返回
+	function CheckPwd(OldPwd, Pwd, RePwd){
+		if(drag === true && PwdPoint === true && RePwdPoint === true)	return true;
+		else	return false;
+	}
+	
+</script>
+  <div class="container main">
+<div class="row">
+		 <div class="panel panel-success">
+			  <div class="panel-heading">
+				<h3 class="panel-title">登入密码修改</h3>
+			  </div>
+			  <div class="panel-body">
+			 <form class="from form-horizontal" method="post" action="{pigcms::U('Updatepsd/updatep')}"  target="_top" onSubmit="return CheckPwd()">
+                 <div class="form-group">
+                 	<label class="col-sm-2 control-label">请输入原密码：</label>
+                 	<div class="col-sm-4">
+                    <input type="password" name='OldPwd'id="OldPwd" value="" class="form-control"/>
+                    </div>
+                    <span id='sp' style="float:left; margin-top:5px" class="label label-danger"></span>
+                </div>
+
+                <div class="form-group">
+                	<label class="col-sm-2 control-label">请输入新密码：</label>
+                	<div class="col-sm-4">
+                    <input type="password" name='psdname' value="" id="Pwd" class="form-control"/>
+                    </div>
+                    <span id='sp1' style="float:left; margin-top:5px" class="label label-danger"></span>
+                </div>
+             
+                <div class="form-group">
+                	<label class="col-sm-2 control-label">再次输入密码：</label>
+					<div class="col-sm-4">
+                    <input type="password" name='psdname1' value="" class="form-control" id="RePwd"/>
+                    </div>
+                    <span id='sp2' style="float:left; margin-top:5px" class="label label-danger"></span>                    
+                </div>
+			</div>
+           	  <div class="panel-footer" style="text-align:right"> 
+	  		<input type="submit" value="保存" class="btn btn-success"/>
+	  		<a href="javascript:history.go(-1);"  class="btn btn-link">取消</a> 
+		      </div>
+		      </form>
+            </div>  
+      </div>
+ </div>
+<include file="Public:footer"/>

@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title> {pigcms::C('site_title')} {pigcms::C('site_name')}</title>
+<link type="text/css" href="{pigcms::RES}/css/top.css" rel="stylesheet"/>
+<link type="text/css" href="{pigcms::RES}/css/left.css" rel="stylesheet"/>
+<link type="text/css" href="{pigcms::RES}/css/styleli.css" rel="stylesheet"/>
+<link type="text/css" href="./tpl/static/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+<script type="text/javascript" src="{pigcms::RES}/js/common.js"></script>
+<script type="text/javascript" src="./tpl/static/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="./tpl/static/bootstrap/js/bootstrap.js"></script>
+<script>var SITEURL='{pigcms::RES}';</script>
+<script type="text/javascript" src="{pigcms::RES}/js/myJs.js"></script>
+</head>
+<body>
+	<div class="box">
+            <!--top--begain-->
+            <div class="top">
+                    <div class="topLeft">
+                        <img src="{pigcms::RES}/img/logo.gif" alt="logo" class="logo"/>
+                        <span>欢迎使用微信营销服务平台！</span>
+                    </div>
+                    <div class="topRight">
+                       <if condition="$_SESSION[uid]==false">
+                            <a href="{pigcms::U('Index/login')}">登录</a>
+                            <span class="shu">|</span>
+                            <a href="{pigcms::U('Index/login')}">注册</a>
+                            <else/>
+                            <span>您好,</span><span class="red">{pigcms:$Think.session.uname}</span>
+                             <span class="shu">|</span>
+                             <a href="{pigcms::U( 'Updatepsd/index',array( 'token'=>$token ) )}"  style="color:#ffffff">修改密码</a>
+                             <span class="shu">|</span>
+                             <a href="{pigcms::U('User/Index/edit',array('token'=>$token))}"  style="color:#ffffff">设置</a>
+                             <span class="shu">|</span>
+                            <a href="{pigcms::U('System/Admin/logout',array('token'=>$token))}"  style="color:#ffffff" >退出</a>
+                        </if>	
+                    </div>
+            </div>
+            <!--top--end-->
+
+            <ul class="heading">
+                <li class="common">
+                    <p>
+                        <span class="user">{pigcms:$wecha.wxname}</span>   
+                    </p>
+                    <p>
+                        <span class="title">微信号：</span>
+                        <span>{pigcms:$wecha.weixin}</span>
+                    </p>
+                </li>
+                <li class="common">
+                    <p>
+                        <span class="title">有效期：</span>
+                        <span><if condition="$_SESSION['viptime'] neq 0">{pigcms:$thisUser.viptime|date="Y-m-d",###}<else/>vip0不限时间</if></span>
+                    </p>
+                    <p>
+                        <span class="title">文本使用数：</span>
+                        <span>{pigcms:$thisUser.textnum}/{pigcms:$thisUser.textcount}</span>
+                    </p>
+                </li>
+                <li class="common">
+
+                     <p>
+                        <span class="title">图文请求数：</span>
+                        <span>{pigcms:$thisUser.diynum}/{pigcms:$userinfo.diynum}</span>
+                    </p>
+                     <p>
+                        <span class="title">图文使用数：</span>
+                        <span>{pigcms:$thisUser.imgnum}/{pigcms:$thisUser.imgcount}</span>
+                    </p>
+                </li>
+                <li class="common">
+                    <p>
+                        <span class="title">活动创建数：</span>
+                        <span>{pigcms:$thisUser.activitynum}/{pigcms:$userinfo.activitynum}</span>
+                    </p>
+                    <p>
+                        <span class="title">语音使用数：</span>
+                        <span>{pigcms:$thisUser.voicenum}/{pigcms:$thisUser.voicecount}</span>
+                    </p>
+                </li>
+                <li class="common last">
+                    <p>
+                        <span class="title">功能请求数：</span>
+                        <span>{pigcms:$thisUser.connectnum}/{pigcms:$userinfo.connectnum}</span>
+                    </p>
+                    <p>
+                        <span class="title">空间：</span>
+                        <span>{pigcms:$qry.usednum}M/{pigcms:$qry.num}M</span>
+                    </p>
+                </li>
+            </ul>

@@ -1,0 +1,59 @@
+<?php $nav = "PROMOTE"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Lottery_index.css" rel="stylesheet"/>
+<div class="container main">
+<div class="row">
+<include file="Lottery:left"/>
+     
+        <div class="col-md-10 main">
+           
+           	 <ol class="breadcrumb">
+			  <li><a href="{pigcms::U( 'Lottery/index',array( 'token'=>$token ))}">大转盘</a></li>
+			  <li class="active">幸运大转盘</li>
+			</ol>
+			
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">幸运大转盘活动信息</h3>
+				<span class="small">你本月有  {pigcms:$group.activitynum} 次机会可免收活动创建费，已经使用了 {pigcms:$activitynum} 次机会!</span>
+				</div>
+			  <div class="panel-body">
+			  	<div class="add-button pull-right">
+            		<a href="{pigcms::U('Lottery/add',array('token'=>$token,'id'=>session('wxid')))}"  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> 增加大转盘活动</a>
+            	</div>
+            	<div style="clear:both"></div>
+
+                <table class="table table-striped" cellspacing="1" style="font-size:13px">
+                    <tr>                      
+                        <th  class="forthTd">活动名称</th>
+                        <th  class="forthTd">关键词</th>
+                        <th class="forthTd">参与人数</th>
+                        <th class="forthTd">浏览数</th>
+                        <th class="forthTd">开始时间/结束时间</th>
+                        <th class="forthTd">状态</th> 
+                        <th class="sevenTd">外链代码</th>
+                        <th class="forthTd">操作</th>
+                    </tr>
+                       <volist id="list" name="list">
+                        <tr>                  
+                        	<td>{pigcms:$list.title}</td>
+                        	<td>{pigcms:$list.keyword}</td>
+                        	<td>{pigcms:$list.joinnum}</td>
+                        	<td>{pigcms:$list.click}</td>
+                        	<td>{pigcms:$list.statdate|date='y-m-d',###}/{pigcms:$list.enddate|date='y-m-d',###}</td>
+                        	<td><if condition="$list['status'] eq 0">未开始<elseif condition="$list['status'] eq 2"/>已经结束<else/>已经开始</if></td>
+                        	<td>{pigcms:$list.keyword} {pigcms:$list.id}</td>
+                        	<td><a href="index.php?g=User&m=Lottery&a=sn&id={pigcms:$list.id}">SN码管理</a> <a href="index.php?g=User&m=Lottery&a=edit&id={pigcms:$list.id}">编辑</a> <a href="<if condition="$list['status'] lt 0">				   
+				   javascript:drop_confirm('你确定要结束活动吗，结束后不可再开启本活动!', 'index.php?g=User&m=Lottery&a=setdes&id={pigcms:$list.id}');<else/>index.php?g=User&m=Lottery&a=setinc&id={pigcms:$list.id}   
+				   </if>"><if condition="$list['status'] eq 0">开始<elseif condition="$list['status'] eq 2"/>打开<else/>结束</if></a> <a href="index.php?g=User&m=Lottery&a=del&id={pigcms:$list.id}">删除</a></td>
+                        </tr>
+                       
+                       </volist>
+                </table>
+                  <p class="page">{pigcms:$page}</p>
+           </div>
+            </div>  
+      </div>
+    </div>
+ </div>
+<include file="Public:footer"/>

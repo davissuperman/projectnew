@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>游戏成绩</title>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link type="text/css" href="{pigcms::RES}/dong/css/style.css" rel="stylesheet"/>
+        <script src="{pigcms::RES}/dong/js/jquery.js"></script>
+        <script>
+            $(function() {
+                $(".priceBox").fadeIn(1000);
+                //活动规则
+                $(".active_rule").on("touchstart", function() {
+                    $(".priceBox").hide();
+
+                    $(".acRule").fadeIn(1000);
+                });
+                //活动规则返回
+                $(".backActive").on("touchstart", function() {
+                    $(".acRule").hide();
+
+                    $(".priceBox").fadeIn(1000);
+
+                });
+            })
+
+
+        </script>
+        <style>
+            body{ background: url("{pigcms::RES}/dong/img/middle.jpg") no-repeat center top; background-size: 100% 100%}
+            .deploy_ctype_tip{z-index:1001;width:100%;text-align:center;position:fixed;top:50%;margin-top:-23px;left:0;}.deploy_ctype_tip p{display:inline-block;padding:13px 24px;border:solid #d6d482 1px;background:#f5f4c5;font-size:16px;color:#8f772f;line-height:18px;border-radius:3px;}
+        </style>
+    </head>
+    <body id="tips">
+        <!--活动规则-->
+
+        <div class="acRule">
+            <p class="texCenter"><img src="{pigcms::RES}/dong/img/logo.png" class="logoPri"/><p>
+            <p class="rankTitle texCenter jifen">活动规则</p>
+            <p class="listFont font14 texCenter">提交您的活动成绩，分享至朋友圈，<br>72小时内，每次分享和朋友的帮助<br>都将给你带来额外的分数。</p>
+            <p class="listFont font14 texCenter">活动结束后排名前3000的参与者<br>都将获得丰厚的奖品。</p>
+            <p class="smallBlue  backActive "  style="bottom: 100px;">返回</p>
+        </div>
+
+        <!--参与抽奖-->
+        <div class="priceBox">
+            <form action="{pigcms::U('Game/add')}" method="post" id="postfrom"  >
+                <p class="rankTitle texCenter">游戏成绩</p>
+                <p class="results texCenter">共收集到<span class="coreNum">{pigcms::$number}</span>颗玻尿酸精华</p>
+                <p class="solidP texCenter"><img src="{pigcms::RES}/dong/img/blueSolid.png" class="blueSolid"/><p>
+                <p class="results texCenter font12">输入您的姓名、手机号码作为获奖查询依据</p>
+                <p class="telBox texCenter">
+                    <span>姓名：</span>
+                    <input  type="text"   name="name" id="name" class="telCase"  />
+                </p>
+                <p class="telBox texCenter">
+                    <span>手机：</span>
+                    <input type="tel" class="telCase" id="tel" name="tel" />
+                    <input type="hidden" name="usercoreNum"  value="{pigcms::$number}"/>
+                    <input type="hidden" name="id"  value="{pigcms::$gid}"  />
+                    <input type="hidden" name="openid"  value="{pigcms::$openid}" />
+                </p>
+                <p class="pinkBtn active_rule downBtn">活动规则</p>
+                <p style="margin: auto;height: 40px;width: 120px;"><input type="button"  value="提交" class="blueBtn sendBtn downBtn" style="border: 0px; font-size: 16px; margin-left: 0" onclick="tgSubmit()"></p>
+
+
+            </form>
+        </div>
+
+        <script>
+            function showTip(tipTxt) {
+
+                var div = document.createElement('div');
+                div.innerHTML = '<div class="deploy_ctype_tip"><p>' + tipTxt + '</p></div>';
+                var tipNode = div.firstChild;
+                $("#tips").after(tipNode);
+                setTimeout(function() {
+                    $(tipNode).remove();
+                }, 1500);
+            }
+
+            function tgSubmit() {
+                var phone = $("#tel").val();
+                var name = $("#name").val();
+                if ($.trim(name) == "") {
+                    showTip('名字不能为空');
+                    return false;
+                }
+                if ($.trim(phone) == "") {
+                    showTip('手机号错误！');
+                    return false;
+                }
+                var patrn = /^1[3|4|5|8|7][0-9]\d{4,8}$/;
+                if (!patrn.exec($.trim(phone))) {
+                    showTip('手机号错误！');
+                    return false;
+                }
+                $.get("./index.php?g=Wap&m=Game&a=chicktel", {id: {pigcms::$gid}, tel: phone},
+                function(data) {
+                    if (data == '1') {
+                        showTip('手机号已经存！');
+                        return false;
+                    } else {
+                        $("form").submit();
+                    }
+                });
+
+            }
+        </script>
+    </body>
+</html>

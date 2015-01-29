@@ -1,0 +1,33 @@
+<script src="{pigcms::RES}/js/product.js" type="text/javascript"></script>
+<div class="col-md-2 sidebar">
+    <nav id="sidebar-nav">
+        <ul class="nav nav-pills nav-stacked">
+            <ul class="nav nav-pills nav-stacked" style="margin:5px 0px">
+                <li class="active"><a href="javascript:;" class="side-top" id="collapseStore">会员管理 <span class="glyphicon glyphicon-chevron-down pull-right" style="margin-top: 3px"></span></a></li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked collapse <?php if($sideTop == 'CRM') echo 'in'; ?>" id="collapseStoreMenu">
+                <li <?php if($side == "MEMBER") echo 'class="active"'; ?>><a href="{pigcms::U('Chat/member',array('token'=>$token))}">基本信息</a></li>
+                <li <?php if($side == "MEMBERADD") echo 'class="active"'; ?>><a href="{pigcms::U('Chat/memberadd',array('token'=>$token))}">会员增减</a></li>
+                <li <?php if($side == "MEMBERINT") echo 'class="active"'; ?>><a href="{pigcms::U('Chat/memberint',array('token'=>$token))}">会员互动</a></li>
+                <li <?php if($side == "MEMBERCOM") echo 'class="active"'; ?>><a href="{pigcms::U('Chat/membercom',array('token'=>$token))}">会员消费</a></li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked" style="margin:5px 0px">
+                <li class="active"><a href="javascript:;" class="side-top" id="collapseOrder">分组管理 <span class="glyphicon glyphicon-chevron-down pull-right" style="margin-top: 3px"></span></a></li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked collapse <?php if($sideTop == 'CRM') echo 'in'; ?>" id="collapseOrderMenu">
+                <li <?php if($side == "GGROUP") echo 'class="active"'; ?>><a href="{pigcms::U('Wechat_group/groups',array('token'=>$token))}">分组管理</a></li>
+                <li <?php if($side == "QF") echo 'class="active"'; ?>><a href="{pigcms::U('Message/sendHistory',array('token'=>$token))}">通知管理</a></li>
+                <li <?php if($side == "FH"||$side == "NO") echo 'class="active"'; ?>><a href="{pigcms::U('Message/history',array('token'=>$token))}">48小时通知</a></li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked" style="margin:5px 0px">
+                <li class="active"><a href="javascript:;" class="side-top" id="collapseMember">卡券管理 <span class="glyphicon glyphicon-chevron-down pull-right" style="margin-top: 3px"></span></a></li>
+            </ul>
+            <ul class="nav nav-pills nav-stacked collapse <?php if($sideTop == 'CRM') echo 'in'; ?>" id="collapseMemberMenu">
+                <li <?php if($side == "KQ") echo 'class="active"'; ?>><a href="{pigcms::U('Chat/lipinq',array('token'=>$token))}">卡券管理</a></li>
+                <li <?php if($side == "JF") echo 'class="active"'; ?>><a href="{pigcms::U('Chat/jifen',array('token'=>$token))}">积分设置</a></li>
+            </ul>
+
+        </ul>
+    </nav>
+</div>
+

@@ -1,0 +1,135 @@
+客服系统表结构
+=====================================================
+tp_customer_service_fans_group     粉丝分组表
+-----------------------------------------------------
+DROP TABLE IF EXISTS tp_customer_service_fans_group
+CREATE TABLE tp_customer_service_fans_group(	
+	gid int(10)  unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+	token char(16) NOT NULL DEFAULT ''  COMMENT '公众号唯一标识',	
+	groupname varchar(20) unsigned NOT NULL DEFAULT '0' COMMENT'组名称'	 
+	PRIMARY KEY (gid),	
+	KEY token (token)	
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-----------------------------------------------------
+tp_customer_service_fans           粉丝表
+-----------------------------------------------------
+DROP TABLE IF EXISTS tp_customer_service_fans
+CREATE TABLE tp_customer_service_fans(
+	openid char(28) NOT NULL DEFAULT '' COMMENT '微信openid',	
+	token char(16) NOT NULL DEFAULT ''  COMMENT '公众号唯一标识',	
+	nickname varchar(20) NOT NULL DEFAULT ''  COMMENT '昵称',	 
+	sex tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT ' 1 女 0 男',	
+	province varchar(20) NOT NULL DEFAULT ''  COMMENT '省',	
+	city varchar(20) NOT NULL DEFAULT ''  COMMENT '城市',
+	headimgurl varchar(150) NOT NULL DEFAULT ''  COMMENT '头像',
+	tel varchar(15) NOT NULL DEFAULT ''  COMMENT '电话',
+	remark varchar(20) NOT NULL DEFAULT ''  COMMENT '电话',
+	gid int(10) unsigned NOT NULL DEFAULT '0' COMMENT'组id',
+	PRIMARY KEY (openid),	
+	KEY token (token)
+	KEY gid(gid)	
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-----------------------------------------------------
+tp_customer_service_fans_visitors  粉丝联系客服记录表-------------记录粉丝每次咨询记录
+-----------------------------------------------------
+DROP TABLE IF EXISTS tp_customer_service_fans_visitors
+CREATE TABLE tp_customer_service_fans_visitors(
+	vid  int(10)  unsigned NOT NULL AUTO_INCREMENT COMMENT '联系记录id',
+	openid char(28) NOT NULL DEFAULT '' COMMENT '微信openid',	
+	token char(16) NOT NULL DEFAULT ''  COMMENT '公众号唯一标识',	
+	starttime int(10) unsigned NOT NULL DEFAULT '0' COMMENT'开始沟通时间',
+	lasttime int(10) unsigned NOT NULL DEFAULT '0' COMMENT'最后沟通时间', 
+	status tinyint(1) NOT NULL DEFAULT '0' COMMENT '客服状态 1 沟通状态 0 非沟通状态',
+	uid int(10) unsigned NOT NULL DEFAULT '0' COMMENT'客服id',
+	tid int(10) unsigned NOT NULL DEFAULT '0' COMMENT'这里咨询的类型',
+	time int(10) unsigned NOT NULL DEFAULT '0' COMMENT'时间',
+	PRIMARY KEY (openid),	
+	KEY token (token)
+	KEY uid (uid)
+	KEY tid (tid)
+	KEY status (status)		
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-----------------------------------------------------
+tp_customer_service_fans_visitors_type  咨询的类型-------------记录粉丝每次咨询类型
+-----------------------------------------------------
+DROP TABLE IF EXISTS tp_customer_service_fans_visitors_type 
+CREATE TABLE tp_customer_service_fans_visitors_type (	
+	tid int(10)  unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+	token char(16) NOT NULL DEFAULT ''  COMMENT '公众号唯一标识',	
+	name varchar(20) unsigned NOT NULL DEFAULT '0' COMMENT'咨询类型'	 
+	PRIMARY KEY (gid),	
+	KEY token (token)	
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--------------------------------------------------------
+tp_customer_service_fans_message   粉丝咨询记录表----------记录粉丝的聊天记录
+mid       --信息id
+token     --公众号唯一标识符
+openid    --用户id
+uid       --客服id
+message   --咨询信息
+time      --时间
+------------------------------------------------------
+tp_customer_service_users_message 客服回复记录表
+token     --公众号唯一标识符
+openid    --用户id
+uid       --客服id
+message   --回复信息
+time      --时间
+------------------------------------------------------
+tp_customer_service_users         客服信息表
+------------------------------------------------------
+DROP TABLE IF EXISTS tp_customer_service_users 
+CREATE TABLE tp_customer_service_users (	
+	uid int(10)  unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+	token char(16) NOT NULL DEFAULT ''  COMMENT '公众号唯一标识',	
+	number varchar(20) unsigned NOT NULL DEFAULT '0' COMMENT'客服编号',
+	name varchar(20) unsigned NOT NULL DEFAULT '0' COMMENT'客服名',
+	type tinyint(1) NOT NULL DEFAULT '0'  COMMENT'客服类型 1=普通客服 2=客服经理',
+ 	usernam varchar(20) unsigned NOT NULL DEFAULT '0' COMMENT'登录名',
+	userpwd varchar(20) unsigned NOT NULL DEFAULT '0' COMMENT'登录密码',
+	PRIMARY KEY (uid),	
+	KEY token (token)	
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+-----------------------------------------------------
+tp_customer_service_users_job         客服工作记录表
+-----------------------------------------------------
+DROP TABLE IF EXISTS tp_customer_service_users_job 
+CREATE TABLE tp_customer_service_users_job  (
+	openid char(28) NOT NULL DEFAULT '' COMMENT '微信openid',	
+	uid int(10)  unsigned NOT NULL DEFAULT '0' COMMENT '客服id',
+	starttime int(10) unsigned NOT NULL DEFAULT '0' COMMENT'开始沟通时间',
+	lasttime int(10) unsigned NOT NULL DEFAULT '0' COMMENT'最后沟通时间', 
+	time int(1) NOT NULL DEFAULT '0'  COMMENT'时间', 
+	PRIMARY KEY (openid,uid),	
+	KEY token (token)	
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+-----------------------------------------------------
+tp_customer_service_users_change  客服转接记录表
+----------------------------------------------------
+DROP TABLE IF EXISTS tp_customer_service_users_change 
+CREATE TABLE tp_customer_service_users_change (	
+	cid int(10)  unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',	
+	uid int(10) unsigned NOT NULL DEFAULT '0'  COMMENT'客服id',
+	touid int(10) unsigned NOT NULL DEFAULT '0'  COMMENT'转接给谁',
+	time int(1) NOT NULL DEFAULT '0'  COMMENT'时间', 	 
+	PRIMARY KEY (cid),	
+	KEY uid (uid)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8; 
+---------------------------------------------------
+客服评论表     待处理
+========================================================
+
+
+
+
+
+
+
+
+
+
+

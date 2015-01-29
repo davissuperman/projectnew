@@ -1,0 +1,127 @@
+<include file="Product:header"/>
+    <input type="hidden" id="isUpdate" name="isUpdate" value="-1" />
+    <input type="hidden" id="oprTip" name="oprTip" value="0" />
+    <input type="hidden" id="provId" name="provId" value="-1" />
+    <!-- <form method="post" action="add.html?url=http%3a%2f%2f1071.vshop.weimob.com%2fcmd%2fconfirmOrder.html%3fpayType%3d0%26itemList%3d12424%26cart%3d1%26t%3d1395383227.515" id="ctl00">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTY2ODQ1NDEwMWRkwY/gGuTsqiDptQsyKjxC7I9bHYc=" />
+</div>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWBAKMm7PEDgL7uPQdAuuX0uAIAqW6yJUHLBsJn8UX0KPN/4ecgvAqVKDmALM=" />
+</div>
+        <div class="lay_page page_address_add" id="page_address_add">
+            <div class="lay_page_wrap">
+                <div class="qb_gap qb_pt10">
+
+                    <div class="qb_mb10 qb_flex">
+                        <input name="name" type="text" id="name" class="mod_input flex_box" placeholder="收件人姓名" />
+                    </div>
+                    <div class="qb_mb10 mod_color_strong qb_fs_s qb_none" id="name_msg"></div>
+						<select id="selectProvinces">
+						<option selected="selected" value="0">请选择...</option>
+						<volist name="region" id="region">
+						<option value="{pigcms:$region.region_id}">{pigcms:$region.region_name}</option>
+						</volist>
+						</select>
+						<span id="spanCity"></span>
+                    <div class="qb_mb10 mod_color_strong qb_fs_s qb_none" id="region_msg"></div>
+                    <div class="qb_mb10 qb_flex">
+                        <input name="address" type="text" id="address" class="mod_input flex_box" placeholder="详细地址" />
+                    </div>
+                    <div class="qb_mb10 mod_color_strong qb_fs_s qb_none" id="address_msg"></div>
+                    <div class="qb_mb10 qb_flex">
+                        <input name="mobile" type="text" id="mobile" placeholder="联系电话" class="mod_input flex_box" />
+                    </div>
+                    <div class="qb_mb10 mod_color_strong qb_fs_s qb_none" id="mobile_msg"></div>
+                    <div class="qb_mb10">
+						<input type="hidden" name="a" id="to" value="stop"/>
+                         <a id="save_addr" class="mod_btn btn_em btn_block"  href="javascript:void(0)" >保存收货地址</a>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form> -->
+    <form method="post" action="/index.php?g=Wap&m=Product&a=SaveAdress&wecha_id={pigcms:$wecha_id}&token={pigcms:$token}&Seconds=1" id="ctl00">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTY2ODQ1NDEwMWRkwY/gGuTsqiDptQsyKjxC7I9bHYc=" />
+</div>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWBAKMm7PEDgL7uPQdAuuX0uAIAqW6yJUHLBsJn8UX0KPN/4ecgvAqVKDmALM=" />
+</div>
+        <div class="lay_page page_address_add" id="page_address_add">
+            <div class="lay_page_wrap">
+                <div class="qb_gap qb_pt10">
+
+                    <div class="qb_mb10 qb_flex">
+                        <input name="name" type="text" id="name" class="mod_input flex_box" placeholder="收件人姓名" />
+                    </div>
+                    <div class="qb_mb10 mod_color_strong qb_fs_s qb_none" id="name_msg"></div>
+                    <div>
+                      
+                        <span class="mod_select qb_mr10 qb_mb10" id="sprovince" data-url="/index.php?g=Wap&m=Product&a=province">
+                            <select name="pvid" id="province">
+                                <option value="-1">选择省</option>
+                                 
+                            </select></span>
+                        <span class="mod_select qb_mr10" id="scity" data-url="/index.php?g=Wap&m=Product&a=city">
+                            <select name="ctid" id="city">
+                                <option value="-1">选择市</option>
+                                 
+                            </select></span>
+                        <span class='mod_select qb_mb10'>
+                            <select name="regionId" id="regionId">
+                                <option value="-1">选择区</option>
+                                    
+                            </select></span>
+                    </div>
+                    <div class="qb_mb10 mod_color_strong qb_fs_s qb_none" id="region_msg"></div>
+                    <div class="qb_mb10 qb_flex">
+                        <input name="address" type="text" id="address" class="mod_input flex_box" placeholder="详细地址" />
+                    </div>
+                    <div class="qb_mb10 mod_color_strong qb_fs_s qb_none" id="address_msg"></div>
+                    <div class="qb_mb10 qb_flex">
+                        <input name="mobile" type="text" id="mobile" placeholder="联系电话" class="mod_input flex_box" />
+                    </div>
+                    <div class="qb_mb10 mod_color_strong qb_fs_s qb_none" id="mobile_msg"></div>
+                    <div class="qb_mb10">
+                         <a id="save_addr" class="mod_btn btn_em btn_block"  href="javascript:void(0)" style="background:green;">进入秒购商城</a>  
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+<include file="Product:bottom"/>
+<script src="{pigcms::$staticFilePath}/js/ChatFloat.js"></script>
+<script>
+    new ChatFloat({
+        AId:1071,
+        right:0,
+        top:150,
+        openid:""
+    });
+</script>
+    <script type="text/javascript"> 
+        //var shareData = {"send2Friend":{"content":"优惠惊喜享不停","img":"http://1071.vshop.weimob.com/statics/images/share_logo.jpg","link":"http://1071.vshop.weimob.com","title":"【微商城】推荐给你看看，关注即可成为会员享受特权"},"share2Friend":{"img":"http://1071.vshop.weimob.com/statics/images/share_logo.jpg","link":"http://1071.vshop.weimob.com","title":"【微商城】关注我吧！更多会员特权等着你！"},"share2qqBlog":{"content":"我关注了【微商城】！拥有N多会员特权，一起来体验吧！","link":"http://1071.vshop.weimob.com"}};
+		//var shareData = {"send2Friend":{"content":"品微惊喜不断！","img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"http://www.wzhi.cc/index.php?g=Wap&m=Product&a=cookie&token={pigcms:$token}","title":"【品微商城】推荐给你看看，不一样的商城"},"share2Friend":{"img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"http://www.wzhi.cc/index.php?g=Wap&m=Product&a=cookie&token={pigcms:$token}","title":"【品微商城】关注我吧！更多会员特权等着你！"},"share2qqBlog":{"content":"我关注了【品微商城】！拥有N多会员特权，一起来体验吧！","link":"http://www.wzhi.cc/index.php?g=Wap&m=Product&a=cookie&token={pigcms:$token}"}};
+	         		         var shareData = {"send2Friend":{"content":"品微惊喜不断！","img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"{pigcms::C('site_url')}{pigcms::U('Product/cookie',array('token'=>$token))}","title":"【品微商城】推荐给你看看，不一样的商城"},"share2Friend":{"img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"{pigcms::C('site_url')}{pigcms::U('Product/cookie',array('token'=>$token))}","title":"【品微商城】关注我吧！更多会员特权等着你！"},"share2qqBlog":{"content":"我关注了【品微商城】！拥有N多会员特权，一起来体验吧！","link":"{pigcms::C('site_url')}{pigcms::U('Product/cookie',array('token'=>$token))}"}};
+			 //   var shareData = {"send2Friend":{"content":"品微惊喜不断！","img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"{pigcms::U('Product/cookie',array('token'=>$token))}","title":"【品微商城】推荐给你看看，不一样的商城"},"share2Friend":{"img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"{pigcms::U('Product/cookie',array('token'=>$token))}","title":"【品微商城】关注我吧！更多会员特权等着你！"},"share2qqBlog":{"content":"我关注了【品微商城】！拥有N多会员特权，一起来体验吧！","link":"{pigcms::U('Product/cookie',array('token'=>$token))}"}};
+	   !function () { function c() { var a = WeixinJSBridge; a.on("menu:share:appmessage", e), a.on("menu:share:weibo", f), a.on("menu:share:timeline", g), a.invoke("getNetworkType", {}, d) } function d(a) { var b, c; switch (a.err_msg) { case "network_type:wwan": b = 2e3; break; case "network_type:edge": b = 3e3; break; case "network_type:wifi": b = 4e3 } c = new Image, c.onerror = c.onload = function () { c = null } } function e() { var a = window.shareData.send2Friend, b = h(a); a.content = b ? b.content : a.content, a.img = b && b.img ? b.img : a.img, WeixinJSBridge.invoke("sendAppMessage", { img_url: a.img, img_width: "640", img_height: "640", link: a.link, desc: a.content, title: a.title }, function () { }) } function f() { var b = window.shareData.share2qqBlog; WeixinJSBridge.invoke("shareWeibo", { content: a.isios ? b.content + b.link : b.content, url: b.link }, function () { }) } function g() { var a = window.shareData.share2Friend; WeixinJSBridge.invoke("shareTimeline", { img_url: a.img, img_width: "640", img_height: "640", link: a.link, desc: " ", title: a.title }, function () { }) } function h() { return "function" == typeof b ? b() : "" } var b, a = function () { var a = window.navigator.userAgent; return this.isAndroid = a.match(/(Android)\s+([\d.]+)/) || a.match(/Silk-Accelerated/) ? !0 : !1, this.isiPad = a.match(/iPad/) ? !0 : !1, this.isiPod = a.match(/(iPod).*OS\s([\d_]+)/) ? !0 : !1, this.isiPhone = !this.isiPad && a.match(/(iPhone\sOS)\s([\d_]+)/) ? !0 : !1, this.isios = this.isiPhone || this.isiPad || this.isiPod, this }(); window.shareData && document.addEventListener("WeixinJSBridgeReady", c, !1), window.setShareListener = function (a) { b = a } }();
+    </script>
+    <script src="{pigcms::$staticFilePath}/js/zepto.min.js"></script>
+    <script src="{pigcms::$staticFilePath}/js/imagesloaded.pkgd.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            document.getElementById("mobile").setAttribute("type", "tel");
+        })
+    </script>
+    <script type="text/javascript">
+        mobile.o2ocn.address.init();
+    </script>
+</body>
+</html>
+

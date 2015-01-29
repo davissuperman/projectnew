@@ -1,0 +1,48 @@
+<?php $nav = "MEMBER"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_index.css" rel="stylesheet"/>
+<div class="container main">
+<div class="row">
+<include file="Member_card:left"/>
+<div class="col-md-10 main">
+            <div class="panel panel-success">
+              <div class="panel-heading cfix">
+                <h3 class="panel-title">会员特权使用统计</h3>
+              </div>
+              <div class="panel-body"> 
+                  <div class="add-button pull-left">
+                        <a href="javascript:history.go(-1);"  class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-left"></span> 返回</a>
+                  </div>
+                <table class="table table-striped" cellspacing="1">
+                    <tr>
+
+                        <th class="sevenTd">卡号</th>
+                        <th class="sevenTd">姓名</th>
+                        <th class="sevenTd">电话</th>
+                        <th class="sevenTd">消费金额</th>
+                        <th class="sevenTd">操作员</th>
+                        <th class="sevenTd">时间</th>
+                        <th class="sevenTd">操作</th>
+                    </tr>
+                    <volist name="list" id="c">        
+                        <tr>
+                           <td>{pigcms:$c.cardNum}</td>
+    					  <td>{pigcms:$c.userName}</td>
+    					  <td>{pigcms:$c.userTel}</td>
+    					  <td>{pigcms:$c.expense}</td>
+    					  <td>{pigcms:$c.operName}</td>
+    					  <td><nobr>{pigcms:$c.time|date='Y-m-d H:i:s',###}</nobr></td>
+                        <td class="sevenTd">
+                           <a href="{pigcms::U('Member_card/useRecord_del',array('itemid'=>$c['id'],'id'=>$thisCard['id']))}">删除</a>
+                        </td>
+                        </tr>
+                    </volist>
+                </table>
+                <p class="page">{pigcms:$page}</p>
+        </div>
+        <!--right--end-->  
+    </div>  
+    </div>
+    </div>
+</div>
+<include file="Public:footer"/>

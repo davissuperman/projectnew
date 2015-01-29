@@ -1,0 +1,32 @@
+
+.right{width:837px;float:left;padding:0px 10px;}
+.artiEdit{height:45px;line-height:50px;border-bottom:1px #eee solid;}
+.big{font-size:16px;color:#6e6e6e;font-weight:bold;float:left;margin-right:10px;}
+.small{font-size:12px;color:#6e6e6e;float:left;}
+.list{height:36px;margin-top:10px;}
+.list li{height:36px;line-height:36px;text-align:center;width:170px;background:#f9f9f9;float:left;margin-right:10px;color:#6e6e6e;cursor:pointer;border-radius:3px;}
+.temp{padding:15px;background:#fff;float:left;width:100%;}
+.temp li{float:left;margin-left:25px;margin-top:10px;cursor:pointer;text-align:center;}
+.list li.clickOver{background:#ccc;}
+.mold{margin-right:5px;}
+.moldTex{color:#6e6e6e;}
+
+.phoneTex{width:400px;float:right;}
+.phoneBox{width:368px;height:624px;background:url(../img/phone.jpg) no-repeat;float:left; padding: 146px 0 0 24px;}
+.listTex{margin-top:15px;}
+.listTex p{height:30px;line-height:30px;background:#f5f5f5;padding-left:5px;margin-bottom:5px;cursor:pointer;}
+.listTex p input{margin-right:5px;}
+
+.temp li{float:left;margin-left:25px;margin-top:10px;cursor:pointer;text-align:center;background:url(../img/bai.png) no-repeat;}
+.temp li:hover{background:url(../img/hei.png) no-repeat;}
+.temp li.active {background:url(../img/hei.png) no-repeat;}
+.contentx{
+width: auto;
+margin: 20px auto;
+border-top: 1px #d4d4d4 solid;
+}
+
+.radio {
+  display: inline;
+}
+ 

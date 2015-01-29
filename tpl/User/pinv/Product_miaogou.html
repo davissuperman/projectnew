@@ -1,0 +1,97 @@
+<?php $nav = "FUNCTION"; $side = "MIAOGOU"; $sideTop = "PRODUCT"; ?>
+<include file="Public:head"/>
+<style>
+    .gap{margin-top:10px;}
+</style>
+<link type="text/css" href="{pigcms::RES}/css/Product_index.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+<link type="text/css" rel="stylesheet" href="{pigcms::RES}/css/manage.css"/>
+<div class="container main">
+<div class="row">
+<include file="Product:left"/>
+
+    <div class="col-md-10 main">
+        <ol class="breadcrumb">
+              <li><a href="{pigcms::U('Product/index',array('token'=>$token))}">微商城</a></li>
+              <li><a href="{pigcms::U('Product/index',array('token'=>$token))}">商城管理</a></li>
+              <li class="active">秒购管理</li>
+            </ol>
+    
+            
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">秒购管理</h3>
+                    </div>
+                <div class="panel-body">
+                    <div class="pull-right add-button">
+                        <a href="{pigcms::U('Product/miaogouAdd',array('token'=>$token,'dining'=>$isDining))}" title="添加" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> 添加秒购</a>
+                    </div>
+                    <div class="clearfix"></div><form method="post" action="" class='form-inline' id="search">
+      <div class="alert alert-info">
+            <div class=" row">
+                <div class="gap">
+            <!--     <span class="fontTex">分类：</span>
+               <select id="catid" name="catid" class="form-control ">
+                   <volist name="cats" id="cat">
+                        <option value="{pigcms:$cat['id']}">{pigcms:$cat['name']}</option>
+                   </volist>
+               </select> -->
+           <div class="col-md-6 gap" >
+               <span class="">价格区间(秒杀价)：</span>
+               <input type="text" name="price1" class="form-control " style="width:100px">~ <input type="text" class="form-control " name="price2"  style="width:100px">
+           </div>
+           <div class="col-md-5 gap">商品名称：<input type="text" name="keyWord" class="form-control " />
+           </div>
+                <a href="javascript:;" class="btn btn-info" style="margin:0 0 0 45px" onclick="document.getElementById('search').submit()"><span class="glyphicon glyphicon-search"></span></a>
+           </div>
+            </div>
+          
+        </div>
+        </form>
+     <table class="table table-striped" cellspacing="1">
+            <tr>
+                <th>ID</th>
+                <th>商品名称</th>
+                <th>所属类别</th>
+                <th>原价（元）</th>
+                <th style="color:red">秒杀价（元）</th>
+                <th>限购数/人</th>
+                <th>管理操作</th>
+            </tr>
+            <volist name="miaogous" id="miaogou">
+            <tr>
+                <td>{pigcms:$miaogou['id']}</td>
+                <td id="write" >{pigcms:$miaogou['name']}</td>
+                <!-- <td>4</td> -->
+                <td>{pigcms:$miaogou['catid']}</td>
+                <td>{pigcms:$miaogou['oprice']}</td>
+                <td style="color:red">{pigcms:$miaogou['price']}</td>
+                <!-- <td>001</td> -->
+                <td>{pigcms:$miaogou['limit']}</td>
+                <td>
+                    <a  href="{pigcms::U('Product/miaogouSet',array('id'=>$miaogou['id'],'token'=>$token,'dining'=>$isDining))}" class="hover-tooltip-edit"><span class="glyphicon glyphicon-edit"></span></a>               
+                    <a href="javascript:;" class="hover-tooltip-trash" id="{pigcms:$miaogou['id']}"><span class="glyphicon glyphicon-trash danger"></span></a>
+        </td>
+            </tr>
+            </volist>
+        </table>
+         <p class="page">{pigcms:$page}</p>
+         </div>
+    </div>
+
+        </div> 
+        </div> 
+        </div> 
+
+    </div>
+    <script>
+            <?php $url=U('Product/miaogouDel',array('token'=>$_GET['token'])); ?>
+      $('.hover-tooltip-trash').click(function(){
+        var bDel=confirm('确定删除么~');
+        if(bDel){
+          var id=$(this).attr('id');
+          location="{pigcms:$url}&id="+id;
+        }
+      });
+    </script>
+<include file="Public:footer"/>

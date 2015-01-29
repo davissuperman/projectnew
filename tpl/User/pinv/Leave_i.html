@@ -1,0 +1,62 @@
+<?php $nav = "FUNCTION"; $side = "INFO" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Product_index.css" rel="stylesheet"/>
+  <div class="container main">
+ <div class="row main">
+<include file="Leave:left"/>
+    <div class="col-md-10 main">
+            		<!-- <p class="rightTop">
+                                        <a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                                        <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                                    </p>
+                                 <p class="artiEdit"><span class="big">微信墙子管理</span>
+                                 </p>
+                                    <ul class="listBox">
+                                        <li class="tabli" id="tab0"><a href="{pigcms::U('Leave/info',array('token'=>$token,'dining'=>$isDining))}">回到上级目录</a></li>        
+                                    </ul> -->
+                                    <ol class="breadcrumb">
+                <li><a href="{pigcms::U( 'Leave/index',array( 'token'=>$token ))}">微信墙</a></li>
+                <li><a href="{pigcms::U( 'Leave/info',array( 'token'=>$token ))}">微信墙</a></li>
+                <li class="active">微信墙子管理</li>
+              </ol>
+
+                <div class="panel panel-success">
+                    <div class="panel-heading cfix">
+        <h3 class="panel-title pull-left">微信墙子管理</h3>
+        </div>
+        <div class="panel-body">
+            <div class="pull-left add-button">
+                <a href="{pigcms::U( 'Leave/info',array( 'token'=>$token ))}" class="btn btn-sm btn-default"><span class="glyphicon glyphicon-arrow-left"></span> 返回</a>
+            </div>
+            <div class="clearfix"></div>
+                	<form method="post" action="" id="info">
+                    <div   >         
+                        <table class="table table-striped" cellspacing="1">
+                            <tr>
+                                <th class="firstTd">回复标题</th>
+                                <th class="secondTd">Token</th>
+                                <th class="forthTd">创建时间</th>
+                                <th class="sevenTd">操作</th>
+                            </tr>
+                         <volist name="list" id="hostlist"> 
+                            <tr>
+                                <td class="firstTd">{pigcms:$hostlist.title}</td>
+                                <td class="secondTd">{pigcms:$hostlist.token}</td>
+                                <td class="forthTd">{pigcms:$hostlist.time|date="Y-m-d H:i:s",###}</td>
+                                <td class="sevenTd"><a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Leave/iD',array('id'=>$hostlist['id'],'token'=>$token,'fid'=>$fid))}');" class="hover-tooltip-trash"><span class="glyphicon glyphicon-trash danger"></span></a></td>
+                            </tr>
+                         </volist>  
+                        </table> 
+                         <p class="page">{pigcms:$page}</p>
+                    </div>
+         </form>
+                     
+                </div>
+            	</div>
+               
+            </div>
+            <!--right--end--> 
+            </div>   
+      
+ </div>
+<include file="Public:footer"/>

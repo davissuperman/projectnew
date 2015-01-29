@@ -1,0 +1,170 @@
+<?php $nav = "PROMOTE"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Coupon_add.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+ <div class="container main">
+ <div class="row main">
+<include file="Coupon:left"/>
+     
+    <!--right--begain-->
+             <div class="col-md-10 main">
+                <ol class="breadcrumb">
+              <li><a href="{pigcms::U( 'Coupon/index',array( 'token'=>$token ))}">优惠劵</a></li>
+              <li><a href="{pigcms::U( 'Coupon/index',array( 'token'=>$token ))}">优惠劵</a></li>
+              <li class="active"><if condition="$_GET['id']">修改<else />增加</if>优惠劵</li>
+            </ol><!-- 
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+                <p class="artiEdit"><span class="big">惠券活动开始内容</span><a href="javascript:history.go(-1);" class="addListX">返回</a></p> -->
+                <div class="panel panel-success">
+        <div class="panel-heading cfix">
+        <h3 class="panel-title pull-left"><if condition="$_GET['id']">修改<else />增加</if>优惠劵活动</h3>
+        </div>
+        <div class="panel-body">
+                <form class="form" method="post" action=""  target="_top" enctype="multipart/form-data" >
+                        <span class="label label-success pull-right">优惠劵活动开始内容</span>
+                 <div class="begainBox">
+                    <div class="rightLeft">
+                        <p class="same">
+                            <span class="Tex">关键词：</span>
+                           <input type="text" id="keyword" value="{pigcms:$vo.keyword}" name="keyword" class="circle"/>
+                        </p>
+                        <p class="example">只能写一个关键词，用户输入此关键词将会触发此活动。 </p>
+                        <p class="same">
+                            <span class="Tex">活动名称：</span>
+                            <input type="text" id="title" value="{pigcms:$vo.title}" name="title"  class="circle"/>
+                        </p>
+                        <p class="example">请不要多于50字!! </p>
+                       
+                        <p class="areaSame">
+                            <span class="Tex">优惠券介绍：</span>
+                            <textarea class="circleArea" id="sttxt" name="sttxt">{pigcms:$vo.sttxt}</textarea>
+                        </p>
+                        <p class="same">
+                            <span class="Tex">活动时间：</span>
+                            <input type="text"  id="statdate" value="<if condition="$vo['statdate'] neq ''">{pigcms:$vo.statdate|date="Y-m-d H:i:s",###}<else/><?php 
+	echo date('Y-m-d H:i:s',mktime(date('h'), date('i'), date('s'), date("m")  , date("d"), date("Y")));?></if>" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',disabledDates:['%y-%M-%d {%H}\:..\:..','%y-%M-%d {%H}\:..\:..']})" name="statdate" class="Scircle"/>
+                            <span class="Stex">到</span>
+                            <input type="text" id="enddate" value="<if condition="$vo['enddate'] neq ''">{pigcms:$vo.enddate|date="Y-m-d H:i:s",###}<else/><?php 
+	echo date('Y-m-d H:i:s',mktime(date('h'), date('i'), date('s'), date("m")  , date("d")+3, date("Y")));?></if>" name="enddate" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',disabledDates:['%y-%M-%d {%H}\:..\:..','%y-%M-%d {%H}\:..\:..']})"   class="Scircle"/>
+                        </p>
+                        <p class="areaSame">
+                            <span class="Tex">优惠券活动声明：</span>
+                            <textarea class="circleArea" id="info" name="info" >{pigcms:$vo.info}</textarea>
+                        </p>
+                        <p class="example">活动声明</p>
+                        <p class="areaSame">
+                            <span class="Tex">兑换券使用说明：</span>
+                            <textarea class="circleArea"  name="aginfo" >{pigcms:$vo.aginfo}</textarea>
+                        </p>
+                        <p class="example">用户获取优惠券后显示的提示信息 </p>
+                       
+                    </div>
+                    <ul class="imgBox">
+                        <img id="pic" src="{pigcms::C('site_url')}/tpl/Wap/default/common/css/guajiang/images/activity-coupon-start.jpg" width="320px" class="rightImg" />
+                        </br>
+                        <input type="text" name="starpicurl" value="<if condition="$vo['starpicurl'] eq ''">{pigcms::C('site_url')}/tpl/Wap/default/common/css/guajiang/images/activity-coupon-start.jpg<else/>{pigcms:$vo.starpicurl}</if>" onblur="document.getElementById('pic').src=this.value;"  class="imgCircel" />
+                        </br>
+                        <span class="imgTex">填写活动开始图片网址  </span>
+                        </br>
+                        <img id="zjpic" src="{pigcms::C('site_url')}/tpl/Wap/default/common/css/guajiang/images/activity-coupon-winning.jpg" width="320px" class="rightImg"/>
+                        </br>
+                        <input type="text"  name="zjpic" value="<if condition="$vo['zjpic'] eq ''">{pigcms::C('site_url')}/tpl/Wap/default/common/css/guajiang/images/activity-coupon-winning.jpg<else/>{pigcms:$vo.zjpic}</if>" onblur="document.getElementById('zjpic').src=this.value;" class="imgCircel"/>
+                        </br>
+                        <span class="imgTex">填写中奖后显示的头部图片地址  </span>
+                        
+                    </ul>
+                </div>
+                <!--活动开始--end-->
+                <!--活动结束内容--begain-->
+                <p class="artiEdit"><span class="big"></span></p>
+                <span class="label label-success pull-right">活动结束内容</span>
+                <div class="begainBox">
+                    <div class="rightLeft">
+                        <p class="same">
+                            <span class="Tex">活动结束公告：</span>
+                           <input type="text" id="endtite" value="{pigcms:$vo.endtite}" name="endtite" class="circle"/>
+                        </p>
+                        <p class="example">请不要多于50字! </p>
+                        <p class="areaSame">
+                            <span class="Tex">活动结束说明：</span>
+                            <textarea class="circleArea" id="endinfo" name="endinfo">{pigcms:$vo.endinfo}</textarea>
+                        </p>
+                        <p class="example">活动结束显示</p>
+                    </div>
+                    <ul class="imgBox">
+                        <img id="end" src="{pigcms::C('site_url')}/tpl/Wap/default/common/css/guajiang/images/activity-coupon-end.jpg" width="320px" class="rightImg"/>
+                        </br>
+                        <input type="text" name="endpicurl" onchange="document.getElementById('end').src=this.value;" value="<if condition="$vo['endpicurl'] eq ''">{pigcms::C('site_url')}/tpl/Wap/default/common/css/guajiang/images/activity-coupon-end.jpg<else/>{pigcms:$vo.endpicurl}</if>" class="imgCircel"/>
+                        </br>
+                        <span class="imgTex">填写活动结束图片网址 </span>
+                    </ul>
+                </div>
+                <!--活动结束内容--end-->
+                <!--优惠券设置--begain-->
+                <p class="artiEdit"><span class="big"></span></p>
+                <span class="label label-success pull-right">优惠券设置</span>
+                <div class="begainBox">
+                    <p class="same">
+                        <span class="TexM">优惠券名称1：</span>
+                       <input type="text" id="fist" name="fist" value="{pigcms:$vo.fist}" class="circle"/>
+                    </p>
+                       <span class="sameTex">请不要多于50字! </span>
+                    <p class="same">
+                        <span class="TexM">优惠券数量：</span>
+                       <input type="text" id="fistnums" name="fistnums" value="{pigcms:$vo.fistnums}"  class="Scircle"/>
+                    </p>
+                       <span class="sameTex">如果是100%中奖,请把一等奖的奖品数量[ 1000就代表前1000人都中奖 ]填写多点</span>
+                    <p class="same">
+                        <span class="TexM">优惠券名称2：</span>
+                       <input type="text" id="second" name="second" value="{pigcms:$vo.second}" class="circle"/>
+                    </p>
+                       <span class="sameTex">请不要多于50字! </span>
+                    <p class="same">
+                        <span class="TexM">优惠券数量：</span>
+                       <input type="text" id="secondnums" name="secondnums" value="{pigcms:$vo.secondnums}" class="Scircle"/>
+                       
+                    </p>
+                    <p class="same">
+                        <span class="TexM">优惠券名称3：</span>
+                       <input type="text" id="third" name="third" value="{pigcms:$vo.third}"  class="circle"/>
+                    </p>
+                       <span class="sameTex">请不要多于50字! </span>
+                    <p class="same">
+                        <span class="TexM">优惠券数量：</span>
+                       <input type="text" id="thirdnums" name="thirdnums" value="{pigcms:$vo.thirdnums}" class="Scircle"/>
+                       
+                    </p>
+                    <p class="same">
+                        <span class="TexM">预计活动的人数：</span>
+                       <input type="text" id="allpeople" name="allpeople"   value="{pigcms:$vo.allpeople}"  class="Scircle"/>
+                    </p>
+                       <div class="sameTex"> 预估活动人数直接影响抽奖概率：中奖概率 = 奖品总数/(预估活动人数*每人抽奖次数) 如果要确保任何时候都100%中奖建议设置为1人参加!如果要确保任何时候都100%中奖建议设置为1人参加!并且奖项只设置一等奖.</div>
+                    <p class="same" style="margin-top:30px;">
+                        <span class="TexM">每人最多允许抽奖次数：</span>
+                       <input type="text"  id="canrqnums" name="canrqnums"   value="{pigcms:$vo.canrqnums}"  class="Scircle"/>
+                    </p>
+                       <span class="sameTex">必须1-5之间的数字</span>
+                    <p class="same" style="margin-top:30px;">
+                        <span class="TexM">SN码生成设置：</span>
+                       
+    
+                       	<input type="radio" checked name="snimport" value="0"/>自动生成 
+                        <input type="radio" name="snimport" value="1"/>手动生成(SN码管理) 
+                    </p>
+                    <!-- <p class="pressBox"><input type="submit" value="保存" class="addList"/><span class="suu">请确认功能管理已开启优惠券功能</span></p> -->
+                </div>
+                </div>
+                    <div class="panel-footer" style="text-align:right"><input type="submit" value="保存" class="btn btn-success"/>
+                    <a href="javascript:history.go(-1)" class="btn btn-link">取消</a>
+                 </div>
+                </div>
+                <!--优惠券设置--end-->
+                </form>
+                </div>
+                </div>
+                
+ </div>
+<include file="Public:footer"/>

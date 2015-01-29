@@ -1,0 +1,43 @@
+<?php $nav = "BASIC"; $side = "AREPLY"; ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Areply_index.css" rel="stylesheet"/>
+<div class="container main">
+<div class="row">
+<include file="Basic:left"/>
+<div class="col-md-10 main">
+     
+     <div class="panel panel-success">
+	  <div class="panel-heading">
+		<h3 class="panel-title">关注时自动回复内容</h3>
+	  </div>
+	  <div class="panel-body">
+		     <div class="leftArea">
+                   <form method="post"  action="{pigcms::U('Areply/insert')}">
+                	<textarea class="areaLeft" name="content">{pigcms:$areply.content}</textarea>
+                    <p><input name="home" class="choice" type="checkbox" <if condition="$areply['home'] eq 1">checked="checked"</if> value="1"   />&nbsp;勾选此项请填写关键词,我们将检索关键词相关的图文信息最多回复9条信息</p>
+                    <p>关键词：<input type="text" class="tex"  value="{pigcms:$areply.keyword}" name="keyword"/>
+                    <BR/>例：填写「功能」，系统会检索包含最近发布的9条信息 </p>
+                </div>
+                <ul class="rightText">
+                	<li class="liHeading">参考范例</li>
+                    <li>1.附近周边信息查询lbs</li>
+                    <li>2.音乐查询　音乐＋音乐名 例：音乐爱你一万年</li>
+                    <li>3.天气查询　城市名＋天气　例上海天气</li>
+                    <li>4.手机归属地查询  手机＋手机号码　例：手机13917778912</li>
+                    <li>5.身份证查询　身份证＋号码　　例：身份证342423198803015568</li>
+                    <li>6.公交查询　公交＋城市＋公交编号　例：上海公交774</li>
+                    <li>7.火车查询　火车＋城市＋目的地　例火车上海南京</li>
+                    <li>8.翻译 支持 及时翻译，语音翻译　翻译＋关键词 例：翻译你好</li>
+                   <li>9.更多功能请回复帮助，或者help</li>
+                </ul>
+	  </div>
+	  <div class="panel-footer" style="text-align:right"> 
+	  		<input type="submit" value="保存" class="btn btn-success"/> 
+            <a href="{pigcms::U('Img/add')}"  class="btn btn-success">切换到图文模式</a>
+      </div>
+	</div>
+                
+</div>
+</div>
+</div>
+<include file="Public:footer"/>

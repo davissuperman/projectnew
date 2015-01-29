@@ -1,0 +1,422 @@
+<?php $nav = "BUSINESS"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<script src="./tpl/User/default/common/js/date/WdatePicker.js"></script>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+ <script src="/tpl/static/upyun.js"></script>
+<style>
+.msgWrap .control-group {
+margin-bottom: 20px;
+width:810px;
+}
+.msgWrap .control-label {
+text-align: left;
+width: 100px;
+font-weight: bold;
+padding-top: 5px;
+float: left;
+display: block;
+margin-bottom: 5px;
+}
+.msgWrap .controls {
+margin-left: 100px;
+}
+.msgWrap .form-actions {
+padding: 19px 20px 20px 160px;
+margin-top: 20px;
+}
+.span4, .span1, .option, .valid, .input-large{
+	background: url(../images/px.png) repeat-x scroll 0 0 #FFFFFF;
+    border-color: #848484 #E0E0E0 #E0E0E0 #848484;
+    border-style: solid;
+    border-width: 1px;
+	border-radius: 2px 2px 2px 2px;
+	padding:5px;
+	width: 210px;
+}
+</style>
+<div class="container main">
+<div class="row">
+<include file="Wedding:left"/>
+ <div class="col-md-10 main">
+           
+           	 <ol class="breadcrumb">
+			  <li><a href="{pigcms::U( 'Wedding/index',array( 'token'=>$token ))}">微婚庆</a></li>
+			  <li><a href="{pigcms::U( 'Wedding/index',array( 'token'=>$token ))}">喜帖管理</a></li>
+			  <li class="active">添加喜帖</li>
+			</ol>
+			
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">添加喜帖</h3>
+				</div>
+			  <div class="panel-body">
+
+  <form action="" method="post" class="form-horizontal form-validate" novalidate="novalidate">
+	<div class="form-group">
+		<label for="title" class="col-sm-2 control-label">喜帖标题：</label>
+		<div class="col-sm-5">
+			<input type="text" name="title" id="title" maxlength="10" class="form-control" value="{pigcms:$wedding.title}" data-rule-required="true" placeholder="十个字以内" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="keyword" class="col-sm-2 control-label">触发关键词：</label>
+		<div class="col-sm-5">
+			<input type="text" name="keyword" id="keyword" class="form-control" data-rule-required="true" value="{pigcms:$wedding.keyword}" placeholder="只能设置一个关键字" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="coverurl" class="col-sm-2 control-label">喜帖封面：</label>
+		<div class="col-sm-5">
+			<img class="thumb_img" id="suicai1_src" src="<if condition="$wedding['coverurl'] neq false">{pigcms:$wedding.coverurl}<else />http://bcs.duapp.com/baeimgs/Tnh1ROgm93.png</if>" style="max-height: 100px;">
+			<input id="suicai1" type="text" name="coverurl" class="px hide" onchange="changpic(this,1)" value="<if condition="$wedding['coverurl'] neq false">{pigcms:$wedding.coverurl}<else />http://bcs.duapp.com/baeimgs/Tnh1ROgm93.png</if>">
+			<span class="help-inline">
+				<a href="javascript:void(0)" onclick="upyunPicUpload('suicai1',700,420,'{pigcms:$token}')" class="btn btn-default">上传</a>
+				<a href="###" onclick="viewImg('suicai1')" class="btn btn-default">预览</a>
+			</span>
+			<span class="help-block"><span class="maroon">*</span>封面默认大小720*400</span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="openpic" class="col-sm-2 control-label">开场动画：</label>
+		<div class="col-sm-5">
+			<img class="thumb_img" id="suicaipic2_src" src="<if condition="$wedding['openpic'] neq false">{pigcms:$wedding.openpic}<else />http://bcs.duapp.com/baeimgs/jNuxaj1cAj.jpg</if>" style="width: 180px; height: 180px;">
+			<input id="suicaipic2" type="text" name="openpic" class="px hide" onchange="changpic(this,2)" value="<if condition="$wedding['openpic'] neq false">{pigcms:$wedding.openpic}<else />http://bcs.duapp.com/baeimgs/jNuxaj1cAj.jpg</if>">
+			<span class="help-inline">
+						<a href="javascript:void(0)" onclick="upyunPicUpload('suicaipic2',700,420,'{pigcms:$token}')" class="btn btn-default">上传</a>
+				<a href="###" onclick="viewImg('suicaipic2')" class="btn btn-default">预览</a>
+			</span>
+			<span class="help-block"> 上传400*400左右的新郎新娘合影图,用于喜帖打开时的动画中,图片大小不超过300K </span>
+			<span class="red">不想要开场动画图片地址留空即可!</span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="picurl" class="col-sm-2 control-label">缩略图：</label>
+		<div class="col-sm-5">
+			<img class="thumb_img" id="suicai3_src" src="<if condition="$wedding['openpic'] neq false">{pigcms:$wedding.openpic}<else />http://bcs.duapp.com/baeimgs/2cDQtFbl75.jpg</if>" style="width: 40px; height: 40px;">
+			<input id="suicai3" type="text" name="picurl" class="px hide" onchange="changpic(this,3)" value="<if condition="$wedding['openpic'] neq false">{pigcms:$wedding.openpic}<else />http://bcs.duapp.com/baeimgs/2cDQtFbl75.jpg</if>">
+			<span class="help-inline">
+				<a href="javascript:void(0)" onclick="upyunPicUpload('suicai3',700,420,'{pigcms:$token}')" class="btn btn-default">上传</a>
+				<a href="###" onclick="viewImg('suicai3')" class="btn btn-default">预览</a>
+			</span><span class="help-block"><span class="maroon">*</span>默认40x40,显示在喜帖主页</span>
+		</div>
+	</div>
+		<div class="form-group">
+		<label for="picurl" class="col-sm-2 control-label">相册选择：</label>
+		<div class="col-sm-5">
+			<select name="pid">
+				<option value="">请选择相册名称</option>
+				<volist id="photo" name="photo">
+				<option value="{pigcms:$photo.id}" <if condition="$photo['id'] eq $wedding['pid']" >selected="selected"</if>>{pigcms:$photo.title}</option>
+				</volist>
+			</select>
+			<span class="help-inline">
+			</span>
+			<span class="help-inline">
+				<span class="maroon">*</span>
+				<a target="ddd" class="btnGrayS vm" href="{pigcms::U('Photo/add')}">创建相册</a>  如果没有请创建
+			</span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="address" class="col-sm-2 control-label">新郎名字：</label>
+		<div class="col-sm-5">
+			<input type="text" name="man" id="man" class="form-control" value="{pigcms:$wedding.man}" data-rule-required="true" placeholder="必填">
+
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="woman" class="col-sm-2 control-label">新娘名字：</label>
+		<div class="col-sm-5">
+			<input type="text" name="woman" id="woman" class="form-control" value="{pigcms:$wedding.woman}" data-rule-required="true" placeholder="必填">
+
+		</div> 
+	</div>
+	<div class="form-group">
+		<label for="typename" class="col-sm-2 control-label"></label>
+		<div class="col-sm-5">
+			<label class="radio inline">
+				<input type="radio" name="who_first" checked="checked" value="1"><span class="help-inline">新郎名字在前</span>
+			</label>
+			<label class="radio inline">
+				<input type="radio" name="who_first" value="2"><span class="help-inline">新娘名字在前</span>
+			</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="tel" class="col-sm-2 control-label">联系电话：</label>
+		<div class="col-sm-5">
+			<input type="text" name="phone" id="phone" class="form-control" value="{pigcms:$wedding.phone}" data-rule-required="true" data-rule-phone="true" placeholder="必填。如：010-88888888">
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="time" class="col-sm-2 control-label">婚宴日期：</label>
+		<div class="col-sm-5"> 
+			<div class="input-prepend">
+				<span class="add-on">
+					<i class="icon-calendar"></i>
+				</span>
+				<input type="input" class="form-control" onClick="WdatePicker()"  value="<if condition="$wedding['time'] neq false">{pigcms:$wedding.time|date='Y-m-d',###}</if>" name="time" placeholder="必填"> 
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="place" class="col-sm-2 control-label">宴席地址：</label>
+		<div class="col-sm-5"> 
+			<div class="input-prepend">
+				<input type="text" name="place" class="form-control" value="{pigcms:$wedding.place}" onchange="loadmap()" id="suggestId" data-rule-required="true" placeholder="必填"/>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		 <label class="col-sm-2 control-label" for="suggestId">经纬地址：</label>
+		 <div class="col-sm-5">
+		   <div id="l-map"  style="width:605px; height:320px;"></div>
+			<div id="r-result">
+				 <input type="input" class="px" id="lng" value="{pigcms:$wedding.lng}"  name="lng" style="width:80px;">
+				 <input type="input" class="px" id="lat" value="{pigcms:$wedding.lat}"  name="lat" style="width:80px;">
+				 <input  type="hidden"  name="city" class="px" id="city" size="20" value="" /> 
+			 </div>
+		 </div>
+    </div>
+	<div class="form-group">
+		<label for="video" class="col-sm-2 control-label">喜帖视频：</label>
+		<div class="col-sm-5"> 
+			 <input type="text" name="video" id="video" class="form-control" style="width:480px" value="{pigcms:$wedding.video}"><p>支持优酷视频地址如;http://v.youku.com/v_show/id_XNjI4ODk5NDQ4.html <br> 腾讯fash视频地址：如http://static.video.qq.com/TPout.swf?vid=v0119s27wd5&amp;auto=0 <br> 也支持mp4和ogg 格式地址 http://www.w3school.com.cn/example/html5/mov_bbb.mp4 </p>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="mp3url">背景音乐：</label>
+		<div class="col-sm-5">
+			<input class="form-control" name="mp3url" value="{pigcms:$wedding.mp3url}" id="suicai4" style="width:300px" onchange="document.getElementById('plmp3').src=this.value">
+		
+			<audio  id="plmp3" src="" preload="none"></audio>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="tel" class="col-sm-2 control-label">密码：</label>
+		<div class="col-sm-5">
+			<input type="text" name="passowrd" id="passowrd" class="form-control" value="{pigcms:$wedding.passowrd}" data-rule-required="true"><span class="maroon">*</span><span class="help-inline">设置微信上查看来宾名单的验证密码</span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="tel" class="col-sm-2 control-label">给朋友说的话：</label>
+		<div class="col-sm-5">
+			<textarea rows="5" name="word" id="word" class="form-control" data-rule-required="true" data-rule-maxlength="200" style=" width:450px; height:60px"><if condition="$wedding['word'] neq false">{pigcms:$wedding.word}<else/>亲爱的朋友，我要结婚了，希望能在我的婚礼上得到你的祝福，并祝愿你也幸福.</if></textarea>
+			<span class="maroon">*</span><span class="help-inline">喜帖文字限制在200字以内</span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="qr_code" class="col-sm-2 control-label">二维码地址：</label>
+		<div class="col-sm-5">
+			<input id="suicai6" type="text" name="qr_code" class="form-control" value="{pigcms:$wedding.qr_code}">
+			<span class="help-inline">
+				<a href="javascript:void(0)" onclick="upyunPicUpload('suicai6',700,420,'{pigcms:$token}')" class="btn btn-default">上传</a>
+				<a href="###" onclick="viewImg('suicai6')" class="btn btn-default">预览</a>
+			</span>
+			<span class="help-inline">
+			<span class="maroon">*</span>默认100x100,显示在喜帖底部</span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="copr" class="col-sm-2 control-label">底部版权：</label>
+		<div class="col-sm-5">
+		<textarea name="copyrite" id="copyrite" class="form-control" rows="5" style="width:450px; height:60px">{pigcms:$wedding.copyrite}</textarea>
+		</div>
+	</div>
+
+	</div>
+           	  <div class="panel-footer" style="text-align:right"> 
+	  		<input type="submit" value="保存" class="btn btn-success"/>
+	  		<a href="javascript:history.go(-1);"  class="btn btn-link">取消</a> 
+		      </div>
+		    </form>
+ 
+  		</div>
+        </div>
+		<script src="http://api.map.baidu.com/api?key=a258befb5804cb80bed5338c74dd1fd1&amp;v=1.1&amp;services=true" type="text/javascript"></script><script type="text/javascript" src="http://api.map.baidu.com/getscript?v=1.1&amp;ak=&amp;services=true&amp;t=20130716024057"></script><link rel="stylesheet" type="text/css" href="http://api.map.baidu.com/res/11/bmap.css"><script type="text/javascript">
+var map = new BMap.Map("l-map");
+var myGeo = new BMap.Geocoder();  
+//map.addControl(new BMap.MapTypeControl({mapTypes: [BMAP_NORMAL_MAP,BMAP_HYBRID_MAP]}));     //2D图，卫星图
+
+//map.addControl(new BMap.MapTypeControl({anchor: BMAP_ANCHOR_TOP_LEFT}));    //左上角，默认地图控件
+
+//alert(city);
+var currentPoint ;
+var marker1;
+var marker2;
+map.enableScrollWheelZoom(); 
+//var point = new BMap.Point(116.331398,39.897445);  
+
+map.enableDragging();   
+map.enableContinuousZoom();
+map.addControl(new BMap.NavigationControl());  
+map.addControl(new BMap.ScaleControl());  
+map.addControl(new BMap.OverviewMapControl());
+var point = new BMap.Point(117.230119,31.84758);
+doit(point);
+window.setTimeout(function(){
+auto();
+},100);
+
+ function auto(){
+ var geolocation = new BMap.Geolocation();  
+geolocation.getCurrentPosition(function(r){  
+if(this.getStatus() == BMAP_STATUS_SUCCESS){  
+//var mk = new BMap.Marker(r.point);  
+//map.addOverlay(mk);  
+ // point = r.point;  
+//map.panTo(r.point); 
+
+var point = new BMap.Point(r.point.lng,r.point.lat);  
+marker1 = new BMap.Marker(point);        // 创建标注
+map.addOverlay(marker1);
+var opts = {
+width : 220,     // 信息窗口宽度 220-730
+height: 60,     // 信息窗口高度 60-650
+title : ""  // 信息窗口标题
+}
+var infoWindow = new BMap.InfoWindow("定位成功这是你当前的位置!,移动红点标注目标位置，你也可以直接修改上方位置,系统自动定位!", opts);  // 创建信息窗口对象
+marker1.openInfoWindow(infoWindow);      // 打开信息窗口
+doit(point);
+
+}else {  
+ 
+}  
+})
+ }
+function  doit(point){
+
+//map.centerAndZoom(point,12);  
+ 
+
+//myGeo.getPoint(city, function(point){ 
+if (point) {
+//window.external.setlngandlat(point.lng,point.lat);
+//alert(point.lng + "  ddd " + point.lat);
+
+ document.getElementById('lat').value = point.lat;
+  document.getElementById('lng').value =point.lng;
+map.setCenter(point);
+map.centerAndZoom(point, 15);
+map.panTo(point);
+
+var cp = map.getCenter();		
+myGeo.getLocation(point, function(result){  
+/*if (result){
+ document.getElementById('suggestId').value = result.address;
+}	*/		
+});	
+
+
+
+
+
+
+marker2 = new BMap.Marker(point);        // 创建标注  
+var opts = {
+width : 220,     // 信息窗口宽度 220-730
+height: 60,     // 信息窗口高度 60-650
+title : ""  // 信息窗口标题
+}
+var infoWindow = new BMap.InfoWindow("拖拽地图或红点，在地图上用红点标注您的店铺位置。", opts);  // 创建信息窗口对象
+marker2.openInfoWindow(infoWindow);      // 打开信息窗口
+
+map.addOverlay(marker2);                     // 将标注添加到地图中
+
+marker2.enableDragging();
+marker2.addEventListener("dragend", function(e){
+ document.getElementById('lat').value =e.point.lat;
+   document.getElementById('lng').value =e.point.lng;
+myGeo.getLocation(new BMap.Point(e.point.lng,e.point.lat), function(result){  
+if (result){
+//$('suggestId').value = result.address;
+//$('city').value = result.city;
+//			alert(result.address)				
+//	window.external.setaddress(result.address);//setarrea(result.address);//
+//marker1.setPoint(new BMap.Point(e.point.lng,e.point.lat));        // 移动标注
+marker2.setPoint(new BMap.Point(e.point.lng,e.point.lat));     
+map.panTo(new BMap.Point(e.point.lng,e.point.lat));
+//window.external.setlngandlat(e.point.lng,e.point.lat);
+}			
+});	
+});	
+
+map.addEventListener("dragend", function showInfo(){
+var cp = map.getCenter();		
+myGeo.getLocation(new BMap.Point(cp.lng,cp.lat), function(result){  
+if (result){
+ //document.getElementById('suggestId').value = result.address;
+ document.getElementById('lat').value =cp.lat;
+   document.getElementById('lng').value =cp.lng;
+//	window.external.setaddress(result.address);//setarrea(result.address);//
+//alert(point.lng + "  ddd " + point.lat);
+//marker1.setPoint(new BMap.Point(cp.lng,cp.lat));        // 移动标注
+marker2.setPoint(new BMap.Point(cp.lng,cp.lat));     
+map.panTo(new BMap.Point(cp.lng,cp.lat));
+//window.external.setlngandlat(cp.lng,cp.lat);
+}			
+});	
+});	
+
+map.addEventListener("dragging", function showInfo(){
+var cp = map.getCenter();
+//marker1.setPoint(new BMap.Point(cp.lng,cp.lat));        // 移动标注
+marker2.setPoint(new BMap.Point(cp.lng,cp.lat)); 
+map.panTo(new BMap.Point(cp.lng,cp.lat));
+map.centerAndZoom(marker2.getPoint(), map.getZoom());
+});	
+
+
+}
+
+
+//}, province);
+
+
+}
+
+
+function loadmap() {
+var province =  document.getElementById('city').value;
+var city =   document.getElementById('suggestId').value ;
+// 将结果显示在地图上，并调整地图视野  
+myGeo.getPoint(city, function(point){  
+if (point) {
+//marker1.setPoint(new BMap.Point(point.lng,point.lat));        // 移动标注
+marker2.setPoint(new BMap.Point(point.lng,point.lat));  
+//window.external.setlngandlat(marker2.getPoint().lng,marker2.getPoint().lat);
+//alert(point.lng + "  ddd " + point.lat);
+ document.getElementById('lat').value =point.lat;
+   document.getElementById('lng').value =point.lng;
+map.panTo(new BMap.Point(marker2.getPoint().lng,marker2.getPoint().lat));
+map.centerAndZoom(marker2.getPoint(), map.getZoom());
+}}, province);
+} 
+
+function setarrea(address,city) {
+//$('suggestId').value = address;
+//$('city').value=city;
+window.setTimeout(function(){
+loadmap();
+},2000);
+}
+
+function initarreawithpoint(lng,lat){
+window.setTimeout(function(){
+//marker1.setPoint(new BMap.Point(lng,lat));        // 移动标注
+marker2.setPoint(new BMap.Point(lng,lat));  
+//window.external.setlngandlat(lng,lat);
+map.panTo(new BMap.Point(lng,lat));
+map.centerAndZoom(marker2.getPoint(), map.getZoom());
+}, 2000);	
+}
+
+
+
+
+
+</script>
+</div>
+</div>
+<include file="Public:footer"/>

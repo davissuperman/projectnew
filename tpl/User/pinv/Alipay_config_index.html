@@ -1,0 +1,38 @@
+<?php $nav = "FUNCTION"; $side = "INDEX"; $sideTop = "PRODUCT"; ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Alipay_config_index.css" rel="stylesheet"/>
+ <div class="content">
+ <div class="ffBox">
+<include file="Public:left"/>
+	    <!--right--begain-->
+            <div class="right">
+            	<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+                <p class="artiEdit"><span class="big">支付宝配置 </span></p>
+                <form class="form" method="post" action="" target="_top" enctype="multipart/form-data">	 
+                <p class="same">
+                	<span class="Tex">支付开关：</span>
+                   <select name="open"><option value="0" <if condition="$config.open eq 0">selected</if>>关闭支付</option><option value="1" <if condition="$config.open eq 1"> selected</if>>开启支付</option></select> 
+                   <span>开启支付后，商城等功能将有支付功能</span>
+                </p>
+                <p class="same">
+                    <span class="Tex">支付宝账号：</span>
+                    <input type="text" name="name" value="{pigcms:$config.name}" class="circle"/>
+                </p>
+                <p class="same">
+                    <span class="Tex">支付宝PID：</span>
+                    <input type="text" name="pid" value="{pigcms:$config.pid}" class="circle"/>
+                </p>
+                <p class="same">
+                    <span class="Tex">支付宝KEY：</span>
+                    <input type="text" name="key" value="{pigcms:$config.key}"  class="circle"/>
+                </p>
+                <input type="hidden" name="token" value="{Pigcms:$token}" />
+                <p class="pressBox"><input type="submit" value="保存" class="addList"/><a href="javascript:history.go(-1);" class="addList"/>取消</a></p>
+                </form>
+            </div>
+            </div>
+ </div>
+<include file="Public:footer"/>

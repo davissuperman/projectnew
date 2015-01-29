@@ -1,0 +1,42 @@
+<?php $nav = "FUNCTION"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_inputs.css" rel="stylesheet"/>
+<div class="container main">
+<div class="row">
+<include file="Wdiaoyan:left"/>
+     
+            <div class="col-md-10 main">
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">投票结果</h3>
+			  </div>
+			  <div class="panel-body">  
+			  	<div class="add-button pull-left">
+                        <a href="javascript:history.go(-1);"  class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-left"></span> 返回</a>
+                  </div>
+                 <table class="table table-striped" cellspacing="1">
+               
+                	<tr>
+                    	<th class="firstTd">显示名称</th>
+                        <th class="secondTd">字段名称</th>
+                        <th class="thirdTd">输入类型</th>
+                        <th class="sevenTd">操作</th>
+                    </tr>
+                    <volist name="list" id="item">             
+					<tr>
+					<td>{pigcms:$item.displayname}</td>
+					<td>{pigcms:$item.fieldname}</td>
+					<td>{pigcms:$item.inputtype}</td>
+					<td class="norightborder">
+					<!--<a href="{pigcms::U('Wdiaoyan/xupdate',array('id'=>$item['id'],'token'=>$token))}">修改</a>&nbsp;&nbsp;--><a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Wdiaoyan/xdelete',array('id'=>$item['id'],'token'=>$token))}');">删除</a></td>
+					</tr>
+					</volist>
+                    
+                </table>
+                <p class="pages">{pigcms:$page}</p>
+                </div>
+                </div>
+                </div>
+                </div>
+ </div>
+<include file="Public:footer"/>

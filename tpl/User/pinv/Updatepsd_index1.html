@@ -1,0 +1,38 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Guajiang_add.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+
+<script>
+$(function(){
+   
+   
+       $('#psd').blur(function(){
+	       var pasd=$('#psd').val(); 
+		    //alert(pasd);
+		   if(pasd==''){
+		     alett('不能为空');
+		      return false;
+		   }
+	     
+	   })
+ 
+})
+</script>
+<include file="Public:left"/>
+     
+
+
+               <form class="form" method="post" action="{pigcms::U('Updatepsd/updatep')}"  target="_top" onSubmit="return CheckPwd()">
+               
+              
+                    <p class="same" style="margin-top:30px;">
+                        <span class="TexM">修改密码：</span>
+                       <span>输入密码：</span><input class="radio" type="password"  name="psdname" id='psd'>
+                       <span>确认密码密码：</span><input class="radio" id='psd1' type="password"  name="psdname1">
+                    </p>
+                    <p class="pressBox"><input type="submit" value="保存" class="addList"/></p> <p class="pressBox"><input type="reset" value="取消" class="addList"/></p>
+                
+                </form>
+                <!--优惠券设置--end-->
+
+<include file="Public:footer"/>

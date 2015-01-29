@@ -1,0 +1,311 @@
+<?php $nav = "CRM"; $side = "JF" ?>
+<include file="Public:head"/>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/jquery/jquery-1.4.4.min.js"></script>
+
+<script type="text/javascript" src="/tpl/static/xhedit/xheditor-1.2.1.min.js"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/xheditor_lang/zh-cn.js"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/xheditor_plugins/showdown.js"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/xheditor_plugins/htmldomparser.js"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/xheditor_plugins/html2markdown.js"></script>
+
+<script src="{pigcms::STATICS}/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="{pigcms::STATICS}/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="{pigcms::STATICS}/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+<style type="text/css">
+.example{padding-left:115px;}
+body, html,#allmap {width: 100%;height: 100%;margin:0;}
+#l-map{height:30%;width:30%;float:left;border-right:2px solid #bcbcbc;margin:10px;}
+</style>
+<script type="text/javascript">
+var markdownConverter = new Showdown.converter();
+function Md2HTML(md){
+	return markdownConverter.makeHtml(md);
+}
+function HTML2Md(html){
+	var md = HTML2Markdown(html);
+    md = md.replace(/&(lt|gt|amp|quot);/ig,function(all, t){
+        return {'lt':'<','gt':'>','amp':'&','quot':'"'}[t.toLowerCase()];
+    });
+    return md;
+}
+function pageInit()
+{   
+    $.extend(XHEDITOR.settings,{shortcuts:{'ctrl+enter':submitForm}});
+	
+
+	var markdownCSS = '<style>*{margin:0;padding:0;}p {margin:1em 0;line-height:1.5em;}table {font-size:inherit;font:100%;margin:1em;}table th{border-bottom:1px solid #bbb;padding:.2em 1em;}table td{border-bottom:1px solid #ddd;padding:.2em 1em;}input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}select,option{padding:0 .25em;}optgroup{margin-top:.5em;}img{border:0;max-width:100%;}abbr{border-bottom:none;}a{color:#4183c4;text-decoration:none;}a:hover{text-decoration:underline;}a code,a:link code,a:visited code{color:#4183c4;}h2,h3{margin:1em 0;}h1,h2,h3,h4,h5,h6{border:0;}h1{font-size:170%;border-bottom:4px solid #aaa;padding-bottom:.5em;margin-top:1.5em;}h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}h2{font-size:150%;margin-top:1.5em;border-bottom:4px solid #e0e0e0;padding-bottom:.5em;}h3{margin-top:1em;}hr{border:1px solid #ddd;}ul{margin:1em 0 1em 2em;}ol{margin:1em 0 1em 2em;}ul li,ol li{margin-top:.5em;margin-bottom:.5em;}ul ul,ul ol,ol ol,ol ul{margin-top:0;margin-bottom:0;}blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555;}dt{font-weight:bold;margin-left:1em;}dd{margin-left:2em;margin-bottom:1em;}pre{margin-left:2em;border-left:3px solid #CCC;padding:0 1em;}</style>';
+	var plugins={
+		Code:{c:'btnCode',t:'插入代码',h:1,e:function(){
+			var _this=this;
+			var htmlCode='<div><textarea id="xheCodeValue" wrap="soft" spellcheck="false" style="width:300px;height:100px;" /></div><div style="text-align:right;"><input type="button" id="xheSave" value="确定" /></div>';
+			var jCode=$(htmlCode),
+				jValue=$('#xheCodeValue',jCode),
+				jSave=$('#xheSave',jCode);
+			jSave.click(function(){
+				_this.loadBookmark();
+				_this.pasteHTML('<pre>'+_this.domEncode(jValue.val())+'</pre>');
+				_this.hidePanel();
+				return false;	
+			});
+			_this.saveBookmark();
+			_this.showDialog(jCode);
+		}},
+		map:{c:'btnMap',t:'插入Google地图',e:function(){
+			var _this=this;
+			_this.saveBookmark();
+			_this.showIframeModal('Google 地图','/tpl/static/xhedit/demo/googlemap/googlemap.html',function(v){
+				_this.loadBookmark();
+				_this.pasteHTML('<img src="'+v+'" />');
+			},538,404);
+		}}
+	};
+	$.extend(XHEDITOR.settings,{shortcuts:{'ctrl+enter':submitForm}});//修改默认设置
+	  editor=$('#elm1').xheditor({upLinkUrl:"{pigcms::U('Upload2/add')}",upImgUrl:"{pigcms::U('Upload2/add')}",upFlashUrl:"{pigcms::U('Upload2/add')}",upMediaUrl:"{pigcms::U('Upload2/add')}",localUrlTest:/^https?:\/\/[^\/]*?(xheditor\.com)\//i,remoteImgSaveUrl:"{pigcms::U('Upload2/add')}",emots:{
+		msn:{name:'MSN',count:40,width:22,height:22,line:8},
+		pidgin:{name:'Pidgin',width:22,height:25,line:8,list:{smile:'微笑',cute:'可爱',wink:'眨眼',laugh:'大笑',victory:'胜利',sad:'伤心',cry:'哭泣',angry:'生气',shout:'大骂',curse:'诅咒',devil:'魔鬼',blush:'害羞',tongue:'吐舌头',envy:'羡慕',cool:'耍酷',kiss:'吻',shocked:'惊讶',sweat:'汗',sick:'生病',bye:'再见',tired:'累',sleepy:'睡了',question:'疑问',rose:'玫瑰',gift:'礼物',coffee:'咖啡',music:'音乐',soccer:'足球',good:'赞同',bad:'反对',love:'心',brokenheart:'伤心'}},
+		ipb:{name:'IPB',width:20,height:25,line:8,list:{smile:'微笑',joyful:'开心',laugh:'笑',biglaugh:'大笑',w00t:'欢呼',wub:'欢喜',depres:'沮丧',sad:'悲伤',cry:'哭泣',angry:'生气',devil:'魔鬼',blush:'脸红',kiss:'吻',surprised:'惊讶',wondering:'疑惑',unsure:'不确定',tongue:'吐舌头',cool:'耍酷',blink:'眨眼',whistling:'吹口哨',glare:'轻视',pinch:'捏',sideways:'侧身',sleep:'睡了',sick:'生病',ninja:'忍者',bandit:'强盗',police:'警察',angel:'天使',magician:'魔法师',alien:'外星人',heart:'心动'}}
+	},plugins:plugins,loadCSS:'<style>pre{margin-left:2em;border-left:3px solid #CCC;padding:0 1em;}</style>',shortcuts:{'ctrl+enter':submitForm}});
+	
+	$.extend(XHEDITOR.settings,{shortcuts:{'ctrl+enter':submitForm}});//修改默认设置
+	  editor=$('#elm2').xheditor({upLinkUrl:"{pigcms::U('Upload2/add')}",upImgUrl:"{pigcms::U('Upload2/add')}",upFlashUrl:"{pigcms::U('Upload2/add')}",upMediaUrl:"{pigcms::U('Upload2/add')}",localUrlTest:/^https?:\/\/[^\/]*?(xheditor\.com)\//i,remoteImgSaveUrl:"{pigcms::U('Upload2/add')}",emots:{
+		msn:{name:'MSN',count:40,width:22,height:22,line:8},
+		pidgin:{name:'Pidgin',width:22,height:25,line:8,list:{smile:'微笑',cute:'可爱',wink:'眨眼',laugh:'大笑',victory:'胜利',sad:'伤心',cry:'哭泣',angry:'生气',shout:'大骂',curse:'诅咒',devil:'魔鬼',blush:'害羞',tongue:'吐舌头',envy:'羡慕',cool:'耍酷',kiss:'吻',shocked:'惊讶',sweat:'汗',sick:'生病',bye:'再见',tired:'累',sleepy:'睡了',question:'疑问',rose:'玫瑰',gift:'礼物',coffee:'咖啡',music:'音乐',soccer:'足球',good:'赞同',bad:'反对',love:'心',brokenheart:'伤心'}},
+		ipb:{name:'IPB',width:20,height:25,line:8,list:{smile:'微笑',joyful:'开心',laugh:'笑',biglaugh:'大笑',w00t:'欢呼',wub:'欢喜',depres:'沮丧',sad:'悲伤',cry:'哭泣',angry:'生气',devil:'魔鬼',blush:'脸红',kiss:'吻',surprised:'惊讶',wondering:'疑惑',unsure:'不确定',tongue:'吐舌头',cool:'耍酷',blink:'眨眼',whistling:'吹口哨',glare:'轻视',pinch:'捏',sideways:'侧身',sleep:'睡了',sick:'生病',ninja:'忍者',bandit:'强盗',police:'警察',angel:'天使',magician:'魔法师',alien:'外星人',heart:'心动'}}
+	},plugins:plugins,loadCSS:'<style>pre{margin-left:2em;border-left:3px solid #CCC;padding:0 1em;}</style>',shortcuts:{'ctrl+enter':submitForm}});
+}
+function submitForm(){$('#frmDemo').submit();}
+$(pageInit);
+</script>
+<script>
+/*$(function(){
+
+ $("#Button1").bind("click",function(){ 
+		alert($('.item').length);return false;
+	   $(".item:checkbox").attr("checked",true); 
+	}); 
+	 $("#Button2").bind("click",function(){ 
+		//alert(22222);return false;
+	   $(".item:checkbox").attr("checked",false); 
+	});
+})*/
+function qx(mm){
+  if(mm)
+	{
+		//alert(mm);
+		for(var i=0;i<$('.item').length;i++)
+		{
+			$('.item')[i].checked=true;
+		}
+		
+	}
+	else
+	{
+		for(var i=0;i<$('.item').length;i++)
+		{
+			$('.item')[i].checked=false;
+		}
+	}
+}
+$(function(){
+   $('#dj').click(function(){
+       //var reg = /^[0-9]+.?[0-9]*$/;
+	// var re = /^[0-9]+.?[0-9]*$/;   //判断字符串是否为数字     //判断正整数 /^[1-9]+[0-9]*]*$/ 
+	var reg=/^[1-9]+[0-9]*]*$/;
+	 var jf=$("#j_jifen").val();
+	 var j_zjmember=$("#j_zjmember").val();
+	 var j_gjmember=$("#j_gjmember").val();
+	   if(jf<='0'){
+	    alert('积分不能小于0');
+		return false;
+	   }
+	   if(!reg.test(jf)){
+         alert('积分不是整数');
+		 return false;
+	   }
+	// alert(jf);
+	 if(isNaN(jf)){
+	   alert('积分不是数字');
+	    return false;
+	  }
+
+	  if(j_zjmember<='0'){
+	    alert('中级会员不能小于0');
+		return false;
+	   }
+	   if(!reg.test(j_zjmember)){
+         alert('中级会员不是整数');
+		 return false;
+	   }
+	// alert(jf);
+	 if(isNaN(j_zjmember)){
+	   alert('中级不是数字');
+	    return false;
+	  }
+
+	  if(j_gjmember<='0'){
+	    alert('高级会员不能小于0');
+		return false;
+	   }
+	   if(!reg.test(j_gjmember)){
+         alert('高级会员不是整数');
+		 return false;
+	   }
+	// alert(jf);
+	 if(isNaN(j_gjmember)){
+	   alert('高级不是数字');
+	    return false;
+	  }
+      
+   })
+})
+</script>
+<link type="text/css" href="{pigcms::RES}/css/Host_add.css" rel="stylesheet"/>
+<style type="text/css">
+.example{padding-left:115px;}
+body, html,#allmap {width: 100%;height: 100%;margin:0;}
+#l-map{height:30%;width:30%;float:left;border-right:2px solid #bcbcbc;margin:10px;}
+
+.btnMap {
+		width:50px !important;
+		background:transparent url(/tpl/static/xhedit/demo/googlemap/map.gif) no-repeat center center;
+	}
+	.btnCode {                     
+		background:transparent url(/tpl/static/xhedit/demo/prettify/code.gif) no-repeat 16px 16px;
+		background-position:2px 2px;
+	}
+
+
+
+.Tex{width:100px;float:left;}
+.sameTable{margin-top:20px;}
+.biaoRight{float:left;}
+.sheet{width:650px;background:#eee;color:#6a6a6a;position:relative;margin-bottom:10px;}
+.sheet td{background:#fff;text-align:center;height:45px;line-height:45px;padding-left:3px;padding-right:3px;}
+.sheet th{background:#f1f1f1;height:45px;line-height:45px;text-align:center;font-weight:normal;}
+.edit{float:left;margin:0px 12px;color:#6a6a6a;font-weight:bold;}
+.cancel{float:left;color:#6a6a6a;font-weight:bold}
+.edit:hover{color:#ea533f;}
+.cancel:hover{color:#ea533f;}
+.sheetTitle{margin-bottom:10px;}
+.inputCase{height:15px;line-height:15px;padding:5px;border:1px #ccc solid;}
+.shan{display:inline-block;margin-right:5px;cursor:pointer;}
+</style>
+ <div class="container main">
+<div class="row">
+<include file="Crm:left"/>
+           
+               <div class="col-md-10 main">
+           
+				 <ol class="breadcrumb">
+				  <li><a href="">积分策略</a></li>
+				  <li class="active">积分策略</li>
+				 </ol>
+			
+				<div class="panel panel-success">
+				  <div class="panel-heading cfix">
+					<h3 class="panel-title pull-left">积分策略</h3>
+				  </div>
+				  <form action="{pigcms::U('Chat/jifen',array('token'=>$_GET['token']))}" id='form_d' method='post'>
+				  <div class="panel-body">
+				   
+					   <table class="table table-bordered">
+						<thead >
+							<th>策略名称</th>
+							<th>奖励积分</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>每消费1元</td>
+								<td><input type="text" name="j_jifen" id='j_jifen' value="{pigcms:$list.j_jifen}" class="form-control"></td>
+							</tr>
+							<tr>
+								<td>积分时效</td>
+								<td><select class="form-control" name="j_time">
+								   <option value="1" <if condition="$list['j_time'] eq 1">selected</if>>6个月</option>
+								   <option value="2" <if condition="$list['j_time'] eq 2">selected</if>>12个月</option>
+								   <option value="3" <if condition="$list['j_time'] eq 3">selected</if>>永久</option>
+								    </select>
+								</td>
+							</tr>
+							   <tr>
+								<td  valign='middle' style="line-height:130px">会员等级积分设置</td>
+								
+								<td  valign='middle' style="line-height:130px">
+									<p style=" height: 36px; line-height: 36px;">
+									  <span style="float: left; margin-right: 10px;">初级会员</span> 
+									  <select style="margin: 0px; width: 200px; float: left;" class="form-control" name="j_cjmember">
+									   <option value='1' <if condition="$list['j_cjmember'] eq 1">selected</if>>关注微信</option>
+									   <option value='2' <if condition="$list['j_cjmember'] eq 2">selected</if>>注册商城</option>
+									   <option value='3' <if condition="$list['j_cjmember'] eq 3">selected</if>>全部</option>
+									   </select>
+									</p>
+
+								<p style=" height: 36px; line-height: 36px;">
+									  <span style="float: left; margin-right: 10px;">中级会员</span> 
+									  <input type="text" name="j_zjmember" id='j_zjmember' value="{pigcms:$list.j_zjmember}" style='width: 200px;' class="form-control">
+									  <!--<select name="j_zjmember" style="margin: 0px; width: 200px; float: left;" class="form-control">
+									   <option>6个月</option>
+									   <option>12个月</option>
+									   <option>永久</option>
+									   </select>-->
+									</p>
+
+									<p style=" height: 36px; line-height: 36px;">
+									  <span style="float: left; margin-right: 10px;">高级会员</span> 
+									  <input type="text" name="j_gjmember" id='j_gjmember' value="{pigcms:$list.j_gjmember}" style='width: 200px;' class="form-control">
+									  <!--<select name="j_gjmember" style="margin: 0px; width: 200px; float: left;" class="form-control">
+
+									   <option>6个月</option>
+									   <option>12个月</option>
+									   <option>永久</option>
+									   </select>-->
+									</p>
+								</td>
+								
+							   </tr>
+						   <tr>
+								<td>双倍积分设定</td>
+								<td>
+									<p style=" height: 36px; line-height: 36px;">
+									  <span style="float: left; margin-right: 10px;">开始时间：</span> 
+									 <input style="float: left; margin-right:10px;height:35px" type="text" class="textCase" name="startime" onclick="WdatePicker();" value='{pigcms:$kssj}'/>
+									   <span style="float: left; margin-right: 10px;">结束时间：</span> 
+									  <input type="text" class="textCase" name="endtime" value='{pigcms:$jssj}' style="height:35px" onclick="WdatePicker();"/>
+									</p>
+									<P>
+									<input type='checkbox' id="Button1" onclick="qx(this.checked)"/> <span>全部</span>
+									<input type='checkbox' name='j_wx' style='margin-left:10px' value='1' class="item" <if condition="$list['j_wx'] eq 1">checked</if>/> <span>关注微信公众号</span>
+									<input type='checkbox' name='j_shop' style='margin-left:10px' value='1' class="item" <if condition="$list['j_shop'] eq 1">checked</if>/> <span>仅商城消费</span>
+									
+									</p>
+								</td>
+
+								
+							</tr>
+						</tbody>
+
+					   </table>
+				  </div>
+				  <div class="areaSame" style="margin-top:10px;height:220px;">
+                    	<span class="Tex">积分规则：</span>
+                       <textarea id="elm1" name="info" rows="8" cols="120" style="width:72%;">{pigcms:$list.j_guize}</textarea>
+                    </div>
+                
+				   <div class="panel-footer" style="text-align:right">
+                   <input type="submit" value="保存" id='dj' class="btn btn-success "/>
+                    <a href="{pigcms::U('Chat/member',array('token'=>$token))}" class="btn btn-link">取消</a>
+					
+                </div> 
+				</div>
+				
+				</form>
+			</div>
+ </div>      
+      
+ </div>
+<include file="Public:footer"/>

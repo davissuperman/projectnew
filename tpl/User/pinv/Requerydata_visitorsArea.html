@@ -1,0 +1,140 @@
+<?php $nav = "STATS"; $side = "VISITORSAREA" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Text_add.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+<script src="{pigcms::RES}/js/pie_chart.js" language="javascript" type="text/javascript"></script> 
+<style>
+    #graph,#graph2{
+        
+    }
+    #graph map img,#graph2 map img{
+        margin-top:-50px;
+        margin-left:-80px;
+        display: none;
+    }
+    #graph div{
+        display: none;
+    }
+    #graph2 div{
+        display: none;
+    }
+</style>
+<div class="container main">
+<div class="row">
+<include file="Requerydata:left"/>     
+    <div class="col-md-10 main">
+            <div class="panel panel-success">
+                <div class="panel-heading cfix">
+                    <h3 class="panel-title pull-left">客服统计——地域统计</h3>
+                </div>
+                <div class="panel-body" style="overflow:hidden">
+                <div id="choose-date">
+                    <a href="{pigcms::U('Requerydata/visitorsArea',array('token'=>$token,'start'=>$nowtime,'end'=>$nowtime))}">今天</a>
+                    <a href="{pigcms::U('Requerydata/visitorsArea',array('token'=>$token,'start'=>$yestoday,'end'=>$yestoday))}">昨天</a>
+                    <a href="{pigcms::U('Requerydata/visitorsArea',array('token'=>$token,'start'=>$sevenDay,'end'=>$nowtime))}" href="javascript:void(0)">最近7天</a>
+                    <a href="{pigcms::U('Requerydata/visitorsArea',array('token'=>$token,'start'=>$thirtyday,'end'=>$nowtime))}">最近30天</a>
+                    <div id="date-calendar">
+                        <form method="post" action="">
+                            <input type="text" name="start" id="start" value="{pigcms:$start|date='Y-m-d',###}" onClick="WdatePicker()" class="form-control" style="width:102px"/><span>-</span>
+                            <input type="text" name="end" id="end" value="{pigcms:$end|date='Y-m-d',###}" onClick="WdatePicker()" class="form-control" style="width:102px"/>
+                            <button type="submit" class="btn btn-default" style="width:50px"/>确定</button>
+                        </form>
+                    </div> 
+                    <a href="<empty name="vlist">javascript:void(0)<else/>{pigcms::U('Requerydata/visitorsAreaImport',array( 'token'=>$token ) )}</empty>" target="_blank" style="float:right;margin-right:10px;">导出报表</a>
+            </div>
+                <empty name="vlist">
+                    没有满足条件的数据
+                <else/>
+                    <div id="graph" style="float:left">Loading graph...</div>
+                    <script type="text/javascript">
+                        var myData = new Array({pigcms:$ChartData1});
+                        var colors = [{pigcms:$colors1}];
+                        var myChart = new JSChart('graph', 'pie');
+                        myChart.setDataArray(myData);
+                        myChart.colorizePie(colors);
+                        myChart.setTitle('访客数');
+                        myChart.setTitleColor('#333333');
+                        myChart.setTitleFontSize(12);
+                        myChart.setTextPaddingTop(280);
+                        myChart.setPieValuesDecimals(0);//饼图数据保存的小数位
+                        myChart.setPieUnitsFontSize(9);
+                        myChart.setPieValuesFontSize(8);
+                        myChart.setPieValuesColor('#fff');
+                        myChart.setPieUnitsColor('#969696');
+                        myChart.setSize(430, 321);
+                        myChart.setPiePosition(220, 145);
+                        myChart.setPieRadius(95);
+                        myChart.setFlagColor('#fff');
+                        myChart.setFlagRadius(4);
+                        myChart.setTooltipOpacity(1);
+                        myChart.setTooltipBackground('#ddf');
+                        myChart.setTooltipPosition('ne');
+                        myChart.setTooltipOffset(2);
+                        myChart.setBackgroundImage('chart_bg.jpg');
+                        myChart.draw();
+                    </script>
+                    
+                    <div id="graph2" style="float:left">Loading graph...</div>
+                    <script type="text/javascript">
+                        var myData = new Array({pigcms:$ChartData2});
+                        var colors = [{pigcms:$colors2}];
+                        var myChart = new JSChart('graph2', 'pie');
+                        myChart.setDataArray(myData);
+                        myChart.colorizePie(colors);
+                        myChart.setTitle('沟通次数');
+                        myChart.setTitleColor('#333333');
+                        myChart.setTitleFontSize(12);
+                        myChart.setTextPaddingTop(280);
+                        myChart.setPieValuesDecimals(0);//饼图数据保存的小数位
+                        myChart.setPieUnitsFontSize(9);
+                        myChart.setPieValuesFontSize(8);
+                        myChart.setPieValuesColor('#fff');
+                        myChart.setPieUnitsColor('#969696');
+                        myChart.setSize(400, 321);
+                        myChart.setPiePosition(220, 145);
+                        myChart.setPieRadius(95);
+                        myChart.setFlagColor('#fff');
+                        myChart.setFlagRadius(4);
+                        myChart.setTooltipOpacity(1);
+                        myChart.setTooltipBackground('#ddf');
+                        myChart.setTooltipPosition('ne');
+                        myChart.setTooltipOffset(2);
+                        myChart.setBackgroundImage('chart_bg.jpg');
+                        myChart.draw();
+                    </script>
+
+                    <table class="table table-striped" cellspacing="1" cellpadding="5">
+                        <tr>
+                            <th>地域</th>
+                            <th>访客数</th>
+                            <th>沟通次数</th> 
+                            <th>沟通比例</th> 
+                            <th>平均沟通时长</th>                                     
+                        </tr>
+                        <volist name="vlist" id="v">
+                        <tr bgcolor="#fff" height=30>
+                            <td>{pigcms:$v.province}</td>
+                            <td>{pigcms:$v.vnum}</td>
+                            <td>{pigcms:$v.chatnum}</td>
+                            <td>{pigcms:$v.per}</td>
+                            <td>{pigcms:$v.perTime}</td>
+                        </tr>
+                        </volist>  
+                    </table>
+                </empty>
+            	<p class="pages">{pigcms:$page}</p>
+            </div>
+            <!--right--end-->  
+        </div>  
+ </div>
+ </div>
+ </div>
+ <script>
+    $(function(){
+       $("#thisCondition").change(function(){
+            var matched = $("#thisCondition").val();
+            window.location.href = "/index.php?g=User&m=Requerydata&a=visitorsArea&token={pigcms:$token}&start={pigcms:$start}&end={pigcms:$end}&matched="+matched;
+        });       
+    });
+</script>
+<include file="Public:footer"/>

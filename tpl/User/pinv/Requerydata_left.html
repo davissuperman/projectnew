@@ -1,0 +1,16 @@
+<div class="col-md-2 sidebar">
+<nav id="sidebar-nav">
+	<ul class="nav nav-pills nav-stacked">
+		<!--
+		<li <?php //if($side == "INDEX") echo 'class="active"'; ?>><a href="{pigcms::U('Requerydata/index',array('token'=>$token))}">综合统计</a></li>-->
+		<li <?php if($side == "MENU") echo 'class="active"'; ?>><a href="{pigcms::U('Requerydata/menuClick',array('token'=>$token))}">自定义菜单统计</a></li>
+		<li <?php if($side == "KEYWORD") echo 'class="active"'; ?>><a href="{pigcms::U('Requerydata/keywordsClick',array('token'=>$token))}">关键词统计</a></li>
+		<li <?php if($side == "LBS") echo 'class="active"'; ?>><a href="{pigcms::U('Requerydata/companyNav',array('token'=>$token,'type'=>1))}">LBS定位统计</a></li>
+		<li <?php if($side == "USERS") echo 'class="active"'; ?>><a href="{pigcms::U('Requerydata/users',array('token'=>$token))}">用户统计</a></li>
+		<li <?php if($side == "USERSC") echo 'class="active"'; ?>><a href="{pigcms::U('Requerydata/usersChange',array('token'=>$token))}">用户分析</a></li>
+                <li <?php if($side == "CRM") echo 'class="active"'; ?>><a href="{pigcms::U('Requerydata/crm',array('token'=>$token))}">CRM统计</a></li>
+		<!--<li <?php if($side == "VISITORS") echo 'class="active"'; ?>><a href="{pigcms::U('Requerydata/visitors',array('token'=>$token))}">客服统计</a></li>
+		<li <?php if($side == "VISITORSAREA") echo 'class="active"'; ?>><a href="{pigcms::U('Requerydata/visitorsArea',array('token'=>$token))}">地域统计</a></li>
+	--></ul>
+</nav>
+</div>

@@ -1,0 +1,11 @@
+<div class="col-md-2 sidebar">
+<nav id="sidebar-nav">
+	<ul class="nav nav-pills nav-stacked">
+		<li <?php if($side == "SET") echo 'class="active"'; ?>><a href="{pigcms::U('Home/set?mark=2',array('token'=>$token))}">首页回复配置</a></li>
+		<li <?php if($side == "CLASSIFY") echo 'class="active"'; ?>><a href="{pigcms::U('Classify/index?mark=2',array('token'=>$token))}">分类管理</a></li>
+		<li <?php if($side == "TMPLS") echo 'class="active"'; ?>><a href="{pigcms::U('Tmpls/index?mark=2',array('token'=>$token))}">模板管理</a></li>
+		<li <?php if($side == "PLUGMENU") echo 'class="active"'; ?>><a href="{pigcms::U('Home/plugmenu?mark=2',array('token'=>$token))}">一键拨号与导航</a></li>
+		<li <?php if($side == "FLASH") echo 'class="active"'; ?>><a href="{pigcms::U('Flash/index?mark=2',array('token'=>$token))}">首页幻灯片</a></li>
+	</ul>
+</nav>
+</div>

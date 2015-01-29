@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>活动首页</title>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link type="text/css" href="{pigcms::RES}/dong/css/style.css" rel="stylesheet"/>
+        <link type="text/css" href="{pigcms::RES}/dong/css/css.css" rel="stylesheet"/>
+        <script src="{pigcms::RES}/dong/js/jquery.js"></script>
+        <script src="{pigcms::RES}/dong/js/touch.js"></script>
+        <script>
+           var swipeLeft=function(){
+			$(".animate").removeClass("animate");
+			var index=$(this).attr("id")-0;
+			$(this).animate({"width":"0px"},400,function(){
+					if((index-1)==0)
+					{
+						index=4;
+					}
+					$(this).insertBefore($(".xproBox").children().eq(0));
+					$(this).css("width","100%");
+					$("#"+(index-1)).addClass("animate");
+					
+			});
+			
+		};
+		var swipeRight=function(){
+			$(".animate").removeClass("animate");
+			var index=$(this).attr("id")-0;
+			$(this).animate({"width":"0px","left":"100%"},400,function(){
+					if((index+1)==5)
+					{
+						index=0;
+					}
+					$(this).insertBefore($(".xproBox").children().eq(0));
+					$(this).css({"width":"100%","left":"10px"});
+					$("#"+(index+1)).addClass("animate");
+					
+			});
+		};
+                
+            $(function() {
+                
+                 $(".proIntro").on("touchstart", function() {
+                      $(".gameBox").hide();
+                      $(".product").show();
+                      var wR = window.innerWidth;
+			var hR = window.innerHeight;
+			$(".xproBox").css({"width":(wR-20)+"px","height":(hR-20)+"px"});
+			touch.on("body","swipeleft",".xproBox img",swipeLeft);
+			touch.on("body","swiperight",".xproBox img",swipeRight);
+			var i=0
+			var begainFly=setInterval(function(){
+				if(i==3)
+				{
+					clearInterval(begainFly);
+					$(".xproBox img").removeClass("begain");
+					$(".upBox").show();
+				}
+				$(".xproBox img").eq(i).addClass("begain").show();
+				i++;
+			},500);
+                     
+                 });
+                 
+                 $(".upImg").on("touchstart", function() {
+                       $(".gameBox").show();
+                      $(".product").hide();
+                 });
+                //开始页点击载入
+                $(".loader").on("touchstart", function() {
+
+                    $(".bj").animate({"top": "-100%", "opacity": "0.2"}, 800, function() {
+                        $(".loader").hide();
+                        $(".skipImg").fadeIn(800);
+                        $(".musicBox").fadeIn(800);
+                        $(".logo").show(800);
+                    });
+
+                    //延迟2s轮播动画
+                    setTimeout(function() {
+                        shuffling(true);
+                        $(".skipImg").on("touchstart", function() {
+                            isPlay = false;
+                            $(".logo").fadeOut(800);
+                        });
+
+                    }, 2000);
+
+
+                    //图片渐变放大
+                    function shuffling(isPlay) {
+                        var i = 0;
+                        $(".skipImg").on("touchstart", function() {
+                            isPlay = false;
+                        });
+                        var inter = setInterval(function() {
+                            if (!isPlay)
+                            {
+                                i = 5;
+                                clearInterval(inter);
+                            }
+                            if (i == 5)
+                            {
+                                clearInterval(inter);
+                                $(".fadeImg").remove();
+                               
+                                $(".gameBox").fadeIn(800);
+                                $(".skipImg").hide();
+                            }
+                            if (i == 0 && isPlay == true)
+                            {
+                                $(".fadeImg").show();
+                                $(".fadeImg").eq(i).fadeIn(1000).addClass("fadeImgGo");
+                            }
+                            if (0 < i < 5 && isPlay == true)
+                            {
+                                $(".logo").hide();
+                                $(".fadeImg").eq(i - 1).fadeOut(1000);
+                                $(".fadeImg").eq(i).fadeIn(1000).addClass("fadeImgGo");
+                            }
+                            i++;
+                        }, 2000);
+                    }
+                    ;
+
+                });
+
+
+
+                //开始游戏
+                $(".btn_game").on("touchstart", function() {
+                    $("#gameing").show();
+                    $(".gameBox").hide();
+                   
+                    gamePlay();
+                });
+
+
+
+                //点击水滴计数
+                $(".snowbox").live("touchstart", function() {
+                    $(this).hide();
+                    var get = $(".getNum").text() - 0;
+                    get = get + 1;
+                    $(".getNum").text(get);
+                });
+
+
+                //奖品介绍
+                $(".price_rule").on("touchstart", function() {
+                    $(".gameBox").hide();
+                   
+                    $(".priceRule").fadeIn(1000);
+                });
+                //奖品介绍返回
+                $(".backPrice").on("touchstart", function() {
+                    
+                    $(".gameBox").fadeIn(1000);
+                    $(".priceRule").hide();
+                });
+            
+
+
+                //游戏过程函数
+                function gamePlay() {
+
+                    $(".time").text(10);
+                    $(".getNum").text(0);
+                    var num = 3;
+                    $(".countdown").show().text(3);
+                    $(".progress").animate({"width": "200px"}, 1000);
+
+                    //3、2、1倒计时
+                    var numInter = setInterval(function() {
+                        if (num == 0)
+                        {
+                            $(".countdown").hide();
+                            $("<div class='snowFall'></div>").appendTo($("#gameing"));
+                            clearInterval(numInter);
+                            waterFall();
+                        }
+                        else
+                        {
+                            num = num - 1;
+                            $(".countdown").text(num);
+                        }
+                    }, 1000);
+                }
+
+
+                //水滴落10s、滚动条减10s过程函数
+                function waterFall(isOne) {
+                    var $flake = $('<div class="snowbox"/>').css({'position': 'absolute', 'top': '-50px', 'z-index': '4000'}),
+                            documentHeight = $(document).height(),
+                            documentWidth = $(document).width(),
+                            defaults = {
+                                minSize: 10, //雪花的最小尺寸
+                                maxSize: 20, //雪花的最大尺寸
+                                newOn: 250, //雪花出现的频率
+                                flakeColor: "#FFFFFF", //懒人建站 www.51xuediannao.com   整理
+                                isFall: true
+                            };
+
+                    var timeInter = 0; //记录水滴落下10s后清除循环
+                    var timeNum = 10;	 //显示游戏剩余时间变量
+                    var timeShow = 10000; //控制游戏剩余时间变量
+                    var interval = setInterval(function() {
+
+                        if (timeInter >= 10000)
+                        {
+                            var core = $(".getNum").text();
+                            location.href="./index.php?g=Wap&m=Game&a=input&id={pigcms::$gid}&openid={pigcms::$openid}&number="+core;
+                            /*
+                            $("#coreNum").val(core);
+                            $(".coreNum").text(core);
+
+                            $("#gameing").children().eq(5).remove();
+                            $("#gameing").hide();
+                            clearInterval(interval);
+                            */
+                            
+                        }
+                        else
+                        {
+                            //显示游戏剩余时间
+                            timeShow -= defaults.newOn;
+                            switch (true) {
+                                case timeShow <= 9000 && timeShow > 8000:
+                                    timeNum = 9;
+                                    break;
+                                case timeShow <= 8000 && timeShow > 7000:
+                                    timeNum = 8;
+                                    break;
+                                case timeShow <= 7000 && timeShow > 6000:
+                                    timeNum = 7;
+                                    break;
+                                case timeShow <= 6000 && timeShow > 5000:
+                                    timeNum = 6;
+                                    break;
+                                case timeShow <= 5000 && timeShow > 4000:
+                                    timeNum = 5;
+                                    break;
+                                case timeShow <= 4000 && timeShow > 3000:
+                                    timeNum = 4;
+                                    break;
+                                case timeShow <= 3000 && timeShow > 2000:
+                                    timeNum = 3;
+                                    break;
+                                case timeShow <= 2000 && timeShow > 1000:
+                                    timeNum = 2;
+                                    break;
+                                case timeShow <= 1000 && timeShow > 0:
+                                    timeNum = 1;
+                                    break;
+                                case timeShow <= 0:
+                                    timeNum = 0;
+                                    break;
+                            }
+                            ;
+                            $(".time").text(timeNum);
+
+                            //水滴落
+                            timeInter += defaults.newOn;
+                            var startPositionLeft = Math.random() * documentWidth - 50,
+                                    startOpacity = 0.5 + Math.random(),
+                                    sizeFlake = defaults.minSize + Math.random() * defaults.maxSize,
+                                    endPositionTop = documentHeight - 40,
+                                    endPositionLeft = startPositionLeft - 100 + Math.random() * 500,
+                                    durationFall = documentHeight * 5 + Math.random() * 500;
+                            $flake.html("<img src='{pigcms::RES}/dong/img/vase.png' style='width:40px' class='waterImg'/>");
+                            var $flclone = $flake.clone().appendTo($(".snowFall"));
+                            $flclone.css({
+                                left: startPositionLeft,
+                                opacity: startOpacity,
+                                'font-size': sizeFlake,
+                                color: defaults.flakeColor
+                            }).animate({
+                                top: endPositionTop,
+                                left: Math.random() * (documentWidth / 2) + 30,
+                                opacity: 0.2
+                            }, durationFall, 'linear', function() {
+                                $(this).remove();
+                                $flake.remove();
+                            }
+                            );
+                        }
+
+
+                    }, defaults.newOn);
+
+                    $(".progress").animate({"width": "0px"}, 11000);
+                }
+
+            })
+
+
+            window.onload = function() {
+
+                //控制声音函数
+                var toggleBgAudio = function(isPlay) {
+                    var audio = document.getElementById("audio");
+                    if (isPlay) {
+                        audio.play();
+                    } else {
+                        audio.pause();
+                    }
+                };
+
+                //载入时音乐响起
+                var oLoadImg = document.getElementById("loadImg");
+                oLoadImg.addEventListener('touchstart', function() {
+                    toggleBgAudio(true);
+                }, false);
+
+
+                //音乐图标点击播放或停止
+                var isMusic = true;
+                var musicStop = document.getElementById("musicStop");
+                var slash = document.getElementById("slash");
+                var misicMove = document.getElementById("misicMove");
+                musicStop.addEventListener('touchstart', function() {
+                    if (isMusic)
+                    {
+                        toggleBgAudio(false);
+                        isMusic = false;
+                        slash.style.visibility = "visible";
+                        misicMove.style.visibility = "hidden";
+                    }
+                    else
+                    {
+                        toggleBgAudio(true);
+                        isMusic = true;
+                        slash.style.visibility = "hidden";
+                        misicMove.style.visibility = "visible";
+                    }
+                }, false);
+
+
+            }
+        </script>
+        <style>
+            .deploy_ctype_tip{z-index:1001;width:100%;text-align:center;position:fixed;top:50%;margin-top:-23px;left:0;}.deploy_ctype_tip p{display:inline-block;padding:13px 24px;border:solid #d6d482 1px;background:#f5f4c5;font-size:16px;color:#8f772f;line-height:18px;border-radius:3px;}
+        </style>
+    </head>
+    <body scroll="no" id="tips">
+        <div class="box">
+            <!--音乐-->
+            <audio id="audio" loop>
+                <source src="{pigcms::RES}/dong/audio/bg.mp3">
+                <source src="{pigcms::RES}/dong/audio/bg.ogg">
+            </audio>
+            <span class="musicBox">
+                <img src="{pigcms::RES}/dong/img/slash.png" id="slash"/>
+                <img src="{pigcms::RES}/dong/img/music_2.png" class="musicImg" id="musicStop"/>
+                <img src="{pigcms::RES}/dong/img/note.png" class="musicUnder" id="misicMove"/>
+            </span>
+
+            <!--跳过动画-->
+            <img src="{pigcms::RES}/dong/img/skip.png" class="skipImg"/>
+
+            <!--开场载入-->
+            <img src="{pigcms::RES}/dong/img/middle.jpg" class="underBj"/>
+            <img src="{pigcms::RES}/dong/img/bg.jpg" class="bj"/>
+            <img src="{pigcms::RES}/dong/img/loader.png" class="loader" id="loadImg"/>
+            <img src="{pigcms::RES}/dong/img/logox.png" class="logo logox"/>
+
+            <!--轮播图-->
+            <div class="fadeBox">
+                <img src="{pigcms::RES}/dong/img/1.jpg" class="fadeImg fade1"/>
+                <img src="{pigcms::RES}/dong/img/2.jpg" class="fadeImg fade2 "/>
+                <img src="{pigcms::RES}/dong/img/3.jpg" class="fadeImg fade3"/>
+                <img src="{pigcms::RES}/dong/img/4.jpg" class="fadeImg fade4"/>
+                <img src="{pigcms::RES}/dong/img/5.jpg" class="fadeImg fade5"/>
+               
+            </div>
+
+            <!--轮播完后-->
+            <div class="gameBox" id="gameBefore">
+                <img src="{pigcms::RES}/dong/img/6.jpg" class="fadeSpecial" id="beforeBj"/>
+                <p class="proIntro">点击进入产品介绍</p>
+                <p class="blueBtn btn_game">开始游戏</p>
+                <p class="pinkBtn price_rule">奖品介绍</p>
+            </div>
+
+            <!--游戏界面-->
+            <div id="gameing">
+                <p class="timeText texCenter">
+                    <span class="time">10</span>
+                    <span>s</span>
+                </p>
+                <p class="proBox texCenter">
+                    <img src="{pigcms::RES}/dong/img/progress_bg.png" class="progress_bg"/>
+                    <img src="{pigcms::RES}/dong/img/progress.png" class="progress"/>
+                <p>
+                <p class="countdown">3</p>
+                <div class="getCase">
+                    <img src="{pigcms::RES}/dong/img/vase.png" class="getVase"/>
+                    <img src="{pigcms::RES}/dong/img/cheng.png" class="cheng"/>
+                    <div class="getNum">0</div>
+                </div>
+            </div>
+
+
+
+            <!--图片展示-->
+            <div class="slideshow">
+                <div id="showimg">
+                    <a><img src="{pigcms::RES}/dong/img/01.jpg" style="display:none;"></a>
+                    <a><img src="{pigcms::RES}/dong/img/02.jpg" style="display:none;"></a>
+                    <a><img src="{pigcms::RES}/dong/img/03.jpg" style="display:block;"></a>
+                </div>
+                <div id="operate" class="operate">
+                    <span>1</span>
+                    </br>
+                    <span>2</span>
+                    </br>
+                    <span>3</span>
+
+                </div>
+                <div style="display:none;" class="arrawBox" style="width:100%;">
+                    <img src="{pigcms::RES}/dong/img/prev.png" class="prev" style="width:56px;height:67px;position:absolute;z-index:9000;top:40%;left:10px;"/>
+                    <img src="{pigcms::RES}/dong/img/next.png" class="next" style="width:56px;height:67px;position:absolute;z-index:9000;top:40%;right:10px;"/>
+                </div>
+            </div>
+
+
+            <!--奖品介绍-->
+            <div class="priceRule">
+                <p class="texCenter"><img src="{pigcms::RES}/dong/img/logo.png" class="logoPri"/><p>
+                <p class="rankTitle texCenter">奖品介绍</p>
+                <p class="results texCenter font12">在10秒内尽可能多的收集玻尿酸精华原液，</br>72小时后根据排名发送奖品哦！</p>
+                <p class="listFont texCenter font12"><span style="font-size:14px;font-weight:bold;">森田全年关爱奖：</span></br>积分排名前十的活动参与者,</br>将获得一整年的森田面膜组合产品</p>
+                <p class="listFont texCenter font12"><span style="font-size:14px;font-weight:bold;">森田补水先锋奖：</span></br>积分排名前3000的活动参与者将获得,</br>森田药妆明星产品“玻尿酸原液面膜（5片装）”一盒</p>
+                <p class="smallBlue backPrice">返回</p>
+            </div>
+         
+            <div class="product" style="display:none">
+                <div class="xproBox">
+                    <img src="{pigcms::RES}/dong/img/x01.jpg" class="pro1" id="1"/>
+                    <img src="{pigcms::RES}/dong/img/x02.jpg" class="pro2" id="2"/>
+                    <img src="{pigcms::RES}/dong/img/x03.jpg" class="pro3" id="3"/>
+                    <img src="{pigcms::RES}/dong/img/x04.jpg" class="" id="4"/>
+                    
+                </div>
+                <p>
+                    <img src="{pigcms::RES}/dong/img/prev.png" class="prevImg"/>
+                    <img src="{pigcms::RES}/dong//img/next.png" class="nextImg"/>
+                    <span class="upBox"><img src="{pigcms::RES}/dong/img/up.png" class="upImg"/></span>
+                </p>
+            </div>
+         
+
+        </div>
+
+        
+    </body>
+</html>
+

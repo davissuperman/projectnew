@@ -1,0 +1,20 @@
+.right{width:837px;height:1000px;float:left;padding:0px 10px;position:relative;}
+.same{height:35px;line-height:35px;color:#696969;margin-top:20px;}
+.artic{height:20px;line-height:20px;margin-top:20px;}
+.circle{width:550px;height:33px;line-height:33px;float:left;border:1px #adacb4 solid;padding-left:5px;margin-right:10px;}
+.circleAear{width:550px;height:200px;float:left;border:1px #adacb4 solid;padding-left:5px;margin-right:10px;}
+.Tex{width:150px;height:auto;color:#676767;float:left;text-align:right;margin-right:15px;display:inline;color:#444;font-weight:bold;}
+.example{height:20px;line-height:20px;color:#ea533f;font-size:12px;padding-left:165px;}
+.artiEdit{height:43px;line-height:43px;border-bottom:1px #eee solid;margin-top:15px;}
+.big{font-size:18px;font-weight:bold;color:#6e6e6e;float:left;margin-right:10px;}
+.small{font-size:12px;color:#6e6e6e;float:left}
+.addList{float:left;width:81px;height:33px;line-height:33px;text-align:center;color:#fff;font-weight:bold;background:url(../img/look.gif) no-repeat;border:0px;cursor:pointer;margin-left:20px;}
+.addList{float:left;width:81px;height:33px;line-height:33px;text-align:center;color:#fff;font-weight:bold;background:url(../img/look.gif) no-repeat;border:0px;cursor:pointer;margin-left:20px;}
+.addList:hover{background:url(../img/lookOver.gif) no-repeat;}
+.addListX{float:right;width:81px;height:33px;line-height:33px;text-align:center;color:#fff;font-weight:bold;background:url(../img/look.gif) no-repeat;border:0px;cursor:pointer;margin-left:20px;}
+.addListX:hover{background:url(../img/lookOver.gif) no-repeat;}
+
+.pressBox{height:30px;padding-left:145px;margin-top:20px;clear:both;}
+.keyWord{height:30px;margin-top:20px;margin-bottom:20px;}
+.keyRight{float:left;}
+

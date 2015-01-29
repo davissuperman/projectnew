@@ -1,0 +1,19 @@
+*{margin:0px;padding:0px;}
+a{text-decoration:none;}
+ul{list-style:none;}
+.clear{clear:both;}
+.box{margin:0px 12px;}
+.heading{height:45px;line-height:45px;margin:0px -12px;background:url(../img/bj.gif) repeat-x;background-size:1px 100%;}
+.topList li{float:left;height:45px;width:18%;background:url(../img/liBj.gif) no-repeat right;text-align:center;}
+.topList li:last-child{background:url("")}
+.topList li.second{float:left;height:45px;width:46%;background:url(../img/liBj.gif) no-repeat right;text-align:center;}
+.logo{width:120px;}
+.title{font-size:21px;text-align:center;margin-top:20px;margin-bottom:18px;}
+.back{width:23px;margin-top:11px;margin-right:4px;}
+.per{width:23px;margin-top:11px;margin-right:4px;}
+.car{width:23px;margin-top:11px;}
+.logo{width:40px;margin-top:6px;}
+.footer{padding-top:10px;border-top:1px #ccc solid;margin:0px -12px;margin-top:40px;}
+.footUl{height:20px;width:294px;margin:0px auto;}
+.footer li{height:20px;line-height:20px;float:left;width:98px;text-align:center;font-size:12px;color:#7f7f7f;font-weight:bold;}
+.copy{height:20px;line-height:20px;text-align:center;font-size:12px;color:#b5b5b5;margin:10px 0px;}

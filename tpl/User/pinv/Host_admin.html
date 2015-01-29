@@ -1,0 +1,171 @@
+<?php $nav = "BUSINESS"; $side = "HOST_INDEX" ?>
+<include file="Public:head"/>
+<style>
+  .new{
+    float:none !important;
+    line-height:0 !important;
+  }
+</style>
+
+<link type="text/css" href="{pigcms::RES}/css/Host_index.css" rel="stylesheet"/>
+<link type="text/css" rel="stylesheet" href="{pigcms::RES}/css/bootstrap-datetimepicker.min.css"/>
+<script src="{pigcms::RES}/js/bootstrap-datetimepicker.min.js"></script>
+<script src="{pigcms::RES}/js/bootstrap-datetimepicker.zh-CN.js"></script>
+ 
+ <div class="container main">
+<div class="row">
+<include file="Host:left"/>
+           
+        <div class="col-md-10 main">
+           
+           	 <ol class="breadcrumb">
+			  <li><a href="{pigcms::U( 'Host/index',array( 'token'=>$token ))}">微酒店管理</a></li>
+			  <li class="active">订单管理</li>
+			</ol>
+			
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">订单管理</h3>
+				<span class="small">订单总数：<span class="redamount">{pigcms:$count}</span>个 | 预订成功：<span class="redamount">{pigcms:$ok_count}</span>个 | 预订失败：<span class="redamount">{pigcms:$lost_count}</span>个 | 未处理订单：<span class="redamount">{pigcms:$no_count}</span>个 | 用户取消订单：<span class="redamount">{pigcms:$yhqux_count}</span>个</span>
+			  </div>
+			  <div class="panel-body">
+          <div class="alert alert-info" style="text-align:center">
+            <form action="" method="post" class="form-inline">
+              <div class="form-group ">
+                <label class="" for="check_in">入住时间：</label>
+                <!-- <div class="input-group date form_datetime start" data-link-field="dtp_input1" data-link-format="yyyy-mm-dd"> -->
+                <input class="form-control form_datetime" type="text" id="check_in" data-link-field="dtp_input1" data-link-format="yyyy-mm-dd" readonly>
+                <!-- <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span> -->
+                <!-- <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span> -->
+                <input type="hidden" id="dtp_input1" value="{pigcms:$set.time_start}" name="check_in" />
+              <!-- </div> -->
+                <input type="hidden" name="hhid" value="{pigcms:$id}">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="tel">电话：</label>
+               <input type="text" name="tel" id="tel" class="form-control" placeholder="电话">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="room_type">房间类型：</label>
+               <input type="text" name="room_type" id="room_type" class="form-control" placeholder="房间类型">
+              </div>
+              <input type="submit" value="搜索" name="search" class="btn btn-info btn-sm">
+            </form>
+          </div>
+          <input type="button" id="" value="批量删除" class="btn btn-danger" style="margin-bottom:10px"  data-toggle="modal" data-target="#myModal">
+                  <table class="table table-striped" cellspacing="1" style="top:15px; font-size:12px">                	
+                   <tr>
+                     <!-- <th>#</th> -->
+                     <th >删除</th>
+                     <th >姓名</th>
+                     <th >电话</th>
+                     <th >入住时间</th>
+                     <th >离开时间</th>
+                     <th >房间类型</th>
+                     <th >预订时间</th>
+                     <!-- <th >数量</th> -->
+                     <th >价格</th>
+                     <th >状态</th>
+                     <th >操作</th>
+                   </tr>
+                   <form action="{pigcms::U('Host/alldel')}" method="post" id="form_d">
+                  
+                   <volist name="li" id="list"> 
+<tr>
+<!-- <td>{pigcms:$i}</td> -->
+<td><input type="checkbox" name="delid[]" form="form_d" value="{pigcms:$list.id}"><input type="hidden" name="jdid" form="form_d" value="{pigcms:$_GET['id']}"></td>
+ <form action="{pigcms::U('Host/admin')}" method="post">  
+<td>{pigcms:$list.book_people}</td>
+<td>{pigcms:$list.tel}</td>
+<td>  
+  <!-- <input type="text" style="border:1px solid" name="check_in" value="<if condition="$list['check_in'] neq false">{pigcms:$list.check_in|date="Y-m-d",###}<else/></if>"   placeholder="请输入需求时间"  />     -->   
+           <if condition="$list['check_in'] neq false">{pigcms:$list.check_in|date="Y-m-d",###}<else/></if>
+</td>
+<td>{pigcms:$list.check_out|date="y-m-d",###}</td>
+<td>{pigcms:$list.room_type}</td>
+ <td>{pigcms:$list.book_time|date="y-m-d H:i:s",###}</td>
+ <!-- <td>{pigcms:$list.book_num}</td> -->
+ <td>{pigcms:$list.price}</td>
+  <td>
+  <input type="hidden" name="id" value="{pigcms:$list.id}">
+    <input type="hidden" name="hid" value="{pigcms:$Think.get.id}">
+ <if condition="$list.order_status eq 1"> 成功 
+ <elseif condition="$list.order_status eq 2"/> 失败 
+ <elseif condition="$list.order_status eq 4"/> 用户取消 
+ <else /> 
+   <select name="status" >    
+    <option value="1">成功</option>
+    <option value="2">失败</option>    
+  </select>
+ </if>  
+
+  </td>
+<td colspan="10" class="norightborder">  
+<!--
+<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Host/list_del',array('id'=>$hostlist['id'],'token'=>$token))}');">删除</a>
+-->
+<if condition="$list.order_status eq 1">
+不可修改 <a href="{pigcms::U('Host/orderDetail',array('token'=>$_GET['token'],'hid'=>$_GET['id'],'id'=>$list['id']))}">详情</a>
+<elseif condition="$list.order_status eq 4" />
+用户取消 <a href="{pigcms::U('Host/orderDetail',array('token'=>$_GET['token'],'hid'=>$_GET['id'],'id'=>$list['id']))}">详情</a>
+<else/>
+<button type="submit" style="cursor:pointer" >编辑</button>
+<a href="{pigcms::U('Host/orderDetail',array('token'=>$_GET['token'],'hid'=>$_GET['id'],'id'=>$list['id']))}">详情</a>
+</if>
+
+
+</td>
+
+</tr>
+</form>
+</volist>
+                   </form>  
+                     <tr>
+                   
+                      <td colspan="11" style="text-align: right">{pigcms:$page}</td>
+                    </tr>
+                </table>  
+             
+            
+          </div>
+            </div>
+            </div>
+         
+            </div>    
+      
+ </div>
+ <!-- Modal -->
+<div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding-top:170px">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title text-danger" id="myModalLabel">删除商品</h4>
+      </div>
+      <div class="modal-body ">
+        确定批量删除商品吗?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="$('#form_d').submit();">确定</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+ <script>
+  $(function(){
+    $('.form_datetime').datetimepicker({
+            language:  'zh-CN',
+            weekStart: 1,
+            todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView:2,
+        forceParse: 0,
+        pickerPosition: "bottom-left",
+        format:'yyyy-mm-dd',
+        });
+  });
+ </script>
+<include file="Public:footer"/>

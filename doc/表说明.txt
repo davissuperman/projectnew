@@ -1,0 +1,37 @@
+粉丝聊天表-------------------------------------------------tp_behavior
+fid
+token
+openid 粉丝的id
+date 时间
+enddate
+model 模块
+num
+keyword
+type
+
+客服聊天记录-------------------------------------tp_service_logs
+pid 客服id
+openid 
+enddate
+keyword 内容
+status 状态
+token 
+
+
+客服表---------------------------------------tp_service_user 
+
+id
+name-客服名称
+token 哪个公司的
+userName 客服登录名
+userPwd  客服密码
+endJoinDate 结束工作时间
+status 状态
+---------------------------------------------
+结构tp_user_request
+
+
+结构tp_users
+
+用户最新最后沟通时间---------------------------------------------tp_wehcat_member_enddate
+

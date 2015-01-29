@@ -1,0 +1,62 @@
+<?php $nav = "BUSINESS"; $side = "CAIPINLIST" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_index.css" rel="stylesheet"/>
+ <div class="container main">
+ <div class="row main">
+<include file="Diancai:left"/>
+     
+            <div class="col-md-10 main">
+                <ol class="breadcrumb">
+                    <li><a href="{pigcms::U('Diancai/index',array('token'=>$token))}">微餐饮</a></li>
+                    <li class="active">菜品管理</li>
+                  </ol>
+                  <div class="panel panel-success">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">菜品管理</h3>
+                    </div>
+            		<!-- <p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p> -->
+             <!-- <p class="pressBox"><a href="{pigcms::U('Diancai/addcaipin',array('token'=>$token))}"     class="addList"/>添加菜品</a></p> -->
+             <div class="panel-body">
+                <div class="pull-right add-button">
+                    <a href="{pigcms::U('Diancai/addcaipin',array('token'=>$token))}"     class="btn btn-success "/><span class="glyphicon glyphicon-plus"></span> 添加菜品</a>
+                </div>
+          <table class="table table-striped" cellspacing="1">
+                    <tr>                      
+                        <th class="secondTd">菜品名称</th>
+                        <th class="thirdTd">所属菜品分类</th>
+                        <th class="sevenTd">价钱</th>
+                        <th class="sevenTd">创建时间</th>
+                    
+                        <th  class="forthTd" >操作</th>
+                    </tr>
+                   <volist name="list" id="item">
+
+						<tr>
+					  
+							<td>{pigcms:$item.cpname}</td>
+							<td>{pigcms:$item.caipname}</td>
+							<td>{pigcms:$item.goods_price}</td>
+							<td >{pigcms:$item.cdate|date="Y-m-d H:i:s",###}</td>
+							
+							<!--<td ><img src='{pigcms:$vo1.ewma}' /></td>-->
+							<td>
+	 <a href="{pigcms::U('Diancai/caipinset',array('id'=>$item['goods_id'],'token'=>$token))}" class="hover-tooltip-edit"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Diancai/caipindel',array('id'=>$item['goods_id'],'token'=>$token))}');" class="hover-tooltip-trash"><span class="glyphicon glyphicon-trash danger"></span></a></td>
+						   
+						</tr>
+					
+                  </volist>
+                </table>
+               
+              
+                <p class="page">{pigcms:$page}</p>
+            </div>
+            </div>
+            </div>
+
+            </div> 
+      
+ </div>
+<include file="Public:footer"/>

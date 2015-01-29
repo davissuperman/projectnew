@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>员工服务评分</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" rel="stylesheet" href="{pigcms::RES}/css/yuangong/grade1.css"/>
+<!--<link type="text/css" rel="stylesheet" href="css/grade2.css"/>-->
+<script src="{pigcms::RES}/js/newyear/jquery.js"></script>
+<script src="{pigcms::RES}/js/yuangong/jquery.infinitescroll.js"></script>
+<script type="text/javascript">
+   $(function(){
+
+	$(".dianji").click(function(){
+	     
+	   var dj=$(this).val();
+	   var sid=$('#sid').val();
+	   var token=$('#token').val();
+	   var username=$('#user').html();
+	   var rs=$('#rs').val();
+	   //alert(username);return false;
+	        $.ajax({
+						url:'{pigcms::U("Yuangong/grtplist")}',
+						data:'dj='+dj+'&sid='+sid+'&token='+token+'&username='+username+'&rs='+rs,
+						type:'get',
+						dataType:'html',
+						success:function(info){
+						   //alert(info);return false;
+						    $('#cd').html(info);
+						    //$('#pp').html(info);
+							$(".mm").children().attr("disabled","disabled");
+							
+							
+
+						   //alert(info);return false;
+						   //if(result.stauts>0){
+						     //   $('#cd').html("fenshu"+result.info);
+						   //}else{
+								//alert(result.info);
+						   //}
+							
+						}
+                 });
+	})
+
+	$('#fsong').click(function(){
+	           //alert(1);return false;
+	            var ssid=$('#ssid').val();
+	            var stoken=$('#stoken').val();
+	            var jianjie=$('#jianjie').val();
+				if(jianjie.length<2){
+				   alert('不能为空');
+				}else{
+				//alert(stoken);
+				//alert(ssid);return false;
+			    $.ajax({
+						url:"{pigcms::U('Yuangong/grpllist')}",
+						data:'ssid='+ssid+'&stoken='+stoken+'&jianjie='+jianjie,
+						type:'get',
+						dataType:'html',
+						success:function(info){
+                                                     localStorage.removeItem("jianjie");
+                                                     $('#jianjie').val('');
+						   //alert(info);return false;
+						   $('#pllb').html(info);
+						   //$('#pllb').empty().append(info);
+						   }
+                 });
+			}
+	})
+
+
+/*
+瀑布流
+*/
+   
+
+$('#container').infinitescroll({               
+                navSelector: ".page",
+                nextSelector: ".page  a",
+                itemSelector: "#container .listBox",          
+                debug: false,  
+                maxPage:{pigcms:$fl},
+                 loading: {finishedMsg:  '加载完毕！',msgText:'<em></em>',img:""},
+                dataType: 'html'         
+            });
+			
+                                   
+})       
+
+		document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+			window.shareData = {
+				"imgUrl": "{pigcms:$rzt.avatar}",
+				"timeLineLink": "http://www.pinv.cc/index.php?g=Wap&m=Yuangong&a=grlist&token={pigcms:$rzt.token}&id={pigcms:$rzt.sid}",
+				"sendFriendLink": "http://www.pinv.cc/index.php?g=Wap&m=Yuangong&a=grlist&token={pigcms:$rzt.token}&id={pigcms:$rzt.sid}",
+				"weiboLink": "http://www.pinv.cc/index.php?g=Wap&m=Yuangong&a=grlist&token={pigcms:$rzt.token}&id={pigcms:$rzt.sid}",
+				"tTitle": "员工服务评分",
+				"tContent": "{pigcms:$rzt.jianjie}",
+				"fTitle": "员工服务评分",
+				"fContent": "{pigcms:$rzt.jianjie}",
+				"wContent": "{pigcms:$rzt.jianjie}"
+			};
+
+			// 发送给好友
+			WeixinJSBridge.on('menu:share:appmessage', function (argv) {
+				WeixinJSBridge.invoke('sendAppMessage', {
+					"img_url": window.shareData.imgUrl,
+					"img_width": "640",
+					"img_height": "640",
+					"link": window.shareData.sendFriendLink,
+					"desc": window.shareData.fContent,
+					"title": window.shareData.fTitle
+				}, function (res) {
+					_report('send_msg', res.err_msg);
+				})
+			});
+
+			// 分享到朋友圈
+			WeixinJSBridge.on('menu:share:timeline', function (argv) {
+				WeixinJSBridge.invoke('shareTimeline', {
+					"img_url": window.shareData.imgUrl,
+					"img_width": "640",
+					"img_height": "640",
+					"link": window.shareData.timeLineLink,
+					"desc": window.shareData.tContent,
+					"title": window.shareData.tTitle
+				}, function (res) {
+					_report('timeline', res.err_msg);
+				});
+			});
+
+			// 分享到微博
+			WeixinJSBridge.on('menu:share:weibo', function (argv) {
+				WeixinJSBridge.invoke('shareWeibo', {
+					"content": window.shareData.wContent,
+					"url": window.shareData.weiboLink,
+				}, function (res) {
+					_report('weibo', res.err_msg);
+				});
+			});
+		}, false)
+	</script>
+</head>
+
+<body>
+	<div class="wapper">
+    	<p class="title">员工服务评分</p>
+    	<div class="personBox">
+        	<div class="headBox">
+            	<img src="{pigcms:$rzt.avatar}" class="pHead"/>
+            </div>
+            <p class="name">{pigcms:$rzt.username}</p>
+				 <if condition="$sid neq ''"> 
+				<p class="numBox">
+				    <input type="hidden" value="1"  id='rs' name='rs'/>
+					<input type="hidden" value="{pigcms:$rzt.sid}"  id='sid' name='sid'/>
+					<input type="hidden" value="{pigcms:$rzt.token}" id='token' name='token'/>
+					<input type="button" disabled value="5" class="num dianji"/>
+					<input type="button" disabled value="4" class="num dianji"/>
+					<input type="button" disabled value="3" class="num dianji"/>
+					<input type="button" disabled value="2" class="num dianji" />
+					<input type="button" disabled value="1" class="num dianji"/>
+				</p>
+				<else />
+				   <p class="numBox">
+				    <input type="hidden" value="1"  id='rs' name='rs'/>
+					<input type="hidden" value="{pigcms:$rzt.sid}"  id='sid' name='sid'/>
+					<input type="hidden" value="{pigcms:$rzt.token}" id='token' name='token'/>
+				<div class='mm numBox'>
+					<input type="button" value="5" class="num dianji"/>
+					<input type="button" value="4" class="num dianji"/>
+					<input type="button" value="3" class="num dianji"/>
+					<input type="button" value="2" class="num dianji" />
+					<input type="button" value="1" class="num dianji"/>
+				  </div>
+				</p>
+				</if>
+            <div class="fontBox">
+            	{pigcms:$bmxx.departmentname}-{pigcms:$rzt.jianjie}
+            </div>
+            <div class="numBox"><div id='cd' class='code'>{pigcms:$list.pzvote}</div></div>
+        </div>
+        <form action="{pigcms::U('Yuangong/grpllist',array('token'=>$_GET['token'],'id'=>$_GET['id']))}" method="post">
+		<div class="sameP">
+		    <input type="hidden" value="{pigcms:$rzt.sid}"  id='ssid' name='sid'/>
+			<input type="hidden" value="{pigcms:$rzt.token}" id='stoken' name='token'/>
+        	<textarea placeholder="留下您的宝贵意见" class="textCase" id='jianjie'></textarea>
+        </div>
+        <p class="sendBox"><input type="button" value="发送" id='fsong' class="senBtn"/></p>
+        </form>
+
+       <!-- <div id='container'>
+			<ul class="listBox" id='pllb'>
+				<volist name='pllist' id='plvo'>
+					<li class='xunhuan'>
+					<span class="red">匿名：</span>
+					 <span>{pigcms:$plvo.message}</span>
+					<span style="float:right;color:#545454;">
+					<font size="-6px">{pigcms:$plvo.sj}<font></span>
+					</li>
+				</volist>
+			</ul>
+			
+        </div>-->
+		<div id='container'>
+			<ul class="listBox" id='pllb'>
+				<volist name='pllist' id='plvo'>
+					<li class='xunhuan'>
+					<span class="red">匿名：</span>
+					 <span>{pigcms:$plvo.message}</span>
+					<span style="float:right;color:#545454;"><font size="-6px">{pigcms:$plvo.sj}</font></span>
+					</li>
+				</volist>
+			</ul>
+		</div><p class="page" style="display:none">{pigcms:$page}</p>
+        <p class="bottomBj"></p>
+    </div>
+<include file="Public:tongji"/>
+</body>
+</html>

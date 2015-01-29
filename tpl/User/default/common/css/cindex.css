@@ -1,0 +1,17 @@
+.right{width:837px;height:1000px;float:left;padding:0px 10px;}
+.replyButton{float:left;width:122px;height:33px;text-align:center;line-height:33px;font-size:12px;background:url(../img/addList.gif) no-repeat;margin-right:20px;margin-top:20px;color:#fff;}
+.replyButton:hover{background:url(../img/addOver.gif) no-repeat;}
+.replayBox{height:60px;}
+.sheet{width:100%;background:#eee;color:#6a6a6a;}
+.sheet td{background:#fff;text-align:center;height:55px;line-height:55px;}
+.sheet th{background:#f1f1f1;height:45px;line-height:45px;text-align:center;}
+.firstTd{width:45px;text-align:center;}
+.edit{float:left;margin:0px 12px;color:#6a6a6a;font-weight:bold;}
+.cancel{float:left;color:#6a6a6a;font-weight:bold}
+.edit:hover{color:#ea533f;}
+.cancel:hover{color:#ea533f;}
+.secondTd{width:74px;text-align:center;}
+.thirdTd{width:319px;text-align:center;}
+.forthTd{width:95px;text-align:center;}
+.sixTd{width:110px;text-align:center;}
+.sevenTd{width:91px;text-align:center;}

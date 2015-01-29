@@ -1,0 +1,8 @@
+<div class="col-md-2 sidebar">
+<nav id="sidebar-nav">
+	<ul class="nav nav-pills nav-stacked">
+		<li><a href="{pigcms::U('Module/functionList',array('token'=>$token))}"><span class="glyphicon glyphicon-chevron-left"></span> 返回</a></li>
+		<li <?php if($side == "SELFFORMINDEX") echo 'class="active"'; ?>><a href="{pigcms::U('Selfform/index',array('token'=>$token,'bid'=>$bid))}"><if condition="$bid eq 1">微预约<elseif condition="$bid eq 2" />微留言<else />微报名</if></a></li>
+	</ul>
+</nav>
+</div>

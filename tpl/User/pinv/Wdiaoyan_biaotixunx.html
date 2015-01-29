@@ -1,0 +1,65 @@
+<?php $nav = "FUNCTION"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_inputAdd.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+<script type="text/javascript" src="{pigcms::RES}/js/formCheck/formcheck.js"> </script>
+<script language="javascript">
+$(function(){
+
+	$("#form").valid([
+	{ name:"displayname",simple:"显示名称",require:true},
+	{ name:"fieldname",type:"eng",simple:"字段名称",require:true},
+	{ name:"inputtype",simple:"输入类型",require:true}	
+	],true,true);
+
+})
+</script>
+<div class="container main">
+<div class="row">
+<include file="Wdiaoyan:left"/>
+     
+              <div class="col-md-10 main">
+           
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">标题下选项设置</h3>
+			  </div>
+			  <div class="panel-body">
+			  	<div class="add-button pull-left">
+                        <a href="javascript:history.go(-1);"  class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-left"></span> 返回</a>
+                  </div>
+                  <div style="clear:both;"></div>
+                 <form class="form" method="post" id="form" action="{pigcms::U('Wdiaoyan/biaotixunx',array('token'=>$token))}"> 
+                  <input type='hidden' value='{pigcms:$_GET["id"]}' name='fid' />
+                  <input type='hidden' value='{pigcms:$_GET["token"]}' name='token' />
+                  <input type='hidden' value='{pigcms:$_GET["formid"]}' name='formid' />
+                <p class="same">
+                    <span class="Tex">显示名称：</span>
+                    <input type="text" id="displayname" name="displayname" value="" class="circle"/>
+                </p>
+                <p class="same">
+                    <span class="Tex">字段名称：</span>
+                    <input type="text" id="fieldname" name="fieldname" value=""  class="circle"/>
+                </p>
+				<p class="same">
+                    <span class="Tex">输入类型：</span>
+                    <select class="seleBox" name="inputtype" id="inputtype">
+					 
+					  <option value='radio'>单选框</option>
+					  <option value='checkbox'>复选框</option>
+					
+					
+					</select>
+                </p>
+            </div>
+           	  <div class="panel-footer" style="text-align:right"> 
+	  			<input type="submit" value="保存" class="btn btn-success"/>
+	  			<a href="javascript:history.go(-1);"  class="btn btn-link">取消</a> 
+		      </div>
+		       </form>
+ 			</div>
+ 			</div>
+ 			</div>
+            </div>    
+ </div>
+<include file="Public:footer"/>

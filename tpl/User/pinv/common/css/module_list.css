@@ -1,0 +1,68 @@
+.pv-modules {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.pv-modules-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.pv-modules-list .glyphicon {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 36px;
+}
+
+.pv-modules-list li {
+  font-size: 12px;
+  float: left;
+  width: 33.3%;
+  height: 115px;
+  padding: 10px;
+  font-size: 10px;
+  line-height: 1.4;
+  text-align: center;
+  border: 5px solid #fff;
+  background-color: #ececec;  
+  cursor: pointer;
+}
+
+.pv-modules-list li .module-left {
+  float: left;
+  width: 90px;
+  height: 90px;
+}
+
+.pv-modules-list li .module-right {
+  float: left;
+  margin-top: 18px;
+  width: 200px;
+  text-align: left !important;
+}
+
+.pv-modules-list a {
+  color: #444 !important;
+}
+
+.pv-modules-list img {
+  width: 90px;
+  height: 90px;
+}
+
+.pv-modules-list li:hover {
+  color: #fff;
+  background-color: #563d7c;
+}
+
+.pv-modules-list .module-list-text {
+  display: block;
+  font-size: 16px;
+  text-align: center;
+}
+
+.pv-modules-list .module-list-desc {
+  display: block;
+  font-size: 12px;
+  color: #666;
+}

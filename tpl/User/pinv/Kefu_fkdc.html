@@ -1,0 +1,326 @@
+<?php $nav = "Kefu"; $side = "FLASH" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Text_index.css" rel="stylesheet"/>
+<style type="text/css">
+body,h2{margin:0 ; padding:0;}
+#faqbg{background-color:#666666; position:absolute; z-index:99; left:0; top:0; display:none; width:100%; height:1000px;opacity:0.5;filter: alpha(opacity=50);-moz-opacity: 0.5;}
+#faqdiv{position:absolute;width:400px; left:50%; top:50%; margin-left:-200px; height:auto; z-index:100;background-color:#fff; border:1px #8FA4F5 solid; padding:1px;}
+#faqdiv h2{ height:25px; font-size:14px; background-color:#8FA4F5; position:relative; padding-left:10px; line-height:25px;}
+#faqdiv h2 a{position:absolute; right:5px; font-size:12px; color:#FF0000}
+#faqdiv .form{padding:10px;}
+</style>
+<script src="{pigcms::RES}/js/kefu/editActive.js"></script>
+<script src="{pigcms::RES}/js/kefu/tanchu.js"></script>
+<script type="text/javascript">
+
+function dianji1(gid){
+		//$(".bor").removeClass("bor");
+        var nicheng=$('#gname'+gid).html();
+		
+        $('#gname'+gid).hide();
+       // $('<input type="text" value="" class="bor"/>').appendTo($('#tt'+uid));
+	   $('<input type="text" value="" class='+"bor"+gid+'>').appendTo($('#tt'+gid));
+	   $('<input style="cursor:pointer" type="button" value="OK"class='+"bor1"+gid+'>').appendTo($('#tt'+gid));
+		//$(".bor").css("border","1px #ccc solid").val(nicheng).addClass("bb"+uid);
+		$(".bor"+gid).css("border","1px #ccc solid");
+		$('.bor'+gid).val(nicheng);
+		
+	    $(".bor1"+gid).click(function(){
+			var groupname=$('.bor'+gid).val();
+			
+			var token=$('#token'+gid).val();
+			$(".bor"+gid).remove();
+			$(".bor1"+gid).remove();
+			//$('#gname'+gid).show().html(nn);
+			//alert(gid);
+			//alert(groupname);
+			//alert(token);return false;
+			 $.ajax({
+			   
+					type: "GET",
+					url: '{pigcms::U("Kefu/updatefkfz")}',
+					data: "groupname="+groupname+'&token='+token+'&gid='+gid,
+					success: function(msg){
+					 	//alert(msg);return false;
+						if(msg == 1){
+						  //alert(groupname);return false;
+						  // alert('修改成功');
+						  $('#gname'+gid).show().html(groupname);
+				           return true; 
+   						}else{
+						    
+							 alert('没有修改成功');
+							 $('#gname'+gid).show().html(groupname);
+				             return false;
+						}
+					},
+					
+			 	});
+			
+		
+		})
+		
+
+
+		
+
+
+}
+$(function(){
+ /*$(".but").click(function(){
+  //var str = "这里是信息内容，这里是信息内容！";
+  //$(".form").html(str);
+  $("#faqbg").css({display:"block",height:$(document).height()});
+  var yscroll =document.documentElement.scrollTop;
+  $("#faqdiv").css("top","100px");
+  $("#faqdiv").css("display","block");
+  document.documentElement.scrollTop=0;
+ });
+*/
+ $(".close").click(function(){
+  $("#faqbg").css("display","none");
+  $("#faqdiv").css("display","none");
+ });
+})
+function dianji(){
+
+  $("#faqbg").css({display:"block",height:$(document).height()});
+  var yscroll =document.documentElement.scrollTop;
+  $("#faqdiv").css("top","150px");
+  $("#faqdiv").css("display","block");
+  document.documentElement.scrollTop=0;
+
+}
+function up(gid,status){
+		var token=$('#token'+gid).val();
+		var This=$('#upp'+gid).closest("tr");
+        var Prev=This.prev();
+	
+		if(This.prev().find("th").eq(0).html()!="分组")
+		{
+		var gggid=This.prev().find("input").eq(0).val();
+		
+		var statusid=This.prev().find("input").eq(1).val();
+			 // alert(gggid);
+	          //alert(333);
+	          //alert(statusid);
+		     //alert($('#upp'+gid).prev().find("input").eq(1).val());
+		     //return false;
+			if(gggid=='11'){
+			   alert('不能像上移动');return false;
+			}else{
+			This.insertBefore(Prev);
+
+			$.ajax({
+			   
+					type: "GET",
+					url: '{pigcms::U("Kefu/upp")}',
+					data: "gid="+gid+'&token='+token+'&status='+status+'&gggid='+gggid+'&statusid='+statusid,
+					success: function(msg){
+					   
+					 
+						//if(msg == 2){
+						  
+						  // alert('已经是顶部了');
+						  
+				           //return true; 
+   						//}else if(msg==3){
+						  // alert('不能被替换');
+						   //return false;
+						//}
+						//else{
+						    
+						//	 alert('没有修改成功');
+						//	 $('#gname'+gid).show().html(groupname);
+				          //   return false;
+						//}
+					},
+					
+			 	});
+		  }
+		}
+		
+		
+		
+
+}
+function down(gid,status){
+		var token=$('#token'+gid).val();
+		var This=$('#downn'+gid).closest("tr");
+        var Next=This.next();
+		if(gid=='11'){
+		   alert('不能移动');
+		   return false;
+		}else{
+		if(This.next().children().length!=1)
+		{     var gggid=This.next().find("input").eq(0).val();
+		    
+		      var statusid=This.next().find("input").eq(1).val();
+	           
+		       //alert($('#upp'+gid).prev().find("input").eq(1).val());
+	      	   This.insertAfter(Next);
+                $.ajax({
+			   
+					type: "GET",
+					url: '{pigcms::U("Kefu/downnn")}',
+					data: "gid="+gid+'&token='+token+'&status='+status+'&gggid='+gggid+'&statusid='+statusid,
+					success: function(msg){
+					   //alert(msg);return false;
+					 
+						//if(msg == 2){
+						  
+						  // alert('已经是顶部了');
+						  
+				           //return true; 
+   						//}else if(msg==3){
+						  // alert('不能被替换');
+						   //return false;
+						//}
+						//else{
+						    
+						//	 alert('没有修改成功');
+						//	 $('#gname'+gid).show().html(groupname);
+				          //   return false;
+						//}
+					},
+					
+			 	});
+
+		}
+	}
+		
+		
+		
+
+}
+
+</script>
+ <div class="container main">
+<div class="row">
+ 
+      <include file="Kefu:left"/>
+             <div class="col-md-10 main">
+             <div class="panel panel-success">
+			  <div class="panel-heading">
+				<h3 class="panel-title">人工客服管理</h3>
+			  </div>
+			  <div class="panel-body">  
+			  	<!--<div class="add-button pull-right">-->
+			  	<div class="" style="float:left">
+				  <a href="{pigcms::U('Kefu/fkgl',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-file"></span>访客分组设定</a>
+            	  <a href="{pigcms::U('Kefu/fkdc',array('token'=>$token))}"  class="btn btn-success">
+				  <span class="glyphicon glyphicon-file"></span>
+				  访客名片导出</a>	
+            		
+            	</div>
+				 
+				
+         <table class="sheet" cellspacing="1"  border="0">
+                <tr>
+                    <th class="firstTd">类别</th>
+                     <th class="secondTd">操作</th>
+                     <th class="secondTd">操作</th>
+                   
+                </tr>
+            
+				   <form class="form" method="post" action="{pigcms::U('Kefu/fkdc',array('token'=>$token))}"  target="_top" enctype="multipart/form-data" >
+                    <tr>
+					  
+					    <input type="hidden" name='token' value="{pigcms:$_GET['token']}" />
+                        <td>选择客服账号:<select name="uid">
+					   
+							        <option value='0'>所有</option>
+										<volist name="userlist" id="vo">
+									     <option value="{pigcms:$vo.uid}"<if condition="$vo['uid'] eq $uidd">selected='selected'</if>>{pigcms:$vo.username}</option>
+										 </volist>
+							</select>
+					   </td>
+                        <td>选择分组类型:<select name="gid">
+					   
+							       <option value='0'>所有</option>
+										<volist name="fansgrouplist" id="vo1">
+									   <option value="{pigcms:$vo1.gid}"<if condition="$vo1['gid'] eq $gidd">selected='selected'</if>>{pigcms:$vo1.groupname}</option>
+										 </volist>
+							</select>
+					   </td>
+                   
+                       <td><input value="搜索" type="submit" class="btn btn-success btn-sm"/>
+					       <a href="{pigcms::U('Kefu/fkdaochu',array('token'=>$token))}">导出</a>
+					   </td>
+					 
+                      
+                       
+                    </tr>
+               </form>
+                <tr>
+
+                    <!--<td colspan="8" style="text-align:right">{pigcms:$page}</td>-->
+                </tr>
+            </table>
+            	<table class="table table-striped" cellspacing="1" style="margin-top:20px">
+                	<tr class="mm">
+                    	<th class="firstTd" style="background:#ddd;">序号</th>
+                        <th class="secondTd" style="background:#ddd;">头像</th>
+                        <th class="secondTd" style="background:#ddd;">微信昵称</th>
+					    <th class="firstTd" style="background:#ddd;">地区</th>
+					    <th class="secondTd" style="background:#ddd;">分组</th>
+					    <th class="secondTd" style="background:#ddd;">备注信息</th>
+					    <th class="secondTd" style="background:#ddd;">沟通客服</th>
+                       
+                    </tr>
+					 <if condition="$groupfans eq ''">
+					    <tr><td style="text-align:center;" colspan="7">没有记录</td></tr>
+					
+				     <else/>
+				         <volist name="groupfans" id="groupfs">
+                     <tr>
+					  
+					    <input type="hidden" value="rggfsk1394161441" name="token">
+                       <td>{pigcms:$i}
+					   </td>
+                        <td><img src="{pigcms:$groupfs.headimgurl}" style="width:20px;height:20px;"/>
+					   </td>
+                   
+                       <td>{pigcms:$groupfs.nickname}
+					   </td>
+                       <td>{pigcms:$groupfs.province}
+					   </td>
+                        <td>{pigcms:$groupfs.groupname}
+					   </td>
+                   
+                       <td>{pigcms:$groupfs.remark}
+					   </td>
+                    
+					   <td>{pigcms:$groupfs.name}
+					   </td>
+					</tr>
+			   </volist> 
+				    </if>
+                    
+                 <tr>
+                 <td colspan="7" style="text-align:right">{pigcms:$page}</td>
+                 </tr>
+                  
+                </table>
+               </div>
+            
+            </div>
+
+            </div>   
+			<div id="faqbg"></div>
+<div id="faqdiv" style="display:none">
+<h2>分组添加<a href="#" class="close">关闭</a></h2>
+    <div class="form">
+	 <form class="form" method="post"   action="{pigcms::U('Kefu/fkfzadd')}"  target="_top" enctype="multipart/form-data" >
+	    <input type="hidden" id='' value="{pigcms:$_GET.token}" name='token' />
+	    <input type="text" name="shuxing" value="" style="border:1px solid #ff0000"/>
+	    <input type="submit" name="" id='dc' value="确定"/>
+	    
+	  
+	  </form>
+	</div>
+	</div>
+
+      </div>
+ </div>
+<include file="Public:footer"/>

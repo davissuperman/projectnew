@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>卡券管理</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link href="{pigcms::RES}/css/kaquan/css/myStyle.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+	<p class="title">卡券</p>
+	<ul class="list-box">
+		
+		<li  <if condition="$tab eq 'lpk'">class="on"</if>><a href="{pigcms::U('Kq/index',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}" style="color:#5D646F">礼品卡券</a></li>
+		<li  <if condition="$tab eq 'xfk'">class="on"</if>><a href="{pigcms::U('Kq/xfkindex',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}" style="color:#5D646F">消费卡券</a></li>
+	</ul>
+	  <volist name="list" id="item">
+	<div class="car-box">
+		<img src="{pigcms::RES}/css/kaquan/img/food.png" class="ka-img"/>
+		<div class="card-text">
+			<p>{pigcms:$item.l_name}</p>
+			<p>{pigcms:$item.l_number}</p>
+			<p class="card-time">结束期：{pigcms:$item.endtime|date="y-m-d H:i:s",###}</p>
+		</div>
+		
+		<if condition="$item['l_leix'] eq 1">
+	    <span class="card-state">试用品券</span>
+		<elseif condition="$item['l_leix'] eq 2"/>
+		<span class="card-state">礼品券</span>
+			<else />
+	   <span class="card-state">促销券</span>
+	 	</if>
+	</div>
+	  </volist>
+	
+</body>
+</html>

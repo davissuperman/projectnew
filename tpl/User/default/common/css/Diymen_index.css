@@ -1,0 +1,21 @@
+.right{width:837px;height:1000px;float:left;padding:0px 10px;}
+.attention{color:#ea533f;}
+.addBox{height:50px;line-height:55px;border-bottom:1px #eee solid;}
+.addPress{width:81px;height:33px;line-height:33px;text-align:center;background:url(../img/look.gif) no-repeat;color:#fff;border:0px;cursor:pointer;}
+.addPress:hover{background:url(../img/lookOver.gif) no-repeat;}
+.case{width:280px;height:23px;float:left;border:1px #adacb4 solid;padding-left:5px;color:#6e6e6e;font-size:12px;margin-right:25px;}
+.Tex{height:23px;line-height:23px;color:#676767;float:left;margin-right:15px;display:inline;font-weight:bold;}
+.nextBox{height:25px;margin-top:15px;margin-bottom:3px; }
+.save{float:left;width:42px;height:22px;text-align:center;line-height:22px;color:#fff;background:url(../img/searchImg.gif) no-repeat;border:0px;cursor:pointer;font-size:12px;}
+.save:hover{background:url(../img/searchOver.gif) no-repeat;}
+.red{color:#ea533f;font-size:12px;margin-bottom:10px;}
+.sheet{width:100%;background:#eee;color:#6a6a6a;margin-top:15px;margin-bottom:15px;}
+.sheet td{background:#fff;text-align:center;height:55px;line-height:55px;}
+.sheet th{background:#f1f1f1;height:45px;line-height:45px;text-align:center;}
+.edit{float:left;margin:0px 20px;color:#6a6a6a;font-weight:bold;}
+.cancel{float:left;color:#6a6a6a;font-weight:bold}
+.edit:hover{color:#ea533f;}
+.cancel:hover{color:#ea533f;}
+.atte{float:left;color:#ea533f;font-size:12px;}
+.addButton{width:122px;height:33px;line-height:33px;text-align:center;color:#fff;background:url(../img/addList.gif) no-repeat;border:0px;}
+.addButton:hover{background:url(../img/addOver.gif) no-repeat;cursor:pointer;}

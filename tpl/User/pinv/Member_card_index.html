@@ -1,0 +1,56 @@
+<?php $nav = "MEMBER"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_index.css" rel="stylesheet"/>
+<div class="container main">
+<div class="row">
+<include file="Member_card:left"/>
+     
+             <div class="col-md-10 main">
+ 				<div class="panel panel-success">
+			  <div class="panel-heading">
+				<h3 class="panel-title">会员卡管理</h3>
+			  </div>
+			  <div class="panel-body">
+				<div class="add-button pull-right">
+            		<a href="{pigcms::U('Member_card/design',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-file"></span> 添加会员卡</a>
+            	</div>
+           <table class="table table-striped" cellspacing="1">
+                    <tr>                      
+                        <th class="secondTd">名称</th>
+                        <th class="secondTd">数量</th>
+                        <th class="secondTd">外链代码</th>
+                        <th  class="forthTd" >操作</th>
+                    </tr>
+                   <volist id="item" name="cards">
+                    <tr>
+                  
+                        <td  class="answer_text">{pigcms:$item.cardname}</td>
+                        <td>{pigcms:$item.usercount}</td>
+                        <td >会员卡</td>
+                        <td>
+                            <a href="{pigcms::U('Member_card/design',array('id'=>$item['id'],'token'=>$token))}">设计</a>
+                            <a href="{pigcms::U('Member_card/create',array('id'=>$item['id'],'token'=>$token))}">在线开卡</a><if condition="$userType eq 1 "> ｜ <a href="{pigcms::U('Member_card/true_create',array('id'=>$item['id'],'token'=>$token))}">实体卡导入</a></if>
+                            <a href="{pigcms::U('Member_card/exchange',array('id'=>$item['id'],'token'=>$token))}">积分设置</a> 
+                            <a href="{pigcms::U('Member_card/notice',array('id'=>$item['id'],'token'=>$token))}">通知管理</a> 
+                            <a href="{pigcms::U('Member_card/privilege',array('id'=>$item['id'],'token'=>$token))}">特权管理</a> 
+                            <a href="{pigcms::U('Member_card/coupon',array('id'=>$item['id'],'token'=>$token))}">优惠券管理</a> 
+                            <a href="{pigcms::U('Member_card/integral',array('id'=>$item['id'],'token'=>$token))}">礼品券管理</a> 
+                            <a href="{pigcms::U('Member_card/members',array('id'=>$item['id'],'token'=>$token))}">会员管理</a> 
+                            <a href="{pigcms::U('Member_card/staff',array('id'=>$item['id'],'token'=>$token))}">店员管理</a> 
+                            <a href="javascript:drop_confirm('您确认要删除此卡吗？','{pigcms::U('Member_card/delete',array('id'=>$item['id'],'token'=>$token))}')">删除</a>
+                                
+                        </TD>                            
+                 
+                    </tr>
+                    </volist>
+                </table>
+               
+              
+                <p class="page">{pigcms:$page}</p>
+            </div>
+            </div>
+            </div>
+             
+</div>       
+</div>
+<include file="Public:footer"/>

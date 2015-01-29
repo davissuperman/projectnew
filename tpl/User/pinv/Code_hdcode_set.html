@@ -1,0 +1,194 @@
+<?php $nav = "EWM"; $side = "WH" ?>
+<include file="Public:head"/>
+<script src="./tpl/User/pinv/common/js/date1/WdatePicker.js"></script>
+<script>
+    $(function() {
+
+//ajax调用
+        $('#fid').change(function() {
+
+            var fid = $('#fid').val();
+            var token = $('#token').val();
+
+
+
+
+
+            $.ajax({
+                url: '{pigcms::U("Code/ajaxxs")}',
+                data: 'fid=' + fid + '&token=' + token,
+                type: 'post',
+                dataType: 'html',
+                success: function(info) {
+                    //alert(info);return false;
+                    if (info == 2) {
+
+                        alert('没有子类');
+                        return false;
+                    } else {
+
+                        $('#qdlx').html(info);
+                        /*$('#qdlx').change(function() {
+                         
+                         if ($('#qdlx').val() == '自定义') {
+                         $('#qdleix').val(null);
+                         $('#qdleixok').show();
+                         } else {
+                         $('#qdleixok').hide();
+                         
+                         }
+                         })*/
+
+                    }
+                }
+            });
+
+
+        })
+        $('#dj').click(function() {
+
+            if ($.trim($('#wxuserphone').val()) == '') {
+
+                alert('活动名称不能为空');
+                return false;
+            }
+
+            if ($.trim($('#fid').val()) == '') {
+
+                alert('渠道不能为空');
+                return false;
+            }
+            if ($.trim($('#f_city').val()) == '') {
+
+                alert('城市不能为空');
+                return false;
+            }
+        })
+
+    })
+</script>
+<div class="container main">
+    <div class="row">
+        <include file="Code:left"/>
+        <div class="col-md-10 main">	
+            <ol class="breadcrumb">
+
+                <li class="active">二维码管理</li>
+            </ol>
+            <div class="panel panel-success">
+                <div class="panel-heading cfix">
+                    <h3 class="panel-title pull-left">二维码管理</h3>
+                </div>			
+                <div class="panel-body">
+
+                    <form class="form-horizontal" method="post" id="form" action="{pigcms::U('Code/hdcode_set')}">
+                        <input type="hidden" value="{pigcms:$npic_twocode_list.token}"  id='token' name='token'/>
+                        <input type="hidden" value="{pigcms:$npic_twocode_list.type}"  id='cptype' name='cptype'/>
+                        <input type="hidden" value="{pigcms:$npic_twocode_list.cid}"  id='cid' name='cid'/>
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label" style='width:105px'>产品名称：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="cpname" id="wxuserphone"  class="form-control" value="{pigcms:$npic_twocode_list.cname}" data-rule-required="true">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label" style='width:105px'>URL：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="codeurl" id="name"  class="form-control" value="{pigcms:$npic_twocode_list.curl}" data-rule-required="true">
+                            </div>
+                        </div>
+                         <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label" style='width:105px'>备注1：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="beizhu1" id="beizhu1"  class="form-control" value="{pigcms:$npic_twocode_list.beizhu1}" data-rule-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label" style='width:105px'>备注2：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="beizhu2" id="beizhu2" class="form-control" value="{pigcms:$npic_twocode_list.beizhu2}" data-rule-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label" style='width:105px'>开始时间：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="sdate" id="name"  class="form-control" value="{pigcms:$npic_twocode_list.sdate|date='Y-m-d H:i:s',###}" onclick="WdatePicker()">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label" style='width:105px'>结束时间：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="edate" id="name"  class="form-control" value="{pigcms:$npic_twocode_list.edate|date='Y-m-d H:i:s',###}" onclick="WdatePicker()">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label" style='width:105px'>二维码：</label>
+                            <div class="col-sm-5">
+                                <img src="{pigcms:$npic_twocode_list.ccode}" width='60px' height="60px"/>
+                            </div>
+                        </div>
+                       
+                        <div class="form-group" style="margin-left:38px">
+
+                            <span >渠道：</span>
+                            <select name="fid" style="width:165px;margin-left:22px" id="fid">
+
+                                <option value="">请选择</option>
+                                <volist name='qudao_list' id='vo'>
+                                    <option value="{pigcms:$vo.qid}"  <if condition="$vo['qid'] eq $npic_twocode_list['qudao']">selected</if>>{pigcms:$vo.q_name}</option>
+                                </volist>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin-left:38px">
+
+                            <span>类型：</span>
+                            <select name="qdlx" style="width: 165px;margin-left:22px" id="qdlx">
+                                <option value="">请选择</option>
+                                <volist name='qdlxlist' id='qdlxvo'>
+                                    <option value="{pigcms:$qdlxvo.lid}"  <if condition="$qdlxvo['lid'] eq $npic_twocode_list['huodongleixing']">selected</if>>{pigcms:$qdlxvo.l_name}</option>
+                                </volist> 
+
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin-left:38px" id='ct'>
+
+                            <span>城市：</span>
+                            <select name="f_city" style="width: 165px;margin-left:22px" id="f_city" onclick="">
+                                <option value="">请选择</option>
+                                <volist name='xxcity' id='xxvo'>
+                                    <option value="{pigcms:$xxvo.cid}" <if condition="$xxvo['cid'] eq $npic_twocode_list['city']">selected</if>>{pigcms:$xxvo.c_name}</option>
+                                </volist>
+
+                            </select>
+                        </div>
+
+                        <div class="form-group" style="margin-left:38px">
+
+                            <span>活动：</span>
+                            <select name="hid" style="width: 165px;margin-left:22px" id="hid">
+
+                                <option value="">请选择</option>
+                                <volist name='hdlist' id='hdlist'>
+                                    <option value="{pigcms:$hdlist.hid}" <if condition="$hdlist['hid'] eq $npic_twocode_list['huodong']">selected</if>>{pigcms:$hdlist.h_name}</option>
+                                </volist>
+
+                            </select>
+                        </div>
+
+
+
+                </div>			
+                <div class="panel-footer" style="text-align:right"> 
+                    <input type="submit" value="保存" id="dj" class="btn btn-success"/>
+                    <!--<input type="reset" value="取消"  class="btn btn-success"/>-->
+                    <a href="javascript:history.go(-1);"  class="btn btn-link">取消</a>
+                    <!--<a class="btn btn-link" id='qx'>取消</a> -->
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<include file="Public:footer"/>

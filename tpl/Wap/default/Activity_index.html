@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>创建活动</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link href="{pigcms::$staticCssPath}/css/second.css" type="text/css" rel="stylesheet"/>
+<script src="{pigcms::RES}/css/style/js/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="{pigcms::$staticJSPath}/myJs.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#activeSubmit").click(function(){
+	  var title=$("#subject").val();
+		if($.trim(title) == ""){	
+			$(".out").show();
+			$(".showBox").hide();		
+			$(".show5").html('没有输入活动主题')
+			$(".show5").show().delay(1000).hide(1);
+			return false;
+		}
+		var content=$("#message").val();
+		if($.trim(content) == ""){	
+			$(".out").show();
+			$(".showBox").hide();		
+			$(".show5").html('活动详情写的太少')
+			$(".show5").show().delay(1000).hide(1);
+			return false;
+		}
+		var name=$("#username").val();
+		if($.trim(name) == ""){
+			$(".out").show();
+			$(".showBox").hide();
+			$(".show5").html('请署上你的大名')
+			$(".show5").show().delay(1000).hide(1);
+			return false;
+		}
+		var password=$("#password").val();
+		if($.trim(password) == ""){
+			$(".out").show();
+			$(".showBox").hide();
+			$(".show5").html('请输入管理密码')
+			$(".show5").show().delay(1000).hide(1);			
+			return false;
+		}
+		$.ajax({
+	        cache: true,
+	        type: "POST",
+	        url:'index.php?&g=Wap&m=Activity&a=ajax',
+	        data:$('#active').serialize(),
+	        async: false,
+	        error: function(request) {
+	            alert("error");
+	        },
+	        success: function(data) {        
+	        	$(".out").show();
+				$(".showBox").show();
+	        	$(".show5").hide();
+	        	history.pushState(null, $('#subject').val(), data);	        	
+	        	$('#myview').attr('href',data);
+	        	
+	        }
+	    });
+   
+  });
+});
+</script>
+</head>
+<body  style="font-family:Arial, Helvetica, sans-serif">
+	<div class="box">
+	<form id="active">
+	<input type="hidden" name="token" value="{pigcms::$token}">
+	<input type="hidden" name="wecha_id" value="{pigcms::$wecha_id}">
+    	<p class="publish">发布违法、反动、人身攻击或冒用他人名义发布的投票内容，将交由公安机关处理。请不要涉及政治敏感话题</p>
+        <p><input type="text" value="输入活动主题，说明时间、地点、事件" class="activ" name="subject" id="subject"/></p>
+        <p><textarea class="areaCase" name="message" id="message"  onFocus="if(this.value == '活动详情，尽量生动、具体') {this.value = '';}" onBlur="if(this.value == '') {this.value = '活动详情，尽量生动、具体';}" >活动详情，尽量生动、具体</textarea></p>
+        <p><input type="text" value="苗" class="activ"  name="username" id="username"/></p>
+        <p><input type="text" value="设置管理密码，用于查看报名人员信息" class="activ"  name="password" id="password"/></p>
+        <p><a   class="sendPress" id="activeSubmit">发送</a></p>
+      </form>  
+        <!--弹出层--begain-->
+        <div class="out" style="display:none">
+            <div class="showBox" style="display:none">
+            	<p class="showFont">请点击右上角将它发送给指定朋友或者分享到朋友圈</p>
+                </br>
+              <a href="" id="myview">  <input type="button" value="预览" class="showPress"/></a>
+              <a href="{pigcms::U('Wap/Activity/index' ,array('token'=>$token,'wecha_id'=>$wecha_id))}">  <input type="button" value="再发一条" class="showPress"/></a>
+           <a href="{pigcms::U('Wap/Activity/alist' ,array('token'=>$token,'wecha_id'=>$wecha_id))}"> <input type="button" value="放弃" class="showPress"/></a>
+            </div>
+            <div class="show5" style="display:none"></div>
+        </div>
+        <!--弹出层--end-->
+    </div>
+    
+</body>
+<include file="Public:tongji"/>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title> {pigcms::C('site_title')} {pigcms::C('site_name')}</title>
+<link type="text/css" href="{pigcms::RES}/css/top.css" rel="stylesheet"/>
+<link type="text/css" href="{pigcms::RES}/css/left.css" rel="stylesheet"/>
+<link type="text/css" href="{pigcms::RES}/css/styleli.css" rel="stylesheet"/>
+<link type="text/css" href="./tpl/static/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+<link type="text/css" href="./tpl/static/bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
+ <!--[if lt IE 9]>
+  <script src="{pigcms::RES}/js/html5shiv.js"></script>
+  <script src="{pigcms::RES}/js/respond.min.js"></script>
+<![endif]--> 
+<script type="text/javascript" src="{pigcms::RES}/js/common.js"></script>
+<script type="text/javascript" src="./tpl/static/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="./tpl/static/bootstrap/js/bootstrap.js"></script>
+<script>var SITEURL='{pigcms::RES}';</script>
+<script type="text/javascript" src="{pigcms::RES}/js/myJs.js"></script>
+</head>
+<body>
+ <header class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <div class="container" style="width: 1100px">
+	<!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+		<ul class="nav navbar-nav">
+<!--<li><img src="{pigcms::RES}/img/logo.gif" style="margin-top: 8px"/></li>-->
+		<li><a href="#" style="color:#FFF; cursor:default">森田药妆</a></li>
+		</ul>
+	</div>
+
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	  <ul class="nav navbar-nav navbar-right">
+		<if condition="$_SESSION[uid]==false">
+			<li><a href="{pigcms::U('Index/login')}">登录</a></li>
+			<li><a href="{pigcms::U('Index/login')}">注册</a></li>
+		<else/>
+			<li><a href="#" style="color:#FFF">您好, <span style="color:red">{pigcms:$Think.session.uname}</span></a></li>
+			<li><a href="{pigcms::U( 'Updatepsd/index',array( 'token'=>$token ) )}"><span class="glyphicon glyphicon-user"></span> 修改密码</a></li>
+			<li><a href="{pigcms::U('User/Index/edit',array('token'=>$token))}"><span class="glyphicon glyphicon-cog"></span> 接口配置</a></li>
+						<li><a href="{pigcms::U('User/Index/help',array('token'=>$token))}"><span class="glyphicon glyphicon-question-sign"></span> 帮助</a></li>
+			<li><a href="{pigcms::U('System/Admin/logout',array('token'=>$token))}"><span class="glyphicon glyphicon-log-out"></span> 退出</a></li>
+		</if>
+	  </ul>
+	</div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</header>
+				
+	<div class="box">
+	
+<div id="header-wrapper">
+<nav class="navbar navbar-default cfix" role="navigation" id="nav-menu">
+  <div class="container-fluid">
+  	<!--<div class="navbar-header">
+  		<a class="navbar-brand" href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"><span class="text-primary">{pigcms:$wecha.wxname}</span></a>
+  	</div>-->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li <?php if($nav == "BASIC") echo 'class="active"';?> ><a href="{pigcms::U('Areply/index?mark=1',array('token'=>$token))}"><span class="glyphicon glyphicon-info-sign"></span> 基础设置</a></li>
+        <li <?php if($nav == "DIYMEN") echo 'class="active"';?> ><a href="{pigcms::U('Diymen/index',array('token'=>$token))}"><span class="glyphicon glyphicon-list"></span> 自定义菜单</a></li>
+        <li <?php if($nav == "HOME") echo 'class="active"';?> ><a href="{pigcms::U('Home/set?mark=2',array('token'=>$token))}"><span class="glyphicon glyphicon-globe"></span> 微官网</a></li>
+        <li <?php if($nav == "MEMBER") echo 'class="active"';?> ><a href="{pigcms::U('Member_card/replyInfoSet',array('token'=>$token))}"><span class="glyphicon glyphicon-credit-card"></span> 会员卡</a></li>
+        <li <?php if($nav == "FUNCTION") echo 'class="active"';?>><a href="{pigcms::U('Module/functionList',array('token'=>$token))}"><span class="glyphicon glyphicon-stop"></span> 功能模块</a></li>
+        <li <?php if($nav == "LBS") echo 'class="active"';?>><a href="{pigcms::U('Company/branches',array('token'=>$token))}"><span class="glyphicon glyphicon-euro"></span> 位置服务</a></li>
+        <li <?php if($nav == "PROMOTE") echo 'class="active"';?>><a href="{pigcms::U('Module/promoteList',array('token'=>$token))}"><span class="glyphicon glyphicon-flag"></span> 推广活动</a></li>
+        <li <?php if($nav == "STATS") echo 'class="active"';?>><a href="{pigcms::U('Requerydata/menuClick',array('token'=>$token,'type'=>1))}"><span class="glyphicon glyphicon-stats"></span> 统计分析</a></li>
+        <!--<li <?php if($nav == "Kefu") echo 'class="active"';?>><a href="{pigcms::U('Kefu/index',array('token'=>$token))}"><span class="glyphicon glyphicon-headphones"></span> 人工客服</a></li>-->
+        <li <?php if($nav == "EWM") echo 'class="active"';?>><a href="{pigcms::U('Code/index',array('token'=>$token))}"><span class="glyphicon glyphicon-stats"></span> 二维码</a></li>
+        <li <?php if($nav == "CRM") echo 'class="active"';?>><a href="{pigcms::U('Chat/member',array('token'=>$token))}"><span class="glyphicon glyphicon-stats"></span> CRM</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</div>

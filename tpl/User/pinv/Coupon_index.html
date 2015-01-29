@@ -1,0 +1,86 @@
+<?php $nav = "PROMOTE"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Coupon_index.css" rel="stylesheet"/>
+ <div class="container main">
+ <div class="row main">
+<include file="Coupon:left"/>
+     
+
+             <div class="col-md-10 main">
+                <ol class="breadcrumb">
+              <li><a href="{pigcms::U( 'Coupon/index',array( 'token'=>$token ))}">优惠劵</a></li>
+              <li class="active">优惠劵</li>
+            </ol>
+            		<!-- <p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+               
+               <p class="artiEdit"><span class="big">优惠券列表<span> {pigcms:$count}</span>条</span><span class="small">你本月有  {pigcms:$group.activitynum}  次机会可免收活动创建费，已经使用了{pigcms:$activitynum}次机会!</span><input type="button" value="搜索" class="searchPress"/><input type="text" value="输入关键词搜索" class="search"/></p>
+                
+                
+                <p class="pressBox"><a href="{pigcms::U('Coupon/add',array('token'=>$token))}" class="addList">新增优惠券</a></p> -->
+                <div class="panel panel-success">
+              <div class="panel-heading cfix">
+                <h3 class="panel-title pull-left">优惠券列表<span> {pigcms:$count}</span>条</h3>
+                <span class="small">你本月有  {pigcms:$group.activitynum} 次机会可免收活动创建费，已经使用了 {pigcms:$activitynum} 次机会!</span>
+                <div class="search-box pull-right">
+                     <form method="post" action="" class="souCase">
+                     <input type="button" value="搜索" class="btn btn-default btn-xs pull-right"/>
+                     <input type="text" placeholder="输入关键词搜索" class="search-text"/>
+                    </form>
+                 </div>
+                </div>
+              <div class="panel-body">
+                <div class="add-button pull-right">
+                    <a href="{pigcms::U('Coupon/add',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> 新增优惠券</a>
+                </div>
+                <table class="table table-striped" style="font-size: 13px">
+                    <tr>
+                     
+                        <th class="secondTd">优惠券名称</th>
+                        <th class="thirdTd">关键词 /id</th>
+                        <th class="forthTd">优惠券状态</th>
+                        <th class="sevenTd">总浏览数</th>
+                        <th class="thirdTd">开始时间/结束时间</th>
+                            
+                        <th class="forthTd">状态</th>
+                       <th class="sevenTd">外链代码</th>
+                        <th class="forthTd">
+                  操作
+                        </th>
+                    </tr>
+                     <volist id="list" name="list">
+                    <tr>
+                        
+                        <td>{pigcms:$list.title}</td>
+                        <td>{pigcms:$list.keyword}</td>
+                        <td>{pigcms:$list.joinnum}</td>
+                        <td>{pigcms:$list.click}</td>
+                        <td>{pigcms:$list.statdate|date='y-m-d',###}/{pigcms:$list.enddate|date='y-m-d',###}</td>
+                        <td> <if condition="$list['status'] eq 0">未开始<elseif condition="$list['status'] eq 2"/>已经结束<else/>已经开始</if></td>
+                    	<td>{pigcms:$list.keyword} {pigcms:$list.id}</td>
+                        <td>
+                               <a href="./index.php?g=User&m=Coupon&a=sn&id={pigcms:$list.id}&type=3">SN码管理</a> 
+				   <a href="./index.php?g=User&m=Coupon&a=edit&id={pigcms:$list.id}">编辑</a>  
+				   <a href="
+				   <if condition="$list['status'] eq 1">				   
+				   javascript:drop_confirm('你确定要结束活动吗，结束后不可再开启本活动!', 'index.php?g=User&m=Coupon&a=setdes&id={pigcms:$list.id}');<else/>index.php?g=User&m=Coupon&a=setinc&id={pigcms:$list.id}   
+				   </if>">
+				   <if condition="$list['status'] eq 0">开始<elseif condition="$list['status'] eq 2"/><else/>结束</if>				   
+				   </a>
+				  
+				   <a href="index.php?g=User&m=Coupon&a=del&id={pigcms:$list.id}">删除</a>
+                        </td>
+                    </tr>
+                    </volist>
+                </table>
+                        <p class="page">{pigcms:$page}</p>
+                </div>
+                </div>
+ 
+            </div> 
+            </div> 
+      
+ </div>
+<include file="Public:footer"/>

@@ -1,0 +1,70 @@
+<?php $nav = "BUSINESS"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Host_index.css" rel="stylesheet"/>
+ <div class="container main">
+ <div class="row main">
+<include file="Diancai:left"/>
+     
+    <!--right--begain-->
+             <div class="col-md-10 main">
+            		<!-- <p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p> -->
+                <ol class="breadcrumb">
+                  <li><a href="{pigcms::U('Diancai/index',array('token'=>$token))}">微餐饮</a></li>
+                  <li class="active">公司设置</li>
+                </ol>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                         <form method="post" action="">
+                    <input type="hidden" name="ac" value="hotels-list">
+                        <h3 class="panel-title">商家信息 <if condition="$page">({pigcms:$page})<else /></if></h3>
+                    
+                </form>
+
+                    </div>
+                <!-- <form method="post" action="">
+                    <p class="artiEdit"><input type="hidden" name="ac" value="hotels-list">
+                    <span class="big">商家信息</span><span class="small">({pigcms:$page})</span>
+                    
+                <p><a href="{pigcms::U('Diancai/add',array('token'=>$token))}" title="新增订单商家"  class="addList">添加商家管理</a></p>
+                </form> -->
+                <div class="panel-body">
+                    <div class="pull-right add-button">
+                        <a href="{pigcms::U('Diancai/add',array('token'=>$token))}" title="新增订单商家"  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> 添加商家</a>
+                    </div>
+                <table class="table table-striped" cellspacing="1">
+                	<tr>
+                    	<th class="firstTd">编号</th>
+                        <th class="secondTd">商家名称</th>
+                        <th class="thirdTd">关键词</th>
+                        <th class="forthTd">电话</th>
+                        <th class="forthTd">创建时间</th>
+                     
+                        <th class="sevenTd">操作</th>
+                    </tr>
+                    <volist name="list" id="hostlist"> 
+                    <tr>
+                    	<td class="firstTd">{pigcms:$i}</td>
+                        <td class="secondTd">{pigcms:$hostlist.title}</td>
+                        <td class="thirdTd">{pigcms:$hostlist.keyword}</td>
+                        <td class="forthTd">{pigcms:$hostlist.tel}</td>
+                        <td class="forthTd">{pigcms:$hostlist.creattime|date="Y-m-d H:i:s",###}</td>
+                        
+                        <td class="sevenTd"><a href="{pigcms::U('Diancai/admin',array('id'=>$hostlist['id'],'token'=>$token))}" class="hover-tooltip-order"><span class=" glyphicon glyphicon-shopping-cart"></span></a> <a href="{pigcms::U('Diancai/set',array('id'=>$hostlist['id'],'token'=>$token))}" class="hover-tooltip-edit"><span class="glyphicon glyphicon-edit"></span></a> <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Diancai/index_del',array('id'=>$hostlist['id'],'token'=>$token))}');" class="hover-tooltip-trash"><span class="glyphicon glyphicon-trash danger"></span></a></td>
+                    </tr>
+                    </volist>
+                     <tr>
+                   
+                      <td colspan="6" style="text-align: right">{pigcms:$page}</td>
+                    </tr>
+                </table>
+                </div>
+                </div>
+              </div>
+            <!--right--end-->  
+            </div>  
+      
+ </div>
+<include file="Public:footer"/>

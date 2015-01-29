@@ -1,0 +1,106 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Product_set.css" rel="stylesheet"/>
+<script type="text/javascript" src="/tpl/static/xhedit/jquery/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/xheditor-1.2.1.min.js"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/xheditor_lang/zh-cn.js"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/xheditor_plugins/showdown.js"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/xheditor_plugins/htmldomparser.js"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/xheditor_plugins/html2markdown.js"></script>
+
+<script src="./tpl/static/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="./tpl/static/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="./tpl/static/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/jquery/jquery-1.4.4.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $("#form").valid([
+            {name: "wname", simple: "名字", require: true},
+            {name: "catid", message: "请选择类别", require: true},
+            //{ name:"price",type:"currency",message:"价格输入不正确"},
+            {name: "bianhao", message: "编号不能为空", require: true},
+            {name: "shoujihao", message: "手机号不能为空", require: true},
+            //{ name:"fakemembercount",type:"int",message:"报名基数只能填写整数或0"}
+
+        ], true, true);
+
+    })
+</script>
+<div class="content">
+    <div class="ffBox">
+        <include file="Public:left"/>      
+        <!--right--begain-->
+        <div class="right">
+            <div class="right">
+                <p class="rightTop">
+                    <a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+
+                <p class="artiEdit"><span class="big">员工信息添加</p>
+                <form class="form" method="post" action="{pigcms::U('Yuangong/addyg',array('token'=>$token,'id'=>session('wxid')))}" enctype="multipart/form-data" id="form" > 
+
+                    <input type="hidden" name="token" id="token" value="{pigcms:$_GET['token']}" />
+
+                    <p class="same">
+                        <span class="Tex">姓名：</span>
+                        <input type="text" name="wname" value="" class="circle"/>
+                    </p>
+                    <p class="same">
+                        <span class="Tex">员工编号：</span>
+                        <input type="text" id="bianhao" onchange="calDiscount();" name="bianhao" value="" class="Scircle"/>
+                    </p>
+                    <p class="same">
+                        <span class="Tex">手机号：</span>
+                        <input type="text" id="shoujihao" onchange="calDiscount();" name="shoujihao" value="" class="Scircle"/>
+                    </p>
+                    <p class="same">
+                        <span class="Tex">性别：</span>
+                        <span>
+                            <input type="radio" id="sex" name="sex" value="1" class="Scircle" style="width: 10px;"/><span style="float:left;">男</span>
+                        </span>
+                        <span>
+                            <input type="radio" id="sex"  name="sex" value="2" class="Scircle" style="width: 10px;" >女
+                        </span>
+                    </p>
+                    <div class="keyWord">
+                        <span class="Tex">类别：</span>
+                        <select id="catid" name="catid"><option value="0">请选择分类...
+                            </option>
+                            <volist name="rzt" id="vo">
+                                <option value="{pigcms:$vo.did}">
+                                    {pigcms:$vo.departmentname}
+                                </option>
+                            </volist>
+
+
+                        </select>
+                    </div>
+
+
+
+                    <p class="same">
+                        <span class="Tex">Logo地址：</span>
+                        <input type="text" id='url' name="logourl" value=""  class="circle"/><a href="###" onclick="upyunPicUpload($(this).prev().attr('id'), 'pic', 700, 420, 'qtclsw1382672973')" class="a_upload">上传</a>
+                    </p>
+                    <div style="margin-top:20px;height:245px;">
+                        <span class="Tex">员工简介信息：</span>
+                        <div class="detailTex">
+                            <!--<textarea class="fontBox" name="content" id="content">{pigcms:$set.content}</textarea>-->
+                            <textarea name="jianjie" rows="8" cols="120" style="width:100%;border:1px #ADACB4 solid"></textarea>
+                        </div>
+                    </div>
+
+
+                    <p class="pressBox"><input type="submit" value="保存" class="addList"/></p>
+                </form>
+            </div>
+            <!--right--end-->
+        </div>   
+
+    </div>
+    <include file="Public:footer"/>

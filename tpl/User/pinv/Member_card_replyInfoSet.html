@@ -1,0 +1,78 @@
+<?php $nav = "MEMBER"; $side = "REPLY" ?>
+<include file="Public:head"/>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+<link type="text/css" href="{pigcms::RES}/css/Home_set.css" rel="stylesheet"/>
+<style>
+.artiEdit{height:33px;line-height:33px;border-bottom:1px #eee solid;margin-top:15px;}
+.big{font-size:18px;font-weight:bold;color:#6e6e6e;float:left;margin-right:10px;}
+
+</style>
+<div class="container main">
+<div class="row">
+<include file="Member_card:left"/>
+     
+            <div class="col-md-10 main">
+ 				<div class="panel panel-success">
+			  <div class="panel-heading">
+				<h3 class="panel-title">回复配置</h3>
+			  </div>
+			  <div class="panel-body">
+           <form class="form" method="post" action="" target="_top" enctype="multipart/form-data">	 
+                <div class="special">
+                    <span class="Tex">关键词：</span>
+                    <span class="red"><span class="label label-primary">会员卡</span> —— 当用户输入该关键词时，将会触发此回复。</span>
+                </div>
+                <div class="same">
+                    <span class="Tex">会员回复标题：</span>
+                    <input type="text"  name="title" value="{pigcms:$set.title}"  class="circle"/> 
+                    <p class="max">  会员回复会员卡的时候出现的图文标题</p>
+                </div>
+               <div class="same">
+                    <span class="Tex">非会员回复标题：</span>
+                    <input type="text"   name="title1" value="{pigcms:$set2.title}"   class="circle"/> 
+                    <p class="max">  非会员回复会员卡的时候出现的图文标题</p>
+                </div>
+               
+                <div class="commonx">
+                    <span class="Tex">会员内容介绍：</span>
+                    <textarea class="textArea" name="info" id="info" >{pigcms:$set.info}</textarea>
+                    <p class="max">最多填写120个字</p>
+                </div>
+                  <div class="commonx">
+                    <span class="Tex">非会员内容介绍：</span>
+                    <textarea class="textArea" name="info1" id="info1"  >{pigcms:$set2.info}</textarea>
+                    <p class="max">最多填写120个字</p>
+                </div>
+                <div class="same">
+                    <span class="Tex">会员回复图片：</span>
+                    <input type="text"  name="picurl" value="{pigcms:$set.picurl}" id="pic"   class="circle"/><a href="###" onclick="upyunPicUpload($(this).prev().attr('id'),'pic',700,420,'qtclsw1382672973')" class=" btn btn-info btn-xs"><span class="glyphicon glyphicon-upload"></span> 上传</a>					 
+                    <p class="max">填写图片外链地址，大小为720x400</p>
+                </div>
+                  <div class="same">
+                    <span class="Tex">非会员回复图片：</span>
+                    <input type="text" name="picurl1" value="{pigcms:$set2.picurl}" id="pic1"   class="circle"/><a href="###" onclick="upyunPicUpload($(this).prev().attr('id'),'pic',700,420,'qtclsw1382672973')" class=" btn btn-info btn-xs"><span class="glyphicon glyphicon-upload"></span> 上传</a>					 
+                    <p class="max">填写图片外链地址，大小为720x400</p>
+                </div>
+                <div class="same">
+                    <span class="Tex">第三方接口：</span>
+                    <input type="text"  name="apiurl" value="{pigcms:$set.apiurl}"   class="circle"/>
+                    <p class="max">{wechat_id}表示用户参数</p>
+		 
+                </div> 
+   					<input type="hidden" name="keyword" value="{Pigcms:$infoType.keyword}" />
+					<input type="hidden" name="infotype" value="{Pigcms:$infoType.type}" />
+					<input type="hidden" name="token" value="{Pigcms:$token}" />
+                        
+                 </div>
+           	  <div class="panel-footer" style="text-align:right"> 
+		  		<input type="submit" value="保存" class="btn btn-success"/>
+		      </div>
+		           </form>
+            </div>
+            </div>
+            </div>
+      
+ </div>
+<include file="Public:footer"/>

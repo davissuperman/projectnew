@@ -1,0 +1,108 @@
+CREATE TABLE IF NOT EXISTS `tp_diancai` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `token` varchar(50) NOT NULL,
+  `keyword` varchar(50) NOT NULL COMMENT '关键词',
+  `title` varchar(50) NOT NULL COMMENT '商家名称',
+  `address` varchar(50) NOT NULL COMMENT '商家地',
+  `tel` varchar(13) NOT NULL COMMENT '商家电话',
+  `index_pic` varchar(250) NOT NULL COMMENT '回复时封面图片',
+  `headpic` varchar(250) NOT NULL COMMENT '头部图片',
+  `info` text NOT NULL COMMENT '店铺介绍',
+  `gsgonggao` text NOT NULL COMMENT '公司公告',
+  `creattime` int(11) NOT NULL COMMENT '创建日期',
+  `zdyname` varchar(255) NOT NULL COMMENT '自定义名字',
+  `dituaddress` varchar(255) NOT NULL COMMENT '搜索地图上的位置',
+  `zdynr` varchar(255) NOT NULL COMMENT '类型选择',
+  `zdylx` varchar(255) NOT NULL COMMENT '自定义类型',
+  `jingdu` varchar(255) NOT NULL COMMENT '地图经度',
+  `weidu` varchar(255) NOT NULL COMMENT '地图纬度',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='点菜信息表' AUTO_INCREMENT=6 ;
+
+
+CREATE TABLE IF NOT EXISTS `tp_diancai_caipin` (
+  `goods_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '菜品id',
+  `token` char(16) NOT NULL DEFAULT '' COMMENT '商家唯一标识',
+  `c_did` int(10) NOT NULL COMMENT '父id',
+  `cpname` varchar(30) NOT NULL DEFAULT '' COMMENT '菜品名称',
+  `cpurl` varchar(255) NOT NULL DEFAULT '' COMMENT '菜品图片',
+  `goods_price` int(10) NOT NULL COMMENT '价钱',
+  `cpjianjie` text NOT NULL COMMENT '菜品介绍',
+  `cdate` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
+  PRIMARY KEY (`goods_id`),
+  KEY `token` (`token`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+
+
+CREATE TABLE IF NOT EXISTS `tp_diancai_fenlei` (
+  `cid` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '菜品分类id',
+  `token` char(16) NOT NULL DEFAULT '' COMMENT '商家唯一标识',
+  `caipname` varchar(30) NOT NULL DEFAULT '' COMMENT '菜品分类名',
+  `jieshao` text NOT NULL COMMENT '菜品简介',
+  `ctime` int(20) NOT NULL COMMENT '创建时间',
+  PRIMARY KEY (`cid`),
+  KEY `token` (`token`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+
+CREATE TABLE IF NOT EXISTS `tp_diancai_input` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `token` varchar(255) NOT NULL COMMENT '网站token',
+  `d_fid` int(11) NOT NULL COMMENT '父id',
+  `zdyname` varchar(250) NOT NULL DEFAULT '' COMMENT '自定义名字',
+  `zdynr` varchar(250) NOT NULL DEFAULT '' COMMENT '自定义类型',
+  `zdylx` varchar(250) NOT NULL DEFAULT '' COMMENT '自定义选项类型',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
+
+
+CREATE TABLE IF NOT EXISTS `tp_diancai_order` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `token` varchar(50) NOT NULL,
+  `wecha_id` varchar(50) NOT NULL,
+  `book_people` varchar(50) NOT NULL COMMENT '预订人',
+  `order_sn` varchar(100) NOT NULL COMMENT '订单号',
+  `tel` varchar(13) NOT NULL COMMENT '电话',
+  `checktime` int(11) NOT NULL COMMENT '订单生成时间',
+  `goods_num` int(11) NOT NULL COMMENT '预订数量',
+  `price` int(11) NOT NULL COMMENT ' 总价格',
+  `dizhi` varchar(255) NOT NULL COMMENT '地址',
+  `order_status` int(11) NOT NULL COMMENT '订单状态 1 成功,2 失败,3 未处理，4 用户取消状态',
+  `cid` int(11) NOT NULL COMMENT '商家id',
+  `remarks` varchar(250) NOT NULL COMMENT '留言备注',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='订单管理' AUTO_INCREMENT=13 ;
+
+CREATE TABLE IF NOT EXISTS `tp_diancai_order_caipin` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `token` char(16) NOT NULL DEFAULT '' COMMENT '商家唯一标识',
+  `wecha_id` varchar(50) NOT NULL,
+  `c_did` int(10) NOT NULL COMMENT '父id',
+  `sub_order_sn` varchar(100) NOT NULL COMMENT '订单号',
+  `cpname` varchar(30) NOT NULL DEFAULT '' COMMENT '菜品名称',
+  `goods_id` char(16) NOT NULL DEFAULT '' COMMENT '商品id',
+  `goods_price` int(10) NOT NULL COMMENT '价钱',
+  `sub_goods_buy_number` int(10) NOT NULL COMMENT '数量',
+  `sub_goods_buy_sum` int(10) NOT NULL COMMENT '总价钱',
+  `cdate` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
+  PRIMARY KEY (`id`),
+  KEY `token` (`token`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+
+
+
+CREATE TABLE IF NOT EXISTS `tp_diancai_users` (
+  `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户id',
+  `token` varchar(200) NOT NULL COMMENT '网站token',
+  `wecha_id` varchar(200) NOT NULL COMMENT '用户唯一标识',
+  `user_sjid` int(11) NOT NULL COMMENT '商家id',
+  `tel` varchar(100) DEFAULT NULL COMMENT '用户电话',
+  `user_name` varchar(50) DEFAULT NULL COMMENT '用户名',
+  `user_dizhi` varchar(255) DEFAULT NULL COMMENT '地址',
+  `user_nicheng` varchar(255) DEFAULT NULL COMMENT '微信昵称',
+  `reg_time` int(11) DEFAULT NULL COMMENT '注册时间',
+  `last_login_time` datetime DEFAULT NULL COMMENT '最后登陆时间',
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;

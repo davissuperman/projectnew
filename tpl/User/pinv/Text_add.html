@@ -1,0 +1,153 @@
+<?php $nav = "BASIC"; $side = "TEXT" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Text_add.css" rel="stylesheet"/>
+<div class="container main">
+<div class="row">
+<include file="Basic:left"/>
+
+     
+            <div class="col-md-10 main">
+            	<div class="panel panel-success">
+	  <div class="panel-heading">
+		<h3 class="panel-title">新增文本自定义回复</h3>
+	  </div>
+	  <div class="panel-body">
+            	 <form class="form" method="post"   action="{pigcms::U('Text/insert')}"  target="_top" enctype="multipart/form-data" >
+            	<p class="same">
+                    <span class="Tex">关键词：</span>
+                    <input type="text" value="" class="circle" id="keyword" value="" name="keyword"/>
+                </p>
+                <p class="example">多个关键词请用空格格开：例如: 美丽 漂亮 好看 </p>
+                <div class="keyWord">
+                    <span class="Tex">关键词类型：</span>
+                    <div class="keyRight">
+                        <input type="radio" class="radChoice" checked="checked" name="type" value="1" /><span class="radTex">完全匹配，用户输入的和此关键词一样才会触发!</span>
+                        </br>
+                        <input type="radio" class="radChoice"  name="type" value="2"/><span class="radTex">包含匹配 (只要用户输入的文字包含本关键词就触发!v2用户才生效)</span>
+                    </div>
+                </div>
+                 <p class="areaSame">
+                    <span class="Tex">内容或间介：</span>
+                    <textarea class="circleArea"  id="Hfcontent" name="text"></textarea>
+                    <img src="{pigcms::RES}/img/linkImg.gif" class="linkImg"/>
+                </p>
+                <p class="replyBox"><span class="faceBox"><img src="{pigcms::RES}/images/face/mm.gif" class="mm"/><span>表情</span></span></p>
+                <p class="example" style="margin-left:180px; margin-top: -10px;">请不要多于1000字否则无法发送! </p>
+                
+                  <div class="faceShow">
+                     	<img onclick="jsbq('微笑')" alt="微笑" src="{pigcms::RES}/images/face/0.gif">
+                        <img onclick="jsbq('撇嘴')" alt="撇嘴" src="{pigcms::RES}/images/face/1.gif">
+                        <img onclick="jsbq('色')" alt="色" src="{pigcms::RES}/images/face/2.gif">
+                        <img onclick="jsbq('发呆')" alt="发呆" src="{pigcms::RES}/images/face/3.gif">
+                        <img onclick="jsbq('得意')" alt="得意" src="{pigcms::RES}/images/face/4.gif">
+                        <img onclick="jsbq('流泪')" alt="流泪" src="{pigcms::RES}/images/face/5.gif">
+                        <img onclick="jsbq('害羞')" alt="害羞" src="{pigcms::RES}/images/face/6.gif">
+                        <img onclick="jsbq('闭嘴')" alt="闭嘴" src="{pigcms::RES}/images/face/7.gif">
+                        <img onclick="jsbq('睡')" alt="睡" src="{pigcms::RES}/images/face/8.gif">
+                        <img onclick="jsbq('大哭')" alt="大哭" src="{pigcms::RES}/images/face/9.gif">
+						<img onclick="jsbq('尴尬')" alt="尴尬" src="{pigcms::RES}/images/face/10.gif">
+						<img onclick="jsbq('发怒')" alt="发怒" src="{pigcms::RES}/images/face/11.gif">
+						<img onclick="jsbq('调皮')" alt="调皮" src="{pigcms::RES}/images/face/12.gif">
+						<img onclick="jsbq('呲牙')" alt="呲牙" src="{pigcms::RES}/images/face/13.gif">
+						<img onclick="jsbq('惊讶')" alt="惊讶" src="{pigcms::RES}/images/face/14.gif">
+						<img onclick="jsbq('难过')" alt="难过" src="{pigcms::RES}/images/face/15.gif">
+						<img onclick="jsbq('酷')" alt="酷" src="{pigcms::RES}/images/face/16.gif">
+						<img onclick="jsbq('冷汗')" alt="冷汗" src="{pigcms::RES}/images/face/17.gif">
+						<img onclick="jsbq('抓狂')" alt="抓狂" src="{pigcms::RES}/images/face/18.gif">
+						<img onclick="jsbq('吐')" alt="吐" src="{pigcms::RES}/images/face/19.gif">
+						<img onclick="jsbq('偷笑')" alt="偷笑" src="{pigcms::RES}/images/face/20.gif">
+						<img onclick="jsbq('可爱')" alt="可爱" src="{pigcms::RES}/images/face/21.gif">
+						<img onclick="jsbq('白眼')" alt="白眼" src="{pigcms::RES}/images/face/22.gif">
+						<img onclick="jsbq('傲慢')" alt="傲慢" src="{pigcms::RES}/images/face/23.gif">
+						<img onclick="jsbq('饥饿')" alt="饥饿" src="{pigcms::RES}/images/face/24.gif">
+						<img onclick="jsbq('困')" alt="困" src="{pigcms::RES}/images/face/25.gif">
+						<img onclick="jsbq('惊恐')" alt="惊恐" src="{pigcms::RES}/images/face/26.gif">
+						<img onclick="jsbq('流汗')" alt="流汗" src="{pigcms::RES}/images/face/27.gif">
+						<img onclick="jsbq('憨笑')" alt="憨笑" src="{pigcms::RES}/images/face/28.gif">
+						<img onclick="jsbq('大兵')" alt="大兵" src="{pigcms::RES}/images/face/29.gif">
+						<img onclick="jsbq('奋斗')" alt="奋斗" src="{pigcms::RES}/images/face/30.gif">
+						<img onclick="jsbq('咒骂')" alt="咒骂" src="{pigcms::RES}/images/face/31.gif">
+						<img onclick="jsbq('疑问')" alt="疑问" src="{pigcms::RES}/images/face/32.gif">
+						<img onclick="jsbq('嘘')" alt="嘘" src="{pigcms::RES}/images/face/33.gif">
+						<img onclick="jsbq('晕')" alt="晕" src="{pigcms::RES}/images/face/34.gif">
+						<img onclick="jsbq('折磨')" alt="折磨" src="{pigcms::RES}/images/face/35.gif">
+						<img onclick="jsbq('衰')" alt="衰" src="{pigcms::RES}/images/face/36.gif">
+						<img onclick="jsbq('骷髅')" alt="骷髅" src="{pigcms::RES}/images/face/37.gif">
+						<img onclick="jsbq('敲打')" alt="敲打" src="{pigcms::RES}/images/face/38.gif">
+						<img onclick="jsbq('再见')" alt="再见" src="{pigcms::RES}/images/face/39.gif">
+						<img onclick="jsbq('擦汗')" alt="擦汗" src="{pigcms::RES}/images/face/40.gif">
+						<img onclick="jsbq('抠鼻')" alt="抠鼻" src="{pigcms::RES}/images/face/41.gif">
+						<img onclick="jsbq('鼓掌')" alt="鼓掌" src="{pigcms::RES}/images/face/42.gif">
+						<img onclick="jsbq('糗大了')" alt="糗大了" src="{pigcms::RES}/images/face/43.gif">
+						<img onclick="jsbq('坏笑')" alt="坏笑" src="{pigcms::RES}/images/face/44.gif">
+						<img onclick="jsbq('左哼哼')" alt="左哼哼" src="{pigcms::RES}/images/face/45.gif">
+						<img onclick="jsbq('右哼哼')" alt="右哼哼" src="{pigcms::RES}/images/face/46.gif">
+						<img onclick="jsbq('哈欠')" alt="哈欠" src="{pigcms::RES}/images/face/47.gif">
+						<img onclick="jsbq('鄙视')" alt="鄙视" src="{pigcms::RES}/images/face/48.gif">
+						<img onclick="jsbq('委屈')" alt="委屈" src="{pigcms::RES}/images/face/49.gif">
+						<img onclick="jsbq('快哭了')" alt="快哭了" src="{pigcms::RES}/images/face/50.gif">
+<img onclick="jsbq('阴险')" alt="阴险" src="{pigcms::RES}/images/face/51.gif">
+<img onclick="jsbq('亲亲')" alt="亲亲" src="{pigcms::RES}/images/face/52.gif">
+<img onclick="jsbq('吓')" alt="吓" src="{pigcms::RES}/images/face/53.gif">
+<img onclick="jsbq('可怜')" alt="可怜" src="{pigcms::RES}/images/face/54.gif">
+<img onclick="jsbq('菜刀')" alt="菜刀" src="{pigcms::RES}/images/face/55.gif">
+<img onclick="jsbq('西瓜')" alt="西瓜" src="{pigcms::RES}/images/face/56.gif">
+<img onclick="jsbq('啤酒')" alt="啤酒" src="{pigcms::RES}/images/face/57.gif">
+<img onclick="jsbq('篮球')" alt="篮球" src="{pigcms::RES}/images/face/58.gif">
+<img onclick="jsbq('乒乓')" alt="乒乓" src="{pigcms::RES}/images/face/59.gif">
+<img onclick="jsbq('咖啡')" alt="咖啡" src="{pigcms::RES}/images/face/60.gif">
+<img onclick="jsbq('饭')" alt="饭" src="{pigcms::RES}/images/face/61.gif">
+<img onclick="jsbq('猪头')" alt="猪头" src="{pigcms::RES}/images/face/62.gif">
+<img onclick="jsbq('玫瑰')" alt="玫瑰" src="{pigcms::RES}/images/face/63.gif">
+<img onclick="jsbq('凋谢')" alt="凋谢" src="{pigcms::RES}/images/face/64.gif">
+<img onclick="jsbq('示爱')" alt="示爱" src="{pigcms::RES}/images/face/65.gif">
+<img onclick="jsbq('爱心')" alt="爱心" src="{pigcms::RES}/images/face/66.gif">
+<img onclick="jsbq('心碎')" alt="心碎" src="{pigcms::RES}/images/face/67.gif">
+<img onclick="jsbq('蛋糕')" alt="蛋糕" src="{pigcms::RES}/images/face/68.gif">
+<img onclick="jsbq('闪电')" alt="闪电" src="{pigcms::RES}/images/face/69.gif">
+<img onclick="jsbq('炸弹')" alt="炸弹" src="{pigcms::RES}/images/face/70.gif">
+<img onclick="jsbq('刀')" alt="刀" src="{pigcms::RES}/images/face/71.gif">
+<img onclick="jsbq('足球')" alt="足球" src="{pigcms::RES}/images/face/72.gif">
+<img onclick="jsbq('瓢虫')" alt="瓢虫" src="{pigcms::RES}/images/face/73.gif">
+<img onclick="jsbq('便便')" alt="便便" src="{pigcms::RES}/images/face/74.gif">
+<img onclick="jsbq('月亮')" alt="月亮" src="{pigcms::RES}/images/face/75.gif">
+<img onclick="jsbq('太阳')" alt="太阳" src="{pigcms::RES}/images/face/76.gif">
+<img onclick="jsbq('礼物')" alt="礼物" src="{pigcms::RES}/images/face/77.gif">
+<img onclick="jsbq('拥抱')" alt="拥抱" src="{pigcms::RES}/images/face/78.gif">
+<img onclick="jsbq('强')" alt="强" src="{pigcms::RES}/images/face/79.gif">
+<img onclick="jsbq('弱')" alt="弱" src="{pigcms::RES}/images/face/80.gif">
+<img onclick="jsbq('握手')" alt="握手" src="{pigcms::RES}/images/face/81.gif">
+<img onclick="jsbq('胜利')" alt="胜利" src="{pigcms::RES}/images/face/82.gif">
+<img onclick="jsbq('抱拳')" alt="抱拳" src="{pigcms::RES}/images/face/83.gif">
+<img onclick="jsbq('勾引')" alt="勾引" src="{pigcms::RES}/images/face/84.gif">
+<img onclick="jsbq('拳头')" alt="拳头" src="{pigcms::RES}/images/face/85.gif">
+<img onclick="jsbq('差劲')" alt="差劲" src="{pigcms::RES}/images/face/86.gif">
+<img onclick="jsbq('爱你')" alt="爱你" src="{pigcms::RES}/images/face/87.gif">
+<img onclick="jsbq('NO')" alt="NO" src="{pigcms::RES}/images/face/88.gif">
+<img onclick="jsbq('OK')" alt="OK" src="{pigcms::RES}/images/face/89.gif">
+<img onclick="jsbq('爱情')" alt="爱情" src="{pigcms::RES}/images/face/90.gif">
+<img onclick="jsbq('飞吻')" alt="飞吻" src="{pigcms::RES}/images/face/91.gif">
+<img onclick="jsbq('跳跳')" alt="跳跳" src="{pigcms::RES}/images/face/92.gif">
+<img onclick="jsbq('发抖')" alt="发抖" src="{pigcms::RES}/images/face/93.gif">
+<img onclick="jsbq('怄火')" alt="怄火" src="{pigcms::RES}/images/face/94.gif">
+<img onclick="jsbq('转圈')" alt="转圈" src="{pigcms::RES}/images/face/95.gif">
+<img onclick="jsbq('磕头')" alt="磕头" src="{pigcms::RES}/images/face/96.gif">
+<img onclick="jsbq('回头')" alt="回头" src="{pigcms::RES}/images/face/97.gif">
+<img onclick="jsbq('跳绳')" alt="跳绳" src="{pigcms::RES}/images/face/98.gif">
+<img onclick="jsbq('挥手')" alt="挥手" src="{pigcms::RES}/images/face/99.gif">
+<img onclick="jsbq('激动')" alt="激动" src="{pigcms::RES}/images/face/100.gif">
+<img onclick="jsbq('街舞')" alt="街舞" src="{pigcms::RES}/images/face/101.gif">
+<img onclick="jsbq('献吻')" alt="献吻" src="{pigcms::RES}/images/face/102.gif">
+<img onclick="jsbq('左太极')" alt="左太极" src="{pigcms::RES}/images/face/103.gif">
+                     </div>
+            </div>
+      <div class="panel-footer" style="text-align:right"> 
+	  		<input type="submit" value="保存" class="btn btn-success"/>
+	  		<a href="javascript:history.go(-1);"  class="btn btn-link">取消</a> 
+      </div>
+      </form>
+</div>
+</div>        
+</div>
+</div>
+<include file="Public:footer"/>

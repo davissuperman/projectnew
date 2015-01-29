@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{pigcms::RES}/images/main.css" type="text/css" rel="stylesheet">
+<style>
+	.listBox {margin-bottom:10px;padding:0 5px;}
+	.listBox li {border-bottom:1px dashed #CCC;border-top:2px solid #FFFFFF;cursor: pointer;float:left;height:30px;line-height:30px;padding-left:10px;width:190px;}
+	.listBox li input,.listBox li span{float:left;margin-right:10px;}
+	.listBox li input{margin-top:8px;}
+	.bginput{border:0px;color:#FFF;float:left;font-size:14px;font-weight:bold;height:38px;line-height:38px;margin:15px 20px 15px 5px;text-align:center;width:125px;cursor:pointer;background:url(/tpl/static/img/butBj.gif) no-repeat;}
+	.bginput:hover{background:url(/tpl/static/img/butBjO.gif) no-repeat;}
+	.buttonBox{clear:both;}
+</style>
+<script src="{pigcms::STATICS}/jquery-1.4.2.min.js" type="text/javascript"></script>
+<body>		
+				<ul class="listBox">
+					<foreach name='val' item='vo'>
+					<li>
+						<input type="checkbox" name='lbb' value="{pigcms:$vo.funname}" class="Chec" id="{pigcms:$vo.funname}"/>
+						<span>{pigcms:$vo.name}</span>
+					</li>
+					</foreach>			
+				</ul>	
+                <p class="buttonBox">
+				<input class="bginput" type="submit" name="s" value="修 改" onclick="javascript:sub();"><input class="bginput" type="button" onclick="javascript:history.back(-1);" value="返 回" ></p>
+				<input type="hidden" value="{pigcms:$token}" id="token"/>
+				<volist name='va' id='c'>
+						<input type="hidden" class='hi' value="{pigcms:$c}">			
+				</volist>
+											
+</body>
+<script>
+$(function(){
+var c = $('.Chec');
+var h = $('.hi');
+var carr = new Array();
+var harr = new Array();
+c.each(function(){
+	carr.push(this.value);
+});
+h.each(function(){
+ harr.push( this.value );
+});
+var k = new Array();
+var k = carr.concat(harr).sort();
+for( var i= 0; i<=k.length;++i){
+			if( k[i]!='' && k[i]==k[i+1] && typeof k[i]!='undefined' ){
+			var l = $("#"+k[i]+"").attr('checked',true);
+			}
+
+}
+
+});
+function sub(){
+var ar = new Array();
+var l= $("input:checkbox:checked").each(function(){
+			ar.push(this.value);
+})
+var scr = ar.toString();
+var token = $( '#token' ).val();
+	$.post('/index.php?g=System&m=Token&a=ajax',{name:scr,tok:token},function( html ){
+					if( html==1 ){
+						alert( '功能添加成功' );
+					}else{
+						alert( '功能添加失败' );
+					}		
+	});
+
+}
+</script>
+</html>

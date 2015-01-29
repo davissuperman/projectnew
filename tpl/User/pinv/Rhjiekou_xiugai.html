@@ -1,0 +1,59 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Adma_index.css" rel="stylesheet"/>
+ <div class="content">
+ <div class="ffBox">
+<include file="Public:left"/>
+     
+    <!--right--begain-->
+            <div class="right">
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+            	 <p class="artiEdit">
+            	 <span class="big">第三方接口添加</span></p>
+             
+                <form class="form" method="post" action="{pigcms::U('Rhjiekou/xiugai')}"  enctype="multipart/form-data">
+                <div class="rightLeft">
+                	 <input type='hidden' value='{pigcms:$_GET["token"]}' name='token'/>
+                	 <input type='hidden' value='{pigcms:$_SESSION["uid"]}' name='uid'/>
+                	 <input type='hidden' value='{pigcms:$list.id}' name='id'/>
+                    <p class="same">
+                        <span class="Tex">接口触发词：</span>
+                        <input type="text" name="keyword" value="{pigcms:$list.keyword}" ID="etitle" class="circle"/>
+                	</p>
+					<p class="same">
+                        <span class="Tex">接口类型：</span>
+                        <input type="radio"  name="leixing" value="1"  id="ewm" class="" <if condition="$list['number'] eq 1">checked="checked"</if>/>
+						<span>必须是微信xml类型。</span>
+                	</p>
+					 
+                    <p class="same">
+                        <span class="Tex">api地址：</span>
+                        <input type="text"  name="url" value="{pigcms:$list.url}"  id="ewm" class="circle"/>
+                	</p>
+					 
+                   
+                    <p class="expBox">
+                    	<input type="submit" name="button" value="保存" class="surePress"/>
+                       
+                       
+                    </p>
+                </div>
+              
+             </form>
+            </div>
+            <!--right--end-->    
+      <script type="text/javascript">
+function DivFollowingText2()
+{
+document.getElementById("jieTex").innerHTML=document.getElementById("info").value;
+}
+function DivFollowingText3()
+{
+document.getElementById("gzhcopyright").innerHTML=document.getElementById("copyright").value;
+}
+</script> 
+</div>
+ </div>
+<include file="Public:footer"/>

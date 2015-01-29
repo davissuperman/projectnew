@@ -1,0 +1,64 @@
+<?php $nav = "FUNCTION"; $side = "CATEGORY"; $sideTop = "PRODUCT"; ?>
+<include file="Public:head"/>
+<div class="container main">
+    <div class="row">
+        <include file="Store:left"/>
+
+        <div class="col-md-10 main">
+            <ol class="breadcrumb">
+                <li><a href="{pigcms::U('Store/index',array('token'=>$token))}">微商城</a></li>
+                <li><a href="{pigcms::U('Store/index',array('token'=>$token))}">商城管理</a></li>
+                <li class="active">商品管理</li>
+            </ol>
+    
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">商品管理</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="pull-right add-button">
+                        <if condition="$type eq 1">     
+                        <a href="{pigcms::U('Store/normsAdd',array('token' => $token, 'catid' => $catid, 'type' => $type))}" title="添加" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> 新增 {pigcms:$catData.name} 分类的外观</a> 
+                         <else />
+                        <a href="{pigcms::U('Store/normsAdd',array('token' => $token, 'catid' => $catid, 'type' => $type))}" title="添加" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> 新增 {pigcms:$catData.name} 分类的规格</a>
+                        </if>
+                    </div>
+                    <div class="clearfix"></div>
+                     
+                            <form method="post" action="" id="info">
+                                <table class="table table-striped" border="0" cellspacing="0" cellpadding="0">
+                                    <thead>
+                                        <tr>
+                                            <th class="select">名称</th>
+                                            <th width="160">分类名称</th>
+                                            <th width="130"><if condition="$type eq 1">外观<else />规格</if>值</th>
+                                    <th width="250" class="norightborder">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr></tr>
+                                    <volist name="list" id="hostlist"> 
+                                        <tr>
+                                        
+                                            <td> {pigcms:$catData.name} </td>
+                                             <td> <if condition="$type eq 1">外观<else />规格</if>值</td>
+                                            <td>{pigcms:$hostlist.value}</td>
+                                            <td class="norightborder">
+                                                <a href="{pigcms::U('Store/normsAdd',array('token' => $token, 'id' => $hostlist['id'], 'catid' => $catid, 'type' => $type))}">修改</a>
+                                                <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Store/normsDel',array('token' => $token, 'id' => $hostlist['id'], 'catid' => $catid, 'type' => $type))}');">删除</a>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                        <div class="cLine">
+                            <div class="pageNavigator right">
+                                <div class="pages">{pigcms:$page}</div>
+                            </div>
+                            <div class="clr"></div>
+                        </div>
+                    </div>
+                </div></div></div></div></div>
+<include file="Public:footer"/>

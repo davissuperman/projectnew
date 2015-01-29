@@ -1,0 +1,213 @@
+<?php $nav = "FUNCTION"; $side = "INDEX"; $sideTop = "PRODUCT"; ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Product_index.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+<link type="text/css" rel="stylesheet" href="{pigcms::RES}/css/manage.css"/>
+<link type="text/css" href="{pigcms::RES}/js/sorttable/jquery-ui.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/sorttable/jquery-ui.js"></script>
+<div class="container main">
+<div class="row">
+<include file="Product:left"/>
+
+	<div class="col-md-10 main">
+        <ol class="breadcrumb">
+              <li><a href="{pigcms::U('Product/index',array('token'=>$token))}">微商城</a></li>
+              <li><a href="{pigcms::U('Product/index',array('token'=>$token))}">商城管理</a></li>
+              <li class="active">商品管理</li>
+            </ol>
+	<!-- <P class="titlex">商品管理</P>
+	 <p class="pressBox"><a class="addList" href="{pigcms::U('Product/add',array('token'=>$token,'dining'=>$isDining))}" title="添加" class="btnGrayS vm bigbtn">添加<if condition="$isDining neq 1">商品<else/>菜品</if></a><a href="{pigcms::U('Alipay_config/index',array('token'=>$token))}"  class="addList"  style="margin-left:10px;">支付宝配置</a></p>
+        <div class="searchx">-->
+        	
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">商品管理</h3>
+                    </div>
+                <div class="panel-body">
+                    <div class="pull-right add-button">
+                        <a href="{pigcms::U('Product/add',array('token'=>$token,'dining'=>$isDining))}" title="添加" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> 添加<if condition="$isDining neq 1">商品<else/>菜品</if></a><!-- <a href="{pigcms::U('Alipay_config/index',array('token'=>$token))}"  class="btn btn-success btn-sm"  style="margin-left:10px;"><span class="glyphicon glyphicon-wrench"></span> 支付宝配置</a> -->
+                    </div>
+                    <div class="clearfix"></div><form method="post" action="">
+      <div class="searchx">
+            <p class="sameP">
+                <span class="fontTex">发布时间：</span>
+                <input type="text" class="textCase" name="startime" onclick="WdatePicker();"/>
+                <span class="dao">到</span>
+                <input type="text" class="textCase" name="endtime" onclick="WdatePicker();"/>
+                <span class="fontTex">分类：</span>
+               <!-- <select id="catid" name="catid"><option value="0" selected="selected">请选择分类...</option>{pigcms:$catsOptions}</select> -->
+                                   <select id="catid" name="catid">
+                                    <option value="">全部分类</option>
+                                        <volist name="options" id="option">
+                                            <option value="{pigcms:$option['id']}" >{pigcms:$option['name']}</option>
+                                        </volist>
+                                   </select>
+            </p>
+            <p class="sameP">
+                <span class="fontTex">是否上架：</span>
+                <select class="selX" name="putaway">
+                    <option value="1">是</option>
+                    <option value="0">否</option>
+                </select>
+                <input type="submit" value="搜索" class="btn btn-info btn-xs" style="margin:5px  5px"/>
+            </p>
+          <!--   <p class="sameP">
+                <span class="fontTex">价格区间：</span>
+                <input type="text" class="textCase" name="p"/>
+                <span class="dao">到</span>
+                <input type="text" class="textCase"/>
+            </p> -->
+           <!--  <p class="sameP">
+                <span class="fontTex">关键词：</span>
+                <input type="text" class="textCaseX"/>
+                <input type="submit" value="搜索" class="btn btn-info btn-xs"/>
+            </p> -->
+        </div>
+        </form>
+        </div>
+        <input type="button" value="批量删除" id='alldel' class="btn btn-danger pull-right" style="margin-bottom:10px" data-toggle="modal" data-target="#myModal">
+     <table class="table table-striped" cellspacing="1">
+        	<thead>
+                <th style="width:7%;">排序<span class="glyphicon glyphicon-question-sign hover-popover" data-container="body" data-toggle="popover" data-placement="left" data-trigger="hover" data-content="拖拉下面的箭头可以调整显示图片的先后顺序喔!"></span></th> 
+            	<th class="">删除</th>
+                <th class="">ID</th>
+                <th class="">商品名称</th>
+                <!-- <th class="second">卖出数量</th> -->
+                <th class="">分类</th>
+                <th class="">价格（元）</th>
+               <!-- <th class="short">排序</th>  -->
+                <th class="">是否上架</th>
+                <th class="">发布时间</th>
+                <th class="">管理操作</th>
+            </thead><form action="{pigcms::U('Product/alldel',array('token'=>$_GET['token']))}" id='form_d' method='post'>
+            <tbody>
+            <volist name="list" id="hostlist">
+			<tr ids="{pigcms:$hostlist.id}">
+                <td style="cursor:move" id='sort' ><span class="glyphicon glyphicon-sort"></span></td>  
+            	<td class="nosort"><input type="checkbox" name="alldel[]" value="{pigcms:$hostlist['id']}" /></td>
+                <td class="nosort">{pigcms:$hostlist['id']}</td>
+                <td class="nosort" id="write" >{pigcms:$hostlist.name|msubstr=0,9}</td>
+                <!-- <td>4</td> -->
+                <td class="nosort">{pigcms:$hostlist.classname}</td>
+                <td class="nosort">{pigcms:$hostlist.price}</td>
+                <!-- <td>001</td> -->
+                <td class="nosort"><if condition="$hostlist['putaway'] eq 1">是<else />否</if></td>
+                <td class="nosort">{pigcms:$hostlist.time|date="Y-m-d H:i:s",###}</td>
+                <td class="nosort">
+                    <a  href="{pigcms::U('Product/set',array('id'=>$hostlist['id'],'token'=>$token,'dining'=>$isDining))}" class="hover-tooltip-edit"><span class="glyphicon glyphicon-edit"></span></a>               
+                    <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Product/del',array('id'=>$hostlist['id'],'token'=>$token,'dining'=>$isDining))}');" class="hover-tooltip-trash"><span class="glyphicon glyphicon-trash danger"></span></a>
+        </td>
+            </tr>
+			</volist></tbody></form>
+        </table>
+		 <p class="page">{pigcms:$page}</p>
+    </div>
+
+    <!--right--begain-->
+<!--             <div class="right">
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+             <div class="artiEdit">
+             
+             	<span class="big">商品管理</span>
+                <form method="post" action="" class="souCase">
+                     <input type="hidden" name="ac" value="hotels-list">
+                     <input type="submit" value="搜索" class="searchPress"/>
+                     <input type="text" value="输入关键词搜索" class="search"/>
+             	</form>
+             
+             </div>
+                <ul class="listBox">
+                	<li class="onOver"><a href="{pigcms::U('Product/index',array('token'=>$token,'dining'=>$isDining))}"><if condition="$isDining neq 1">商品<else/>菜品</if>管理</a></li>
+                    <li><a href="{pigcms::U('Product/cats',array('token'=>$token,'dining'=>$isDining))}"><if condition="$isDining neq 1">商品分类<else/>菜品分类</if>管理</a></li>
+                    <li><a href="{pigcms::U('Product/orders',array('token'=>$token,'dining'=>$isDining))}">订单管理</a></li>
+                    <if condition="$isDining eq 1"><li><a href="{pigcms::U('Product/tables',array('token'=>$token,'dining'=>1))}">桌台管理</a></li></if>
+						<if condition="$isDining neq 1">
+						<li><a href="{pigcms::U('Product/reply',array('token'=>$token,'infotype'=>'Shop'))}">商城回复配置</a></li>
+						<else/>
+						<li><a href="{pigcms::U('Reply_info/set',array('token'=>$token,'infotype'=>'Dining'))}">订餐回复配置</a></li>
+						</if>
+					<li><a href="{pigcms::U('Product/shop_index',array('token'=>$token,'infotype'=>'Dining'))}">商城首页图片</a></li>
+                </ul>
+                <div class="showBox">
+                	<div>
+                        <p class="pressBox"><a class="addList" href="{pigcms::U('Product/add',array('token'=>$token,'dining'=>$isDining))}" title="添加" class="btnGrayS vm bigbtn">添加<if condition="$isDining neq 1">商品<else/>菜品</if></a><a href="{pigcms::U('Alipay_config/index',array('token'=>$token))}"  class="addList"  style="margin-left:10px;">支付宝配置</a></p>
+                       <form method="post" action="" id="info">
+                        <table class="sheet" cellspacing="1">
+                            <tr>
+                                <th class="firstTd">编号</th>
+                                <th class="secondTd">商品名称</th>
+                                <th class="thirdTd">价格</th>
+                                <th class="forthTd">关键词</th>
+                                <th class="forthTd">创建时间</th>
+                                <th class="sevenTd">操作</th>
+                            </tr>
+                             <volist name="list" id="hostlist">
+                            <tr>
+                                <td class="firstTd">{pigcms:$i}</td>
+                                <td class="secondTd">{pigcms:$hostlist.name}</td>
+                                <td class="thirdTd">{pigcms:$hostlist.price}元</td>
+                                <td class="forthTd">{pigcms:$hostlist.keyword}</td>
+                                <td class="forthTd">{pigcms:$hostlist.time|date="Y-m-d H:i:s",###}</td>
+                                <td class="sevenTd"><a  class="edit" href="{pigcms::U('Product/set',array('id'=>$hostlist['id'],'token'=>$token,'dining'=>$isDining))}">修改</a> <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Product/del',array('id'=>$hostlist['id'],'token'=>$token,'dining'=>$isDining))}');" class="cancel">删除</a></td>
+                            </tr>
+                            </volist>
+                        </table>
+                         <p class="page">{pigcms:$page}</p>
+                        </form>
+                    </div>
+            </div>
+            <!--right--end-->  
+        </div> 
+        </div> 
+        </div> 
+
+	</div>
+    <!-- Modal -->
+<div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding-top:170px">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title text-danger" id="myModalLabel">删除商品</h4>
+      </div>
+      <div class="modal-body ">
+        确定批量删除商品吗?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="$('#form_d').submit();">确定</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+    $(function(){
+       <?php $url=U('Product/sort',array('token'=>$_GET['token']));?>
+       $('tbody').sortable({
+           opacity: 0.6,
+           cancel:'.nosort',
+           helper: 'clone' ,
+           revert: true,
+           stop: function( event, ui ) {
+               var arr=[];
+               $('tbody tr').each(function(index, val) {
+                   var obj={};
+                   obj.id=$(this).attr('ids');
+                   obj.sort=index;
+                   arr.push(obj);
+               });
+               $.ajax({
+                   url: '{pigcms:$url}',
+                   type: 'post',
+                   dateType:'json',
+                   data: {sort:JSON.stringify(arr)},
+                   success:function(data){}
+               });
+           }
+       });
+    });
+</script>
+<include file="Public:footer"/>

@@ -1,0 +1,58 @@
+<?php $nav = "FUNCTION"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="./tpl/User/pinv/common/css/Text_add.css" rel="stylesheet"/>
+<script src="./tpl/User/pinv/common/js/date/WdatePicker.js"></script>
+<div class="container main">
+    <div class="row">
+        <include file="Doing:left"/>
+        <div class="col-md-10 main">
+            <div class="panel panel-success">
+                <div class="panel-heading cfix">
+                    <h3 class="panel-title pull-left">按钮统计</h3>
+                    <span class="small"> </span>
+                    <div class="search-box pull-right">
+
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div>
+                        
+                        <form method="post" action="" id="info">
+                            
+                            <div class="clearfix"></div>
+                            <table class="table table-striped" cellspacing="1">
+                                <tr>
+                                    <th class="firstTd">序号</th>
+                                    <th class="sevenTd">日期</th>
+                                    <th class="secondTd">开始游戏按钮</th>
+                                    <th class="thirdTd">提交信息按钮</th>                      
+                                    <th class="sevenTd">获得更多积分按钮</th>
+                                    <th class="sevenTd">参加活动按钮</th>
+                                </tr>
+                                <volist name="info" id="o"> 
+                                    <tr>
+                                        <td>{pigcms:$i}</td>
+                                         <td>{pigcms:$o.dateinfo}</td>
+                                        <td>{pigcms:$o.start}</td>
+                                        <td>{pigcms:$o.submit}</td>
+                                    <td>{pigcms:$o.more}</td>
+                                    <td>{pigcms:$o.participate}</td>
+                                    
+                                    </tr>
+                                </volist>
+                                <td colspan="9" style="text-align:right">{pigcms:$page}</td>
+                            </table>
+                            <input type="hidden" name="token" value="{pigcms:$_GET['token']}" /></form>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>   
+
+</div>
+<include file="Public:footer"/>

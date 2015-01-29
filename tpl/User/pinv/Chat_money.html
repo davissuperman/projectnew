@@ -1,0 +1,158 @@
+<?php $nav = "CRM"; $side = "MEMBER" ?>
+<include file="Public:head"/>
+<link rel="stylesheet" type="text/css" href="./tpl/User/default/common/css/cymain.css" />
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+<script>
+function showIntroDetail(id){
+	art.dialog.open('{pigcms::U('Store/orderInfo',array('token'=>$token,'dining'=>$isDining))}&id='+id,{lock:false,title:'订单详情',width:800,height:220,yesText:'关闭',background: '#000',opacity: 0.87});
+}
+</script>
+<script type="text/javascript">
+    $(function() {
+
+        $("#Button1").bind("click", function() {
+            //alert(11111);return false;
+            $(".item:checkbox").prop("checked", true);
+        });
+        $("#Button2").bind("click", function() {
+            //alert(22222);return false;
+            $(".item:checkbox").prop("checked", false);
+        });
+        //批量删除
+        $('#ss').click(function() {
+            $('#info').attr("action", "{pigcms::U('Chat/money',array('token'=>$token))}");
+
+        })
+        //批量导出
+        $('#djdc').click(function() {
+            $('#info').attr("action", "{pigcms::U('Chat/xfdc',array('token'=>$token))}");
+
+        })
+
+        $('#tc').click(function() {
+
+            $('#tcc').show();
+        })
+        $('#gb').click(function() {
+            $('#tcc').hide();
+
+        })
+
+
+    })
+
+</script>
+<div class="container main">
+    <div class="row main">
+        <include file="Crm:left"/>
+        <div class="col-md-10">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">消费管理</h3>
+                </div>
+                <div class="panel-body">
+
+                    <div class="msgWrap">
+                        <div class="add-button"></div>
+                        <!--<form method="post"  action="{pigcms::U('Chat/drsj',array('token'=>$token))}" enctype="multipart/form-data">-->
+ 
+                        <!--   </form>-->
+                        <form method="post"  action="{pigcms::U('Chat/suos',array('token'=>$token))}" id="info">
+
+               
+
+
+                            <TABLE class="table table-striped">
+
+                                <tr> 
+                                    <th style="padding-left:9px">
+                                        <a id="Button1" style="cursor:pointer">全</a>|
+                                        <a id="Button2"    style="cursor:pointer">反</a>
+                                    </th>     
+                                    <th class="thirdTd">会员号</th>
+                                    <th class="thirdTd">手机号码</th>
+                                    <th class="thirdTd">收货地址</th>
+                                    <th class="thirdTd">消费时间</th>
+                                    <th class="thirdTd">订单状态</th>
+                                    <th class="thirdTd">消费金额</th>
+                                    <th class="thirdTd">购买商品</th>
+                                </tr>
+
+                                <volist name="list" id="vo" key='k'>
+
+                                    <TR>
+                                        <td><input type="checkbox"  style="margin-right: 10px; margin-left: 21px;" name="item[]" class="item" value="{pigcms:$vo.xid}"/>	
+                                        </td>
+                                        <TD>{pigcms:$uid}</TD>
+                                        <TD>{pigcms:$vo.tel}</TD>
+                                        <TD>{pigcms:$vo.address}</TD>
+
+                                        <TD>{pigcms:$vo.time|date="y-m-d",###}</TD>
+                                    
+                                        <TD><if condition="$vo.paid eq 1"><span style="color:green">已付款</span><else/><span style="color:red">未付款</span></if> / <if condition="$vo.sent eq 1"><span style="color:green">已发货</span></if><if condition="$vo.sent eq 2"><span style="color:yellow">已退货</span></if><if condition="$vo.sent eq 0"><span style="color:red">未发货</span></if></TD>
+                                        <TD>{pigcms:$vo.price}</TD>
+ 
+
+                                        <TD  onclick="showIntroDetail({pigcms:$vo.id})">详细</TD>
+
+
+                                    </TR>
+                                </volist>
+                                </TBODY>
+                            </TABLE>
+                        </form>
+
+                    </div>
+                    <div class="cLine">
+                        <div class="pageNavigator right">
+                            <div class="pages">{pigcms:$page}</div>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--弹出层-->
+<!--弹出层-->
+<div class="panel panel-success" id='tcc' style="position:absolute;left:480px;top:170px;display:none">
+    <!--<p style="float:right;padding-right:10px;padding-top:5px;cursor:pointer" id='gb'>关闭</p>	-->
+    <div class="panel-body">
+
+        <form method="post"  action="{pigcms::U('Chat/drxfjl',array('token'=>$token))}" enctype="multipart/form-data">
+
+            <div>
+
+                <!--<div class="col-sm-5">
+                    <input type="text" name="cpprice" style='width:150px' id="cpprice"  class="form-control" value="" data-rule-required="true"><input type="file" name="inputExcel" id="inputExcel" >
+                </div>-->
+
+                <div class="col-sm-5">
+                    <input type='text'class="circle" id="ehdel_upload_text" name='imgname' />
+                </div>
+                <div class="col-sm-5" style='margin-left:30px'>
+                    <input value='浏览' style='width:70px;border:0px;' onchange="ehdel_upload_text.value = this.value" type='file' name="inputExcel" id="inputExcel" />
+                </div> 
+            </div>
+
+
+
+
+    </div>			
+    <div class="panel-footer" style="text-align:right"> 
+        <input type="submit" value="保存" id="dj" class="btn btn-success"/>
+        <input style="width:60px" value="取消"  id='gb' class="btn btn-success"/>
+        <!--<a class="btn btn-link" id='qx'>取消</a> -->
+    </div>
+</form>
+</div>
+
+
+
+
+
+<include file="Public:footer"/>

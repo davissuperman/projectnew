@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>提交信息</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" href="{pigcms::RES}/game/css/sendInfor.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/game/js/jquery.js"></script>
+<script>
+$(function(){
+	var $height=window.innerHeight;
+	var browser={
+	  versions:function() {
+		var u=navigator.userAgent, app = navigator.appVersion;
+		return {//移动终端浏览器版本信息 
+		  trident: u.indexOf('Trident') > -1, //IE内核
+		  presto: u.indexOf('Presto') > -1, //opera内核
+		  webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+		  gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+		  mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), //是否为移动终端
+		  ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+		  android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+		  iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+		  iPad: u.indexOf('iPad') > -1, //是否iPad
+		  webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+		};
+	  }(),
+	  language:(navigator.browserLanguage||navigator.language).toLowerCase()
+	}
+	if(browser.versions.android){
+	 	$(".inCase").focus(function(){
+			$(".middle").css("height",$height);
+			$(".sendInforBox").css("top","-"+"45%");
+			if($(".sendInforBox").position().top<0)
+			{
+				$(".sendInforBox").css("top","0px");
+			}
+		}).blur(function(){
+			$(".sendInforBox").css("top","0px");
+		});
+	}
+})
+</script>
+ <script>
+             document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+                window.shareData = {
+                    "imgUrl": "{pigcms::$gameinfo[img]}",
+                    "timeLineLink": "{pigcms::C('site_url')}/index.php?g=Wap&m=Doing&a=index&gid={pigcms::$gid}",
+                    "sendFriendLink": "{pigcms::C('site_url')}/index.php?g=Wap&m=Doing&a=index&gid={pigcms::$gid}",
+                    "weiboLink": "{pigcms::C('site_url')}/index.php?g=Wap&m=Doing&a=index&gid={pigcms::$gid}",
+                    "tTitle": "{pigcms::$gameinfo[desc]}",
+                    "tContent": "{pigcms::$gameinfo[desc]}",
+                    "fTitle": "{pigcms::$gameinfo[desc]}",
+                    "fContent": "{pigcms::$gameinfo[desc]}",
+                    "wContent": "{pigcms::$gameinfo[desc]}"
+                };
+                // 发送给好友
+                WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+                    WeixinJSBridge.invoke('sendAppMessage', {
+                        "img_url": window.shareData.imgUrl,
+                        "img_width": "640",
+                        "img_height": "640",
+                        "link": window.shareData.sendFriendLink,
+                        "desc": window.shareData.fContent,
+                        "title": window.shareData.fTitle
+                    }, function(res) {
+
+                    })
+                });
+
+                // 分享到朋友圈
+                WeixinJSBridge.on('menu:share:timeline', function(argv) {
+                    WeixinJSBridge.invoke('shareTimeline', {
+                        "img_url": window.shareData.imgUrl,
+                        "img_width": "640",
+                        "img_height": "640",
+                        "link": window.shareData.timeLineLink,
+                        "desc": window.shareData.tContent,
+                        "title": window.shareData.tTitle
+                    }, function(res) {
+                        
+                    });
+                });
+
+                // 分享到微博
+                WeixinJSBridge.on('menu:share:weibo', function(argv) {
+                    WeixinJSBridge.invoke('shareWeibo', {
+                        "content": window.shareData.wContent,
+                        "url": window.shareData.weiboLink,
+                    }, function(res) {
+                        _report('weibo', res.err_msg);
+                    });
+                });
+            }, false);
+        </script>
+   <style>
+        
+            .deploy_ctype_tip{z-index:1001;width:100%;text-align:center;position:fixed;top:50%;margin-top:-23px;left:0;}.deploy_ctype_tip p{display:inline-block;padding:13px 24px;border:solid #d6d482 1px;background:#f5f4c5;font-size:16px;color:#8f772f;line-height:18px;border-radius:3px;}
+        </style>
+</head>
+<body id="tips">
+	<img src="{pigcms::RES}/game/img/middle.jpg" class="middle"/>
+	<div class="sendInforBox">
+        <form  action="{pigcms::U('Doing/add')}" method="post"  >
+    	<p class="logoBox"><img src="{pigcms::RES}/game/img/logo.png" class="logoImg"/></p>
+        <p class="texCenter"><img src="{pigcms::RES}/game/img/core.png" class="core"/></p>
+        <p class="texCenter numText">{pigcms::$number}</p>
+        <p class="texCenter"><img src="{pigcms::RES}/game/img/sendText.png" class="sendText"/></p>
+        <p class="texCenter inforCase">
+        	<span>昵称：</span>
+                <input type="text" placeholder="必填,昵称即可哦(限8个字符)" class="inCase" name="name" id="name"/>
+        </p>
+        <p class="texCenter inforCase">
+        	<span>手机：</span>
+            <input type="text" name="tel" id="tel"  placeholder="必填,中奖查询及领奖凭证哦" class="inCase"/>
+        </p>
+        <p class="texCenter"><button class="sendBtn"  type="button"  onclick="tgSubmit()">提交信息</button></p>
+        <input type="hidden" name="usercoreNum"  value="{pigcms::$number}"/>
+        <input type="hidden" name="gid"  value="{pigcms::$gid}"  />
+       <input type="hidden" name="openid"  value="{pigcms::$openid}" />
+        </form>
+    </div>
+<script>
+            function showTip(tipTxt) {
+                var div = document.createElement('div');
+                div.innerHTML = '<div class="deploy_ctype_tip"><p>' + tipTxt + '</p></div>';
+                var tipNode = div.firstChild;
+                $("#tips").after(tipNode);
+                setTimeout(function() {
+                    $(tipNode).remove();
+                }, 1500);
+            }
+
+            function tgSubmit() {
+               $.get("./index.php?g=Wap&m=Doing&a=date&t=sub");//开始页点
+                var phone = $("#tel").val();
+                var name = $("#name").val();
+                
+                if ($.trim(name) == ""||$.trim(name).length >8) {
+                    showTip('昵称名字不能为空也不能超过8个字符');
+                    return false;
+                }
+                phone = $.trim(phone);
+                if (phone== "") {
+                    showTip('手机号错误！');
+                    return false;
+                }
+                if (phone.length<11||phone.length >12){
+                     showTip('手机号格式错误！');
+                      return false;
+                 }
+                $.get("./index.php?g=Wap&m=Doing&a=chicktel", {tel: phone},
+                function(data) {
+                    if (data == '1') {
+                        showTip('手机号码已经存在，只能参加一次哦！');
+                        return false;
+                    } else if (data == '0') {
+                      
+                       $("form").submit();
+                    }
+                });
+                return false;
+            
+            }
+</script>
+</body>
+</html>

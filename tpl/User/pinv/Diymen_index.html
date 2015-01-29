@@ -1,0 +1,152 @@
+<?php $nav = "DIYMEN"; ?>
+<include file="Public:head"/>
+<script type="text/javascript" src="./tpl/static/menu/yyucadapter.js"></script>
+<style type="text/css" charset="utf-8">
+    .bold {
+        font-weight: bold;
+    }
+    .diymenred {
+        color: #f00;
+    }
+    .maincd{
+        cursor: pointer;
+    }
+    .zizicd{
+        width: 82px;height:38px;border: 1px solid gray; margin-bottom: -1px; line-height: 38px;text-align: center;cursor: pointer;position: relative;
+    }
+    .szcjbt, #czselarea,.zizicd{
+
+    }
+</style>
+<div class="container main">
+    <div class="row">
+        <div class="col-md-2 sidebar">
+            <nav id="sidebar-nav">
+                <ul class="nav nav-pills nav-stacked">
+                    <li ><a href="{pigcms::U('Diymen/set',array('token'=>$token))}">授权设置</a></li>
+                    <li  class="active"><a href="{pigcms::U('Diymen/index',array('token'=>$token))}">菜单设置</a></li>                   
+                </ul>
+            </nav>
+        </div>
+        <div class="col-md-10 main">
+
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">自定义菜单设置</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="top" class="alert alert-info" style="margin:0 0 ;">
+                        1.使用本模块，必须在微信公众平台<strong>申请</strong>自定义菜单使用的<strong>AppId和AppSecret</strong>，然后在【授权设置】中设置。<br>
+                        2.最多创建<span class="diymenred bold">3 个一级菜单</span>，每个一级菜单下最多可以创建 <span class="diymenred bold">5 个二级菜单</span>，菜单<span class="diymenred bold">最多支持两层</span>。
+                    </div>
+                    <form enctype="multipart/form-data" action="" method="post" id='diyfrom'>
+                        <input type="hidden" id="id" name="id" value="0">
+                        <input type="hidden" id="pid" name="pid" value="0">
+                        <table border="1">
+                            <tbody><tr>
+                                    <td>
+                                        <div style="background-image: url('./tpl/static/menu/3CustomLt.png');width: 344px;height: 623px;position: relative;" class="meunBox">
+                                            <volist name="class" id="cs" >                                           
+                                                <if condition="$key eq 2"> 
+                                                    <div style="position: absolute;bottom: 170px;left: 216px; width: 83px;" class="meun" id='{pigcms:$cs.id}'>
+                                                        <elseif condition="$key eq 1"/>  
+                                                        <div style="position: absolute;bottom: 170px;left: 131px; width: 83px;" class="meun" id='{pigcms:$cs.id}'>
+                                                            <else />
+                                                            <div style="position: absolute; bottom: 170px; left: 46px; width: 82px;"  class="meun" id='{pigcms:$cs.id}'>
+
+                                                                </if>
+                                                                <volist name="cs['class']" id="csp">
+                                                                    <div class="zizicd" id='{pigcms:$csp.id}' reldata='{pigcms:$csp.keyword}' rel='{pigcms:$csp.url}'>
+                                                                        {pigcms:$csp.title} 
+                                                                    </div>
+                                                                </volist>
+                                                            </div>
+                                                            </volist>
+                                                            <div style="position: absolute;bottom: 122px;left: 43px;">
+                                                                <table style="border: none;" cellpadding="0" cellspacing="0">
+                                                                    <tbody><tr>
+                                                                    <volist name="class" id="cs"> 
+                                                                        <td><div style="height: 45px;width: 85px;line-height: 45px;text-align: center;"  id='{pigcms:$cs.id}' reldata='{pigcms:$cs.keyword}' rel='{pigcms:$cs.url}' class="maincd">{pigcms:$cs.title}</div></td>
+                                                                    </volist>
+                                                                    </tr>
+                                                                    </tbody></table>
+                                                            </div>
+                                                        </div>
+                                                        </td>
+                                                        <td valign="top">
+                                                            <br>                                    
+                                                            <div id="czselarea" style="display: block; width: 300px">
+                                                                <div id="top" class="form-group"  >
+                                                                    <input type="hidden" name="is_show" value="1">
+                                                                    <label for="cdmcinpo" class=" control-label">菜单名称：</label>
+                                                                    <input type="text" id="cdmcinpo" name="title" class="form-control" value="菜单一" />
+                                                                </div>
+                                                                <div class="control-group">
+                                                                    <label class="control-label" for="answertype">菜单点击事件:</label>
+                                                                    <div class="controls">
+                                                                        <select  id="answertype" name="answertype" class="form-control">                                                                                                   
+
+                                                                            <option value="res_gjz">关键字</option>  
+                                                                            <option value="res_url">链接地址</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>                
+                                                            <!-- 关键字  -->
+                                                            <div class="szcjbt form-group" id="res_gjz" style="display: none; margin-top: 30px">
+                                                                <label for="cdmcinpo" class=" control-label">要触发的关键字：</label><input type="text" name="keyword" id='event_gjz'  class="form-control">
+                                                            </div>
+                                                            <!-- 关键字  -->
+                                                            <div class="szcjbt form-group" id="res_url" style="display: none; margin-top: 30px">
+                                                                <label for="cdmcinpo" class=" control-label">要链接到的URL地址：</label><input type="text" name="url" id='event_url'  class="form-control">
+                                                            </div>
+                                                            <!-- 文本 -->
+                                                        </td>
+                                                        </tr>
+                                                        </tbody></table>
+                                                        <div class="panel-footer" style="text-align:right"> 
+                                                            <input type="submit" value="保存菜单数据" class="btn btn-success"/>    <a href="{pigcms::U('Diymen/class_send')}" class="btn btn-success">发布菜单</a>
+                                                        </div>
+                                                        </form>
+
+                                                    </div>
+                                                    </div>
+                                                    </div>
+                                                    </div>
+                                                    </div>
+                                                    <script type="text/javascript">
+                                                        $(function() {
+                                                            $('#answertype').change(function() {
+                                                                $('.szcjbt').hide();
+                                                                $('#' + $(this).val()).show();
+                                                            });
+                                                            $('.maincd').eq(0).trigger('click');
+                                                            $('.zizicd,.maincd').click(function() {
+                                                                $('.zizicd,.maincd').unmask();
+                                                                $(this).mask();
+                                                                loaddata(this);
+                                                            });
+                                                              
+                                                        });
+
+                                                        function loaddata(ob) {
+                                                            var id = ob.id;
+                                                            var pid=$(ob).parent().attr('id');
+                                                            var url = trim($(ob).attr('rel'));
+                                                            var keyword = $(ob).attr('reldata');
+                                                            var Text = ob.innerText;
+                                                            $('#cdmcinpo').val(Text);
+                                                            $('#id').val(id);  
+                                                             $('#pid').val(pid);
+                                                            if (url != "") {
+                                                                $('#answertype').trigger('change');
+                                                                $('#event_url').val(url);
+
+                                                            } else {
+                                                                $('#answertype').trigger('change');
+                                                                $('#event_gjz').val(keyword);
+                                                            }
+
+                                                        }
+                                                    </script>
+                                                    <include file="Public:footer"/>

@@ -1,0 +1,364 @@
+<?php $nav = "BUSINESS"; $side = "HOST_INDEX" ?>
+<include file="Public:head"/>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/jquery/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/xheditor-1.2.1.min.js"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/xheditor_lang/zh-cn.js"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/xheditor_plugins/showdown.js"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/xheditor_plugins/htmldomparser.js"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/xheditor_plugins/html2markdown.js"></script>
+<script src="{pigcms::STATICS}/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="{pigcms::STATICS}/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="{pigcms::STATICS}/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<link type="text/css" href="{pigcms::RES}/css/Host_add.css" rel="stylesheet"/>
+<style type="text/css">
+.example{padding-left:115px;}
+body, html,#allmap {width: 100%;height: 100%;margin:0;}
+#l-map{height:30%;width:30%;float:left;border-right:2px solid #bcbcbc;margin:10px;}
+</style>
+<script type="text/javascript">
+var markdownConverter = new Showdown.converter();
+function Md2HTML(md){
+	return markdownConverter.makeHtml(md);
+}
+function HTML2Md(html){
+	var md = HTML2Markdown(html);
+    md = md.replace(/&(lt|gt|amp|quot);/ig,function(all, t){
+        return {'lt':'<','gt':'>','amp':'&','quot':'"'}[t.toLowerCase()];
+    });
+    return md;
+}
+function pageInit()
+{   
+    $.extend(XHEDITOR.settings,{shortcuts:{'ctrl+enter':submitForm}});
+	
+
+	var markdownCSS = '<style>*{margin:0;padding:0;}p {margin:1em 0;line-height:1.5em;}table {font-size:inherit;font:100%;margin:1em;}table th{border-bottom:1px solid #bbb;padding:.2em 1em;}table td{border-bottom:1px solid #ddd;padding:.2em 1em;}input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}select,option{padding:0 .25em;}optgroup{margin-top:.5em;}img{border:0;max-width:100%;}abbr{border-bottom:none;}a{color:#4183c4;text-decoration:none;}a:hover{text-decoration:underline;}a code,a:link code,a:visited code{color:#4183c4;}h2,h3{margin:1em 0;}h1,h2,h3,h4,h5,h6{border:0;}h1{font-size:170%;border-bottom:4px solid #aaa;padding-bottom:.5em;margin-top:1.5em;}h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}h2{font-size:150%;margin-top:1.5em;border-bottom:4px solid #e0e0e0;padding-bottom:.5em;}h3{margin-top:1em;}hr{border:1px solid #ddd;}ul{margin:1em 0 1em 2em;}ol{margin:1em 0 1em 2em;}ul li,ol li{margin-top:.5em;margin-bottom:.5em;}ul ul,ul ol,ol ol,ol ul{margin-top:0;margin-bottom:0;}blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555;}dt{font-weight:bold;margin-left:1em;}dd{margin-left:2em;margin-bottom:1em;}pre{margin-left:2em;border-left:3px solid #CCC;padding:0 1em;}</style>';
+	var plugins={
+		Code:{c:'btnCode',t:'插入代码',h:1,e:function(){
+			var _this=this;
+			var htmlCode='<div><textarea id="xheCodeValue" wrap="soft" spellcheck="false" style="width:300px;height:100px;" /></div><div style="text-align:right;"><input type="button" id="xheSave" value="确定" /></div>';
+			var jCode=$(htmlCode),
+				jValue=$('#xheCodeValue',jCode),
+				jSave=$('#xheSave',jCode);
+			jSave.click(function(){
+				_this.loadBookmark();
+				_this.pasteHTML('<pre>'+_this.domEncode(jValue.val())+'</pre>');
+				_this.hidePanel();
+				return false;	
+			});
+			_this.saveBookmark();
+			_this.showDialog(jCode);
+		}},
+		map:{c:'btnMap',t:'插入Google地图',e:function(){
+			var _this=this;
+			_this.saveBookmark();
+			_this.showIframeModal('Google 地图','/tpl/static/xhedit/demo/googlemap/googlemap.html',function(v){
+				_this.loadBookmark();
+				_this.pasteHTML('<img src="'+v+'" />');
+			},538,404);
+		}}
+	};
+	$.extend(XHEDITOR.settings,{shortcuts:{'ctrl+enter':submitForm}});//修改默认设置
+	  editor=$('#elm1').xheditor({upLinkUrl:"{pigcms::U('Upload2/add')}",upImgUrl:"{pigcms::U('Upload2/add')}",upFlashUrl:"{pigcms::U('Upload2/add')}",upMediaUrl:"{pigcms::U('Upload2/add')}",localUrlTest:/^https?:\/\/[^\/]*?(xheditor\.com)\//i,remoteImgSaveUrl:"{pigcms::U('Upload2/add')}",emots:{
+		msn:{name:'MSN',count:40,width:22,height:22,line:8},
+		pidgin:{name:'Pidgin',width:22,height:25,line:8,list:{smile:'微笑',cute:'可爱',wink:'眨眼',laugh:'大笑',victory:'胜利',sad:'伤心',cry:'哭泣',angry:'生气',shout:'大骂',curse:'诅咒',devil:'魔鬼',blush:'害羞',tongue:'吐舌头',envy:'羡慕',cool:'耍酷',kiss:'吻',shocked:'惊讶',sweat:'汗',sick:'生病',bye:'再见',tired:'累',sleepy:'睡了',question:'疑问',rose:'玫瑰',gift:'礼物',coffee:'咖啡',music:'音乐',soccer:'足球',good:'赞同',bad:'反对',love:'心',brokenheart:'伤心'}},
+		ipb:{name:'IPB',width:20,height:25,line:8,list:{smile:'微笑',joyful:'开心',laugh:'笑',biglaugh:'大笑',w00t:'欢呼',wub:'欢喜',depres:'沮丧',sad:'悲伤',cry:'哭泣',angry:'生气',devil:'魔鬼',blush:'脸红',kiss:'吻',surprised:'惊讶',wondering:'疑惑',unsure:'不确定',tongue:'吐舌头',cool:'耍酷',blink:'眨眼',whistling:'吹口哨',glare:'轻视',pinch:'捏',sideways:'侧身',sleep:'睡了',sick:'生病',ninja:'忍者',bandit:'强盗',police:'警察',angel:'天使',magician:'魔法师',alien:'外星人',heart:'心动'}}
+	},plugins:plugins,loadCSS:'<style>pre{margin-left:2em;border-left:3px solid #CCC;padding:0 1em;}</style>',shortcuts:{'ctrl+enter':submitForm}});
+	
+	$.extend(XHEDITOR.settings,{shortcuts:{'ctrl+enter':submitForm}});//修改默认设置
+	  editor=$('#elm2').xheditor({upLinkUrl:"{pigcms::U('Upload2/add')}",upImgUrl:"{pigcms::U('Upload2/add')}",upFlashUrl:"{pigcms::U('Upload2/add')}",upMediaUrl:"{pigcms::U('Upload2/add')}",localUrlTest:/^https?:\/\/[^\/]*?(xheditor\.com)\//i,remoteImgSaveUrl:"{pigcms::U('Upload2/add')}",emots:{
+		msn:{name:'MSN',count:40,width:22,height:22,line:8},
+		pidgin:{name:'Pidgin',width:22,height:25,line:8,list:{smile:'微笑',cute:'可爱',wink:'眨眼',laugh:'大笑',victory:'胜利',sad:'伤心',cry:'哭泣',angry:'生气',shout:'大骂',curse:'诅咒',devil:'魔鬼',blush:'害羞',tongue:'吐舌头',envy:'羡慕',cool:'耍酷',kiss:'吻',shocked:'惊讶',sweat:'汗',sick:'生病',bye:'再见',tired:'累',sleepy:'睡了',question:'疑问',rose:'玫瑰',gift:'礼物',coffee:'咖啡',music:'音乐',soccer:'足球',good:'赞同',bad:'反对',love:'心',brokenheart:'伤心'}},
+		ipb:{name:'IPB',width:20,height:25,line:8,list:{smile:'微笑',joyful:'开心',laugh:'笑',biglaugh:'大笑',w00t:'欢呼',wub:'欢喜',depres:'沮丧',sad:'悲伤',cry:'哭泣',angry:'生气',devil:'魔鬼',blush:'脸红',kiss:'吻',surprised:'惊讶',wondering:'疑惑',unsure:'不确定',tongue:'吐舌头',cool:'耍酷',blink:'眨眼',whistling:'吹口哨',glare:'轻视',pinch:'捏',sideways:'侧身',sleep:'睡了',sick:'生病',ninja:'忍者',bandit:'强盗',police:'警察',angel:'天使',magician:'魔法师',alien:'外星人',heart:'心动'}}
+	},plugins:plugins,loadCSS:'<style>pre{margin-left:2em;border-left:3px solid #CCC;padding:0 1em;}</style>',shortcuts:{'ctrl+enter':submitForm}});
+}
+function submitForm(){$('#frmDemo').submit();}
+$(pageInit);
+
+$(function(){
+        $("#tj").click(function(){
+		   $("#tttt").show();
+	    });
+  	   $(".add").live("click",function(){
+			$(this).closest("tr").clone().insertAfter($(this).closest("tr"));
+			})
+		$(".move").live("click",function(){
+			$(this).closest("tr").remove();
+			})
+		
+	$('.xx').live("click",function(){
+	       
+			 //alert($(this).val());return false;
+	        
+			 if($(this).val()=='select'){
+			      $(this).parent().prev().children().val('下拉框');  
+			 }else if($(this).val()=='text'){
+			    $(this).parent().prev().children().val('文本框');  
+			 }else if($(this).val()=='datetime1'){
+			    $(this).parent().prev().children().val('时间日期框');  
+			 }else if($(this).val()=='textarea'){
+			     $(this).parent().prev().children().val('文本域');  
+			 }    
+	        
+			 
+	         
+	})
+   
+ 
+  
+})
+</script>
+<style type="text/css">
+	.btnMap {
+		width:50px !important;
+		background:transparent url(/tpl/static/xhedit/demo/googlemap/map.gif) no-repeat center center;
+	}
+	.btnCode {                     
+		background:transparent url(/tpl/static/xhedit/demo/prettify/code.gif) no-repeat 16px 16px;
+		background-position:2px 2px;
+	}
+
+
+
+.Tex{width:100px;float:left;}
+.sameTable{margin-top:20px;}
+.biaoRight{float:left;}
+.sheet{width:650px;background:#eee;color:#6a6a6a;position:relative;margin-bottom:10px;}
+.sheet td{background:#fff;text-align:center;height:45px;line-height:45px;padding-left:3px;padding-right:3px;}
+.sheet th{background:#f1f1f1;height:45px;line-height:45px;text-align:center;font-weight:normal;}
+.edit{float:left;margin:0px 12px;color:#6a6a6a;font-weight:bold;}
+.cancel{float:left;color:#6a6a6a;font-weight:bold}
+.edit:hover{color:#ea533f;}
+.cancel:hover{color:#ea533f;}
+.sheetTitle{margin-bottom:10px;}
+.inputCase{height:15px;line-height:15px;padding:5px;border:1px #ccc solid;}
+.shan{display:inline-block;margin-right:5px;cursor:pointer;}
+</style>
+<div class="container main">
+<div class="row">
+<include file="Host:left"/>
+     
+              <div class="col-md-10 main">
+           
+           	 <ol class="breadcrumb">
+			  <li><a href="{pigcms::U( 'Host/index',array( 'token'=>$token ))}">微酒店管理</a></li>
+			  <li class="active">添加酒店</li>
+			</ol>
+			
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">添加酒店</h3>
+				</div>
+			  <div class="panel-body">
+			  
+ 				    <form class="form" method="post" action="{pigcms::U('Host/add')}" enctype="multipart/form-data"> 
+    				<input type="hidden" name="token" value="{pigcms:$_GET['token']}" /> 
+ 				   <div class="rightLeft">
+                	<p class="same">
+                        <span class="Tex">关键词：</span>
+                       <input type="text" name="keyword" value="{pigcms:$set.keyword}"  class="circle"/>
+                	</p>
+                    <p class="example">只能写一个关键词</p>
+                    <p class="same">
+                        <span class="Tex">商家名称：</span>
+                       <input type="text" name="title" value="{pigcms:$set.title}" class="circle"/>
+                	</p>
+                	 <p class="same">
+                        <span class="Tex">商家地址：</span>
+                       <input type="text" name="address" value="{pigcms:$set.address}"  class="circle"/>
+                	</p>
+					
+					<div style="height:240px;margin-top:10px;">
+						<span class="Tex">百度地图：</span>
+						<div style="float:left;">
+						<div id="r-results">
+							<input type="text" name="dituaddress" value="国贸"  id="micro_diancai_setaddr" class="circle" style="width:100px" required="required"/>	
+							<button class="btn btn-default btn-xs" type="button" id="positioning" style="margin-bottom:4px">搜索</button>
+							经度<input type='text' name="jingdu" id='micro_diancai_setjd' value='116.470642' class="circle" style="width:100px; float:none;"/>
+							纬度<input type='text' name="weidu" id='micro_diancai_setwd' value='39.920857' class="circle" style="width:100px; float:none;"/>
+						</div>
+						<div id="l-map" style="height:200px;width:400px;"></div>
+						</div>
+					</div>
+                    <p class="same">
+                        <span class="Tex">商家电话：</span>
+                       <input type="text" name="tel" value="{pigcms:$set.tel}" class="circle"/>
+                	</p>
+                    <p class="example">电话号码</p>
+                    <p class="same">
+                        <span class="Tex">手机号：</span>
+                       <input type="text"  name="tel2" value="{pigcms:$set.tel2}" class="circle"/>
+                	</p>
+                    <p class="example">手机号</p>
+                    <p class="same">
+                        <span class="Tex">订单封面图片：</span>
+                       <input type="text" id='url'  name="ppicurl" value="{pigcms:$set.ppicurl}" class="circle"/>
+					   <a href="###" onclick="upyunPicUpload($(this).prev().attr('id'),'pic',700,420,'qtclsw1382672973')" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-upload"></span> 上传</a>
+                	</p>
+                    <p class="example">填写图片外链地址，推荐大小为720x400</p>
+                    <p class="same">
+                        <span class="Tex">订单页头部图片：</span>
+                       <input type="text" id='url1' name="headpic" value="<if condition="$set.headpic neq false">{pigcms:$set.headpic}<else/>{pigcms::RES}/images/cart_info/online.jpg</if>"  class="circle"/>
+					   <a href="###" onclick="upyunPicUpload($(this).prev().attr('id'),'pic',700,420,'qtclsw1382672973')" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-upload"></span> 上传</a>
+                	</p>
+                    <p class="example">不会自定义请留空:填写图片外链地址，推荐大小为720x125，高度可根据自身需求调整。
+不填默认本图片 <a  target="_blank" href="{pigcms::C('site_url')}/tpl/User/default/common/images/cart_info/online.jpg">点击查看</a> </p>
+					<!--<div class="sheetBox">
+                        <span class="Tex">商家图片：</span>
+                       	<table class="sheet" cellspacing="1">
+                            <tr>
+                                <th class="firstTd">文字描述</th>
+                                <th class="firstTd">图片地址</th>
+                                <th class="firstTd">图片跳转地址以http://开头</th>
+                            </tr>
+                            <tr>
+                            	<td><input type="text"  name="name" value="{pigcms:$set.name}"  class="inputCase"/></td>
+                                <td><input type="text"  id='urlll' name="picurl" value="{pigcms:$set.picurl}" class="inputCase"/> <a href="###" onclick="upyunPicUpload($(this).prev().attr('id'),'pic',700,420,'qtclsw1382672973')" class="a_upload">上传</a></td>
+                                <td><input type="text" name="url" value="{pigcms:$set.url}" class="px" class="inputCase"/></td>
+                            </tr>
+                            
+                        </table>
+                	</div>-->
+					 <div class="same" style="margin-top:10px;height:160px; ">
+                    	<span class="Tex">订单温馨提示：</span>
+                       <textarea name="wenxin" rows="8" cols="120" style="width:72%;border:1px solid"></textarea>
+                    </div>
+                  
+                   
+					<div class="areaSame" style="margin-top:10px;height:220px;">
+                    	<span class="Tex">订单说明：</span>
+                       <textarea id="elm2" name="orderinfo" rows="8" cols="120" style="width:72%;"></textarea>
+                    </div>
+					<div class="areaSame" style="margin-top:10px;height:220px;">
+                    	<span class="Tex">商家介绍：</span>
+                       <textarea id="elm1" name="info" rows="8" cols="120" style="width:72%;"></textarea>
+                    </div>
+                    <div class="sameTable">
+                	<span class="Tex">订单内容设置：</span>
+                    <div class="biaoRight">
+                        <p class="sheetTitle">填写你要收集的内容！订单默认选项不可以修改删除！</p>
+                        <table class="table table-striped" cellspacing="1">
+                            <tr>
+                                <th>字段类型</th>
+                                <th>字段名称</th>
+                                <th>初始内容</th>
+                                <th>操作</th>
+                            </tr>
+                            <tr>
+                                <td>单行文字</td>
+                                <td><input type="text" disabled="" name='jllxr' value="联系人" class="inputCase"/></td> 
+                                <td><input type="text" disabled="" name='lxr' value="请输入您的名字" class="inputCase"/></td>
+                                <td>默认订单项</td>
+                            </tr>
+                            <tr>
+                                <td>单行文字</td>
+                                <td><input type="text" disabled="" value="联系电话" class="inputCase"/></td>
+                                <td><input type="text" disabled="" name='lxhd' value="请输入您的电话" class="inputCase"/></td>
+                               <td>默认订单项</td>
+                            </tr>
+                            <tr>
+                                <td>单行文字</td>
+                                <td><input type="text" disabled="" value="入住日期" class="inputCase"/></td>
+                                <td><input type="text" disabled="" name='daterq' value="入住日期" class="inputCase"/></td>
+                               <td>默认订单项</td>
+                            </tr>
+							  <tr>
+                                <td>单行文字</td>
+                                <td><input type="text" disabled="" value="离店日期" class="inputCase"/></td>
+                                <td><input type="text" disabled="" name='daterl' value="离店日期" class="inputCase"/></td>
+                               <td>默认订单项</td>
+                            </tr>
+							<tr>
+                                <td>单行文字</td>
+                                <td><input type="text" value="留言" disabled="" class="inputCase"/></td>
+                                <td><input type="text" disabled="" name='fjsl' value="留言" class="inputCase"/></td>
+                                <td>默认订单项</td>
+                            </tr>
+							 <tr>
+                                <td>单行文字</td>
+                                <td><input type="text" value="房间数量" disabled="" class="inputCase"/></td>
+                                <td><input type="text" disabled="" name='fjsl' value="房间数量" class="inputCase"/></td>
+                                <td>默认订单项|<span id='tj' style='cursor:pointer;'>添加</span></td>
+                            </tr>
+							
+							<tr id='tttt' style="display:none">
+                                    <td>当行文字</td>
+									<td><input type="text" value="" placeholder='自定义字段' name='zdyname[]' class="inputCase"/></td>
+									<td><input type="text" name='zdynr[]' value="请输入" class="inputCase"/></td>
+									<td><span class="shan move">删除</span><span class="shan add" id='sp'>添加</span>
+									    <select name='xz[]' class='xx'>
+												   <option value="text">单行文字</option>
+												   <option value="textarea">多行文字</option>
+												   <option value="datetime1">日期选择</option>
+												   <option value="select">自定义下拉</option>
+										</select>
+									</td>
+							</tr>
+                        </table>
+                    </div>
+                </div> 
+                
+                   
+                </div>
+              </div>
+
+           	  <div class="panel-footer" style="text-align:right"> 
+	  		<input type="submit" value="保存" class="btn btn-success"/>
+	  		<a href="javascript:history.go(-1);"  class="btn btn-link">取消</a> 
+		      </div>
+		           </form>
+            
+          </div>
+            
+         </div>
+
+            </div>      
+      
+ </div>
+<include file="Public:footer"/>
+
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=B7b844507d78466300c445187b68cc4f"></script>
+<script type="text/javascript" src="jquery-1.4.2.js"></script>
+<script type="text/javascript">
+	//定位坐标
+	//var destPoint = new BMap.Point($('#micro_diancai_setjd').val(),$('#micro_diancai_setwd').val());
+		var destPoint = new BMap.Point(116.404, 39.915);
+	//var mapoption = new MMapOptions(enableMapClick:false);	
+		/**开始处理百度地图**/
+		var map = new BMap.Map("l-map",{enableMapClick:false});
+		map.centerAndZoom(new BMap.Point(destPoint.lng, destPoint.lat), 15);//初始化地图
+		map.enableScrollWheelZoom();//鼠标滑轮地图缩放
+		map.addControl(new BMap.NavigationControl());
+		var marker = new BMap.Marker(destPoint);
+		map.addOverlay(marker);//添加标注
+		var local = new BMap.LocalSearch(map, {
+		 renderOptions: {map: map, panel: "r-result"}
+		});
+		map.addEventListener("click", function(e){
+			var gc = new BMap.Geocoder(); //反地理解析
+			destPoint = e.point;
+			gc.getLocation(destPoint, function(rs){
+				var addComp = rs.addressComponents;
+				var addr_str = addComp.city+','+addComp.district+','+addComp.province+','+addComp.street+','+addComp.streetNumber;
+				if(confirm("当前选择的位置是："+addr_str+",您确认要选择这个位置？")){
+					$('#micro_diancai_setjd').val(destPoint.lng);
+					$('#micro_diancai_setwd').val(destPoint.lat);
+					map.clearOverlays();
+					var marker1 = new BMap.Marker(destPoint);  // 创建标注
+					map.addOverlay(marker1); 
+				}
+				// alert(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber);
+			});
+			//alert(addComp);
+			
+		});
+	 $("#positioning").click(function(){
+	    var addr = $("#micro_diancai_setaddr").val();
+		local.search(addr);
+	  });
+		
+</script>

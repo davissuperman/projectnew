@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>涨分秘籍</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link type="text/css" href="{pigcms::RES}/game/css/secret.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/game/js/jquery.js"></script>
+<script>
+	$(function(){
+		$(".sendBtn").on("touchstart",function(){
+                        $.get("./index.php?g=Wap&m=Doing&a=date&t=m");
+			$(".cover").show();
+		});
+		$(".knowImg").on("touchstart",function(){
+			$(".cover").hide();
+		});
+	});
+            document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+                window.shareData = {
+                    "imgUrl": "{pigcms::$gameinfo[img]}",
+                    "timeLineLink": "{pigcms::C('site_url')}/index.php?g=Wap&m=Doing&a=share&gid={pigcms::$gid}&time={pigcms::$tel}",
+                    "sendFriendLink": "{pigcms::C('site_url')}/index.php?g=Wap&m=Doing&a=share&gid={pigcms::$gid}&time={pigcms::$tel}",
+                    "weiboLink": "{pigcms::C('site_url')}/index.php?g=Wap&m=Doing&a=share&gid={pigcms::$gid}&time={pigcms::$tel}",
+                    "tTitle": "{pigcms::$gameinfo[desc]}",
+                    "tContent": "{pigcms::$gameinfo[desc]}",
+                    "fTitle": "{pigcms::$gameinfo[desc]}",
+                    "fContent": "{pigcms::$gameinfo[desc]}",
+                    "wContent": "{pigcms::$gameinfo[desc]}"
+                };
+                // 发送给好友
+                WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+                    WeixinJSBridge.invoke('sendAppMessage', {
+                        "img_url": window.shareData.imgUrl,
+                        "img_width": "640",
+                        "img_height": "640",
+                        "link": window.shareData.sendFriendLink,
+                        "desc": window.shareData.fContent,
+                        "title": window.shareData.fTitle
+                    }, function(res) {
+                        $.get("./index.php?g=Wap&m=Doing&a=sharetimeline&gid={pigcms::$gid}&tel={pigcms::$tel}",function(data) {
+                             location.href = "./index.php?g=Wap&m=Doing&a=share&gid={pigcms::$gid}&time={pigcms::$tel}";
+                        });  
+                    })
+                });
+
+                // 分享到朋友圈
+                WeixinJSBridge.on('menu:share:timeline', function(argv) {
+                    WeixinJSBridge.invoke('shareTimeline', {
+                        "img_url": window.shareData.imgUrl,
+                        "img_width": "640",
+                        "img_height": "640",
+                        "link": window.shareData.timeLineLink,
+                        "desc": window.shareData.tContent,
+                        "title": window.shareData.tTitle
+                    }, function(res) {
+                        $.get("./index.php?g=Wap&m=Doing&a=sharetimeline&gid={pigcms::$gid}&tel={pigcms::$tel}",function(data) {
+                             location.href = "./index.php?g=Wap&m=Doing&a=share&gid={pigcms::$gid}&time={pigcms::$tel}";
+                        });        
+                    });
+                });
+
+                // 分享到微博
+                WeixinJSBridge.on('menu:share:weibo', function(argv) {
+                    WeixinJSBridge.invoke('shareWeibo', {
+                        "content": window.shareData.wContent,
+                        "url": window.shareData.weiboLink,
+                    }, function(res) {
+                        _report('weibo', res.err_msg);
+                    });
+                });
+            }, false);
+        </script>
+</head>
+<body>
+	<div class="secretBox">
+    	<p class="logoBox"><img src="{pigcms::RES}/game/img/logo.png" class="logoImg"/></p>
+        <p class="texCenter"><img src="{pigcms::RES}/game/img/secrectImg.png" class="core"/></p>
+        <div class="beText">
+        	<p class="texCenter textTitle textTitleX">推送给好友或朋友圈，每次得10分 </p>
+            <p class="texCenter">(200分封顶)</p>
+        </div>
+        <div class="beText">
+        	<p class="texCenter textTitle textTitleX">好友投一票获得5分</p>
+            <p class="texCenter">(每人限投一票)</p>
+        </div>
+        <div class="beText">
+        	<p class="texCenter textTitle textTitleX">涨分有效期：72小时</p>
+            <p class="texCenter">(推送后72小时内所获分数即为最终得分)</p>
+        </div>
+        <p class="texCenter"><img src="{pigcms::RES}/game/img/lastCore.png" class="lastCore"/></p>
+        <p class="texCenter"><button class="sendBtn">拉分去</button></p>
+    </div>
+    <div class="cover">
+    	<div class="coverText">
+        	<p class="topTipP"><img src="{pigcms::RES}/game/img/topTip.png" class="topTip"/></p>
+            <p class="texCenter"><img src="{pigcms::RES}/game/img/share1.png" class="shareImg"/></p>
+            <p class="texCenter">将活动推送给你的好友</br> 即刻获得额外活动积分</p>
+            <p class="texCenter"><img src="{pigcms::RES}/game/img/share2.png" class="shareImg"/></p>
+            <p class="texCenter">将活动推送至你的朋友圈</br>马上获得额外活动积分</p>
+            <p class="texCenter"><img src="{pigcms::RES}/game/img/kownImg.png" class="knowImg"/></p>
+        </div>
+    </div>
+</body>
+</html>

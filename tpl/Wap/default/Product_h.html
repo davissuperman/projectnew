@@ -1,0 +1,152 @@
+<include file="Product:header"/>
+<script src="{pigcms::$staticFilePath}/js/zepto.min.js"></script>
+<script>
+		function Second( id ){
+					var l = $( "#idA" ).val();
+					 var a = eval('(' + l + ')');
+					 var is = 0;
+						for( var b in a ){
+								if( a[ b ] == id ){
+									is = 1;	
+							}
+					}
+				if( is ){
+					return utils.showBubble( "亲这个商品已经秒购过来，请下次在来！" ),void 0;	
+				}else{
+					window.location = "/index.php?g=Wap&m=Product&a=shopping&token={pigcms:$token}&wecha_id={pigcms:$wecha_id}&id="+id;		
+				}	
+	}					
+</script>
+<link type="text/css" rel="stylesheet" href="{pigcms::$staticFilePath}/css/public.css"/>
+<link type="text/css" rel="stylesheet" href="{pigcms::$staticFilePath}/css/tPurchase.css"/>
+<body>
+	<div class="box">
+       	<p class="imgBox"><img src="{pigcms:$images_l}" class="miaImg"/><div class="clear"></div></p>
+        <p class="imgText">今日秒购</p>
+        <p class="detailBox">
+        	<span class="shaText">秒杀商品20分钟内未付款将取消订单</span>
+            <a href="{pigcms::U('Product/rule',array('token'=>$token))}" class="detail">秒杀规则详情>></a>
+       	</p>
+		<volist name="list" id="list" key="k">
+        <div class="common">
+        	<div class="leftImg">
+            	<img src="{pigcms:$list.index_logo}" class="proImg"/>
+            </div>
+            <div class="rightText">
+            	<p class="textP">
+                    <span class="span1">{pigcms:$list.name}</span>     
+                </p> 
+                <p class="textP">
+                	<span class="money">￥{pigcms:$list.price}</span>
+                    <span class="huaM">{pigcms:$list.oprice}</span>
+                </p>
+            	 <p class="textP" <?php if( $list[ 'repertory' ]==0 ) echo "style='display:none'";?>><?php if( time()>=$list[ 'time_start' ] && $list[ 'time_end' ]>time() ) { ?><span class="dateText">距结束:</span><span class="hours" id="endtime{pigcms:$k-1}"><?php echo $list[ 'time_end' ]-time();?></span><?php }elseif( $list[ 'time_start' ]>=time() ){?><span class="dateText">距开始:</span><span class="hours" id="endtime{pigcms:$k-1}"><?php echo $list[ 'time_start' ]-time();}?></p>
+				<?php if( $list[ 'time_start' ]<=time() && $list[ 'repertory' ]!=0 && $list[ 'time_end' ]>time() ) {?><p><a href="javascript:void(0);" class="nowBtn" onclick="Second( {pigcms:$list.id} );">立即秒杀</a></p><?php }?>
+				<?php if( $list[ 'repertory' ]==0 ) {?><p><a href="javascript:void(0);" class="nowPro">抢光了</a></p><?php }?>
+				<?php if( $list[ 'time_start' ]>time() && $list[ 'repertory' ]!=0 ) {?><p><a href="javascript:void(0);" class="nowPro">即将开始</a></p><?php }?>
+		   </div>
+            <div class="clear"></div>
+			<input type="hidden" id="idA" value="{pigcms:$idA}"/>
+			<div class="qb_quick_tip qb_none" id="bubble"></div>
+        </div>
+        </volist>
+		<script>
+var getElementByClass = function (classN){
+var arrCls =[];
+var listElm = document.getElementsByTagName("*");
+for (var i = listElm.length-1; i>=0; i--)
+{
+   if (listElm[i].className ==""){
+		continue;
+   } 
+   classname = listElm[i].className;
+   if (classname.indexOf(" ")) 
+   {
+		var classlist = classname.split(" ");
+		for(var j = classlist.length-1; j>=0; j--)
+		{
+			if(classlist[j] == classN) arrCls.push(listElm[i].innerHTML);
+		}
+   }
+   else {
+		if(classname ==classN)
+		{
+			arrCls.push(listElm[i]);
+		}
+   }
+}
+
+return arrCls;
+}
+</script>
+<script type="text/javascript">
+var iTimes = getElementByClass("hours").reverse();
+var j=iTimes.length;
+if(j>0)
+{
+    var Account;
+    RemainTime();
+}
+function RemainTime()
+{
+    var iDay,iHour,iMinute,iSecond;
+    var sDay="",sHour="",sMinute="",sSecond="";
+	var sTime = new Array();
+	for(k=0;k<j;k++){
+		//alert(k+":"+iTimes[k]);
+		if (iTimes[k] >= 0)
+		{		
+		<!-- 	iDay = parseInt(iTimes[k]/24/3600);
+			//if (iDay > 0)
+			//{
+		//		sDay = iDay + "天";
+			//}else if( iDay <= 0 ){
+		//		sDay = "0天";
+		//	} -->
+			iHour = parseInt((iTimes[k]/3600));
+			if (iHour > 0){
+				sHour = iHour + "小时";
+			}else if( iHour <= 0 ){
+				 sHour = "0小时";
+			}	
+			iMinute = parseInt((iTimes[k]/60)%60);
+			if (iMinute > 0){
+				sMinute = iMinute + "分钟";
+			}else{
+				sMinute =  "0分钟";	
+			}
+			iSecond = parseInt(iTimes[k]%60);
+			if (iSecond >= 0){
+				sSecond = iSecond + "秒";
+			}else{
+				sSecond = "0秒";	
+			}
+			//if ((sDay=="")&&(sHour=="")){
+				//sTime[k]="<span style='color:red'>" + sMinute+sSecond + "</font>";
+			//}
+			//else
+		//	{
+				sTime[k]=sDay+sHour+sMinute+sSecond;
+		//	}
+			if(iTimes[k]==0){
+				clearTimeout(Account);
+				sTime[k]="<span style='color:green'>抢购时间到了！</span>";
+			}
+			iTimes[k]=iTimes[k]-1;
+		}
+		else
+		{
+				location.reload();
+		}
+		document.getElementById("endtime"+k).innerHTML = sTime[k];
+    }
+	Account = setTimeout("RemainTime()",1000);
+}
+</script>
+            <div class="clear"></div>
+        </div> 
+    </div>
+<include file="Product:bottom"/>
+
+</body>
+</html>

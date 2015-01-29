@@ -1,0 +1,22 @@
+
+#login{height:440px;padding:60px 0px;}
+.login{height:410px;overflow:hidden;padding-top:60px;}
+.formBox{width:362px;background:#fff;border:1px #ccc solid;float:right;display:inline;overflow:hidden;}
+.weiImg{float:left;display:inline;}
+.weiImg1{float:left;display:inline;margin-top:40px;}
+
+.formBox1{width:362px;margin-bottom:50px;background:#fff;border:1px #ccc solid;float:right;overflow:hidden;}
+
+#login form .login_form .t{height:50px;line-heiht:50px;font-weight:bold;color:#71832f;text-align:center;margin-top:30px;}
+.login form .login_form .t{height:50px;line-heiht:50px;font-weight:bold;color:#71832f;text-align:center;margin-top:30px;}
+.boSolid{text-align:center;}
+.tex{height:30px;line-height:30px;text-align:right;width:60px;float:left;}
+.tex1{height:30px;line-height:30px;text-align:center;width:80px;float:left;text-align:right;}
+.caseButton{width:273px;height:49px;text-align:center;line-height:49px;background:url(../img/loginImg.gif) no-repeat;border:0px;margin-top:40px;cursor:pointer;}
+.caseButton2{width:273px;height:49px;text-align:center;line-height:49px;background:url(../img/login_btn.png) no-repeat;border:0px;margin-top:60px;cursor:pointer;}
+.rows{height:40px;line-height:25px;margin-top:20px;}
+.case{height:30px;width:150px;line-height:30px;border:1px #ccc solid;padding:3px;color:#9b9b9b;font-size:16px;}
+.form{margin:30px auto;padding:0px 60px;}
+.loginBox{width:950px;margin:auto;}
+
+.example{padding-left:78px;hegiht:20px;line-height:20px;color:red;font-size:12px;}

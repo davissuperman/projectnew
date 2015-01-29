@@ -1,0 +1,106 @@
+<?php $nav = "FUNCTION"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<div class="container main">
+    <div class="row">
+        <include file="Game:left"/>
+
+        <div class="col-md-10 main">
+            <div class="panel panel-success">
+                <div class="panel-heading cfix">
+                    <h3 class="panel-title pull-left">游戏运营</h3>
+                    <span class="small"> </span>
+                    <div class="search-box pull-right">
+
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div>
+                        <form method="post" action="" id="info">
+                            <div class="add-button pull-right">
+                                <a href="{pigcms::U('Game/add',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span> 添加游戏</a>
+                            </div>
+                            <div class="clearfix"></div>
+                            <table class="table table-striped" cellspacing="1">
+                                <tr>
+                                    <th class="firstTd">序号</th>
+                                    <th class="secondTd">标题</th>
+                                    <th class="thirdTd">前N名领奖</th>                      
+                                    <th class="sevenTd">开始时间</th>
+                                    <th class="sevenTd">结束时间</th>
+                                    <th class="sevenTd">游戏|查询</th>
+                                    <th class="sevenTd" ><center>操作</center></th>
+                                </tr>
+                                <volist name="info" id="o"> 
+                                    <tr>
+                                        <td>{pigcms:$i}</td>
+                                        <td>{pigcms:$o.title}</td>
+                                        <td><if condition="$o.top eq 0"><span style="color:green">没开启</span><else/><span style="color:red">前{pigcms:$o.top}直接领奖</span></if></td>
+                                    <td>{pigcms:$o.start|date="Y-m-d H:i",###}</td>
+                                    <td>{pigcms:$o.end|date="Y-m-d H:i",###}</td>
+                                    <td><a href="{pigcms::U('Game/index',array('id'=>$o[gid] ))}" >复制</a>|<a href="{pigcms::U('Game/search',array('id'=>$o[gid] ))}" >复制</a></td>
+                                    <td>
+                                        <a href="{pigcms::U('Game/add',array('token'=>$token,'gid'=>$o[gid] ))}"   class="hover-tooltip-edit"><span class="glyphicon glyphicon-log-out"></span>编辑</a> 
+                                        <a href="{pigcms::U('Game/slist',array('token'=>$token,'gid'=>$o[gid] ))}"   class="hover-tooltip-edit"><span class="glyphicon glyphicon-user"></span>模版列表</a> 
+                                        <a href="{pigcms::U('Game/ulist',array('token'=>$token,'gid'=>$o[gid] ))}"   class="hover-tooltip-edit"><span class="glyphicon glyphicon-user"></span>申请领奖用户</a> 
+
+                                    </td>
+                                    </tr>
+                                </volist>
+                                <td colspan="9" style="text-align:right">{pigcms:$page}</td>
+                            </table>
+                            <input type="hidden" name="token" value="{pigcms:$_GET['token']}" /></form>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>   
+
+</div>
+<script>
+    function copyToClipboard(txt) {
+        if (window.clipboardData)
+        {
+            window.clipboardData.clearData();
+            window.clipboardData.setData("Text", txt);
+            alert("网址复制成功!快用Ctrl+V粘贴到QQ，MSN中发送给好友吧！")
+        }
+        else if (navigator.userAgent.indexOf("Opera") != -1)
+        {
+            window.location = txt;
+            alert("网址复制成功!快用Ctrl+V粘贴到QQ，MSN中发送给好友吧！")
+        }
+        else if (window.netscape)
+        {
+            try {
+                netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+            }
+            catch (e)
+            {
+                alert("被浏览器拒绝！\n请在浏览器地址栏输入'about:config'并回车\n然后将'signed.applets.codebase_principal_support'设置为'true'");
+            }
+            var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
+            if (!clip)
+                return;
+            var trans = Components.classes['@mozilla.org/widget/transferable;1'].createInstance(Components.interfaces.nsITransferable);
+            if (!trans)
+                return;
+            trans.addDataFlavor('text/unicode');
+            var str = new Object();
+            var len = new Object();
+            var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+            var copytext = txt;
+            str.data = copytext;
+            trans.setTransferData("text/unicode", str, copytext.length * 2);
+            var clipid = Components.interfaces.nsIClipboard;
+            if (!clip)
+                return false;
+            clip.setData(trans, null, clipid.kGlobalClipboard);
+            alert("网址复制成功!快用Ctrl+V粘贴到QQ，MSN中发送给好友吧！")
+    }
+</script>
+<include file="Public:footer"/>

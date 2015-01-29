@@ -1,0 +1,244 @@
+<?php $nav = "Kefu"; $side = "CLASSIFY" ?>
+<include file="Public:head"/>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+<script>
+
+$(function(){
+
+     $("#showcard").click(function(){
+	        
+			var username = $("#userName").val();
+			var token = $("#token").val();
+	        var title=$("#title").val();
+			if($("#title").val()==''){alert('昵称不能为空');return false;} 
+			
+			if($("#userName").val()==''){alert('登陆账号不能为空');return false;} 
+			if($("#userPwd").val()==''){alert('密码不能为空');return false;}
+			if($("#userPwd1").val()==''){alert('密码不能为空');return false;}
+			var loginpwd = $("#userPwd").val();
+		    var loginpwd2 = $("#userPwd1").val();
+			if(title.length>8){
+			    alert('工号昵称长度不能超过八个');
+				return false;
+			}
+		  if(loginpwd2.length != loginpwd.length && loginpwd != loginpwd2) {
+			 alert('两次密码不一样');
+			 return  false;
+		}
+		
+
+		 $.ajax({
+					type: "GET",
+					url: '{pigcms::U("Kefu/chaxunuser1")}',
+					data: "username="+username+'&token='+token,
+					success: function(msg){
+					 	//alert(msg);return false;
+						if(msg == 1){
+						    alert('账号不能有重复的');
+				            return false;
+   						}else{
+						     $("#form").submit();
+				             return true;
+						}
+					},
+					
+			 	});
+			
+	 })
+
+         //昵称
+	 	$("#title").blur(function(){
+		
+			var uname = $("#title").val();
+			var token = $("#token").val();
+			
+		  if(uname==''){
+		        
+			   $("#sp").html("不能为空");
+				return false;
+			}else{
+			       $.ajax({
+					type: "GET",
+					url: '{pigcms::U("Kefu/chaxunuser")}',
+					data: "uname="+uname+'&token='+token,
+					success: function(msg){
+					 	//alert(msg);return false;
+						if(msg == 1){
+						    $("#sp").css({color:"red"});
+						    $("#sp").html("昵称已经被注册");
+				            return false;
+   						}else{
+						        if(uname.length>8){
+								     
+								     $("#sp").html("不能超过八个");
+									 $("#sp").css({color:"red"});
+									 return false;
+								}else{
+						     $("#sp").html("OK");
+						     $("#sp").css({color:"black"});
+				            return true;
+							}
+						}
+					},
+					
+			 	});
+			   
+			}
+			
+		})
+
+
+         //用户名
+			$("#userName").blur(function(){
+		
+			var username = $("#userName").val();
+			var token = $("#token").val();
+		
+			var check = /^[A-Za-z][A-Za-z0-9]+/;
+		    var patrn=/^(\w){5,20}$/;
+		  if(username==''){
+		      
+			   $("#sp1").html("不能为空");
+				 return false;
+			}else if (!check.test(username)){
+				//alert(111); return false;
+				$("#pp1").css({color:"red"});
+				//$("#pp1").css({color:"black"});
+				//$("#sp1").html("由英文字母、数字组成，并以英文字母开头");
+				 return false;
+			}else if(!patrn.test(username)){
+				$("#sp1").html("5-20英文或数字组成");
+				 return false;
+				}else if(/[^\x00-\xff]/g.test(username)){
+				$("#sp1").html("用户名不能有汉字。");
+				 return false;
+			}else{
+			       $.ajax({
+					type: "GET",
+					url: '{pigcms::U("Kefu/chaxunuser1")}',
+					data: "username="+username+'&token='+token,
+					success: function(msg){
+					 	//alert(msg);return false;
+						if(msg == 1){
+						    $("#sp1").html("用户名已经被注册");
+                            $("#sp1").css({color:"red"});
+				            return false;
+   						}else{
+						     $("#sp1").html("OK");
+						     $("#sp1").css({color:"black"});
+							 $("#pp1").css({color:"black"});
+				             return true;
+						}
+					},
+					
+			 	});
+			   
+			}
+			
+		})
+
+
+			//密码验证
+
+	
+	$("#userPwd").blur(function(){
+		
+		var loginpwd = $("#userPwd").val();
+		if(loginpwd.length<6 || loginpwd.length>16){
+		    $("#sp2").css({color:"red"});
+			$("#sp2").html("输入6位以上的密码");
+		
+			return false;
+		} else {
+			$("#sp2").html("OK");
+			$("#sp2").css("color","black");
+			return true;
+		}
+	});
+
+ //确认密码
+  $("#userPwd1").blur(function(){
+		var loginpwd = $("#userPwd").val();
+		var loginpwd2 = $("#userPwd1").val();
+		if(loginpwd2.length<6 || loginpwd2.length>16){
+			$("#sp3").html("为了您的账户安全，请输入6 位以上密码");
+			
+			return false;
+		} else if(loginpwd2.length == loginpwd.length && loginpwd == loginpwd2) {
+			$("#sp3").html("OK");
+			$("#sp44").html("OK");
+			$("#sp44").css({color:"black"});
+			$("#sp3").css({color:"black"});
+			ispasswordok1 = true;
+		} else {
+			$("#sp3").html("两次密码不同，请您仔细输入");
+			
+			return false;
+		}
+	});
+	
+  
+
+});
+
+</script> 
+<link type="text/css" href="{pigcms::RES}/css/Classify_add.css" rel="stylesheet"/>
+<div class="container main">
+<div class="row">
+ <include file="Kefu:left"/>
+         <div class="col-md-10">
+ 				<div class="panel panel-success">
+			  <div class="panel-heading">
+				
+				<span class="panel-title">添加客服</span>
+				<span class="panel-title" style="float:right;padding-bottom:50px"><a href="javascript:history.go(-1);">返回</a></span>
+			  </div>
+			  <div class="panel-body">
+     			<form class="form" method="post" id="form"   action="{pigcms::U('Kefu/add')}"  target="_top" enctype="multipart/form-data" >
+				 <input type="hidden" value="{pigcms:$_GET['token']}" id='token' name='token' />
+                <p class="same">
+                    <span class="Tex">工号呢称：</span>
+                    <input type="text"  name="name" id="title" value="" class="circle"/><span id='sp'>不超过8个</span>
+                </p>
+               
+                <p class="same">
+                    <span class="Tex">登陆帐号：</span>
+                    <input type="text" value="" class="circle" name="userName" id="userName" /><span id='sp1' style="color:red"></span>
+                </p>
+                <p id="pp1" style="padding-left:140px">由英文字母、数字组成，并以英文字母开头 </p>
+                
+                <p class="same">
+                    <span class="Tex">登陆密码：</span>
+                    <input type="password" value="" class="circle" id="userPwd"  name="userPwd"/>
+					<span id='sp2'>请输入6位以上的密码</span>
+                </p>
+				
+                <p class="same">
+                    <span class="Tex">确认密码：</span>
+                    <input type="password" value="" class="circle" id="userPwd1"  name="qruserPwd"/><span id='sp44'></span>
+				</p>
+				<span id='sp3' style="color:red;padding-left:140px"></span>
+                <div class="keyWord">
+                    <span class="Tex">客服级别：</span>
+                    <div class="keyRight">
+                        <select name='jibie'>
+					     <option value='1'>普通客服</option>
+					      <option value='2'>客服经理</option>
+					    </select>
+						
+                    </div>
+                </div>
+                </div>
+                <div class="panel-footer" style="text-align:right"> 
+	  				<input type="button" value="保存" id='showcard' class="btn btn-success"/>
+	  				<a href="javascript:history.go(-1);"  class="btn btn-link">取消</a> 
+		      </div>
+		      </form>
+            </div>
+
+      </div>
+      </div>
+ </div>
+<include file="Public:footer"/>

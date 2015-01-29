@@ -1,0 +1,11 @@
+<div class="col-md-2 sidebar">
+<nav id="sidebar-nav">
+	<ul class="nav nav-pills nav-stacked">
+		<li><a href="{pigcms::U('Module/functionList',array('token'=>$token))}"><span class="glyphicon glyphicon-chevron-left"></span> 返回</a></li>
+		<li <?php if($side == "INDEX") echo 'class="active"'; ?>><a href="{pigcms::U('Product/index',array('token'=>$token,'dining'=> false))}">商城商品管理</a></li>
+		<li <?php if($side == "CATEGORY") echo 'class="active"'; ?>><a href="{pigcms::U('Product/cats',array('token'=>$token,'dining'=> false))}">商城分类管理</a></li>
+		<li <?php if($side == "ORDERS") echo 'class="active"'; ?>><a href="{pigcms::U('Product/orders',array('token'=>$token,'dining'=> false))}">商城订单管理</a></li>
+		<li <?php if($side == "REPLY") echo 'class="active"'; ?>><a href="{pigcms::U('Reply_info/set',array('token'=>$token,'infotype'=>'Shop'))}">商城回复配置</a></li>
+	</ul>
+</nav>
+</div>

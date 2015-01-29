@@ -1,0 +1,124 @@
+<?php $nav = "EWM"; $side = "SC" ?>
+<include file="Public:head"/>
+
+<link rel="stylesheet" type="text/css" href="./tpl/User/default/common/css/cymain.css" />
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript">
+    $(function() {
+
+        $("#Button1").bind("click", function() {
+            //alert(11111);return false;
+            $(".item:checkbox").prop("checked", true);
+        });
+        $("#Button2").bind("click", function() {
+            //alert(22222);return false;
+            $(".item:checkbox").prop("checked", false);
+        });
+    })
+
+</script>
+<div class="container main">
+    <div class="row main">
+        <include file="Code:left"/>
+        <div class="col-md-10">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">二维码管理</h3>
+                </div>
+                <div class="panel-body">
+                    <include file="Code:header"/>
+                    <div class="msgWrap">
+                        <div class="add-button"></div>
+
+
+                        <form method="post"  action="{pigcms::U('Code/cpcodesc',array('token'=>$token))}" id="info" >
+                            <p style="height:40px;line-height:40px;padding-right:45px;">
+                                <input type="submit" value="批量生成"  class="btn btn-success" style="float:left;margin-left:12px" >
+                            </p>
+                            <TABLE class="table table-striped">
+                                <THEAD>
+                                    <tr>                     <th style="padding-left:9px"><!--<input id="Button1" type="button" value="全选" />|--><!--<input id="Button2" type="button" value="反选" />-->
+                                            <a id="Button1" style="cursor:pointer">全选</a>|
+                                            <a id="Button2"    style="cursor:pointer">反选</a>
+                                        </th>     
+                                        <th class="thirdTd">产品名称</th>
+
+                                       
+
+
+                                        <th class="thirdTd">渠道</th>
+                                        <th class="thirdTd">类型</th>
+                                        <th class="thirdTd">城市</th>
+                                        <th class="thirdTd">开始时间</th>
+                                        <th class="thirdTd">结束时间</th>
+
+                                    </tr>
+                                </THEAD>
+                                <TBODY>
+                                    <TR></TR>
+                                <volist name="list" id="vo" key='k'>
+                                    <input type="hidden" name='token' value="{pigcms:$vo.token}" />
+                                    <TR>
+                                        <td><input type="checkbox"  style="margin-right: 10px; margin-left: 21px;" name="item[]" class="item" value="{pigcms:$vo.cid}"/>	
+                                        </td>
+                                        <td>{pigcms:$vo.cname}</td>
+
+                                       
+
+
+
+                                    <if condition="$vo['qudao'] neq ''">
+                                        <volist name='xxlist' id='xxvo'>
+                                            <if condition="$xxvo['xid'] eq $vo['qudao']">
+                                                <td>{pigcms:$xxvo.x_name}</td>
+                                            </if>
+                                        </volist>
+                                        <else/>
+                                        <td>无</td>
+                                    </if>
+
+                                    <if condition="$vo['huodongleixing'] neq ''">
+                                        <volist name='cpxxcitylist' id='xxcityvo'>
+                                            <if condition="$xxcityvo['cid'] eq $vo['huodongleixing']">
+                                                <td>{pigcms:$xxcityvo.c_name}</td>
+                                            </if>
+                                        </volist>
+                                        <else/>
+                                        <td>无</td>
+                                    </if>
+
+
+                                    <if condition="$vo['city'] neq ''">
+                                        <volist name='xxcity' id='cityvo'>
+                                            <if condition="$cityvo['cid'] eq $vo['city']">
+                                                <td>{pigcms:$cityvo.c_name}</td>
+                                            </if>
+                                        </volist>
+                                        <else/>
+                                        <td>无</td>
+                                    </if>
+
+
+
+                                    <td>{pigcms:$vo.sdate|date="Y-m-d H:i:s",###}</td>
+                                    <td>{pigcms:$vo.edate|date="Y-m-d H:i:s",###}</td>
+                                </volist>
+                                </TBODY>
+                            </TABLE>
+                        </form>
+
+                    </div>
+                    <div class="cLine">
+                        <div class="pageNavigator right">
+                            <div class="pages">{pigcms:$page}</div>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="Public:footer"/>

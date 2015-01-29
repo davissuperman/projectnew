@@ -1,0 +1,228 @@
+<include file="Product:header"/>
+ <script type="text/javascript">
+ var time_now_server,time_now_client,time_end,time_server_client,timerID;
+ 
+ //结束时间
+time_end=new Date("{pigcms:$end}");
+time_end=time_end.getTime();
+ //开始的时间:如果不填入时间日期默认为当前的日期时间
+time_now_server=new Date;
+time_now_server=time_now_server.getTime();
+ 
+time_now_client=new Date();
+time_now_client=time_now_client.getTime();
+ 
+time_server_client=time_now_server-time_now_client;
+ 
+setTimeout("show_time()",1000);
+ 
+ //显示时间函数
+ function show_time()
+ {
+ var timer = document.getElementById("timer");
+ if(!timer){
+ return ;
+ }
+ timer.innerHTML =time_server_client;
+ 
+ var time_now,time_distance,str_time;
+ var int_day,int_hour,int_minute,int_second;
+ var time_now=new Date();
+ time_now=time_now.getTime()+time_server_client;
+ time_distance=time_end-time_now;
+ if(time_distance>0)
+ {
+    int_day=Math.floor(time_distance/86400000)
+    time_distance-=int_day*86400000;
+    int_hour=Math.floor(time_distance/3600000)
+    time_distance-=int_hour*3600000;
+    int_minute=Math.floor(time_distance/60000)
+    time_distance-=int_minute*60000;
+    int_second=Math.floor(time_distance/1000)
+   
+    if(int_hour<10){
+      int_hour="0"+int_hour;
+    }
+    if(int_minute<10){
+      int_minute="0"+int_minute;
+    }
+    if(int_second<10){
+      int_second="0"+int_second;
+    }
+   
+  str_time=int_day+"天"+int_hour+"小时"+int_minute+"分钟"+int_second+"秒";
+  timer.innerHTML=str_time;
+  setTimeout("show_time()",1000);
+ }
+ else
+ {
+  timer.innerHTML =timer.innerHTML;
+  clearTimeout(timerID)
+  var DisPla = document.getElementById("disp");
+  var timeEnds = document.getElementById( "timeEnd" );
+  DisPla.style.display = "none";
+  timeEnds.style.display = "block";
+ }
+ }
+ </script>
+    <style type="text/css">
+        .mod_fold .fold_detail img {
+            display: block;
+            width: 100%;
+        }
+
+        .mod_fold .maxheight {
+            max-height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="lay_page page_detail current" id="page_detail">
+        <div class="lay_page_wrap">
+            <div class="mod_bg_lace"></div>
+            <div class="mod_slider">
+                <div class="slider_cnt">
+                    <ul id="detail-slider" style="visibility: hidden;">
+							<volist name="l" id='lo' key="k"><li>
+                     <img index="{pigcms:$k-1}" back_src="{pigcms:$lo}" class="default" />
+					 </li></volist>
+                    </ul>
+                </div>
+            </div>
+            <div class="fn_detail qb_gap qb_fs_l">
+                <h1 id="share-itemName">{pigcms:$name}</h1>
+                <div style="display:block" id="disp">
+				<if condition="$count neq 0">
+				<div class="price">
+                    现价： <strong class="mod_color_strong" id="price">¥{pigcms:$oprice}</strong>
+                    <del class="mod_color_weak qb_fs_s" id="maketPrice">¥{pigcms:$price}</del>
+                    <br>
+                </div>			
+				<if condition="$Tt eq 0">
+				<div class="price"><span style="color:red;float:left;">距离活动结束:</span><div id="timer" style="float:left;color:red;"></div></div></if>
+                <hr class="qb_hr" />
+                <div id="prop-list"></div>
+				<dl class="mod_dl qb_mb10 mod_lh_l qb_clearfix">
+				<dt>快递：</dt>
+				<if condition="$freight eq 0"><dd class="qb_color_weak mod_property" id="dd"></dd><else /><dd class="qb_color_weak mod_property"><span class="property disabled">卖家包邮</span></dd></if>
+				</dl>
+				<div id="J_buy" >
+                    <dl class="mod_dl mod_lh_l qb_mb10 qb_clearfix">
+                        <dt>数量：</dt>
+							<dd><span class="quantity"><span class="minus" tag="sub"><i class="qb_icon icon_minus"></i></span>
+                            <input type="tel" id="buyNum" value="1"><span tag="add" class="plus"><i class="qb_icon icon_plus"></i></span></span><span class="qb_fs_s mod_color_comment">&nbsp;<span id="stock-num-prev">剩余</span><span id="stock-num">{pigcms:$count}</span><span id="stock-num-next">件</span></span></dd>
+                    </dl>
+                    <hr class="qb_hr" />
+                    <div class="qb_flex">
+                        <span class="mod_btn btn_block btn_em qb_mr10 flex_box" id="add-cart">加入购物车</span>
+                        <span class="mod_btn btn_block btn_strong  flex_box" id="buy-now">立即购买</span>
+                    </div>
+                </div>
+				 <div id="J_buydisable" style="display:none;">
+                    <div class="btn_empty qb_tac mod_color_weak" id="J_nogoods">已经售完</div>
+                </div>
+				<else/>
+				 <div id="J_buydisable">
+                    <div class="btn_empty qb_tac mod_color_weak" id="J_nogoods">已经售完</div>
+                </div>
+				</if> 
+				</div>
+				<div style="display:none" id="timeEnd">
+                    <div class="btn_empty qb_tac mod_color_weak" id="J_nogoods">已经结束</div>
+                </div>
+                <hr class="qb_hr" />
+                <h2>商品详情</h2>
+                <div class="mod_fold fold">
+                    <div class="fold_detail qb_fs_m qb_mb10 mod_color_weak maxheight" id="detail-info">
+							{pigcms:$intro|htmlspecialchars_decode}
+                    </div>
+                    <div class="fold_arrow qb_tac qb_mb10 qb_none" id="info-arrow">
+                        <div class="handle arrow"></div>
+                    </div>
+                </div>
+            </div>
+           <form action="/index.php?g=Wap&m=Product&a=buy_now&token={pigcms:$token}&wecha_id={pigcms:$wecha_id}" method="post" name="detailForm">  
+				<input type="hidden" value="" id="bc" name="bc">
+                <input type="hidden" value="" id="attr" name="attr">
+                <input type="hidden" value="" id="mid" name="mid">
+                <input type="hidden" value="{pigcms:$id}" id="ic" name="ic">
+				<input type="hidden" value="{pigcms:$token}" id="token" name="token">
+				<input type="hidden" value="{pigcms:$name}" id="name" name="name">
+				<input type="hidden" value="{pigcms:$oprice}" id="oprice" name="oprice">
+                <input type="hidden" value="{pigcms:$freight}" id="freight" name="freight">
+				<input type="hidden" value="{pigcms:$i_logo}" id="i_logo" name="i_logo">
+				<input type="hidden" value="{pigcms:$wecha_id}" id="wecha_id" name="wecha_id">
+				<input type="hidden" value="{pigcms:$catid}" id="catid" name="catid"/>
+				<input type="hidden" value="{pigcms:$Seconds}" id="Seconds" />
+				<input type="hidden" value="{pigcms:$bc_l}" id="bc_l" name="bc_l"/>
+			</form> 	
+        </div>
+    </div>
+    <div class="mod_dialog qb_none" id="message-notice">
+        <div class="dialog_mask"></div>
+        <div class="dialog_main qb_br qb_tac">
+            <div class="dialog_bd" id="notice-content"></div>
+            <div class="dialog_ft qb_flex"><a href="javascript:void(0);" class="flex_box" id="notice-cancel">取消</a><a href="javascript:void(0);" class="flex_box" id="notice-sure">确定</a></div>
+        </div>
+    </div>
+    <div class="qb_quick_tip qb_none" id="bubble"></div>
+    <script type="text/template" id="prop-tpl">
+        <dl class="mod_dl qb_mb10 mod_lh_l qb_clearfix">
+            <dt>{#pName#}：</dt>
+            <dd class="qb_color_weak mod_property" skuname="{#pName#}" index="{#index#}">{#pList#}</dd>
+        </dl>
+    </script>
+    
+<include file="Product:bottom"/>
+<script src="{pigcms::$staticFilePath}/js/ChatFloat.js"></script>
+<script>
+    new ChatFloat({
+        AId:1071,
+        right:0,
+        top:150,
+        openid:""
+    });
+</script>
+    <script type="text/javascript"> 
+       // var shareData = {"send2Friend":{"content":"【微商城】【测试】红毯高级定制系列，一圈钻石镶嵌成对树叶造（测试） ￥1.00元","img":"http://84924.vshop.weimob.com/data/goods/300/13642.jpg","link":"http://1071.vshop.weimob.com/goods/13642.html","title":"【微商城】【测试】红毯高级定制系列，一圈钻石镶嵌成对树叶造（测试）"},"share2Friend":{"img":"http://84924.vshop.weimob.com/data/goods/300/13642.jpg","link":"http://1071.vshop.weimob.com/goods/13642.html","title":"【微商城】【测试】红毯高级定制系列，一圈钻石镶嵌成对树叶造（测试）"},"share2qqBlog":{"content":"我关注了【微商城】！拥有N多会员特权，一起来体验吧","link":"http://1071.vshop.weimob.com/goods/13642.html"}};
+              //  var shareData = {"send2Friend":{"content":"品微惊喜不断！","img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"http://www.wzhi.cc/index.php?g=Wap&m=Product&a=cookie&token={pigcms:$token}","title":"【品微商城】推荐给你看看，不一样的商城"},"share2Friend":{"img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"http://www.wzhi.cc/index.php?g=Wap&m=Product&a=cookie&token={pigcms:$token}","title":"【品微商城】关注我吧！更多会员特权等着你！"},"share2qqBlog":{"content":"我关注了【品微商城】！拥有N多会员特权，一起来体验吧！","link":"http://www.wzhi.cc/index.php?g=Wap&m=Product&a=cookie&token={pigcms:$token}"}};
+		        		         var shareData = {"send2Friend":{"content":"品微惊喜不断！","img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"{pigcms::C('site_url')}{pigcms::U('Product/cookie',array('token'=>$token))}","title":"【品微商城】推荐给你看看，不一样的商城"},"share2Friend":{"img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"{pigcms::C('site_url')}{pigcms::U('Product/cookie',array('token'=>$token))}","title":"【品微商城】关注我吧！更多会员特权等着你！"},"share2qqBlog":{"content":"我关注了【品微商城】！拥有N多会员特权，一起来体验吧！","link":"{pigcms::C('site_url')}{pigcms::U('Product/cookie',array('token'=>$token))}"}};
+				// var shareData = {"send2Friend":{"content":"品微惊喜不断！","img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"{pigcms::U('Product/cookie',array('token'=>$token))}","title":"【品微商城】推荐给你看看，不一样的商城"},"share2Friend":{"img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"{pigcms::U('Product/cookie',array('token'=>$token))}","title":"【品微商城】关注我吧！更多会员特权等着你！"},"share2qqBlog":{"content":"我关注了【品微商城】！拥有N多会员特权，一起来体验吧！","link":"{pigcms::U('Product/cookie',array('token'=>$token))}"}};
+		!function () { function c() { var a = WeixinJSBridge; a.on("menu:share:appmessage", e), a.on("menu:share:weibo", f), a.on("menu:share:timeline", g), a.invoke("getNetworkType", {}, d) } function d(a) { var b, c; switch (a.err_msg) { case "network_type:wwan": b = 2e3; break; case "network_type:edge": b = 3e3; break; case "network_type:wifi": b = 4e3 } c = new Image, c.onerror = c.onload = function () { c = null } } function e() { var a = window.shareData.send2Friend, b = h(a); a.content = b ? b.content : a.content, a.img = b && b.img ? b.img : a.img, WeixinJSBridge.invoke("sendAppMessage", { img_url: a.img, img_width: "640", img_height: "640", link: a.link, desc: a.content, title: a.title }, function () { }) } function f() { var b = window.shareData.share2qqBlog; WeixinJSBridge.invoke("shareWeibo", { content: a.isios ? b.content + b.link : b.content, url: b.link }, function () { }) } function g() { var a = window.shareData.share2Friend; WeixinJSBridge.invoke("shareTimeline", { img_url: a.img, img_width: "640", img_height: "640", link: a.link, desc: " ", title: a.title }, function () { }) } function h() { return "function" == typeof b ? b() : "" } var b, a = function () { var a = window.navigator.userAgent; return this.isAndroid = a.match(/(Android)\s+([\d.]+)/) || a.match(/Silk-Accelerated/) ? !0 : !1, this.isiPad = a.match(/iPad/) ? !0 : !1, this.isiPod = a.match(/(iPod).*OS\s([\d_]+)/) ? !0 : !1, this.isiPhone = !this.isiPad && a.match(/(iPhone\sOS)\s([\d_]+)/) ? !0 : !1, this.isios = this.isiPhone || this.isiPad || this.isiPod, this }(); window.shareData && document.addEventListener("WeixinJSBridgeReady", c, !1), window.setShareListener = function (a) { b = a } }();
+    </script>
+    <script src="{pigcms::$staticFilePath}/js/zepto.min.js"></script>
+    <script src="{pigcms::$staticFilePath}/js/imagesloaded.pkgd.min.js"></script>
+    <script type="text/javascript">
+        var sku, availSku, totalStock, bookEndTime, bookBeginTime, isNew, wxInfo,picLinks,buymaxnum;
+		sku = {pigcms:$p};
+		//sku = [{"pList":["无褶版","平烫版","双褶版"],"pName":"版型"},{"pList":["78/2.34尺/30.5","80/2.4尺/31","82/2.46尺/31.5","84/2.52尺/32","86/2.58尺/33","88/2.64尺/33.5","90/2.7尺/34","92/2.76尺/34.5","94/2.82尺/35","96/2.88尺/36","98/2.94尺/36.5","100/3.0尺/37","102/3.06尺/37.5","104/3.12尺/38","106/3.18尺/39","108/3.24尺/39.5","112/3.36尺/41","116/3.42尺/42"],"pName":"规格"}]; 
+		availSku = {pigcms:$availSku}; 
+        //
+		totalStock = '{pigcms:$count}', 
+        isNew = "false";
+        wxInfo = { "isFocus": "true", "wxId": "ONLY_BESTSELLER" }; 
+        picLinks = "{pigcms:$logo}";
+        buymaxnum="50";
+        imagesLoaded( document.querySelector('#detail-info'), function( instance ) {
+            mobile.o2ocn.detail.init();
+        });
+    </script>
+	<script>
+			$(function(){
+					var json = {pigcms:$exp};
+					for( var key in json.pList){
+						var s = document.createElement( "span" );
+						var t = document.createTextNode( json.pList[ key ] );
+						s.className="property disabled";
+						s.appendChild( t );
+						$( '#dd' ).append( s );	
+	 				}	                                           
+			});
+	</script>
+	<script>
+			$( "#notice-cancel" ).on( "click",function(){
+						location.reload()   
+			} );
+	</script>
+</body>
+</html>

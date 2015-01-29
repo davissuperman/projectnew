@@ -1,0 +1,1 @@
+ALTER TABLE  `tp_product_shop` ADD  `service_remark` VARCHAR( 300 ) NOT NULL DEFAULT  ''

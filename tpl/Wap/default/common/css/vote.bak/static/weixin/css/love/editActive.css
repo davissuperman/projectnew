@@ -1,0 +1,52 @@
+*{margin:0px;padding:0px;}
+html,body{width:100%;height:100%;font-size:16px;min-width:320px;}
+body{background:url(../../img/top1Img.gif) no-repeat 0px 0px #fff0ff; background-size:100%;}
+a{text-decoration:none;}
+ul{list-style:none;}
+.clear{clear:both;}
+.box{margin:18px 12px;font-family:"微软雅黑";padding-top:8%;}
+.title{color:#333333;font-size:20px;font-weight:bold;margin-bottom:10px;}
+.titleS{color:#333333;font-size:17px;margin-bottom:10px;}
+.detail{height:20px;line-height:20px;color:#7f7f7f;font-size:12px;margin-top:15px;margin-bottom:10px;}
+.time{float:left;margin-right:10px;}
+.pImg{width:100%;}
+.report{text-align:right;margin-top:16px;font-size:12px;}
+.report a{color:#7f7f7f;}
+.voteNum{height:22px;line-height:22px;margin-top:15px;padding-left:5px;margin-bottom:5px;}
+.voteNum span{float:left;font-size:12px;color:#333;}
+.voteNum span.look{height:22px;line-height:22px;padding:0px 6px;border-radius:3px;color:#fff;float:right;background:#ff5466;}
+.sendOver{height:44px;line-height:44px;background:url(../../img/overBj.gif) repeat-x top center;font-size:18px;color:#fff;border:0px;text-align:center;width:100%;font-weight:bold;margin-top:16px;border-radius:5px;}
+.sendBtnX{height:44px;line-height:44px;background:url(../../img/sendBjL.gif) no-repeat top center;font-size:18px;color:#fff;border:0px;text-align:center;width:100%;border-radius:5px;font-weight:bold;margin-top:18px;}
+.btn{margin-top:18px;}
+.bottom{height:45px;line-height:45px;text-align:center;font-size:12px;margin-bottom:18px;color:#808080;}
+.top{height:45px;line-height:45px;background:#000;margin-bottom:18px;text-align:right;padding-right:12px;}
+.top a{color:#fff;}
+.sendBox{width:41%;text-align:center;margin-right:10px;float:left;background:url(../../img/garylove.gif) no-repeat center top;height:45px;line-height:45px;border-radius:5px;color:#fff;padding:0px 10px;}
+.share1{float:left;height:15px;margin-top:15px;}
+.share2{float:left;height:16px;margin-top:14px;margin-right:5px;}
+.shareBox{width:41%;text-align:center;float:right;background:url(../../img/garylove.gif) no-repeat center top;height:45px;line-height:45px;border-radius:5px;color:#fff;padding:0px 10px;}
+.gLeft{float:left;}
+.blacBottom{height:50px;background:#1a1a1a;line-height:50px;text-align:center;color:#fff;margin:-18px -12px;}
+.detailText{margin-top:18px;text-align:left;padding-left:2px;font-size:14px;line-height: 20px}
+.userDetail{border:1px #ffb8cf solid;border-radius:5px;background:#fff;padding:10px;font-size:12px;border-bottom:0px;}
+.userDetailX{border:1px #ffb8cf solid;border-radius:5px;background:#fff;padding:10px;font-size:12px;}
+.user{float:left;}
+.date{float:right;color:#808080;}
+.headRows{height:30px;line-height:30px;}
+.head{float:left;width:30px;margin-right:10px;}
+.userRows{height:20px;line-height:20px;}
+.resion{height:20px;line-height:25px;color:#808080;border-top:1px #ccc solid;margin-top:5px;}
+.passWord{width:230px;z-index:9999;background:#fef0ff;position:absolute;border-radius:5px;padding:18px 12px;display:none;}
+.passBox{border:1px #feb8d0 solid;border-radius:5px;padding:10px 6px;background:#fff;margin-top:15px;}
+.pass{width:100%;margin:-10px 0px;padding:13px 0px;color:#b2b2b2;border:0px;font-size: 14px;}
+.passX{padding:13px 0px;margin:-10px 0px;color:#b2b2b2;border:0px;width:95px;font-size: 14px;-webkit-appearance:none}
+.button1{height:40px;line-height:40px;color:#fff;background:url(../../img/loveBtn.gif) no-repeat center top;border:0px;border-radius:5px;width:46%;float:left;margin-top:18px;font-size:16px;}
+.button2{height:40px;line-height:40px;color:#fff;background:url(../../img/graylBtn.gif) no-repeat center top;border:0px;border-radius:5px;width:46%;float:right;margin-top:18px;font-size:16px;}
+
+.sendBtn{height:44px;line-height:44px;background:url(../../img/loveBtn.gif) repeat top center;font-size:18px;color:#fff;border:0px;text-align:center;width:100%;border-radius:5px;font-weight:bold;margin-top:18px;}
+#party_join{width:230px;display:none;position:absolute;z-index:9999;background:#fef0ff;border-radius:5px;padding:0px 12px 15px 12px;}
+.perBox1{border:1px #feb8d0 solid;border-radius:5px;padding:10px 6px;background:#fff;float:left;}
+.perBox2{border:1px #feb8d0 solid;border-radius:5px;padding:10px 6px;background:#fff;float:right;}
+.perBox{margin-top:15px;}
+
+

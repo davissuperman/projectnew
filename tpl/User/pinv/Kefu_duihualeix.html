@@ -1,0 +1,135 @@
+<?php $nav = "Kefu"; $side = "TMPLS" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Text_index.css" rel="stylesheet"/>
+<script type="text/javascript">
+
+function dianji(tid){
+    //alert(tid); return false;
+     if($('#tt'+tid).children().length==1)
+	  {
+		//$(".bor").removeClass("bor");
+        var nicheng=$('#dj'+tid).html();
+		//alert(nicheng);return false;
+        $('#dj'+tid).hide();
+       // $('<input type="text" value="" class="bor"/>').appendTo($('#tt'+uid));
+	   $('<input type="text" value=""class='+"bor"+tid+'>').appendTo($('#tt'+tid));
+	   $('<input style="cursor:pointer" type="button" value="OK"class='+"bor1"+tid+'>').appendTo($('#tt'+tid));
+		//$(".bor").css("border","1px #ccc solid").val(nicheng).addClass("bb"+uid);
+		
+		$(".bor"+tid).css("border","1px #ccc solid");
+		$('.bor'+tid).val(nicheng);
+		}
+		 if($('#dj'+tid)){
+				for(var i=1;i<$('#dj'+tid).closest("tr").siblings().length;i++)
+				{
+					if($('#dj'+tid).closest("tr").siblings().eq(i).find("td").eq(1).children().length!=1)
+					{
+						$('#dj'+tid).closest("tr").siblings().eq(i).find("td").eq(1).find("input").remove();
+						$('#dj'+tid).closest("tr").siblings().eq(i).find("td").eq(1).find("span").show();
+
+					}
+				
+				}
+		    
+		}
+	    $(".bor1"+tid).click(function(){
+			var nn=$('.bor'+tid).val();
+			var token=$('#token'+tid).val();
+			if($.trim(nn).length>12){
+				alert('不能超过十二个字符');
+				return false;
+			}else if($.trim(nn).length<2){
+			    alert('不能小于二个字符');
+				return false;
+			}
+			//alert(nn);
+			//alert(token);
+			//alert(tid);
+			//return false;
+			//var username=$('#username'+tid).val();
+			//alert(nn);return false;
+			$(".bor"+tid).remove();
+			$(".bor1"+tid).remove();
+			//$('#dj'+uid).show().html(nn);
+			//alert(token);return false;
+			 $.ajax({
+					type: "GET",
+					url: '{pigcms::U("Kefu/duihualeixxiugai")}',
+					data: "nn="+nn+'&token='+token+'&tid='+tid,
+					success: function(msg){
+					 	//alert(msg);return false;
+						if(msg == 1){
+						  // alert('修改成功');
+						   $('#dj'+tid).show().html(nn);
+				           return true; 
+   						}else{
+						    
+							 alert('没有修改成功');
+							 $('#dj'+tid).show().html(nn);
+				             return false;
+						}
+					},
+					
+			 	});
+			
+		
+		})
+		
+
+
+		
+
+
+}
+</script>
+ <div class="container main">
+<div class="row">
+<include file="Kefu:left"/>
+     
+            <div class="col-md-10 main">
+             <div class="panel panel-success">
+			  <div class="panel-heading">
+				<h3 class="panel-title">人工客服管理</h3>
+			  </div>
+			  <div class="panel-body">  
+			  <!--	<div class="add-button pull-right"style="float:left">-->
+			 <div class="" style="float:left">
+				  <a href="{pigcms::U('Kefu/ltiaojl',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-file"></span>聊天记录</a>
+            	  <a href="{pigcms::U('Kefu/duihualeix',array('token'=>$token))}"  class="btn btn-success">
+				  <span class="glyphicon glyphicon-file"></span>
+				  对话类型设置</a>	
+            	</div>        
+            	<table class="table table-striped" cellspacing="1">
+                	<tr>
+                    	<th class="">编号</th>
+                        <th class="">类型名</th>
+                        <th class="text-center">操作</th>
+                    </tr>
+                    <volist name="list" id="vo">
+                    <tr>
+                    	<td class="">{pigcms:$i}</td>
+                        <td  class='k' id="tt{pigcms:$vo.tid}"><span id="dj{pigcms:$vo.tid}">{pigcms:$vo.name}</span>
+						</td>
+
+						<td class="text-center">
+                        	<input type="hidden" id='username{pigcms:$vo.tid}' value="{pigcms:$vo.name}" name='username' />
+						   <input type="hidden" id='token{pigcms:$vo.tid}' value="{pigcms:$vo.token}" name='token' />
+							<a class="hover-tooltip-edit" onclick="dianji({pigcms:$vo.tid})" style="cursor:pointer"><span class="glyphicon glyphicon-edit"></span>
+							</a> 
+                        	
+                        </td>
+                    </tr>
+                    </volist>
+                 <tr>
+                 <td colspan="7" style="text-align:right">{pigcms:$page}</td>
+                 </tr>
+                  
+                </table>
+               </div>
+            
+            </div>
+
+            </div>   
+      </div>
+ </div>
+<include file="Public:footer"/>

@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <title>品微商城</title>    
+<meta charset="UTF-8">
+<meta name="viewport" content=" initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link href="{pigcms::$staticFilePath}/css/style.css" rel="stylesheet" />
+<link href="{pigcms::$staticFilePath}/css/templates.css" rel="stylesheet" />
+<style>
+.back {
+    width: 25px;
+    margin-top: 10px;
+    margin-right: 12px;
+	margin-left: 12px;
+}
+</style>
+ <script type="text/javascript">
+     var basePath = "{pigcms::U('Product/index',array('token'=>$token,'wecha_id'=>$wecha_id))}", baseParam = ""; 
+ </script>
+<SCRIPT LANGUAGE="JavaScript"> 
+//var te = new Date();
+//var s = parseInt(te.getTime()/1000);
+//var t = parseInt(te.getTime()/1000)-{pigcms:$C}; -->
+var s = {pigcms:$T};
+var t = {pigcms:$T}-{pigcms:$C};
+var maxtime = 1200-t-1;
+var maxtime1 = 1200-t-1;
+function CountDown(){  
+ if(maxtime>=0){  
+ minutes = Math.floor(maxtime/60);  
+ seconds = Math.floor(maxtime%60); 
+if( seconds < 10 ){
+		seconds = "0"+seconds;
+}  
+ msg = minutes+":"+seconds;  
+ document.all["ltimer"].innerHTML=msg; 
+ --maxtime;  
+ }  
+ else{  
+ clearInterval(ltimer);
+  clearInterval(ltimer2);
+			if( p != 0 && s > p ){
+			window.location = "/index.php?g=Wap&m=Product&a=join&token={pigcms:$token}&wecha_id={pigcms:$wecha_id}";										
+			}	
+	} 			
+}
+function CountDown1(){  
+ if(maxtime1>=0){  
+ minutes = Math.floor(maxtime1/60);  
+ seconds = Math.floor(maxtime1%60);
+if( seconds < 10 ){
+		seconds = "0"+seconds;
+} 
+ msg = minutes+":"+seconds;  
+document.all["ltimer2"].innerHTML=msg;   
+ --maxtime1;  
+ }  
+ else{  
+  clearInterval(ltimer2);
+			if( p != 0 && s > p ){
+			window.location = "/index.php?g=Wap&m=Product&a=join&token={pigcms:$token}&wecha_id={pigcms:$wecha_id}";										
+			}	
+	} 			
+}   
+if( {pigcms:$C} > 0 ){
+ltimer = setInterval("CountDown()",1000);
+ltimer2 = setInterval("CountDown1()",1000);  
+} 
+</SCRIPT>  
+<body>   
+<div class="lay_header" style="height: 45px">
+    <div class="lay_toptab mod_tab" id="lay_head">
+         <a class="" href="javascript:;" onclick="self.location=document.referrer;"><li style="list-style:none;"><img src="{pigcms::$staticFilePath}/css/img/backx.png" class="back"/></li></a>
+        <!-- <div class="tab_item go_back"><i class="qb_icon icon_goback"></i></div> -->
+        <a class="tab_item tab_item_logo" href="{pigcms::U('Product/index',array('token'=>$token,'wecha_id'=>$wecha_id))}">
+            <img src="{pigcms:$pic}"  style="width: 132px; margin-top: 8px;" />
+        </a>
+        <a class="tab_item" href="{pigcms::U('Product/usermember',array('token'=>$token,'wecha_id'=>$wecha_id))}"><i class="qb_icon icon_icenter"></i></a>
+        <a class="tab_item" href="{pigcms::U('Product/cats',array('token'=>$token,'wecha_id'=>$wecha_id))}"><div id="ltimer" style="color:red;font-size:10px;position:absolute; z-index:9999;left:3px;" mce_style="color:red"></div><i class="qb_icon icon_cart"></i><i class="qb_icon icon_number_bubble qb_none"></i></a>
+    </div>
+    <div class="lay_toptab mod_tab fixed qb_none" id="lay_head_fixed">
+		 <a class="" href="javascript:history.go(-1);"><li style="list-style:none;"><img src="{pigcms::$staticFilePath}/css/img/backx.png" class="back"/></li></a>
+	 <!--  <a class="tab_item" href="{pigcms::U('Product/index',array('token'=>$token,'wecha_id'=>$wecha_id))}"><i class="qb_icon icon_goback"></i></a> -->
+        <!--<div class="tab_item go_back"><i class="qb_icon icon_goback"></i></div>-->
+        
+        <a class="tab_item tab_item_logo" href="{pigcms::U('Product/index',array('token'=>$token,'wecha_id'=>$wecha_id))}">
+            <img src="{pigcms:$pic}" style="width: 132px; margin-top: 8px;" />
+        </a>
+        
+        <a class="tab_item" href="{pigcms::U('Product/usermember',array('token'=>$token,'wecha_id'=>$wecha_id))}"><i class="qb_icon icon_icenter"></i></a>
+        <a class="tab_item" href="{pigcms::U('Product/cats',array('token'=>$token,'wecha_id'=>$wecha_id))}"><div id="ltimer2" style="color:red;font-size:10px;position:absolute; z-index:9999;left:3px;" mce_style="color:red"></div><i class="qb_icon icon_cart"></i><i class="qb_icon icon_number_bubble qb_none"></i></a>
+    </div>
+</div>

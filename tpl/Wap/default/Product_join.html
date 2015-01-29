@@ -1,0 +1,76 @@
+<include file="Product:header"/>
+<link type="text/css" rel="stylesheet" href="{pigcms::$staticFilePath}/css/public.css"/>
+<link type="text/css" rel="stylesheet" href="{pigcms::$staticFilePath}/css/join.css"/>
+	    <script src="{pigcms::$staticFilePath}/js/zepto.min.js"></script>
+</head>
+<body>
+	<div class="box">
+		<if condition="$LI neq 0">
+        <section class="secBox">
+		<foreach name="l" item="li" key="k">
+		
+            <div class="same" id="slow">
+            	<p class="topText">以下商品重新加入才可以进行购买哦</p>
+            	<div class="common">
+                    <div class="leftImg">
+                        <img src="{pigcms:$li.pic}" class="proImg"/>
+                    </div>		
+                    <div class="rightText">
+                        <p class="textP">
+                            <span class="span1">{pigcms:$li.name}</span>
+                        </p>
+                        <p class="textP">
+                            <span class="span1">秒杀价：</span>
+                            <span class="Redmoney">￥{pigcms:$li.price}</span>
+                        </p>
+                        <p><a href="{pigcms::U('Product/h',array('token'=>$token,'wecha_id'=>$wecha_id,'id'=>$li[ 'ic' ]))}" class="nowBtn">重新加入</a></p>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <p class="topText">
+                	<span>数量:</span>
+                    <span class="num">{pigcms:$li.bc}</span>
+                    <span>共计:</span>
+                    <span class="money">￥<?php echo $li[ 'bc' ]*$li[ 'price' ] ?></span>
+                    <img src="{pigcms::$staticFilePath}/images/crash.gif" class="crash" onclick="Del( '{pigcms:$k}' );"/>
+                </p>
+            </div>
+			</foreach>
+        </section>  
+			<else/>
+		<div class="lay_page current">
+        <div class="lay_page_wrap">
+            <input type="hidden" id="items-len" value="0" />
+            <input type="hidden" id="problem-Len" value="0" />
+            <section id="content">  
+                <div class="qb_gap qb_tac qb_pt10" style="padding: 70px 0 5px; margin-bottom: 0px;">
+                    <img src="http://3glogo.gtimg.com/mobilelife/o2o/cn/img/s/icon_cart_empty.png" width="81" class="qb_mb10">
+                    <p class="qb_fs_xl mod_color_comment">你的购物车空空如也哦</p>
+                </div>
+                <div class="qb_tac qb_gap">
+                    <a href="{pigcms::U('Product/h',array('token'=>$token,'wecha_id'=>$wecha_id))}" class="mod_btn">去逛逛</a>
+                </div>           
+                <form action="" method="get" name="cartForm">
+                    <input type="hidden" value="{pigcms:$token}" id="token" name="token">
+                    <input type="hidden" value="{pigcms:$wecha_id}" id="user" name="user">
+                    <input type="hidden" value="0" id="cart" name="cart" />
+                    <input type="hidden" id="trandom" name="t"> 
+                </form>
+            </section>
+			</div>
+		</div>
+	</if>
+    </div>
+	<script>
+		function Del( id ){
+				$.post( "/index.php?g=Wap&m=Product&a=join_Del",{ id:id },function( html ){
+							if( html ) 	location.reload()
+									else 
+										alert( 'error!' )
+						
+				} )	
+		}			
+</script>
+	<include file="Product:bottom"/>
+</body>
+</html>

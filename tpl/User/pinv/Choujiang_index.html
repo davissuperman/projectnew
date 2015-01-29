@@ -1,0 +1,46 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Guajiang_index.css" rel="stylesheet"/>
+ <div class="content">
+ <div class="ffBox">
+<include file="Public:left"/>
+     
+    <!--right--begain-->
+             <div class="right">
+            	<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+               
+              <p class="artiEdit"><span class="big">抽奖列表 </span> 
+                
+            
+                <table class="sheet" cellspacing="1">
+                    <tr>
+                       
+                        <th class="secondTd">ID</th>
+                        <th class="thirdTd">抽奖数字</th>
+                        <th class="forthTd">名字</th>
+                        <th class="sevenTd">微信id</th>
+                        <!--<th class="thirdTd">开始时间/结束时间</th>
+                        <th class="forthTd">状态</th>
+                     	 <th class="sevenTd">外链代码</th>
+                        <th  class="forthTd">操作</th>-->
+                    </tr>
+                    <volist id="list" name="list">
+                    <tr>
+                       
+                        <td class="secondTd">{pigcms:$list.id}</td>
+                        <td class="secondTd">{pigcms:$list.num}</td>
+                        <td class="secondTd">{pigcms:$list.username}</td>
+                        <td class="secondTd">{pigcms:$list.wkid}</td>
+                       
+                    </tr>
+                    </volist>
+                </table>
+                 <p class="page">{pigcms:$page}</p>
+                </div>
+            <!--right--end-->   
+            </div> 
+      
+ </div>
+<include file="Public:footer"/>

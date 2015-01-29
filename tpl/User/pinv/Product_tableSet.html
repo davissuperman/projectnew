@@ -1,0 +1,41 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Product_index.css" rel="stylesheet"/>
+ <div class="content">
+ <div class="ffBox">
+<include file="Public:left"/>
+   
+      
+    <!--right--begain-->
+            <div class="right">
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+       
+             <p class="artiEdit"><span class="big">桌台设置</span> <a href="{pigcms::U('Product/tables',array('token'=>$token,'dining'=>$isDining))}"  class="addListX" >返回</a> </p>
+                  <form class="form" method="post" action="" enctype="multipart/form-data"> 
+<if condition="$isUpdate eq 1">
+<input type="hidden" name="id" value="{pigcms:$set.id}" />
+</if>
+                <p class="same">
+                    <span class="Tex">名称：</span>
+                    <input type="text" name="name" value="{pigcms:$set.name}"  class="circle"/>
+                </p>
+                <p class="same">
+                    <span class="Tex">介绍：</span>
+                    <input type="text"  name="intro" value="{pigcms:$set.intro}" class="circle"/>
+                </p>
+                <p class="same">
+                    <span class="Tex">顺序：</span>
+                    <input type="text" name="taxis" value="{pigcms:$set.taxis}" class="circle"/>
+                </p> <input type="hidden" name="id" value="{pigcms:$set.id}" />
+                <p class="pressBox"><input type="submit" value="保存" class="addList"/></p>
+                
+                
+             </form>
+            </div>
+            <!--right--end--> 
+            </div>   
+      
+ </div>
+<include file="Public:footer"/>

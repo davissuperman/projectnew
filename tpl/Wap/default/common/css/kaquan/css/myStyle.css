@@ -1,0 +1,25 @@
+*{margin:0px;padding:0px;font-family: "Microsoft Yahei" !important;font-size:14px;}
+html,body{width:100%;height:100%;background:#f0f0f0;}
+ul{list-style:none;}
+a{text-decoration:none;}
+.title{height:45px;line-height:45px;color:#fff;background:#6c935f;text-align:center;font-size:20px;}
+.list-box{height:50px;background:#d2d2d2;}
+.list-box li{float:left;width:50%;height:49px;line-height:49px;text-align:center;color:#989ea5;font-size:16px;}
+.list-box li.on{float:left;width:50%;height:49px;line-height:49px;text-align:center;background:#fff;color:#6c935f;}
+.ka-img{width:70px;float:left;}
+.car-box{position:relative;margin-top:20px;padding:15px;border:1px #d2d2d2 solid;background:#fff;overflow:auto;zoom:1;}
+.card-text{font-size:14px;color:#5D646F;float:left;margin-left:10px;}
+.card-time{font-size:12px;color:#989EA5;margin-top:10px;}
+.card-state{background: #6C935F;
+    border-radius: 3px;
+    color: #FFFFFF;
+    height: 24px;
+    line-height: 24px;
+    margin-top: 10px;
+    position: absolute;
+    right: 15px;
+    text-align: center;
+    top: 5px;
+    width: 45px;
+}
+.car-box-same{margin-top:0px;border-top:0px;}

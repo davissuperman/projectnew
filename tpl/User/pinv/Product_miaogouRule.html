@@ -1,0 +1,79 @@
+<?php $nav = "FUNCTION"; $side = "RULE"; $sideTop = "PRODUCT"; ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Product_index.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+<link type="text/css" rel="stylesheet" href="{pigcms::RES}/css/manage.css"/>
+<div class="container main">
+<div class="row">
+<include file="Product:left"/>
+
+    <div class="col-md-10 main">
+        <ol class="breadcrumb">
+              <li><a href="{pigcms::U('Product/index',array('token'=>$token))}">微商城</a></li>
+              <li><a href="{pigcms::U('Product/index',array('token'=>$token))}">商城管理</a></li>
+              <li class="active">秒购规则管理</li>
+            </ol>
+    
+            
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">秒购规则管理</h3>
+                    </div>
+                <div class="panel-body">
+                    <div class="pull-right add-button">
+                        <a href="{pigcms::U('Product/miaogouRuleAdd',array('token'=>$token))}" title="添加" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> 添加规则</a>
+                    </div>
+                    <div class="clearfix"></div>
+     <table class="table table-striped" cellspacing="1">
+            <tr>
+                <th style="width:10%">ID</th>
+                <th style="width:20%">活动标题</th>
+                <th style="width:30%;">规则内容</th>
+                <th style="width:10%">是否显示</th>
+                <th style="width:10%">管理操作</th>
+            </tr>
+            <volist name="rules" id="rule">
+            <tr>
+                <td>{pigcms:$rule['id']}</td>
+                <td id="write" ><div style="white-space:nowrap;width:200px;overflow:hidden;text-overflow:ellipsis;" title="{pigcms:$rule['title']}">{pigcms:$rule['title']}</div></td>
+                <td><div style="white-space:nowrap;width:300px;overflow:hidden;text-overflow:ellipsis;" title="{pigcms:$rule['content']}">{pigcms:$rule['content']}</div></td>
+                <td><input type="checkbox" id="{pigcms:$rule['id']}" class="show" <if condition="$rule['show'] eq 1">checked</if> /></td>
+                <td>
+                    <a  href="{pigcms::U('Product/miaogouRuleSet',array('id'=>$rule['id'],'token'=>$_GET['token']))}" class="hover-tooltip-edit"><span class="glyphicon glyphicon-edit"></span></a>               
+                    <a href="javascript:;" class="hover-tooltip-trash" id="{pigcms:$rule['id']}"><span class="glyphicon glyphicon-trash danger"></span></a>
+        </td>
+            </tr>
+            </volist>
+        </table>
+         <p class="page">{pigcms:$page}</p>
+         </div>
+    </div>
+
+        </div> 
+        </div> 
+        </div> 
+
+    </div>
+    <script>
+      <?php $url=U('Product/miaogouRuleDel',array('token'=>$_GET['token']));$url1=U('Product/miaogouShow',array('token'=>$_GET['token'])); ?>
+      $(function(){
+        $('.hover-tooltip-trash').click(function(){
+          var bDel=confirm('确定删除么~');
+          if(bDel){
+            var id=$(this).attr('id');
+            location="{pigcms:$url}&id="+id;
+          }
+        });
+        $('.show').change(function(){
+          if($(this).prop('checked')){
+            var id=$(this).attr('id');
+            var _this=$(this);
+            $.post("{pigcms:$url1}",{id:id},function(){
+              $('.show').prop('checked',false);
+              _this.prop('checked',true);
+            });
+          }
+        });
+      });
+    </script>
+<include file="Public:footer"/>

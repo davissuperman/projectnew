@@ -1,0 +1,76 @@
+<?php $nav = "FUNCTION"; $side = "PHOTOINDEX" ?>
+<include file="Public:head"/>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+<link type="text/css" href="{pigcms::RES}/css/Adma_index1.css" rel="stylesheet"/>
+ <div class="container main">
+<div class="row">
+<include file="Photo:left"/>
+     
+           <div class="col-md-10 main">
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">编辑相册</h3>
+			  </div>
+			  <div class="panel-body">
+			  
+             		<form method="post" action="">
+             		<div class="row">
+             			<div class="col-md-8">
+							<p class="same">
+								<span class="Tex">相册名称：</span>
+							   <input type="text"  name="title" value="{pigcms:$photo.title}"  value="" class="circle"/>
+							   <input type="hidden" name="id" value="{pigcms:$photo.id}" />
+							</p>
+							<p class="example">尽量简单，不要超过20字.</p>
+							<p class="same">
+								<span class="Tex">相册封面图：</span>
+								<input type="text" value="{pigcms:$photo.picurl}" id='url'  name="picurl" class="circle"/><a href="###" onclick="upyunPicUpload($(this).prev().attr('id'),'pic',700,420,'qtclsw1382672973')" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-upload"></span> 上传</a>
+		
+							</p>
+							<p class="example">外链图片地址，尺寸230×134.</p>
+						   
+							<p class="areaSame">
+								<span class="Tex">相册介绍：</span>
+								<textarea class="circleArea" id="info" name="info">{pigcms:$photo.info}</textarea>
+							</p>
+							<p class="example">请简单描述相册内容，尽量控制在150文字以内。</p>
+							<p class="sameX">
+								<input  name="isshoinfo" type="radio" class="raTe" value="1" <if condition="$photo['isshoinfo'] eq 1">checked="checked"</if>/><span>显示简介</span>
+								<input  name="isshoinfo" type="radio"  value="0"  <if condition="$photo['isshoinfo'] eq 0">checked="checked"</if> /><span>不显示简介</span>
+							</p>
+							<p class="same">
+								<span class="Tex">是否显示：</span>
+								<input type="radio" name="status"  value="1"  <if condition="$photo['status'] eq 1">checked="checked"</if> /><span>显示此相册</span>
+								<input type="radio" name="status"  value="0"  <if condition="$photo['status'] eq 0">checked="checked"</if> /><span>不显示此相册</span>
+							</p>
+						</div>
+						<div class="col-md-4">
+							<div class="thumbnail" style="margin-top:30px">
+								<if condition="$photo.picurl neq ''">
+									<img src="{pigcms:$photo.picurl}" />
+								<else/>
+									<img src="{pigcms::RES}/img/baseImg.gif" alt="baseImg"/>
+								</if>
+								<div class="thumb-caption">
+									<span class="thumb-caption-title">{pigcms:$photo.title}</span>
+									<span class="thumb-caption-number">有{pigcms:$photo.num}张图片</span>
+								</div>
+							</div>
+						</div>
+                	</div> <!-- row -->
+                </div>
+           	  <div class="panel-footer" style="text-align:right"> 
+	  		<input type="submit" value="保存" class="btn btn-success"/>
+	  		<a href="javascript:history.go(-1);"  class="btn btn-link">取消</a> 
+		      </div>
+                </div>
+                </form>
+            </div>
+            
+          
+            </div>       
+      
+ </div>
+<include file="Public:footer"/>

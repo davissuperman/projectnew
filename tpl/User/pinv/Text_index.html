@@ -1,0 +1,104 @@
+<?php $nav = "BASIC"; $side = "TEXT" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/cindex.css" rel="stylesheet"/>
+<style>
+.answer_text{
+width: 270px;
+overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+
+}
+</style>
+<script>
+$(function(){
+var key = $( '.k' );
+var w = $( '#w .wv' );
+w.each( function(){
+				if( $(this).text().match( /[\u4e00-\u9fa5]/g ) ){//汉子验证
+						if( $(this).text().length > 5 ){
+							var Nstr =$(this).text().substring( 0,4 )+'...';
+							$( this ).text( Nstr );
+						}
+				
+				}		
+			if( $(this).text().match( /[a-zA-Z]/g ) ){
+					if( $(this).text().length > 10 )
+					var Nstr =$(this).text().substring( 0,10 )+"...";
+					$( this ).text( Nstr );
+					
+			}
+  } );
+key.each( function(){
+				if( $(this).text().match( /[\u4e00-\u9fa5]/g ) ){//汉子验证
+						if( $(this).text().length > 5 ){
+							var Nstr =$(this).text().substring( 0,5 )+'...';
+							$( this ).text( Nstr );
+						}
+				
+				}		
+			if( $(this).text().match( /[a-zA-Z]/g ) ){
+					if( $(this).text().length > 10 )
+					var Nstr =$(this).text().substring( 0,10 )+"...";
+					$( this ).text( Nstr );
+					
+			}
+  } );
+  
+  
+  
+});
+
+</script>
+<div class="container main">
+<div class="row">
+<include file="Basic:left"/>
+<div class="col-md-10 main">
+	<div class="panel panel-success">
+	  <div class="panel-heading">
+		<h3 class="panel-title">关注时自动回复内容</h3>
+	  </div>
+	  <div class="panel-body">
+            	<div class="add-button pull-right">
+            		<a href="{pigcms::U("Text/add")}"  class="btn btn-success"><span class="glyphicon glyphicon-file"></span> 新增文本回复</a>
+            	</div>
+                <table class="table table-striped" border="0">
+                	<tr>
+                    	<th>编号</th>
+                        <th>关键词</th>
+                        <th>回答</th>
+                        <th>匹配类型</th>
+                        <th>浏览次数</th>
+                        <th>时间</th>
+                        <!--<th>外链代码</th>-->
+                        <th class="sevenTd">操作</th>
+                    </tr>
+                    <volist name="info" id="vo">
+                    <tr>
+                    	<td> {pigcms:$i}</td>
+                        <td class= 'k'>{pigcms:$vo.keyword}</td>
+                     
+                     <td>
+                           <div class="answer_text">{pigcms:$vo.text}</div>
+                        </td>
+                       <td><eq name="vo.type" value="1">完全匹配<else/>模糊匹配</eq></td>
+                       <td>{pigcms:$vo.click}</td>
+                       <td><php>echo date('Y-m-d',$vo['updatetime']);</php></td>
+                       <!--<td id = 'w'><span class = 'wv'>{pigcms:$vo.keyword}</span> {pigcms:$vo.id}</td>-->
+                       <td style="text-align:center">
+                       <a href="{pigcms::U('Text/edit',array('id'=>$vo['id']))}"><span class="glyphicon glyphicon-edit hover-tooltip-edit"></span></a>
+                        <a href="javascript:drop_confirm('您确定要删除吗?', \'{pigcms::U('Text/del',array('id'=>$vo['id']))}\');"><span class="glyphicon glyphicon-trash danger hover-tooltip-trash"></span></a> 
+                       </td>
+                    </tr>
+                 </volist>
+                    <tr>
+                      <td colspan="8" style="text-align:right">{pigcms:$page}</td>
+                    </tr>
+                </table>
+        </div>
+       </div>
+            
+</div>
+</div>          
+ </div>
+<include file="Public:footer"/>

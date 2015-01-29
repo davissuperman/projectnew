@@ -1,0 +1,1 @@
+ALTER TABLE tp_flash ADD orders INT NOT NULL DEFAULT 0;

@@ -1,0 +1,62 @@
+<?php $nav = "CRM"; $side = "QF" ?>
+<include file="Public:head"/>
+<div class="container main">
+<div class="row main">
+<include file="Crm:left"/>
+        <div class="col-md-10 main">
+        	      <div class="panel panel-success">
+        	  <div class="panel-heading">
+        	    <h3 class="panel-title">群发记录</h3>
+        	  </div>
+       <div class="add-button pull-right"style="margin-bottom:30px">
+							   
+            		<a href="{pigcms::U('Message/index',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> 添加通知</a>
+					 
+            	</div>
+        	  <div class="panel-body">
+ <div class="msgWrap form">
+<div class="bdrcontent">
+<div id="div_ptype" style="margin-top:30px;">
+<table class="table table-striped" border="0" cellSpacing="0" cellPadding="0" width="100%">
+<thead>
+<tr>
+<th style=" width:180px;">标题</th>
+<th style=" width:80px;">类型</th>
+<th style=" width:80px;">成功数量</th>   
+<th style=" width:80px;">失败数量</th>  
+<th style=" width:150px;" class="norightborder">时间</th>
+<th style=" width:80px;">操作</th>    
+</tr>
+</thead>
+<volist name="info" id="actinfo">
+<tr>
+<td>{pigcms:$actinfo.title}</td>
+<td>{pigcms:$actinfo.msgtype}</td>
+<td>{pigcms:$actinfo.sentcount}</td>
+<td>{pigcms:$actinfo.errorcount}</td>
+<td>
+<php>echo date('Y-m-d',$actinfo['time']);</php>
+</td>
+<td class="norightborder"><a charset="a_oper" href="{pigcms::U('Message/item',array('id'=>$actinfo['id']))}">查看</a></td>
+</volist>
+</tr>
+
+</table>
+
+</div>
+</div>
+<div class="footactions" style="padding-left:10px">
+  <div class="pages">{pigcms:$page}</div>
+</div>
+          </div>
+  
+        </div>
+   
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div> 
+  <!--底部-->
+  	</div>
+
+<include file="Public:footer"/>

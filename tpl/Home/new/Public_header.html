@@ -1,0 +1,21 @@
+<!--header-->
+<div class="topHeader">
+    <div id="header">
+    	<div id="logo"><a href="/"><img src="tpl/static/logo.png" width="225" height="84" /></a></div>
+        <div class="nav">
+        	<a href="/#" onclick="Javascript:window.open('{pigcms::C('site_url')}','_blank');">首页</a>
+            <a href="/#Features">功能特色</a>
+            <a href="/#Profiles">关于我们</a>
+            <a href="/#Comment">客户评价</a>
+            <a href="/#Help">帮助指南</a>
+			<a href="/#" onclick="Javascript:window.open('{pigcms::U('User/Index/index')}','_blank');" >管理</a>
+            <if condition="$_SESSION[uid]==false">
+			<a href="/#" onclick="Javascript:window.open('{pigcms::U('Index/login')}' ,'_blank')" >登录</a>
+			<a href="/#" onclick="Javascript:window.open('{pigcms::U('Index/login')}','_blank')"  >注册</a>
+			<else/>
+				<a href="/#" hidefocus="true"  >{pigcms:$Think.session.uname}</a>
+			<a href="/#" onclick="Javascript:window.open('{pigcms::U('Admin/Admin/logout')}','_blank')" >退出</a>
+	</if>
+        </div>
+    </div>
+</div>

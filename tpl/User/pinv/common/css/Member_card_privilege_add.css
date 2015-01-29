@@ -1,0 +1,75 @@
+.right{width:837px;float:left;padding:0px 10px;}
+.artiEdit{height:40px;line-height:45px;border-bottom:1px #eee solid;margin-top:15px;}
+.big{font-size:18px;font-weight:bold;color:#6e6e6e;float:left;margin-right:10px;}
+.small{font-size:12px;color:#6e6e6e;float:left}
+
+.searchPress{float:left;width:42px;height:22px;line-height:22px;text-align:center;color:#fff;font-weight:bold;background:url(../img/searchImg.gif) no-repeat;border:0px;float:right;font-size:12px;cursor:pointer;}
+.searchPress:hover{background:url(../img/searchOver.gif) no-repeat;}
+.same{height:35px;line-height:35px;color:#696969;margin-top:20px;}
+.sameX{height:35px;line-height:35px;color:#696969;margin-top:15px;padding-left:165px;}
+
+.areSame{height:120px;}
+.artic{height:20px;line-height:20px;margin-top:20px;}
+.are{height:120px;color:#696969;margin-top:20px;width:557px;border:1px #adacb4 solid;}
+.coverImg{height:20px;line-height:20px;margin-top:20px;}
+.circle{width:550px;height:33px;line-height:33px;float:left;border:1px #adacb4 solid;padding-left:5px;margin-right:10px;}
+.Scircle{width:150px;height:33px;line-height:33px;float:left;border:1px #adacb4 solid;padding-left:5px;margin-right:10px;}
+.example{height:20px;line-height:20px;color:#ea533f;font-size:12px;padding-left:165px;}
+.radTex{font-size:12px;color:#444;}
+.radChoice{margin-right:5px;}
+.keyWord{height:30px;margin-top:20px;}
+.keyRight{float:left;}
+.Tex{width:150px;height:auto;color:#676767;float:left;text-align:right;margin-right:15px;display:inline;color:#444;font-weight:bold;}
+.circleArea{float:left;width:550px;height:130px;border:1px #adacb4 solid;padding-left:5px;font-size:12px;color:#676767;padding-top:5px;}
+.addF{font-size:12px;color:#636b89;}
+.addF:hover{color:#009900;}
+.coveTex{font-size:12px;color:#444;}
+.detailTex{float:left;width:560px;}
+.toping{height:50px;line-height:20px;background:#f0f0ee;border-bottom:1px #ccc solid;}
+.toping img{float:left;}
+.imgSame{float:left;padding:5px;}
+.fontBox{width:100%;height:150px;border:0px;}
+
+
+.backgrd{width:16px;height:16px;background:url(../img/default.png) no-repeat;cursor:pointer;float:left;}
+.back1{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -48px;cursor:pointer;float:left;}
+.go{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -64px;cursor:pointer;float:left;}
+.copy{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -96px;cursor:pointer;float:left;}
+.noTex{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -704px;cursor:pointer;float:left;}
+.fromW{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -720px;cursor:pointer;float:left;}
+.clear{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -1008px;cursor:pointer;float:left;}
+.oneKey{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -1056px;cursor:pointer;float:left;}
+.allCopy{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -128px;cursor:pointer;float:left;}
+
+.Esc{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -656px;cursor:pointer;float:left;}
+.font{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -352px;cursor:pointer;float:left;}
+.fontSize{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -368px;cursor:pointer;float:left;}
+.bot{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -272px;cursor:pointer;float:left;}
+.tp{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -288px;cursor:pointer;float:left;}
+.add{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -240px;cursor:pointer;float:left;}
+.redus{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -256px;cursor:pointer;float:left;}
+.col{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -384px;cursor:pointer;float:left;}
+.fontB{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -400px;cursor:pointer;float:left;}
+.fontBlods{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -416px;cursor:pointer;float:left;}
+.itatic{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -432px;cursor:pointer;float:left;}
+.decor{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -448px;cursor:pointer;float:left;}
+.sert{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -592px;cursor:pointer;float:left;}
+.leftS{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -144px;cursor:pointer;float:left;}
+.middle{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -160px;cursor:pointer;float:left;}
+.rightS{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -176px;cursor:pointer;float:left;}
+.numX{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -208px;cursor:pointer;float:left;}
+.bullet{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -224px;cursor:pointer;float:left;}
+.faceImg{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -608px;cursor:pointer;float:left;}
+.ditu{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -976px;cursor:pointer;float:left;}
+.link{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -624px;cursor:pointer;float:left;}
+.caceLik{width:16px;height:16px;background:url(../img/default.png) no-repeat 0px -640px;cursor:pointer;float:left;}
+.shuxian{height:16px;float:left;border-style:none solid;border-width:0 1px;display:block;font-size:0px;line-height:0;margin:4px 4px;}
+.artiEdit{height:40px;line-height:45px;border-bottom:1px #eee solid;margin-top:15px;}
+.addList{float:left;width:81px;height:33px;line-height:33px;text-align:center;color:#fff;font-weight:bold;background:url(../img/look.gif) no-repeat;border:0px;cursor:pointer;margin-left:20px;}
+.addList:hover{background:url(../img/lookOver.gif) no-repeat;}
+.addListX{float:right;width:81px;height:33px;line-height:33px;text-align:center;color:#fff;font-weight:bold;background:url(../img/look.gif) no-repeat;border:0px;cursor:pointer;margin-left:20px;}
+.addListX:hover{background:url(../img/lookOver.gif) no-repeat;}
+.pressBox{padding-left:145px;margin:10px 0px;}
+.rad{float:left;margin-top:2px;margin-right:2px;}
+.radTex{float:left;margin-right:10px;}
+.arrive{float:left;margin-right:10px;}

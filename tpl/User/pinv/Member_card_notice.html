@@ -1,0 +1,59 @@
+<?php $nav = "MEMBER"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_index.css" rel="stylesheet"/>
+<div class="container main">
+<div class="row">
+<include file="Member_card:left"/>
+ 			<div class="col-md-10 main">
+ 			
+ 			<ol class="breadcrumb">
+			  <li><a href="{pigcms::U( 'Member_card/replyInfoSet',array( 'token'=>$token ))}">会员卡</a></li>
+			  <li><a href="{pigcms::U( 'Member_card/index',array( 'token'=>$token ))}">会员卡管理</a></li>
+			  <li class="active">{pigcms:$thisCard.cardname} - 会员卡通知</li>
+			</ol>
+			
+ 				<div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title" style="float:left; margin-right: 5px">会员卡通知</h3><small class="small">{pigcms:$thisCard.cardname}的相关通知</small>
+			  </div>
+			  <div class="panel-body">
+			  	<div class="add-button pull-left">
+	            	<a href="javascript:history.go(-1);"  class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-left"></span> 返回</a>
+			  	</div>			  		
+			  		<div class="add-button pull-right">
+            		<a href="{pigcms::U('Member_card/noticeSet',array('token'=>$token, 'id'=>$thisCard['id']))}"  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> 添加会员卡通知</a>
+            		</div>
+                        <table class="table table-striped" cellspacing="1">
+                            <tr>                      
+                                <th class="secondTd">名称</th>
+                                <th class="secondTd">截止日期</th>
+                                <th class="secondTd">添加时间</th>
+                                <th  class="forthTd" >操作</th>
+                            </tr>
+                         <volist id="item" name="list">
+                                <tr>
+
+                                    <td  class="answer_text">{pigcms:$item.title}</td>
+                                    <td>{pigcms:$item.endtime|date="Y-m-d",###}</td>
+                                    <td >{pigcms:$item.time|date="Y-m-d H:i:s",###}</td>
+                                    <td>
+                                        <a href="{pigcms::U('Member_card/noticeSet',array('id'=>$thisCard['id'],'token'=>$token,'noticeid'=>$item['id']))}">编辑</a>
+                                      
+                                        <a href="{pigcms::U('Member_card/noticeDelete',array('id'=>$thisCard['id'],'token'=>$token,'noticeid'=>$item['id']))}">删除</a> 
+                                        <!--<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Member_card/delete',array('id'=>$item['id'],'token'=>$token))});">删除</a>-->
+                                    </TD>
+
+
+
+                                </tr>
+                          </volist>
+                        </table>
+
+
+                        <p class="page">{pigcms:$page}</p>
+                        </div>
+                        </div> 
+                        </div>
+						</div>
+                        </div>
+                        <include file="Public:footer"/>

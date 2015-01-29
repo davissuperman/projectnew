@@ -1,0 +1,21 @@
+.right{width:837px;height:1000px;float:left;padding:0px 10px;color:#6e6e6e;}
+.photoHead{height:50px;line-height:50px;}
+.photoHead span{float:left;margin-left:5px;font-size:18px;font-weight:bold;}
+.replyTex{color:#009900;font-size:12px;font-weight:bold;}
+.replyBox{padding:20px;border:1px #eee solid;background:#fcfcfc;}
+.replyTex1{height:30px;}
+.lefTex{float:left;font-weight:bold;}
+.circle{width:415px;height:33px;line-height:25px;float:left;border:1px #adacb4 solid;padding-left:5px;margin-right:10px;}
+.same{height:33px;line-height:33px;color:#696969;margin-top:10px;}
+.surePress{float:left;width:72px;height:33px;line-height:33px;text-align:center;color:#fff;background:url(../img/savePress.gif) no-repeat;border:0px;margin-left:10px;cursor:pointer;font-weight:bold;}
+.surePress:hover{background:url(../img/saveX.gif) no-repeat;}
+.buildImg{float:left;width:94px;height:33px;line-height:33px;text-align:center;color:#fff;background:url(../img/buildImg.gif) no-repeat;border:0px;cursor:pointer;font-weight:bold;margin:20px 0px 20px 10px;}
+.buildImg:hover{background:url(../img/bulidOver.gif) no-repeat;}
+.imgBox{clear:both;}
+.imgBox li{width:231px;height:192px;float:left;margin:0px 30px 20px 10px;position:relative;background:url(../img/liBj.gif) no-repeat;padding:3px;}
+.imgName{position:absolute;width:100px;height:20px;line-height:20px;top:8px;left:8px;color:#6e6e6e;}
+.nameBottom{position:absolute;width:100px;height:20px;line-height:20px;left:8px;bottom:40px;color:#6d6d6e;}
+.imgNum{position:absolute;width:100px;height:20px;line-height:20px;left:8px;bottom:15px;font-size:12px;color:#999;}
+.editBox{position:absolute;right:8px;bottom:15px;font-size:12px;}
+.editBox a{float:left;margin-right:10px;color:#999;}
+.editBox a:hover{color:#ea533f;}

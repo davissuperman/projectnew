@@ -1,0 +1,70 @@
+.right{width:837px;float:left;padding:0px 10px;}
+.replyButton2{float:left;width:94px;height:33px;text-align:center;line-height:33px;font-size:12px;background:url(../img/buildImg.gif) no-repeat;margin-right:20px;margin-top:10px;color:#fff;}
+.replyButton2:hover{background:url(../img/bulidOver.gif) no-repeat;}
+.replyButton1{float:left;width:122px;height:33px;text-align:center;line-height:33px;font-size:12px;background:url(../img/addList.gif) no-repeat;margin-right:20px;margin-top:10px;color:#fff;}
+.replyButton1:hover{background:url(../img/addOver.gif) no-repeat;}
+.replayBox{height:60px;}
+.sheet{width:100%;background:#eee;color:#6a6a6a;position:relative;}
+.sheet a{color:#6a6a6a;font-weight:bold;}
+.sheet a:hover{color:#EA533F;}
+/*.sheet tr{border:1px red solid;height:30px;line-height:30px;}*/
+.sheet tr{height:30px;line-height:30px;}
+.sheet td{background:#fff;text-align:center;height:46px;padding-left:3px;padding-right:3px;}
+.sheet th{background:#f1f1f1;height:45px;line-height:45px;text-align:center;}
+.edit{float:left;margin:0px 12px;color:#6a6a6a;font-weight:bold;}
+.cancel{float:left;color:#6a6a6a;font-weight:bold}
+.edit:hover{color:#ea533f;}
+.cancel:hover{color:#ea533f;}
+.artiEdit{height:30px;line-height:30px;border-bottom:1px #eee solid;margin-top:15px;}
+.big{font-size:18px;font-weight:bold;color:#6e6e6e;float:left;margin-right:10px;}
+.small{font-size:12px;color:#6e6e6e;float:left}
+.question1{margin-left:5px;cursor:pointer;}
+.question2{margin-left:5px;cursor:pointer;}
+.show1{position:absolute;top:35px;left:500px;}
+.show2{position:absolute;top:35px;left:639px;}
+/*
+.smallImg{cursor:pointer;}
+.bigImg{position:absolute;top:112px;left:475px;}
+*/
+.cateimg {
+position: relative;
+float: left;
+}
+.cateimg .smallImg {
+width: 50px;
+}
+.cateimg .bigImg {
+position: absolute;
+left: 51px;
+top: 0px;
+display: none;
+width: 320px;
+}
+.sevenTd{width:100px;}
+
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+ol.example li.placeholder {
+  position: relative;
+  /** More li styles **/
+}
+ol.example li.placeholder:before {
+  position: absolute;
+  /** Define arrowhead **/
+}
+
+tr.placeholder:before {
+  position: absolute;
+}
+tr.placeholder {
+  position: relative;
+  height: 50px;
+}

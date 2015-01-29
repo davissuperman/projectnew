@@ -1,0 +1,86 @@
+<include file="Product:header"/>
+<link type="text/css" rel="stylesheet" href="{pigcms::$staticFilePath}/css/orderTail.css"/>
+    <script src="{pigcms::$staticFilePath}/js/jquery.min.js"></script>
+<body>
+	<div class="box" style="margin-top:10px;">
+        <section>
+            <p class="common">
+                <span class="leftFont">在线支付：</span>
+                <span class="money">￥{pigcms:$dt}</span>
+                <span class="moneyFont" id="money"}>（待支付）</span>
+            </p><input type="hidden" id="sc" value="{pigcms:$sc}"/>
+            <div class="special">
+                <span class="speFont">订单编号：</span>
+                <span class="num">{pigcms:$number}</span>
+            </div>
+            <p class="common">
+                <span class="leftFont">下单时间：</span>
+                <span class="time">{pigcms:$time|date="Y-m-d H:i:s",###}</span>
+            </p>
+            <figure class="imgBox">
+                <img src="{pigcms:$logo}" class="cloze"/>
+                <div class="imgTex">
+                	<p id="write">{pigcms:$name}</p>
+                    <p id="attr">{pigcms:$attr}</p>
+                    <p>数量:{pigcms:$bc}</p>
+                    <p>价格：<span style="color:#ff0000;">￥{pigcms:$dt}</span></p>
+                </div>
+                <div class="clear"></div>
+            </figure>
+            <p class="common">
+                <span class="leftFont">应付金额：</span>
+                <span class="money">￥{pigcms:$dt}(不含邮费)</span>
+            </p>
+            <div class="special">
+                <span class="speFont">送货地址：</span>
+                <div class="imgTex mm">
+                	<p id="address">{pigcms:$address}</p>
+                    <p>{pigcms:$names}&nbsp&nbsp{pigcms:$mobile}</p>
+                </div>
+            </div><input type="hidden" id="id" value="{pigcms:$i}">
+			<input type="hidden" id="ic" value="{pigcms:$ic}"/>
+			<input type="hidden" id="etalon" value="{pigcms:$etalon}"/>
+			<div id="display">
+            <p class="btn"><button class="celBtn" id="cancel">取消订单</button></p>
+			</div><input type="hidden" id="token" value="{pigcms:$token}"/>
+			<input type="hidden" id="wecha_id" value="{pigcms:$wecha_id}"/>
+        </section>
+    </div>
+	<include file="Product:bottom"/>
+	<script>
+			$(function(){
+				if ( $( '#sc' ).val() == 4 ){
+					$( "#money" ).text( '(已关闭)' );
+					$( "#display" ).css({display:"none"});
+				} 
+				var write = $( "#write" ).text();
+				var attr = $( "#attr" ).text();
+				var s = attr.substring(0,10);
+				var t = attr.length <= 10 ? '' :'...';
+				$( "#attr" ).text(s+t);
+				var address = $( "#address" ).text();
+				var s1 = address.substring(0,10);
+				var t1 = address.length <= 10 ? '' :'...';
+				$( "#address" ).text(s1+t1);		
+				var w = write.substring(0,10);
+				var r = write.length <= 10 ? '' :'...';
+				$( "#write" ).text(w+r);		
+			});	
+		$( "#cancel" ).bind( "click",function(){ 
+					var id = $( "#id" ).val();
+					var token = $( "#token" ).val();
+					var wecha_id = $( "#wecha_id" ).val();
+					var attr = $( "#etalon" ).val();
+					var ic = $( "#ic" ).val();
+					$.post( "/index.php?g=Wap&m=Product&a=orderCancel",{id:id,token:token,wecha_id:wecha_id,attr:attr,ic:ic},function( msg ){
+								if( msg.error==1 ){
+										$( "#display" ).css({display:"none"});
+										$( "#money" ).text( '(已关闭)' );
+								}else{
+										alert("订单取消出错");
+								}
+					},"json" )			
+			} );
+	</script>
+</body>
+</html>

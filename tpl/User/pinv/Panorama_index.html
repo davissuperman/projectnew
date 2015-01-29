@@ -1,0 +1,49 @@
+<?php $nav = "FUNCTION"; $side = "REPLY" ?>
+<include file="Public:head" />
+<link type="text/css" href="{pigcms::RES}/css/Coupon_index.css"
+	rel="stylesheet" />
+<div class="container main"><div class="row">
+	<include file="Panorama:left" /> 
+	<!--right--begain-->
+<div class="col-md-10">
+<!-- <p class="rightTop"><a
+	href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"
+	class="back">回到首页</a> <a href="" onclick="reloadMainFrame();"
+	class="new">刷新</a></p>
+
+<p class="artiEdit"><span class="big">360°全景列表<span></p> -->
+<div class="panel panel-success">
+<div class="panel-heading">
+	<h3 class="panel-title">360°全景列表</h3>
+</div>
+<!-- <p class="pressBox"><a
+	href="{pigcms::U('Panorama/add',array('token'=>$token))}" class="addList">新增360°全景</a>&nbsp;&nbsp;<a
+	href="{pigcms::U('Reply_info/set',array('token'=>$token,'infotype'=>'panorama'))}" class="addList">回复设置</a></p> -->
+	<div class="panel-body">
+		<div class="add-button pull-right">
+		<a href="{pigcms::U('Panorama/add',array('token'=>$token))}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus "></span> 新增360°全景</a></div>
+		<div class="add-button pull-left">
+		<a href="{pigcms::U('Reply_info/set',array('token'=>$token,'infotype'=>'panorama'))}" class="btn btn-info btn-sm pull-left"><span class="glyphicon glyphicon-comment"></span> 回复设置</a></div>
+<table class="table table-striped" cellspacing="1">
+	<tr>
+
+		<th class="secondTd">名称</th>
+		<th class="thirdTd">关键词</th>
+		<th class="sevenTd">外链代码</th>
+		<th class="forthTd">操作</th>
+	</tr>
+ <volist name="list" id="o"> 
+	<tr>
+	<td>{pigcms:$o.name}</td>
+	<td>{pigcms:$o.keyword}</td>
+	<td>全景 {pigcms:$o.id}</td>
+	<td><a href="{pigcms::U('Panorama/set',array('token'=>$token,'id'=>$o['id']))}" class="hover-tooltip-edit"><span class="glyphicon glyphicon-edit"></span></a> <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Panorama/delete',array('token'=>$token,'id'=>$o['id']))}');" class="hover-tooltip-trash"><span class="glyphicon glyphicon-trash danger"></span></a></td>
+	</tr> 
+	</volist>
+</table>
+<p class="page">{pigcms:$page}</p>
+</div>
+</div>
+</div>
+<!--right--end--></div></div>
+<include file="Public:footer" />

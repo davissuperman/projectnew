@@ -1,0 +1,10 @@
+*{margin:0px;padding:0px;}
+html{width:100%;height:100%;font-size:16px;min-width:320px;}
+body{width:100%;height:100%;font-family:"微软雅黑";font-weight:bold;}
+a{text-decoration:none;}
+ul{list-style:none;}
+.clear{clear:both;}
+.box{padding:18px 20px;padding-bottom:20px;min-height:100%;background:url(../../images/wdy/bj.png) no-repeat center top;background-size:cover;}
+header{text-align:center;color:#3d403c;font-weight:bold;font-size:25px;}
+section{padding-top:50px;height:350px;margin-top:35px;background:url(../../images/wdy/ulBj.gif) no-repeat center top;background-size:cover;}
+article{color:#3d403c;margin-top:20px;padding:0px 30px;line-height:25px;text-align:justify; text-justify:distribute-all-lines;}

@@ -1,0 +1,17 @@
+<script type="text/javascript">
+	$(function(){
+		var mid = '{pigcms:$Think.get.mid}';
+		var openid = '{pigcms:$Think.get.wecha_id}';
+		if( mid && openid){
+			$.ajax({
+                type:"POST",
+                data:{'mid':mid,'openid':openid},
+                url:"{pigcms::U('ClickCount/menuClick',array('token'=>$token))}",
+                dataType: "text",
+                success:function(msg){
+                	//alert(msg);
+                }
+            });
+		}
+	});
+</script>

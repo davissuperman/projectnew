@@ -1,0 +1,12 @@
+1.修改表增加的字段host表增加了8个字段
+  `wenxin` text NOT NULL COMMENT '温馨提示',
+  `orderinfo` text NOT NULL COMMENT '订单介绍',
+  `zdyname` varchar(255) NOT NULL COMMENT '自定义名字',
+  `zdynr` varchar(255) NOT NULL COMMENT '自定义类型内容',
+  `zdylx` varchar(255) NOT NULL COMMENT '自定义类型',
+  `dituaddress` varchar(255) NOT NULL COMMENT '搜索地图上的位置',
+  `jingdu` varchar(255) NOT NULL COMMENT '地图经度',
+  `weidu` varchar(255) NOT NULL COMMENT '地图纬度',
+2.host_list_add表增加了fjnum字段
+3.tp_host_order增加了房间fjid字段
+4.还增加了两个表tp_host_input和tp_host_order_fenlei表

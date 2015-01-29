@@ -1,0 +1,265 @@
+<?php $nav = "Kefu"; $side = "FLASH" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Text_index.css" rel="stylesheet"/>
+<link type="text/css" href="{pigcms::RES}/js/sorttable/jquery-ui.css" rel="stylesheet"/>
+<style type="text/css">
+body,h2{margin:0 ; padding:0;}
+#faqbg{background-color:#666666; position:absolute; z-index:99; left:0; top:0; display:none; width:100%; height:1000px;opacity:0.5;filter: alpha(opacity=50);-moz-opacity: 0.5;}
+#faqdiv{position:absolute;width:400px; left:50%; top:50%; margin-left:-200px; height:auto; z-index:100;background-color:#fff; border:1px #8FA4F5 solid; padding:1px;}
+#faqdiv h2{ height:25px; font-size:14px; background-color:#8FA4F5; position:relative; padding-left:10px; line-height:25px;}
+#faqdiv h2 a{position:absolute; right:5px; font-size:12px; color:#FF0000}
+#faqdiv .form{padding:10px;}
+</style>
+<script src="{pigcms::RES}/js/kefu/editActive.js"></script>
+<script src="{pigcms::RES}/js/kefu/tanchu.js"></script>
+<script src="./tpl/static/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="{pigcms::RES}/js/sorttable/jquery-ui.js"></script>
+<script type="text/javascript">
+
+function dianji1(gid){
+		//$(".bor").removeClass("bor");
+       if($('#tt'+gid).children().length==2)
+	   {
+		var nicheng=$('#gname'+gid).html();
+		
+        $('#gname'+gid).hide();
+       // $('<input type="text" value="" class="bor"/>').appendTo($('#tt'+uid));
+	   $('<input type="text" value="" class='+"bor"+gid+'>').appendTo($('#tt'+gid));
+	   $('<input style="cursor:pointer" type="button" value="OK"class='+"bor1"+gid+'>').appendTo($('#tt'+gid));
+		//$(".bor").css("border","1px #ccc solid").val(nicheng).addClass("bb"+uid);
+		$(".bor"+gid).css("border","1px #ccc solid");
+		$('.bor'+gid).val(nicheng);
+		}
+		 if($('#gname'+gid)){
+		 
+			  for(var i=2;i<$('#gname'+gid).closest("tr").siblings().length;i++)
+			{     
+				if($('#gname'+gid).closest("tr").siblings().eq(i).find("td").eq(0).children().length>2)
+					{    
+						$('#gname'+gid).closest("tr").siblings().eq(i).find("td").eq(0).find("input").eq(1).remove();
+						$('#gname'+gid).closest("tr").siblings().eq(i).find("td").eq(0).find("input").eq(1).remove();
+		$('#gname'+gid).closest("tr").siblings().eq(i).find("td").eq(0).find("span").show();
+
+					}
+				
+				}
+		    
+		}
+	    $(".bor1"+gid).click(function(){
+			var groupname=$('.bor'+gid).val();
+			   if($.trim(groupname).length>12){
+							   alert('不能超过十二个字符');
+							   return false;
+			}else if($.trim(groupname).length<2){
+			
+			         alert('不能小于二个字符');
+							   return false;
+			}
+			var token=$('#token'+gid).val();
+			$(".bor"+gid).remove();
+			$(".bor1"+gid).remove();
+			//$('#gname'+gid).show().html(nn);
+			//alert(gid);
+			//alert(groupname);
+			//alert(token);return false;
+			 $.ajax({
+			   
+					type: "GET",
+					url: '{pigcms::U("Kefu/updatefkfz")}',
+					data: "groupname="+groupname+'&token='+token+'&gid='+gid,
+					success: function(msg){
+					 	//alert(msg);return false;
+						if(msg == 1){
+						  //alert(groupname);return false;
+						  // alert('修改成功');
+						
+						  $('#gname'+gid).show().html(groupname);
+				           return true; 
+						   
+   						}else{
+						    
+							 alert('没有修改成功');
+							 $('#gname'+gid).show().html(groupname);
+				             return false;
+						}
+					},
+					
+			 	});
+			
+		
+		})
+		
+
+
+		
+
+
+}
+$(function(){
+ /*$(".but").click(function(){
+  //var str = "这里是信息内容，这里是信息内容！";
+  //$(".form").html(str);
+  $("#faqbg").css({display:"block",height:$(document).height()});
+  var yscroll =document.documentElement.scrollTop;
+  $("#faqdiv").css("top","100px");
+  $("#faqdiv").css("display","block");
+  document.documentElement.scrollTop=0;
+ });
+*/
+ $("#dc").click(function(){
+	 
+	        var title=$("#title").val();
+			
+			if($("#title").val()==''){alert('不能为空');return false;} 
+			if(title.length>8){
+			      alert("不能超过八个");
+				  return false; 
+			}
+			
+			
+			 
+			
+	 })
+
+ $(".close").click(function(){
+  $("#faqbg").css("display","none");
+  $("#faqdiv").css("display","none");
+ });
+ $("#dc1").click(function(){
+  $("#faqbg").css("display","none");
+  $("#faqdiv").css("display","none");
+ });
+})
+function dianji(){
+
+  $("#faqbg").css({display:"block",height:$(document).height()});
+  var yscroll =document.documentElement.scrollTop;
+  $("#faqdiv").css("top","150px");
+  $("#faqdiv").css("display","block");
+  document.documentElement.scrollTop=0;
+
+}
+
+
+</script>
+ <div class="container main">
+<div class="row">
+ <include file="Kefu:left"/>
+     
+            <div class="col-md-10 main">
+             <div class="panel panel-success" >
+			  <div class="panel-heading">
+				<h3 class="panel-title">人工客服管理</h3>
+			  </div>
+			  <div class="panel-body">  
+			  	<!--<div class="add-button pull-right">-->
+			  	<div class="" style="float:left">
+				  <a href="{pigcms::U('Kefu/fkgl',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-file"></span>访客分组设定</a>
+            	  <a href="{pigcms::U('Kefu/fkdc',array('token'=>$token))}"  class="btn btn-success">
+				  <span class="glyphicon glyphicon-file"></span>
+				  访客名片导出</a>	
+            	</div>
+				
+      
+            	<table class="table table-striped" cellspacing="1">
+				<thead>
+                	<tr class="mm">
+                    	<th class="">分组</th>
+                        <th class="" style="padding-left:160px">操作</th>
+                        <th class="" style="padding-left:70px">排序</th>
+                        <th class="" style="cursor:pointer;text-align:right"><font id='tj' onclick="dianji()">添加分组</font><span class="glyphicon glyphicon-plus"></span></th>
+                    </tr></thead>
+				<tbody>	<tr>
+							<input type="hidden" id='ggg{pigcms:$list1.gid}' value="{pigcms:$list1.gid}"/>
+								 <input type="hidden" id='status{pigcms:$list1.gid}' value="{pigcms:$list1.status}"/>
+
+								<td id="tt{pigcms:$list1.gid}"><input type="hidden" id='token{pigcms:$list1.gid}' value="{pigcms:$list1.token}" name='token' />
+							<span id='gname{pigcms:$list1.gid}'>未分组访客</span>
+								</td>
+
+							   <td></td>
+							   <td></td>
+							   <td></td>
+						</tr>
+					
+				
+						
+                    <volist name="list" id="list1">
+                      
+					      <tr id="{pigcms:$list1.gid}" class="tttt">
+						     <input type="hidden" id='ggg{pigcms:$list1.gid}' value="{pigcms:$list1.gid}"/>
+							 <input type="hidden" id='status{pigcms:$list1.gid}' value="{pigcms:$list1.status}"/>
+
+							<td id="tt{pigcms:$list1.gid}" class="yidong"><input type="hidden" id='token{pigcms:$list1.gid}' value="{pigcms:$list1.token}" name='token' />
+							 <span id='gname{pigcms:$list1.gid}'>{pigcms:$list1.groupname}</span></td>
+
+						   
+							<td style="padding-left:160px" class="yidong"><a style="cursor:pointer"  onclick="dianji1({pigcms:$list1.gid})" class="yidong"/><span class="glyphicon glyphicon-edit hover-tooltip-edit"></span></a>
+							 
+							<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Kefu/fkfzdel',array('gid'=>$list1['gid'],'token'=>$token))}');"><span class="glyphicon glyphicon-trash danger hover-tooltip-trash"></span></a>
+							
+							
+
+							</td>
+							<td style="cursor:move;padding-left:65px"><span class="glyphicon glyphicon-sort" style="cursor:move;padding-left:5px;"  id="upp{pigcms:$list1.gid}"></span></td>
+							<td></td>
+						</tr>
+					
+               
+                    </volist>
+                   </tbody>
+			
+                </table>
+               </div>
+              <p colspan="7" style="text-align:right">{pigcms:$page}
+                 </p>
+                  
+            </div>
+
+            </div>   
+			<div id="faqbg"></div>
+<div id="faqdiv" style="display:none">
+<h2>分组添加<a href="#" class="close" style="padding-top:5px;color:black">关闭</a></h2>
+    <div class="form">
+	 <form class="form" method="post"   action="{pigcms::U('Kefu/fkfzadd')}"  target="_top" enctype="multipart/form-data" >
+	    <input type="hidden" id='' value="{pigcms:$_GET.token}" name='token' />
+	    <input type="text" name="shuxing" value="" id='title' style="border:1px solid black"/>
+	    <input type="submit" name="" id='dc' class='btn btn-success btn-sm' value="确定"/>
+	    <input type="reset" name=""  class='btn btn-default btn-sm' id='dc1' value="取消"/>
+	    
+	  
+	  </form>
+	</div>
+	</div>
+
+      </div>
+ </div>
+  <script>
+ $(function(){
+    <?php $url=U('Kefu/sort',array('token'=>$_GET['token']));?>
+    $('tbody').sortable({
+        opacity: 0.6,
+        cancel:'.sssss,.yidong',
+        helper: 'clone' ,
+        revert: true,
+        stop: function( event, ui ) {
+            var arr=[];
+            $('tbody tr').each(function(index, val) {
+			
+                var obj={};
+                obj.id=$(this).attr('id');
+                obj.sort=index;
+                arr.push(obj);
+            });
+            $.ajax({
+                url: '{pigcms:$url}',
+                type: 'post',
+                dateType:'json',
+                data: {sort:JSON.stringify(arr)},
+                success:function(data){}
+            });
+        }
+    });
+ });
+ </script>
+<include file="Public:footer"/>

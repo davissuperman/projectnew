@@ -1,0 +1,60 @@
+<?php $nav = "STATS"; $side = "MENU";?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Text_add.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+<div class="container main">
+<div class="row">
+<include file="Requerydata:left"/>     
+    <div class="col-md-10 main">
+            <div class="panel panel-success">
+                <div class="panel-heading cfix">
+                    <h3 class="panel-title pull-left">自定义菜单统计</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="choose-date">
+                        <a href="{pigcms::U('Requerydata/menuClick',array( 'token'=>$token,'start'=>$nowtime,'end'=>$nowtime ) )}">今天</a>
+                        <a href="{pigcms::U('Requerydata/menuClick',array( 'token'=>$token,'start'=>$yestoday,'end'=>$yestoday ) )}">昨天</a>
+                        <a href="{pigcms::U('Requerydata/menuClick',array( 'token'=>$token,'start'=>$sevenDay,'end'=>$nowtime ) )}">最近7天</a>
+                        <a href="{pigcms::U('Requerydata/menuClick',array( 'token'=>$token,'start'=>$thirtyday,'end'=>$nowtime ) )}">最近30天</a>
+                        <div id="date-calendar">
+                            <form method="post" action="">
+                                <input type="text" name="start" id="start" value="{pigcms:$start|date="Y-m-d",###}" onClick="WdatePicker()" class="form-control" style="width:102px"/>
+                                <span>-</span>
+                                <input type="text" name="end" id="end" value="{pigcms:$end|date="Y-m-d",###}" onClick="WdatePicker()" class="form-control" style="width:102px"/>
+                                <button type="submit" class="btn btn-default" style="width:50px"/>确定</button>
+                            </form>
+                        </div> 
+                        <a href="{pigcms::U('Requerydata/menuClickImport',array( 'token'=>$token ) )}" target="_blank" style="float:right;margin-right:10px;">导出报表</a>
+                    </div>
+                	<table class="table table-striped" cellspacing="1" cellpadding="5">
+                    	<tr class="strong">
+                        	<th>自定义菜单名称</th>
+                            <th>点击次数</th>                  	 				 
+                            <th>到达数</th> 
+                            <th>到达率</th>                         
+                        </tr>
+                        <volist id="Menus" name="Menus">
+        				<tr bgcolor="#fff" height=30>
+        					<td>{pigcms:$Menus.title}</td>
+                            <td>{pigcms:$Menus.clicknum}</td>
+        					<td>{pigcms:$Menus.reachednum}</td>	
+        					<td>{pigcms:$Menus.reachedPer}</td>
+        				</tr>
+                        <notempty name="Menus.child">
+                            <volist id="sub" name="Menus['child']">
+                            <tr bgcolor="#fff" height=30>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;{pigcms:$sub.title}</td>
+                                <td>{pigcms:$sub.clicknum}</td>
+                                <td>{pigcms:$sub.reachednum}</td>
+                                <td>{pigcms:$sub.reachedPer}</td>
+                            </tr>
+                            </volist>  
+                        </notempty>
+                        </volist>  
+                    </table>
+                </div>
+            </div>
+    </div>
+ </div>
+ </div>
+<include file="Public:footer"/>

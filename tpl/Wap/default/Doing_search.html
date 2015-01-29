@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>积分查询</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" href="{pigcms::RES}/game/css/sendLook.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/game/js/jquery.js"></script>
+<script>
+$(function(){
+	var $height=window.innerHeight;
+	var browser={
+	  versions:function() {
+		var u=navigator.userAgent, app = navigator.appVersion;
+		return {//移动终端浏览器版本信息 
+		  trident: u.indexOf('Trident') > -1, //IE内核
+		  presto: u.indexOf('Presto') > -1, //opera内核
+		  webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+		  gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+		  mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), //是否为移动终端
+		  ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+		  android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+		  iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+		  iPad: u.indexOf('iPad') > -1, //是否iPad
+		  webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+		};
+	  }(),
+	  language:(navigator.browserLanguage||navigator.language).toLowerCase()
+	}
+	if(browser.versions.android){
+	 	$(".inCase").focus(function(){
+			$(".middle").css("height",$height);
+			$(".sendLookBox").css("top","-"+"45%");
+			if($(".sendLookBox").position().top<0)
+			{
+				$(".sendLookBox").css("top","0px");
+			}
+		}).blur(function(){
+			$(".sendLookBox").css("top","0px");
+		});
+		
+	}
+	
+})
+</script>
+<style>
+.deploy_ctype_tip{z-index:1001;width:100%;text-align:center;position:fixed;top:50%;margin-top:-23px;left:0;}.deploy_ctype_tip p{display:inline-block;padding:13px 24px;border:solid #d6d482 1px;background:#f5f4c5;font-size:16px;color:#8f772f;line-height:18px;border-radius:3px;}
+</style>
+</head>
+<body id="tips">
+	<img src="{pigcms::RES}/game/img/middle.jpg" class="middle"/>
+        <form method="post" action="{pigcms::U('Doing/search')}" >
+	<div class="sendLookBox">
+    	<p class="logoBox"><img src="{pigcms::RES}/game/img/logo.png" class="logoImg"/></p>
+        <p class="texCenter"><img src="{pigcms::RES}/game/img/begainText.png" class="topText"></p>
+        <p class="texCenter bitText">输入手机号看看你击败了多少人</p>
+        <p class="texCenter inforCase" style="fontsi">
+            <span style="font-size: 16px;">手机号码：</span>
+            <input type="text" placeholder="输入原始登记手机号码" id="tel" name="tel"  class="inCase"/>
+             <input type="hidden" name="gid"  value="{pigcms::$gid}"  />
+        </p>
+        <p class="texCenter"><img src="{pigcms::RES}/game/img/lookImg.png" class="lookImg" width="90%"/></p>
+        <p class="texCenter"><button class="begainBtn"   type="button"  onclick="tgSubmit()">提交查询</button></p>
+        </div>
+        </form>
+         <script>
+        function showTip(tipTxt) {
+            var div = document.createElement('div');
+            div.innerHTML = '<div class="deploy_ctype_tip"><p>' + tipTxt + '</p></div>';
+            var tipNode = div.firstChild;
+            $("#tips").after(tipNode);
+            setTimeout(function() {
+                $(tipNode).remove();
+            }, 1500);
+        }
+        function tgSubmit() {
+            var phone = $("#tel").val();
+            if ($.trim(phone) == "") {
+                showTip('手机号错误！');
+                return false;
+            }
+            if ($.trim(phone).length<11||$.trim(phone).length >12){
+                     showTip('手机号格式错误！');
+                      return false;
+            }
+            $.get("./index.php?g=Wap&m=Doing&a=chicktel", {tel: phone},
+                function(data) {
+                    if (data == '1') {
+                        $("form").submit();
+                    } else if (data == '0') {
+                        showTip('提示请输入正确手机号码！');
+                    }else if(data == '4'){
+                         showTip('您涉嫌使用不正当方式获得积分，为保证活动公平，您的参与资格被取消。我司保留进一步追究责任的权力');
+                    }
+                });
+           return false;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>年会抽奖</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link href="{pigcms::RES}/css/newyear/over.css" type="text/css" rel="stylesheet"/>
+</head>
+
+<body>
+<!--{pigcms:$_GET['wecha_id']}
+{pigcms:$_GET['username']}-->
+	<if condition="($rzt1username neq '') OR($rzt1wkid neq '') ">
+		<div class="box">
+			<img src="{pigcms::RES}/images/newyear/flowImg.png" class="flowImg"/>
+			<div class="overBox">
+				<p class="overTex">{pigcms:$rzt1username}您好：您已领取抽奖号码。抽奖号码为：</p>
+				<p class="overTex"> {pigcms:$num}</p>
+			</div>
+			<img src="{pigcms::RES}/images/newyear/boImg.png" class="boImg"/>
+		</div>
+    <elseif condition="($cjusername neq '') OR($cjwkid neq '') "/>	
+	<div class="box">
+    	<img src="{pigcms::RES}/images/newyear/flowImg.png" class="flowImg"/>
+        <div class="overBox">
+        	<p class="overTex">{pigcms:$cjusername}，您的抽奖号码为：</p>
+            <p class="overTex">{pigcms:$cjnum}</p>
+        </div>
+        <img src="{pigcms::RES}/images/newyear/boImg.png" class="boImg"/>
+    </div>
+	
+   <else/>
+   <div class="box">
+    	<img src="{pigcms::RES}/images/newyear/flowImg.png" class="flowImg"/>
+        <div class="overBox">
+        	<p class="overTex">您已经抽过了不能在抽取别人的</p>
+           
+        </div>
+        <img src="{pigcms::RES}/images/newyear/boImg.png" class="boImg"/>
+    </div>
+   </if>
+
+  <!--
+	<div class="box">
+    	<img src="{pigcms::RES}/images/newyear/flowImg.png" class="flowImg"/>
+        <div class="overBox">
+        	<p class="overTex">{pigcms:$cjusername}，您的抽奖号码为：</p>
+            <p class="overTex"> {pigcms:$cjnum}</p>
+        </div>
+        <img src="{pigcms::RES}/images/newyear/boImg.png" class="boImg"/>
+    </div>-->
+<include file="Public:tongji"/>
+</body>
+</html>

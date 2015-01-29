@@ -1,0 +1,432 @@
+<?php $nav = "EWM"; $side = "ERWM" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_index.css" rel="stylesheet"/>
+
+<script src="./tpl/User/pinv/common/js/date/WdatePicker.js"></script>
+<script>
+$(function(){
+    
+	       
+	
+	      
+		            
+		   /*$('#fid').change(function(){
+				   if($('#fid').val()==6){
+
+						  $('#mm').hide();
+
+				   }else{
+				   
+				     $('#mm').show();
+				   }
+			})*/
+			//ajax线下城市调用
+			$('#fid').change(function(){
+			           
+			             var fid=$('#fid').val();
+                         var token=$('#token').val();
+						  if(fid==1){
+						      $('#hhhddd').hide();
+                              $('#ct').hide();
+                              $('#cityok').hide();
+                              $('#zzid').hide();
+                              $('#huod').hide();
+                              $('#mmid').hide();
+                              $('#mend').hide();
+                              //$('#zzid').hide();
+
+                             
+							   $.ajax({
+							url:'{pigcms::U("Code/ajaxxs")}',
+							data:'fid='+fid+'&token='+token,
+							type:'post',
+							dataType:'html',
+							success:function(info){
+						     //alert(info);return false;
+						     if(info==2){
+										  
+											 $('#xs').hide();
+										 }else{
+										     $('#xs').show();
+											 $('#xians').html(info);
+                                             
+											   $('#xians').change(function(){
+			                                             //alert(111);return false;
+																if($('#xians').val()=='自定义'){
+																
+																         $('#zdyxianshang').show();
+																}else{
+																       $('#zdyxianshang').hide();
+																
+																}
+													})  
+										 }
+									}
+							 });
+
+						  }else{
+						    $('#xs').hide();
+						    $('#zdyxianshang').hide();
+			                $.ajax({
+							url:'{pigcms::U("Code/ajaxct")}',
+							data:'fid='+fid+'&token='+token,
+							type:'post',
+							dataType:'html',
+							success:function(info){
+						 
+						     if(info==2){
+										  
+											$('#ct').hide();
+										 }else{
+										     $('#hhhddd').show();
+											 $('#ct').show();
+											 $('#f_city').html(info);
+                                             
+											   $('#f_city').change(function(){
+			
+																if($('#f_city').val()=='自定义城市'){
+																
+																         $('#cityok').show();
+																}else{
+																   $('#cityok').hide();
+																
+																}
+													})  
+										 }
+									}
+							 });
+							 }
+			})
+			//OK添加城市
+			$('#zdycity').click(function(){
+			             var token=$('#token').val();
+			             var cityname=$('#city').val();
+			            var cid=$('#cityid').val();
+					   $.ajax({
+					        url:'{pigcms::U("Code/ajaxcityok")}',
+							data:'cid='+cid+'&token='+token+'&cityname='+cityname,
+							type:'post',
+							dataType:'html',
+							success:function(cinfo){
+							         //alert(cinfo);
+							       $('#f_city').html(cinfo);
+							
+							}
+					   
+					   })
+
+			})
+
+			//OK添加线上渠道
+			$('#zdyxs').click(function(){
+			             var token=$('#token').val();
+			             var xianshang=$('#xianshang').val();
+			             //var fid=$('#fid').val();
+			             var cid=$('#xianshangid').val();
+						 //alert(cid);return false;
+					   $.ajax({
+					        url:'{pigcms::U("Code/ajaxxsok")}',
+							data:'cid='+cid+'&token='+token+'&xianshang='+xianshang,
+							type:'post',
+							dataType:'html',
+							success:function(ccinfo){
+							        // alert(ccinfo);return false;
+							       $('#xians').html(ccinfo);
+							
+							}
+					   
+					   })
+
+			})
+			
+
+			//ajax线下路演活动调用
+			$('#hid').change(function(){
+			             var hid=$('#hid').val();
+                         var token=$('#token').val();
+						
+			                $.ajax({
+							url:'{pigcms::U("Code/ajaxluyan")}',
+							data:'hid='+hid+'&token='+token,
+							type:'post',
+							dataType:'html',
+							success:function(zinfo){
+						     
+						         if(zinfo==2){
+										  
+											$('#zzid').hide();
+										 }else{
+										 
+											 $('#zzid').show();
+											 $('#zid').html(zinfo);
+                                             
+											   $('#zid').change(function(){
+			
+																if($('#zid').val()=='自定义'){
+																
+																         $('#huod').show();
+																}else{
+																   $('#huod').hide();
+																
+																}
+													})  
+										 }
+									}
+							 });
+			})
+
+
+			//点击OK添加路演活动
+			$('#lydj').click(function(){
+			             var token=$('#token').val();
+			             var huodong=$('#huodong').val();
+			             var hid=$('#hid').val();
+						 
+			          
+					   $.ajax({
+					        url:'{pigcms::U("Code/ajaxhuodongok")}',
+							data:'hid='+hid+'&token='+token+'&huodong='+huodong,
+							type:'post',
+							dataType:'html',
+							success:function(zinfo){
+							        
+							       $('#zid').html(zinfo);
+							
+							}
+					   
+					   })
+
+			})
+
+
+			
+			//ajax线下门店调用
+			$('#zid').change(function(){
+			             var zid=$('#zid').val();
+                         var token=$('#token').val();
+						
+			                $.ajax({
+							url:'{pigcms::U("Code/ajaxmendian")}',
+							data:'zid='+zid+'&token='+token,
+							type:'post',
+							dataType:'html',
+							success:function(minfo){
+						          // alert(minfo);return false;
+						         if(minfo==2){
+										  
+											$('#mmid').hide();
+										 }else{
+										 
+											 $('#mmid').show();
+											 $('#mid').html(minfo);
+                                             
+											   $('#mid').change(function(){
+			
+																if($('#mid').val()=='自定义'){
+																
+																         $('#mend').show();
+																}else{
+																   $('#mend').hide();
+																
+																}
+													})  
+										 }
+									}
+							 });
+			})
+
+			
+		 
+	     //点击OK添加门店
+			$('#mddj').click(function(){
+			             var token=$('#token').val();
+			             var mendian=$('#mendian').val();
+			             var zid=$('#zid').val();
+						
+					   $.ajax({
+					        url:'{pigcms::U("Code/ajaxmendianok")}',
+							data:'zid='+zid+'&token='+token+'&mendian='+mendian,
+							type:'post',
+							dataType:'html',
+							success:function(minfo){
+							        //alert(minfo);return false;
+							       $('#mid').html(minfo);
+							
+							}
+					   
+					   })
+
+			})
+	 
+	 
+	     
+	 
+	 
+    //alert($('#fid option').length); 
+   //$('#fid').click(function(){
+   
+     
+   //})
+})
+</script>
+
+<style>
+    .cateimg {
+        position: relative;
+         
+    }
+    .cateimg .smallImg {
+        width: 50px;
+    }
+    .cateimg .bigImg {
+        position: absolute;
+        left: 51px;
+        top: 0px;
+        display: none;
+        width: 320px;
+    }
+	#date-calendar input {
+float: left;
+}
+</style>
+<div class="container main">
+<div class="row">
+<include file="Code:left"/>
+
+        <div class="col-md-10 main">
+           
+           	 <ol class="breadcrumb">
+			  <li class="active">二维码管理</li>
+			</ol>
+			
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">二维码管理</h3>
+				</div>
+			  <div class="panel-body">
+			  
+			  <!-- <div class="add-button pull-right">
+							   
+            		<a href="{pigcms::U('Code/hd',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> 活动类二维码编辑</a>
+					<a href="{pigcms::U('Code/cp',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> 产品类二维码编辑</a>
+					<a href="{pigcms::U('Code/zdy',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> 自定义设置</a>
+            	</div>-->
+            	<div style="clear:both"></div>
+           <!--自定义设置-->
+		     <div style="padding-top:20px;" class="row">
+					  <div class="col-md-5" style="margin-left: 30px;">
+                                        <span style="color:red">设置需要添加二维码的属性</span>
+						 <form class="form-horizontal" method="post" id="form" action="/index.php?g=User&amp;m=Code&amp;a=qudao">
+						      <input type="hidden" value="{pigcms:$_GET['token']}" id='token'/>
+							  <input type="hidden" value="1" id='cityid'/>
+						      <input type="hidden" value="2" id='xianshangid'/>
+						<div>
+							<div class="form-group">
+							  
+							<span>渠道：</span>
+							<select name="fid" style="width: 265px;" id="fid">
+								 
+									 <option value="">请选择</option>
+									 <volist name='qudao_list' id='vo'>
+									 <option value="{pigcms:$vo.qid}">{pigcms:$vo.q_name}</option>
+								     </volist>
+								</select>
+							 </div>
+							<div class="form-group" style="display:none" id='ct'>
+							  
+							<span>城市：</span>
+							<select name="f_city" style="width: 265px;" id="f_city" onclick="">
+						    </select>
+							 </div>
+							 <div class="form-group" id='cityok' style="padding-left:45px;display:none">
+							   <input type="text" name="city" value="" id='city' class="form-control" style="width:265px;float:left"><a class="btn btn-success" id='zdycity' style="float:left">OK</a>
+							 </div>
+                           
+
+						 <div class="form-group" style="display:none" id='xs'>
+							  
+							<span>线上：</span>
+							<select name="xians" style="width: 265px;" id="xians" onclick="">
+						    </select>
+							 </div>
+							 <div class="form-group" id='zdyxianshang' style="padding-left:45px;display:none">
+							   <input type="text" name="xianshang" value="" id='xianshang' class="form-control" style="width:265px;float:left"><a class="btn btn-success" id='zdyxs' style="float:left">OK</a>
+					    </div>
+
+						  <div class="form-group" id='hhhddd'>
+							  
+							<span>活动：</span>
+							<select name="hid" id="hid" style="width: 265px;">
+								 
+									 <option value="">请选择</option>
+									 <volist name='active_list' id='avo'>
+									 <option value="{pigcms:$avo.hid}">{pigcms:$avo.h_name}</option>
+								     </volist>
+									
+								   
+								</select>
+
+							 </div>
+							 <div class="form-group" id='zzid' style='display:none'>
+							  
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							<select name="zid" id="zid" style="width: 267px;" onclick="">
+								</select>
+							 </div>
+							 <div class="form-group" style="padding-left:45px;display:none" id='huod'>
+							   <input type="text" name="huod" id='huodong' value="" class="form-control" style="width:265px;float:left"> <a class="btn btn-success" style="float:left" id='lydj'>OK</a>
+							</div>
+							
+							 <div class="form-group" id='mmid' style='display:none'>
+							  
+							<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							<select name="mid" id="mid" style="width: 267px;" onclick="">
+								</select>
+							 </div>
+							 <div class="form-group" style="padding-left:45px;display:none" id='mend'>
+							   <input type="text" name="mendian" id='mendian' value="" class="form-control" style="width:265px;float:left"> <a class="btn btn-success" style="float:left" id='mddj'>OK</a>
+							</div>
+							      
+                            <!-- <div style="padding-left:30px;">
+							  <input type="submit" class="btn btn-success" id="dj" value="保存">
+                              <input type="reset" class="btn btn-success" value="取消">
+							 </div>-->
+						</div>
+						
+
+                          </form>
+                                             
+
+                     </div>
+					 <div class="col-md-1" style="height: 290px; margin-top: 25px; width: 50px; border-width: 0px 1px 0px 0px; border-style: none solid none none; border-color: -moz-use-text-color rgb(210, 210, 210) -moz-use-text-color -moz-use-text-color; -moz-border-top-colors: none; -moz-border-right-colors: none; -moz-border-bottom-colors: none; -moz-border-left-colors: none; border-image: none;"></div>
+					  <div class="col-md-5" style="float:right;margin-right:20px;padding-left: 0px;  ; margin-top;-10px;">
+					          <div class="form-group"> 
+							   <select name="fid" id="" style="width: 265px;" onclick="">
+								 
+									 <option value="">请选择</option>
+									 <option value="">商圈活动</option>
+									 <option value="自定义">自定义</option>
+								   
+								</select>
+								</div>
+							<div class="form-group" style="">
+							
+							   <input type="text" name="city" value="" class="form-control" style="float: left; width: 265px;"> <a class="btn btn-success" style="float:left">OK</a>
+							</div>
+					  
+					      
+					  
+					  </div>
+					   
+                 </div>      
+		    
+		 
+		   <!--end-->
+      
+        </div>
+	</div>
+	</div>
+    </div> 
+
+</div>
+<include file="Public:footer"/>

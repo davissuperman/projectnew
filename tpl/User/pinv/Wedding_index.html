@@ -1,0 +1,62 @@
+<?php $nav = "BUSINESS"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_index.css" rel="stylesheet"/>
+<div class="container main">
+<div class="row">
+<include file="Wedding:left"/>
+
+        <div class="col-md-10 main">
+           
+           	 <ol class="breadcrumb">
+			  <li><a href="{pigcms::U( 'Car/set',array( 'token'=>$token ))}">微婚庆</a></li>
+			  <li class="active">喜帖管理</li>
+			</ol>
+			
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">喜帖管理</h3>
+				</div>
+			  <div class="panel-body">
+			   <div class="add-button pull-right">
+            		<a href="{pigcms::U('Wedding/add',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> 添加喜帖</a>
+            	</div>
+            	<div style="clear:both"></div>
+
+            <table class="table table-striped" cellspacing="1">
+                <tr>    
+                    <th class="secondTd">编号</th>
+                    <th class="secondTd">喜帖标题</th>
+                    <th class="secondTd">关键词</th>
+                    <th class="secondTd">新郎/新娘名字</th>
+                    <th class="secondTd">密码</th>
+                    <th class="secondTd">相册</th>
+                    <th  class="forthTd" >操作</th>
+                </tr>
+                <volist name="wedding" id="wedding">
+                    <tr>
+
+                        <td>{pigcms:$i}</td>
+                        <td>{pigcms:$wedding.title}</td>
+                        <td>{pigcms:$wedding.keyword}</td>
+                        <td>{pigcms:$wedding.man}/{pigcms:$wedding.woman}</td>
+                        <td>{pigcms:$wedding.password}</td>
+                        <td><a class="green" href="{pigcms::U('Photo/list_add',array('id'=>$wedding['id']))}">喜帖图片</a> </td>
+                        <td class="norightborder">
+                            <a href="{pigcms::U('Wedding/info',array('id'=>$wedding['id']))}">查看名单</a>　
+                            <a href="{pigcms::U('User/Wedding/edit',array('id'=>$wedding['id']))}">编辑喜帖</a>　
+                            <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('User/Wedding/del',array('id'=>$wedding['id']))}');">删除</a>
+                        </td>
+
+                    </tr>
+                </volist>
+            </table>
+
+
+            <p class="page">{pigcms:$page}</p>
+        </div>
+	</div>
+	</div>
+    </div> 
+
+</div>
+<include file="Public:footer"/>

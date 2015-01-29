@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+        <head>
+        <title>在线预订 -{pigcms:$types['type']} </title>
+        <script type="text/javascript"></script><script type="text/javascript" src="{pigcms::RES}/js/host/jquery.js"></script><script type="text/javascript" src="{pigcms::RES}/js/host/yyucadapter.js"></script>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="{pigcms::RES}/css/host/hotels.css" media="all" />
+        <link rel="stylesheet" type="text/css" href="{pigcms::RES}/css/host/mobiscroll.custom-2.5.2.min.css" media="all"/>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+        <meta name="Keywords" content="" />
+        <meta name="Description" content="" />
+        <!-- Mobile Devices Support @begin -->
+        <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+        <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta content="0" http-equiv="expires">
+        <meta content="telephone=no, address=no" name="format-detection">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <!-- apple devices fullscreen -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <!-- Mobile Devices Support @end -->
+        <script type="text/javascript" src="{pigcms::RES}/js/host/swipe.js"></script>
+   <!--     <style>
+img {
+	width: 100%!important;
+}
+</style>-->
+        </head>
+        <body id="hotels" ondragstart="return false;" onselectstart="return false;" >
+<section class="body">
+          <div class="banner"> </div>
+          <div class="cardexplain"> 
+    <div class="qiandaobanner"> <a href="javascript:;"> <img src="{pigcms:$types.picurl}" /> </a> </div>   
+    <!--商家房价及类型-->
+    <ul class="round">
+              <li class="biaotou bradius pad" style="padding:0px;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                  <tbody>
+            <tr style="height:25px;">
+                      <td style="padding-left:5px;">类型</td>
+                      <td class="yuanjia" style="text-align:center;">原价</td>
+                      <td class="youhuijia" style="text-align:center;">优惠价</td>
+                      <td class="youhuijia" style="text-align:center;">房间数量</td>
+                    </tr>
+					<tr style="height:35px;">
+						<td style="background:#fff;padding-left:5px;">{pigcms:$types['type']}</td>
+						<td class="yuanjia" id="yj" style="background:#fff;text-align:center;">￥{pigcms:$types['price']}</td>
+						<td class="youhuijia" id="yhj" style="background:#fff;text-align:center;">￥{pigcms:$types['yhprice']}</td>
+						<td class="youhuijia" id="yhj" style="background:#fff;text-align:center;">{pigcms:$types['fjnum']}</td>
+                  </tr>
+          </tbody>
+                </table>
+      </li>
+              <!--<li> <span class="noneorder">
+                <table class="jiagebiao" border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tbody>
+                    <tr>
+                    <td>{pigcms:$types['type']}</td>
+                    <td class="yuanjia" id="yj">￥{pigcms:$types['price']}</td>
+                    <td class="youhuijia" id="yhj">￥{pigcms:$types['yhprice']}</td>
+                    <td class="youhuijia" id="yhj">{pigcms:$types['fjnum']}</td>
+                  </tr>
+                  </tbody>
+              </table>
+                </span> </li>-->
+            </ul>
+    
+    <!--后台可控制是否显示-->
+    <ul class="round">
+              <li>
+        <h2>配套设施</h2>
+        <div class="text">{pigcms:$types['info']|htmlspecialchars_decode}</div>
+      </li>
+              <li class="tel"><a href="tel:{pigcms:$host['tel2']}"><span>{pigcms:$host['tel2']} 电话预订</span></a></li>
+            </ul>
+    <ul class="round roundyellow">
+              <li class="userinfo"> <a href="#"> <span>请认真填写在线订单</span> </a> </li>
+            </ul>
+    <ul class="round">
+              <form action="{pigcms::U('Host/orderadd')}" method="post" id="theform">
+        <li class="title mb"><span class="none">请认真填写在线订单</span></li>
+		<input type="hidden" name='hid' value="{pigcms:$_GET['hid']}" />
+		<input type="hidden" name='wecha_id' value="{pigcms:$_GET['wecha_id']}" />
+		<input type="hidden" name='token' value="{pigcms:$_GET['token']}" />
+		<input type="hidden" name='fjid' value="{pigcms:$_GET['id']}" />
+        <li class="nob">
+                  <table class="kuang" border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tbody>
+                      <tr>
+                <th>联系人</th>
+                <td><input type="text"   value="" name="book_people" id="micro_hotel_recordform0" class="px" placeholder="请输入您的名字" required/></td>
+              </tr>
+                    </tbody>
+          </table>
+                </li>
+        <li class="nob">
+                  <table class="kuang" border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tbody>
+                      <tr>
+                <th>联系电话</th>
+                <td><input type="text"   value="" name="tel" id="micro_hotel_recordform1" class="px" placeholder="请输入您的电话" required/></td>
+              </tr>
+                    </tbody>
+          </table>
+                </li>
+        <li class="nob">
+                  <table class="kuang" border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tbody>
+                      <tr>
+                <th>入住日期</th>
+                <td><input type="text"   value=""  id="micro_hotel_recordform2" class="px" placeholder="请选择预约日期" required name="check_in" mdate="date" relobj="yyucmcalendar" rel="yyuc"/></td>
+              </tr>
+			   <tr>
+                <th>离店日期</th>
+                <td><input type="text"   value=""  id="micro_hotel_recordform22" class="px" placeholder="请选择预约日期" required name="check_out" mdate="date" relobj="yyucmcalendar" rel="yyuc"/></td>
+              </tr>
+                    </tbody>
+          </table>
+                </li>
+        <li class="nob">
+                  <table class="kuang" border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tbody>
+                      <tr>
+                <th>房间数量</th>
+                <td><select    name="book_num"  id="micro_hotel_recordform3" class="dropdown-select" required="required">
+                    <option value="1" >1</option>
+                    <option value="2" >2</option>
+                    <option value="3" >3</option>
+                    <option value="4" >4</option>
+                    <option value="5" >5</option>
+                    <option value="6" >6</option>
+                    <option value="7" >7</option>
+                    <option value="8" >8</option>
+                    <option value="9" >9</option>
+                    <option value="10" >10</option>
+                  </select></td>
+              </tr>
+                    </tbody>
+          </table>
+                </li>
+	  <li class="nob">
+                  <table class="kuang" border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tbody>
+                      <tr>
+                <th>备注</th>
+                <td><textarea name="remarks"   id="micro_hotel_recordform6" class="pxtextarea" style="height:99px;overflow-y:visible" placeholder="请留言" required></textarea></td>
+              </tr>
+                    </tbody>
+          </table>
+                </li>
+           <li class="nob">
+                  <table class="kuang" border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tbody>
+                      <tr>
+                <th>价钱</th>
+                <td><input type="text" disabled   value="{pigcms:$types['yhprice']}" name="price" id="micro_hotel_recordform4" class="px" placeholder="text"/></td>
+              </tr>
+                    </tbody>
+          </table>
+        </li>
+		 <li class="nob">
+                  <table class="kuang" border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tbody>
+                      <tr>
+                <th>房间类型</th>
+                <td><input type="text" disabled  value="{pigcms:$types['type']}" name="room_type" id="micro_hotel_recordform4" class="px" placeholder="text"/></td>
+              </tr>
+                    </tbody>
+          </table>
+        </li>
+		<volist name='inputlist' id='ipt'>
+			 
+				 <li class="nob">
+				    <table class="kuang" border="0" cellpadding="0" cellspacing="0" width="100%">
+					<tbody>
+					  
+					  <tr>
+					  <if condition="$ipt['zdylx'] eq 'text'">
+						    <th>{pigcms:$ipt.zdyname}</th>
+                            <input type="hidden" value="{pigcms:$ipt.zdyname}" name='leixname[]'/>
+							<td><input type="text"   value="" name="leix[]" id="micro_hotel_recordform4" class="px" placeholder="text"/></td>
+						<elseif condition="$ipt['zdylx'] eq 'datetime1'"/>
+							<th>{pigcms:$ipt.zdyname}</th>
+							
+                            <input type="hidden" value="{pigcms:$ipt.zdyname}" name='leixname[]'/>
+						   <td><input type="text"   value=""  id="micro_hotel_recordform2" class="px" placeholder="请选择预约日期" required name="leix[]" mdate="date" relobj="yyucmcalendar" rel="yyuc"/></td>
+						<elseif condition="$ipt['zdylx'] eq 'textarea'"/>
+							<th>{pigcms:$ipt.zdyname}</th>
+							
+                            <input type="hidden" value="{pigcms:$ipt.zdyname}" name='leixname[]'/>
+						   <td><textarea name="leix[]"   id="micro_hotel_recordform6" class="pxtextarea" style="height:99px;overflow-y:visible" placeholder="请留言" required></textarea></td>
+						<elseif condition="$ipt['zdylx'] eq 'select'"/>
+
+							<th>{pigcms:$ipt.zdyname}</th>
+							
+                            <input type="hidden" value="{pigcms:$ipt.zdyname}" name='leixname[]'/>
+						   <td><select name="leix[]"  id="micro_hotel_recordform9" class="dropdown-select">
+							<option value="1" >1</option>
+							<option value="2" >2</option>
+							<option value="3" >3</option>
+							<option value="4" >4</option>
+							<option value="5" >5</option>
+						  </select></td>
+						</if>
+						
+					  </tr>
+							</tbody>
+				    </table>
+				</li>
+			
+	    </volist>
+              <div class="footReturn"> <input type="submit" class="submit" style="width:100%" id="showcard" value="提交订单"/>
+             
+            </div>
+  </div>
+      </form>
+            </ul>
+    <!--<div class="footReturn"> <a id="showcard" class="submit" href="javascript:void(0);">提交订单</a>
+              <div class="window" id="windowcenter">
+        <div id="title" class="wtitle">提示<span class="close" id="alertclose"></span></div>
+        <div class="content">
+                  <div id="txt"></div>
+                </div>
+      </div>
+            </div>
+  </div>-->
+          <div class="plugback"> <a href="javascript:history.back(-1)">
+            <div class="plugbg themeStyle"> <span class="plugback"> </span> </div>
+            </a> </div>
+        </section>
+
+<script>
+
+$(function(){
+     $("#showcard").click(function(){
+                    var str=$("#micro_hotel_recordform2")[0].value.replace(/-/g,'/');
+                    var date=new Date(str);
+                    var str1=$("#micro_hotel_recordform22")[0].value.replace(/-/g,'/');
+                    var date1=new Date(str1);
+			// if( !/(.*?)[\u4E00-\u9FA5](.*?)/.test($("#micro_hotel_recordform0").val())){alert('请正确输入名字');return false;} 
+			
+			// if(!/\d{11}/.test($("#micro_hotel_recordform1").val())){alert('请正确输入电话');return false;} 
+			if($("#micro_hotel_recordform2").val()==''){alert('请选择时间');return false;}
+                     if($("#micro_hotel_recordform22").val()==''){alert('请选择时间');return false;}
+                    if(date.getTime()>=date1.getTime()){alert("离店日期不能小于入住日期");return;}
+	 })
+	
+  
+
+});
+
+</script> 
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<?php $nav = "DIYMEN"; ?>
+<include file="Public:head"/>
+<style type="text/css" charset="utf-8">
+    .bold {
+        font-weight: bold;
+    }
+    .diymenred {
+        color: #f00;
+    }
+</style>
+<div class="container main">
+    <div class="row">
+        <div class="col-md-2 sidebar">
+            <nav id="sidebar-nav">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="active"><a href="{pigcms::U('Diymen/set',array('token'=>$token))}">授权设置</a></li>
+                    <li ><a href="{pigcms::U('Diymen/index',array('token'=>$token))}">菜单设置</a></li>                   
+                </ul>
+            </nav>
+        </div>
+        <div class="col-md-10 main">
+
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">授权设置</h3>
+                </div>
+                <form class="form-horizontal" role="form" action="{pigcms::U('Diymen/set',array('token'=>$token))}" method="post">
+                    <div class="panel-body">
+                        <div class="alert alert-info">
+                            1. 要在微信公众平台<strong>“开发模式”</strong>下使用自定义菜单，首先要在公众平台<strong>申请</strong>自定义菜单使用的<strong>AppId和AppSecret</strong>，然后填入下边表单。<br>
+                            2. 提交完id和密钥后，可以在【菜单设置】中设置各个菜单项，然后进行发布，您的微信公众号便支持自定义菜单了。<br>
+                            3. 公众平台规定，<strong>菜单发布<span class="diymenred bold">24小时后生效</span></strong>。如果为新增粉丝，则可马上看到菜单。
+                        </div>                
+                        <div class="form-group">
+                            <label for="appid" class="col-sm-2 control-label">应用id:</label>
+                            <div class="col-sm-5">
+                                <input  type="text" class="form-control" id="appid" name="appid"  placeholder="AppID" value="{pigcms:$diymen.appid}"  >
+                            </div>
+                            <div class="col-sm-5">
+                                公众平台申请到的AppId
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">应用密钥:</label>
+                            <div class="col-sm-5">
+                                <input  type="text" class="form-control" id="appsecret" name="appsecret" placeholder="AppSecret" value="{pigcms:$diymen.appsecret}"  >
+                            </div>
+                             <div class="col-sm-5">
+                                公众平台申请到的AppSecret
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="panel-footer" style="text-align:right"> 
+                        <input type="submit" value="保存授权" class="btn btn-success"/>                   
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<include file="Public:footer"/>

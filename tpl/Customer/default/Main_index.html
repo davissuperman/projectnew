@@ -1,0 +1,239 @@
+<!doctype html>
+<html>
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>客服系统</title>
+        <link type="text/css" rel="stylesheet" href="./tpl/static/custome/css/public.css?t={pigcms:$times}"/>
+        <link type="text/css" rel="stylesheet" href="./tpl/static/custome/css/serchOrder.css?t={pigcms:$times}"/>
+        <link type="text/css" rel="stylesheet" href="./tpl/static/custome/css/noOrders.css?t={pigcms:$times}"/>
+        <link type="text/css" rel="stylesheet" href="./tpl/static/custome/css/allOrders.css?t={pigcms:$times}"/>
+        <script src="./tpl/static/custome/static/js/jquery.js?t={pigcms:$times}"></script>
+        <script src="./tpl/static/custome/static/js/jquery.json.js?t={pigcms:$times}"></script>
+        <script src="./tpl/static/custome/config.js?t={pigcms:$times}" charset="utf-8"></script>
+        <script>
+           var u = {        
+                'uid' : '{pigcms:$Think.session.number}' ,
+                'username' : '{pigcms:$Think.session.name}',
+                'role' : '{pigcms:$Think.session.type}',
+                'token' : '{pigcms:$Think.session.token}'      
+            }     
+        </script>
+        <script src="./tpl/static/custome/static/js/chat.js?t={pigcms:$times}" charset="utf-8"></script>
+</head>
+    <body style="font-family:微软雅黑">   
+        <div class="box">
+            <p class="heading">
+                <img src="./tpl/static/custome/img/logo.png" class="logo"/>
+                <span class="span1">欢迎咨询</span>
+                <img src="./tpl/static/custome/img/zhSolid.gif" class="zhSolid"/>
+                <span class="span1">品微在线客服</span>
+            </p>
+            <div class="content">
+                <!--left--begaing-->
+                <div class="left">
+                    <p class="userList">访客列表</p>
+                    <div class="userBox">
+                        <ul class="user" >
+                          
+
+                        </ul>
+                        <div class="change">
+                            <p class="chaHead">将访客转移至：</p>
+                            <p class="chaTitle">普通客服</p>
+                            
+                        </div>
+                    </div>
+                    <div class="userDetail">
+                        <div class="userLeft">
+                            <p class="detail">昵称：<span id="infoname"></span></p>
+                            <p class="detail">地区：<span id="infoaddss"></span></p>   
+
+                        </div>
+                        <img src="./tpl/static/custome/img/userImg.gif" class="userImg" id="infoimg" width="60"/>
+                        <div class="clear"></div>
+
+                        <p class="fenzu">
+                            <span>用户分组：</span>
+                            <select class="sel" name="gid" id="gid">
+                                <volist name="group" id="o">
+                                    <option value="{pigcms:$o.gid}" class="op" >{pigcms:$o.groupname}</option>
+                                </volist>
+                            </select>
+
+                        </p>
+                        <p class="fenzu">备注：</p>
+                        <div style="margin-top:5px;">
+                            <textarea class="psBox" id="inforemark"></textarea>
+                            <input type="button" value="确定" class="surePress" id="info_submit" onclick="info_submit()"/>	
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <!--转接原因--begain-->
+                    <div class="reason"  style="display:none;">
+                        <textarea class="texArea" id="what" onfocus="this.value = ''">请输入转接原因（非必填）</textarea>
+                        <p class="pressBox"><input type="button" value="确定" class="surePress" id="reason"  onclick="movesubmit()"/><input type="button" value="取消" class="celPress" id="recancel" onclick="moveCancel()"/></p>
+                    </div>
+                    <!--转接原因--begain-->
+                </div>
+                <!--left--end-->
+                <!--middle--begain-->
+                <div class="middle">
+                    <div class="dialog">
+                        <div class="same"  style="display: none">
+                            <img src="./tpl/static/custome/img/me.gif" class="me"/>
+                            <div class="question">
+                                <img src="./tpl/static/custome/img/arrow.gif" class="arrow"/>
+                                <div class="para">
+                                    <div class="paraP">
+                                        <span class="date">14-04-09 10:01:57</span>
+                                        <span class="name"></span>
+                                        <div style="clear:both;"></div>
+                                    </div>
+                                    <p class="paraS fance"></p>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="sameX" style="paddding:0px 20px;margin-top:10px;display:none;">
+                            <img src="./tpl/static/custome/img/person.gif" class="person"/>
+                            <div class="answer">
+                                <div class="paraX">
+                                    <p class="paraP">
+                                        <span class="date">14-04-09 10:01:57</span>
+                                        <span class="name"></span>
+                                    </p>
+                                    <p class="paraS   all"></p>
+                                </div>
+                                <img src="./tpl/static/custome/img/arrowX.gif" class="arrowX"/>
+                            </div>
+
+                            <div class="clear"></div>
+                        </div>
+                        <div class="dialogBox">                
+
+                        </div>
+                    </div>
+                    <div class="sendBox" id="send_info">
+                        <div class="sendPress">
+                            <textarea class="area" id="sendinfo">您的订单号为</textarea>
+                            <input type="hidden"  value="" id="openid" />
+                            <input type="button" value="发送" class="sendBtn"  onclick="sendinfo()"/>
+                            <div class="clear"></div>
+                        </div>
+                        <p class="okBox" style="">
+                            <input type="button" value="完成" class="ok" onclick="_party._manage(true)"/>
+                            <input type="button" value="转接客服" class="kefu" onclick="move()"/>
+                        </p>
+                    </div>
+
+                </div>
+                <!--middle--end-->
+                <!--right--begaing-->
+                <div class="right">
+                    <p class="userList">客服信息</p>
+                    <div class="infor">
+                        <p class="detail">客服状态：<span id="snum" >{pigcms:$Think.session.number}</span> <span id="sstatic"></span></p>
+                        <p class="detail">客服名称：<span id="sname">{pigcms:$Think.session.name}</span> </p>                       
+                        <p class="detail" >退出登录</p>
+                        <p class="sureBox"><input type="button" value="确定" class="surePress"   onclick="_party._exit(true)"/></p>
+                    </div>
+
+                    <p class="userList" id="slist-title">查询订单</p>
+                    <div class="serCh" id="searchOrder">
+                        <form action="" onsubmit="return false;" id="soForm">
+                            <p class="orderP">请输入微信ID或</p>
+                            <p class="orderP">联系方式查询订单</p>
+                            <p class="ID">微信ID</p>
+                            <p><input type="text" class="case" id="o_openid"/></p>
+                            <p class="ID">联系方式</p>
+                            <p><input type="text" class="case" id="o_mobile"/></p>
+                            <p class="pressBox"><input type="button" value="确定" class="surePress" id="getOrders"/><input type="button" value="取消" class="celPress"/></p>
+                        </form>
+
+                    </div>
+                </div>
+                <!--right--end-->
+                <div class="clear"></div>
+            </div>
+
+        </div>
+        <div id="cover"></div>
+        <div id="party_pass" class="passWord">
+            <p class="head">竭诚为您服务</p>
+            <div class="radioBox">
+                <p class="radioPx">此次对话咨询类型</p>
+                <volist name="list" id="o">                                
+                    <p class="radioP" >
+                        <input type="radio" class="rad visitors_type" name="visitors_type"   value="{pigcms:$o.tid}"/>
+                        <span class="radText">{pigcms:$o.name}</span>
+
+                    </p>
+                </volist>
+            </div>
+            <p class="btnBoxX">
+                <input type="button" value="确定" class="surePress" id="visitors_type" onclick="visitors_type()"/>
+                <input type="button" value="取消" class="celPress" id="button1" onclick="_party._manage()"/>
+            </p>
+        </div>
+        <div id="party_exit"  style="display:none;">
+            <p class="head"><img src="./tpl/static/custome/img/close.png" class="close" onclick="_party._exit()"/></p>
+            <p class="exitPan">确定注册登录号</p>
+            <p class="btnBox">
+                <a class="surePress"  href="./index.php?g=Customer&m=Index&a=logout">确定</a>
+                <input type="button" value="取消" class="celPress" id="button1" onclick="_party._exit()"/>
+            </p>
+        </div>
+
+        <script type="text/javascript" src="./tpl/static/custome/js/static1012.js"></script>
+        <script type="text/javascript">
+                    var $ = function(id) {
+                        return document.getElementById(id);
+                    };
+                    var _party = {
+                        _manage: function(show) {
+                            if (show) {
+                                _system._cover(true);
+                                // alert(1);
+                                $("party_pass").show();
+                                $("party_pass").center();
+                                window.onresize = function() {
+                                    _system._cover(true);
+                                    $("party_pass").center();
+                                };
+                                $("cover").onclick = function() {
+                                    _party._manage();
+                                };
+                            } else {
+                                _system._cover();
+                                $("party_pass").hide();
+                                $("pass_pass").value = "";
+                                $("cover").onclick = null;
+                                window.onresize = null;
+                            }
+                        },
+                        _exit: function(show) {
+                            if (show) {
+                                _system._cover(true);
+                                // alert(1);
+                                $("party_exit").show();
+                                $("party_exit").center();
+                                window.onresize = function() {
+                                    _system._cover(true);
+                                    $("party_exit").center();
+                                };
+                                $("cover").onclick = function() {
+                                    _party._manage();
+                                };
+                            } else {
+                                _system._cover();
+                                $("party_exit").hide();
+                                $("party_exit").value = "";
+                                $("cover").onclick = null;
+                                window.onresize = null;
+                            }
+                        }
+                    };
+        </script>
+
+    </body>
+</html>

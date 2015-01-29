@@ -1,0 +1,53 @@
+<include file="Product:header"/>
+    <div class="lay_page page_cat_1">
+        <div class="lay_page_wrap">
+            <div class="fn_goods qb_clearfix">
+                <ul id="show_container"></ul>
+            </div> 
+            
+<include file="Product:bottom"/>
+<script src="{pigcms::$staticFilePath}/js/ChatFloat.js"></script>
+<script>
+    new ChatFloat({
+        AId:1071,
+        right:0,
+        top:150,
+        openid:""
+    });
+</script>
+        </div>
+    </div>
+
+    <div class="qb_quick_tip qb_none" id="bubble"></div>
+    <script type="text/template" id="show_item_tpl">
+        <li><a href="/index.php?g=Wap&m=Product&a=shopping&id={#id#}&token={pigcms:$token}&wecha_id={pigcms:$wecha_id}">
+            <img src="{#index_logo#}" width="140" height="140" class="default" />
+            <div class="goods_name qb_fs_s mod_color_weak">{#name#}</div>
+            <div class="price qb_fs_s mod_color_strong">&yen;{#price#}</div>
+            {#discountHtml#}</a></li>
+    </script>
+    <script src="{pigcms::$staticFilePath}/js/zepto.min.js"></script>
+
+    <script type="text/javascript">
+         
+  var itemArray = {
+		"1":{pigcms:$goods}
+	 },
+ 	    lz = true;
+        var topicType = 5;
+    </script> 
+ 
+     <script type="text/javascript"> 
+        // var shareData = {"send2Friend":{"content":"","img":"","link":"","title":""},"share2Friend":{"img":"","link":"","title":""},"share2qqBlog":{"content":"我关注了【微商城】！拥有N多会员特权，一起来体验吧","link":""}};
+                // var shareData = {"send2Friend":{"content":"品微惊喜不断！","img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"http://www.wzhi.cc/index.php?g=Wap&m=Product&a=cookie&token={pigcms:$token}","title":"【品微商城】推荐给你看看，不一样的商城"},"share2Friend":{"img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"http://www.wzhi.cc/index.php?g=Wap&m=Product&a=cookie&token={pigcms:$token}","title":"【品微商城】关注我吧！更多会员特权等着你！"},"share2qqBlog":{"content":"我关注了【品微商城】！拥有N多会员特权，一起来体验吧！","link":"http://www.wzhi.cc/index.php?g=Wap&m=Product&a=cookie&token={pigcms:$token}"}};
+		         		         var shareData = {"send2Friend":{"content":"品微惊喜不断！","img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"{pigcms::C('site_url')}{pigcms::U('Product/cookie',array('token'=>$token))}","title":"【品微商城】推荐给你看看，不一样的商城"},"share2Friend":{"img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"{pigcms::C('site_url')}{pigcms::U('Product/cookie',array('token'=>$token))}","title":"【品微商城】关注我吧！更多会员特权等着你！"},"share2qqBlog":{"content":"我关注了【品微商城】！拥有N多会员特权，一起来体验吧！","link":"{pigcms::C('site_url')}{pigcms::U('Product/cookie',array('token'=>$token))}"}};
+				 // var shareData = {"send2Friend":{"content":"品微惊喜不断！","img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"{pigcms::U('Product/cookie',array('token'=>$token))}","title":"【品微商城】推荐给你看看，不一样的商城"},"share2Friend":{"img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"{pigcms::U('Product/cookie',array('token'=>$token))}","title":"【品微商城】关注我吧！更多会员特权等着你！"},"share2qqBlog":{"content":"我关注了【品微商城】！拥有N多会员特权，一起来体验吧！","link":"{pigcms::U('Product/cookie',array('token'=>$token))}"}};
+		 !function () { function c() { var a = WeixinJSBridge; a.on("menu:share:appmessage", e), a.on("menu:share:weibo", f), a.on("menu:share:timeline", g), a.invoke("getNetworkType", {}, d) } function d(a) { var b, c; switch (a.err_msg) { case "network_type:wwan": b = 2e3; break; case "network_type:edge": b = 3e3; break; case "network_type:wifi": b = 4e3 } c = new Image, c.onerror = c.onload = function () { c = null } } function e() { var a = window.shareData.send2Friend, b = h(a); a.content = b ? b.content : a.content, a.img = b && b.img ? b.img : a.img, WeixinJSBridge.invoke("sendAppMessage", { img_url: a.img, img_width: "640", img_height: "640", link: a.link, desc: a.content, title: a.title }, function () { }) } function f() { var b = window.shareData.share2qqBlog; WeixinJSBridge.invoke("shareWeibo", { content: a.isios ? b.content + b.link : b.content, url: b.link }, function () { }) } function g() { var a = window.shareData.share2Friend; WeixinJSBridge.invoke("shareTimeline", { img_url: a.img, img_width: "640", img_height: "640", link: a.link, desc: " ", title: a.title }, function () { }) } function h() { return "function" == typeof b ? b() : "" } var b, a = function () { var a = window.navigator.userAgent; return this.isAndroid = a.match(/(Android)\s+([\d.]+)/) || a.match(/Silk-Accelerated/) ? !0 : !1, this.isiPad = a.match(/iPad/) ? !0 : !1, this.isiPod = a.match(/(iPod).*OS\s([\d_]+)/) ? !0 : !1, this.isiPhone = !this.isiPad && a.match(/(iPhone\sOS)\s([\d_]+)/) ? !0 : !1, this.isios = this.isiPhone || this.isiPad || this.isiPod, this }(); window.shareData && document.addEventListener("WeixinJSBridgeReady", c, !1), window.setShareListener = function (a) { b = a } }();
+    </script>
+    <script type="text/javascript">  
+        mobile.o2ocn.topic.init(); 
+    </script>
+</body>
+</html>
+
+

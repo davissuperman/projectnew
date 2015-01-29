@@ -1,0 +1,47 @@
+<?php $nav = "FUNCTION"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_inputs.css" rel="stylesheet"/>
+<div class="container main">
+<div class="row">
+<include file="Wdiaoyan:left"/>
+     
+            <div class="col-md-10 main">
+           
+           	 <ol class="breadcrumb">
+			  <li><a href="{pigcms::U( 'Wdiaoyan/index',array( 'token'=>$token ))}">微调研列表</a></li>
+			  <li><a href="{pigcms::U( 'Wdiaoyan/xuanxadd',array( 'token'=>$token, 'id'=> $id ))}">输入项管理</a></li>
+			  <li><a href="{pigcms::U('Wdiaoyan/biaotilist',array('token'=>$token,'id'=>$fid))}">标题列表</a></li>
+			  <li class="active">详细选项</li>
+			</ol>
+			
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">详细选项</h3>
+			  </div>
+			  <div class="panel-body">    
+		
+                 <table class="table table-striped" cellspacing="1">
+               
+                	<tr>
+                    	<th class="firstTd">显示名称</th>
+                        <th class="secondTd">字段名称</th>
+                        <th class="thirdTd">输入类型</th>
+                        <th class="sevenTd">操作</th>
+                    </tr>
+                    <volist name="list" id="item">             
+					<tr>
+					<td>{pigcms:$item.displayname}</td>
+					<td>{pigcms:$item.fieldname}</td>
+					<td>{pigcms:$item.inputtype}</td>
+					<td class="norightborder"><a href="{pigcms::U('Wdiaoyan/lupdate',array('id'=>$item['id'],'token'=>$token, 'fid'=>$fid, 'sid'=>$sid))}"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Wdiaoyan/ldelete',array('id'=>$item['id'],'token'=>$token))}');"><span class="glyphicon glyphicon-trash danger"></span></a></td>
+					</tr>
+					</volist>
+                    
+                </table>
+                <p class="page">{pigcms:$page}</p>
+                </div>
+                </div>
+                </div>
+                </div>
+ </div>
+<include file="Public:footer"/>

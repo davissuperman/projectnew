@@ -1,0 +1,53 @@
+<?php $nav = "FUNCTION"; $side = "CATEGORY"; $sideTop = "PRODUCT"; ?>
+<include file="Public:head"/>
+<div class="container main">
+    <div class="row">
+        <include file="Store:left"/>
+        <div class="col-md-10 main">
+            <ol class="breadcrumb">
+                <li><a href="{pigcms::U('Product/index',array('token'=>$token))}">微商城</a></li>
+                <li><a href="{pigcms::U('Product/index',array('token'=>$token))}">商城管理</a></li>
+                <li class="active">商品管理</li>
+            </ol>
+             <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title"> {pigcms:$catData.name} 的分类属性设置</h3>
+                </div>
+                <form class="form-horizontal" method="post" action="" enctype="multipart/form-data"> 
+                <div class="panel-body">
+                  <input type="hidden" name="id" value="{pigcms:$set.id}" /> 
+                   <input type="hidden" value="{pigcms::$catid}" name="catid" />
+                   <input type="hidden" value="{pigcms::$token}" name="token" />
+                  <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label">
+                               名称
+                            </label>
+                            <div class="col-sm-5">
+                             
+                                <input type="text"   name="name" value="{pigcms:$set.name}"  class="form-control validate[required]"  data-rule-required="true"  />
+                            </div>
+                            <div class="col-sm-5">
+
+                            </div>							
+                  </div>
+                  <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label">
+                               属性值
+                            </label>
+                            <div class="col-sm-5">
+                             
+                                <input type="text"   name="value" value="{pigcms:$set.value}"  class="form-control validate[required]"  data-rule-required="true"  />
+                            </div>
+                            <div class="col-sm-5">
+
+                            </div>							
+                  </div>
+                </div>
+                <div class="panel-footer" style="text-align:right">
+                        <input type="submit" value="保存" class="btn btn-success"/>
+                        <input type="button" value="取消" class="btn btn-link" onclick="javascript:history.go(-1);"/>
+                    </div>
+                
+                </form> </div></div></div></div>
+</div> 
+<include file="Public:footer" />

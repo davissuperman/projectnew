@@ -1,0 +1,51 @@
+<?php $nav = "CRM"; $side = "CHAT" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/cindex.css" rel="stylesheet"/>
+ <div class="container main">
+<div class="row main">
+<include file="Crm:left"/>
+
+
+        <div class="col-md-10 main">
+        
+        <div class="alert alert-warning">申请微信认证后方可使用</div>
+        
+             <div class="panel panel-success">
+			  <div class="panel-heading">
+				<h3 class="panel-title">微客服管理</h3>
+			  </div>
+			  <div class="panel-body">  
+         <div class="pull-right add-button"><a href="{pigcms::U('Chat/add',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> 添加客服</a> <a href="{pigcms::U('Chat/chat_log',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-file"></span> 聊天记录</a></div>
+            <table class="table table-striped" cellspacing="1"  border="0">
+                <tr>
+                    <th class="">编号</th>
+                    <th class="">客服名</th>
+                    <th class="">登陆名</th>
+                    <th class="">状态</th>                  
+                    <th class="">时间</th>
+                    <th class="">操作</th>
+                </tr>
+                <volist name="list" id="vo">
+                    <tr>
+                        <td> {pigcms:$i}</td>
+                        <td class= 'k'>{pigcms:$vo.name}</td>
+                        <td>{pigcms:$vo.userName}</td>
+                        <td>{pigcms:$vo.status}</td>
+                        <td>{pigcms:$vo.click}</td>
+                        <td><a href="{pigcms::U('Chat/edit',array('id'=>$vo['id'],'token'=>$token))}" class="hover-tooltip-edit"><span class="glyphicon glyphicon-edit"></span></a> <a href="{pigcms::U('Chat/del',array('id'=>$vo['id'],'token'=>$token))}" class="hover-tooltip-trash"><span class="glyphicon glyphicon-trash danger"></span></a></td>
+                    </tr>
+                </volist>
+                <tr>
+
+                    <td colspan="8" style="text-align:right">{pigcms:$page}</td>
+                </tr>
+            </table>
+
+        </div>
+        <!--right--end-->
+    </div>    
+
+</div>
+</div>
+</div>
+<include file="Public:footer"/>

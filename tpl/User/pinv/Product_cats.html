@@ -1,0 +1,390 @@
+<?php $nav = "FUNCTION"; $side = "CATEGORY"; $sideTop = "PRODUCT"; ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Product_index.css" rel="stylesheet"/>
+<link href="{pigcms::RES}/css/editActive.css" type="text/css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/jscolor.js" type="text/javascript"></script>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+<link type="text/css" href="{pigcms::RES}/js/sorttable/jquery-ui.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/sorttable/jquery-ui.js"></script>
+ <div class="container main">
+<div class="row">
+<include file="Product:left"/>
+
+            <div class="col-md-10 main">
+            	 <ol class="breadcrumb">
+              <li><a href="{pigcms::U('Product/index',array('token'=>$token))}">微商城</a></li>
+              <li><a href="{pigcms::U('Product/index',array('token'=>$token))}">商城管理</a></li>
+              <li class="active">商品分类管理</li>
+            </ol>
+            	<!-- 	<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p> -->
+                <div class="panel panel-success">
+                	<div class="panel-heading cfix">
+                		<h3 class="panel-title pull-left">商品分类管理</h3>
+                		<div class="search-box pull-right">
+                		<form method="post" action="" class="">
+	             <input type="hidden" name="ac" value="hotels-list">
+	             <input type="submit" value="搜索" class="btn btn-xs btn-default pull-right "/>
+	             <input type="text" placeholder="输入关键词搜索" class="search " name="searchkey" style="margin:0;"/>
+             </form></div>
+                	</div>
+             <!-- <p class="artiEdit"><span class="big">商品管理</span>
+             <form method="post" action="">
+	             <input type="hidden" name="ac" value="hotels-list">
+	             <input type="submit" value="搜索" class="searchPress"/>
+	             <input type="text" value="输入关键词搜索" class="search"/>
+             </form>
+             </p> -->
+          <!--   <ul class="listBox">
+                	 <li><a href="{pigcms::U('Product/index',array('token'=>$token,'dining'=>$isDining))}"><if condition="$isDining neq 1">商品<else/>菜品</if>管理</a></li>
+                    <li class="onOver"><a href="{pigcms::U('Product/cats',array('token'=>$token,'dining'=>$isDining))}"><if condition="$isDining neq 1">商品分类<else/>菜品分类</if>管理</a></li>
+                    <li><a href="{pigcms::U('Product/orders',array('token'=>$token,'dining'=>$isDining))}">订单管理</a></li>
+                    <if condition="$isDining eq 1"><li><a href="{pigcms::U('Product/tables',array('token'=>$token,'dining'=>1))}">桌台管理</a></li></if>
+						<if condition="$isDining neq 1">
+						<li><a href="{pigcms::U('Reply_info/set',array('token'=>$token,'infotype'=>'Shop'))}">商城回复配置</a></li>
+						<else/>
+						<li><a href="{pigcms::U('Reply_info/set',array('token'=>$token,'infotype'=>'Dining'))}">订餐回复配置</a></li>
+						</if> 
+         
+                </ul> -->
+				<input type="hidden" id="save" value="0" />
+                <!-- <div class="showBox"> -->
+                	<div class="panel-body">
+					 <form method="post" action="" id="info">
+					 		<div class="pull-right add-button">
+					 			 <a href="javascript:;" onclick="_party._manage(true)"  class="btn btn-success btn-sm"/><span class="glyphicon glyphicon-plus"></span> 添加分类</a>
+					 			<!-- <a href="/index.php?g=User&m=Product&a=catsL&token={pigcms:$token}" class="btn btn-success btn-sm">0</a> -->
+					 		</div>
+					 		<div class="clearfix"></div>
+                        <table class="table table-striped" cellspacing="1">
+                        	<thead>
+                <th style="width:7%;">排序<span class="glyphicon glyphicon-question-sign hover-popover" data-container="body" data-toggle="popover" data-placement="left" data-trigger="hover" data-content="拖拉下面的箭头可以调整显示图片的先后顺序喔!"></span></th> 
+                                <th>商品ID</th>
+                                <th>分类名称<!--  <span class="glyphicon glyphicon-question-sign hover-popover" data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="用鼠标点击下面的分类名称,可以修改大类和商品名称哦!"></span> --></th>
+                                <th>分类类型</th>
+                                <th>管理操作</th>
+                            </thead>
+                            <tbody class="tbody">
+                             <volist name="list" id="hostlist">
+                            <tr ids="{pigcms:$hostlist.id}">
+                            <td style="cursor:move" id='sort' ><span class="glyphicon glyphicon-sort"></span></td>  
+                                <td class="nosort">{pigcms:$hostlist.id}</td>
+                                <td class="mod nosort" ><span>{pigcms:$hostlist.name}</span></td>
+                                <td class="nosort">{pigcms:$hostlist.classname}</if></td>
+                                <td class="nosort">
+                                	<a href="javascript:void(0);" onclick="_party._p( true,{pigcms:$hostlist.id} );" id="{pigcms:$hostlist.classname}" class="111"><if condition="$hostlist['classname']"><span class="glyphicon glyphicon-edit hover-tooltip-edit" id="color11"></span></a> 
+                                	<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Product/catDel',array('id'=>$hostlist['id'],'token'=>$token,'dining'=>$isDining))}');" ><span class="glyphicon glyphicon-trash danger hover-tooltip-trash"></span></a><else /></if>
+                                </td>
+                            </tr>
+	                             <!-- <volist name="hostlist['children']" id="hostlist_1">
+	                             		<tr>
+	                                <td>{pigcms:$hostlist_1.id}</td>
+	                                <td class="mod" style="cursor:pointer"><span>　|--{pigcms:$hostlist_1.name}</span><input type="text" class="top_1" host="{pigcms:$hostlist_1.host}" id="{pigcms:$hostlist_1.id}" value="{pigcms:$hostlist_1.name}" name="top" style="display:none" /></td>
+	                                <td>　|--{pigcms:$hostlist_1.classname}</td>
+	                                <td>
+	                                	<a href="javascript:void(0);" onclick="_party._p( true,{pigcms:$hostlist_1.id} );"><if condition="$hostlist_1['classname']"><span class="glyphicon glyphicon-edit hover-tooltip-edit"></span></a> 
+	                                	<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Product/catDel',array('id'=>$hostlist_1['id'],'token'=>$token,'dining'=>$isDining))}');" ><span class="glyphicon glyphicon-trash danger hover-tooltip-trash"></span></a><else /></if>
+	                                </td>
+	                            </tr>
+	                            </volist> -->
+                            </volist>
+                            </tbody>
+                        </table>
+                         <p class="page">{pigcms:$page}</p>
+                        </form>
+    <div id="cover" style="z-index:1101"></div>
+    <div id="party_pass" class="passWord" style="z-index:1102">
+		<p class="titlex">添加分类</p>
+       <!-- <p class="commonx">
+        	<span class="seLeft">上级栏目：</span>
+            <select id="catid" name="sid">
+            	<foreach name="categories" item='category'>
+						<option value="{pigcms:$category.id}">{pigcms:$category.name}</option>
+         		</foreach>
+					 <volist name="class" id='class'>
+					<if condition="$class['id'] eq $set[ 'id' ]">
+					<option value="{pigcms:$class.id}" selected="selected">|-{pigcms:$class.name}</option>
+					<else/>
+				 <option value="{pigcms:$class.id}">|-{pigcms:$class.name}</option></if>
+					<volist name="class[ 'son' ]" id="cla">
+						<if condition="$cla['id'] eq $set[ 'id' ]">		
+						 <option value="{pigcms:$cla.id}" selected="selected">&nbsp&nbsp&nbsp&nbsp|---{pigcms:$cla.name}</option>
+							<else/>
+							 <option value="{pigcms:$cla.id}">&nbsp&nbsp&nbsp&nbsp|---{pigcms:$cla.name}</option>
+							 </if>
+					</volist>
+				 </volist> 
+				 </select>
+        </p>-->
+		 <p class="imgCase">
+        	<span class="seLeft">中文名称：</span>
+			<input type="text" name="name" id="name" value="{pigcms:$set.name}" class="imgBox"/><small class=" text-danger hide">此项不能为空 </small>
+        </p>
+		<p class="imgCase">
+        	<span class="seLeft">英文名称：</span>
+             <input type="text" name="Ename" id="Ename" value="{pigcms:$set.name}" class="imgBox"/> <small class=" text-danger hide">此项不能为空 </small>
+        </p>
+		<p class="imgCase">
+		 <tr>
+				<td class="label">　　分类:　　</td>
+				<volist name="tops" id="top">
+					<td><input type="checkbox" name="host[]" value="{pigcms:$top.host}" id="r{pigcms:$i}" catid="{pigcms:$top.id}" /><span id="{pigcms:$i}">{pigcms:$top.name}</span></td>
+				</volist>
+				<!-- <td><input type="radio" name="host" value="news" id="r3">最新</td> -->
+				<!-- <td><input type="radio" name="host" value="trend" id="r4">潮流趋势</td>	 -->
+					</tr> 
+		     </p>			
+		<p class="imgCase">
+        	 <span class="seLeft">颜色选择：</span><input class="color" value="{pigcms:$color}" name="color" id="color"> 
+        </p>			
+        <p class="imgCase">
+        	<span class="seLeft">分类图片：</span>
+            <input type="text" name="logourl" id='url' value="{pigcms:$set.logourl}" class="imgBox" placeholder="图片规格220*282"/>
+           <a href="###" onclick="upyunPicUpload($(this).prev().attr('id'),'pic',700,420,'qtclsw1382672973')" class="btn btn-xs btn-info " style="margin-top:10px"><span class="glyphicon glyphicon-upload"></span> 上传</a>
+        </p>
+        <!-- <p class="commonx">
+        	<span class="seLeft">分类类型：</span>
+            <input type="radio" class="rad"/>
+            <label class="radFont">护肤产品</label>
+            <input type="radio" class="rad"/>
+            <label class="radFont">化妆品</label>
+        </p> -->
+       <!--  <p class="commonx">
+        	<span class="seLeft">首页显示：</span>
+            <input type="radio" class="rad"/>
+            <label class="radFont">不显示</label>
+            <input type="radio" class="rad"/>
+            <label class="radFont">显示</label>
+        </p> -->
+        <div class=" pull-right" style="margin-right:20px">
+        	<input type="button" value="确定" class="btn btn-success" id="button1" />
+        	<input type="button" value="取消" class="btn btn-default" id="button2" onclick="_party._manage()"/>
+            
+        </div>
+    </div>
+			<!-- <form method="post" action="" id="info">
+					<p class="pressBox"><a href="{pigcms::U('Product/catAdd',array('token'=>$token,'parentid'=>$parentid,'dining'=>$isDining))}" class="addList">新增分类</a></p>
+			<volist name="list" id="lyy">
+              <div class="show">
+                    <p class="titleTop">
+                        <span class="titleLeft">{pigcms:$lyy.name}</span>
+                        <span class="date">{pigcms:$lyy.time|date="Y-m-d",###}</span>
+                        <a href="{pigcms::U('Products/catSet',array('token'=>$token,'id'=>$lyy['id'],'dining'=>$isDining))}" class="rFont fontR">修改</a>
+                        <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Product/catDel',array('id'=>$lyy['id'],'token'=>$token,'dining'=>$isDining))}');" class="rFont">删除</a>
+                        <img src="{pigcms::RES}/images/baijiao.gif" class="jiao"/>
+                    </p>				
+                    <div class="tableZ" style="display:none;">			
+                        <table class="biaoBox" cellspacing="1">
+                            <tr>                
+                                <td class="thirdTd">分类名称</td>
+                                <td class="thirdTd">时间</td>
+                                <td class="sixTd">操作</td>
+                            </tr>
+								<volist name="lyy[ 'son' ]" id="l">
+                            <tr>
+                                <td class="thirdTd">{pigcms:$l.name}</td>
+                                <td class="forthTd">{pigcms:$l.time|date="Y-m-d",###}</td>
+                                <td class="sixTd"><a href="{pigcms::U('Products/catSet',array('token'=>$token,'id'=>$l['id'],'dining'=>$isDining))}" target="_blank" class="edit">编辑</a><a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Product/catDel',array('id'=>$hostlist['id'],'token'=>$token,'dining'=>$isDining))}');" target="_blank" class="cancel">删除</a></td>
+                            </tr> 
+							</volist>
+							</table>							
+                     </div>					
+                 </div>
+				</volist>		
+		    </form>	  -->                  	
+                    </div> <input type="hidden" id="token" value="{pigcms:$token}"/>           
+                    </div>
+            	</div>
+            	</div>
+
+            </div> 
+  <script src="{pigcms::RES}/js/static1012.js"></script>
+    <script type="text/javascript">
+	var $l=function(id){return document.getElementById(id);};
+	var _party={
+	   _manage:function(show){
+	   		$( "#save" ).val(0);
+		  if(show){
+			 _system._cover(true);
+			 $l("party_pass").style.position='fixed';
+			 $l("party_pass").style.left=0;
+			 $l("party_pass").style.top=0;
+			$l("cover").style.position='fixed';
+			 $l("cover").style.left=0;
+			 $l("cover").style.top=0;
+			 $l("party_pass").style.display="block";
+			 $l("party_pass").center();
+			 window.onresize=function(){_system._cover(true);$l("party_pass").center();};
+			 $l("cover").onclick=function(){_party._manage();};
+		  }else{location.reload();
+			 _system._cover();
+			 $l("party_pass").style.display="none";
+			 $l("pass_pass").value="";
+		 $l("cover").onclick=null;
+		 window.onresize=null;
+		 //location.reload();
+		  }
+	   },
+	   _p:function(show,id){
+			 if(show){
+			 _system._cover(true);
+			 $l("party_pass").style.position='fixed';
+			 $l("party_pass").style.left=0;
+			 $l("party_pass").style.top=0;
+			$l("cover").style.position='fixed';
+			 $l("cover").style.left=0;
+			 $l("cover").style.top=0;
+			 $l("party_pass").style.display="block";
+			 $l("party_pass").center();
+			 window.onresize=function(){_system._cover(true);$l("party_pass").center();};
+			 $l("cover").onclick=function(){_party._manage();};
+						edit( id );
+		  }else{ location.reload();
+			 _system._cover();
+			 $l("party_pass").style.display="none";
+			 $l("pass_pass").value="";
+		 $l("cover").onclick=null;
+		 window.onresize=null;
+		  }
+	   }
+	};
+	function edit( id ){
+				var token = $( "#token" ).val();
+				$.ajax({
+					type: "POST",
+					url: "/index.php?g=User&m=Product&a=edit",
+					data: "id="+id+"&token="+token,
+					success: function(msg){
+						$('#color').focus();
+        	$('#color').blur();
+							  var myObject = eval('(' + msg + ')');
+									$( '#catid' ).val( myObject.id );
+									$( "#name" ).val( myObject.name );
+									$( "#Ename" ).val( myObject.Ename );
+									$( "#color" ).val( myObject.color );
+									$( "#url" ).val( myObject.logourl );
+									if( myObject.host == 'news' ){
+											$( '#r1' ).attr( "checked",true );
+									}
+									if( myObject.host == 'activ' ){
+											$( '#r2' ).attr( "checked",true );
+									}
+									$( "#save" ).val( myObject.id );
+							}
+						});
+	}
+	var is=false;
+	var is1=false;
+	$('.imgBox').eq(0).blur(function(){
+		if($(this).val()){
+			$(this).next().addClass('hide');
+			is=true;
+		}else{
+			$(this).next().removeClass('hide');
+			is=false;
+		}
+	});
+	$('.imgBox').eq(1).blur(function(){
+		if($(this).val()){
+			$(this).next().addClass('hide');
+			is1=true;
+		}else{
+			$(this).next().removeClass('hide');
+			is1=false;
+		}
+	});
+	/*$('#r1').attr('checked',false);
+	$('#r2').attr('checked',false);
+	$('#r1').click(function(){
+				$(this).attr('checked',!$(this).attr('checked'));
+			})
+	$('#r2').click(function(){
+				$(this).attr('checked',!$(this).attr('checked'));
+			})*/
+	$( "#button1" ).bind( 'click',function(){
+		$(('.imgBox')).blur();
+			if(!is || !is1)
+				return false;
+			var a=$( "#name" ).val();var b=$( "#Ename" ).val();var c=$( "#r1" ).val();var c1=$( "#r2" ).val();var d=$("#color").val();var e=$( "#url" ).val();var catid1 = $( "#r1" ).attr('catid');var catid2 = $( "#r2" ).attr('catid');var token = $( "#token" ).val();
+			var radio = [];
+			var catid=[];
+			if( $( "#r1" ).prop( "checked" ) && $( "#r2" ).prop( "checked" ) ){
+					radio.push(c);
+					radio.push(c1);
+					catid.push(catid1);
+					catid.push(catid2);
+			}else if( $( "#r2" ).prop( "checked" ) ){
+					radio.push(c1);
+					catid.push(catid2);
+			}else if( $( "#r1" ).prop( "checked" ) ){
+					radio.push(c);
+					catid.push(catid1);
+			}
+			var save = $( "#save" ).val();
+					$.ajax({
+					type: "POST",
+					url: "/index.php?g=User&m=Product&a=Insert",
+					data: "name="+a+"&b="+b+"&c="+radio.join(',')+"&d="+d+"&e="+e+"&catid="+catid.join(',')+"&token="+token+"&save="+save,
+					success: function(msg){
+							if( msg ){
+									alert( "添加成功" );
+									location.reload();
+								}else{
+									alert( "添加失败" );	
+								} 
+							}
+						});			
+	} );
+$(function(){
+	$(".111").click(function(){
+		if($(this).attr('id')==$('#1').html()){
+			$('#1').prev().prop('checked',false);
+			$('#2').prev().prop('checked',false);
+			$('#1').prev().prop('checked',true);
+		}
+		else if($(this).attr('id')==$('#2').html()){
+			$('#2').prev().prop('checked',false);
+			$('#1').prev().prop('checked',false);
+			$('#2').prev().prop('checked',true);
+		}
+		else if($(this).attr('id')=='未分类'){
+			$('#1').prev().prop('checked',false);
+			$('#2').prev().prop('checked',false);
+		}else{
+			$('#1').prev().prop('checked',true);
+			$('#2').prev().prop('checked',true);
+		}
+	});
+});
+    $(function(){
+       <?php $url=U('Product/csort',array('token'=>$_GET['token']));?>
+       $('.tbody').sortable({
+           opacity: 0.6,
+           cancel:'.nosort',
+           helper: 'clone' ,
+           revert: true,
+           stop: function( event, ui ) {
+               var arr=[];
+               $('.tbody tr').each(function(index, val) {
+                   var obj={};
+                   obj.id=$(this).attr('ids');
+                   obj.sort=index;
+                   arr.push(obj);
+               });
+               $.ajax({
+                   url: '{pigcms:$url}',
+                   type: 'post',
+                   dateType:'json',
+                   data: {sort:JSON.stringify(arr)},
+                   success:function(data){}
+               });
+           }
+       });
+    });
+</script>      
+ </div>
+<include file="Public:footer"/>

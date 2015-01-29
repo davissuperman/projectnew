@@ -1,0 +1,88 @@
+<?php $nav = "PROMOTE"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Guajiang_sn.css" rel="stylesheet"/>
+ <div class="container main">
+ <div class="row main">
+<include file="Guajiang:left"/>
+     
+    <!--right--begain-->
+             <div class="col-md-10 main">
+              <ol class="breadcrumb">
+              <li><a href="{pigcms::U( 'Guajiang/index',array( 'token'=>$token ))}">刮刮乐</a></li>
+              <li><a href="{pigcms::U( 'Guajiang/index',array( 'token'=>$token ))}">刮刮乐</a></li>
+              <li class="active">刮刮卡SN码发放管理</li>
+            </ol>
+            	<!-- <p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+               
+            
+              <p class="artiEdit"><span class="big">刮刮卡SN码发放管理
+</span>  <a href="javascript:history.go(-1);" class="addListX"  >返回</a></p>
+                <p class="artiEdit" style="border:0px;">
+                	<span>本次活动奖品总数:</span>
+                    <span class="um">{pigcms:$datacount}</span><span class="num">个</span>
+                    <span>中奖人数</span>
+                    <span class="um">{pigcms:$recordcount}</span><span class="num">个</span>
+                   
+                    
+                </p> -->
+                <div class="panel panel-success">
+        <div class="panel-heading cfix">
+        <h3 class="panel-title pull-left">刮刮卡SN码发放管理</h3>
+        <span class="small"><span>本次活动奖品总数:</span>
+                    <span class="um">{pigcms:$datacount}</span><span class="num">个</span>
+                    <span>中奖人数</span>
+                    <span class="um">{pigcms:$recordcount}</span><span class="num">个</span></span>
+        </div>
+        <div class="panel-body">
+          <div class="add-button pull-left">
+            <a href="{pigcms::U( 'Guajiang/index',array( 'token'=>$token ))}" class="btn btn-default btn-default btn-sm"/><span class="glyphicon glyphicon-arrow-left"></span> 返回</a>
+          </div>
+               <table class="table table-striped" cellspacing="1">
+                	<tr>
+                    	<th class="firstTd">序号</th>
+                        <th class="secondTd">SN码(中奖号)</th>
+                        <th class="thirdTd">奖项</th>
+                        <th class="sevenTd">是否已发奖品</th>
+                        <th class="firstTd">奖品发送时间</th>
+                        <th class="secondTd">中奖者手机号</th>
+                        <th class="thirdTd">中奖者微信码</th>
+                        <th class="sevenTd">中奖时间</th>
+                        <th class="secondTd">操作</th>
+                    </tr>
+                    <volist name="record" id="record">
+					 <TR>
+						<td class="select">{pigcms:$i}</td>
+						<td>{pigcms:$record.sn}</td>
+						<td>{pigcms:$record.prize}</td>
+						<td>
+              <if condition="$record['sendstutas'] eq 0">否<else/>是</if>
+            </td>
+            <td><if condition="$record['sendtime'] eq 0"> <else/>{pigcms:$record.sendtime|date='Y-m-d H:i:s',###}</if>
+            </td>
+						<td>{pigcms:$record.phone}</td>
+						<td>{pigcms:$record.wecha_name}</td>
+						<td>{pigcms:$record.time|date='Y-m-d H:i:s',###}</td>
+						<td>
+               <if condition="$record['sendstutas'] eq 0"> 
+                 <a href="index.php?g=User&m=Guajiang&a=sendprize&id={pigcms:$record.id}">发奖</a>
+              <else/>
+               <a href="index.php?g=User&m=Guajiang&a=sendnull&id={pigcms:$record.id}">取消发奖</a>
+              </if>
+             
+            </td>
+					</TR>
+				</volist>
+                </table>  
+             
+                 <p class="page">{pigcms:$page}</p>
+                </div>
+                </div>
+                </div>
+            <!--right--end--> 
+            </div>   
+      
+ </div>
+<include file="Public:footer"/>

@@ -1,0 +1,12 @@
+.content{width:1070px;height:1300px;background:#fff;margin:20px auto;border-top:1px #d4d4d4 solid;}
+.left{width:212px;background:#f7f7f7;float:left;}
+.leftList{border-top:1px #ebebeb solid;color:#6a6a6a;background:#fff;}
+.leftList a{color:#6a6a6a;}
+.leftList li ul li{height:39px;line-height:39px;text-align:center;border-bottom:1px #f4f4f4 solid;font-size:12px;cursor:pointer;border-right:1px #ebebeb solid;}
+.leftList li ul li a:hover{color:#ea533f;}
+.leftList li p{height:39px;line-height:39px;padding-left:28px;background:#f7f7f7;border-bottom:1px #ebebeb solid;cursor:pointer;border-right:1px #ebebeb solid;}
+.leftList li p.over{background:url(../img/overBj.gif) no-repeat;border-right:0px;}
+
+.leftList li.first{height:39px;line-height:39px;padding-left:15px;background:#f7f7f7;border-bottom:1px #fff solid;border-right:1px #ebebeb solid;}
+.down{margin:10px;margin-left:0px;float:left;}
+.trang{float:right;margin:15px 15px 0px;}

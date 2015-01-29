@@ -1,0 +1,38 @@
+*{margin:0px;padding:0px;font-family:"微软雅黑";}
+html,body{min-width:320px;font-size:16px;}
+a{text-decoration:none;}
+ul{list-style:none;}
+.clear{clear:both;}
+.fontF{font-family:Arial, Helvetica, sans-serif;}
+.box{margin:0px 12px;}
+.heading{height:45px;line-height:45px;margin:0px -12px;margin-bottom:10px;background:url(../img/bj.gif) repeat-x;background-size:1px 100%;}
+.topList li{float:left;height:45px;width:18%;background:url(../img/liBj.gif) no-repeat right;text-align:center;}
+.topList li:last-child{background:url("")}
+.topList li.second{float:left;height:45px;width:46%;background:url(../img/liBj.gif) no-repeat right;text-align:center;}
+.logo{width:120px;}
+.title{font-size:21px;text-align:center;margin-top:20px;margin-bottom:18px;}
+.per{width:20px;margin-top:11px;margin-right:4px;}
+.car{width:20px;margin-top:11px;}
+
+.backX{width:45px;margin-top:6px;margin-left:10px;}
+.bacLink{float:left;}
+.logoBox{height:45px;text-align:center;position:relative;margin-bottom:18px;}
+.perBox{float:right;}
+.logoFloat{text-align:center;}
+.logoFont{width:100%;position:absolute;}
+.common{background:#d0d0d0;color:#535353;height:45px;line-height:45px;padding:0px 8px;border-radius:5px;margin-bottom:10px;}
+.money{float:left;color:#ff0000;font-family:Arial, Helvetica, sans-serif;margin-top:1px;}
+.time{float:left;font-family:Arial, Helvetica, sans-serif;}
+.leftFont{float:left;}
+.moneyFont{float:left;}
+.special{background:#d0d0d0;color:#535353;height:50px;margin-bottom:10px;padding:9px 8px;border-radius:5px;}
+.speFont{float:left;margin-top:2px;}
+.num{width:70%;height:40px;line-height:25px;float:left;font-family:Arial, Helvetica, sans-serif;}
+.cloze{width:90px;float:left;margin-right:5px;}
+.imgTex{line-height:23px;float:left;color:#535353;}
+.imgBox{margin-bottom:10px;}
+.mm{margin-top:1px;}
+.btn{text-align:center;margin-bottom:10px;}
+.surBtn{width:100%;height:45px;text-align:center;line-height:45px;border:0px;color:#fff;background:-o-linear-gradient(90deg,#58c400 0%,#58c400 100%);background:-moz-linear-gradient(90deg,#58c400 0%,#58c400 100%);background:-webkit-linear-gradient(90deg,#58c400 0%,#58c400 100%);background:linear-gradient(0deg,#58c400 0%,#58c400 100%);border-radius:5px;font-size:16px;}
+.celBtn{width:100%;height:45px;text-align:center;line-height:45px;border:0px;color:#fff;background:-o-linear-gradient(90deg,#a3a3a3 0%,#a3a3a3 100%);background:-moz-linear-gradient(90deg,#a3a3a3 0%,#a3a3a3 100%);background:-webkit-linear-gradient(90deg,#a3a3a3 0%,#a3a3a3 100%);background:linear-gradient(0deg,#a3a3a3 0%,#a3a3a3 100%);border-radius:5px;font-size:16px;}
+.foot{text-align:center;line-height:25px;font-size:12px;color:#a0a0a0;}

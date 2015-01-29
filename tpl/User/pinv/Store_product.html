@@ -1,0 +1,68 @@
+<?php $nav = "FUNCTION"; $side = "CATEGORY"; $sideTop = "PRODUCT"; ?>
+<include file="Public:head"/>
+<div class="container main">
+    <div class="row">
+        <include file="Store:left"/>
+        <div class="col-md-10 main">
+            <ol class="breadcrumb">
+                <li><a href="{pigcms::U('Store/index',array('token'=>$token))}">微商城</a></li>
+                <li><a href="{pigcms::U('Store/index',array('token'=>$token))}">商城管理</a></li>
+                <li class="active">商品管理</li>
+            </ol>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">商品管理</h3>
+                </div>
+                <form method="post" action="" id="info">
+                <div class="panel-body">			
+                 
+ 
+                        <if condition="$catid neq 0">
+                            <div class="pull-right add-button">
+                                <a href="{pigcms::U('Store/addNew', array('token' => $token, 'catid' => $catid))}" title="添加" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> 添加商品</a><!-- <a href="{pigcms::U('Alipay_config/index',array('token'=>$token))}"  class="btn btn-success btn-sm"  style="margin-left:10px;"><span class="glyphicon glyphicon-wrench"></span> 支付宝配置</a> -->
+                            </div>
+                            <div class="clearfix"></div>
+                        </if>
+                        
+                            
+                                <input name="delall" type="hidden" value="">
+                                <input name="wxid" type="hidden" value="">
+                                <table class="table table-striped" border="0" cellspacing="0" cellpadding="0">
+                                    <thead>
+                                        <tr>
+                                          
+                                            <th width="270">商品名称</th>
+                                            <th width="60">价格</th>
+                                            <th width="60">会员价</th>
+                                            <th width="100">关键词</th>
+                                            
+                                            <th width="80" class="norightborder">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr></tr>
+                                    <volist name="list" id="hostlist"> 
+                                        <tr>
+                                            
+                                            <td class="">{pigcms:$hostlist.name}</td>
+                                            <td>{pigcms:$hostlist.price}元</td>
+                                            <td>{pigcms:$hostlist.vprice}元</td>
+                                            <td>{pigcms:$hostlist.keyword}</td>
+                                          
+                                            <td class="norightborder">
+                                                <a href="{pigcms::U('Store/addNew',array('id' => $hostlist['id'], 'token' => $token,'catid' => $catid))}">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Store/del',array('id'=>$hostlist['id'],'token'=>$token,'catid'=>$catid))}');">删除</a>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                    </tbody>
+                                </table>
+                            
+                         
+                           <div class="pages" style="text-align:right" >{pigcms:$page}</div>
+                    </div>
+                   
+                
+                </form>
+                </div></div></div></div></div>
+<include file="Public:footer"/>

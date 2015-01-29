@@ -1,0 +1,85 @@
+<?php $nav = "EWM"; $side = "ERWM" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_index.css" rel="stylesheet"/>
+
+<script src="./tpl/User/pinv/common/js/date/WdatePicker.js"></script>
+
+<style>
+    .cateimg {
+        position: relative;
+         
+    }
+    .cateimg .smallImg {
+        width: 50px;
+    }
+    .cateimg .bigImg {
+        position: absolute;
+        left: 51px;
+        top: 0px;
+        display: none;
+        width: 320px;
+    }
+	#date-calendar input {
+float: left;
+}
+</style>
+<div class="container main">
+<div class="row">
+<include file="Code:left"/>
+
+        <div class="col-md-10 main">
+           
+           	 <ol class="breadcrumb">
+			  <li class="active">二维码管理</li>
+			</ol>
+			
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">二维码管理</h3>
+				</div>
+			  
+			   <div class="add-button pull-right">
+							   
+            		<a href="{pigcms::U('Code/hd',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> 活动类二维码编辑</a>
+					<a href="{pigcms::U('Code/cp',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> 产品类二维码编辑</a>
+					<a href="{pigcms::U('Code/zdy',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> 自定义设置</a>
+            	</div>
+            	<div style="clear:both"></div>
+
+            <table class="table table-striped" cellspacing="1">
+                 <tr>                      
+                        <th class="secondTd">标题</th>
+                        <th class="thirdTd">阅读次数</th>
+						<th class="thirdTd">用户手机号</th>
+                    
+                        <th class="thirdTd">分享次数</th>
+                        <!--<th class="sevenTd">分享次数</th>-->
+                      <th class="thirdTd">发起人</th>
+                        <th class="thirdTd">发起时间</th>
+                        <th  class="forthTd" >操作</th>
+                    </tr>
+                    <volist name="list" id="item">
+
+						<tr>
+					  
+							<td>{pigcms:$item.subject}</td>
+							<td>{pigcms:$item.reviews}</td>
+							<td>{pigcms:$item.wxuserphone}</td>
+						 
+							<td>{pigcms:$item.shares}</td>
+						 	<!--<td>{pigcms:$item.shares}</td>-->
+						 <td>{pigcms:$item.username}</td>
+							<td >{pigcms:$item.adate|date="m-d H:i:s",###}</td>
+							<td>
+						<a href="{pigcms::U('Vote/tpxxlist',array('id'=>$item['vid'],'token'=>$token))}">选项列表</a>&nbsp;&nbsp;<a href="{pigcms::U('Vote/pllist',array('id'=>$item['vid'],'token'=>$token))}">评论列表</a>&nbsp;&nbsp;<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Vote/voteDele',array('id'=>$item['vid'],'token'=>$token))}');">删除</a>&nbsp;&nbsp;<a href="{pigcms::U('Vote/editlist',array('id'=>$item['vid'],'token'=>$token))}">编辑</a></td>
+						</tr>
+                  </volist>
+            </table>
+            <p class="page">{pigcms:$page}</p>
+        </div>
+	</div>
+	</div>
+    </div> 
+
+</div>
+<include file="Public:footer"/>

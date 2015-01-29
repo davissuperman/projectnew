@@ -1,0 +1,50 @@
+*{margin:0px;padding:0px;}
+body,html{overflow-x:hidden;font-family:Arial, Helvetica, sans-serif;background:#f0f0f0;font-size:14px;}
+ul{list-style:none;}
+a{text-decoration:none;}
+.box{min-width:301px;height:auto;margin:15px 10px 0px 10px;}
+.title{height:20px;line-height:20px;font-size:20px;}
+.time{height:30px;line-height:30px;margin-top:10px;}
+.title img{float:right;margin-right:20px;}
+.time span{float:left;margin-right:15px;}
+.caseBox{margin-top:15px;border:1px #dcdcdc solid;background:#fff;padding:5px;}
+.addBox{height:20px;line-height:20px;color:#8d8d8d;font-weight:bold;margin-top:15px;}
+.addBox span{float:right;margin-left:15px;}
+.perNum{height:25px;line-height:25px;color:#434343;font-weight:bold;margin-top:15px;}
+.look{float:right;height:20px;line-height:20px;color:#434343;background:#dfe0df;border:1px #b0b0b0 solid;border-radius:5px;}
+.nowBox{height:40px;margin-top:15px;}
+.now{width:96%;height:35px;line-height:35px;color:#5a5a5a;font-weight:bold;border:1px #dcdcdc solid;border-radius:5px;padding:0px 5px;float:left;color:#434343;}
+.applyBox{height:30px;margin-top:15px;}
+.apply{width:99%;height:30px;line-height:30px;text-align:center;background:#01a038;color:#fff;border:0px;font-weight:bold;float:left;border:1px #5e6a62 solid;border-radius:3px;}
+.applyX{width:99%;height:30px;line-height:30px;text-align:center;background:#dedfde;color:#434343;border:0px;font-weight:bold;float:left;border:1px #b1b1b1 solid;border-radius:5px;}
+.sendBox{margin-top:15px;height:45px;}
+.send{width:45%;height:45px;line-height:45px;color:#434343;background:#dfe2e0;font-weight:bold;float:left;border:1px #b1b1b1 solid;border-radius:5px;float:left;}
+.sendX{width:45%;height:45px;line-height:45px;color:#434343;background:#dfe2e0;font-weight:bold;float:left;border:1px #b1b1b1 solid;border-radius:5px;float:right;}
+.sendImg{float:left;margin-top:10px;margin-left:10px;}
+.sendTex{float:left;margin-left:10px;}
+.share{width:228px;color:#434343;border:0px;background:url(../../../images/activity/img/shareImg.gif) no-repeat;float:left;font-weight:bold;text-indent:20px;}
+.organImg{width:464px;height:52px;text-align:center;line-height:52px;color:#434343;border:0px;font-weight:bold;background:url(../../../images/activity/img/organImg.gif) no-repeat;}
+.bottom{background:#a0a09e;border-top:1px #bfbfbe solid;}
+.bottom img{float:left;}
+.applyTe{color:#082071;}
+.teBox{height:20px;line-height:20px;text-align:center;margin:15px 0px;} 
+.showBox{width:100%;height:1300px;background:#000;position:absolute;z-Index:2;top:0px;left:0px;filter: alpha(opacity=50); /*IE*/
+-moz-opacity: 0.5; /*MOZ , FF*/
+opacity: 0.5; /*CSS3, FF1.5*/position:fixed;}
+.show1{width:75%;height:auto;background:#c9c9c9;position:absolute;top:120px;left:12%;border:1px #5a5a5a solid;position:absolute;z-index:3;}
+.show3{width:75%;height:auto;background:#c9c9c9;position:absolute;top:200px;left:12%;border:1px #5a5a5a solid;position:absolute;z-index:3;}
+.show4{width:67%;text-align:center;background:#333333;position:absolute;top:260px;left:12%;border:3px #5a5a5a solid;position:absolute;z-index:4;color:#fff;font-weight:bold;padding:10px;}
+.show2{width:67%;text-align:center;background:#333333;position:absolute;top:160px;left:12%;border:3px #5a5a5a solid;position:absolute;z-index:4;color:#fff;font-weight:bold;padding:10px;}
+.showTex{height:20px;line-height:20px;color:#161616;margin-top:15px;margin-left:15px;}
+.passWord{width:82%;height:30px;line-height:30px;border:1px #e7e7e7 solid;float:left;color:#3c3c3c;padding-left:10px;margin-left:15px;}
+.passBox{height:30px;margin-top:15px;}
+.putIn{width:40%;height:30px;line-height:30px;border:0px;border:1px #6c6c6c solid;border-radius:5px;color:#fff;text-align:center;margin-right:20px;margin-left:15px;background:url(../../../images/activity/img/preBj.gif) repeat-x;}
+
+.cancel{width:40%;height:30px;line-height:30px;border:0px;border:1px #6c6c6c solid;border-radius:5px;color:#2c2c2c;text-align:center;background:url(../../../images/activity/img/cecelImg.gif) repeat-x;}
+.putBox{height:30px;margin:18px 0px;}
+.nameList{margin-top:5px;border-bottom:1px #dcdcdc solid;}
+.nameList li{height:30px;line-height:30px;border-top:1px #dcdcdc solid;background:#fff;}
+.name{float:left;margin-left:5px;}
+.nameTime{float:right;margin-right:5px;}
+.showPress{width:85px;height:40px;line-height:40px;text-align:center;margin-left:15px;border:0px;float:left;font-size:16px;}
+.showFont{font-size:20px;line-height:35px;color:#fff;font-weight:bold;padding:15px;margin-top:80px;}

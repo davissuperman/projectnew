@@ -1,0 +1,59 @@
+<?php $nav = "FUNCTION"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<div class="container main">
+    <div class="row">
+        <include file="Doing:left"/>
+
+        <div class="col-md-10 main">
+            <div class="panel panel-success">
+                <div class="panel-heading cfix">
+                    <h3 class="panel-title pull-left">申请领奖列表</h3>
+                    <span class="small"> </span>
+                    <div class="search-box pull-right">
+
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div>
+                        <form method="post" action="" id="info">
+                            <div class="add-button pull-right">
+                                <a href="{pigcms::U('Doing/add',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span> 添加游戏</a>
+                            </div>
+                            <div class="clearfix"></div>
+                            <table class="table table-striped" cellspacing="1">
+                                <tr>
+                                    <th class="firstTd">模版号</th>
+                                    <th class="secondTd">联系电话</th>
+                                    <th class="thirdTd">联系姓名</th>                      
+                                    <th class="sevenTd">申请时间 </th>
+                                    <th class="sevenTd">申请时得分</th>
+                                    <th class="sevenTd">申请时排名</th>
+                                    <th class="sevenTd">操作</th>
+                                </tr>
+                                <volist name="info" id="o"> 
+                                    <tr>
+                                        <td>{pigcms:$o.tel}</td>
+                                        <td>{pigcms:$o.phone}</td>
+                                        <td>{pigcms:$o.name}</td>
+                                        <td>{pigcms:$o.createtime|date="Y-m-d H:i",###}</td>
+                                        <td>{pigcms:$o.number}</td>
+                                    <td>{pigcms:$o[order]}</td>
+                                    <td> 备注 结束时排名  </td>
+                                    </tr>
+                                </volist>
+                                <td colspan="9" style="text-align:right">{pigcms:$page}</td>
+                            </table>
+                            <input type="hidden" name="token" value="{pigcms:$_GET['token']}" /></form>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>   
+
+</div>
+<include file="Public:footer"/>

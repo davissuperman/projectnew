@@ -1,0 +1,55 @@
+<?php $nav = "FUNCTION"; $side = "CATEGORY" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Product_index.css" rel="stylesheet"/>
+<div class="container main">
+<div class="row">
+<include file="Product:left"/>
+   
+             <div class="col-md-10 main">
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">商城分类管理</h3>
+				<div class="search-box pull-right">
+					 <form method="post" action="" class="souCase">
+                     <input type="hidden" name="ac" value="hotels-list">
+                     <input type="submit" value="搜索" class="btn btn-default btn-xs pull-right"/>
+                     <input type="text" placeholder="输入关键词搜索" class="search-text"/>
+	             	</form>
+	             </div>
+			  </div>
+			  <div class="panel-body">
+			  	<div class="add-button pull-right">
+            		<a href="{pigcms::U('Product/catAdd',array('token'=>$token,'parentid'=>$parentid,'dining'=>$isDining))}"  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> 添加分类</a>
+            	</div>
+                	<form method="post" action="" id="info">
+                        <table class="table table-striped" cellspacing="1">
+                            <tr>
+                                <th class="firstTd">名称</th>
+                                <th class="secondTd">分类名称</th>
+                                <th class="thirdTd">简介</th>
+                                <th class="forthTd">创建时间</th>
+                                <th class="">操作</th>
+                            </tr>
+                         <volist name="list" id="hostlist"> 
+                            <tr>
+                                <td class="firstTd">{pigcms:$i}</td>
+                                <td class="secondTd">{pigcms:$hostlist.name}</td>
+                                <td class="thirdTd">{pigcms:$hostlist.des}</td>
+                                <td class="forthTd">{pigcms:$hostlist.time|date="Y-m-d H:i:s",###}</td>
+                                <td class="">
+                                <a href="{pigcms::U('Product/catSet',array('token'=>$token,'id'=>$hostlist['id'],'dining'=>$isDining))}"><span class="glyphicon glyphicon-edit"></span></a>
+                                <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Product/catDel',array('id'=>$hostlist['id'],'token'=>$token,'dining'=>$isDining))}');"><span class="glyphicon glyphicon-trash danger"></span></a></td>
+                            </tr>
+                         </volist>  
+                        </table> 
+                         <p class="page">{pigcms:$page}</p>
+                    </div>
+         </form>
+                     
+            	</div>
+               
+            </div>
+            </div> 
+      
+ </div>
+<include file="Public:footer"/>

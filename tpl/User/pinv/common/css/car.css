@@ -1,0 +1,44 @@
+.car_form{
+	background-color: #fcfcfc;
+	padding: 20px;
+	border: 1px solid #EEEEEE;
+	border-top: 0;
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+.userinfoArea th {
+	text-align: right;
+	width: 145px;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 1.5;
+	padding: 8px 5px;
+	vertical-align: top;
+}
+.px, .pt, .ps, select {
+	background: url(../img/px.png) repeat-x scroll 0 0 #FFFFFF;
+	border-color: #848484 #E0E0E0 #E0E0E0 #848484;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 2px 2px 2px 2px;
+}
+.userinfoArea td {
+	margin-left: 10px;
+	padding: 8px 0;
+	color: #666;
+	font-size: 12px;
+}
+.box{
+	min-height: 590px!important;
+}
+.input-tip{
+	color:#f00;
+	display: inline-block;
+}
+.input-title{
+	width:360px;
+}
+.col-xs-6{
+	width:500px;
+	float: left;
+}

@@ -1,0 +1,518 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title> {pigcms::C('site_title')} {pigcms::C('site_name')}</title>
+<link type="text/css" href="{pigcms::RES}/css/top.css" rel="stylesheet"/>
+<link type="text/css" href="{pigcms::RES}/css/left.css" rel="stylesheet"/>
+<link type="text/css" href="{pigcms::RES}/css/styleli.css" rel="stylesheet"/>
+<link type="text/css" href="./tpl/static/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+<link type="text/css" href="./tpl/static/bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
+ <!--[if lt IE 9]>
+  <script src="{pigcms::RES}/js/html5shiv.js"></script>
+  <script src="{pigcms::RES}/js/respond.min.js"></script>
+<![endif]--> 
+<script type="text/javascript" src="{pigcms::RES}/js/common.js"></script>
+<script type="text/javascript" src="./tpl/static/bootstrap/js/bootstrap.js"></script>
+<script>var SITEURL='{pigcms::RES}';</script>
+<script type="text/javascript" src="{pigcms::RES}/js/myJs.js"></script>
+</head>
+<body>
+ <header class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <div class="container" style="width: 1100px">
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<div class="navbar-header">
+		<ul class="nav navbar-nav">
+		<li><img src="{pigcms::RES}/img/logo.gif" style="margin-top: 8px"/></li>
+		<li><a href="#" style="color:#FFF; cursor:default">pinv.cc</a></li>
+		</ul>
+	</div>
+
+	<!-- Collect the nav links, forms, and other content for toggling -->
+	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	  <ul class="nav navbar-nav navbar-right">
+		<if condition="$_SESSION[uid]==false">
+			<li><a href="{pigcms::U('Index/login')}">登录</a></li>
+			<li><a href="{pigcms::U('Index/login')}">注册</a></li>
+		<else/>
+			<li><a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}" style="color:#FFF">您好, <span style="color:#FFF">{pigcms:$wecha.wxname}</span></a></li>
+			<li><a href="{pigcms::U( 'Updatepsd/index',array( 'token'=>$token ) )}"><span class="glyphicon glyphicon-user"></span> 修改密码</a></li>
+			<li><a href="{pigcms::U('User/Index/edit',array('token'=>$token))}"><span class="glyphicon glyphicon-cog"></span> 接口配置</a></li>
+			<li><a href="{pigcms::U('User/Index/help',array('token'=>$token))}"><span class="glyphicon glyphicon-question-sign"></span> 帮助</a></li>
+			<li><a href="{pigcms::U('System/Admin/logout',array('token'=>$token))}"><span class="glyphicon glyphicon-log-out"></span> 退出</a></li>
+		</if>
+	  </ul>
+	</div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</header>
+				
+	<div class="box">
+	
+<div id="header-wrapper">
+<nav class="navbar navbar-default cfix" role="navigation" id="">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li <?php if($nav == "BASIC") echo 'class="active"';?> ><a href="{pigcms::U('Areply/index?mark=1',array('token'=>$token))}"><span class="glyphicon glyphicon-info-sign"></span> 基础设置</a></li>
+        <li <?php if($nav == "DIYMEN") echo 'class="active"';?> ><a href="{pigcms::U('Diymen/index',array('token'=>$token))}"><span class="glyphicon glyphicon-list"></span> 自定义菜单</a></li>
+        <li <?php if($nav == "HOME") echo 'class="active"';?> ><a href="{pigcms::U('Home/set?mark=2',array('token'=>$token))}"><span class="glyphicon glyphicon-globe"></span> 微官网</a></li>
+        <li <?php if($nav == "MEMBER") echo 'class="active"';?> ><a href="{pigcms::U('Member_card/replyInfoSet',array('token'=>$token))}"><span class="glyphicon glyphicon-credit-card"></span> 会员卡</a></li>
+        <li <?php if($nav == "FUNCTION") echo 'class="active"';?>><a href="{pigcms::U('Module/functionList',array('token'=>$token))}"><span class="glyphicon glyphicon-stop"></span> 功能模块</a></li>
+        <li <?php if($nav == "BUSINESS") echo 'class="active"';?>><a href="{pigcms::U('Module/businessList',array('token'=>$token))}"><span class="glyphicon glyphicon-lock"></span> 行业应用</a></li>
+        <li <?php if($nav == "PROMOTE") echo 'class="active"';?>><a href="{pigcms::U('Module/promoteList',array('token'=>$token))}"><span class="glyphicon glyphicon-flag"></span> 推广活动</a></li>
+        <li <?php if($nav == "STATS") echo 'class="active"';?>><a href="{pigcms::U('Requerydata/index',array('token'=>$token))}"><span class="glyphicon glyphicon-stats"></span> 统计分析</a></li>
+        <li <?php if($nav == "CRM") echo 'class="active"';?>><a href="{pigcms::U('Chat/index',array('token'=>$token))}"><span class="glyphicon glyphicon-stats"></span> CRM</a></li>        
+      </ul>
+    </div>
+  </div>
+</nav>
+</div>
+<link href="{pigcms::RES}/css/docs.min.css" rel="stylesheet">
+<link href="{pigcms::RES}/css/tu.css" rel="stylesheet">
+<script src="{pigcms::RES}/js/jquery.min.js"></script> 
+<script src="{pigcms::RES}/js/bootstrap.js"></script> 
+<script src="{pigcms::RES}/js/docs.min.js"></script>
+<script src="{pigcms::RES}/js/jquery.min.js"></script> 
+ <div class="container bs-docs-container" id="content" style="width:1112px;margin:0px auto;">
+  <div class="row">
+    <div class="col-md-9" role="main" > 
+	  <!--首页--begain-->
+      <div class="bs-docs-section">
+      		<h1 id="Index" class="page-header">首页</h1>	
+            <p class="sameP"><span class="boldFont">有效期：</span>套餐到期的时间，套餐结束后品微平台将暂停服务，续费后服务恢复。</p>
+            <p class="sameP"><span class="boldFont">文本请求数：</span>是指粉丝输入关键词通过公众号发起一次文本请求互动的次数。</p>
+            <p class="sameP"><span class="boldFont">图文请求数：</span>是指粉丝输入关键词通过公众号发起一次图文请求互动的次数。</p>
+            <p class="sameP"><span class="boldFont">图文使用数：</span>是指回复设置里面关键词回复里定义图文回复的条数。</p>
+            <p class="sameP"><span class="boldFont">活动创建数：</span>是指各种推广活动的综合创建次数。</p>
+            <p class="sameP"><span class="boldFont">功能请求数：</span>请求是指粉丝输入关键词或者位置，通过公众号发起推广活动互动的次数。</p>
+            <p class="sameP"><span class="boldFont">空间：</span>是指套餐内品微平台提供的信息储存空间。</p>
+            <p><img src="{pigcms::RES}/images/help/index.png" class="indexTu bian"/></p>
+      </div>
+      <!--首页--end-->
+      <!--基础设置--begain-->
+      <div class="bs-docs-section">
+        <h1 id="panels" class="page-header">基础设置</h1>
+        <h3 id="panels-basic">关注时回复</h3>
+        <P class="sameP" style="height:45px;">关注时回复指粉丝关注微信公众号后推送的第一条信息，可以是文本，也可以是图文，如果需要图文回复，点击切换到图文模式。</P>
+        <p><img src="{pigcms::RES}/images/help/guanhui.png" class="indexTu bian"/></p>
+        <p class="sameP" style="height:40px;">关注时自动回复内容指粉丝关注微信公众号后推送的第一条信息，可以是文本，也可以是图文，如果需要图文回复，点击切换到图文模式。</p>
+        <p><img src="{pigcms::RES}/images/help/huix.png" class="indexTu bian"/></p>
+        <p class="sameP" style="height:45px;">注：如果想关注时默认进到微网站，可以不填写图文内容，然后在图文外链地址里面填写微官网首页地址，微官网首页地址在微官网设置里可以看见。</p>
+        <p><img src="{pigcms::RES}/images/help/wailian.png" class="indexTu bian"/></p>
+        <h3 id="panels-heading">文本回复</h3>
+        <p class="sameP">文本回复指添加关键后回复的内容是文本。点击“新增文本回复”按钮</p>
+        <p><img src="{pigcms::RES}/images/help/wen1.png" class="indexTu bian"/></p>
+        <p class="sameP">如上示例：定义了关键词你好，当用户在公众号发送“你好”的时候，将会回复“哈哈”</p>
+        <p class="sameP">如果想定义多个关键词用空格隔开，如：你好 在吗 哈哈</p>
+        <p class="sameP">匹配类型分完全匹配和包含匹配，考虑到包括匹配出现的情况太多，目前只支持完全匹配</p>
+        
+        <h3 id="panels-alternatives">图文回复</h3>
+        <p class="sameP">点击“新增图文回复”按钮进入图文编辑页面</p>
+        <p><img src="{pigcms::RES}/images/help/tu1.png" class="indexTu bian"/></p>
+        <p class="sameP">填写触发关键词，图文标题、图文简介，上传图文封面。</p>
+        <p><img src="{pigcms::RES}/images/help/tu2.png" class="indexTu bian"/></p>
+        <p class="sameP">所属类型：是指图片所属分类，默认可以不选择分类，如果需要定义分类，需要在微官网—分类管理，添加对应分类。</p>
+        <p class="sameP">详细页是否显示封面：就是详情的内容页头部是否会将图文的封面显示在顶部。</p>
+        <p class="sameP">图文详细内容：即是添加图文的完整内容。</p>
+        <p>图文外链地址：是指当用户点击图文消息框的时候，不进入对应的图文详情页，而是直接进行已有的网站链接，这个功能可以很好的整合自身的一些资源。如果企业本身有移动3G站，可以直接链到3G站。</p>
+        <p><img src="{pigcms::RES}/images/help/wen2.png" class="indexTu bian"/></p>
+        <p class="sameP">添加完之后点击保存，即完成图文回复创建。</p>
+        <p class="sameP">下面是回复效果展示，我们在品微公众号输入关键词”官网”“黄金原则” “收获黄金”测试一下效果。</p>
+        <p><img src="{pigcms::RES}/images/help/wen3.png" style="width:600px;" class="bian"/></p>
+        <p class="sameP" style="height:45px;">注：图文回复是整个品微平台的素材库，里面定义的内容在微官网里会用到，所在在定义前最好创建好分类，之前在微官网里就可以直接显示。</p>
+        
+        
+        <h3 id="panels-tables">答不上来的回复</h3>
+        <p class="sameP">客户回复的关键词无回答的时候将会触发此回复。点击“答不上来的回复”进入编辑页面。</p>
+        
+        <h3 id="panels-list-group">LBS回复</h3>
+        <p class="sameP">用户点击“公司信息”，添加商家店面的信息，多个店面可添加多条LBS。</p>
+        <p class="sameP">使用方法：</p>
+        <p class="sameP">(1)、 LBS数据：设置商铺的地理位置即可；</p>
+        <p class="sameP">(2)、 填写标题、店面封面、电话、简介、详细页内容。</p>
+        <p><img src="{pigcms::RES}/images/help/L1.png" class="indexTu bian"/></p>
+        <p class="sameP">(3)、批量导入</p>
+        <p class="sameP">多家商铺信息可批量导入，点击“导入分支机构”按钮，进入导入店铺信息页面，下载导入模板（格式为CSV），并完成填写后可批量导入。</p>
+        
+      </div>
+      <!--基础设置--end-->
+      <!--自定义菜单--begain-->
+      <div class="bs-docs-section">
+        <h1 id="menu" class="page-header">自定义菜单</h1>
+        <P class="sameP">自定义菜单是企业微信公众号消息框底部的导航菜单，可以很方便用户进行交互，相当于一个轻量级的APP。</P>
+        <h3 id="menu-shou">授权设置</h3>
+        <P class="sameP" style="height:70px;">目前自定义菜单只对服务号开放，服务号认证需要企业认证，所以如果是订阅号这个功能是用不了的，如果服务号还没有申请自定义菜单，可以点击-高级功能-开发模式，会有一栏会话界面自定义菜单，点击申请就可以了，申请成功后的界面如下：
+将AppId 和AppSecret填写在品微平台授权里。</P>
+		<p><img src="{pigcms::RES}/images/help/shou.png" class="indexTu bian"/></p>
+        <h3 id="menu-cai">菜单设置</h3>
+        <p><img src="{pigcms::RES}/images/help/cai.png" class="indexTu bian"/></p>
+        <p class="sameP">自定义菜单目前限制只能3个一级菜单，5个二级菜单，每一步设置后要回车保存菜单，菜单需要逐步保存。</p>
+      	<P class="sameP">点击菜单对应位置，右侧编辑菜单名称，设置点击事件和触发的关键词。</P>
+        <p class="sameP">主菜单名称就是显示在消息框的一级菜单，可以回复文本或图文，图文信息在素材管理理设置好后，可以选择。</p>
+      	<P class="sameP">添加二级菜单，点击一级菜单后可以创建二级菜单，二级菜单只能同时启用5个。</P>
+      </div>
+      <!--自定义菜单--end-->
+      <!--微官网--begain-->
+      <div class="bs-docs-section">
+        <h1 id="net" class="page-header">微官网</h1>
+        <h3 id="net-stat">微官网回复配置</h3>
+        <P><img src="{pigcms::RES}/images/help/guan1.png" class="indexTu bian"/></P>
+        <p class="sameP" style="height:40px;">使用微官网前首先进行微官网回复配置，设置微官网触发关键词、回复标题、内容介绍、回复图片，微官方网站背景，设置完后点击保存。回复标题、内容介绍、回复图片选项信息只用于图文回复时显示。</p>
+        <h3 id="net-lei">分类管理</h3>
+        <p class="sameP">分类管理是用于显示在首页的菜单栏，点击添加分类。</p>
+        <p><img src="{pigcms::RES}/images/help/guan2.png" class="indexTu bian"/></p>
+        <p>分类名称：用于显示在首页的菜单名称。</p>
+        <p>分类描述：菜单的一句话描述，有些模板会用到，另外列表页简介也会用到。</p>
+        <p>分类图片外链地址：该分类的图标图片的链接地址，图标是在图标模板或菜单导航时显示的，让分类更加直观。</p>
+       	<P>外链网站或活动：填充此项，点击该分类时会自动链接活动网站。</P>
+        <p>排序：菜单显示的先后顺序。</p>
+        <p>是否显示：是否显示在首页菜单，勾选就会显示。</p>
+        <h3 id="net-manage">模板管理</h3>
+        <p class="sameP" style="height:40px;">微官网目前支持首页模板风格、图文详情页模板风格、图文列表页模板风格、颜色风格。多达几十种模板可以随意任意组合，快速打造超强超炫的微官网。</p>
+     	<p class="sameP">直接选择喜欢的模板风格，勾选就可以了，然后打开手机端即可预览效果。</p>
+        <P><img src="{pigcms::RES}/images/help/guan4.png" class="bian"/></P>
+        <h3 id="net-num">一键拨号与导航</h3>
+        <P class="sameP" style="height:40px;">快捷菜单是首页左下角小圆快捷交互功能，企业通过设定一些常用快捷，如电话、导航、首页、在线咨询等快捷工具，可以很好的方便用户与企业进行在线沟通。</P>
+        <P class="sameP">点击新增快捷菜单，填写快捷名称，显示顺序，是否显示，对应图标，以及回复类型即可完成快捷菜单的创建。</P>
+        <p class="sameP" style="height:45px;">颜色与版权：快捷导航按钮显示的颜色，默认是红色，可以按需要修改。版权是页面底部显示的版权，默认是显示公众号名称，可以自行修改。</p>
+        <p><img src="{pigcms::RES}/images/help/guan5.png" class="indexTu bian"/></p>
+        <h3 id="net-play">首页幻灯片</h3>
+        <p>为了加大微官网的视觉效果，微官网支持首页幻灯片，点击首页幻灯片-添加幻灯片，输入幻灯片名称、幻灯片显示顺序、上传幻灯片图片、外链网站，点击保存即完成幻灯片添加工作。</p>
+     	<P><img src="{pigcms::RES}/images/help/guan6.png" class="indexTu bian"/></P>
+      </div>
+      <!--微官网--end-->
+      <!--会员卡--begain-->
+      <div class="bs-docs-section">
+        <h1 id="card" class="page-header" id="card">会员卡</h1>
+        <P class="sameP" style="height:40px;">微会员——移动时代的社会化会员管理平台。微信会员卡通过在微信内植入会员卡，基于全国6亿微信用户，帮助企业建立集品牌推广、会员管理、营销活动、统计报表于一体的微信会员管理平台。</P>
+        <P class="sameP">清晰记录企业用户的消费行为并进行数据分析；还可根据用户特征进行精细分类，从而实现各种模式的精准营销。</P>
+        <h3 id="card-basic">会员卡设置</h3>
+        <P><img src="{pigcms::RES}/images/help/hui1.png" class="indexTu bian"/></P>
+        <P class="sameP">品微强大的会员卡自定义功能，极大的方便了商家进行会员卡设计。</P>
+        <P class="sameP">填写会员卡名称，会显示在会员卡左上角，不填将不显示。</P>
+        <P class="sameP">会员卡名称颜色可以根据会员卡背景不同进行设置。</P>
+        <P class="sameP">会员卡背景可以调用品微系统后台模板，目前品微支持23种会员卡模板，供商家调用。</P>
+        <P class="sameP">如果商家对微盟提供的模板不满意，可以上传自己设计的背景，注意尺寸尽量为534*318。</P>
+        <P class="sameP">填写图文消息封面，用来在关键词出发时显示。</P>
+        <P class="sameP">会员卡图标：即商家LOGO，注意尺寸，且是透明的PNG或者GIF图片。</P>
+        <P class="sameP">卡号文字颜色，根据会员卡背景设置会员卡号颜色。</P>
+        <P class="sameP">首页提示文字：即首页图文消息封面简介。</P>
+        <P class="sameP">以上都设置好，点击提交，整个会员卡页面设计完成。</P>
+        <h3 id="card-open">在线开卡</h3>
+        <P class="sameP">即创建会员卡号。此会员卡号,会员领取一张，这里将会少一张，当全部被领取完了，请再次开卡。</P>
+        <P class="sameP">第一步：点击操作中“在线开卡”</P>
+        <P><img src="{pigcms::RES}/images/help/hui2.png" class="indexTu bian"/></P>
+        <P class="sameP">第二步：进入编辑页面，点击“创建会员卡号”按钮</P>
+        <P><img src="{pigcms::RES}/images/help/hui3.png" class="indexTu bian"/></P>
+        <P class="sameP">第三步：设置会员卡卡前编号及生成范围</P>
+        <P><img src="{pigcms::RES}/images/help/hui4.png" class="indexTu bian"/></P>
+        <h3 id="card-set">积分设置</h3>
+        <P><img src="{pigcms::RES}/images/help/hui5.png" class="indexTu bian"/></P>
+        <P class="sameP" style="height:40px;">使用方法：进入积分设置界面，商家进行会员卡使用说明和积分规则说明的设置，并且商家根据自己的需求设置相应的奖励积分，点击保存。</P>
+        <h3 id="card-news">通知管理</h3>
+        <P><img src="{pigcms::RES}/images/help/hui6.png" class="indexTu bian"/></P>
+        <P class="sameP" style="height:40px;">使用方法：进入通知管理界面，点击“会员卡通知添加”按钮，编辑通知标题，并且可以添加图文详细页内容，点击保存即可。</P>
+        <h3 id="card-special">特权管理</h3>
+        <P><img src="{pigcms::RES}/images/help/hui7.png" class="indexTu bian"/></P>
+        <P class="sameP">特权名称即是特权标题。</P>
+        <P class="sameP">有效期：是会员特权有效期。填好后创建特权。</P>
+        <P class="sameP">特权的状态分三种：未开始、进行中、已结束、只有在进行中的特权才会显示在会员卡首页。</P>
+        <P class="sameP">备注：进行中或已经结束的特权不可以修改！</P>
+        <h3 id="card-favor">优惠劵管理</h3>
+        <P><img src="{pigcms::RES}/images/help/hui8.png" class="indexTu bian"/></P>
+        <P class="sameP" style="height:40px;">使用方法：进入优惠券管理界面，点击“发布优惠券”按钮，编辑优惠券名称、设置有效期、选择类型、设置每位用户可以获得优惠券数量、编辑使用说明、点击保存。</P>
+        <h3 id="card-gift">礼品劵管理</h3>
+        <P class="sameP">即发布礼品劵兑换礼品信息</P>
+        <P><img src="{pigcms::RES}/images/help/hui9.png" class="indexTu bian"/></P>
+        <P class="sameP" style="height:40px;">使用方法：进入礼品券管理界面，点击“发布礼品券”，设置礼品名称、兑换礼品所需积分、有效期、编辑使用说明，点击保存。</P>
+        <h3 id="card-person">会员管理</h3>
+        <P><img src="{pigcms::RES}/images/help/hui10.png" class="indexTu bian"/></P>
+        <P><img src="{pigcms::RES}/images/help/hui11.png" class="indexTu bian"/></P>
+        <P>使用方法：用户在手机端领取会员卡之后，会在后台显示会员记录，商家可以在会员卡领取记录里面，设置消费金额、查看统计消费记录、编辑会员信息的功能。</P>
+        <h3 id="card-people">店员管理</h3>
+        <P>即为商铺添加店员。</P>
+        <P><img src="{pigcms::RES}/images/help/hui12.png" class="indexTu bian"/></P>
+        <P>使用方法：</P>
+        
+        <p>为店铺添加职员，便于区分店铺会员卡的录入及修改职员。点击“添加职员“按钮，为职员设置姓名、用户名、密码、电话及所属店铺，点击保存。</P>
+        <h3 id="card-replay">会员卡回复配置</h3>
+        <P><img src="{pigcms::RES}/images/help/hui13.png" class="indexTu bian"/></P>
+        <P class="sameP">使用方法：</P>
+        <P class="sameP">当用户输入“会员卡“关键词时，将会触发此回复，需填写回复标题、会员内容及图片。</P>
+      </div>
+      <!--会员卡--end-->
+      <!--微团购--begain-->
+      <div class="bs-docs-section">
+        <h1 id="group" class="page-header" id="group">微团购</h1>
+        <h3 id="group-pro">团购产品管理</h3>
+        <P><img src="{pigcms::RES}/images/help/tuan1.png" class="indexTu bian"/></P>
+        <P class="sameP">微团购后台管理分为团购产品管理、团购订单管理及团购回复配置，三个部分。</P>
+        <P><img src="{pigcms::RES}/images/help/tuan2.png" class="indexTu bian"/></P>
+        <P class="sameP">团购产品管理：可以添加、编辑团购活动信息。类别为商城中已有商品分类。</P>
+        <P class="sameP">报名基数：为前台人数显示的保底人数，前台显示的报名人数是实际报名人数加上报名基数。</P>
+        <P class="sameP">截止日期：为截团日期。</P>
+        <P class="sameP">关键词：可以触发活动，Logo地址处本地上传或者外链Logo图片。</P>
+        <P class="sameP">图文详细页：描述团购商品详细信息。</P>
+        <h3 id="group-order">团购订单管理</h3>
+        <P><img src="{pigcms::RES}/images/help/tuan3.png" class="indexTu bian"/></P>
+        <P class="sameP">订单管理可以处理、编辑、删除订单。</P>
+        <P class="sameP">编辑订单填写订单的发货情况和快递信息，处理订单的发货情况。</P>
+        <P class="sameP">选定客户点击“处理订单”，状态将由“处理”和“未处理”互相转换。</P>
+        <h3 id="group-play">团购回复管理</h3>
+        <P><img src="{pigcms::RES}/images/help/tuan4.png" class="indexTu bian"/></P>
+        <P>团购回复配置是触发关键词时前台发出的图文回复，第三方接口为点击该图文将跳转到第三方的网页链接。</P>
+      </div>
+      <!--微团购--end-->
+      <!--微相册--begain-->
+      <div class="bs-docs-section">
+        <h1 class="page-header" id="photo">微相册</h1>
+        <P class="sameP">微相册作为品微平台的一项主打基本功能，为微盟用户提供图片的存储和展示服务，是基于图片兴趣分享的社区型产品。</P>
+        <P class="sameP">在微相册里，您可以方便的创建相册，轻松地发布您需要展示的照片，还可以拓展为商家开展活动的一种展现方式。</P>
+        <h3 id="photo-add">添加相册</h3>
+        <P><img src="{pigcms::RES}/images/help/photo1.png" class="indexTu bian"/></P>
+        <P class="sameP">添加相册：填写相册名称、相册介绍、上传封面图，设置是否显示，保存相册信息，相册就成功创建。</P>
+        <P><img src="{pigcms::RES}/images/help/photo2.png" class="indexTu bian"/></P>
+        <h3 id="photo-tran">上传图片</h3>
+        <P><img src="{pigcms::RES}/images/help/photo3.png" class="bian"/></P>
+        <P>点击“上传图片”，进入图片上传页面。编辑图片名称和图片简单说明，上传符合标准的本地图片或者图片链接，设置图片顺序，就可完成添加和修改图片信息。</P>
+        <P><img src="{pigcms::RES}/images/help/photo4.png" class="indexTu bian"/></P>
+        <h3 id="photo-edit">编辑相册</h3>
+        <P><img src="{pigcms::RES}/images/help/photo5.png" class="bian"/></P>
+        <P class="sameP">点击“编辑”，编辑相册信息，可编辑、修改相册信息。</P>
+        <P><img src="{pigcms::RES}/images/help/photo6.png" class="bian"/></P>
+        <h3 id="photo-remove">删除相册</h3>
+        <P><img src="{pigcms::RES}/images/help/photo7.png" class="bian"/></P>
+        <P class="sameP">点击“删除”，即可删除相册。</P>
+      </div>
+      <!--微相册--end-->
+      <!--360全景--begain-->
+      <div class="bs-docs-section">
+        <h1 class="page-header" id="Panor">360度全景</h1>
+        <P><img src="{pigcms::RES}/images/help/jing1.png" class="indexTu bian"/></P>
+        <P class="sameP">品微平台提供360度全景空间展示功能，适用于房产微信推广和汽车微信推广。</P>
+        <h3 id="Panor-replay">回复设置</h3>
+        <P><img src="{pigcms::RES}/images/help/jing2.png" class="indexTu bian"/></P>
+        <P class="sameP">当微信用户发送“全景”即可出发此图文回复。</P>
+        <P class="sameP">编辑“图文消息标题”、“内容介绍”文字信息；“回复图片”中上传图片作为前端图文展示中的显示图片。</P>
+
+        <P class="sameP">“第三方接口”可直接引用其他3G网站链接。</P>
+        <h3 id="Panor-new">新建360°全景</h3>
+        <P class="sameP">点击“添加360°全景”，设置全景图名称、关键词、顺序数字及背景音乐，最后上传图片。</P>
+        <P><img src="{pigcms::RES}/images/help/jing3.png" class="indexTu bian"/></P>
+        <P class="sameP">注意：360度全景图制作要点：</P>
+        <P class="sameP">（1）硬件配备：数码单反相机、鱼眼镜头、全景云台、三脚架、硬件设备推荐表</P>
+        <P class="sameP">（2）如何制作一个360度全景？</P>
+        <P class="sameP">360全景不是凭空生成的，要制作一个360全景，我们需要有原始的图像素材，原始图像素材的来源可以是:</P>
+        <P class="sameP">A、在现实的场景中，使用相机的全景拍摄功能得到的鱼眼图像</P>
+        <P class="sameP">B、通过建模渲染得到的虚拟图像 </P>
+        <P class="sameP">下文中的表格对比了在不同的设备、拍摄机位、拼合模式、拍摄难度下所能获得到的鱼眼图像：</P>
+        <P><img src="{pigcms::RES}/images/help/jing4.png" class="indexTu bian"/></P>
+        <P class="sameP">C、如何使用图片素材来生成360全景图片？</P>
+        <P class="sameP">您可以使用pano2vr这款专业的全景图片生成软件，也可以将全景图片素材发送给微盟的客服来替您处理。 </P>
+        <P class="sameP">pano2vr下载地址：http://gardengnomesoftware.com/object2vr.php </P>
+        <P class="sameP">pano2vr使用教程：http://gardengnomesoftware.com/tutorial.php?movid=start</P>
+        <P class="sameP">D、上传6张全景图切片</P>
+        <P class="sameP">将pano2vr生成的6张全景图切上传到微房产楼盘户型添加的页面上，您就可以在手机端看到精美大气的微房产全景图片。</P>
+        <h3 id="Panor-edit">操作：修改</h3>
+        <P class="sameP">对已经存在的360度全景选项进行修改。</P>
+        <P><img src="{pigcms::RES}/images/help/jing5.png" class="indexTu bian"/></P>
+        <h3 id="Panor-remove">操作：删除</h3>
+        <P class="sameP">点击“删除”，删除对应360度全景选项。</P>
+      </div>
+      <!--360全景--end-->
+      <!--微调研--begain-->
+      <div class="bs-docs-section">
+        <h1 class="page-header" id="diao">微调研</h1>
+        <h3 id="diao-list">微调研列表</h3>
+        <P><img src="{pigcms::RES}/images/help/diao1.png" class="indexTu bian"/></P>
+        <P class="sameP">点击“添加调研”，新增微调研的基本信息，填写基本信息后保存即可。</P>
+        <P><img src="{pigcms::RES}/images/help/diao2.png" class="indexTu bian"/></P>
+        <P class="sameP">再点击“输入项管理”，进行详情管理：</P>
+        <P><img src="{pigcms::RES}/images/help/diao3.png" class="indexTu bian"/></P>
+        <P class="sameP">进入页面：</P>
+        <P><img src="{pigcms::RES}/images/help/diao4.png" class="indexTu bian"/></P>
+        <P class="sameP">点击“添加输入项”，进入页面：</P>
+        <P><img src="{pigcms::RES}/images/help/diao5.png" class="indexTu bian"/></P>
+        <P class="sameP">显示名称：需要用户填写的个人信息项目，每次仅填写一项（例如：姓名，电话）</P>
+        <P class="sameP">字段名称：输入英文字符字段</P>
+        <P class="sameP">输入类型：一般显示为文本框</P>
+        <P class="sameP">对应前端页面效果展示：</P>
+        <P><img src="{pigcms::RES}/images/help/diao6.png" style="width:200px;" class="bian"/></P>
+        <P class="sameP">点击“添加标题”，填写调研的问题：</P>
+        <P><img src="{pigcms::RES}/images/help/diao7.png" class="indexTu bian"/></P>
+        <P>保存后，页面跳转：</P>
+        <P><img src="{pigcms::RES}/images/help/diao8.png" class="indexTu bian"/></P>
+        <P>再点击“输入项管理”进行选项添加：</P>
+        <P><img src="{pigcms::RES}/images/help/diao9.png" class="indexTu bian"/></P>
+        <P class="sameP">显示名称：添加相应问题的调研选项，此处仅填写一个选项内容</P>
+        <P class="sameP">字段名称：输入英文字符字段</P>
+        <P class="sameP">输入类型：可选择单选或复选</P>
+        <P class="sameP">对应前端页面效果展示：</P>
+        <P><img src="{pigcms::RES}/images/help/diao10.png" style="width:200px;" class="bian"/></P>
+        <P class="sameP">重复以上操作，可以重复添加问题及选项。</P>
+        <P class="sameP">点击对应的查看项和修改项对该标题进行查看或修改：</P>
+        <P><img src="{pigcms::RES}/images/help/diao11.png" class="indexTu bian"/></P>
+        <P><img src="{pigcms::RES}/images/help/diao12.png" class="indexTu bian"/></P>
+        <h3 id="diao-add">添加活动选项</h3>
+        <P><img src="{pigcms::RES}/images/help/diao13.png" class="indexTu bian"/></P>
+        <P class="sameP">选择添加活动的类型，所添加的活动会在问题调研结束后展现，用户可以进行活动互动。</P>
+        <h3 id="diao-end">结束信息添加</h3>
+        <P><img src="{pigcms::RES}/images/help/diao14.png" class="indexTu bian"/></P>
+        <P class="sameP">编辑填写活动结束语，例如：谢谢参与。</P>
+        
+      </div>
+      <!--微调研--end-->
+      <!-- 微宣传--begain -->
+      <div class="bs-docs-section">
+        <h1 id="wells" class="page-header">微宣传</h1>
+        <P class="sameP">填写微信宣传页信息，利于二维码推广，可分享至其他社交平台。</P>
+        <P><img src="{pigcms::RES}/images/help/xuan.png" class="indexTu bian"/></P>
+      </div>
+      <!-- 微宣传--end -->
+      <!-- 微预约--begain -->
+      <div class="bs-docs-section">
+        <h1 id="appoint" class="page-header">微预约</h1>
+        <h3 id="appoint-add">添加预约</h3>
+        <P><img src="{pigcms::RES}/images/help/yu1.png" class="indexTu bian"/></P>
+        <P class="sameP">点击“添加预约”，进行预约详情的填写，图文编辑框里可以填写图文详情：</P>
+        <P><img src="{pigcms::RES}/images/help/yu2.png" class="indexTu bian"/></P>
+        <P class="sameP">添加预约成功后，页面跳转，点击“输入项管理”：</P>
+        <P><img src="{pigcms::RES}/images/help/yu3.png" class="indexTu bian"/></P>
+        <P class="sameP">点击“添加”，添加需要用户填写的信息选项：</P>
+        <P><img src="{pigcms::RES}/images/help/yu4.png" class="indexTu bian"/></P>
+        <P class="sameP">填写的“显示名称”为需要用户填写的信息选项：（例如：姓名、联系方式、地址、预约时间等）</P>
+        <P><img src="{pigcms::RES}/images/help/yu5.png" class="indexTu bian"/></P>
+        <h3 id="appoint-send">提交信息管理</h3>
+        <P class="sameP">点击“提交信息管理”，可以查看并管理预约用户的信息：</P>
+        <P><img src="{pigcms::RES}/images/help/yu6.png" class="indexTu bian"/></P>
+        <P class="sameP">12、【微留言】操作同“微预约”，其中输入项管理可以设置为留言相关信息。</P>
+        <P class="sameP">13、【微报名】操作同“微预约”，其中输入项管理可以设置为报名相关信息</P>
+        <P class="sameP">14、【微商城】待完善。建议放入“行业应用”中。</P>
+        <P class="sameP">15、【微信墙】待完善。</P>
+      </div>
+      <!-- 微预约--end -->
+      <!-- 推广活动--begain -->
+      <div class="bs-docs-section">
+        <h1 id="activ" class="page-header">推广活动</h1>
+        <h3 id="activ-go">大转盘</h3>
+        <P><img src="{pigcms::RES}/images/help/tui1.png" style="width:400px;" class="bian"/></P>
+        <P class="sameP" style="height:40px;">该模块可为商家提供转盘抽奖服务，商家通过设置活动时间，预计参加抽奖人数，相应奖项和触发关键词，由网友在线参与抽奖。</P>
+        <P class="sameP">使用方法：</P>
+        <P class="sameP" style="height:40px;">1、设置抽奖前需要先编辑一条图文消息，提前一天或者当天推送给所有粉丝，告知在某个时间段发某个关键词可以参与抽奖；</P>
+        <P class="sameP" style="height:40px;">2、进入抽奖设置，设定活动的类别，设定活动的预热时间，已经活动的开始和结束时间，设置活动回复关键词“我要抽奖”，确定设置后系统会根据设定的中奖几率产生相应的SN码；</P>
+        <P class="sameP" style="height:40px;">3、活动设定后，在规定时间到时，网友发送关键词如“我要抽奖”，就可以参与三次转盘，中奖后会得到一个SN码，网友到店时向商家出示SN码，商家根据系统产生的SN码进行比对，确认无误后即可兑换奖品。</P>
+        <h3 id="activ-happy">刮刮乐</h3>
+        <P><img src="{pigcms::RES}/images/help/tui2.png" style="width:200px;" class="bian"/></P>
+        <P class="sameP">该模块可为商家提供刮刮卡抽奖服务，全网第一个可以通过微信玩刮刮卡，用户通过手机屏幕进行刮奖的游戏！</P>
+        <P class="sameP">使用方法：</P>
+        <P class="sameP" style="height:40px;">1、设置抽奖前需要先编辑一条图文消息，提前一天或者当天推送给所有粉丝，告知在某个时间段发某个关键词可以参与刮奖；</P>
+        <P class="sameP" style="height:40px;">2、进入抽奖设置，设定活动时间、中奖几率、触发关键词和相应的奖品，确定设置后系统会根据设定的中奖几率产生相应的SN码；</P>
+       	<P class="sameP" style="height:40px;">3、活动设定后，在规定时间到时，网友发送关键词如“我要抽奖”，就会发送给他一张刮刮卡，粉丝通过屏幕进行刮奖，中奖后会得到一个SN码，网友到店时向商家出示SN码，商家根据系统产生的SN码进行比对，确认无误后即可兑换奖品。</P>
+        <h3 id="activ-you">优惠券</h3>
+        <P><img src="{pigcms::RES}/images/help/tui3.png" style="width:400px;" class="bian"/></P>
+        <P class="sameP" style="height:40px;">优惠券是用于微信上与顾客互动的一种营销方式，不仅可以展现自己的产品，更能让顾客在使用此项功能时感受到更多的乐趣。</P>
+      	<P class="sameP">使用方法：</P>
+        <P class="sameP">1、新建优惠券活动；</P>
+        <P class="sameP">2、填写活动开始的内容；</P>
+        <P class="sameP">3、填写活动结束的内容；</P>
+        <P class="sameP" style="height:40px;">4、设置奖项，设定活动时间、中奖几率、触发关键词和相应的奖品，确定设置后系统会根据设定的中奖几率产生相应的SN码，保存活动；</P>
+      	<P class="sameP" style="height:40px;">5、设置活动开始；（点击开始活动后，就不能再修改活动奖项，但可以修改其他活动内容,活动开启会自动生成SN码，也就是兑奖码）</P>
+      	<P class="sameP">6、设置活动结束；（你设置的活动结束时间到了会自动结束活动，你也可以时间没有到直接结束活动）</P>
+      	<P class="sameP" style="height:40px;">7、兑奖，查看活动粉丝中奖详情；（点击SN码管理查看详情）通过设置SN码状态，可以将一等奖先不放出！要内部人员中奖，只要对着公众号，输入：刮奖 SN码 即可！</P>
+      	<P class="sameP">8、删除活动（最好是在最后兑奖时间过了，再删除活动）</P>
+      </div>
+      <!-- 推广活动--end -->
+    </div>
+    <div class="col-md-3" style="font-family:'Helvetica Neue,Helvetica,Arial,sans-serif'">
+      <div class="bs-docs-sidebar hidden-print" role="complementary">
+        <ul class="nav bs-docs-sidenav" id="list" style="margin-top:40px;margin-left:65px;">
+          <li><a href="#Index">首页</a></li>
+          <li><a href="#panels">基础设置</a>
+            <ul class="nav">
+              <li><a href="#panels-basic">关注时回复</a></li>
+              <li><a href="#panels-heading">文本回复</a></li>
+              <li><a href="#panels-alternatives">图文回复</a></li>
+              <li><a href="#panels-tables">答不上来回复</a>
+              <li><a href="#panels-list-group">LBS回复</a>
+            </ul>
+          </li>
+          <li><a href="#menu">自定义菜单</a>
+            <ul class="nav">
+              <li><a href="#menu-shou">授权设置</a></li>
+              <li><a href="#menu-cai">菜单设置</a></li>
+            </ul>
+          </li>
+          <li><a href="#net">微官网</a>
+            <ul class="nav">
+              <li><a href="#net-stat">微官网回复配置</a></li>
+              <li><a href="#net-lei">分类管理</a></li>
+              <li><a href="#net-manage">模板管理</a></li>
+              <li><a href="#net-num">一键拨号与导航</a></li>
+              <li><a href="#net-play">首页幻灯片</a></li>
+            </ul>
+          </li>
+          <li><a href="#card">会员卡</a>
+            <ul class="nav">
+              <li><a href="#card-basic">会员卡设置</a></li>
+              <li><a href="#card-open">在线开卡</a></li>
+              <li><a href="#card-set">积分设置</a></li>
+              <li><a href="#card-news">通知管理</a></li>
+              <li><a href="#card-special">特权管理</a></li>
+              <li><a href="#card-favor">优惠劵管理</a></li>
+              <li><a href="#card-gift">礼品劵管理</a></li>
+              <li><a href="#card-person">会员管理</a></li>
+              <li><a href="#card-people">店员管理</a></li>
+              <li><a href="#card-replay">会员卡回复配置</a></li>
+            </ul>
+          </li>
+          <li><a href="#group">微团购</a>
+            <ul class="nav">
+              <li><a href="#group-pro">团购产品管理</a></li>
+              <li><a href="#group-order">团购订单管理</a></li>
+              <li><a href="#group-play">团购回复管理</a></li>
+            </ul>
+          </li>
+          <li><a href="#photo">微相册</a>
+            <ul class="nav">
+              <li><a href="#photo-add">添加相册</a></li>
+              <li><a href="#photo-tran">上传图片</a></li>
+              <li><a href="#photo-edit">编辑相册</a></li>
+              <li><a href="#photo-remove">删除相册</a></li>
+            </ul>
+          </li>
+          <li><a href="#Panor">360度全景</a>
+            <ul class="nav">
+              <li><a href="#Panor-replay">回复设置</a></li>
+              <li><a href="#Panor-new">新建360°全景</a></li>
+              <li><a href="#Panor-edit">操作：修改</a></li>
+              <li><a href="#Panor-remove">操作：删除</a></li>
+            </ul>
+          </li>
+          <li><a href="#diao">微调研</a>
+            <ul class="nav">
+              <li><a href="#diao-list">微调研列表</a></li>
+              <li><a href="#diao-add">添加活动选项</a></li>
+              <li><a href="#diao-end">结束信息添加</a></li>
+            </ul>
+          </li>
+          <li><a href="#wells">微宣传</a></li>
+          <li><a href="#appoint">微预约</a>
+            <ul class="nav">
+              <li><a href="#appoint-add">添加预约</a></li>
+              <li><a href="#appoint-send">提交信息管理</a></li>
+            </ul>
+          </li>
+          <li><a href="#activ">推广活动</a>
+            <ul class="nav">
+              <li><a href="#activ-go">大转盘</a></li>
+              <li><a href="#activ-happy">刮刮乐</a></li>
+              <li><a href="#activ-you">优惠券</a></li>
+            </ul>
+          </li>
+        </ul>
+        <a class="back-to-top" href="#top" style="margin-left:75px;">回到顶部</a> </div>
+    </div>
+  </div>
+</div>
+<include file="Public:footer"/>

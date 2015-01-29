@@ -1,0 +1,10 @@
+<div class="col-md-2 sidebar">
+<nav id="sidebar-nav">
+	<ul class="nav nav-pills nav-stacked">
+		<li <?php if($side == "CLASSIFY") echo 'class="active"'; ?>><a href="{pigcms::U('Kefu/index?mark=2',array('token'=>$token))}">客服管理</a></li>
+		<li <?php if($side == "TMPLS") echo 'class="active"'; ?>><a href="{pigcms::U('Kefu/ltiaojl?mark=2',array('token'=>$token))}">聊天管理</a></li>
+		
+		<li <?php if($side == "FLASH") echo 'class="active"'; ?>><a href="{pigcms::U('Kefu/fkgl?mark=2',array('token'=>$token))}">访客管理</a></li>
+	</ul>
+</nav>
+</div>

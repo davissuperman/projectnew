@@ -1,0 +1,97 @@
+<?php $nav = "MEMBER"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Member_card_coupon_edit.css" rel="stylesheet"/>
+<link rel="stylesheet" href="./tpl/static/kindeditor/themes/default/default.css" />
+<link rel="stylesheet" href="./tpl/static/kindeditor/plugins/code/prettify.css" />
+<script src="./tpl/static/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="./tpl/static/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="./tpl/static/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+<script>
+    var editor;
+    KindEditor.ready(function(K) {
+    editor = K.create('#info', {
+    resizeType : 1,
+    allowPreviewEmoticons : false,
+    allowImageUpload : false,
+    items : [
+    'source','undo','redo','copy','plainpaste','wordpaste','clearhtml','quickformat','selectall','fullscreen','fontname', 'fontsize','subscript','superscript','indent','outdent','|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline','hr',
+     '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+    'insertunorderedlist', '|', 'emoticons', 'link', 'unlink','baidumap']
+    });
+    });
+</script>
+<style>
+    .ke-statusbar{
+        display: none;
+    }
+</style>
+<div class="container main">
+<div class="row">
+<include file="Member_card:left"/>
+            <div class="col-md-10 main">
+            
+            <ol class="breadcrumb">
+              <li><a href="{pigcms::U( 'Member_card/replyInfoSet',array( 'token'=>$token ))}">会员卡</a></li>
+			  <li><a href="{pigcms::U( 'Member_card/index',array( 'token'=>$token ))}">会员卡管理</a></li>
+			  <li><a href="{pigcms::U( 'Member_card/coupon',array( 'token'=>$token, 'id'=>$cid ))}">{pigcms:$thisCard.cardname} - 优惠券管理</a></li>
+			  <li class="active">添加优惠券</li>
+			</ol>
+			  
+            <div class="panel panel-success">
+              <div class="panel-heading cfix">
+                <h3 class="panel-title" style="float:left; margin-right: 5px">发布优惠券</h3>
+                <span class="small">发布现金抵用券和打折优惠券信息</span>
+              </div>
+              <form method="post" class="form" action="" enctype="multipart/form-data">
+                <div class="panel-body">
+                    <p class="same">
+                        <span class="Tex">券名称：</span>
+                        <input type="text" value="{pigcms:$vip.title}"  name="title"  class="circle"/>
+                    </p>
+                    <div class="keyWord" style="display:none">
+                        <span class="Tex">选择人群：</span>
+                            <label><input name="group" type="radio" id="CheckboxGroup1_0" value="1" checked="checked">所有会员</label>　
+                            <label><input type="radio" name="group" value="2" id="CheckboxGroup1_1" <if  condition="$vip['group'] eq 2">checked="checked"</if>>普通会员</label>　
+                            <label><input type="radio" name="group" value="3" id="CheckboxGroup1_2" <if  condition="$vip['group'] eq 3">checked="checked"</if>>银卡会员</label>
+                            <label><input type="radio" name="group" value="4" id="CheckboxGroup1_3" <if  condition="$vip['group'] eq 4">checked="checked"</if>>金卡会员</label>
+                            <label><input type="radio" name="group" value="5" <if  condition="$vip['group'] eq 5">checked="checked"</if>>钻石会员</label>
+                    </div>
+                    <p class="same">
+                        <span class="Tex">有效期：</span>
+                        <input type="text" class="Scircle" id="statdate" value="{pigcms:$vip.statdate|date='Y-m-d',###}" onClick="WdatePicker()" name="statdate"/>
+                        <span class="arrive">（含）到</span>
+                        <input type="text" class="Scircle"  id="enddate" value="{pigcms:$vip.enddate|date='Y-m-d',###}" name="enddate" onClick="WdatePicker()"/>
+                        <span class="arrive">（含）</span>
+                    </p>
+                    <div class="keyWord">
+                        <span class="Tex">券类型：</span>
+                        <input type="radio" class="rad" name="type" <if  condition="$vip['type'] eq 1">checked="checked"</if> name="type" onclick="document.getElementById('cktime').style.display='none';" value="1" id="RadioGroup1_1"><span class="radTex">打折优惠券</span>
+                       <input name="type" <if  condition="$vip['type'] eq false">checked="checked"</if>  type="radio" id="RadioGroup1_0" onclick="document.getElementById('cktime').style.display='';;" value="0" class="rad"><span class="radTex">现金抵用券</span>
+                    </div>
+                    <p class="same" id="cktime" <if  condition="$vip['type'] neq false">style="display:none"</if>>
+                        <span class="Tex">抵用金额：</span>
+                        <input type="input"  value="{pigcms:$vip.price}" name="price" style="width:50px;" class="Scircle" > 元
+                    </p>
+                    <div style="margin-top:20px;margin-bottom:20px;height:205px;">
+                        <span class="Tex">使用说明：</span>
+                        <div class="detailTex">      
+                            <textarea class="fontBox" id="info"  name="info">{pigcms:$vip.info}</textarea>
+                        </div>
+                    </div>
+                    <p class="same">
+                        <span class="Tex">数量：</span>
+                        <span>每个用户可获得</span>
+                        <input type="text" id="people" value="{pigcms:$vip.people}" name="people"  class="numBox"/>
+                        <span>张券</span>
+                    </p>
+                </div>
+                <div class="panel-footer" style="text-align:right"> 
+                      <input type="submit" value="保存" class="btn btn-success"/>
+                      <a href="javascript:history.go(-1);"  class="btn btn-link">取消</a> 
+                </div>
+              </form>
+            </div>
+        </div>
+ </div>
+<include file="Public:footer"/>

@@ -1,0 +1,209 @@
+<?php $nav = "EWM"; $side = "ERWM" ?>
+<include file="Public:head"/>
+<script src="./tpl/User/pinv/common/js/date1/WdatePicker.js"></script>
+<script>
+    $(function() {
+
+       $('#cpxxid').change(function() {
+
+            var cpxxid = $('#cpxxid').val();
+            var token = $('#token').val();
+
+
+            if (cpxxid == 2) {
+
+                $('#chanpcity').show();
+
+
+            } else {
+                $('#chanpcity').hide();
+            }
+
+
+            $.ajax({
+                url: '{pigcms::U("Code/ajacpxxs")}',
+                data: 'cpxxid=' + cpxxid + '&token=' + token,
+                type: 'post',
+                dataType: 'html',
+                success: function(info) {
+                    //alert(info);return false;
+                    if (info == 2) {
+
+                        alert('没有子类');
+                        return false;
+                    } else {
+
+                        $('#cpcity').html(info);
+
+
+                    }
+                }
+            });
+
+
+        })
+
+        $('#dj').click(function() {
+
+            if ($.trim($('#wxuserphone').val()) == '') {
+
+                alert('名称不能为空');
+                return false;
+            }
+            /*  if ($.trim($('#cpprice').val()) == '') {
+             
+             alert('价格不能为空');
+             return false;
+             }
+             if ($('#cpprice').val() <= '0') {
+             alert('价格不能小于0');
+             return false;
+             }
+             
+             if ($.trim($('#num').val()) == '') {
+             
+             alert('数量不能为空');
+             return false;
+             }
+             if ($('#num').val() <= '0') {
+             alert('数量不能小于0');
+             return false;
+             }*/
+
+
+            if ($.trim($('#cpxxid').val()) == '') {
+
+                alert('渠道不能为空');
+                return false;
+            }
+        })
+
+    })
+</script>
+<div class="container main">
+    <div class="row">
+        <include file="Code:left"/>
+        <div class="col-md-10 main">	
+            <ol class="breadcrumb">
+
+                <li class="active">二维码管理</li>
+            </ol>
+            <div class="panel panel-success">
+                <div class="panel-heading cfix">
+                    <h3 class="panel-title pull-left">二维码管理</h3>
+                </div>			
+                <div class="panel-body">
+
+                    <form class="form-horizontal" method="post" id="form" action="{pigcms::U('Code/cpeditlist')}">
+                        <input type="hidden" value="{pigcms:$npic_twocode_list.token}"  id='token' name='token'/>
+                        <input type="hidden" value="{pigcms:$npic_twocode_list.type}"  id='cptype' name='cptype'/>
+                        <input type="hidden" value="{pigcms:$npic_twocode_list.cid}"  id='cid' name='cid'/>
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label" style='width:105px'>产品名称：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="cpname" id="wxuserphone"  class="form-control" value="{pigcms:$npic_twocode_list.cname}" data-rule-required="true">
+                            </div>
+                        </div>
+                       
+                        
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label" style='width:105px'>URL：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="codeurl" id="name"  class="form-control" value="{pigcms:$npic_twocode_list.curl}" data-rule-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label" style='width:105px'>备注1：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="beizhu1" id="beizhu1" class="form-control" value="{pigcms:$npic_twocode_list.beizhu1}" data-rule-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label" style='width:105px'>备注2：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="beizhu2" id="beizhu2"  class="form-control" value="{pigcms:$npic_twocode_list.beizhu2}" data-rule-required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label" style='width:105px'>开始时间：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="sdate" id="name"  class="form-control" value="{pigcms:$npic_twocode_list.sdate|date='Y-m-d H:i:s',###}" onclick="WdatePicker()">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="title" class="col-sm-2 control-label" style='width:105px'>结束时间：</label>
+                            <div class="col-sm-5">
+                                <input type="text" name="edate" id="name"  class="form-control" value="{pigcms:$npic_twocode_list.edate|date='Y-m-d H:i:s',###}" onclick="WdatePicker()">
+                            </div>
+                        </div>
+
+                        
+                        
+                        <div class="form-group" style="margin-left:35px">
+
+                            <span>渠道：</span>
+                            <select name="cpxxid" style="width:165px;margin-left:22px" id="cpxxid">
+
+                                <option value="">请选择</option>
+                                <volist name='xxlist' id='xvo'>
+                                    <option value="{pigcms:$xvo.xid}" <if condition="$xvo['xid'] eq $npic_twocode_list['qudao']">selected</if>>{pigcms:$xvo.x_name}</option>
+                                </volist>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin-left:35px">
+
+                            <span>类型：</span>
+                            <select name="cpcity" style="width:165px;margin-left:22px" id="cpcity">
+                                <option value="">请选择</option>
+                                <volist name='cpxxcitylist' id='xxcityvo'>
+                                    <option value="{pigcms:$xxcityvo.cid}" <if condition="$xxcityvo['cid'] eq $npic_twocode_list['huodongleixing']">selected</if>>{pigcms:$xxcityvo.c_name}</option>
+                                </volist>
+
+                            </select>
+                        </div>
+                        <if condition="$npic_twocode_list['city'] neq ''">
+                            <div class="" style="margin-left:35px" id='chanpcity'>
+
+                            <span>城市：</span>
+                            <select name="chanpct" style="width:165px;margin-left:22px" id="chanpct" onclick="">
+                                <option value="">请选择</option>
+                                <volist name='xxcity' id='cityvo'>
+                                    <option value="{pigcms:$cityvo.cid}" <if condition="$cityvo['cid'] eq $npic_twocode_list['city']">selected</if>>{pigcms:$cityvo.c_name}</option>
+                                </volist>
+
+                            </select>
+                        </div>
+                            <else/>
+                            
+                            <div class="" style="display:none;margin-left:35px" id='chanpcity'>
+
+                            <span>城市：</span>
+                            <select name="chanpct" style="width:165px;margin-left:22px" id="chanpct" onclick="">
+                                <option value="">请选择</option>
+                                <volist name='xxcity' id='xxvo'>
+                                    <option value="{pigcms:$xxvo.cid}">{pigcms:$xxvo.c_name}</option>
+                                </volist>
+
+                            </select>
+                        </div>
+                        </if>
+                        
+
+
+
+
+
+                </div>			
+                <div class="panel-footer" style="text-align:right"> 
+                    <input type="submit" value="保存" id="dj" class="btn btn-success"/>
+                    <!-- <input type="reset" value="取消"  class="btn btn-success"/>-->
+                    <a href="javascript:history.go(-1);"  class="btn btn-link">取消</a>
+                    <!--<a class="btn btn-link" id='qx'>取消</a> -->
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<include file="Public:footer"/>

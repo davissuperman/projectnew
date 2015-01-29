@@ -1,0 +1,3 @@
+ALTER TABLE `tp_product` ADD `time_start` VARCHAR(32) NOT NULL DEFAULT '0',
+ADD `time_end` VARCHAR(32) NOT NULL DEFAULT '0';
+ALTER TABLE `tp_product` ADD `limit` INT UNSIGNED NOT NULL DEFAULT '0'

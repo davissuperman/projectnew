@@ -1,0 +1,18 @@
+*{margin:0px;padding:0px;}
+body,html{overflow-x:hidden;font-family:Arial, Helvetica, sans-serif;font-size:14px;}
+ul{list-style:none;}
+a{text-decoration:none;}
+.box{min-width:301px;height:auto;margin:6px;}
+.icon{float:left;width:60px;margin-right:15px;margin-top:12px;}
+.nature{float:left;width:60px;margin-right:15px;margin-top:22px;}
+.public{float:left;width:60px;margin-right:15px;margin-top:6px;}
+.party{float:left;width:60px;margin-right:15px;margin-top:3px;}
+
+.iconTex{float:left;width:62%;}
+.same{float:left;width:93%;border:1px #dadada solid;padding:10px;margin-bottom:20px;}
+.title{font-size:20px;margin-bottom:5px;}
+.text{color:#8d8d8d;line-height:20px;text-align:justify;word-break:break-all;text-justify:inter-ideograph;}
+.arraw{float:right;margin-top:30px;}
+.natArraw{float:right;margin-top:35px;}
+.pubArraw{float:right;margin-top:25px;}
+

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>补水大作战</title>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link type="text/css" href="{pigcms::RES}/game/css/begainGame.css" rel="stylesheet"/>
+        <link type="text/css" href="{pigcms::RES}/game/css/load.css" rel="stylesheet"/>
+        <link type="text/css" href="{pigcms::RES}/game/css/gameing.css" rel="stylesheet"/>
+        <script src="{pigcms::RES}/game/js/jquery.js"></script>
+        <script>
+            $(function() {
+                //参加活动点击
+                $(".begainBtn").on("touchstart", function() {
+                    $(".loadBox").hide();
+                    $(".begainGame").fadeIn(800);
+                    toggleBgAudio(true);
+                    $.get("./index.php?g=Wap&m=Doing&a=date&t=p");//开始页点
+                });
+                //点击开始游戏
+                $(".gameBtn").on("touchstart", function() {
+                    $(".begainGame").hide();
+                    $("#gameing").show();
+                    $.get("./index.php?g=Wap&m=Doing&a=date&t=s");//开始页点
+                    $("body").removeClass("bodyBj").addClass("bodyBjX");
+                    toggleBgAudio(false);
+                    gamePlay();
+                });
+                //点击水滴计数
+                $(".snowbox").live("touchstart", function() {
+                    var $thisLeft = $(this).position().left;
+                    var $thisTop = $(this).position().top;
+                    $(".water").css({"top": $thisTop - 0 - 50, "left": $thisLeft - 0 - 50}).show();
+                    setTimeout(function() {
+                        $(".water").hide();
+                    }, 200);
+                    toggleWaterAudio(true);
+                    $(this).hide();
+                    var get = $(".getNum").text() - 0;
+                    get = get +2;
+                    $(".getNum").text(get);
+                });
+                //游戏过程函数
+                function gamePlay() {
+                    $(".time").text(10);
+                    $(".getNum").text(0);
+                    var num = 3;
+                    $(".countdown").show().text(3);
+                    $(".progress").animate({"width": "90px"}, 1000);
+                    //3、2、1倒计时
+                    var numInter = setInterval(function() {
+                        if (num == 0)
+                        {
+                            $(".countdown").hide();
+                            $(".gameText").hide();
+                            $("<div class='snowFall'></div>").appendTo($("#gameing"));
+                            clearInterval(numInter);
+                            waterFall();
+                        }
+                        else
+                        {
+                            num = num - 1;
+                            $(".countdown").text(num);
+                        }
+                    }, 1000);
+                }
+                ;
+                //水滴落10s、滚动条减10s过程函数
+                function waterFall(isOne) {
+                    var $flake = $('<div class="snowbox"/>').css({'position': 'absolute', 'top': '-50px', 'z-index': '4000'}),
+                            documentHeight = $(document).height(),
+                            documentWidth = $(document).width(),
+                            defaults = {
+                                minSize: 10, //雪花的最小尺寸
+                                maxSize: 20, //雪花的最大尺寸
+                                newOn: 250, //雪花出现的频率
+                                flakeColor: "#FFFFFF",
+                                isFall: true
+                            };
+                    var timeInter = 0; //记录水滴落下10s后清除循环
+                    var timeNum = 10;	 //显示游戏剩余时间变量
+                    var timeShow = 10000; //控制游戏剩余时间变量
+                    var interval = setInterval(function() {
+                        if (timeInter >= 10000)
+                        {
+                            var core = $(".getNum").text();
+                            $(".coreNum").text(core);
+                            $("#gameing").children().eq(5).remove();
+                            $("#gameing").hide();
+                            $(".priceBox").fadeIn(1000);
+                            clearInterval(interval);
+                            window.location.href="./index.php?g=Wap&m=Doing&a=input&gid={pigcms::$gid}&openid={pigcms::$openid}&number="+core;
+                        }
+                        else
+                        {
+                            //显示游戏剩余时间
+                            timeShow -= defaults.newOn;
+                            switch (true) {
+                                case timeShow <= 9000 && timeShow > 8000:
+                                    timeNum = 9;
+                                    break;
+                                case timeShow <= 8000 && timeShow > 7000:
+                                    timeNum = 8;
+                                    break;
+                                case timeShow <= 7000 && timeShow > 6000:
+                                    timeNum = 7;
+                                    break;
+                                case timeShow <= 6000 && timeShow > 5000:
+                                    timeNum = 6;
+                                    break;
+                                case timeShow <= 5000 && timeShow > 4000:
+                                    timeNum = 5;
+                                    break;
+                                case timeShow <= 4000 && timeShow > 3000:
+                                    timeNum = 4;
+                                    break;
+                                case timeShow <= 3000 && timeShow > 2000:
+                                    timeNum = 3;
+                                    break;
+                                case timeShow <= 2000 && timeShow > 1000:
+                                    timeNum = 2;
+                                    break;
+                                case timeShow <= 1000 && timeShow > 0:
+                                    timeNum = 1;
+                                    break;
+                                case timeShow <= 0:
+                                    timeNum = 0;
+                                    break;
+                            }
+                            ;
+                            $(".time").text(timeNum);
+
+                            //水滴落
+                            timeInter += defaults.newOn;
+                            var startPositionLeft = Math.random() * documentWidth - 50,
+                                    startOpacity = 0.5 + Math.random(),
+                                    sizeFlake = defaults.minSize + Math.random() * defaults.maxSize,
+                                    endPositionTop = documentHeight - 40,
+                                    endPositionLeft = startPositionLeft - 100 + Math.random() * 500,
+                                    durationFall = documentHeight * 5 + Math.random() * 500;
+                            $flake.html("<img src='{pigcms::RES}/game/img/vase.png' style='width:40px' class='waterImg'/>");
+                            var $flclone = $flake.clone().appendTo($(".snowFall"));
+                            $flclone.css({
+                                left: startPositionLeft,
+                                opacity: startOpacity,
+                                'font-size': sizeFlake,
+                                color: defaults.flakeColor
+                            }).animate({
+                                top: endPositionTop,
+                                left: Math.random() * (documentWidth / 2) + 30,
+                                opacity: 0.2
+                            }, durationFall, 'linear', function() {
+                                $(this).remove();
+                                $flake.remove();
+                            }
+                            );
+                        }
+                    }, defaults.newOn);
+                    $(".progress").animate({"width": "0px"}, 11000);
+                }
+                ;
+            })
+
+            //控制音乐函数
+            var toggleBgAudio = function(isPlay) {
+                var audio = document.getElementById("audio");
+                if (isPlay) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
+            };
+            //控制点击水滴音乐函数
+            var toggleWaterAudio = function(isPlay) {
+                var audioWater = document.getElementById("audioWater");
+                if (isPlay) {
+                    audioWater.play();
+                } else {
+                    audioWater.pause();
+                }
+            };
+        </script>
+         <script>
+             document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+                window.shareData = {
+                    "imgUrl": "{pigcms::$gameinfo[img]}",
+                    "timeLineLink": "{pigcms::C('site_url')}/index.php?g=Wap&m=Doing&a=index&gid={pigcms::$gid}",
+                    "sendFriendLink": "{pigcms::C('site_url')}/index.php?g=Wap&m=Doing&a=index&gid={pigcms::$gid}",
+                    "weiboLink": "{pigcms::C('site_url')}/index.php?g=Wap&m=Doing&a=index&gid={pigcms::$gid}",
+                    "tTitle": "补水大作战",
+                    "tContent": "{pigcms::$gameinfo[desc]}",
+                    "fTitle": "补水大作战",
+                    "fContent": "{pigcms::$gameinfo[desc]}",
+                    "wContent": "{pigcms::$gameinfo[desc]}"
+                };
+                // 发送给好友
+                WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+                    WeixinJSBridge.invoke('sendAppMessage', {
+                        "img_url": window.shareData.imgUrl,
+                        "img_width": "640",
+                        "img_height": "640",
+                        "link": window.shareData.sendFriendLink,
+                        "desc": window.shareData.fContent,
+                        "title": window.shareData.fTitle
+                    }, function(res) {
+
+                    })
+                });
+
+                // 分享到朋友圈
+                WeixinJSBridge.on('menu:share:timeline', function(argv) {
+                    WeixinJSBridge.invoke('shareTimeline', {
+                        "img_url": window.shareData.imgUrl,
+                        "img_width": "640",
+                        "img_height": "640",
+                        "link": window.shareData.timeLineLink,
+                        "desc": window.shareData.tContent,
+                        "title": window.shareData.tTitle
+                    }, function(res) {
+                        
+                    });
+                });
+
+                // 分享到微博
+                WeixinJSBridge.on('menu:share:weibo', function(argv) {
+                    WeixinJSBridge.invoke('shareWeibo', {
+                        "content": window.shareData.wContent,
+                        "url": window.shareData.weiboLink,
+                    }, function(res) {
+                        _report('weibo', res.err_msg);
+                    });
+                });
+            }, false);
+        </script>
+        <style>
+            .bodyBj{background:url({pigcms::RES}/game/img/middle.jpg) no-repeat center top;background-size:100% 100%;}
+		.bodyBjX{background:url({pigcms::RES}/game/img/gameBj.jpg) no-repeat center top;background-size:100% 100%;}
+        </style>
+    </head>
+    <body class="bodyBj">
+        <!--音乐-->
+        <audio id="audio" loop>
+            <source src="{pigcms::RES}/game/audio/bg.mp3">
+            <source src="{pigcms::RES}/game/audio/bg.ogg">
+        </audio>
+        <audio id="audioWater">
+            <source src="{pigcms::RES}/game/audio/bopo.mp3">
+            <source src="{pigcms::RES}/game/audio/bopo.ogg">
+        </audio>
+        <!--开始页面-->
+        <div class="loadBox">
+            <p class="logoBox"><img src="{pigcms::RES}/game/img/logo.png" class="logoImg"/></p>
+            <p class="texCenter"><img src="{pigcms::RES}/game/img/faceImg.png" class="faceImg"/></p>
+            <p class="texCenter"><img src="{pigcms::RES}/game/img/begainText.png" class="begainText"/></p>
+            <p class="texCenter"><button class="begainBtn">参加活动</button></p>
+            <p class="texCenter"><img src="{pigcms::RES}/game/img/botText.png" class="botText"/></p>
+        </div>
+        <!--开始游戏-->
+        <div class="begainGame"> 
+            <p class="logoBox"><img src="{pigcms::RES}/game/img/logo.png" class="logoImg"/></p>
+            <p class="texCenter"><img src="{pigcms::RES}/game/img/begainText.png" class="topText"></p>
+            <div class="beText">
+                <p class="texCenter textTitle textTitleX">"水皇后"奖:10名</p>
+                <p class="texCenter">230片森田面膜，价值2450元</p>
+            </div>
+            <div class="beText">
+                <p class="texCenter textTitle">"水美人"奖:3000名</p>
+                <p class="texCenter">价值49元森田面膜一盒</p>
+                <p class="texCenter">（每盒不同品类4-5片，随机发放）</p>
+            </div>
+            <p class="texCenter shiwu">奖品以实物为准</p>
+            <p class="texCenter"><button class="gameBtn">开始游戏</button></p>
+        </div>
+        <!--游戏界面-->
+        <div id="gameing">
+            <p class="waterLogoBox"><img src="{pigcms::RES}/game/img/waterLogo.png" class="waterLogo"/></p>
+            <div class="growBox">
+                <img src="{pigcms::RES}/game/img/progress_bg.png" class="progress_bg"/>
+                <img src="{pigcms::RES}/game/img/progress.png" class="progress"/>
+                <span class="timeBox">
+                    <span class="time">10</span>
+                    <span>s</span>
+                </span>
+            </div>
+           <div class="gameText">
+        	<p class="texCenter">点击下落的水珠</p>
+            <p class="texCenter">对抗干燥冬季</p>
+            <p class="texCenter">1个水滴得2分</p>
+          </div>
+            <span class="getCase">得分：<span class="getNum">0</span></span>
+            <p class="countdown">3</p>
+            <img src="{pigcms::RES}/game/img/water.png" class="water"/>
+        </div>
+    </body>
+</html>

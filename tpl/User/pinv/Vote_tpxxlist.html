@@ -1,0 +1,44 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_index.css" rel="stylesheet"/>
+ <div class="content">
+ <div class="ffBox">
+<include file="Public:left"/>
+     
+    <!--right--begain-->
+            <div class="right">
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+          <table class="sheet" cellspacing="1">
+                    <tr>                      
+                        <th class="secondTd">选项ID</th>
+                        <th class="thirdTd">投票ID</th>
+                        <th class="thirdTd">选项内容</th>
+                        <th class="thirdTd">票数</th>
+                       <th  class="forthTd" >操作</th>
+                    </tr>
+                   <volist name="list" id="item">
+
+						<tr>
+					  
+						  <td>{pigcms:$item.oid}</td>
+							<td>{pigcms:$item.subject}</td>
+							<td>{pigcms:$item.voteoption}</td>
+							<td>{pigcms:$item.votes}</td>
+							
+						
+							<td>
+	<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Vote/tpxxDele',array('id'=>$item['oid'],'token'=>$token))}');">删除</a></td>
+						   
+						</tr>
+						
+                  </volist>
+                </table>
+              <p class="page">{pigcms:$page}</p>
+            </div>
+            <!--right--end-->   
+            </div> 
+      
+ </div>
+<include file="Public:footer"/>

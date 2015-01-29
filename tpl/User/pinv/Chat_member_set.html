@@ -1,0 +1,125 @@
+<?php $nav = "CRM"; $side = "MEMBER" ?>
+<include file="Public:head"/>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/jquery/jquery-1.4.4.min.js"></script>
+
+
+<script src="{pigcms::STATICS}/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="{pigcms::STATICS}/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="{pigcms::STATICS}/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<link type="text/css" href="{pigcms::RES}/css/Host_add.css" rel="stylesheet"/>
+<style type="text/css">
+.example{padding-left:115px;}
+body, html,#allmap {width: 100%;height: 100%;margin:0;}
+#l-map{height:30%;width:30%;float:left;border-right:2px solid #bcbcbc;margin:10px;}
+</style>
+
+ <div class="container main">
+<div class="row">
+<include file="Crm:left"/>
+           
+               <div class="col-md-10 main">
+           
+           	 <ol class="breadcrumb">
+			  <li><a href="">会员管理</a></li>
+			  <li class="active">修改会员</li>
+			</ol>
+			
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">修改会员</h3>
+				</div>
+			  <div class="panel-body">
+ 				    <form class="form" method="post" action="{pigcms::U('Chat/member_set')}" enctype="multipart/form-data"> 
+    				<input type="hidden" name="token" value="{pigcms:$_GET['token']}" /> 
+    				<input type="hidden" name="uid" value="{pigcms:$set.uid}" /> 
+ 				   <div class="rightLeft">
+                	<p class="same">
+                        <span class="Tex">会员号：</span>
+                       <input type="text" name="u_number" value="{pigcms:$set.uid}"  class="circle"/>
+                	</p>
+                   
+                    <p class="same">
+                        <span class="Tex">用户名：</span>
+                       <input type="text" name="u_name" value="{pigcms:$set.u_name}" class="circle"/>
+                	</p>
+                	 <p class="same">
+                        <span class="Tex">姓名：</span>
+                       <input type="text" name="u_username" value="{pigcms:$set.u_username}"  class="circle"/>
+                	</p>
+					
+                    <p class="same">
+                        <span class="Tex">电话号码：</span>
+                       <input type="text" name="u_iphone" value="{pigcms:$set.u_iphone}" class="circle"/>
+                	</p>
+                   
+                    <p class="same">
+                        <span class="Tex">性别：</span>
+						
+                       男：<input type="radio"  name="u_sex" value="1"<if condition="$set['u_sex'] eq '1'">checked</if>>
+					 
+                       女：<input type="radio"  name="u_sex" value="0"<if condition="$set['u_sex'] eq '2'">checked</if>/>
+					   未知：<input type="radio"  name="u_sex" value="0"<if condition="$set['u_sex'] eq '0'">checked</if>/>
+					  
+                	</p>
+                    <p class="same">
+                        <span class="Tex">消费金额：</span>
+                       <input type="text"  name="u_money" value="{pigcms:$set.u_money}" class="circle"/>
+                	</p>
+					<p class="same">
+                        <span class="Tex">地区：</span>
+                       <input type="text"  name="u_address" value="{pigcms:$set.u_address}" class="circle"/>
+                	</p>
+					<p class="same">
+                        <span class="Tex">来源：</span>
+                       <input type="text"  name="u_form" value="{pigcms:$set.u_form}" class="circle"/>
+                	</p>
+					<p class="same">
+                        <span class="Tex">邮箱：</span>
+                       <input type="text"  name="u_email" value="{pigcms:$set.u_email}" class="circle"/>
+                	</p>
+					<p class="same">
+                        <span class="Tex">联系地址：</span>
+                       <input type="text"  name="u_lxaddress" value="{pigcms:$set.u_lxaddress}" class="circle"/>
+                	</p>
+					<p class="same">
+                        <span class="Tex">会员级别：</span>
+
+					   <input type="radio" name='u_member' class='item' value="1" <if condition="$set['u_member'] eq 1">checked</if>>初级会员
+						<input type="radio" name='u_member' class='item' value="2" <if condition="$set['u_member'] eq 2">checked</if>>中级会员
+						
+						<input type="radio" name='u_member' class='item' value="3"<if condition="$set['u_member'] eq 3">checked</if>>高级会员
+                	</p>
+					
+                   
+                   
+                  
+					
+                	
+                   
+					
+                   
+                </div>
+
+				  
+                   
+                </div>
+               </div>
+
+           	  <div class="panel-footer" style="text-align:right"> 
+	  		<input type="submit" value="保存" class="btn btn-success"/>
+	  		<a href="javascript:history.go(-1);"  class="btn btn-link">取消</a> 
+		      </div>
+		           </form>
+          </div>
+            
+         
+			</div>
+			</div>
+            </div>      
+      
+ </div>
+<include file="Public:footer"/>

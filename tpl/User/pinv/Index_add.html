@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title> {pigcms::C('site_title')} {pigcms::C('site_name')}</title>
+<link type="text/css" href="{pigcms::RES}/css/top.css" rel="stylesheet"/>
+<link type="text/css" href="{pigcms::RES}/css/left.css" rel="stylesheet"/>
+<link type="text/css" href="{pigcms::RES}/css/loginOver.css" rel="stylesheet"/>
+<script>var SITEURL='';</script>
+<script src="{pigcms::RES}/js/common.js" type="text/javascript"></script>
+</head>
+<body>
+	<div class="box">
+    	<!--top--begain-->
+    	<div class="top">
+        	<div class="topLeft">
+                <img src="{pigcms::RES}/img/logo.gif" alt="logo" class="logo"/>
+                <span>欢迎使用多用户微信营销服务平台！</span>
+            </div>
+            <div class="topRight">
+            <if condition="$_SESSION[uid]==false">
+			<a href="{pigcms::U('Index/login')}">登录</a>
+			<span class="shu">|</span>
+			<a href="{pigcms::U('Index/login')}">注册</a>
+			<else/>
+			<span>您好,</span><span class="red">{pigcms:$Think.session.uname}</span>
+			 <span class="shu">|</span>
+		<a href="{pigcms::U('System/Admin/logout',array('token'=>$token))}"  style="color:#ffffff" >退出</a>
+            </if>	
+            
+            </div>
+        </div>
+        <!--top--end-->
+        
+        <p class="loginHeading">
+            <span class="addTex">平台管理</span>
+             <span class="red">请添加微信平台公众号</span>
+   		</p>
+        
+        <!--content--begain-->
+        <div class="content">
+        <div class="ffBox">
+          <form method="post" action="{pigcms::U('User/Index/insert')}" enctype="multipart/form-data">
+                <p class="infor">添加微信公众号->>查看API接口</p>
+                <input type="hidden"  name="headerpic" value="{pigcms::RES}/images/portrait.jpg" size="60">            
+                 <p class="same">
+                    <span class="Tex">TOKEN：</span>
+                    <input type="text" required="" class="circle" name="token" value="{pigcms:$tokenvalue}" tabindex="1" size="25" readonly >
+                     <span class="redTex">接口URL是：{pigcms::C('site_url')}/index.php/api/{pigcms:$tokenvalue}</span>
+                </p>
+                <p class="same">
+                    <span class="Tex">公众号名称：</span>
+                    <input type="text" required="" class="circle" name="wxname" value="" tabindex="1" size="25">
+                    
+                </p>
+                
+                <p class="same">
+                    <span class="Tex">公众号原始id：</span>
+                    <input type="text" required="" name="wxid" value="" onmouseup="this.value=this.value.replace('_430','')" class="circle" tabindex="1" size="25">　
+                  
+                    <span class="redTex">请认真填写，错了不能修改。</span>
+                    <span class="example">比如gh_423dewjkeww3</span>
+                   <a href="http://jingyan.baidu.com/article/63f23628eb6b490209ab3d6b.html" target="_blank" class="noKnow"><img src="{pigcms::RES}/img/noKnow.gif" alt="noKnow"/></a>
+                    
+                </p>
+                <p class="same">
+                    <span class="Tex">微信号：</span>
+               
+                    <input type="text" required="" name="weixin" value="" class="circle" tabindex="1" size="25">
+                    <span class="example">比如baoku</span>
+                    
+                </p>
+                <p class="same">
+                    <span class="Tex">地区：</span>
+                    <input type="text" class="circle2" id="province" value="{pigcms:$province}" name="province" tabindex="1" size="20">
+                   
+                    <span class="city">省</span>
+                    <input id="city" value="{pigcms:$city}" type="text" name="city" class="circle2" tabindex="1" size="20"> 
+                    <span class="city">市</span>
+                    <span class="example"> （此处关联公交等本地化查询） </span>
+                </p>
+                <p class="same">
+                 <span class="Tex">公众号邮箱：</span>
+               <input type="text" required="" class="circle" tabindex="1" value="{pigcms:$email}" name="qq" size="25">
+                    </p>
+                    <p class="same"> 
+                    <span class="Tex"> 类型：</span>
+                    <select id="type" name="type">                  
+                  <option value="1,情感">情感</option>
+                  <option value="2,数码">数码</option>
+                  <option value="3,娱乐">娱乐</option>
+                  <option value="4,IT">IT</option>
+                  <option value="5,数码">数码</option>
+                  <option value="6,购物">购物</option>
+                  <option value="7,生活">生活</option>
+                  <option value="8,服务">服务</option>
+                  </select>
+                   </p>
+               <div class="pressBott" >
+               		<input type="submit" value="下一步" class="next"/>
+                  <!--  <input type="button" value="API接口" class="next"/>-->  
+               </div>
+              </form> 
+              </div>  
+        </div>
+        <!--content--end-->
+    
+    </div>
+</body>
+</html>

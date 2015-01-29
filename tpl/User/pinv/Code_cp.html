@@ -1,0 +1,358 @@
+<?php $nav = "EWM"; $side = "ERWM" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_index.css" rel="stylesheet"/>
+<style>
+    .box{min-height:876px}
+</style>
+<script src="./tpl/User/pinv/common/js/date1/WdatePicker.js"></script>
+<script>
+    $(function() {
+        $('#tjcp').click(function() {
+            $('#tcc').show();
+
+
+        })
+        $('#qx').click(function() {
+            $('#tcc').hide();
+
+
+        })
+        $('#gb').click(function() {
+            $('#tcc').hide();
+
+
+        })
+
+
+//ajax调用
+        $('#cpxxid').change(function() {
+
+            var cpxxid = $('#cpxxid').val();
+            var token = $('#token').val();
+
+
+            if (cpxxid == 2) {
+
+                $('#chanpcity').show();
+
+
+            } else {
+                $('#chanpcity').hide();
+            }
+
+
+            $.ajax({
+                url: '{pigcms::U("Code/ajacpxxs")}',
+                data: 'cpxxid=' + cpxxid + '&token=' + token,
+                type: 'post',
+                dataType: 'html',
+                success: function(info) {
+                    //alert(info);return false;
+                    if (info == 2) {
+
+                        alert('没有子类');
+                        return false;
+                    } else {
+
+                        $('#cpcity').html(info);
+
+
+                    }
+                }
+            });
+
+
+        })
+
+
+        $('#dj').click(function() {
+            var reg = /^[1-9]+[0-9]*]*$/;
+            if ($.trim($('#wxuserphone').val()) == '') {
+
+                alert('名称不能为空');
+                return false;
+            }
+
+
+            /*if ($('#cpprice').val() <= '0') {
+             alert('价格不能小于0');
+             return false;
+             }
+            if (isNaN($('#cpprice').val())) {
+                alert('价格不是数字');
+                return false;
+            }*/
+            //if (!reg.test($('#cpprice').val())) {
+            //  alert('价格不是整数');
+            //return false;
+            //}
+
+
+           /*if (isNaN($('#num').val())) {
+                alert('数量不是数字');
+                return false;
+            }
+            if (!reg.test($('#num').val())) {
+             
+             alert('数量不是整数');
+             return false;
+             }
+             if ($('#num').val() <= '0') {
+             alert('数量不能小于0');
+             return false;
+             }*/
+
+
+
+
+
+
+            if ($.trim($('#cpxxid').val()) == '') {
+
+                alert('渠道不能为空');
+                return false;
+            }
+        })
+
+
+
+
+
+    })
+</script>
+<style>
+    .cateimg {
+        position: relative;
+
+    }
+    .cateimg .smallImg {
+        width: 50px;
+    }
+    .cateimg .bigImg {
+        position: absolute;
+        left: 51px;
+        top: 0px;
+        display: none;
+        width: 320px;
+    }
+    #date-calendar input {
+        float: left;
+    }
+</style>
+<div class="container main">
+    <div class="row">
+        <include file="Code:left"/>
+
+        <div class="col-md-10 main">
+
+
+
+            <div class="panel panel-success">
+                <div class="panel-heading cfix">
+                    <h3 class="panel-title pull-left">二维码管理</h3>
+                </div>
+                <div class="panel-body">
+
+                    <include file="Code:hdcpheader"/>
+                    <div style="clear:both;"></div>
+                    <input type='button' style="box-shadow: 3px 3px 3px #888888;margin-bottom:10px;background:#3e8f3e;color:#fff;border-radius:5px;width:100px;height:35px;text-align:center;line-height:25px;margin-top:20px" value="添加产品" id='tjcp'/>
+                    <table class="table table-striped" cellspacing="1">
+                        <tr>                      
+
+                            <th class="thirdTd">产品名称</th>
+
+                          
+                            <th class="thirdTd">渠道</th>
+                            <th class="thirdTd">类型</th>
+                            <th class="thirdTd">城市</th>
+
+                            <th class="thirdTd">开始时间</th>
+                            <th class="thirdTd">结束时间</th>
+
+                            <th  class="thirdTd" >操作</th>
+                        </tr>
+                        <volist name="twocode_list" id="item" key="k">
+
+                            <tr>
+
+
+                                <td>{pigcms:$item.cname}</td>
+
+                             
+
+
+
+                            <if condition="$item['qudao'] neq ''">
+                                <volist name='xxlist' id='xxvo'>
+                                    <if condition="$xxvo['xid'] eq $item['qudao']">
+                                        <td>{pigcms:$xxvo.x_name}</td>
+                                    </if>
+                                </volist>
+                                <else/>
+                                <td>无</td>
+                            </if>
+
+                            <if condition="$item['huodongleixing'] neq ''">
+                                <volist name='cpxxcitylist' id='xxcityvo'>
+                                    <if condition="$xxcityvo['cid'] eq $item['huodongleixing']">
+                                        <td>{pigcms:$xxcityvo.c_name}</td>
+                                    </if>
+                                </volist>
+                                <else/>
+                                <td>无</td>
+                            </if>
+
+
+                             <if condition="$item['city'] neq ''">
+                                <volist name='xxcity' id='cityvo'>
+                                    <if condition="$cityvo['cid'] eq $item['city']">
+                                        <td>{pigcms:$cityvo.c_name}</td>
+                                    </if>
+                                </volist>
+                                <else/>
+                                <td>无</td>
+                            </if>
+
+
+
+                            <td>{pigcms:$item.sdate|date="Y-m-d H:i:s",###}</td>
+                            <td>{pigcms:$item.edate|date="Y-m-d H:i:s",###}</td>
+
+                            <td>
+                                <a href="{pigcms::U('Code/cpeditlist',array('id'=>$item['cid'],'token'=>$token))}">编辑</a></td>
+                            </tr>
+                        </volist>
+                    </table>
+                    <p class="page">{pigcms:$page}</p>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+</div>
+
+<!--弹出层-->
+<div class="panel panel-success" id='tcc' style="position:absolute;left:480px;top:170px;display:none;width:400px">
+    <!--<p style="float:right;padding-right:10px;padding-top:5px;cursor:pointer" id='gb'>关闭</p>	-->
+    <div class="panel-body">
+
+        <form class="form-horizontal" method="post" id="form" action="{pigcms::U('Code/cptj')}">
+            <input type="hidden" value="{pigcms:$_GET['token']}"  id='token' name='token'/>
+            <input type="hidden" value="2"  id='token' name='cptype'/>
+            <div class="form-group">
+                <label for="title" class="col-sm-2 control-label" style='width:105px'>产品名称：</label>
+                <div class="col-sm-6">
+                    <input type="text" name="cpname" id="wxuserphone"  class="form-control" value="" data-rule-required="true">
+                </div>
+            </div>
+          <!--  <div class="form-group">
+                <label for="title" class="col-sm-2 control-label" style='width:105px'>价格：</label>
+                <div class="col-sm-6">
+                    <input type="text" name="cpprice" id="cpprice"  class="form-control" value="" data-rule-required="true">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="title" class="col-sm-2 control-label" style='width:105px'>折扣：</label>
+                <div class="col-sm-6">
+                    <input type="text" name="zhekou" id="zhekou" class="form-control" value="" data-rule-required="true">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="title" class="col-sm-2 control-label" style='width:105px'>数量：</label>
+                <p class="aresame col-sm-6"  >
+                    <input type='text' class="form-control" name="num" id='num'></textarea>
+                </p>
+            </div>
+            <div class="form-group">
+                <label for="title" class="col-sm-2 control-label" style='width:105px'>产品成分：</label>
+                <div class="col-sm-6">
+                    <input type="text" name="chengfen" id="chengfen" class="form-control" value="" data-rule-required="true">
+                </div>
+            </div>-->
+            
+            <div class="form-group">
+                <label for="title" class="col-sm-2 control-label" style='width:105px'>URL：</label>
+                <div class="col-sm-6">
+                    <input type="text" name="codeurl" id="name"  class="form-control" value="" data-rule-required="true">
+                </div>
+            </div>
+          <div class="form-group">
+                <label for="title" class="col-sm-2 control-label" style='width:105px'>备注1：</label>
+                <div class="col-sm-6">
+                    <input type="text" name="beizhu1" id="beizhu1" class="form-control" value="" data-rule-required="true">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="title" class="col-sm-2 control-label" style='width:105px'>备注2：</label>
+                <div class="col-sm-6">
+                    <input type="text" name="beizhu2" id="beizhu2"  class="form-control" value="" data-rule-required="true">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="title" class="col-sm-2 control-label" style='width:105px'>开始时间：</label>
+                <div class="col-sm-5">
+                    <!--<input type="text" name="sdate" id="name"  class="form-control" value="" data-rule-required="true">-->
+                    <input type="text" class="Scircle" name="sdate" onclick="WdatePicker()" value="" id="statdate">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="title" class="col-sm-2 control-label" style='width:105px'>结束时间：</label>
+                <div class="col-sm-5">
+                    <!--<input type="text" name="edate" id="name"  class="form-control" value="" data-rule-required="true">-->
+                    <input type="text" class="Scircle" onclick="WdatePicker()" name="edate" value="" id="enddate">
+                </div>
+            </div>
+
+
+
+            <div class="form-group" style="margin-left:38px">
+
+                <span>渠道：</span>
+                <select name="cpxxid" style="width:165px;margin-left:22px" id="cpxxid">
+
+                    <option value="">请选择</option>
+                    <volist name='xxlist' id='xvo'>
+                        <option value="{pigcms:$xvo.xid}">{pigcms:$xvo.x_name}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="form-group" style="margin-left:38px">
+
+                <span>类型：</span>
+                <select name="cpcity" style="width:165px;margin-left:22px" id="cpcity">
+                    <option value="">请选择</option>
+
+
+                </select>
+            </div>
+
+            <div class="" style="display:none;margin-left:38px" id='chanpcity'>
+
+                <span>城市：</span>
+                <select name="chanpct" style="width:165px;margin-left:22px" id="chanpct" onclick="">
+                    <option value="">请选择</option>
+                    <volist name='xxcity' id='xxvo'>
+                        <option value="{pigcms:$xxvo.cid}">{pigcms:$xxvo.c_name}</option>
+                    </volist>
+
+                </select>
+            </div>
+
+
+
+
+
+
+
+
+
+
+    </div>			
+    <div class="panel-footer" style="text-align:right"> 
+        <input type="submit" value="保存" id="dj" class="btn btn-success"/>
+        <input style="width:55px" value="取消" id='gb' class="btn btn-success"/>
+        <!--<a class="btn btn-link" id='qx'>取消</a> -->
+    </div>
+</form>
+</div>
+<include file="Public:footer"/>

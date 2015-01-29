@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="text/css" href="./tpl/static/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+        <link type="text/css" href="./tpl/static/bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
+        <script type="text/javascript" src="./tpl/static/jquery-1.9.1.min.js"></script>
+        <script src="./tpl/User/pinv/common/js/date/WdatePicker.js"></script>
+
+        <script>
+            $(function() {
+
+
+                $("#Button1").bind("click", function() {
+                    // alert(11111);return false;
+                    $(".item:checkbox").prop("checked", true);
+                });
+                $("#Button2").bind("click", function() {
+                    // alert(22222);return false;
+                    $(".item:checkbox").prop("checked", false);
+                });
+            })
+        </script>
+
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="panel-body">
+
+                <form method="post" class="form-inline" action="{pigcms::U('Game/export')}">
+                    <div id="choose-date">
+
+                        <div id="date-calendar">
+                            选择模版：
+                            <div class="form-group">
+                                   <input type="text" name="tstart" id="tstart" value="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control" style="width:132px"/><span>-</span>
+                           </div>
+                             <div class="form-group">
+                                <input type="text" name="tend" id="tend" value="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control" style="width:132px"/>
+                            </div>
+                           选择数据范围(不要)
+                            <div class="form-group">
+                                <input type="text" name="start" id="start" value="" onClick="WdatePicker()" class="form-control" style="width:112px"/><span>-</span>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="end" id="end" value="" onClick="WdatePicker()" class="form-control" style="width:112px"/>
+                            </div>
+                            <div class="form-group">
+                                过滤 <input type="checkbox"  name="g">
+                             </div>
+                            <button type="submit" class="btn btn-default" style="width:50px"/>导出</button>
+                        数据范围请不要超过60天
+
+                        </div> 
+                        <br>
+                    </div>
+
+
+                    <table class="table table-striped" cellspacing="1">
+                        <tr>
+                            <th class="firstTd">序号</th>
+                            <th class="secondTd">电话</th>
+                            <th class="thirdTd">姓名</th>                      
+                            <th class="sevenTd">参与时间 </th>
+                            <th class="sevenTd">首次分享时间 </th>
+                            <th class="sevenTd">总分数</th>
+                            <th class="sevenTd">浏览数</th>
+                            <th class="sevenTd">转发数</th>
+                            <th class="sevenTd">点赞数</th>
+                            <th class="sevenTd">扩散数</th>
+                        </tr>
+                        <volist name="info" id="o"> 
+                            <tr>
+                            <tr>
+                                <td>{pigcms:$i}</td>
+        
+                                <td>{pigcms:$o.tel}</td>
+                                <td>{pigcms:$o.name}</td>
+                                <td>{pigcms:$o.createtime|date="y-m-d H:i",###}</td>
+                                <td><if condition="$o.sharetime gt 0">{pigcms:$o.sharetime|date="Y-m-d H:i",###}<else/>-------------- --:-- </if></td>
+                            <td>{pigcms:$o[share]*10+$o[number]}</td>
+                            <th class="sevenTd">{pigcms:$o.views}</th>
+                            <th class="sevenTd">{pigcms:$o.share}</th>
+                            <th class="sevenTd">{pigcms:$o.vote}</th>
+                            <th class="sevenTd">{pigcms:$o.joins}</th>
+                            </tr>
+                            </tr>
+                        </volist>
+                    </table>
+                </form>
+                <dvi class="page" style="text-align:right">{pigcms:$page}</dvi>
+            </div>
+        </div>
+    </body>
+</html>

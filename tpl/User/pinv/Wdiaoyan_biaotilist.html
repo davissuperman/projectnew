@@ -1,0 +1,50 @@
+<?php $nav = "FUNCTION"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_index.css" rel="stylesheet"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_inputs.css" rel="stylesheet"/>
+<div class="container main">
+<div class="row">
+<include file="Wdiaoyan:left"/>
+     
+           <div class="col-md-10 main">
+           
+           	 <ol class="breadcrumb">
+			  <li><a href="{pigcms::U( 'Wdiaoyan/index',array( 'token'=>$token ))}">微调研列表</a></li>
+			  <li><a href="{pigcms::U( 'Wdiaoyan/xuanxadd',array( 'token'=>$token, 'id'=> $id ))}">输入项管理</a></li>
+			  <li class="active">标题列表</li>
+			</ol>
+			
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">调研标题列表</h3>
+			  </div>
+			  <div class="panel-body">    
+           <table class="table table-striped" cellspacing="1">
+                    <tr>                      
+                        <th class="secondTd">名称</th>
+                        <th class="thirdTd">关键词</th>
+                        <!--<th class="sevenTd">创建时间</th>-->
+                        <th  class="forthTd" >操作</th>
+                    </tr>
+                    <volist name="list" id="item"> 
+                    <tr>
+                  
+                        <td>{pigcms:$item.bname}</td>
+                        <td>{pigcms:$item.keyword}</td>
+                       <!-- <td >{pigcms:$item.time|date="Y-m-d H:i:s",###}</td>-->
+                        <td>
+<a href="{pigcms::U('Wdiaoyan/xuanxlist',array('id'=>$item['id'],'token'=>$token,formid=>$_GET['id']))}">查看详细选项</a>&nbsp;<a href="{pigcms::U('Wdiaoyan/tplist',array('id'=>$item['id'],'token'=>$token,formid=>$_GET['id']))}">投票结果查看</a>&nbsp;&nbsp;<a href="{pigcms::U('Wdiaoyan/biaotixunx',array('id'=>$item['id'],'token'=>$item['token'],formid=>$_GET['id']))}">输入项管理</a>&nbsp;&nbsp;<a href="{pigcms::U('Wdiaoyan/supdate',array('id'=>$item['id'],'token'=>$token,bid=>$_GET['bid']))}">修改</a>&nbsp;&nbsp;<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Wdiaoyan/sdelete',array('id'=>$item['id'],'token'=>$token))}');">删除</a></td>
+                       
+                    </tr>
+                    </volist>
+                </table>
+               
+              
+                <p class="page">{pigcms:$page}</p>
+                </div>
+            </div>
+			</div>
+            </div> 
+      
+ </div>
+<include file="Public:footer"/>

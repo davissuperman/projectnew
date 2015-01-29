@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>单选页</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" rel="stylesheet" href="{pigcms::RES}/css/wdy/choose.css"/>
+<script type="text/javascript" src="{pigcms::RES}/js/wdy/jquery.js"></script>
+<script type="text/javascript">
+	$(function(){
+			
+		})
+</script>
+
+</head>
+
+<body>
+	<div class="box">
+	<form method="post"  action="{pigcms::U('Wdiaoyan/xuanxiang',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id'],'id'=>$_GET['id']))}" >
+	           <!--input type='text' name='id' value='{pigcms:$_GET["id"]}' />
+			   <input type='text' name='token' value='{pigcms:$_GET["token"]}' />
+			   <input type='text' name='wecha_id' value='{pigcms:$_GET["wecha_id"]}' /-->
+     <!--volist name='list' id='vo'-->	
+	   <div>
+	    
+		<P class="heading">{pigcms:$list.bname}？</P>
+               <volist name='list.fenlei' id='vo1'>
+			     
+				            <if condition="$vo1.inputtype eq radio"> 
+						<div class="chBox">
+							  <p class="common">
+                                   
+									<input type="radio" name="displayname[]" value='{pigcms:$vo1.displayname}_{pigcms:$vo1.id}_{pigcms:$vo1.b_fid}_{pigcms:$list.formid}'/>
+									<!--<span class="arr"></span>-->
+									<span>{pigcms:$vo1.displayname}</span>
+									
+								</p>
+						  </div>
+				           <elseif condition="$vo1.inputtype eq checkbox "/>  
+							   <div class="chBox">
+								  <p class="common">
+									<input type="checkbox" name="displayname[]" value='{pigcms:$vo1.displayname}_{pigcms:$vo1.id}_{pigcms:$vo1.b_fid}_{pigcms:$list.formid}'/>
+											<!--<span class="arr"></span>-->
+											<span>{pigcms:$vo1.displayname}</span>
+										
+									</p>
+							  </div>
+						   </if>
+			    </volist>				
+			</div>
+			<p class="btnBox"><input type="submit" class="btn" value="下一步"></p>
+			<input type="hidden" name='hidden' value="{pigcms:$page}">
+			<input type="hidden" name='formid' value="{pigcms:$formid}">
+			<input type="hidden" name='token' value="{pigcms:$token}">
+			<input type="hidden" name='id' value="{pigcms:$id}">
+			<input type="hidden" name='wecha_id' value="{pigcms:$wecha_id}">
+		<!--/volist-->
+		
+    </form>
+    </div>
+<include file="Public:tongji"/>
+</body>
+</html>

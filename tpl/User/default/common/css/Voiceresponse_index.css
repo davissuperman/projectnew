@@ -1,0 +1,19 @@
+.right{width:837px;height:1000px;float:left;padding:0px 10px;}
+.replycredit{height:30px;line-height:30px;border-bottom:1px #eee solid;margin-top:20px;font-size:16px;font-weight:bold;}
+.replyButton{float:left;width:122px;height:33px;text-align:center;line-height:33px;font-size:12px;background:url(../img/addList.gif) no-repeat;margin-right:20px;margin-top:15px;color:#fff;}
+.replyButton:hover{background:url(../img/addOver.gif) no-repeat;}
+.replayBox{height:60px;}
+.sheet{width:100%;background:#eee;color:#6a6a6a;}
+.sheet td{background:#fff;text-align:center;height:55px;line-height:55px;}
+.sheet th{background:#f1f1f1;height:45px;line-height:45px;text-align:center;}
+.edit{float:left;margin:0px 20px;color:#6a6a6a;font-weight:bold;}
+.cancel{float:left;color:#6a6a6a;font-weight:bold}
+.edit:hover{color:#ea533f;}
+.cancel:hover{color:#ea533f;}
+.firstTd{width:80px;}
+.choiceBox{height:55px;line-height:55px;}
+.choiceBox span,.choiceBox input{float:left;}
+.choiceBox input{margin-top:18px;margin-right:10px;}
+.tChoice{margin-right:15px;}
+.choiceBox input.surePress{float:left;width:42px;height:22px;line-height:22px;text-align:center;color:#fff;background:url(../img/searchImg.gif) no-repeat;border:0px;margin-top:15px;margin-left:10px;cursor:pointer;font-size:12px;}
+.choiceBox input.surePress:hover{background:url(../img/searchOver.gif) no-repeat;}

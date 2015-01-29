@@ -1,0 +1,20 @@
+.right{width:837px;height:1000px;float:left;padding:0px 10px;}
+.sheet{width:100%;background:#eee;color:#6a6a6a;}
+.sheet td{background:#fff;text-align:center;height:55px;line-height:55px;}
+.sheet th{background:#f1f1f1;height:45px;line-height:45px;text-align:center;}
+.sevenTd{width:100px;}
+.artiEdit{height:33px;line-height:33px;border-bottom:1px #eee solid;margin:20px 0px 25px 0px;}
+.big{font-size:18px;font-weight:bold;color:#6e6e6e;float:left;margin-right:10px;}
+.tishi{height:20px;line-height:20px;font-size:12px;color:#ea533f;}
+.case{width:400px;height:23px;line-height:23px;border:1px #ccc solid;float:left;}
+.refer{width:42px;height:22px;line-height:22px;text-align:center;float:left;color:#fff;cursor:pointer;border:0px;background:url(../img/searchImg.gif) no-repeat;float:left;font-size:12px;margin-left:5px;margin-top:2px;}
+.refer:hover{background:url(../img/searchOver.gif) no-repeat;}
+.promot{height:50px;margin-bottom:20px;}
+.proText{font-size:12px;color:#ea533f;line-height:22px;}
+.price{width:44px;height:14px;line-height:20px;padding:3px;}
+.date{width:84px;height:14px;line-height:14px;padding:3px;}
+.cancel{color:#6e6e6e;font-size:12px;font-weight:bold;}
+.cancel:hover{color:#ea533f;}
+.allCel{height:30px;line-height:30px;border-bottom:1px #eee solid;}
+.allCel input{float:left;margin-top:8px;margin-right:5px;}
+.allCel span{float:left;margin-right:10px;}

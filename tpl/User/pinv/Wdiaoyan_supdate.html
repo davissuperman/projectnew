@@ -1,0 +1,75 @@
+<?php $nav = "FUNCTION"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_inputAdd.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+<script type="text/javascript" src="{pigcms::RES}/js/formCheck/formcheck.js"> </script>
+<script language="javascript">
+$(function(){
+
+	$("#form").valid([
+	{ name:"bname",simple:"显示名称",require:true},
+	{ name:"fieldname",type:"eng",simple:"字段名称",require:true},
+	{ name:"inputtype",simple:"输入类型",require:true}	
+	],true,true);
+
+})
+</script>
+<div class="container main">
+<div class="row">
+<include file="Wdiaoyan:left"/>
+     
+            <div class="col-md-10 main">
+			
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">标题修改</h3>
+			  </div>
+			  <div class="panel-body">
+			  	<div class="add-button pull-left">
+                        <a href="javascript:history.go(-1);"  class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-left"></span> 返回</a>
+                  </div>
+                  <div style="clear:both;"></div>
+                 <form class="form" method="post" id="form" action="{pigcms::U('Wdiaoyan/supdate',array('token'=>$token))}"> 
+                  <input type='hidden' value='{pigcms:$_GET["id"]}' name='id' />
+                  <input type='hidden' value='{pigcms:$_GET["token"]}' name='token' />
+                <p class="same">
+                    <span class="Tex">选项标题修改：</span>
+                    <input type="text" id="displayname" name="bname" value="{pigcms:$list.bname}" class="circle"/>
+                </p>
+                
+              
+                <!--  <p class="same" id="troptions"<if condition="$set['inputtype'] neq select"> style="display:none"</if>>
+                    <span class="Tex">选项：</span>
+                   <input type="text" id="options" name="options" value="{pigcms:$set.options}" class="circleS"  />下拉列表的各个选项，多个选项用"|"隔开      
+                </p>
+                <p class="same">
+                    <span class="Tex">是否必填：</span>
+                    <select name="require" id="require" class="seleBox">{pigcms:$requireOptions}</select>                   
+                </p>
+                <p class="same">
+                    <span class="Tex">输入限制：</span>
+                    <select name="regexSelect" id="regexSelect" onchange="regexChange()" class="seleBox">{pigcms:$regexOptions}</select> <input type="text" name="regex" id="regex" value="{pigcms:$set.regex}" class="circleS"/>
+         
+                </p>
+                <p class="example spancial">可以自己编写正则表达式</p>
+                <p class="same">
+                    <span class="Tex">排序：</span>
+                    <input type="text"  name="taxis" id="taxis" value="{pigcms:$set.taxis}"  class="circle"/>
+                </p>
+                <p class="same">
+                    <span class="Tex">错误提示：</span>
+                    <input type="text"  name="errortip" id="errortip" value="{pigcms:$set.errortip}" class="circle"/>
+                </p>
+                <p class="example">输入错误时的提示内容</p>
+                -->
+                </div>
+           	  <div class="panel-footer" style="text-align:right"> 
+	  			<input type="submit" value="保存" class="btn btn-success"/>
+	  			<a href="javascript:history.go(-1);"  class="btn btn-link">取消</a> 
+		      </div>
+		       </form>
+ 			</div>
+			</div>
+            </div>    
+ </div>
+<include file="Public:footer"/>

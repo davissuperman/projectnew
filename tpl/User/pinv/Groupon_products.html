@@ -1,0 +1,60 @@
+<?php $nav = "FUNCTION"; $side = "PRODUCTS" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Groupon_index.css" rel="stylesheet"/>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<div class="container main">
+<div class="row">
+<include file="Groupon:left"/>
+
+             <div class="col-md-10 main">
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">团购商品管理</h3>
+               		<div class="search-box pull-right">
+					 <form method="post" action="" class="souCase">
+                     <input type="hidden" name="ac" value="hotels-list">
+                     <input type="submit" value="搜索" class="btn btn-default btn-xs pull-right"/>
+                     <input type="text" placeholder="输入关键词搜索" class="search-text"/>
+	             	</form>
+	               </div>
+	          </div>
+               <div class="panel-body">
+               	<div class="add-button pull-right">
+            		<a href="{pigcms::U('Groupon/add',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> 添加团购</a>
+            	</div>
+                <div class="clearfix"></div>
+                <form method="post" action="" id="info">
+                        <table class="table table-striped" cellspacing="1">
+                            <tr>
+                             
+                                <th class="secondTd">商品名称</th>
+                                <th class="thirdTd">原价/现价（元）</th>
+                                <th class="forthTd">关键词</th>
+                                <th class="forthTd">创建时间/截止日期</th>
+                                <th class="sixTd">出售数量</th>
+                                <th class="sevenTd">操作</th>
+                            </tr>
+                            <volist name="list" id="hostlist"> 
+                            <tr>
+						 
+                            	<td>{pigcms:$hostlist.name}</td>
+                            	<td><span style="text-decoration:line-through">{pigcms:$hostlist.oprice}</span> / {pigcms:$hostlist.price}</td>
+                            	<td>{pigcms:$hostlist.keyword}</td>
+                            	<td>{pigcms:$hostlist.time|date="Y-m-d",###} / {pigcms:$hostlist.endtime|date="Y-m-d",###}</td>
+                            	<td>{pigcms:$hostlist.salecount}</td>
+                            	<td>
+                            		<a href="{pigcms::U('Groupon/set',array('id'=>$hostlist['id'],'token'=>$token))}" class="hover-tooltip-edit"><span class="glyphicon glyphicon-edit"></span></a> 
+                            		<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Groupon/del',array('id'=>$hostlist['id'],'token'=>$token))}');" class="hover-tooltip-trash"><span class="glyphicon glyphicon-trash danger"></span></a>
+                            	</td>
+                            </tr>
+                            </volist>
+                            
+                             <td colspan="6" style="text-align:right">{pigcms:$page}</td>
+                        </table>
+                      </div>
+            </div>
+            </div>
+            </div>
+ </div>
+<include file="Public:footer"/>

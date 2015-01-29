@@ -1,0 +1,166 @@
+<include file="Product:header"/>
+    <div class="lay_page page_order current" id="page_order">
+        <div class="lay_page_wrap">
+            <ul class="mod_addresslist ui_mt15 ui_mb15">
+                <li class="address_item arrow" id="toAddrList" evttag="toAddrList">
+                    <div class="address_detail">
+                        <p evttag="toAddrList">
+                            收件人：{pigcms:$name}&nbsp<span class="ui_color_weak">{pigcms:$mobile}</span>
+                            <span id="goaddlist" style="display: none" addr="/index.php?g=Wap&m=Product&a=select&wecha_id={pigcms:$wecha_id}&token={pigcms:$token}&adid={pigcms:$adid}"></span>
+                        </p>
+                        <p evttag="toAddrList" class="address qb_fs_m">{pigcms:$address}</p>
+                    </div>
+                </li>
+            </ul>
+            <div class="mod_cell ui_p10">
+                <div class="qb_flex">
+                    <div class="mod_select select_block flex_box">
+                        <select data-price="200" evttag="sendType" id="select_shipFee">
+                                <if	condition="$b eq 1">	
+                                 <option value="0" mtype="1012" ptype="0">卖家包邮: ￥0.00元</option>
+								<else/>
+									<volist name="ex" id="v">
+											 <option value="<?php echo $v[ 'price' ]."00" ?>" mtype="1012" ptype="100">{pigcms:$v.name}:￥{pigcms:$v.price}.00元</option>
+									</volist>
+								</if>				
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="mod_cell ui_p10">
+                <div class="qb_flex">
+                    <div class="mod_select select_block flex_box">
+                        <select evttag="changePay">
+                            <option value="-1">请选择支付方式</option>
+                            <option value="1014">财付通</option>
+                             <option value="1015">微支付</option>
+                            <option value="1016">货到付款</option>                                     
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="mod_cell_hr"></div>
+            <div class="mod_cell">
+                <div class="mod_celltitle">商品详情</div>
+                <div class="ui_color_weak qb_mb10"></div>
+                <ul class="mod_list">
+						<volist name="shopping" id="sh">
+								<volist name="sh" id="shop">
+                            <li class="list_item qb_mb10 qb_bfc">
+                                <a href="javascript:void(0)" class="bfc_f">
+                                    <img src="{pigcms:$shop.pic}" width="100" height="100" alt=""></a>
+                                <div class="bfc_c">
+                                    <p><if condition="$shop.attr eq ''">{pigcms:$shop.name}<else/>{pigcms:$shop.name}[{pigcms:$shop.attr}]</if></p>
+                                    <p class="qb_fs_s ui_color_weak">数量: {pigcms:$shop.bc}&nbsp;&nbsp;价格：<strong class="mod_color_strong">￥{pigcms:$shop.price}元</strong> </p>
+                                </div>
+                            </li>
+                        </volist>
+					</volist>
+                </ul>
+                <div class="qb_flex qb_mb10" id="coupon-node" index="0"></div>
+                <div class="qb_flex qb_mb10" id="promote-node" index="0"></div>
+                <div class="mod_cell_hr"></div>
+                <div class="ui_mb10">
+                    <p class="ui_align_right qb_none" id="free-div"></p>
+                    <p class="ui_align_right qb_none" id="dealoff-div">优惠金额：<strong class="mod_color_strong"><span id="dealoff-price"></span></strong></p>
+                    <p class="ui_align_right">应付金额：<strong class="mod_color_strong"><span id="total-price"></span></strong></p>
+                </div>
+            </div>
+            <div class="ui_gap">
+                <a id="submit-order" evttag="submitOrder" class="mod_btn btn_strong btn_block">提交订单</a>
+            </div>
+            <div class="qb_gap">
+               <!--  <form action="http://weigou.qq.com/o2ov1/cn/cmdy/confirmOrder.xhtml" method="get" name="cartForm">
+                    <input type="hidden" value="10" id="payType" name="payType">
+                    <input type="hidden" value="2F702C6C0000000004010000299520A7-颜色:030蓝 Blue|尺码:175/92A/XL-1" id="itemList" name="itemList">
+                    <input type="hidden" value="46521" id="adid" name="adid">
+                    <input type="hidden" value="7-1-5" id="prePageId" name="prePageId">
+                    <input type="hidden" value="" id="gcfa" name="gcfa">
+                    <input type="hidden" value="" id="icfa" name="icfa">
+                    <input type="hidden" value="1814851631" id="bid" name="bid">
+                    <input type="hidden" value="" id="ifb" name="ifb">
+                </form> -->
+            </div>
+        </div>
+    </div>
+    <div class="qb_quick_tip qb_none" id="bubble"></div>
+    <div class="mod_dialog qb_none" id="message-notice">
+        <div class="dialog_mask"></div>
+        <div class="dialog_main qb_br qb_tac">
+            <div class="dialog_bd" id="notice-content"></div>
+            <div class="dialog_ft qb_flex"><a href="javascript:void(0);" class="flex_box" id="notice-cancel">取消</a><a href="javascript:void(0);" class="flex_box" id="notice-sure">确定</a></div>
+        </div>
+    </div>
+    <!-- <script type="text/template" id="Script1">
+        <div class="mod_select select_block flex_box">
+            <select id="Select1" evttag="{#evtTag#}">{#optList#}</select>
+        </div>
+    </script>
+    <script type="text/template" id="Script2">
+        <li index="{#index#}">{#name#} <span class="mod_color_weak">{#mobile#}</span>{#selected#}<div class="address">{#address#}</div>
+        </li>
+    </script>
+    <script type="text/template" id="Script3">
+        <div class="qb_tar qb_mb10">货到付款优惠（减免零头）：<strong class="mod_color_strong qb_fs_s">&yen;{#free#}</strong></div>
+        <div class="qb_tar">包裹小计：<strong class="mod_color_strong">&yen;{#pkgTotal#}</strong></div>
+    </script> -->
+    
+<include file="Product:bottom"/>
+<script src="{pigcms::$staticFilePath}/js/ChatFloat.js"></script>
+<script>
+    new ChatFloat({
+        AId:1071,
+        right:0,
+        top:150,
+        openid:""
+    });
+</script>
+   <!--  <script type="text/template" id="promote-tpl">
+        <div class="mod_select select_block flex_box">
+            <select id="{#id#}" evttag="{#evtTag#}">{#optList#}</select>
+        </div>
+    </script>
+   <script type="text/template" id="addr-tpl">
+        <li index="{#index#}">{#name#} <span class="mod_color_weak">{#mobile#}</span>{#selected#}<div class="address">{#address#}</div>
+        </li>
+    </script> 
+    <script type="text/template" id="free-tpl">
+        <div class="qb_tar qb_mb10">货到付款优惠（减免零头）：<strong class="mod_color_strong qb_fs_s">&yen;{#free#}</strong></div>
+        <div class="qb_tar">包裹小计：<strong class="mod_color_strong">&yen;{#pkgTotal#}</strong></div>
+    </script> -->
+
+
+    <script type="text/javascript"> 
+       // var shareData = {"send2Friend":{"content":"优惠惊喜享不停","img":"http://1071.vshop.weimob.com/statics/images/share_logo.jpg","link":"http://1071.vshop.weimob.com","title":"【微商城】推荐给你看看，关注即可成为会员享受特权"},"share2Friend":{"img":"http://1071.vshop.weimob.com/statics/images/share_logo.jpg","link":"http://1071.vshop.weimob.com","title":"【微商城】关注我吧！更多会员特权等着你！"},"share2qqBlog":{"content":"我关注了【微商城】！拥有N多会员特权，一起来体验吧！","link":"http://1071.vshop.weimob.com"}};
+	   // var shareData = {"send2Friend":{"content":"品微惊喜不断！","img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"http://www.wzhi.cc/index.php?g=Wap&m=Product&a=cookie&token={pigcms:$token}","title":"【品微商城】推荐给你看看，不一样的商城"},"share2Friend":{"img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"http://www.wzhi.cc/index.php?g=Wap&m=Product&a=cookie&token={pigcms:$token}","title":"【品微商城】关注我吧！更多会员特权等着你！"},"share2qqBlog":{"content":"我关注了【品微商城】！拥有N多会员特权，一起来体验吧！","link":"http://www.wzhi.cc/index.php?g=Wap&m=Product&a=cookie&token={pigcms:$token}"}};	
+	           		         var shareData = {"send2Friend":{"content":"品微惊喜不断！","img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"{pigcms::C('site_url')}{pigcms::U('Product/cookie',array('token'=>$token))}","title":"【品微商城】推荐给你看看，不一样的商城"},"share2Friend":{"img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"{pigcms::C('site_url')}{pigcms::U('Product/cookie',array('token'=>$token))}","title":"【品微商城】关注我吧！更多会员特权等着你！"},"share2qqBlog":{"content":"我关注了【品微商城】！拥有N多会员特权，一起来体验吧！","link":"{pigcms::C('site_url')}{pigcms::U('Product/cookie',array('token'=>$token))}"}};
+			   // var shareData = {"send2Friend":{"content":"品微惊喜不断！","img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"{pigcms::U('Product/cookie',array('token'=>$token))}","title":"【品微商城】推荐给你看看，不一样的商城"},"share2Friend":{"img":"http://www.wzhi.cc/tpl/User/pinv/common/img/logo.gif","link":"{pigcms::U('Product/cookie',array('token'=>$token))}","title":"【品微商城】关注我吧！更多会员特权等着你！"},"share2qqBlog":{"content":"我关注了【品微商城】！拥有N多会员特权，一起来体验吧！","link":"{pigcms::U('Product/cookie',array('token'=>$token))}"}};
+	   !function () { function c() { var a = WeixinJSBridge; a.on("menu:share:appmessage", e), a.on("menu:share:weibo", f), a.on("menu:share:timeline", g), a.invoke("getNetworkType", {}, d) } function d(a) { var b, c; switch (a.err_msg) { case "network_type:wwan": b = 2e3; break; case "network_type:edge": b = 3e3; break; case "network_type:wifi": b = 4e3 } c = new Image, c.onerror = c.onload = function () { c = null } } function e() { var a = window.shareData.send2Friend, b = h(a); a.content = b ? b.content : a.content, a.img = b && b.img ? b.img : a.img, WeixinJSBridge.invoke("sendAppMessage", { img_url: a.img, img_width: "640", img_height: "640", link: a.link, desc: a.content, title: a.title }, function () { }) } function f() { var b = window.shareData.share2qqBlog; WeixinJSBridge.invoke("shareWeibo", { content: a.isios ? b.content + b.link : b.content, url: b.link }, function () { }) } function g() { var a = window.shareData.share2Friend; WeixinJSBridge.invoke("shareTimeline", { img_url: a.img, img_width: "640", img_height: "640", link: a.link, desc: " ", title: a.title }, function () { }) } function h() { return "function" == typeof b ? b() : "" } var b, a = function () { var a = window.navigator.userAgent; return this.isAndroid = a.match(/(Android)\s+([\d.]+)/) || a.match(/Silk-Accelerated/) ? !0 : !1, this.isiPad = a.match(/iPad/) ? !0 : !1, this.isiPod = a.match(/(iPod).*OS\s([\d_]+)/) ? !0 : !1, this.isiPhone = !this.isiPad && a.match(/(iPhone\sOS)\s([\d_]+)/) ? !0 : !1, this.isios = this.isiPhone || this.isiPad || this.isiPod, this }(); window.shareData && document.addEventListener("WeixinJSBridgeReady", c, !1), window.setShareListener = function (a) { b = a } }();
+    </script>
+       <script src="{pigcms::$staticFilePath}/js/zepto.min.js"></script>
+   <!--  <script src="/newPS{pigcms::$staticFilePath}/js/imagesloaded.pkgd.min.js"></script> -->
+  
+    <script type="text/javascript">
+        var pageParam, promoteIndex, subParam;	
+        pageParam = { 
+            "adid": "{pigcms:$token}",
+            "cart":"{pigcms:$wecha_id}", 
+            "totalPrice": "{pigcms:$price}+100",
+            "totalCount": "0",
+            "payType": "0",
+            "minipay": "true",
+			"shopid" : "{pigcms:$shopid}",
+			"name" : "{pigcms:$name}",
+			"moble" : "{pigcms:$mobile}",
+			"address" : "{pigcms:$address}",
+            "promotion": [ 
+            ],
+            "coupon": [
+
+            ]
+        };
+       subParam = [{"ic":"13641","attr":"22","bc":"2","mid":12424}];
+        mobile.o2ocn.cmdyDeal.init();
+    </script>
+</body>
+</html>

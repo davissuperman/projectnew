@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="text/css" href="./tpl/static/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+        <link type="text/css" href="./tpl/static/bootstrap/css/bootstrap-theme.css" rel="stylesheet"/>
+        <script type="text/javascript" src="./tpl/static/jquery-1.9.1.min.js"></script>
+        <script src="./tpl/User/pinv/common/js/date/WdatePicker.js"></script>
+
+        <script>
+            $(function() {
+
+
+                $("#Button1").bind("click", function() {
+                    // alert(11111);return false;
+                    $(".item:checkbox").prop("checked", true);
+                });
+                $("#Button2").bind("click", function() {
+                    // alert(22222);return false;
+                    $(".item:checkbox").prop("checked", false);
+                });
+            })
+        </script>
+
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="panel-body">
+
+                <form method="post" class="form-inline" action="{pigcms::U('Game/exportqsum')}">
+                    <div id="choose-date">
+
+                        <div id="date-calendar">
+                          范围：
+                            <div class="form-group">
+                                <input type="text" name="tstart" id="tstart" value="" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" class="form-control" style="width:132px"/><span>-</span>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="tend" id="tend" value="" onClick="WdatePicker({dateFmt: 'yyyy-MM-dd'})" class="form-control" style="width:132px"/>
+                            </div>
+                            <button type="submit" class="btn btn-default" style="width:50px"/>导出</button>
+              
+
+                        </div> 
+                        <br>
+                    </div>
+
+ 
+               
+            </div>
+        </div>
+    </body>
+</html>

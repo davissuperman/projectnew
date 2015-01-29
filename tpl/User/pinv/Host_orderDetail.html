@@ -1,0 +1,111 @@
+<?php $nav = "BUSINESS"; $side = "HOST_INDEX"; ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Product_index.css" rel="stylesheet"/>
+<link href="{pigcms::RES}/css/editActive.css" type="text/css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/jscolor.js" type="text/javascript"></script>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+<link type="text/css" href="{pigcms::RES}/css/order.css" rel="stylesheet"/>
+ <div class="container main">
+<div class="row">
+<include file="Host:left"/>
+    <!--right--begain-->
+		            <div class="col-md-10 main">
+                        <ol class="breadcrumb">
+              <li><a href="{pigcms::U('Host/index',array('token'=>$_GET['token']))}">微酒店</a></li>
+              <li><a href="{pigcms::U('Host/admin',array('token'=>$_GET['token'],'id'=>$_GET['id']))}">订单管理</a></li>
+              <li class='active'>查看订单</li>
+            </ol>
+            <div class="panel panel-success">
+                 <div class="panel-heading">
+                <h3 class="panel-title">查看订单</h3>
+              </div>
+              <div class="panel-body">
+                <div class='add-button pull-left'>
+                    <a href="{pigcms::U('Host/admin',array('token'=>$_GET['token'],'id'=>$_GET['hid']))}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-left"></span> 返回</a>
+                </div>
+                <div class="clearfix"></div>
+                <div class="alert alert-info">
+                	<p class="basSame">
+                        <span>订单编号：</span> 
+                        <span>{pigcms:$orders.sn}</span>
+                        <span>订单状态：</span> 
+                        <span style="color:green;"><if condition="$orders.order_status eq 1">成功</if><if condition="$orders.order_status eq 2">失败</if><if condition="$orders.order_status eq 3">未处理</if><if condition="$orders.order_status eq 4">用户取消</if></span>
+                    </p>
+                    <p class="basSame">               
+                        <span>订单总额：</span> 
+                        <span>￥{pigcms:$orders.price}</span>
+                    </p>
+                    <p class="basSame">
+                        <span>预定时间：</span> 
+                        <span>{pigcms:$orders.book_time|date="Y-m-d",###}</span>
+                    </p>
+                    <p class="basSame">
+                    	<span>客服备注：</span>
+                        <span id="service" style="width:auto;margin-right:5px;cursor:pointer"><if condition="$orders['service_remark'] neq ''">{pigcms:$orders['service_remark']}<else />点此编辑</if></span><span class="glyphicon glyphicon-question-sign hover-popover" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="hover" data-content="点击左侧内容可以进行编辑"></span>
+                        <input type="text" class="fuCase hide" id="edit_service"/>
+                    </p>
+                </div>
+                <div class="Info">
+                	<p class="inTitle">订单信息</p>
+                    <div class="forBox">
+                        <p class="pay">
+                        	<span>姓名：{pigcms:$orders.book_people}</span>
+                        </p>
+                        <p class="pay">
+                        	<span>联系电话：{pigcms:$orders.tel}</span>
+                        </p>
+                        <p class="pay">
+                        	<span>入住时间：{pigcms:$orders.check_in|date="Y-m-d",###}</span>
+                        </p>
+                        <p class="pay">
+                        	<span>离开时间：{pigcms:$orders.check_out|date="Y-m-d",###}</span>
+                        </p>
+                          <p class="pay">
+                        	<span>房间类型：{pigcms:$orders.room_type}</span>
+                        </p>
+                          <p class="pay">
+                        	<span>预订数量：{pigcms:$orders.book_num}</span>
+                        </p>
+                          <p class="pay">
+                        	<span>用户备注：{pigcms:$orders.remarks}</span>
+                        </p>
+                    </div>
+                    
+                </div>
+            </div>
+            </div>
+            </div>
+            </div>
+ </div>
+ <script>
+    $(function(){
+        $("#service").click(function(){
+            $(this).hide();
+            $(this).next().hide();
+            $("#edit_service").removeClass("hide");
+            $("#edit_service").focus();
+        });
+        <?php 
+            $url=U("Host/modremark",array("token"=>$_GET['token']));
+        ?>
+        $("#edit_service").blur(function(){
+             $("#edit_service").addClass("hide");
+             $("#service").show();
+            $("#service").next().show();
+             if($("#edit_service").val())
+                $("#service").html($("#edit_service").val());
+            else
+                $("#service").html("点此编辑");
+            $.ajax({
+                url: '{pigcms:$url}',
+                type: 'post',
+                data: {val: $('#edit_service').val(),id:"{pigcms:$_GET['id']}"},
+                success:function(){
+                }
+            });
+        });
+    });
+ </script>
+<include file="Public:footer"/>

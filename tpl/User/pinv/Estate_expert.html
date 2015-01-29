@@ -1,0 +1,49 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_index.css" rel="stylesheet"/>
+<div class="content">
+    <div class="ffBox">
+        <include file="Public:left"/>
+        <!--right--begain-->
+        <div class="right">
+            <p class="rightTop">
+                <a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+            </p> 
+            <p class="pressBox"><a href="{pigcms::U('Estate/expert_add',array('token'=>$token))}"     class="addList"/>添加点评</a></p>
+
+            <table class="sheet" cellspacing="1">
+                <tr>    
+                        <th class="secondTd">点评标题</th>
+                                            <th class="secondTd">专家</th>
+                                            <th class="secondTd">显示顺序</th>
+                                  
+                                            <th class="forthTd">操作</th>                  
+                </tr>
+                   <if condition="$expert eq ''">
+                                        <tr>
+                                        <td colspan="4" style="text-align:center; height:30px;"><strong>请加添房友印象信息.</strong></td>
+                                        </tr>
+                                    <else/>
+                                    <volist name="expert" id="list">
+                                        <tr>
+                                         
+                                        <td>{pigcms:$list['title']}</td>
+                                        <td>{pigcms:$list['name']}</td> 
+                                        <td>{pigcms:$list['sort']}</td>
+                                        <td>
+                                        <a href="{pigcms::U('Estate/expert_add',array('id'=>$list['id'],'token'=>$list['token']))}" class="btn">编辑</a>
+                                        <a href="{pigcms::U('Estate/expert_del',array('id'=>$list['id'],'token'=>$list['token']))}" onclick="return(confirm('确定要删除吗？'))"  class="btn">删除</a>
+</td>
+                                        </tr>
+                                    </volist>
+                                    </if>
+            </table>
+
+
+            <p class="page">{pigcms:$page}</p>
+        </div>
+        <!--right--end-->   
+    </div> 
+
+</div>
+<include file="Public:footer"/>

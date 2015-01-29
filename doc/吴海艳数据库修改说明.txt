@@ -1,0 +1,29 @@
+1.2014/4/10粉丝表tp_customer_service_fans添加关注状态字段subscribe
+  ALTER TABLE `sentian`.`tp_customer_service_fans`     ADD COLUMN `subscribe` TINYINT(1) UNSIGNED DEFAULT '1' NOT NULL COMMENT '1关注中，0已取消关注' AFTER `subscribe_time`;
+
+2.增加用户行为表 记录用户关注 取消关注 绑定会员卡行为
+  CREATE TABLE `tp_user_action` (
+   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+   `openid` char(28) NOT NULL COMMENT '操作用户',
+   `token` char(16) NOT NULL COMMENT '对应商家标识',
+   `type` varchar(12) NOT NULL COMMENT '关注subscribe,取消关注unsubscribe，绑定会员卡binding_card',
+   `time` int(10) unsigned NOT NULL COMMENT '操作时间',
+   PRIMARY KEY (`id`),
+   UNIQUE KEY `id` (`id`),
+   KEY `token` (`token`),
+   KEY `type` (`type`),
+   KEY `openid` (`openid`)
+ ) ENGINE=MyISAM DEFAULT CHARSET=utf8
+
+3.修改tp_customer_service_fans字段subscribe_time备注为关注时间或取消关注时间
+  ALTER TABLE `sentian`.`tp_customer_service_fans`     CHANGE `subscribe_time` `subscribe_time` INT(10) UNSIGNED DEFAULT '0' NOT NULL COMMENT '关注时间或取消关注时间';
+
+3.修改tp_user_action type备注，
+  关注subscribe
+  取消关注unsubscrib
+  绑定会员卡binding
+  ALTER TABLE `sentian`.`tp_user_action`     CHANGE `type` `type` VARCHAR(12) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '关注subscribe,取消关注unsubscribe,绑定会员卡binding,活跃度统计active_usert';
+
+4.粉丝表tp_customer_service_fans添加字段county，因为当用户是中国以外的国家时，城市就没有值，
+  在用户统计的时候需要作筛选
+  ALTER TABLE `sentian`.`tp_customer_service_fans`     ADD COLUMN `country` VARCHAR(24) DEFAULT '' NOT NULL COMMENT '国家' AFTER `sex`;

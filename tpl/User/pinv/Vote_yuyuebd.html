@@ -1,0 +1,87 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Product_set.css" rel="stylesheet"/>
+<!--<link type="text/css" href="/tpl/static/xhedit/demo/common.css" rel="stylesheet"/>-->
+
+<script type="text/javascript" src="/tpl/static/xhedit/jquery/jquery-1.4.4.min.js"></script>ript>
+
+<script type="text/javascript">
+$(function(){
+     /*$("#catid").click(function(){
+	     
+	  
+	 
+	    var catid=$('#catid').val();
+	     //alert(catid);return false;
+	        $.ajax({
+						url:'{pigcms::U("Yuangong/grtplist")}',
+						data:'dj='+dj+'&sid='+sid+'&token='+token+'&username='+username+'&rs='+rs,
+						type:'get',
+						dataType:'html',
+						success:function(info){
+						   //alert(info);return false;
+						    $('#cd').html(info);
+						    //$('#pp').html(info);
+							$(".mm").children().attr("disabled","disabled");
+							
+							
+
+						   //alert(info);return false;
+						   //if(result.stauts>0){
+						     //   $('#cd').html("fenshu"+result.info);
+						   //}else{
+								//alert(result.info);
+						   //}
+							
+						}
+                 });
+	})*/
+
+})
+
+</script>
+ <div class="content">
+ <div class="ffBox">
+<include file="Public:left"/>      
+     <!--right--begain-->
+           <div class="right">
+           	  <div class="right">
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+              </p>
+              
+              <p class="artiEdit"><span class="big">预约信息选择</span></p>
+               <form class="form" method="post" action="{pigcms::U('Vote/yuyuebd',array('token'=>$token,'id'=>session('wxid')))}" id="form" > 
+				
+				<input type="hidden" name="token" id="token" value="{pigcms:$_GET['token']}" />
+				<input type="hidden" name="kid"  value="{pigcms:$qry['keyid']}" />
+				
+               
+                <div class="keyWord">
+                    <span class="Tex">类别：</span>
+                  <select id="catid" name="keyword"><option value="0">请选择分类...
+				  </option>
+  
+				  <volist name="list" id="vo">
+					    <option value="{pigcms:$vo.id}" <if condition="$vo['id'] eq $qry['keyid']">selected='selected'</if>>
+					        {pigcms:$vo.keyword}
+				        </option>
+				  </volist>
+									
+				  
+				  </select>
+                </div>
+               
+                
+                
+               
+               
+                       
+                <p class="pressBox"><input type="submit" value="保存" class="addList"/></p>
+           </form>
+               </div>
+            <!--right--end-->
+            </div>   
+      
+ </div>
+<include file="Public:footer"/>

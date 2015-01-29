@@ -1,0 +1,63 @@
+<?php $nav = "FUNCTION"; $side = "CATEGORY"; $sideTop = "PRODUCT"; ?>
+<include file="Public:head"/>
+ 
+<div class="container main">
+    <div class="row">
+        <include file="Store:left"/>
+
+        <div class="col-md-10 main">
+            <ol class="breadcrumb">
+                <li><a href="{pigcms::U('Store/index',array('token'=>$token))}">微商城</a></li>
+                <li><a href="{pigcms::U('Store/index',array('token'=>$token))}">商城管理</a></li>
+                <li class="active">商品管理</li>
+            </ol> 
+            <div> 
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">商品管理</h3>
+                    </div>
+                    <form class="form-horizontal" class="form" method="post" action=""> 
+                    <div class="panel-body">
+
+                       
+                            
+                                <input type="hidden" name="id" value="{pigcms:$setting.id}" /> 
+                                <input type="hidden" name="token" value="{pigcms:$token}" /> 
+                                <div class="form-group">
+                                    <label for="title" class="col-sm-2 control-label">免邮设置：</label>
+                                    <div class="col-sm-5">
+                                        <input type="text"  name="price" value="{pigcms:$setting.price}"    class="form-control validate[required]" value="{Pigcms:$info.username}" data-rule-required="true"  />
+                                    </div>
+                                    <div class="col-sm-5">
+                                        满元免邮
+                                    </div>							
+                                </div>
+                                <div class="form-group">
+                                    <label for="title" class="col-sm-2 control-label">积分兑换：</label>
+                                    <div class="col-sm-5">
+                                        <input type="text" name="score" value="{pigcms:$setting.score}"    class="form-control validate[required]" value="{Pigcms:$info.username}" data-rule-required="true"  />
+                                    </div>
+                                    <div class="col-sm-5">
+                                        积分=1元 (注：写0表示积分不可兑换)
+                                    </div>							
+                                </div>
+                                <div class="form-group">
+                                    <label for="title" class="col-sm-2 control-label">货到付款：</label>
+                                    <div class="col-sm-5">
+                                        <label class="checkbox-inline"> <input type="radio" name="paymode" value="0" <if condition="$setting['paymode'] eq 0" >checked</if>>不支持</label>
+                                        <label class="checkbox-inline"> <input type="radio" name="paymode" value="1"   <if condition="$setting['paymode'] eq 1">checked</if>>支持</label>
+                                    </div>
+                                </div>
+                                
+                            
+                          
+                    </div>
+                     <div class="panel-footer" style="text-align:right">
+
+                       
+                        <input type="submit" value="保存" class="btn btn-success"/>
+                        <input type="button" value="取消" class="btn btn-link" onclick="javascript:history.go(-1);"/>
+                    </div></form> 
+                
+                </div></div></div></div></div>
+<include file="Public:footer" />

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+        <head>
+        <title>{pigcms:$set['title']}|在线订购</title>
+        <script type="text/javascript">var yyuc_jspath = "/@system/";</script><script type="text/javascript" src="{pigcms::RES}/js/host/js/jquery.js"></script><script type="text/javascript" src="/@system/js/yyucadapter.js"></script>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="{pigcms::RES}/css/host/hotels.css" media="all" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+        <meta name="Keywords" content="" />
+        <meta name="Description" content="" />
+        <!-- Mobile Devices Support @begin -->
+        <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+        <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta content="0" http-equiv="expires">
+        <meta content="telephone=no, address=no" name="format-detection">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <!-- apple devices fullscreen -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <!-- Mobile Devices Support @end -->
+        <script type="text/javascript" src="{pigcms::RES}/js/host/swipe.js"></script>
+        <style>
+img {
+	width: 100%!important;
+}
+</style>
+        </head>
+        <body id="hotels" ondragstart="return false;" onselectstart="return false;" >
+<section class="body">
+          <div class="banner">
+    <div id="imgs_box" class="box_swipe">
+              <ul>
+             
+
+			  <if condition="$set['ppicurl'] neq false">
+		        <li style="width:100%;">
+			    <a href="javascript:;"><img src="{pigcms:$set['ppicurl']}"  />  </a>
+			  
+			     </li>
+				<else />
+			 <li style="width:100%;">
+				<a href="javascript:;"><img src="{pigcms::RES}/css/style/images/default.jpg"  /></a>
+					 </li>
+			   </if>
+      </ul>
+             
+            </div>
+  </div>
+          <div class="cardexplain">
+    <ul class="round">
+              <li class="addr"> <a href="http://api.map.baidu.com/marker?location= {pigcms:$set['jingdu']},{pigcms:$set['weidu']}&title={pigcms:$set['title']}&name={pigcms:$set['address']}&content={pigcms:$set['dituaddress']}&output=html&src=weiba|weiweb"> <span> {pigcms:$set.title}</span> </a> </li>
+              <li class="tel"> <a href="tel://{pigcms:$set['tel2']}"> <span> {pigcms:$set['tel2']}  电话预订 </span> </a> </li>
+            </ul>
+    <div class="detailcontent">
+              <h2> 详情介绍 </h2>
+              <span style="white-space:normal;">{pigcms:$set.info}</div>
+  </div>
+          <div class="plugback"> <a href="javascript:history.back(-1)">
+            <div class="plugbg themeStyle"> <span class="plugback"> </span> </div>
+            </a> </div>
+        </section>
+<!--<div class="mfooter" id="wxgjfooter" style="text-align: center;width: 100%;height: 20px;line-height: 20px;margin-top:10px;"> <span class="sp2"><a href="http://www.weiqimobile.com" style="color: #5e5e5e;font-size: 12px;">@微信平台提供技术支持</a></span> </div>
+<div style="width: 0px;height: 0px;overflow: hidden;"> 
+          <script src="http://s22.cnzz.com/z_stat.php?id=1000151448&web_id=1000151448" language="JavaScript"></script> 
+        </div>-->
+<script>
+/**
+$(function(){
+	if($('body').height()<$(window).height()){
+		$('body').height($(window).height());
+		$('#wxgjfooter').css('position','fixed').css('bottom','0px');
+	}
+});
+**/
+</script> 
+<script>
+    	$(document).ready(function(){
+    		$(function(){
+				new Swipe(document.getElementById('imgs_box'), {
+					speed:500,
+					//auto:3000,
+					callback: function(index, elem){
+						var lis = $('#imgs_box').children("ol").children();
+						lis.removeClass("on").eq(index).addClass("on");
+					}
+				}); 
+			});
+    	});
+   	</script>
+<include file="Public:tongji"/>
+</body>
+</html>

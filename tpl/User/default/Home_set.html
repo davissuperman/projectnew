@@ -1,0 +1,42 @@
+<include file="Public:head"/>
+<div class="content">
+
+<div class="cLineB">
+  <h4>首页回复配置 </h4><a href="javascript:history.go(-1);" class="right btnGrayS vm" style="margin-top:-27px">返回</a>
+ </div>
+         
+    <div class="msgWrap bgfc">
+	  <form class="form" method="post" action="" target="_top" enctype="multipart/form-data">	 
+		<table class="userinfoArea" style=" margin:0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+			<tbody>
+				<tr>
+				  <th valign="top"><span class="red">*</span>关键词：</th>
+				  <td>
+					<span class="red">首页 或者 home —— 当用户输入该关键词时，将会触发此回复。</span></td>
+				</tr>
+				<tr>
+					<th width="120">回复标题：</th>
+					<td><input type="text" name="title" value="{pigcms:$home.title}" class="px" style="width:550px;"></td>
+				</tr>
+				<tr>
+					<th width="120">内容介绍：</th>
+					<td><textarea style="width:560px;height:75px" name="info" id="info" class="px">{pigcms:$home.info}</textarea><br/>最多填写120个字</td>
+				</tr>
+				<tr>
+					<th>回复图片：</th>
+					<td><input type="text" name="picurl" value="{pigcms:$home.picurl}" class="px" style="width:550px;"><br/> 填写图片外链地址，大小为720x400</td>
+				</tr>
+				<th>&nbsp;</th>
+					<td>
+						<button type="submit" name="button" class="btnGreen">保存</button>
+						<a href="javascript:history.go(-1);" class="btnGray vm">取消</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+  </div> 
+ 
+  
+        </div>
+<include file="Public:footer"/>

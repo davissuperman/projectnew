@@ -1,0 +1,76 @@
+<?php $nav = "STATS"; $side = "KEYWORD" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Text_add.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+<script src="{pigcms::RES}/flash/FusionCharts.js" type="text/javascript"></script>
+<script src="{pigcms::RES}/flash/MSLine.swf" language="javascript" type="text/javascript"></script> 
+<div class="container main">
+<div class="row">
+<include file="Requerydata:left"/>     
+    <div class="col-md-10 main">
+            <div class="panel panel-success">
+                <div class="panel-heading cfix">
+                    <h3 class="panel-title pull-left">关键词统计</h3>
+                </div>
+                <div class="panel-body">
+                    <div id="condition">
+                        指标：<select id="thisCondition">
+                                <option value="0" <if condition="$matched eq 0">selected</if>>触发次数</option>
+                                <option value="1" <if condition="$matched eq 1">selected</if>>命中次数</option>
+                              </select>
+                    </div>
+                    <div id="choose-date">
+                            <a href="{pigcms::U('Requerydata/keywordsClick',array('token'=>$token,'start'=>$nowtime,'end'=>$nowtime,'matched'=>$matched ))}">今天</a>
+                            <a href="{pigcms::U('Requerydata/keywordsClick',array('token'=>$token,'start'=>$yestoday,'end'=>$yestoday,'matched'=>$matched ))}">昨天</a>
+                            <a href="{pigcms::U('Requerydata/keywordsClick',array('token'=>$token,'start'=>$sevenDay,'end'=>$nowtime,'matched'=>$matched ))}" href="javascript:void(0)">最近7天</a>
+                            <a href="{pigcms::U('Requerydata/keywordsClick',array('token'=>$token,'start'=>$thirtyday,'end'=>$nowtime,'matched'=>$matched ))}">最近30天</a>
+                            <div id="date-calendar">
+                                <form method="post" action="">
+                                    <input type="text" name="start" id="start" value="{pigcms:$start}" onClick="WdatePicker()" class="form-control" style="width:102px"/><span>-</span>
+                                    <input type="text" name="end" id="end" value="{pigcms:$end}" onClick="WdatePicker()" class="form-control" style="width:102px"/>
+                                    <button type="submit" class="btn btn-default" style="width:50px"/>确定</button>
+                                </form>
+                            </div> 
+                             <empty name="xdata"><else/><a href="{pigcms::U('Requerydata/keywordsImport',array( 'token'=>$token ) )}" target="_blank" style="float:right;margin-right:10px;">导出报表</a></empty>
+                    </div>
+                    <empty name="click">
+                        没有满足条件的数据
+                    <else/>
+                        <div id="chartdiv1" align="center" style="background:#f9f9f9"></div>
+                        <script type="text/javascript">
+                            var chart = new FusionCharts("{pigcms::RES}/flash/MSLine.swf", "ChartId", "830", "350", "0", "1");
+                            //chart.setTransparent("false");
+                            chart.setDataXML('{pigcms:$xml}');
+                            //chart.setDataURL("data.html");
+                            chart.render("chartdiv1");
+                        </script>
+                        <table class="table table-striped" cellspacing="1" cellpadding="5">
+                            <tr>
+                                <th>关键词</th>
+                                <th><if condition="$matched eq 1">命中次数<else/>触发次数</if></th>
+                                <if condition="$matched eq 1"><else/><th>是否命中</th></if>
+                            </tr>
+                            <volist id="click" name="click">
+                            <tr bgcolor="#fff" height=30>
+                                <td>{pigcms:$click.keyword}</td>
+                                <td>{pigcms:$click.clicknum}</td>
+                                <if condition="$matched eq 1"><else/><th>{pigcms:$match[$click['matched']]}</th></if>
+                            </tr>
+                            </volist>  
+                        </table>
+                    </empty>
+            	    <p class="pages">{pigcms:$page}</p>
+            </div>  
+    </div>  
+ </div>
+ </div>
+ </div>
+ <script>
+    $(function(){
+       $("#thisCondition").change(function(){
+            var matched = $("#thisCondition").val();
+            window.location.href = "/index.php?g=User&m=Requerydata&a=keywordsClick&token={pigcms:$token}&start={pigcms:$start}&end={pigcms:$end}&matched="+matched;
+        });       
+    });
+</script>
+<include file="Public:footer"/>

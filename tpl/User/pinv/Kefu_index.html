@@ -1,0 +1,154 @@
+<?php $nav = "Kefu"; $side = "CLASSIFY" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Text_index.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/kefu/global.js"></script>
+<script type="text/javascript">
+
+function dianji(uid){
+    //alert(uid);
+	
+		
+         if($('#tt'+uid).children().length==1)
+		 {
+				 var nicheng=$('#dj'+uid).html();
+				$('#dj'+uid).hide();
+			   // $('<input type="text" value="" class="bor"/>').appendTo($('#tt'+uid));
+				$('<input type="text" value=""class='+"bor"+uid+'>').appendTo($('#tt'+uid));
+				$('<input style="cursor:pointer" type="button" value="OK"class='+"bor1"+uid+'>').appendTo($('#tt'+uid));
+				//$(".bor").css("border","1px #ccc solid").val(nicheng).addClass("bb"+uid);
+				$(".bor"+uid).css("border","1px #ccc solid");
+				$('.bor'+uid).val(nicheng);
+		    }
+			
+			
+		
+		
+		
+		    //$(".bor").removeClass("bor");
+			
+		//alert($('#dj'+uid).closest("tr").siblings().length)
+	    if($('#dj'+uid)){
+		      
+				for(var i=1;i<$('#dj'+uid).closest("tr").siblings().length;i++)
+				{
+					if($('#dj'+uid).closest("tr").siblings().eq(i).find("td").eq(1).children().length!=1)
+					{   
+						$('#dj'+uid).closest("tr").siblings().eq(i).find("td").eq(1).find("input").remove();
+						$('#dj'+uid).closest("tr").siblings().eq(i).find("td").eq(1).find("span").show();
+
+					}
+				
+				}
+		    
+		}
+		
+		$(".bor1"+uid).click(function(){
+			
+			var nn=$('.bor'+uid).val();
+			var token=$('#token'+uid).val();
+			var username=$('#username'+uid).val();
+			
+			
+			 if($.trim(nn).length>12){
+			    alert('不能超过十二个字符');
+				return false;
+			  }else if($.trim(nn).length<2){
+			  
+			       alert('不能小于二个字符');
+				    return false;
+			  }
+			$(".bor"+uid).remove();
+			$(".bor1"+uid).remove();
+			//$('#dj'+uid).show().html(nn);
+			//alert(token);return false;
+			 $.ajax({
+					type: "GET",
+					url: '{pigcms::U("Kefu/updateuser")}',
+					data: "nn="+nn+'&token='+token+'&username='+username,
+					success: function(msg){
+					 	//alert(msg);return false;
+						if(msg == 1){
+						  // alert('修改成功');
+						   $('#dj'+uid).show().html(nn);
+				           return true; 
+   						}else{
+						    
+							 alert('没有修改成功');
+							 $('#dj'+uid).show().html(nn);
+				             return false;
+						}
+					},
+					
+			 	});
+			
+		
+		});
+		//mm=true;
+		
+
+
+		
+
+
+}
+
+</script>
+ <div class="container main">
+<div class="row">
+<include file="Kefu:left"/>
+     
+            <div class="col-md-10 main">
+             <div class="panel panel-success">
+			  <div class="panel-heading">
+				<h3 class="panel-title">人工客服管理</h3>
+			  </div>
+			  <div class="panel-body">  
+			  <!--	<div class="add-button pull-right"style="float:left">-->
+			 <div class=""style="float:left">
+            		<a href="{pigcms::U('Kefu/add',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-file"></span> 添加客服</a>
+            		<!--<a href="{pigcms::U('Kefu/ltiaojl',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-picture"></span> 聊天记录</a>
+					<a href="{pigcms::U('Kefu/fkgl',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-picture"></span> 访客管理</a>-->
+            	</div>         
+            	<table class="table table-striped" cellspacing="1">
+                	<tr>
+                    	<th class="">编号</th>
+                        <th class="">客服名</th>
+                        <th class="">登陆名</th>
+                        <th class="">状态 </th>
+                        <th class="text-center">操作</th>
+                    </tr>
+                    <volist name="list" id="vo">
+                    <tr>
+                    	<td class="">{pigcms:$i}</td>
+                        <td  class='k' id="tt{pigcms:$vo.uid}"><span id="dj{pigcms:$vo.uid}">{pigcms:$vo.name}</span>
+						</td>
+
+                        <td class="">{pigcms:$vo.username}</td>
+                          <if condition= "$vo['type'] eq 1">
+                           <td class="">普通客服</td>
+					      <elseif condition= "$vo['type'] eq 2"/>
+                          <td class="">客服经理</td>
+                        </if>
+						<td class="text-center">
+                        	<input type="hidden" id='username{pigcms:$vo.uid}' value="{pigcms:$vo.username}" name='username' />
+						   <input type="hidden" id='token{pigcms:$vo.uid}' value="{pigcms:$vo.token}" name='token' />
+							<a class="hover-tooltip-edit" onclick="dianji({pigcms:$vo.uid})" style="cursor:pointer"><span class="glyphicon glyphicon-edit"></span>
+							</a> 
+                        	
+							<a href="javascript:drop_confirm('您确定要删除吗?', \'{pigcms::U('Kefu/del',array('id'=>$vo['uid'],'token'=>$token))}\');" class="hover-tooltip-trash"><span class="glyphicon glyphicon-trash danger"></span></a>
+                        </td>
+                    </tr>
+                    </volist>
+                 
+                  
+                </table>
+               </div>
+                  <p colspan="7" style="text-align:right">
+                 {pigcms:$page}
+                 </p>
+            </div>
+
+            </div>   
+      </div>
+ </div>
+<include file="Public:footer"/>

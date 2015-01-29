@@ -1,0 +1,67 @@
+<?php $nav = "FUNCTION"; $side = "SHOP"; $sideTop = "PRODUCT"; ?>
+
+<include file="Public:head"/>
+
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+<link type="text/css" href="{pigcms::RES}/css/Photo_list_add.css" rel="stylesheet"/>
+ <div class="container main">
+<div class="row">
+<include file="Product:left"/>
+     
+<!--right--begain-->
+<div class="col-md-10 main">
+                 <ol class="breadcrumb">
+              <li><a href="{pigcms::U('Product/index',array('token'=>$token))}">微商城</a></li>
+              <li><a href="{pigcms::U('Product/index',array('token'=>$token))}">商城管理</a></li>
+              <li class="active">首页设置</li>
+            </ol>
+              <div class="panel panel-success">
+            		<!-- <p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+               <p class="artiEdit"><span class="big">上传图片</span><a href="javascript:history.go(-1);"   class="addListX">返回</a></p>        -->   
+               <div class="panel-heading">
+                <h3 class="panel-title">上传图片</h3>
+              </div>
+              <div class="panel-body">
+                <table class="table table-striped" cellspacing="1">
+                    <tr>
+                      <th>预览</th>
+                        <th class="">名称</th>
+                        <th class="" title="">图片外链地址(宽720够了，高不限制)</th>
+                   <!--      <th class="sevenTd">显示</th>
+                        <th class="thirdTd">操作</th >-->
+                    </tr>
+                     <form method="post" action=""> 
+					<input type="hidden" name="id" value="{pigcms:$i.id}"/>	
+                    <tr>
+                      <td><img width="80px"src="{pigcms:$i.Shopic}" alt=""></td>
+                    	<td>商城首页背景图</td>
+                        <td><input type="text" class="case" name="Shopic"  value="{pigcms:$i.Shopic}" id='url' placeholder="图片规格378*567" /><a href="###" onclick="upyunPicUpload($(this).prev().attr('id'),'pic',700,420,'qtclsw1382672973')" class="a_upload">上传</a></td>
+                      <!--   <td><input type="checkbox" name="status" value="1"   <if condition="$photo['status'] eq 1">checked</if> /></td>
+                        <td><input type="hidden"   name="id" value="{pigcms:$photo.id}"  /> <input type="submit" class="btn btn-xs btn-default"  value="修改"/></td> -->
+                    </tr>
+					<tr>
+             <td><img width="80px" src="{pigcms:$i.Shopics}" alt=""></td>
+                    	<td>首页LOGO图</td>
+                        <td><input type="text" class="case" name="Shopics"  value="{pigcms:$i.Shopics}" id='url1'  placeholder="图片规格132*220" /><a href="###" onclick="upyunPicUpload($(this).prev().attr('id'),'pic',700,420,'qtclsw1382672973')" class="a_upload">上传</a></td>
+                      <!--   <td><input type="checkbox" name="status" value="1"   <if condition="$photo['status'] eq 1">checked</if> /></td>
+                        <td> <input type="hidden"   name="id" value="{pigcms:$photo.id}"  /> <input type="submit"  class="btn btn-xs btn-default"  value="修改" /></td> -->
+                    </tr>
+                </table>        
+            </div>
+                            <div class="panel-footer" style="text-align:right">
+                        <input type="submit" value="保存" class="btn btn-success"/><input type="hidden" name="token" value="{pigcms:$token}" />     
+                            </div>
+                    </form>
+            </div>
+            <!--right--end-->    
+            </div>    
+            </div>    
+      
+ </div>
+<include file="Public:footer"/>

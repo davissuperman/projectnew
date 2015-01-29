@@ -1,0 +1,15 @@
+.right{width:837px;height:1000px;float:left;padding:0px 10px;}
+.artiEdit{height:40px;line-height:45px;border-bottom:1px #eee solid;margin-top:15px;}
+.big{font-size:18px;font-weight:bold;color:#6e6e6e;float:left;margin-right:10px;}
+.small{font-size:12px;color:#ea533f;float:left;}
+.same{height:27px;line-height:27px;color:#696969;margin-top:25px;padding-left:10px;}
+.Tex{width:120px;height:auto;color:#676767;float:left;text-align:right;margin-right:15px;display:inline;color:#444;font-weight:bold;}
+.circle{width:510px;height:25px;line-height:25px;float:left;border:1px #adacb4 solid;padding-left:5px;margin-right:10px;}
+.example{height:20px;line-height:20px;padding-left:145px;font-size:12px;color:#ea533f;}
+.expBox{height:35px;line-height:15px;font-size:12px;padding-left:195px;margin-top:5px;color:#696969;}
+.surePress{float:left;width:72px;height:33px;line-height:33px;text-align:center;color:#fff;background:url(../img/savePress.gif) no-repeat;border:0px;margin-top:13px;margin-left:10px;cursor:pointer;}
+.apiBox{margin-top:30px;}
+.apiBox li{width:177px;height:87px;float:left;margin-left:20px;}
+.aipTex{float:left;width:175px;height:33px;line-height:33px;text-align:center;background:url(../img/apiPress.gif) no-repeat;color:#000;font-weight:bold;color:#fff;}
+.surePress:hover{background:url(../img/saveX.gif) no-repeat;}
+.aipTex:hover{background:url(../img/imgOver.gif) no-repeat;}

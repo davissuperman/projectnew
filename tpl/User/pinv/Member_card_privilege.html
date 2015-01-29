@@ -1,0 +1,62 @@
+<?php $nav = "MEMBER"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Member_card_privilege.css" rel="stylesheet"/>
+ <div class="container main">
+<div class="row">
+<include file="Member_card:left"/>
+
+           <div class="col-md-10 main">
+           
+           <ol class="breadcrumb">
+			  <li><a href="{pigcms::U( 'Member_card/replyInfoSet',array( 'token'=>$token ))}">会员卡</a></li>
+			  <li><a href="{pigcms::U( 'Member_card/index',array( 'token'=>$token ))}">会员卡管理</a></li>
+			  <li class="active">{pigcms:$thisCard.cardname} - 会员特权管理</li>
+			</ol>
+			
+ 				<div class="panel panel-success">
+			  <div class="panel-heading">
+				<h3 class="panel-title">会员特权管理</h3>
+			  </div>
+			  <div class="panel-body">
+            	<div class="add-button pull-left">
+	            	<a href="javascript:history.go(-1);"  class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-left"></span> 返回</a>
+			  	</div>			  		
+			  		<div class="add-button pull-right">
+            		<a href="{pigcms::U('Member_card/privilege_add',array('token'=>$token,'id'=>$thisCard['id']))}"  class="btn btn-success"> 添加会员特权</a>
+            		</div>
+                <table class="table table-striped" cellspacing="1">
+                    <tr>
+                      
+                        <th class="sevenTd">标题</th>
+                   <th class="">使用次数</th>
+                        <th class="">创建时间</th>
+                        <th class="">过期时间</th>
+                        <th class="">操作</th>
+                    </tr>
+                        <volist name="data_vip" id="data_vip">           
+                    <tr>
+                         
+                        <td class="">{pigcms:$data_vip.title}</td>
+                        <td>{pigcms:$data_vip.usetime}</td>
+                       
+                        <td><if condition="$data_vip['type'] eq 1">无时间限制<else/>{pigcms:$data_vip.statdate|date='Y-m-d',###}</if></td>
+					  <td><if condition="$data_vip['type'] eq 1">无时间限制<else/>{pigcms:$data_vip.enddate|date='Y-m-d',###}</if></td>
+                        <td class="">
+                           
+                        <a href="{pigcms::U('Member_card/useRecords',array('id'=>$thisCard['id'],'type'=>'vip','itemid'=>$data_vip['id']))}"><span class="glyphicon glyphicon-stats hover-tooltip-stats"></span></a>
+                        <a href="{pigcms::U('Member_card/privilege_add',array('id'=>$thisCard['id'],'itemid'=>$data_vip['id']))}">编辑</a> 
+                        <a href="{pigcms::U('Member_card/privilege_del',array('itemid'=>$data_vip['id'],'id'=>$thisCard['id']))}">删除</a>
+                        
+                        </td>
+                    </tr>
+                   </volist>
+                    
+                </table>
+              <p class="page">{pigcms:$page}</p>
+            </div>
+            </div>
+            </div>
+            </div>   
+      
+ </div>
+<include file="Public:footer"/>

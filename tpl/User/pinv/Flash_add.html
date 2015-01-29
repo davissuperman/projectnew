@@ -1,0 +1,49 @@
+<?php $nav = "HOME"; $side = "FLASH" ?>
+<include file="Public:head"/>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+<link type="text/css" href="{pigcms::RES}/css/Classify_add.css" rel="stylesheet"/>
+<div class="container main">
+<div class="row">
+<include file="Home:left"/>
+
+ <div class="col-md-10 main">
+ 				<div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title ">添加首页幻灯片</h3>
+			  </div>
+			  <div class="panel-body">
+    			 <form class="form" method="post"   action="{pigcms::U('Flash/insert')}"  enctype="multipart/form-data" >
+    			 <p class="same">
+                    <span class="Tex">幻灯片描述：</span>
+                    <input type="text" value="" name="info" class="circle"/>
+                </p>
+                <p class="example"> 	
+30个字简短分类描述，可为空 </p>
+               
+                <p class="same">
+                    <span class="Tex">幻灯片图片设置：</span>
+                    <input type="text" id='url' value="" name="img" class="circle"/>
+					<a href="###" onclick="upyunPicUpload($(this).prev().attr('id'),'pic',700,420,'qtclsw1382672973')" class="a_upload btn btn-info btn-sm"><span class="glyphicon glyphicon-upload"></span> 上传</a>
+                </p>
+                <p class="example">为了提搞速度，建议将图片上传QQ空间然后获取链接地址，微信限制3秒内无反应将终止；图片(宽720高400) </p>
+                
+                <p class="example">限制200字内</p>
+                
+                <p class="same">
+                    <span class="Tex">幻灯片外链地址：</span>
+                    <input type="text" value="" name="url" id='url1' class="circle"/>
+					
+                </p>
+              </div>
+              <div class="panel-footer" style="text-align:right"> 
+	  		<input type="submit" value="保存" class="btn btn-success"/>
+	  		<a href="javascript:history.go(-1);"  class="btn btn-link">取消</a> 
+		      </div>
+		           </form>
+            </div>
+            </div>
+            </div>
+ </div>
+<include file="Public:footer"/>

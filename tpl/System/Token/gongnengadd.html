@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="{pigcms::RES}/images/main.css" type="text/css" rel="stylesheet">
+<style>
+	.listBox{padding:30px;padding-bottom:0px;margin-bottom:10px;}
+	.listBox li{height:30px;line-height:30px;border-top:1px #ccc solid;}
+	.listBox li input,.listBox li span{float:left;margin-right:10px;}
+	.listBox li input{margin-top:8px;}
+	.bginput{border:0px;color:#FFF;float:left;font-size:14px;font-weight:bold;height:38px;line-height:38px;margin:15px 10px 15px 10px;text-align:center;width:125px;cursor:pointer;background:url(/tpl/static/img/butBj.gif) no-repeat;}
+	.bginput:hover{background:url(/tpl/static/img/butBjO.gif) no-repeat;}
+	.addHead{height:40px;line-height:40px;font-size:18px;font-weight:bold;margin-left:15px;}
+	.addP{background:none repeat scroll 0 0 #E3F5FF;height:40px;line-height:40px;margin-left: 10px;padding-left:10px;}
+	.addTex{float:left;}
+	.addBox{float:left;margin-top:14px;margin-left:5px;}
+</style>
+<script src="{pigcms::STATICS}/jquery-1.4.2.min.js" type="text/javascript"></script>
+<body>		    
+<body>		   
+			    <p class="addHead">给微信帐号添加cms</p>
+             <form method="post" action="{pigcms::U('Token/upgnadd')}">
+                <!--<if condition="$qry.advancetpl eq 1">
+				添加列表模块:<input type='checkbox' disabled name='advancetpl'
+				<if condition="$qry.advancetpl eq 1">checked='checked'</if>/>	-->
+                <input type='hidden' value='{pigcms:$qry.token}' name='token' />
+				<p class="addP"><span class="addTex">添加cms功能:</span><input type='checkbox' name='advancetpl' class="addBox"
+				<if condition="$qry.advancetpl eq 1">checked="checked"  </if>/></p>
+
+				
+				<input class="bginput" type="submit" name="s" value="修 改" onclick="javascript:sub();"><input class="bginput" type="button" onclick="javascript:history.back(-1);" value="返 回" >
+				<input type="hidden" value="{pigcms:$token}" id="token"/>
+			 </form>
+			 </div>
+</body>
+</html>

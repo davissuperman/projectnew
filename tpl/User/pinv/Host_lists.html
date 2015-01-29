@@ -1,0 +1,60 @@
+<?php $nav = "BUSINESS"; $side = "HOST_INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Host_index.css" rel="stylesheet"/> 
+ <div class="container main">
+<div class="row">
+<include file="Host:left"/>
+           
+               <div class="col-md-10 main">
+    
+               <ol class="breadcrumb">
+			  <li><a href="{pigcms::U( 'Host/index',array( 'token'=>$token ))}">微酒店管理</a></li>
+			  <li class="active">房间设置</li>
+				</ol>
+               
+ 				<div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">房间类型管理</h3>
+			  </div>
+			  <div class="panel-body">
+				<div class="add-button pull-right">
+            		<a href="{pigcms::U('Host/list_add',array('token'=>$token,'hid'=>$_GET['id']))}"  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> 添加房间类型</a>
+            	</div>
+            	<div style="clear:both"></div>
+             <table class="table table-striped" cellspacing="1">
+                	<tr>
+                    	<th class="firstTd">序号</th>
+                        <th class="secondTd">房间类型</th>
+                        <th class="thirdTd">原价</th>
+                        <th class="forthTd">优惠价</th>
+                        <th class="forthTd">房间说明</th>
+                     
+                        <th class="sevenTd">操作</th>
+                    </tr>
+                   <volist name="li" id="list"> 
+					<tr>
+						<td>{pigcms:$i}</td>
+						<td>{pigcms:$list.type}</td>
+						<td>{pigcms:$list.price}</td>
+						<td>{pigcms:$list.yhprice}</td>
+						<td>{pigcms:$list.typeinfo}</td> 
+						<td>  <a  href="{pigcms::U('Host/list_edit',array('id'=>$list['id'],'token'=>$token, 'hid'=>$hid))}">编辑</a> |
+						<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Host/list_del',array('id'=>$list['id'],'token'=>$token))}');">删除</a>
+						
+						</td>
+					</tr>
+					</volist>
+					 <tr>
+                   
+                      <td colspan="6" style="text-align: right">{pigcms:$page}</td>
+                    </tr>
+               </table>
+          
+         </div>
+         </div>
+          </div>
+            
+            </div>      
+      
+ </div>
+<include file="Public:footer"/>

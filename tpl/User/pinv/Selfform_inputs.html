@@ -1,0 +1,51 @@
+﻿<?php $nav = "FUNCTION"; $side = "SELFFORMINDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_inputs.css" rel="stylesheet"/>
+ <div class="container main">
+ <div class="row">
+<include file="Selfform:left"/>
+     
+    <!--right--begain-->
+            <div class="col-md-10">
+            	<!-- <p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+              <p class="artiEdit"><span class="big">商家表单输入项管理 </span><a href="{pigcms::U('Selfform/index',array('token'=>$token,'bid'=>$bid))}"  class="addListX">返回</a></p>
+              <p class="artiEdit"><a href="{pigcms::U('Selfform/inputAdd',array('token'=>$token,'formid'=>$thisForm['id'],'bid'=>$bid))}" title="添加"  class="addList">添加</a></p> -->
+              <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">表单输入项管理</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="pull-right add-button">
+                        <a href="{pigcms::U('Selfform/inputAdd',array('token'=>$token,'formid'=>$thisForm['id'],'bid'=>$bid))}" title="添加"  class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> 添加</a>
+                    </div>
+                    <div class="pull-left add-button">
+                        <a href="{pigcms::U('Selfform/index',array('token'=>$token,'bid'=>$bid))}"  class="btn btn-default btn-sm"><span class="glyphicon glyphicon-arrow-left"></span> 返回</a>
+                    </div>
+                 <table class="table table-striped" cellspacing="1"><input type="hidden" name="bid" value="{pigcms:$bid}"/>
+               
+                	<tr>
+                    	<th class="firstTd">显示名称</th>
+                        <th class="secondTd">字段名称</th>
+                        <th class="thirdTd">输入类型</th>
+                        <th class="sevenTd">操作</th>
+                    </tr>
+                    <volist name="list" id="item">             
+					<tr>
+					<td>{pigcms:$item.displayname}</td>
+					<td>{pigcms:$item.fieldname}</td>
+					<td>{pigcms:$item.inputtype}</td>
+					<td class="norightborder"><a href="{pigcms::U('Selfform/inputSet',array('id'=>$item['id'],'token'=>$token,'bid'=>$bid))}" class="hover-tooltip-edit"><span class="glyphicon glyphicon-edit"></span></a>&nbsp;&nbsp;<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Selfform/inputDelete',array('id'=>$item['id'],'token'=>$token,'bid'=>$bid))}');" class="hover-tooltip-trash"><span class="glyphicon glyphicon-trash danger"></span></a></td>
+					</tr>
+					</volist>
+                    
+                </table>
+                <p class="pages">{pigcms:$page}</p>
+                </div>
+                </div>
+                </div>
+                </div>
+ </div>
+<include file="Public:footer"/>

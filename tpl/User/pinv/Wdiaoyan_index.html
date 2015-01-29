@@ -1,0 +1,52 @@
+<?php $nav = "FUNCTION"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_index.css" rel="stylesheet"/>
+<div class="container main">
+<div class="row">
+<include file="Wdiaoyan:left"/>
+     
+            <div class="col-md-10 main">
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">微调研管理</h3>
+			  </div>
+			  <div class="panel-body">
+			 	 <div class="add-button pull-right">
+            		<a href="{pigcms::U('Wdiaoyan/wdyadd',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>添加调研</a>
+            	</div>
+        
+           <table class="table table-striped" cellspacing="1">
+                    <tr>                      
+                        <th class="secondTd">名称</th>
+                        <th class="thirdTd">关键词</th>
+                        <th class="sevenTd">创建时间</th>
+                        <th class="sevenTd">输入项</th>
+                        <th  class="forthTd" >操作</th>
+                    </tr>
+                    <volist name="list" id="item"> 
+                    <tr>
+                  
+                        <td>{pigcms:$item.name}</td>
+                        <td>{pigcms:$item.keyword}</td>
+                        <td >{pigcms:$item.time|date="Y-m-d H:i:s",###}</td>
+                        <td>
+    						<a href="{pigcms::U('Wdiaoyan/xuanxadd',array('id'=>$item['id'],'token'=>$item['token']))}" class="btn btn-success btn-xs">输入项管理</a>
+						</td>
+                        <td>
+							<!--<a href="{pigcms::U('Wdiaoyan/tplist',array('id'=>$item['id'],'token'=>$token))}">提交信息管理</a>&nbsp;&nbsp;-->
+							<a href="{pigcms::U('Wdiaoyan/xiugai',array('id'=>$item['id'],'token'=>$token))}" class="hover-tooltip-edit"><span class="glyphicon glyphicon-edit"></span></a>
+							<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Wdiaoyan/del',array('id'=>$item['id'],'token'=>$token))}');" class="hover-tooltip-trash"><span class="glyphicon glyphicon-trash danger"></span></a>
+						</td>
+                    </tr>
+                    </volist>
+                </table>
+               
+              
+                <p class="page">{pigcms:$page}</p>
+            </div>
+			</div>
+			</div>
+            </div> 
+      
+ </div>
+<include file="Public:footer"/>

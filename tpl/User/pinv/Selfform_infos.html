@@ -1,0 +1,48 @@
+﻿<?php $nav = "FUNCTION"; $side = "SELFFORMINDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_inputs.css" rel="stylesheet"/>
+ <div class="container main">
+ <div class="row">
+<include file="Selfform:left"/>
+     
+    <!--right--begain-->
+            <div class="col-md-10">
+            	<!-- <p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+              <p class="artiEdit"><span class="big">{pigcms:$thisForm.name}信息列表 </span><a href="{pigcms::U('Selfform/index',array('token'=>$token,'bid'=>$bid))}"  class="addListX">返回</a></p> -->
+              <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{pigcms:$thisForm.name}信息列表</h3>
+                </div>
+                <div class="panel-body">
+                <div class=" pull-left add-button"><a href="{pigcms::U('Selfform/index',array('token'=>$token,'bid'=>$bid))}" class="btn btn-default btn-sm" ><span class="glyphicon glyphicon-arrow-left"></span> 返回</a></div>
+                 <table class="table table-striped" cellspacing="1">
+               
+                	<tr>
+                    	<th class="firstTd">id</th>
+							<th class="sevenTd">时间</th>	
+                    	<volist name="fields" id="item">
+						<th class="secondTd">{pigcms:$item.displayname}</th>
+						</volist>   
+						
+                        <th class="sevenTd">操作</th>
+                    </tr>
+                    <volist name="list" id="item">            
+					<tr>
+					<volist name="item" id="citem">
+					<td>{pigcms:$citem}</td>
+					</volist>
+					<td><a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Selfform/infoDelete',array('id'=>$item['id'],'token'=>$token))}');" class="hover-tooltip-trash"><span class="glyphicon glyphicon-trash danger"></span></a></td>
+					</tr>
+					</volist>
+                    
+                </table>
+                <p class="pages">{pigcms:$page}</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+ </div>
+<include file="Public:footer"/>

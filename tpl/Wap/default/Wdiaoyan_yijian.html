@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>有奖微调研</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" rel="stylesheet" href="{pigcms::RES}/css/wdy/haveLcky.css"/>
+<script type="text/javascript" src="{pigcms::RES}/js/wdy/jquery.js"></script>
+<script type="text/javascript" src="{pigcms::RES}/js/wdy/formCheck/formcheck.js"> </script>
+<script type="text/javascript">
+
+	$(function(){
+		
+	        $("#form").valid([
+			
+			{ name:"te",simple:"留言",require:true}
+				
+			],true,true);
+				
+
+		
+		})
+
+		
+</script>	
+</head>
+
+<body>
+	<div class="box">
+	   <form method="post"  action="{pigcms::U('Wdiaoyan/yijian',array('token'=>$_GET['token'],'wecha_id'=>$_GET['wecha_id']))}" id='form'>
+    	<p class="title">有奖微调研</p>
+		  <input type='hidden' value='{pigcms:$_GET["id"]}' name='id'/>
+		  <input type='hidden' value='{pigcms:$_GET["token"]}' name='token'/>
+		  <input type='hidden' value='{pigcms:$_GET["wecha_id"]}' name='wecha_id'/>
+		  <input type='hidden' value='{pigcms:$type}' name='type'/>
+		  <input type='hidden' value='{pigcms:$keyid}' name='keyid'/>
+        <div class="sameP">
+        	<textarea class="textCase" id='yj' name='te'></textarea>
+        </div>
+        <p class="btnBox"><input type="submit" class="beBtn" value="参加活动"></p>
+    </div>
+	</form>
+<include file="Public:tongji"/>
+</body>
+</html>

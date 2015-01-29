@@ -1,0 +1,16 @@
+<script src="{pigcms::RES}/js/product.js" type="text/javascript"></script>
+<div class="col-md-2 sidebar">
+<nav id="sidebar-nav">
+	<ul class="nav nav-pills nav-stacked">
+		<li><a href="{pigcms::U('Module/functionList',array('token'=>$token))}"><span class="glyphicon glyphicon-chevron-left"></span> 返回</a></li>
+	</ul>
+	<ul class="nav nav-pills nav-stacked" style="margin:5px 0px">
+		<li class="active"><a href="javascript:;" class="side-top" id="collapseStore">商城管理 <span class="glyphicon glyphicon-chevron-down pull-right" style="margin-top: 3px"></span></a></li>
+	</ul>
+	<ul class="nav nav-pills nav-stacked collapse <?php if($sideTop == "PRODUCT") echo 'in'; ?>" id="collapseStoreMenu">
+		<li <?php if($side == "CATEGORY") echo 'class="active"'; ?>><a href="{pigcms::U('Store/index',array('token'=>$token,'dining'=>$isDining))}">分类管理</a></li>
+		<li <?php if($side == "ORDER") echo 'class="active"'; ?>><a href="{pigcms::U('Store/orders',array('token'=>$token,'dining'=>$isDining))}">订单管理</a></li>
+		<li <?php if($side == "SET") echo 'class="active"'; ?>><a href="{pigcms::U('Reply_info/set',array('token'=>$token,'infotype'=>'Shop'))}">商城回复配置</a></li>
+	</ul>
+</nav>
+</div>

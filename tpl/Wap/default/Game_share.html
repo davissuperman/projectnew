@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>游戏成绩</title>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link type="text/css" href="{pigcms::RES}/dong/css/style.css" rel="stylesheet"/>
+
+        <script src="{pigcms::RES}/dong/js/jquery.js"></script>
+        <script>
+            $(function() {
+                $(".friendBox").fadeIn(1000);
+            })
+            document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+                window.shareData = {
+                    "imgUrl": "http://wx.drjou.cc/tpl/Wap/default/common/dong/img/loader.png",
+                    "timeLineLink": "http://wx.drjou.cc/index.php?g=Wap&m=Game&a=share&id={pigcms::$gid}&time={pigcms::$time}",
+                    "sendFriendLink": "http://wx.drjou.cc/index.php?g=Wap&m=Game&a=share&id={pigcms::$gid}&time={pigcms::$time}",
+                    "weiboLink": "http://wx.drjou.cc/index.php?g=Wap&m=Game&a=share&id={pigcms::$gid}&time={pigcms::$time}",
+                    "tTitle": "{pigcms::$name}的补水大作战得分为{pigcms::$number}",
+                    "tContent": "{pigcms::$name}邀请你帮她补水！",
+                    "fTitle": "{pigcms::$name}的补水大作战得分为{pigcms::$number}",
+                    "fContent": "{pigcms::$name}邀请你帮她补水！",
+                    "wContent": "{pigcms::$name}邀请你帮她补水！"
+                };
+                // 发送给好友
+                WeixinJSBridge.on('menu:share:appmessage', function(argv) {
+                    WeixinJSBridge.invoke('sendAppMessage', {
+                        "img_url": window.shareData.imgUrl,
+                        "img_width": "640",
+                        "img_height": "640",
+                        "link": window.shareData.sendFriendLink,
+                        "desc": window.shareData.fContent,
+                        "title": window.shareData.fTitle
+                    }, function(res) {
+
+                    })
+                });
+
+                // 分享到朋友圈
+                WeixinJSBridge.on('menu:share:timeline', function(argv) {
+                    WeixinJSBridge.invoke('shareTimeline', {
+                        "img_url": window.shareData.imgUrl,
+                        "img_width": "640",
+                        "img_height": "640",
+                        "link": window.shareData.timeLineLink,
+                        "desc": window.shareData.tContent,
+                        "title": window.shareData.tTitle
+                    }, function(res) {
+                        $.get("http://wx.drjou.cc/index.php?g=Wap&m=Game&a=sharetimeline&id={pigcms::$gid}&time={pigcms::$time}");
+                    });
+                });
+
+                // 分享到微博
+                WeixinJSBridge.on('menu:share:weibo', function(argv) {
+                    WeixinJSBridge.invoke('shareWeibo', {
+                        "content": window.shareData.wContent,
+                        "url": window.shareData.weiboLink,
+                    }, function(res) {
+                        _report('weibo', res.err_msg);
+                    });
+                });
+            }, false)
+        </script>
+        <style>
+            body{ background: url("{pigcms::RES}/dong/img/middle.jpg") no-repeat center top; background-size: 100% 100%}
+        </style>
+        <style>
+
+            .deploy_ctype_tip{z-index:1001;width:100%;text-align:center;position:fixed;top:50%;margin-top:-23px;left:0;}.deploy_ctype_tip p{display:inline-block;padding:13px 24px;border:solid #d6d482 1px;background:#f5f4c5;font-size:16px;color:#8f772f;line-height:18px;border-radius:3px;}
+        </style>
+    </head>        
+    <body scroll="no" id="tips">
+        <!--朋友圈页面-->
+        <div class="friendBox">
+            <p class="texCenter"><img src="{pigcms::RES}/dong/img/logo.png" class="logoPri"/><p>
+            <p class="rankTitle texCenter">游戏成绩</p>
+            <p class="results texCenter font16">{pigcms::$name}的游戏成绩得分是：<span class="coreNum">{pigcms::$number}</span></p>
+            <p class="solidP texCenter"><img src="{pigcms::RES}/dong/img/blueSolid.png" class="blueSolid"/><p>
+            <p class="results texCenter font12">帮他补水对抗干燥秋季，一整年面膜送给你！</br>帮助截止时间：72小时</p>
+            <if condition="$openid neq  ''">
+
+                <if condition="$oldtime neq  ''">
+                    <p class="grayBtn helpWater" onclick="showTip('你已经帮她补水过！')">帮她补水</p>
+                    <else/>
+                    <p class="blueBtn helpWater" id="" onclick="showget('{pigcms::$openid}')">帮她补水</p>
+                </if>
+
+
+                <else/>
+                <p class="grayBtn helpWater" onclick="showTip('超过72小时！请在72小时内榜她补水')">帮她补水</p>
+
+            </if>
+            <p class="pinkBtn catchPrice" onclick="showTip('请关注森田药装公众号领取试用装')">领取试用装</p>
+            <if condition="$end neq '' ">
+                <p class="grayBtn join" style="width:150px;margin-left:-75px;" onclick="showTip('活动结束！请关注森田公众号了解更多活动！')">我也要参加</p>
+                <else/>
+                <a href="./index.php?g=Wap&m=Game&a=index&id={pigcms::$gid}&tel={pigcms::$time}"><p class="blueBtn join" style="width:150px;margin-left:-75px;">我也要参加</p></a>
+            </if>
+            <p class="pinkBtn rankBtnX" onclick="showTip('请关注森田药装公众号查看排名')">查看排名</p>
+        </div>
+
+        <script>
+            function showTip(tipTxt) {
+
+                var div = document.createElement('div');
+                div.innerHTML = '<div class="deploy_ctype_tip"><p>' + tipTxt + '</p></div>';
+                var tipNode = div.firstChild;
+                $("#tips").after(tipNode);
+                setTimeout(function() {
+                    $(tipNode).remove();
+                }, 1500);
+            }
+            function showget() {
+                $.get("http://wx.drjou.cc/index.php?g=Wap&m=Game&a=shareget&id={pigcms::$gid}&time={pigcms::$time}&openid={pigcms::$openid}");
+                showTip('你帮她补水成功！');
+
+
+            }
+
+        </script>
+    </body>
+</html>

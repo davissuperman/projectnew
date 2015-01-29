@@ -1,0 +1,9 @@
+/Conf/logs
+/.svn
+/.idea
+/PUBLIC
+/Conf/db.php
+/tpl/static/xhedit/xheditor_emot/pidgin/.svn
+*.svn
+/tpl/User/default/common/images/face/104.gif
+/.project

@@ -1,0 +1,67 @@
+<include file="Public:head"/>
+ <div class="content">
+          <div class="cLineB"><h4>添加文章分类</h4><a href="javascript:history.go(-1);"  class="right btnGrayS vm" style="margin-top:-27px" >返回</a></div> 
+<div class="msgWrap">
+  <form class="form" method="post"   action="{pigcms::U('Classify/insert')}"  target="_top" enctype="multipart/form-data" >
+<TABLE class="userinfoArea" style=" margin:20px 0 0 0;" border="0" cellSpacing="0" cellPadding="0" width="100%">
+  <THEAD>
+<TR>
+  <TH valign="top"><label for="keyword">分类名称：</label></TH>
+  <TD><input type="input" class="px" id="keyword" value="" name="name" style="width:500px" ><br />
+                  </TD>
+  <TD>&nbsp;</TD>
+</TR>
+                            </THEAD>
+  <TBODY>
+<TR>
+  <TH valign="top"><label for="keyword">分类描述：</label></TH>
+  <TD><input type="input" class="px" id="keyword" value="" name="info" style="width:500px" ><br />
+                  30个字简短分类描述，可为空   </TD>
+  <TD>&nbsp;</TD>
+</TR>
+<TR>
+  <TH valign="top"><label for="keyword">分类图片外链地址：</label></TH>
+  <TD><input type="input" class="px" id="keyword" value="" name="img" style="width:500px" ><br />
+                  为了提搞速度，建议将图片上传百度bae然后获取链接地址，微信限制3秒内无反应将终止；图片(宽720高400)  </TD>
+  <TD>&nbsp;</TD>
+</TR>
+<TR>
+  <TH valign="top"><label for="keyword">外链网站或活动 ：</label></TH>
+  <TD><input type="input" class="px" id="keyword" value="" name="url" style="width:500px" ><br />
+                   </TD>
+  <TD>&nbsp;</TD>
+</TR>
+<TR>
+  <TH valign="top"><label for="keyword">排序：</label></TH>
+  <TD><input type="input" class="px" id="keyword" value="1" name="sorts" style="width:500px" ><br />
+                   </TD>
+  <TD>&nbsp;</TD>
+</TR>
+<TR>
+  <TH valign="top"><label for="keyword">是否显示：</label></TH>
+  <TD><input type="radio" class="px" id="keyword" value="1" name="status" checked />是<br />
+  <input type="radio" class="px" id="keyword" value="0" name="status" />否
+                   </TD>
+  <TD>&nbsp;</TD>
+</TR>
+<TR>
+  <TH></TH>
+  <TD><button type="submit"  name="button"  class="btnGreen left" >保存</button>
+  	<div class="clr"></div>
+  	</TD>
+  </TR>
+  </TBODY>
+</TABLE>
+  </form>
+  </div> 
+
+        </div>
+        
+        <div class="clr"></div>
+      </div>
+    </div>
+  </div> 
+
+<!--底部-->
+  	</div>
+<include file="Public:footer"/>

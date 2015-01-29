@@ -1,0 +1,15 @@
+.right{width:837px;float:left;padding:0px 10px;}
+.replyHeading{height:45px;line-height:55px;border-bottom:1px #eee solid;padding-left:15px;color:#6a6a6a;}
+.span1{font-weight:bold;float:left;font-size:16px;}
+.span2{font-size:12px;float:left;margin-left:15px;}
+.areaLeft{width:440px;height:320px;border:1px #CCC solid;font-size:12px;color:#6a6a6a;padding:10px;}
+.leftArea{width:470px;float:left;}
+.leftArea p{height:30px;line-height:25px;font-size:12px;color:#6a6a6a;}
+.choice{float:left;margin:6px 6px;}
+.liHeading{color:#6a6a6a;font-weight:bold;font-size:18px;}
+.rightText{width:335px;margin-left:10px;float:left;font-size:12px;color:#6a6a6a;line-height:22px;}
+.tex{border:1px #CCC solid;height:20px;line-height:20px;padding-left:5px;color:#6a6a6a;font-size:12px;}
+.next{width:72px;height:33px;line-height:33px;text-align:center;color:#fff;font-size:12px;background:url(../img/savePress.gif) no-repeat;cursor:pointer;border:0px;font-weight:bold;float:left;margin-right:10px;}
+.next:hover{background:url(../img/saveX.gif) no-repeat;}
+.replyButton{background: url(../img/addList.gif) no-repeat;color:#FFF;float:left;font-size:12px;height:33px;line-height:33px;margin-right:20px;text-align:center;width:122px;}
+.replyButton:hover{background: url(../img/addOver.gif) no-repeat;color: #FFFFFF;}

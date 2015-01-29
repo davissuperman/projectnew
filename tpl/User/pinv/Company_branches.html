@@ -1,0 +1,165 @@
+<?php $nav = "LBS"; $side = "LBS" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/company_set.css" rel="stylesheet"/>
+<div class="container main">
+<div class="row">    
+         
+             <div class="panel panel-success">
+			  <div class="panel-heading">
+				<h3 class="panel-title">LBS</h3>
+			  </div>
+			  <div class="panel-body">
+			  	<div class="add-button pull-right">
+            		<a href="{pigcms::U('Company/index',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-file"></span> 公司信息</a>
+            		<a href="{pigcms::U('Company/index',array('token'=>$token,'isBranch'=>1))}"  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> 新增分支机构</a>
+            		<a href="{pigcms::U('Company/import',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-import"></span> 导入分支机构</a>
+            	</div>
+            	<div style="clear:both;"></div>
+                    <span class="label label-success pull-left">公司信息</span>
+                    <div class="clearfix add-button"></div>
+                    <table class="table table-striped" id="branch_list">
+                            <tr>
+                                <th class="">名称</th>
+                                <th class="">电话</th>
+                                <th class="">地址</th>
+                                <th class="">外链代码</th>
+                                <th>操作</th>
+                            </tr>
+                            <volist name="companys" id="company"> 
+                            <tr>
+                                <td>{pigcms:$company.name}</td>
+                                <td>{pigcms:$company.tel}</td>
+                                <td>{pigcms:$company.address}</td>
+                                <td>地图 {pigcms:$company.id}</td>
+                                <td><a href="{pigcms::U('Company/index',array('token'=>$token,'id'=>$company['id'],'isBranch'=>0))}" class="hover-tooltip-edit"><span class="glyphicon glyphicon-edit"></span></a> </td>
+                            </tr>
+                            </volist>
+                    </table>
+                <form method="post" action="" id="info">
+                    <span class="label label-success pull-left">分支机构信息</span>
+                    <div class="clearfix add-button"></div>
+                    <table class="table table-striped" id="branch_list">
+                            <tr>
+                                <th class=""><input type="checkbox" value="" id="check_box" onclick="selectall('id[]');"></th>
+                                <th class="">名称</th>
+                                <th class="">电话</th>
+                                <th class="">地址</th>
+                                <th class="">外链代码</th>
+                                <th class="">操作</th>
+                            </tr>
+                            <volist name="branches" id="c"> 
+                            <tr>
+                                <td><input type="checkbox" value="{pigcms:$c.id}" class="cbitem" name="id_{pigcms:$c.id}"></td>
+                                <td>{pigcms:$c.name}</td>
+								<td>{pigcms:$c.tel}</td>
+								<td>{pigcms:$c.address}</td>
+								<td>地图 {pigcms:$c.id}</td>
+                                <td>
+                                <a href="{pigcms::U('Company/index',array('token'=>$token,'id'=>$c['id'],'isBranch'=>1))}" class="hover-tooltip-edit"><span class="glyphicon glyphicon-edit"></span></a> 
+                        		<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Company/delete',array('token'=>$token,'id'=>$c['id'],'isBranch'=>1))}');" class="hover-tooltip-trash"><span class="glyphicon glyphicon-trash danger"></span></a>
+                            	</td>
+                            </tr>
+                            </volist>
+                            <tr>
+	                            <td colspan="7" style="text-align:right" class="pages">{pigcms:$page}</td>
+                            </tr>
+                    </table>
+                </form>          
+
+                <div id="edit_box" style="display:none">
+                    <form action="" onsubmit="return false;" id="activeEdit">
+                    	<span class="reset" id="toClose"><a>x</a></span>
+                        活动内容：<input type="text" value="" name="active" id="newActive"/><br/>
+                        <input type="hidden" id="branches" value=""/>
+                        <input type="button" value="确认修改" id="editsubmit" style="margin-left:110px;"/>
+                        <input type="button" value="取消" class="reset"/>
+                    </form>
+                </div>
+            </div>
+				<div class="panel-footer" style="text-align:right"> 
+					<input type="button" value="批量删除" class="btn btn-warning" onclick="if(confirm('确定删除吗')){$('#info').submit()}" style="margin-right:15px;"/>
+                    <input type="button" value="批量修改" class="btn btn-warning" id="edits"/>
+				  </div>
+
+            </div>
+            <script>
+                function checkvotethis() {
+                    var aa = document.getElementsByName('del_id[]');
+                    var mnum = aa.length;
+                    j = 0;
+                    for( i = 0;i < mnum;i++ ){
+                        if( aa[i].checked ){
+                            j++;
+                        }
+                    }
+                    if( j > 0 ) {
+                        document.getElementById('info').submit();
+                    }
+                    else{
+                        alert('未选中内容！')
+                    }
+                }
+                function selectall(name) {
+                    var checkItems=$('.cbitem');
+                    if ($("#check_box").attr('checked') == false) {
+                        $.each(checkItems, function(i,val){
+                            val.checked = !(val.checked);
+                        });
+                        
+                    } else {
+                        $.each(checkItems, function(i,val){
+                            val.checked = !(val.checked);
+                        });
+                    }
+                }
+
+            </script>
+            <script>
+                //活动批量修改
+                $(function(){
+                    //把要修改的活动id传给表单activeEdit
+                    $("#edits").click(function(){
+                        var inputs = $("td input:checked");
+                        if( inputs.length < 1){
+                            alert('未选中店铺！');
+                            return;
+                        }
+
+                        var checkeds = '';
+                        for( var i = 0;i < inputs.length;i++ ){
+                            checkeds = checkeds + (inputs[i].value) + ',';
+                        }
+                        $("#branches").val(checkeds);
+                        $("#edit_box").show();
+                    });
+
+                    $('#editsubmit').click(function(){
+                        var branches = $('#branches').val();
+                        var active = $('#newActive').val();
+                        $.ajax({
+                            type:"POST",
+                            data:{'branches':branches,'active':active},
+                            url:"{pigcms::U('Company/edit',array('token'=>$token,'isBranch'=>1))}",
+                            dataType: "text",
+                            success:function(msg){
+                                alert(msg);
+                                $("#edit_box").hide();
+                                window.location.reload();
+                            }
+                        });
+                    });
+
+                    //取消批量修改
+                    $('.reset').click(function(){
+                    	$('#edit_box').hide();
+                    	$('#branches').val('');
+                    });
+                });
+
+            </script>    
+      
+ </div>
+
+
+</div>
+<include file="Public:footer"/>

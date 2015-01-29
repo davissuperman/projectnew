@@ -1,0 +1,8 @@
+<div class="col-md-2 sidebar">
+<nav id="sidebar-nav">
+	<ul class="nav nav-pills nav-stacked">
+		<li><a href="{pigcms::U('Module/functionList',array('token'=>$token))}"><span class="glyphicon glyphicon-chevron-left"></span> 返回</a></li>
+		<li <?php if($side == "QRCODE") echo 'class="active"'; ?>><a href="{pigcms::U('Adma/index',array('token'=>$token))}">二维码宣传</a></li>
+	</ul>
+</nav>
+</div>

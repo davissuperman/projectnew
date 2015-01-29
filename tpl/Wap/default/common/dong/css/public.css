@@ -1,0 +1,22 @@
+*{margin:0px;padding:0px;font-family:"微软雅黑"}
+html,body{width:100%;height:100%;overflow:hidden;}
+body{width:100%;height:100%;overflow-x:hidden;position:relative;}
+a{text-decoration:none;}
+
+/*按钮*/
+.pinkBtn{width:120px;height:40px;line-height:40px;margin-left:-60px;color:#fff;letter-spacing:2px;text-align:center;background:url(../img/btnBjP.png) no-repeat center top;background-size:100% 100%;border:0px;font-size:16px;}
+.blueBtn{width:120px;height:40px;line-height:40px;margin-left:-60px;color:#fff;letter-spacing:2px;text-align:center;background:url(../img/btnBj.png) no-repeat center top;background-size:100% 100%;border:0px;font-size:16px;}
+.grayBtn{width:120px;height:40px;line-height:40px;margin-left:-60px;color:#fff;letter-spacing:2px;text-align:center;background:url(../img/grayBtn.png) no-repeat center top;background-size:100% 100%;border:0px;font-size:16px;}
+.smallBlue{width:100px;height:40px;line-height:40px;color:#fff;text-align:center;background:url(../img/smallBtn.png) no-repeat center top;background-size:100% 100%;border:0px;font-size:16px;}
+.bluexBtn{width:126px;height:40px;line-height:40px;margin-left:-63px;color:#fff;letter-spacing:2px;text-align:center;background:url(../img/btnxBj.png) no-repeat center top;background-size:100% 100%;border:0px;font-size:16px;}
+.redBtn{width:126px;height:40px;line-height:40px;margin-left:-63px;color:#fff;letter-spacing:2px;text-align:center;background:url(../img/redBtn.png) no-repeat center top;background-size:100% 100%;border:0px;font-size:16px;}
+
+/*文字*/
+.texCenter{text-align:center;}
+.font12{font-size:12px;}
+.font14{font-size:14px;}
+.font16{font-size:16px;}
+.font18{font-size:18px;}
+
+.floatL{float:left}
+.floatR{float:right;}

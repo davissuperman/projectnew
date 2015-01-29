@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+        <head>
+        <title>微酒店</title>
+        <script type="text/javascript">var yyuc_jspath = "/@system/";</script><script type="text/javascript" src="{pigcms::RES}/js/host/jquery.js"></script><script type="text/javascript" src="{pigcms::RES}/js/host/yyucadapter.js"></script>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="{pigcms::RES}/css/host/hotels.css" media="all" />
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+        <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+        <meta name="Keywords" content="" />
+        <meta name="Description" content="" />
+        <!-- Mobile Devices Support @begin -->
+        <meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+        <meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+        <meta content="no-cache" http-equiv="pragma">
+        <meta content="0" http-equiv="expires">
+        <meta content="telephone=no, address=no" name="format-detection">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <!-- apple devices fullscreen -->
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <!-- Mobile Devices Support @end -->
+<!--<style>
+img {
+	width: 100%!important;
+}
+</style>-->
+<script type="text/javascript">
+function dianji(aaa){
+           //alert($('#orderid'+aaa).val());return false;
+           var wecha_id=$('#wecha_id'+aaa).val();
+	       var token=$('#token'+aaa).val();
+	       var hid=$('#hid'+aaa).val();
+	       var orderid=$('#orderid'+aaa).val();
+		   //alert(wecha_id);
+		   //alert(token);
+		   //alert(hid);
+		   //alert(orderid);
+
+		   $.ajax({
+					type: "GET",
+					url: '{pigcms::U("$action/quxiaoorder")}',
+					data: "wecha_id="+wecha_id+"&token="+token+"&hid="+hid+"&orderid="+orderid,
+					success: function(msg){
+					 	//alert(msg);return false;
+						if(msg==1){
+						   //alert('已经取消');
+						  $('#sp'+aaa).html('已经取消');
+						  $('#djj'+aaa).hide();
+							return true;
+						}else{
+
+							alert("取消失败");
+							return false;
+						}
+					},
+					
+			 	});
+            
+}
+
+</script>
+        </head>
+        <body id="hotels" ondragstart="return false;" onselectstart="return false;" >
+<section class="body">
+          <div class="cardexplain"> 
+    
+    <!--普通用户登录时显示--> 
+    <!--商家房价及类型-->
+    <div class="qiandaobanner"> <a href="javascript:;"> <img src="{pigcms:$hostlist.headpic}" /> </a> </div>
+    <ul class="round">
+             <volist name="list" id='vo'>
+			  <li class="title"> <a href="#"> <span>{pigcms:$vo.book_time|date="Y-m-d H:i:s",###}<!-- <em class="no">确认</em> --></span> </a> </li>
+              <li>
+				   <div class="text">
+					  <p>温馨提示：{pigcms:$hostlist.wenxin}</p>
+					  <p>房间类型：{pigcms:$vo.room_type}</p>
+					  <p>联系人：{pigcms:$vo.book_people}</p>
+					  <p>联系电话：{pigcms:$vo.tel}</p>
+					  <p>入住日期：{pigcms:$vo.check_in|date="Y-m-d H:i:s",###}</p>
+					  <p>房间数量：{pigcms:$vo.book_num}</p>
+					  <p>价钱：{pigcms:$vo.price}</p>
+					  <p>备注：{pigcms:$vo.remarks}</p>
+					  <p>预定日期：{pigcms:$vo.book_time|date="Y-m-d H:i:s",###}</p>
+                  </div>
+				    
+                 <p class='mark{pigcms:$vo.id}'>
+				    
+				    <input type="hidden" value="{pigcms:$_GET['wecha_id']}" class='wecha_id' name='wecha_id' id="wecha_id{pigcms:$vo.id}"/>
+				    <input type="hidden" value="{pigcms:$_GET['token']}" class='token' name='token' id="token{pigcms:$vo.id}"/>
+				    <input type="hidden" value="{pigcms:$_GET['hid']}" class='hid' name='hid' id="hid{pigcms:$vo.id}"/>
+				    <input type="hidden" value="{pigcms:$vo.id}" class='orderid' name='orderid' id="orderid{pigcms:$vo.id}"/>
+				    
+					
+					<p id="sp{pigcms:$vo.id}">
+					  <if condition="$vo['order_status'] eq 4">
+					 已经取消
+					</if>
+					</p>
+					  <if condition="$vo['order_status'] neq 4">
+					<input type="button" value="取消订单" class='dj' onclick="dianji({pigcms:$vo.id})" id="djj{pigcms:$vo.id}"/>
+					</if>
+				 </p>
+				</volist>
+      </li>
+           
+            </ul>
+
+  </div>
+     <p>{pigcms:$page}</p>
+          <div class="plugback"> <a href="javascript:history.back(-1)">
+            <div class="plugbg themeStyle"> <span class="plugback"></span> </div>
+            </a> </div>
+        </section>
+
+<include file="Public:tongji"/>
+</body>
+</html>

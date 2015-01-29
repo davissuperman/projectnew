@@ -1,0 +1,144 @@
+<?php $nav = "CRM"; $side = "NO" ?>
+<include file="Public:head"/>
+<style>
+    .show{
+        width:280px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 8px black;
+        padding:20px;
+        cursor:pointer;
+    }
+    .show .img {margin-top:10px; position:relative;}
+    .show .img img{width:100%; }
+</style>
+<link type="text/css" href="{pigcms::RES}/css/Text_add.css" rel="stylesheet"/>
+<div class="container main">
+    <div class="row main">
+        <include file="Crm:left"/>
+        <div class="col-md-10 main">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">48群发消息</h3>
+                </div>
+                <div class="panel-body">  
+                    <div id="top" class="alert alert-info" style="margin:0 0 ;">
+                        1.提醒:当用户超过48小时没有和公众号沟通过,会出现微信接收失败<br>
+
+                    </div><br><br><br>
+                    <form action="{pigcms::U('Message/noticesend')}" method="post" class="form-horizontal" >
+                        <div class="form-group">
+                            <label for="group" class="col-sm-2 control-label">标题:</label>
+                            <div class="col-sm-6">
+                                <input type="text" value="" name="title"  class="form-control">
+                                <div id="myhidden"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="group" class="col-sm-2 control-label">选择分组:</label>
+                            <div class="col-sm-6">
+                                <select name="groupid" id="group" class="form-control">
+                                    <volist name="groups" id="group">
+                                        <option value="{pigcms:$group.wechatgroupid}">{pigcms:$group.name}</option>
+                                    </volist>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="group" class="col-sm-2 control-label">添加群发消息:</label>
+                            <div class="col-sm-6">
+                                <a href="javascript:;" class="btn btn-info btn-sm" data-toggle="modal" data-target="#addmessage">添加图文消息</a>
+                                <a href="javascript:;" class="btn btn-danger btn-sm" onclick="window.location.reload()">清空重选</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="group" class="col-sm-2 control-label hide">示例:</label>
+                            <div class="col-sm-6 col-sm-offset-2">
+                                <div class="show">
+                                    <div class="show1">
+                                        <b>图文消息标题</b>
+                                        <div class="text-muted text-right"><?php echo date("Y-m-d"); ?></div>
+                                        <div class="img"><img src="/tpl/static/img/oids.jpg" alt=""></div>
+                                        <div id="text"><h4>消息简介</h4></div>
+                                    </div>
+                                    <hr />
+                                    <!--<div class="show2">
+                                        <p class="text-primary text-right"><a href="">查看全文</a></p>
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+                <div class="panel-footer" style="text-align:right">
+                    <input type="submit" value="发送" class="btn btn-success "/>
+                </div>   
+</form>
+            </div>
+           
+
+        </div>
+    </div>  
+
+</div>
+
+
+<!--modal-->
+<div class="modal fade" id="addmessage" tabindex="-100" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">添加图文消息</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                    <th>标题</th>
+                    <th>操作</th>
+                    </thead>
+                    <tbody>
+                    <volist name="imgs" id="img">
+                        <tr>
+                            <td>{pigcms:$img.title}</td>
+                            <td>
+                                <a href="javascript:;" class="btn btn-link checked my" id="{pigcms:$img.id}" img="{pigcms:$img.pic}" title="{pigcms:$img.title}" text="{pigcms:$img.text}">选中</a>
+                               
+                            </td>
+                        </tr>
+                    </volist> <input type="hidden" class="imgids" name="imgids[]" value="">
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="modal-footer"> -->
+            <!-- </div> -->
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+    $(function() {
+        $(".my").click(function() {
+           var id= $(this).attr('id');
+            var src = $('.img img').attr('src');
+            var title = $('.img img').attr('title');
+            var clone = $('.imgids:first').clone();
+            clone.attr('name', 's[]');
+            clone.attr('value',  id);
+            $("#myhidden").before(clone);
+            
+            $('#addmessage').modal('hide');
+            if (src.indexOf('oids.jpg') != -1) {
+                $('.show').find('b').html($(this).attr('title'));
+                $('#text').html($(this).attr('text'));
+                $('.img img').attr('src', $(this).attr('img'));
+                $('.img img').attr('title', $(this).attr('title'));
+            } else {
+                $(".show p").remove();
+                $(".show1").html("<div class='img'><img title=" + title + " src=" + src + " style='width:100%'><div style='width:100%;height:30px;background:black;opacity:0.5;filter:alpha(opacity=50);position:absolute;bottom:0px;padding:5px 10px'><span style='color:white'>" + title + "</span></div></div>");
+                $(".show").append($(this).attr('title') + "<img src=" + $(this).attr('img') + " style='width:30%;margin-top:-10px' class='pull-right'><hr>");
+            }
+        });
+    });
+</script>
+
+<include file="Public:footer"/>

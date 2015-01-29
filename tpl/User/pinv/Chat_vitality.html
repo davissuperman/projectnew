@@ -1,0 +1,61 @@
+<?php $nav = "CRM"; $side = "MEMBER" ?>
+<include file="Public:head"/>
+
+<link rel="stylesheet" type="text/css" href="./tpl/User/default/common/css/cymain.css" />
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+
+<style>
+    .answer_text{
+        width: 80px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+    }
+</style>
+<div class="container main">
+    <div class="row main">
+        <include file="Crm:left"/>
+        <div class="col-md-10">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">签到记录</h3>
+                </div>
+                <div class="panel-body">
+                    <TABLE class="table table-striped" >
+                        <tr>
+                            <th class="thirdTd">微信昵称</th>
+                            <th class="thirdTd">姓名</th>
+                            <th class="thirdTd">签到时间</th>
+                            <th class="thirdTd">获得积分</th>
+                        </tr>
+                        <volist name="list" id="vo" key='k'>
+                            <tr>
+                                <TD>{pigcms:$userinfo.u_name}</TD>
+                                <TD>{pigcms:$userinfo.u_username}</TD>
+                                <TD>{pigcms:$vo.sign_time|date="y-m-d",###}</TD>
+                                <TD>{pigcms:$vo.expense}</TD>
+                            </TR>
+                        </volist>
+                    </TABLE>
+                </div>
+                <div class="cLine">
+                    <div class="pageNavigator right">
+                        <div class="pages">{pigcms:$page}</div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--弹出层-->
+
+
+
+
+
+<include file="Public:footer"/>

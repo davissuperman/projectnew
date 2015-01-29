@@ -1,0 +1,24 @@
+﻿.oderList{height:45px;}
+.oderList li{height:45px;line-height:45px;float:left;width:49.7%;text-align:center;background:url(../img/listBj.gif) repeat-x;color:#471c05;cursor:pointer;}
+.oderList li.over{background:#dadada;}
+.oderList li:hover{background:#dadada;}
+.oderList li.firstLi{border-right:1px #c0c0c0 solid;}
+.solds{border-top:1px #c0c0c0 solid;}
+.pBox{height:25px;line-height:25px;}
+.leftTu{float:left;margin-top:8px;margin-right:10px;}
+
+.state{color:#919191;font-size:12px;float:left;}
+.stateTex{color:#494949;font-size:12px;}
+.orderTitle{color:#22292c;font-size:12px;}
+.money{color:#e40000;font-size:12px;}
+.rightTex{float:left;margin-top:6px;line-height:25px;}
+.order{cursor:pointer;font-size:12px;position:relative;background:#e2f9fd;border:1px #c0c0c0 solid;margin:10px;padding:7px;}
+.tail{width:62px;height:25px;line-height:25px;background:url(../img/gen.gif) repeat-x;text-align:center;font-size:12px;border:1px #dcdcdc solid;color:#686767;border-radius:2px;position:absolute;right:10px;top:10px;cursor:pointer;}
+.topTail{width:62px;height:25px;line-height:25px;background:url(../img/gen.gif) repeat-x;text-align:center;font-size:12px;border:1px #dcdcdc solid;color:#686767;border-radius:2px;cursor:pointer;margin-left:60px;margin-bottom:5px;}
+.pressBox{padding-left:10px;}
+.celPress{background:url(../img/btnNo.gif) repeat-x;float:right;width:62px;color:#471c05;font-weight:bold;letter-spacing:3px;height:39px;border:0px;float:left;border:1px #b5b5b5 solid;border-radius:2px;margin-bottom:10px;cursor:pointer;margin-left:40px;font-family:"微软雅黑"}
+.show{overflow-y:scroll;}
+.orderTail{margin:10px;padding:7px;background:#E2F9FD;border:1px solid #BFBFBF}
+.staP{font-size:12px;color:#494949;padding-left:60px;margin-top:5px;}
+.dash{border-top:1px #c0c0c0 solid;margin:10px 0px;}
+.ordP{height:25px;line-height:25px;font-size:12px;color:#22292c;}

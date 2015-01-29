@@ -1,0 +1,56 @@
+<?php $nav = "FUNCTION"; $side = "PHOTOINDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Photo_index.css" rel="stylesheet"/>
+<div class="container main">
+<div class="row">
+<include file="Photo:left"/>
+     
+             <div class="col-md-10 main">
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">相册列表</h3>
+			  </div>
+                <!--  
+                <form method="post" action="" enctype="multipart/form-data">          
+               <p class="photoHead"><span>相册</p>
+                <div class="replyBox">
+                	<p class="replyTex1">回复：相册,3g相册,等等关键词触发此功能：</p>
+                    <p class="replyTex1"><a href="" class="replyTex">在回复中，系统默认第一个相册（封面、标题、简介）为图文回复信息</a></p>
+                    <p class="same">
+                    	<span class="lefTex">相册头部外链地址：</span>
+                        <input type="text" name="picurl" class="circle"/>
+                        <input type="submit"     value="修改" class="surePress"/>
+                    </p>
+                </div>
+                <p><a href="{pigcms::U('Photo/add',array('token'=>$_SESSION['token']))}" class="buildImg">创建相册</a></p>
+                </form>-->
+                <div class="panel-body">
+			  	<div class="add-button pull-right">
+            		<a href="{pigcms::U('Photo/add',array('token'=>$_SESSION['token']))}"  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> 添加相册</a>
+            	</div>
+            	<div style="clear:both"></div>
+				<div class="row">
+             		<volist name="photo" id="photo">    		 
+						<div class="col-xs-6 col-md-3">
+							<div class="thumbnail">
+								<a href="{pigcms::U('Photo/show',array('token'=>$_SESSION['token'],'id'=>$photo['id']))}"><img src="{pigcms:$photo.picurl}" /></a>
+								<div class="thumb-caption">
+									<span class="thumb-caption-title">{pigcms:$photo.title}</span>
+									<span class="thumb-caption-number">有{pigcms:$photo.num}张图片</span>
+									<span class="thumb-caption-editor">
+										<a href="{pigcms::U('Photo/list_add',array('id'=>$photo['id']))}">上传图片</a>
+										<a href="{pigcms::U('Photo/edit',array('token'=>session('token'),'id'=>$photo['id']))}">编辑</a>
+										<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Photo/del',array('token'=>session('token'),'id'=>$photo['id']))}');">删除</a>
+									</span>
+								</div>
+							</div>
+						</div>
+             		 </volist>  
+                </div>
+            </div>
+			 <p class="page">{pigcms:$page}</p> 
+            </div>       
+      </div>
+    </div>
+ </div>
+<include file="Public:footer"/>

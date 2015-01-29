@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="{pigcms::RES}/wedding/css/snower.css" media="all" />
+<link rel="stylesheet" type="text/css" href="{pigcms::RES}/wedding/css/weimob-ui-1-1.css" media="all" />
+<link rel="stylesheet" type="text/css" href="{pigcms::RES}/wedding/css/common.css" media="all" />
+<link rel="stylesheet" type="text/css" href="{pigcms::RES}/wedding/css/home-0.css" media="all" />
+<script type="text/javascript" src="{pigcms::RES}/wedding/js/maivl.js"></script>
+<script type="text/javascript" src="{pigcms::RES}/wedding/js/jQuery.js"></script>
+<script type="text/javascript" src="{pigcms::RES}/wedding/js/swipe.js"></script>
+<script type="text/javascript" src="{pigcms::RES}/wedding/js/zepto.js"></script>
+<title>{pigcms:$tpl['wxname']}</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<!-- Mobile Devices Support @begin -->
+<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+<meta content="no-cache" http-equiv="pragma">
+<meta content="0" http-equiv="expires">
+<meta content="telephone=no, address=no" name="format-detection">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<!-- apple devices fullscreen -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+</head>
+<body onselectstart="return true;" ondragstart="return false;">
+<link rel="stylesheet" type="text/css" href="{pigcms::RES}/wedding/css/font-awesome.css" media="all" />
+<div class="weimob-page" style="display:block; padding-bottom:55px;"> 
+  
+  <!--
+	幻灯片管理
+	-->
+  <div style="-webkit-transform:translate3d(0,0,0);">
+    <div id="banner_box" class="box_swipe">
+      <ul>
+      <volist name="flash" id="so">
+        <li> <a href="{pigcms:$so.url}"><img src="{pigcms:$so.img}" style="width:100%;" /></a></li>
+        </volist>
+      </ul>
+      <ol>
+	  	<volist name="flash" id="so">
+        <li <if condition="$i eq 1">class="on"</if>  ></li>
+		</volist>
+       
+      </ol>
+    </div>
+  </div>
+  <script>
+		$(function(){
+			new Swipe(document.getElementById('banner_box'), {
+				speed:500,
+				auto:3000,
+				callback: function(){
+					var lis = $(this.element).next("ol").children();
+					lis.removeClass("on").eq(this.index).addClass("on");
+				}
+			});
+		});
+	</script>
+  <header>
+    <div class="snower"> 
+      <script type="text/javascript"></script> 
+      <script type="text/javascript" src="{pigcms::RES}/wedding/js/snower.js"></script> 
+    </div>
+  </header>
+  <!--
+		用户分类管理
+        -->
+   <div class="weimob-content">
+  <volist name="info" id="vo">
+    <div class="weimob-list"> <a href="<if condition="$vo['url'] eq ''">{pigcms::U('Wap/Index/lists',array('classid'=>$vo['id'],'token'=>$vo['token']))}<else/>{pigcms:$vo.url|htmlspecialchars_decode}</if>" class="weimob-list-item">
+      <div class="weimob-list-item-bg">
+        <div> <img src="{pigcms:$vo.img}" style="width:100%;" /> </div>
+        <div class="weimob-list-item-box">
+          <div class="weimob-list-item-line">
+            <div class="weimob-list-item-title">{pigcms:$vo.name}</div>
+          </div>
+        </div>
+      </div>
+      </a>   </div></volist>
+  </div>
+</div>
+
+<!--
+导航菜单
+   后台设置的快捷菜单
+-->
+<section>
+  <div class="plug-div">
+    <div id="plug-phone" class="plug-phone">
+      <input type="checkbox" id="plug-btn" class="plug-menu" style="background-color:#B70000;"/>
+      <div style="background-color:#B70000; "> <a href="tel:4000377520" class="icon-phone" style="position:relative;"><img src="img/ico1.gif" style="position:absolute;top:5px;right:5px;"/></a></a> </div>
+      <div style="background-color:#B70000; "> <a href="http://www.hanguoyijiang.com" class="icon-globe " style="position:relative;"><img src="img/ico2.gif" style="position:absolute;top:5px;right:5px;"/></a></a> </div>
+      <div style="background-color:#B70000; "> <a href="/webreserve/ReserveBook?rid=29&wechatid=ouHGIjgGLgjuhD5a7o1a4I_3jq9k" class="icon-plane" style="position:relative;"><img src="img/ico3.gif" style="position:absolute;top:5px;right:5px;"/></a> </div>
+      <div style="background-color:#B70000; "> <a href="http://api.map.baidu.com/marker?location=31.230448,121.467026&title=韩国艺匠婚纱摄影&name=韩国艺匠婚纱摄影&content=上海市茂名北路65号&output=html&src=weiba|weiweb" class="icon-map-marker" style="position:relative;"><img src="img/ico4.gif" style="position:absolute;top:5px;right:5px;"/></a> </div>
+    </div>
+  </div>
+</section>
+<script>
+			window.addEventListener("DOMContentLoaded", function(){
+				btn = document.getElementById("plug-btn");
+				btn.onclick = function(){
+					var divs = document.getElementById("plug-phone").querySelectorAll("div");
+					var className = className=this.checked?"on":"";
+					for(i = 0;i<divs.length; i++){
+						divs[i].className = className;
+					}
+					document.getElementById("plug-wrap").style.display = "on" == className? "block":"none";
+				}
+			}, false);
+		</script> 
+
+
+<footer style="overflow:visible;">
+  <div class="weimob-copyright" style="padding-bottom:50px;"> <php>echo htmlspecialchars_decode(C('copyright'))</php></div>
+  <span class="weimob-support" style="display:none;"></span> </footer>
+<div mark="stat_code" style="width:0px; height:0px; display:none;">{pigcms:$tpl.tongji|htmlspecialchars_decode} </div>
+<include file="Public:tongji"/>
+</body>
+</html>

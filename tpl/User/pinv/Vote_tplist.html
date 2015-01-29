@@ -1,0 +1,51 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_index.css" rel="stylesheet"/>
+ <div class="content">
+ <div class="ffBox">
+<include file="Public:left"/>
+     
+    <!--right--begain-->
+            <div class="right">
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+				<p class="pressBox"><a href="{pigcms::U('Uservote/index',array('token'=>$token))}"     class="addList"/>添加</a></p>
+          <table class="sheet" cellspacing="1">
+                    <tr>                      
+                        <th class="secondTd">标题</th>
+                        <th class="thirdTd">阅读次数</th>
+                        <th class="thirdTd">发起人名字</th>
+                        <th class="thirdTd">人数</th>
+                        <!--<th class="sevenTd">分享次数</th>-->
+                      
+                        <th class="sevenTd">发起时间</th>
+                        <th  class="forthTd" >操作</th>
+                    </tr>
+                   <volist name="list" id="item">
+
+						<tr>
+					  
+							<td>{pigcms:$item.subject}</td>
+							<td>{pigcms:$item.reviews}</td>
+							<td>{pigcms:$item.username}</td>
+							<td>{pigcms:$item.voters}</td>
+						 	<!--<td>{pigcms:$item.shares}</td>-->
+						 
+							<td >{pigcms:$item.adate|date="Y-m-d H:i:s",###}</td>
+							<td>
+	<a href="{pigcms::U('Vote/tpxxlist',array('id'=>$item['vid'],'token'=>$token))}">选项列表</a>&nbsp;&nbsp;<a href="{pigcms::U('Vote/pllist',array('id'=>$item['vid'],'token'=>$token))}">评论列表</a>&nbsp;&nbsp;<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Vote/voteDele',array('id'=>$item['vid'],'token'=>$token))}');">删除</a></td>
+						   
+						</tr>
+						
+                  </volist>
+                </table>
+               
+              
+                <p class="page">{pigcms:$page}</p>
+            </div>
+            <!--right--end-->   
+            </div> 
+      
+ </div>
+<include file="Public:footer"/>

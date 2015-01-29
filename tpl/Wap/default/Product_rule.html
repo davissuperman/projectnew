@@ -1,0 +1,16 @@
+<include file="Product:header"/>
+<link type="text/css" rel="stylesheet" href="{pigcms::$staticFilePath}/css/public.css"/>
+<link type="text/css" rel="stylesheet" href="{pigcms::$staticFilePath}/css/rule.css"/>
+</head>
+<body>
+	<div class="box">
+        <section class="secBox">
+            <p class="ruleText">{pigcms:$title}</p>
+            <p class="ruleDate">{pigcms:$time|date="Y-m-d H:i:s",###}</p>
+            <p class="huiSolid"></p>
+            <p class="textP">{pigcms:$count}</p>
+        </section>  
+    </div>
+		<include file="Product:bottom"/>
+</body>
+</html>

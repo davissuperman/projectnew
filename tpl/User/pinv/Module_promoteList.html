@@ -1,0 +1,81 @@
+<?php $nav = "PROMOTE"?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/module_list.css" rel="stylesheet"/>
+<div class="container main">
+    <div class="row">
+
+
+        <div class="panel panel-success">
+            <div class="panel-heading cfix">
+                <h3 class="panel-title ">推广模块</h3>
+            </div>
+            <div class="panel-body">
+                <div class="pv-modules">
+                    <ul class="pv-modules-list">
+                        <a href="{pigcms::U('Lottery/index?mark=4',array('token'=>$token))}">
+                            <li>
+                                <div class="module-left">
+                                    <span class="glyphicon glyphicon-record"></span>
+                                    <span class="module-list-text">大转盘</span>
+                                </div>
+                                <div class="module-right">
+                                    <span class="module-list-desc">直接发布幸运大转盘活动，设置活动内容、奖项及中将比例。</span>
+                                </div>
+                            </li>
+                        </a>
+
+                        <a href="{pigcms::U('Coupon/index?mark=4',array('token'=>$token))}">
+                            <li>
+                                <div class="module-left">
+                                    <span class="glyphicon glyphicon-certificate"></span>
+                                    <span class="module-list-text">优惠劵</span>
+                                </div>
+                                <div class="module-right">
+                                    <span class="module-list-desc">用于发放优惠券的营销活动。</span>
+                                </div>
+                            </li>
+                        </a>
+
+                        <a href="{pigcms::U('Guajiang/index?mark=4',array('token'=>$token))}">
+                            <li>
+                                <div class="module-left">
+                                    <span class="glyphicon glyphicon-flash"></span>
+                                    <span class="module-list-text">刮刮乐</span>
+                                </div>
+                                <div class="module-right">
+                                    <span class="module-list-desc">通过逼真的刮卡体验，增强用户粘性，可设置活动内容、奖项及中奖比例。</span>
+                                </div>
+                            </li>
+                        </a>
+                        <a href="{pigcms::U('Game/index',array('token'=>$token))}">
+                            <li>
+                                <div class="module-left">
+                                    <span class="glyphicon glyphicon-tint"></span>
+                                    <span class="module-list-text">运营游戏</span>
+                                </div>
+                                <div class="module-right">
+                                    <span class="module-list-desc">进入游戏页面完成游戏，
+                                        填写手机并提交，分享活动给朋友或发送至朋友圈。</span>
+                                </div>
+                            </li>
+                        </a>
+                        <a href="{pigcms::U('Doing/index',array('token'=>$token))}">
+                            <li>
+                                <div class="module-left">
+                                    <span class="glyphicon glyphicon-tint"></span>
+                                    <span class="module-list-text">流程B</span>
+                                </div>
+                                <div class="module-right">
+                                    <span class="module-list-desc">进入游戏页面完成游戏，
+                                        填写手机并提交，分享活动给朋友或发送至朋友圈。</span>
+                                </div>
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>      
+</div>
+<include file="Public:footer"/>

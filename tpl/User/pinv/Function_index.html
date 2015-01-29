@@ -1,0 +1,32 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Function_index.css" rel="stylesheet"/>
+ <div class="container">
+ <div class="row">
+		<div class="panel panel-success">
+			  <div class="panel-heading">
+				<h3 class="panel-title">使用状况</h3>
+			  </div>
+			  <div class="panel-body">
+				<div class="row">
+					<div class="col-md-6">
+						<ul class="list-group">
+						  <li class="list-group-item list-group-item-default">有效期：<if condition="$_SESSION['viptime'] neq 0">{pigcms:$thisUser.viptime|date="Y-m-d",###}<else/>vip0不限时间</if></li>
+						  <li class="list-group-item list-group-item-default">文本使用数：{pigcms:$thisUser.textnum}/{pigcms:$thisUser.textcount}</li>
+						  <li class="list-group-item list-group-item-default">图文请求数：{pigcms:$thisUser.diynum}/{pigcms:$userinfo.diynum}</li>
+						  <li class="list-group-item list-group-item-default">图文使用数：{pigcms:$thisUser.imgnum}/{pigcms:$thisUser.imgcount}</li>
+						</ul>
+					</div>
+  					<div class="col-md-6">
+  						<ul class="list-group">
+						  <li class="list-group-item list-group-item-default">活动创建数：{pigcms:$thisUser.activitynum}/{pigcms:$userinfo.activitynum}</li>
+						  <li class="list-group-item list-group-item-default">功能请求数：{pigcms:$thisUser.connectnum}/{pigcms:$userinfo.connectnum}</li>
+						  <li class="list-group-item list-group-item-default">空间：{pigcms:$qry.usednum}M/{pigcms:$qry.num}M</li>
+						  <li class="list-group-item list-group-item-default"><!-- 语音使用数：{pigcms:$thisUser.voicenum}/{pigcms:$thisUser.voicecount} -->&nbsp;</li>
+						</ul>
+  					</div>
+				</div>
+			  </div>
+		</div>
+ </div>
+ </div>
+<include file="Public:footer"/>

@@ -1,0 +1,12 @@
+<div class="col-md-2 sidebar">
+<nav id="sidebar-nav">
+	<ul class="nav nav-pills nav-stacked">
+		<li><a href="{pigcms::U('Module/businessList',array('token'=>$token))}"><span class="glyphicon glyphicon-chevron-left"></span> 返回</a></li>
+		<li <?php if($side == "INDEX") echo 'class="active"'; ?>><a href="{pigcms::U('Wedding/index',array('token'=>$token))}">喜帖管理</a></li>
+		<li <?php if($side == "DEPARTMENT") echo 'class="active"'; ?>><a href="{pigcms::U('Yuangong/index',array('token'=>$token))}">部门管理</a></li>
+		<li <?php if($side == "YUANGONG") echo 'class="active"'; ?>><a href="{pigcms::U('Yuangong/yglist',array('token'=>$token))}">员工管理</a></li>
+		<li <?php if($side == "TPLIST") echo 'class="active"'; ?>><a href="{pigcms::U('Vote/tplist',array('token'=>$token))}">客照投票</a></li>
+		<li <?php if($side == "YUYUE") echo 'class="active"'; ?>><a href="{pigcms::U('Vote/yuyuebd',array('token'=>$token))}">预约表单</a></li>		
+	</ul>
+</nav>
+</div>

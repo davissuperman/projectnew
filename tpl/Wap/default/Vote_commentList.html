@@ -1,0 +1,281 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{pigcms:$title}</title>      
+        <meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+        <link type="text/css" rel="stylesheet" href="{pigcms::RES}/css/vote/static/weixin/css/common.css"/>
+        <link type="text/css" rel="stylesheet" href="{pigcms::RES}/css/vote/static/{pigcms:$style}/checkVote.css"/> 
+        <script src="{pigcms::RES}/css/vote/static/js/jquery.js"></script>
+        <script src="{pigcms::RES}/css/vote/static/js/jquery.infinitescroll.js"></script>
+        <script type="text/javascript">
+            var jq = jQuery.noConflict();
+        </script>  
+        <script src="{pigcms::RES}/css/vote/static/js/top.js"></script>
+
+        <script>
+            window.onload = function() {
+                if (_cookie._get("PINV") == "{pigcms:$vid}") {
+                    $("topc").style.display = "block";
+                    $("toup").style.display = "none";
+                    $("vote_vote").className = 'sendOver';
+                    $("vote_vote").setAttribute("onclick", "_system._toast(\'你已经投过票了\');");
+                    $("vote_vote").value = "你已经投过票了";
+                }
+            }
+        </script>	
+    </head>
+    <body> 
+        <div class="box">
+            <h3 class="title" id="title">{pigcms:$title}</h3>
+            <p  class="detail">
+                <span class="time"><span> {pigcms:$time}</span><span></span></span>
+                <span class="time"></span>
+                <span class="time"><span>阅读</span><span>{pigcms:$reviews}</span></span>
+                <span class="time"><span>分享</span><span>{pigcms:$shares}</span></span>
+            </p>
+            <volist name="img" id="im">
+                <p><!--放图片-->
+                    <img src="{pigcms:$im.attachment}" class="pImg"><br>
+                </p></volist>
+            <p>{pigcms:$message}</p>
+
+            <p class="report"><a href="">举报</a></p>
+            <div class="voteNum">
+                <span>多选投票，已收到</span>
+                <span>{pigcms:$sum[0].c}</span>
+                <div class="clear"></div>
+            </div>
+            <div id="toup" style="display:block">
+                <ul class="checkList"  id="checkList">
+                    <volist name="optio" id="o">
+                        <li>
+                            <span class="radioText">{pigcms:$o.voteoption}</span>
+                            <span class="radioCheck" onclick="_vote._select({pigcms:$o.oid})">    <img id="option_{pigcms:$o.oid}" src="{pigcms::RES}/css/vote/static/images/default_mt_no.png" class="chosImg"></span>
+                        </li></volist>      
+                </ul></div>
+            <div id="topc" style="display:none">
+                <!--已投票--begain-->
+                <div class="numBox">
+                    <volist name="optio" id="ol">
+                        <!--没兴趣--begain-->
+                        <div class="numSame">
+                            <div class="num">
+                                <span class="faceText">{pigcms:$ol.voteoption}</span>
+                                <span class="faceRight">
+                                    <span>{pigcms:$ol.votes}</span>
+                                    <span class="voteText">票</span>
+                                    <span><?php echo intval(( $ol[ 'votes' ]/$sum[0]['c'] )*100)."%"?></span>
+                                </span>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="gGBox">
+                                <span class="green" style="width:<?php echo intval(( $ol[ 'votes' ]/$sum[0]['c'] )*100)."%"?>;"></span>
+                                <span class="grayNess" style="width:<?php echo (100-intval(( $ol[ 'votes' ]/$sum[0]['c'] )*100))."%"?>;"></span>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </volist>
+                    <!--没兴趣--end-->
+                </div>
+                <!--已投票--end-->
+                <!--评论--begain-->
+                <div id="container">
+                    <p class="artical">
+                        <span class="span1">点评</span>
+                        <span class="span2">{pigcms:$count}</span>
+                        <span class="span3">条</span>
+                    </p>
+                    <volist name="comment" id="comm">
+                        <div class="artText">
+                            <div>
+                                <span class="headTex">{pigcms:$comm.message}</span>
+                                <span class="headRight">{pigcms:$comm.cdate}</span>
+                                <div class="clear"></div>
+                            </div>
+                        </div></volist>
+                    <span id="page" style="display:none">{pigcms:$page}</span>
+                </div>
+                
+                <!--   <img src="{pigcms::RES}/css/vote/static/weixin/img/goTop.png" class="goTop" onclick="scroll(0, 0)"/>
+           <p><input type="button" value="你已经投过票了" class="sendOver"  id="vote_vote" onclick="_system._toast('你已经投过票了');"/></p>	 -->
+            </div>
+            <!--评论--begain-->
+            <img src="{pigcms::RES}/css/vote/static/weixin/img/goTop.png" class="goTop" onclick="scroll(0, 0)"/>
+            <!--//评论--begain-->
+            <p><input type="button" value="我要投票" class="sendBtnX"  id="vote_vote" onclick="_vote._vote()"/></p>
+            <p class="btn" >
+                <a href="#" class="sendBox"  onclick="_system._guide(true)">
+                    <img src="{pigcms::RES}/css/vote/static/weixin/img/share1.png" class="share1"/>
+                    <span>发送给朋友</span>
+                </a>
+                <a href="#" class="shareBox"  onclick="_system._guide(true)">
+                    <img src="{pigcms::RES}/css/vote/static/weixin/img/share2.png" class="share2"/>
+                    <span>分享到朋友圈</span>
+                </a>
+            </p>
+			<p><input type="button"  value="我也要发起投票" class="sendBtnX" onclick="location.href = location.href = './index.php?g=Wap&m=Vote&a=index&token={pigcms:$token}'"/></p>
+            <p class="bottom">服务声明</p>
+            <p class="blacBottom"></p>
+        </div>
+        <!--评论框--begain-->
+        <!--评论框--begain-->
+        <div class="samepBox" id="samepBox">
+            <p class="articText" style="display:none;" id="articText"><img src="{pigcms::RES}/css/vote/static/weixin/img/falusImg_over.png" class="artLeftImg"   onclick="closes()" />写点评<img src="{pigcms::RES}/css/vote/static/weixin/img/rightImg.png" class="artRightImg" id="artRight" onclick="_comment._comment()"/></p>
+            <div class="sameP" onclick="onclicks()">
+                <textarea placeholder="写点评" class="case" id="artical" oninput="change(this)"></textarea>
+                <!-- <a ><span class="case" id="artical">写点评</span></a>-->
+            </div>
+
+        </div>
+        <script>
+            var _vote = {
+                _sel: "",
+                _select: function(id) {
+                    if ($("option_" + id).src.indexOf("_yes") != -1) {
+                        $("option_" + id).src = $("option_" + id).src.replace(/_yes/, "_no");
+                        this._sel = ("," + this._sel + ",").replace("," + id + ",", "");
+                    } else {
+                        $("option_" + id).src = $("option_" + id).src.replace(/_no/, "_yes");
+                        if ("sg" == "sg") {
+                            if (this._sel != "") {
+                                $("option_" + this._sel).src = $("option_" + id).src.replace(/_yes/, "_no");
+                            }
+                            this._sel = id.toString();
+                        } else {
+                            this._sel += "," + id;
+                        }
+
+
+                    }
+                    this._sel = this._sel.replace(/\,{2,}/g, ",").replace(/^\,/g, "").replace(/\,$/g, "");
+                },
+                _vote: function() {
+                    if (this._sel == "") {
+                        _system._toast("你没有做出任何选择");
+                        return;
+                    }
+                    var formdate = new FormData();
+                    formdate.append("id", "{pigcms:$vid}");
+                    formdate.append("title", "{pigcms:$title}");
+                    formdate.append("options", this._sel);
+                    formdate.append("token", "{pigcms:$token}");                  
+                    _$("./index.php?g=Wap&m=Vote&a=commentAjax", formdate, "请稍候", "_vote._ok");
+                },
+                _ok: function(json) {
+                    if (json.state == "0") {
+                        _system._toast("你的操作有误");
+                        return;
+                    }
+                    if (json.state == "1") {
+                        _system._toast("你已经投过票了");
+                        return;
+                    }
+                    _system._ok("投票成功", function() {
+                        $("vote_vote").innerHTML = "投票成功";
+                        $("vote_vote").className = 'sendOver';
+                        _cookie._set("PINV", "{pigcms:$vid}", 311040000);
+                        $("vote_vote").onclick = function() {
+                            _system._toast("你已经投过票了");
+                        };
+                        _system._dis();
+                    });
+                }
+
+            };
+            var _comment = {
+                _comment: function() {
+                    var _comment_text = $("artical").value.trim()
+                    if (_comment_text.len < 1) {
+                        _system._toast("评论不能为空！");
+                        return;
+                    }
+                    var formdate = new FormData();
+                    formdate.append("vid", "{pigcms:$vid}");
+                    formdate.append("message", _comment_text);
+                    _$("./index.php?g=Wap&m=Vote&a=Ajax", formdate, "请稍候", "_comment._comment_ok");
+                },
+                _comment_ok: function(json) {
+                    if (json.state == "0") {
+                        _system._toast("评论不能为空!");
+                        return;
+                    }
+                    closes();
+                    _system._toast("评论成功!");
+
+                    window.location.reload();
+                }
+            };
+            (function() {				
+                dataForWeixin.MsgImg = "http://www.pinv.cc/{pigcms:$img_l}";				
+                dataForWeixin.TLImg = "http://www.pinv.cc/{pigcms:$img_l}"				
+                dataForWeixin.path = "./index.php?g=Wap&m=Vote&a=commentList&id={pigcms:$vid}&token={pigcms:$token}";
+                dataForWeixin.title = "{pigcms:$title}";
+                dataForWeixin.desc = "{pigcms:$message}";
+                dataForWeixin.desc = dataForWeixin.desc || dataForWeixin.title;
+                dataForWeixin.callback = function() {
+                    _$("./index.php?g=Wap&m=Vote&a=voteA&vid={pigcms:$vid}&token={pigcms:$token}", "", "");
+                };
+                jq('#container').infinitescroll({
+                    navSelector: "#page",
+                    nextSelector: "#page  a",
+                    itemSelector: "#container .artText",
+                    debug: false,
+                    maxPage: {pigcms:$pages},
+                    loading: {finishedMsg: '加载完毕！', msgText: '<em>加载中</em>'},
+                    dataType: 'html'});
+            })();
+            function closes() {
+                var mObj = document.getElementById("articText");
+                mObj.style.display = "none";
+                var artical = document.getElementById("artical");
+                artical.value = "";
+                artical.style.height = 30 + "px";
+
+            }
+            function onclicks() {
+                var mObj = document.getElementById("articText");
+                mObj.style.display = "block";
+                var artical = document.getElementById("artical");
+                artical.style.height = 45 + "px";
+
+
+
+            }
+            function change(obj) {
+                obj.style.color = "#000";
+                var mObj = document.getElementById("artRight");
+                mObj.setAttribute("src", "{pigcms::RES}/css/vote/static/weixin/img/rightImg_over.png");
+
+            }
+        </script><div id="ok"><img src="{pigcms::RES}/css/vote/static/images/ok.png"><div id="ok_text"></div></div>
+        <div id="cover"></div>
+        <div id="loading"><img src="{pigcms::RES}/css/vote/static/images/loading.gif"><div id="loading_text"></div></div>
+        <div id="guide1" style="width:100%;top:220px;right:0px;">
+            <div id="guide_button1">
+                <div class="pleft" style="text-align:center;height:40px;"><button class="lockX" onclick="location.href = 'http://www.pinv.cc/index.php?g=Wap&m=Selfform&a=index&token={pigcms:$token}&id={pigcms:$gid}'">去预约</button></div>
+                <div class="pleft" style="text-align:center;height:40px;"><button class="lockX" onclick="location.href = location.href">查看投票结果</button></div>
+                <div class="pclear"></div>                    
+            </div>
+            <div id="guide_button3"><button class="lock" onclick="_system._guideHide()">取消</button></div>
+        </div>
+		<div id="guide">
+            <div><img src="{pigcms::RES}/css/vote/static/images/guide.png"></div>
+            <div id="guide_button">
+                <div class="pleft"><button class="lock" onclick="location.href = '/' + dataForWeixin.path +''">预览</button></div>
+                <div class="pleft"><button class="lock" onclick="location.href = location.href">再发一条</button></div>
+                <div class="pclear"></div>                    
+            </div>
+            <div id="guide_button2"><button class="lock" onclick="_system._guideHide()">取消</button></div>
+        </div>
+        <div id="guide2"><img src="{pigcms::RES}/css/vote/static/images/guide2.png"></div>
+        <div id="guide3"><img src="{pigcms::RES}/css/vote/static/images/guide3.png"></div>
+        <div id="toast"></div> 
+		<script>var _fromCode="http://www.pinv.cc/";</script>
+        <script src="{pigcms::RES}/css/vote/static/js/static1012.js"></script>
+        <include file="Public:tongji"/>
+    </body>
+</html>

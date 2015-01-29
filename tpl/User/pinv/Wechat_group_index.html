@@ -1,0 +1,68 @@
+<?php $nav = "CRM"; $side = "GINDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/cindex.css" rel="stylesheet"/>
+<script src="/tpl/static/fushionCharts/JSClass/FusionCharts.js" type="text/javascript"></script>   
+
+<div class="container main">
+    <div class="row main">
+        <include file="Crm:left"/>
+        <div class="col-md-10 main">
+
+            <ol class="breadcrumb">
+                <li><a href="{pigcms::U('Chat/index',array('token'=>$token))}">CRM</a></li>
+                <li class="active">分组粉丝管理</li>
+            </ol>
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">分组粉丝管理</h3>
+                </div>
+                <div class="panel-body">
+
+                    <table class="table table-striped" cellspacing="1"  border="0">              
+                        <tr>
+                        <tr> 
+
+                            <th class="thirdTd">微信昵称</th>
+                            <th class="thirdTd">姓名</th>
+                            <th class="thirdTd">手机号</th>
+                            <th class="thirdTd">性别</th>
+                            <th class="thirdTd">共消费</th>
+                            <th class="thirdTd">城市</th>
+                            <th class="thirdTd">来源</th>
+                            <th class="thirdTd">签到</th>
+                            <th class="thirdTd">扫码</th>
+                            <th class="thirdTd">积分</th>
+
+                        </tr>
+                        </tr>
+                        <volist name="list" id="vo">
+
+                            <TD><div  class="answer_text">{pigcms:$vo.u_name}</div></TD>
+                            <TD>{pigcms:$vo.u_username}</TD>
+                            <TD>{pigcms:$vo.u_iphone}</TD>
+                            <if condition="$vo['u_sex'] eq 1">
+                                <TD>男</TD>
+                                <elseif condition="$vo['u_sex'] eq 2"/>
+                                <TD>女</TD>
+                                <else/>
+                                <TD>无</TD>
+                            </if>
+                            <TD>{pigcms:$vo.u_money}</TD>
+                            <TD>{pigcms:$vo.u_address}</TD>
+                            <TD>{pigcms:$vo.u_form}</TD>
+                            <TD>{pigcms:$vo.signscore}</TD>
+                            <TD>{pigcms:$vo.code_num}</TD>
+                            <TD>{pigcms:$vo.u_number}</TD>
+                            </tr>
+                        </volist>
+                      
+                    </table>
+                      <div >{pigcms:$page} </div>
+                </div>
+              
+            </div>
+        </div>
+    </div>    
+
+</div>
+<include file="Public:footer"/>

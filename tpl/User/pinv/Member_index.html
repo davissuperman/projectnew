@@ -1,0 +1,76 @@
+<include file="Public:head" />
+<link type="text/css" href="{pigcms::RES}/css/Membe_index.css"
+	rel="stylesheet" />
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+<div class="content"><div class="ffBox"><include file="Public:left" />
+<div class="right">
+<p class="rightTop"><a
+	href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"
+	class="back">回到首页</a> <a href="" onclick="reloadMainFrame();"
+	class="new">刷新</a></p>
+<p class="artiEdit"><span class="big">会员管理</span></p>
+<form method="post" action="">
+<p class="promot"><span class="tishi">查询资料仅支持微信名(如we),手机号(如158)的(模糊)查询</span>
+</br>
+<input type="text" class="case" name="searchkey" /> <input
+	type="submit" value="查询" class="refer" /></p>
+</form>
+<p class="proText">注意:消费金额只能填整数(采取进一取整法,加入消费了 40.22
+元,1元=10个积分.那么消费金额去整=50,积分就是
+50*10=500个积分)每修改一次,就增加一条新的消费积分记录,请慎用!(只显示最后一次修改记录)</p>
+<table class="sheet" cellspacing="1">
+	<tr>
+
+		<th class="secondTd">编号</th>
+		<th class="thirdTd">微信名</th>
+		<th class="forthTd">姓名</th>
+		<th class="sevenTd">联系电话</th>
+		<th class="thirdTd">QQ号码</th>
+
+		<th class="sevenTd">领卡时间</th>
+		<th class="sevenTd">消费金额(元)</th>
+		<th class="forthTd">消费日期</th>
+		<th class="sevenTd">添加</th>
+		<th class="sevenTd">操作</th>
+	</tr>
+
+	<volist id="list" name="list">
+	<form method="post" action="/index.php?g=User&m=Member&a=edit">
+	<tr>
+		<td class="secondTd">{pigcms:$i}</td>
+		<td class="thirdTd">{pigcms:$list.wechaname}</td>
+		<td class="forthTd">{pigcms:$list.truename}</td>
+		<td class="sevenTd">{pigcms:$list.tel}</td>
+		<td class="thirdTd">{pigcms:$list.qq}</td>
+
+		<td class="sevenTd"><if
+			condition="$list['getcardtime'] neq false">
+		{pigcms:$list.getcardtime|date='Y-m-d',###} <else /> 无时间记录 </if></td>
+		<td class="sevenTd"><input type="text" name="add_expend"
+			value="{pigcms:$list.add_expend}" class="px" style="width: 40px;">
+		<input type="hidden" name="token" value="{pigcms:$list.token}">
+		<input type="hidden" name="wecha_id" value="{pigcms:$list.wecha_id}">
+		</td>
+		<td class="forthTd"><input type="input" class="px"
+			id="add_expend_time" value="<?php
+		if(!empty($list['add_expend_time'])): echo
+		date('Y-m-d',$list['add_expend_time']); else: echo
+		date('Y-m-d',time()); endif; ?>" onClick="WdatePicker()"
+		name="add_expend_time" /></td>
+		<td class="sevenTd">
+		<button type="submit" style="cursor: pointer">修改</button>
+		</td>
+		<td class="sevenTd"><a class="cancel"
+			href="javascript:drop_confirm('您确定要删除吗?', '/index.php?g=User&m=Member&a=del&token={pigcms:$Think.get.token}&id={pigcms:$list.id}');">删除</a>
+		</td>
+	</tr>
+	 </form>
+	</volist>
+</table>
+	<p class="page">{pigcms:$page}</p>
+<!--
+                <p class="allCel"><input type="checkbox"/><span>全选</span><input type="radio" checked="checked"/><span>删除</span></p>
+            --></div>
+            	</div>
+</div>
+<include file="Public:footer" />

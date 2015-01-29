@@ -1,0 +1,198 @@
+<?php $nav = "HOME"; $side = "PLUGMENU" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Home_plugmenu.css" rel="stylesheet"/>
+<script src="./tpl/User/default/common/js/cart/jscolor.js" type="text/javascript"></script>
+<script>
+$(document).ready(function(){ 
+  $(".checkbox").click(function(){
+	var i=0; 
+  $("input:checked").each(function(){
+    i++;  
+  });
+ if(i>4){
+ alert('最多只显示四项');
+ }
+});
+
+});
+</script>
+<div class="container main">
+<div class="row">
+<include file="Home:left"/>
+	 <div class="col-md-10 main">
+ 				<div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title " style="float:left; margin-right:10px;">快捷菜单</h3><span class="small">提供一键拨号，一键导航，一键email等快捷功能</span>
+			  </div>
+			  <div class="panel-body">
+	
+              <form method="post" action="" enctype="multipart/form-data">
+               <div style="padding: 15px 20px;" class="msgWrap bgfc">
+ 					<table width="100%" cellspacing="0" cellpadding="0" border="0" style=" margin:0;" class="userinfoArea">
+						<tbody>
+							<tr>
+								<td width="60"><div style="background-color: rgb(92, 250, 255);" id="plugmenucolor" class="plug-menu"><span class="close"></span></div></td>
+								<td width="170"><strong style="">选择快捷菜单颜色:</strong></td>
+								<td width="95"><input type="text" onblur="document.getElementById('plugmenucolor').style.backgroundColor=document.getElementById('themeStyle').value;" style="width: 55px; background-image: none; background-color: rgb(92, 250, 255); color: rgb(0, 0, 0);" class="px color" value="#ff0000" id="themeStyle"   name="plugmenucolor" ></td>
+								<td width="536">请在手机上查看效果！</td>
+							</tr>
+							<if condition="$userinfo.iscopyright eq 1">
+							<tr>
+								<td colspan="2">设置页面版权:</td>
+								
+								
+								<td colspan="2"><textarea style="width:500px; height:35px;line-height:35px;" name="copyright">{pigcms:$homeInfo.copyright}</textarea></td>
+							</tr>
+							</if>
+						</tbody>
+					</table>
+ 				</div>
+                
+                <table class="table table-striped" cellspacing="1">
+                	<tr>
+                    	<th class="firstTd">图标</th>
+                        <th class="secondTd">名称</th>
+                        <th class="forthTd">外链网站或活动
+                        	<span class="glyphicon glyphicon-question-sign hover-popover" data-container="body" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="比如你想跳转到百度，就填写http://baidu.com。不需要跳转就不用填写，还可以外链活动，直接填写的活动外链地址：大转盘 888"></span>
+                        </th>
+                        <th class="sixTd">显示顺序</th>
+                        <th class="sevenTd">显示</th>
+                    </tr>
+                    <tr>
+                    	<td class="firstTd"><img src="{pigcms::RES}/img/tou1.gif" class="tou"/></td>
+                        <td class="secondTd">电话</td>
+                        <td class=""><input type="text" name="url_tel" value="<php>echo $menus['tel']['url'];</php>" /></td>
+                        <td class=""><input type="text" name="sort_tel" value="<php>echo $menus['tel']['taxis'];</php>"/></td>
+                        <td class="forthTd"><input class="checkbox" type="checkbox" style="margin-right:5px;" name="display_tel" value="1" <php>if($menus['tel']['display']){echo 'checked';}</php> /><span>默认为商家电话，可以输入电话号码，比如：13888888888</span></td>
+                    </tr>
+                    <tr>
+                    	<td class="firstTd"><img src="{pigcms::RES}/img/tou2.gif" class="tou"/></td>
+                        <td class="secondTd">会员资料</td>
+                        <td class=""><input type="text" name="url_memberinfo" value="<php>echo $menus['memberinfo']['url'];</php>"/></td>
+                        <td class=""><input type="text" name="sort_memberinfo" value="<php>echo $menus['memberinfo']['taxis'];</php>" /></td>
+                        <td class="forthTd"><input class="checkbox" type="checkbox" style="margin-right:5px;"  name="display_memberinfo" value="1" <php>if($menus['memberinfo']['display']){echo 'checked';}</php> /><span>默认为会员卡资料，可以填写外链</span></td>
+                    </tr>
+                    <tr>
+                    	<td class="firstTd"><img src="{pigcms::RES}/img/tou3.gif" class="tou"/></td>
+                        <td class="secondTd">导航</td>
+                        <td class=""><input type="text"  name="url_nav" value="<php>echo $menus['nav']['url'];</php>"/></td>
+                        <td class="forthTd"><input type="text" name="sort_nav" value="<php>echo $menus['nav']['taxis'];</php>"/></td>
+                        <td class="forthTd"><input class="checkbox" type="checkbox" style="margin-right:5px;" name="display_nav" value="1" <php>if($menus['nav']['display']){echo 'checked';}</php> /><span>默认为商家地图</span></td>
+                    </tr>
+                    <tr>
+                    	<td class="firstTd"><img src="{pigcms::RES}/img/tou4.gif" class="tou"/></td>
+                        <td class="secondTd">分享</td>
+                        <td class="thirdTd"><input type="text" name="url_share" value="<php>echo $menus['share']['url'];</php>"/></td>
+                        <td class="forthTd"><input type="text" name="sort_share" value="<php>echo $menus['share']['taxis'];</php>"/></td>
+                        <td class="forthTd"><input class="checkbox" type="checkbox" style="margin-right:5px;" name="display_share" value="1" <php>if($menus['share']['display']){echo 'checked';}</php>/><span></span></td>
+                    </tr>
+                    <tr>
+                    	<td class="firstTd"><img src="{pigcms::RES}/img/tou5.gif" class="tou"/></td>
+                        <td class="secondTd">首页</td>
+                        <td class="thirdTd"><input type="text"  name="url_home" value="<php>echo $menus['home']['url'];</php>"/></td>
+                        <td class="forthTd"><input type="text" name="sort_home" value="<php>echo $menus['home']['taxis'];</php>" class=""/></td>
+                        <td class="forthTd"><input class="checkbox" type="checkbox" style="margin-right:5px;"  name="display_home" value="1" <php>if($menus['home']['display']){echo 'checked';}</php>/><span>默认为首页</span></td>
+                    </tr>
+                    <tr>
+                    	<td class="firstTd"><img src="{pigcms::RES}/img/tou6.gif" class="tou"/></td>
+                        <td class="secondTd">相册</td>
+                        <td class="thirdTd"><input type="text" name="url_album" value="<php>echo $menus['album']['url'];</php>"/></td>
+                        <td class="forthTd"><input type="text"  name="sort_album" value="<php>echo $menus['album']['taxis'];</php>"/></td>
+                        <td class="forthTd"><input class="checkbox" type="checkbox" style="margin-right:5px;" name="display_album" value="1" <php>if($menus['album']['display']){echo 'checked';}</php>/><span>默认为3g相册</span></td>
+                    </tr>
+                    <tr>
+                    	<td class="firstTd"><img src="{pigcms::RES}/img/tou7.gif" class="tou"/></td>
+                        <td class="secondTd">邮箱</td>
+                        <td class="thirdTd"><input type="text"  name="url_email" value="<php>echo $menus['email']['url'];</php>"/></td>
+                        <td class="forthTd"><input type="text" name="sort_email" value="<php>echo $menus['email']['taxis'];</php>"/></td>
+                        <td class="forthTd"><input class="checkbox" type="checkbox" style="margin-right:5px;" name="display_email" value="1" <php>if($menus['email']['display']){echo 'checked';}</php>/><span>请填写邮箱地址</span></td>
+                    </tr>
+                    <tr>
+                    	<td class="firstTd"><img src="{pigcms::RES}/img/tou8.gif" class="tou"/></td>
+                        <td class="secondTd">购物</td>
+                        <td class="thirdTd"><input type="text" name="url_shopping" value="<php>echo $menus['shopping']['url'];</php>"/></td>
+                        <td class="forthTd"><input type="text" name="sort_shopping" value="<php>echo $menus['shopping']['taxis'];</php>"/></td>
+                        <td class="forthTd"><input class="checkbox" type="checkbox" style="margin-right:5px;" name="display_shopping" value="1" <php>if($menus['shopping']['display']){echo 'checked';}</php>/><span>默认为微商城</span></td>
+                    </tr>
+                    <tr>
+                    	<td class="firstTd"><img src="{pigcms::RES}/img/tou9.gif" class="tou"/></td>
+                        <td class="secondTd">会员卡</td>
+                        <td class="thirdTd"><input type="text"  name="url_membercard" value="<php>echo $menus['membercard']['url'];</php>"/></td>
+                        <td class="forthTd"><input type="text" name="sort_membercard" value="<php>echo $menus['membercard']['taxis'];</php>"/></td>
+                        <td class="forthTd"><input class="checkbox" type="checkbox" style="margin-right:5px;" name="display_membercard" value="1" <php>if($menus['membercard']['display']){echo 'checked';}</php>/><span>默认为会员卡</span></td>
+                    </tr>
+                    <tr>
+                    	<td class="firstTd"><img src="{pigcms::RES}/img/tou10.gif" class="tou"/></td>
+                        <td class="secondTd">活动</td>
+                        <td class="thirdTd"><input type="text"  name="url_activity" value="<php>echo $menus['activity']['url'];</php>"/></td>
+                        <td class="forthTd"><input type="text"  name="sort_activity" value="<php>echo $menus['activity']['taxis'];</php>"/></td>
+                        <td class="forthTd"><input class="checkbox" type="checkbox" style="margin-right:5px;" name="display_activity" value="1" <php>if($menus['activity']['display']){echo 'checked';}</php>/><span>请填写活动外链代码</span></td>
+                    </tr>
+                    <tr>
+                    	<td class="firstTd"><img src="{pigcms::RES}/img/tou11.gif" class="tou"/></td>
+                        <td class="secondTd">新浪微博</td>
+                        <td class="thirdTd"><input type="text" name="url_weibo" value="<php>echo $menus['weibo']['url'];</php>"/></td>
+                        <td class="forthTd"><input type="text" name="sort_weibo" value="<php>echo $menus['weibo']['taxis'];</php>"/></td>
+                        <td class="forthTd"><input class="checkbox" type="checkbox" style="margin-right:5px;" name="display_weibo" value="1" <php>if($menus['weibo']['display']){echo 'checked';}</php>/><span>请填写微博地址</span></td>
+                    </tr>
+                    <tr>
+                    	<td class="firstTd"><img src="{pigcms::RES}/img/tou12.gif" class="tou"/></td>
+                        <td class="secondTd">腾讯微博</td>
+                        <td class="thirdTd"><input type="text" name="url_tencentweibo" value="<php>echo $menus['tencentweibo']['url'];</php>"/></td>
+                        <td class="forthTd"><input type="text" name="sort_tencentweibo" value="<php>echo $menus['tencentweibo']['taxis'];</php>"/></td>
+                        <td class="forthTd"><input class="checkbox" type="checkbox" style="margin-right:5px;" name="display_tencentweibo" value="1" <php>if($menus['tencentweibo']['display']){echo 'checked';}</php>/><span>请填写微博地址</span></td>
+                    </tr>
+                    <tr>
+                    	<td class="firstTd"><img src="{pigcms::RES}/img/tou13.gif" class="tou"/></td>
+                        <td class="secondTd">腾讯空间</td>
+                        <td class="thirdTd"><input type="text"  name="url_qqzone" value="<php>echo $menus['qqzone']['url'];</php>"/></td>
+                        <td class="forthTd"><input type="text" name="sort_qqzone" value="<php>echo $menus['qqzone']['taxis'];</php>"/></td>
+                        <td class="forthTd"><input class="checkbox" type="checkbox" style="margin-right:5px;" name="display_qqzone" value="1" <php>if($menus['qqzone']['display']){echo 'checked';}</php>/><span>请填写空间地址</span></td>
+                    </tr>
+                    <tr>
+                    	<td class="firstTd"><img src="{pigcms::RES}/img/tou14.gif" class="tou"/></td>
+                        <td class="secondTd">微信</td>
+                        <td class="thirdTd"><input type="text"  name="url_wechat" value="<php>echo $menus['wechat']['url'];</php>"/></td>
+                        <td class="forthTd"><input type="text" name="sort_wechat" value="<php>echo $menus['wechat']['taxis'];</php>"/></td>
+                        <td class="forthTd"><input class="checkbox" type="checkbox" style="margin-right:5px;"  name="display_wechat" value="1" <php>if($menus['wechat']['display']){echo 'checked';}</php>/><span>默认为您的微信号</span></td>
+                    </tr>
+                    <tr>
+                    	<td class="firstTd"><img src="{pigcms::RES}/img/tou15.gif" class="tou"/></td>
+                        <td class="secondTd">音乐</td>
+                        <td class="thirdTd"><input type="text"  name="url_music" value="<php>echo $menus['music']['url'];</php>"/></td>
+                        <td class="forthTd"><input type="text" name="sort_music" value="<php>echo $menus['music']['taxis'];</php>"/></td>
+                        <td class="forthTd"><input class="checkbox" type="checkbox" style="margin-right:5px;" name="display_music" value="1" <php>if($menus['music']['display']){echo 'checked';}</php>/><span>请填写音乐地址</span></td>
+                    </tr>
+                    <tr>
+                    	<td class="firstTd"><img src="{pigcms::RES}/img/tou16.gif" class="tou"/></td>
+                        <td class="secondTd">视频</td>
+                        <td class="thirdTd"><input type="text"  name="url_video" value="<php>echo $menus['video']['url'];</php>"/></td>
+                        <td class="forthTd"><input type="text" name="sort_video" value="<php>echo $menus['video']['taxis'];</php>"/></td>
+                        <td class="forthTd"><input class="checkbox" type="checkbox" style="margin-right:5px;" name="display_video" value="1" <php>if($menus['video']['display']){echo 'checked';}</php>/><span>请填写视频地址</span></td>
+                    </tr>
+                    <tr>
+                    	<td class="firstTd"><img src="{pigcms::RES}/img/tou18.gif" class="tou"/></td>
+                        <td class="secondTd">推荐</td>
+                        <td class="thirdTd"><input type="text"  name="url_recommend" value="<php>echo $menus['recommend']['url'];</php>"/></td>
+                        <td class="forthTd"><input type="text"  name="sort_recommend" value="<php>echo $menus['recommend']['taxis'];</php>" /></td>
+                        <td class="forthTd"><input class="checkbox" type="checkbox" style="margin-right:5px;"  name="display_recommend" value="1" <php>if($menus['recommend']['display']){echo 'checked';}</php>/><span></span></td>
+                    </tr>
+                    <tr>
+                    	<td class="firstTd"><img src="{pigcms::RES}/img/tou19.gif" class="tou"/></td>
+                        <td class="secondTd">其他</td>
+                        <td class="thirdTd"><input type="text" name="url_other" value="<php>echo $menus['other']['url'];</php>"/></td>
+                        <td class="forthTd"><input type="text" name="sort_other" value="<php>echo $menus['other']['taxis'];</php>"/></td>
+                        <td class="forthTd"><input class="checkbox" type="checkbox" style="margin-right:5px;" name="display_other" value="1" <php>if($menus['other']['display']){echo 'checked';}</php>/><span></span></td>
+                    </tr>
+                </table>
+                </div>
+				<div class="panel-footer" style="text-align:right"> 
+	  		<input type="submit" value="保存" class="btn btn-success"/>
+		      </div>
+		           </form>
+	</div>
+	</div>
+    </div>
+
+</div>
+<include file="Public:footer"/>

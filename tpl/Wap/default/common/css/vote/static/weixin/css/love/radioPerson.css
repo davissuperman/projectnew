@@ -1,0 +1,46 @@
+*{margin:0px;padding:0px;}
+html,body{width:100%;height:100%;font-size:16px;min-width:320px;}
+body{background:url(../../img/top1Img.gif) no-repeat top #fff0ff; background-size:100%;}
+a{text-decoration:none;}
+ul{list-style:none;}
+.clear{clear:both;}
+.box{margin:18px 12px;font-family:"微软雅黑";padding-top:10%;}
+.title{color:#333333;font-size:20px;font-weight:bold;}
+.detail{height:20px;line-height:20px;color:#7f7f7f;font-size:12px;margin-top:15px;margin-bottom:10px;}
+.time{float:left;margin-right:10px;}
+.pImg{width:100%;}
+.report{height:20px;line-height:20px;text-align:right;margin-top:10px;font-size:12px;}
+.report a{color:#7f7f7f;}
+.voteNum{margin-top:15px;}
+.voteNum span{float:left;font-size:12px;color:#333;}
+.fourChoic{border:1px #ffb8cf solid;border-radius:3px;margin-top:10px;background:#fff;padding:10px 0px;}
+.same{width:25%;float:left;text-align:center;}
+.face{height:60px;}
+.faceTop{text-align:center;margin-top:10px;}
+.sendBtn{height:44px;line-height:44px;background:url(../../img/loveBtn.gif) no-repeat top center;font-size:18px;color:#fff;border:0px;text-align:center;width:100%;border-radius:5px;font-weight:bold;margin-top:18px;}
+.sendBtnX{height:44px;line-height:44px;background:url(../../img/sendBjL.gif) no-repeat top center;font-size:18px;color:#fff;border:0px;text-align:center;width:100%;border-radius:5px;font-weight:bold;margin-top:18px;}
+.btn{margin-top:18px;}
+.bottom{height:45px;line-height:45px;text-align:center;font-size:12px;color:#808080;}
+.sendBox{width:40%;text-align:center;margin-right:10px;float:left;background:url(../../img/garyLove.gif) no-repeat center top;height:45px;line-height:45px;border-radius:5px;color:#fff;padding:0px 10px;}
+.share1{float:left;height:15px;margin-top:15px;}
+.share2{float:left;height:20px;margin-top:12px;}
+
+.shareBox{width:40%;text-align:center;float:right;background:url(../../img/garyLove.gif) no-repeat center top;height:45px;line-height:45px;border-radius:5px;color:#fff;padding:0px 10px;}
+.radioCheck{height:16px;width:16px;border-radius:16px;border:1px #ccc solid;background:url(../../img/lvBjL.gif) no-repeat 4px 4px;background-size:50%;float:left;margin-left:38%;display:inline;}
+.radioNocheck{height:16px;width:16px;border-radius:16px;border:1px #ccc solid;float:left;margin-left:38%;display:inline;}
+
+.numBox{background:#fff;border-radius:5px;margin-top:5px;border-bottom:1px #ffb8cf solid;}
+.num{text-align:right;word-spacing:10px;color:#808080;font-size:12px;}
+.numSame{padding:15px 6px;padding-top:12px;padding-bottom:15px;border:1px #ffb8cf solid;border-radius:5px;border-bottom:0px;}
+.faceRight{float:right;}
+.faceRight span{float:left;margin-top:5px;}
+.voteText{margin-right:10px;}
+.faceText{float:left;font-size:12px;margin-top:4px;}
+.faceX{height:30px;float:left;margin-right:5px;}
+.faceText{float:left;color:#000;}
+.green{height:6px;float:left;background:#ed2c3d;}
+.grayNess{height:6px;float:left;background:#e5e5e5;}
+.gGBox{width:100%;margin-top:15px;}
+.gLeft{float:left;}
+.changImg{background:url(../../img/vote_sgl_no.png) no-repeat center top;float:left;height:15px;width:16px;background-size:16px 15px;margin-left:38%;}
+.changImgX{background:url(../../img/vote_sgL_yes.png) no-repeat center top;float:left;height:15px;width:16px;background-size:16px 15px;margin-left:38%;}

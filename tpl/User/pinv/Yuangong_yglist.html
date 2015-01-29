@@ -1,0 +1,65 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_index.css" rel="stylesheet"/>
+<style>
+    .cateimg {
+        position: relative;
+         
+    }
+    .cateimg .smallImg {
+        width: 50px;
+    }
+    .cateimg .bigImg {
+        position: absolute;
+        left: 51px;
+        top: 0px;
+        display: none;
+        width: 320px;
+    }
+</style>
+<div class="content">
+    <div class="ffBox">
+        <include file="Public:left"/>
+
+        <!--right--begain-->
+        <div class="right">
+            <p class="rightTop">
+                <a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+            </p>
+            <p class="pressBox"><a href="{pigcms::U('Yuangong/addyg',array('token'=>$token))}"     class="addList"/>添加</a></p>
+            <table class="sheet" cellspacing="1">
+                <tr>                      
+                    <th class="secondTd">名称</th>
+                    <th class="thirdTd">部门</th>
+                    <th class="sevenTd">创建时间</th>
+                    <th class="sevenTd">总评分</th>
+                    <th class="secondTd">二维码</th>
+                    <th  class="forthTd" >操作</th>
+                </tr>
+                <volist name="list" id="item">
+
+                    <tr>
+
+                        <td>{pigcms:$item.username}</td>
+                        <td>{pigcms:$item.departmentname}</td>
+                        <td >{pigcms:$item.cdate|date="Y-m-d H",###}</td>
+                        <td >{pigcms:$item.votesize} </td>
+                        <td class="forthTd">
+                            <div class="cateimg"><img src="{pigcms:$item.ewma}" class="smallImg"><img src="{pigcms:$item.ewma}" class="bigImg" style="display: none"></div>
+                        </td>
+                        <td>
+                            <a href="{pigcms::U('Yuangong/ygpl',array('id'=>$item['sid'],'token'=>$token))}">评论管理</a>&nbsp;&nbsp;<a href="{pigcms::U('Yuangong/ygpflist',array('id'=>$item['sid'],'token'=>$token))}">评分管理</a>&nbsp;&nbsp;<a href="{pigcms::U('Yuangong/ygupdate',array('id'=>$item['sid'],'token'=>$token))}">修改</a>&nbsp;&nbsp;<a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Yuangong/ygdel',array('id'=>$item['sid'],'token'=>$token))}');">删除</a></td>
+
+                    </tr>
+
+                </volist>
+            </table>
+
+
+            <p class="page">{pigcms:$page}</p>
+        </div>
+        <!--right--end-->   
+    </div> 
+
+</div>
+<include file="Public:footer"/>

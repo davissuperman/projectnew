@@ -1,0 +1,22 @@
+
+*{margin:0px;padding:0px;font-size:14px;}
+.right{width:837px;height:1000px;float:left;padding:0px 10px;}
+
+.titlex{height:40px;line-height:46px;font-size:20px;border-bottom:1px #ddd solid;}
+.searchx{margin-top:10px;border-radius:3px;border:1px #BCE8F1 solid;padding-bottom:15px;background:#D9EDF7;}
+.dao{float:left;margin:0px 5px;}
+.fontTex{width:80px;text-align:right;float:left;margin:0px 5px;}
+.textCase{height:25px;width:98px;line-height:25px;float:left;padding:0px 5px;}
+.textCaseX{height:25px;width:234px;line-height:25px;float:left;padding:0px 5px;}
+
+.sameP{height:29px;line-height:25px;margin-top:15px;}
+.sel{height:25px;line-height:25px;float:left;width:100px;margin-top:2px;}
+.selX{height:25px;line-height:25px;float:left;width:50px;margin-top:2px;}
+
+.serBtn{float:left;background:#24BD4F;border:0px;color:#fff;font-weight:bold;height:29px;width:60px;line-height:29px;text-align:center;cursor:pointer;}
+.cell{width:100%;margin-top:10px;background:#dddddd;border-radius:3px;}
+.cell td{height:35px;line-height:35px;background:#fff;text-align:center;color:#333333;}
+.cell th{height:35px;line-height:35px;background:#f6f6f6;text-align:center;color:#333333;font-weight:bold;}
+.short{width:5%;}
+.second{width:10%;}
+.cancel{text-decoration:none;margin-right:6%;color:#0088CC;}

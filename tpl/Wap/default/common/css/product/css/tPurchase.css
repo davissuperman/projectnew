@@ -1,0 +1,23 @@
+
+.miaImg{float:left;width:100%;}
+.imgBox{margin:0px -12px;}
+.imgText{height:30px;line-height:30px;margin:0px -12px;text-align:center;color:#fff;font-weight:bold;background:#ff0017;}
+.shaText{float:left;color:#6e6e6e;font-size:12px;font-weight:bold;}
+.detail{float:right;color:#0086e4;font-weight:bold;font-size:12px;}
+.detailBox{height:20px;line-height:20px;margin:10px 0px;}
+.leftImg{float:left;width:100px;height:105px;border-radius:5px;border:1px #99c7c5 solid;text-align:center;margin-top:3px;}
+.proImg{width:90px;margin:5px;float:left;height:95px;}
+.rightText{float:left;margin-left:10px;}
+.span1{float:left;color:#22292c;font-size:14px;}
+.span2{float:left;color:#22292c;font-size:14px;margin-left:5px;}
+.span2X{float:left;color:#22292c;font-size:14px;margin-left:33px;}
+.money{font-size:16px;float:left;color:#f70029;}
+.huaM{float:left;color:#999;text-decoration:line-through;margin-left:20px;font-size:14px;}
+.textP{height:20px;line-height:20px;}
+.dateText{float:left;color:#F70029;font-size:14px;}
+.hours{float:left;color:#F70029;font-size:14px;}
+.nowBtn{float:left;height:30px;width:75px;line-height:30px;text-align:center;color:#f80a1b;color:#fff;font-weight:bold;background:#f80a1b;font-size:14px;}
+.nowPro{float:left;height:30px;width:75px;line-height:30px;text-align:center;color:#f80a1b;color:#fff;font-weight:bold;background:#898989;font-size:14px;}
+
+.common{margin-top:10px;padding-bottom:10px;border-bottom:1px #ccc solid;}
+.last{border-bottom:0px;}

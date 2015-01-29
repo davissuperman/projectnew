@@ -1,0 +1,148 @@
+
+
+
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <title>购物车</title>
+    
+<meta charset="UTF-8">
+
+<meta name="viewport" content=" initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link href="/statics/css/style.css" rel="stylesheet" />
+<link href="/statics/css/templates.css" rel="stylesheet" />
+ <script type="text/javascript">
+     var basePath = "http://1071.vshop.weimob.com", baseParam = ""; 
+ </script>
+ 
+</head>
+<body>
+    
+<div class="lay_header" style="height: 45px">
+    <div class="lay_toptab mod_tab" id="lay_head">
+         <a class="tab_item" href="/list/all.html"><i class="qb_icon icon_goback"></i></a>
+        <!--<div class="tab_item go_back"><i class="qb_icon icon_goback"></i></div>-->
+        
+        <a class="tab_item tab_item_logo" href="http://1071.vshop.weimob.com">
+            <img src="/statics/images/logo.png"/>
+        </a>
+        
+        <a class="tab_item" href="/my/index.html"><i class="qb_icon icon_icenter"></i></a>
+        <a class="tab_item" href="http://1071.vshop.weimob.com/cart.html"><i class="qb_icon icon_cart"></i><i class="qb_icon icon_number_bubble qb_none"></i></a>
+    </div>
+    <div class="lay_toptab mod_tab fixed qb_none" id="lay_head_fixed">
+        <a class="tab_item" href="/list/all.html"><i class="qb_icon icon_goback"></i></a>
+        <!--<div class="tab_item go_back"><i class="qb_icon icon_goback"></i></div>-->
+        
+        <a class="tab_item tab_item_logo" href="http://1071.vshop.weimob.com">
+            <img src="/statics/images/logo.png" style="width: 132px; margin-top: 8px;" />
+        </a>
+        
+        <a class="tab_item" href="/my/index.html"><i class="qb_icon icon_icenter"></i></a>
+        <a class="tab_item" href="http://1071.vshop.weimob.com/cart.html"><i class="qb_icon icon_cart"></i><i class="qb_icon icon_number_bubble qb_none"></i></a>
+    </div>
+</div>
+
+
+    <div class="lay_page current">
+        <div class="lay_page_wrap">
+            <input type="hidden" id="items-len" value="1" />
+            <input type="hidden" id="problem-Len" value="0" />
+            <section id="content">  
+                <section id="item-sec">
+                    
+                            <div class="mod_cell ui_plr0 ui_mt15 qb_mb15 item" id="0" last-count="3" price="100">
+                                <div class="mod_celltitle qb_fs_s ui_plr10">
+                                    <h3 class="qb_fl"><i price="100" class="qb_icon icon_checkbox icon_checkbox_checked" price="100" index="0" name="cart_checkbox"></i></h3>
+                                </div>
+                                <div class="ui_plr10">
+                                    <ul class="mod_list mod_list_hr qb_fs_s">
+                                        <li class="list_item qb_mb10 qb_bfc">
+                                            <a href="/goods/13641.html" class="bfc_f">
+                                                <img src="http://25292.vshop.weimob.com/data/goods/80/13641.jpg" /></a>
+                                            <div class="bfc_c">
+                                                <p>【测试】红毯高级定制系列，一圈钻石镶嵌成对树叶造（测试）</p>
+                                                <p>单价：<span class="ui_color_strong">￥1.00元</span></p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="qb_tar ui_p10 qb_fs_s ui_bg_color_weak ui-bt">
+                                    <i class="qb_icon icon_trash ui_mr30 icon_delete"></i>数量：<input type="tel" class="ui_textinput ui_textinput_tiny count" value="3" />
+                                    <span class="qb_tof" style="width: 100px">共计：<span class="ui_color_strong single-total">￥3.00元</span></span>
+                                </div>
+                                <input type="hidden" class="cmdy-data" supportcod="true" num="3" limit="0" storenum="50" ic="13641" mid="12424" sa="" />
+                            </div>
+                        
+                    <div class="mod_cell ui_mt15 qb_mb15 ui_pt10">
+                       
+                        <div class="ui_pb10 ui_clearfix qb_fs_s">
+                            <div class="qb_fl">
+                                <span class="ui_mr30 ui_pt10"><i class="qb_icon icon_checkbox icon_checkbox_checked" id="choose-all"></i>全选</span>
+                                总价：<span class="ui_color_strong">￥<span id="total">3.00</span></span>
+                            </div>
+                            <span class="mod_btn btn_strong qb_fr confirm_order">去结算</span>
+                        </div>
+                    </div>
+                </section> 
+                
+                <form action="/cmd/confirmOrder.html" method="get" name="cartForm">
+                    
+                    <input type="hidden" value="0" id="payType" name="payType">
+                    <input type="hidden" value="" id="itemList" name="itemList">
+                    <input type="hidden" value="1" id="cart" name="cart" />
+                    <input type="hidden" id="trandom" name="t"> 
+                </form>
+            </section>
+        </div>
+    </div>
+    <div class="qb_quick_tip qb_none" id="bubble"></div>
+    <div class="mod_dialog qb_none" id="message-notice">
+        <div class="dialog_mask"></div>
+        <div class="dialog_main qb_br qb_tac">
+            <div class="dialog_bd" id="notice-content"></div>
+            <div class="dialog_ft qb_flex"><a href="javascript:void(0);" class="flex_box" id="notice-cancel">取消</a><a href="javascript:void(0);" class="flex_box" id="notice-sure">确定</a></div>
+        </div>
+    </div>
+    
+<div class="lay_footer qb_tac qb_fs_s mod_mb15">
+    <div class="fn_quicklinks">
+        <a class="mod_color_weak" href="http://1071.vshop.weimob.com">商户首页</a>
+        <span class="mod_color_comment">|</span>
+        <a class="mod_color_weak" href="/my/index.html">会员中心</a>
+        <span class="mod_color_comment">|</span>
+        <a class="mod_color_weak" href="/cmd/about.html">品牌介绍</a>
+    </div>
+    <div class="fn_copyright qb_bfc">
+        <div class="mod_color_comment bfc_c">&copy;&nbsp;2013 微盟版权所有</div>
+    </div>
+</div>
+<script src="kf/ChatFloat.js"></script>
+<script>
+    new ChatFloat({
+        AId:1071,
+        right:0,
+        top:150,
+        openid:""
+    });
+</script>
+     <script type="text/javascript"> 
+          var shareData = {"send2Friend":{"content":"【微商城】【测试】红毯高级定制系列，一圈钻石镶嵌成对树叶造（测试） ￥1.00元","img":"http://25292.vshop.weimob.com/data/goods/300/13641.jpg","link":"http://1071.vshop.weimob.com/goods/13641.html","title":"【微商城】【测试】红毯高级定制系列，一圈钻石镶嵌成对树叶造（测试）"},"share2Friend":{"img":"http://25292.vshop.weimob.com/data/goods/300/13641.jpg","link":"http://1071.vshop.weimob.com/goods/13641.html","title":"【微商城】【测试】红毯高级定制系列，一圈钻石镶嵌成对树叶造（测试）"},"share2qqBlog":{"content":"我关注了【微商城】！拥有N多会员特权，一起来体验吧","link":"http://1071.vshop.weimob.com/goods/13641.html"}};
+          !function () { function c() { var a = WeixinJSBridge; a.on("menu:share:appmessage", e), a.on("menu:share:weibo", f), a.on("menu:share:timeline", g), a.invoke("getNetworkType", {}, d) } function d(a) { var b, c; switch (a.err_msg) { case "network_type:wwan": b = 2e3; break; case "network_type:edge": b = 3e3; break; case "network_type:wifi": b = 4e3 } c = new Image, c.onerror = c.onload = function () { c = null } } function e() { var a = window.shareData.send2Friend, b = h(a); a.content = b ? b.content : a.content, a.img = b && b.img ? b.img : a.img, WeixinJSBridge.invoke("sendAppMessage", { img_url: a.img, img_width: "640", img_height: "640", link: a.link, desc: a.content, title: a.title }, function () { }) } function f() { var b = window.shareData.share2qqBlog; WeixinJSBridge.invoke("shareWeibo", { content: a.isios ? b.content + b.link : b.content, url: b.link }, function () { }) } function g() { var a = window.shareData.share2Friend; WeixinJSBridge.invoke("shareTimeline", { img_url: a.img, img_width: "640", img_height: "640", link: a.link, desc: " ", title: a.title }, function () { }) } function h() { return "function" == typeof b ? b() : "" } var b, a = function () { var a = window.navigator.userAgent; return this.isAndroid = a.match(/(Android)\s+([\d.]+)/) || a.match(/Silk-Accelerated/) ? !0 : !1, this.isiPad = a.match(/iPad/) ? !0 : !1, this.isiPod = a.match(/(iPod).*OS\s([\d_]+)/) ? !0 : !1, this.isiPhone = !this.isiPad && a.match(/(iPhone\sOS)\s([\d_]+)/) ? !0 : !1, this.isios = this.isiPhone || this.isiPad || this.isiPod, this }(); window.shareData && document.addEventListener("WeixinJSBridgeReady", c, !1), window.setShareListener = function (a) { b = a } }();
+    </script>
+    <script src="/statics/js/zepto.min.js"></script>
+ 
+    <script type="text/javascript">
+        var itemArray, wxInfo, suin, onlyonline; 
+        itemArray = {"0":{"ic":"13641","attr":"","bc":"3","mid":12424}};
+        wxInfo = { isFocus: "true", wxId: "ONLY_BESTSELLER" };
+        suin = "1814851631", onlyonline = "true";
+        mobile.o2ocn.cmdy.init();
+          
+            
+    </script>
+</body>
+</html>

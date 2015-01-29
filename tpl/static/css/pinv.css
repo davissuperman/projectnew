@@ -1,0 +1,18 @@
+*{margin:0px;padding:0px;}
+body,html{overflow-x:hidden;font-family:Arial, Helvetica, sans-serif;font-size:14px;}
+ul{list-style:none;}
+img{border:0px;}
+.box{max-width:640px;min-width:301px;margin:15px 10px 0px 10px;margin:auto;padding:0px 10px;}
+.heading{width:100%;height:60px;background:#2a2a2a;}
+.headBox{width:90%;height:60px;margin:auto;}
+.logo{margin-top:5px;float:left;}
+.listBox{float:right;}
+.cry{float:left;height:80px;}
+.cryBox{width:100%;float:left;margin-top:80px;margin-bottom:90px;text-align:center;}
+.cryTex{float:right;}
+.fontSize{height:20px;line-height:20px;color:#666;margin-top:20px;}
+.fontBack{height:20px;line-height:20px;color:#74ab2e;}
+.fontBack a{color:#74ab2e;float:left;}
+.fontBack span{float:left;margin-right:10px;}
+.phone{width:20%;margin-right:20px;}
+.phoneBox{text-align:center;margin-top:30px;margin-bottom:30px;clear:both;}

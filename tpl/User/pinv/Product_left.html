@@ -1,0 +1,35 @@
+<script src="{pigcms::RES}/js/product.js" type="text/javascript"></script>
+<div class="col-md-2 sidebar">
+<nav id="sidebar-nav">
+	<ul class="nav nav-pills nav-stacked">
+		<li><a href="{pigcms::U('Module/functionList',array('token'=>$token))}"><span class="glyphicon glyphicon-chevron-left"></span> 返回</a></li>
+	</ul>
+	<ul class="nav nav-pills nav-stacked" style="margin:5px 0px">
+		<li class="active"><a href="javascript:;" class="side-top" id="collapseStore">商城管理 <span class="glyphicon glyphicon-chevron-down pull-right" style="margin-top: 3px"></span></a></li>
+	</ul>
+	<ul class="nav nav-pills nav-stacked collapse <?php if($sideTop == "PRODUCT") echo 'in'; ?>" id="collapseStoreMenu">
+		<li <?php if($side == "CATEGORY") echo 'class="active"'; ?>><a href="{pigcms::U( 'Product/cats',array( 'token'=>$token ) )}">分类管理</a></li>
+		<li <?php if($side == "INDEX") echo 'class="active"'; ?>><a href="{pigcms::U('Product/index',array('token'=>$token))}">商品管理</a></li>
+		<li <?php if($side == "BRAND") echo 'class="active"'; ?>><a href="{pigcms::U('Product/brand',array('token'=>$token))}">品牌介绍</a></li>
+		<li <?php if($side == "SHOP") echo 'class="active"'; ?>><a href="{pigcms::U('Product/shop_index',array('token'=>$token))}">首页设置</a></li>
+		<li <?php if($side == "REPLY_INFO") echo 'class="active"'; ?>><a href="{pigcms::U('Reply_info/set',array('token'=>$token,'infotype'=>'Shop'))}">回复设置</a></li>
+		<li <?php if($side == "MIAOGOU") echo 'class="active"'; ?>><a href="{pigcms::U('Product/miaogou',array('token'=>$token))}">秒购管理</a></li>
+		<li <?php if($side == "RULE") echo 'class="active"'; ?>><a href="{pigcms::U('Product/miaogouRule',array('token'=>$token))}">规则设置</a></li>
+	</ul>
+	<ul class="nav nav-pills nav-stacked"  style="margin:5px 0px">
+		<li class="active"><a href="javascript:;" class="side-top" id="collapseOrder">交易管理 <span class="glyphicon glyphicon-chevron-down pull-right" style="margin-top: 3px"></span></a></li>
+	</ul>
+	<ul class="nav nav-pills nav-stacked collapse <?php if($sideTop == "ORDER") echo 'in'; ?>" id="collapseOrderMenu">
+		<li <?php if($side == "ORDER") echo 'class="active"'; ?>><a href="{pigcms::U( 'Product/management',array( 'token'=>$token ) )}">订单管理</a></li>
+		<li <?php if($side == "ADDR") echo 'class="active"'; ?>><a href="{pigcms::U('Product/take',array('token'=>$token))}">收货地址管理</a></li>
+		<li <?php if($side == "EXPRESS") echo 'class="active"'; ?>><a href="{pigcms::U('Product/express',array('token'=>$token))}">快递方式管理</a></li>
+		<!-- <li <?php if($side == "PAYMENT") echo 'class="active"'; ?>><a href="{pigcms::U('Wdiaoyan/addxinxi',array('token'=>$token))}">收款方式管理</a></li>		 -->
+	</ul>
+	<ul class="nav nav-pills nav-stacked" style="margin:5px 0px">
+		<li class="active"><a href="javascript:;" class="side-top" id="collapseMember">客户管理 <span class="glyphicon glyphicon-chevron-down pull-right" style="margin-top: 3px"></span></a></li>
+	</ul>
+	<ul class="nav nav-pills nav-stacked collapse <?php if($sideTop == "MEMBER") echo 'in'; ?>" id="collapseMemberMenu">
+		<li <?php if($side == "MEMBERS") echo 'class="active"'; ?>><a href="{pigcms::U( 'Product/usertake',array( 'token'=>$token ) )}">会员管理</a></li>
+	</ul>
+</nav>
+</div>

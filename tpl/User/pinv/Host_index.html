@@ -1,0 +1,62 @@
+<?php $nav = "BUSINESS"; $side = "HOST_INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Host_index.css" rel="stylesheet"/>
+ <div class="container main">
+<div class="row">
+<include file="Host:left"/>
+     
+             <div class="col-md-10 main">
+ 				<div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">微酒店</h3>
+				<div class="search-box pull-right">
+					 <form method="post" action="">
+                     <input type="hidden" name="ac" value="hotels-list">
+                     <input type="submit" value="搜索" class="btn btn-default btn-xs pull-right"/>
+                     <input type="text" name="searchkey" placeholder="输入关键词搜索" class="search-text"/>
+	             	</form>
+	             </div>
+			  </div>
+			  <div class="panel-body">
+				<div class="add-button pull-right">
+            		<a href="{pigcms::U('Host/add',array('token'=>$token))}"  class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> 添加酒店</a>
+            	</div>
+            	<div style="clear:both"></div>
+                <table class="table table-striped" cellspacing="1">
+                	<tr>
+                    	<th>编号</th>
+                        <th>商家名称</th>
+                        <th>关键词</th>
+                        <th>电话</th>
+                        <th>外链代码</th>
+                        <th>创建时间</th>
+                     
+                        <th>操作</th>
+                    </tr>
+                    <volist name="list" id="hostlist"> 
+                    <tr>
+                    	<td>{pigcms:$i}</td>
+                        <td>{pigcms:$hostlist.title}</td>
+                        <td>{pigcms:$hostlist.keyword}</td>
+                        <td>{pigcms:$hostlist.tel}</td>
+                        <td>{pigcms:$hostlist.id}</td>
+                        <td>{pigcms:$hostlist.creattime|date="Y-m-d H:i:s",###}</td>
+                        
+                        <td><a href="{pigcms::U('Host/admin',array('id'=>$hostlist['id'],'token'=>$token))}" class="hover-tooltip-order"><span class=" glyphicon glyphicon-shopping-cart"></span></a> 
+                          <a href="{pigcms::U('Host/lists',array('id'=>$hostlist['id'],'token'=>$token))}" class="hover-tooltip-wrench"><span class="glyphicon glyphicon-wrench"></span></a> 
+                          <a href="{pigcms::U('Host/set',array('id'=>$hostlist['id'],'token'=>$token))}" class="hover-tooltip-edit"><span class="glyphicon glyphicon-edit"></span></a> 
+                          <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Host/index_del',array('id'=>$hostlist['id'],'token'=>$token))}');" class="hover-tooltip-trash"><span class="glyphicon glyphicon-trash danger"></span></td>
+                    </tr>
+                    </volist>
+                     <tr>
+                   
+                      <td colspan="7" style="text-align: right">{pigcms:$page}</td>
+                    </tr>
+                </table>
+              </div>
+              </div>
+              </div>
+            </div>  
+      
+ </div>
+<include file="Public:footer"/>

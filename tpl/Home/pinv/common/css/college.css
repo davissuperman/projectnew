@@ -1,0 +1,22 @@
+.content{text-align:center;margin:30px auto;}
+.imgBox{text-align:center;}
+.diImg{width:100%;border:0px;}
+.cotet{width:1000px;height:320px;margin:auto;}
+.cotetLeft{width:171px;float:left;background:#EDEDED;padding-bottom:124px;}
+.cotetLeft li{height:37px;line-height:37px;text-align:center;color:#2e2e2e;cursor:pointer;font-size:14px;}
+
+.cotetLeft li.overX{background:#85a93d;color:#fff;}
+.caseBox{width:798px;height:310px;float:right;background:#ededed;overflow:hidden;}
+.cotetRight{width:798px;float:right;position:relative;margin:3px 0px;}
+.blackSolid{position:absolute;top:0px;right:0px;z-index:2;}
+.shopName{height:95px;line-height:95px;text-align:center;font-size:18px;background:#ededed;}
+.imgLeft{width:232px;color:#2e2e2e;float:right;margin-left:2px;}
+.imgNormal{float:left;}
+.maBox{height:405px;background:#ededed;margin-top:2px;}
+.maImg{margin-top:59px;}
+.numBox{width:140px;height:18px;line-height:18px;text-align:center;background:#f6d705;padding:15px;margin-top:46px;margin-left:30px;}
+.tuBox{height:502px;padding-top:40px;}
+.topHead{height:50px;line-height:50px;background:#ededed;text-align:left;padding-left:2px;}
+.topBottom{height:55px;background:#ededed;text-align:left;clear:both;padding:30px;}
+.fontTex{width:970px;margin:25px auto;background:#ededed;padding:20px;line-height:40px;font-size:16px;}
+.conRight{background:#ededed;text-align:left;line-height:60px;padding:8px 30px;font-size:14px;}

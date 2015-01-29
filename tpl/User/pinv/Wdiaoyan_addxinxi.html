@@ -1,0 +1,45 @@
+<?php $nav = "FUNCTION"; $side = "ADDXINXI" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_set.css" rel="stylesheet"/>
+<script type="text/javascript" src="{pigcms::RES}/js/formCheck/formcheck.js"> </script>
+<script type="text/javascript">
+$(function(){
+	$("#form").valid([
+	{ name:"name",simple:"名称",require:true},
+	{ name:"intro",simple:"简介",require:true}
+		
+	],true,true);
+
+})
+</script>
+<div class="container main">
+<div class="row">
+<include file="Wdiaoyan:left"/>
+     
+            <div class="col-md-10 main">
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">添加结束信息</h3>
+			  </div>
+			  <div class="panel-body">
+
+                <form class="form" method="post" id="form" action="{pigcms::U('Wdiaoyan/addxinxi')}"> 
+				
+				   <input type='hidden' name='token' value="{pigcms:$_GET['token']}"/>
+				   <input type='hidden' name='token1' value="{pigcms:$list['token']}"/>
+           
+                <p class="aresame">
+                    <span class="Tex" style="margin-top:20px;">结束信息：</span>
+                    <textarea class="are" name="intro">{pigcms:$list.addxx}</textarea>
+                </p>
+ 			</div>
+           	  <div class="panel-footer" style="text-align:right"> 
+	  			<input type="submit" value="保存" class="btn btn-success"/>
+	  			<a href="javascript:history.go(-1);"  class="btn btn-link">取消</a> 
+		      </div>
+		       </form> 
+ 			</div>
+			</div>
+            </div>   
+ </div>
+<include file="Public:footer"/>

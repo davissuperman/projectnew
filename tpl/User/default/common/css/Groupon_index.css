@@ -1,0 +1,29 @@
+.right{width:837px;height:1000px;float:left;padding:0px 10px;}
+
+.sheet{width:100%;background:#eee;color:#6a6a6a;}
+.sheet td{background:#fff;text-align:center;height:55px;line-height:55px;padding-left:3px;padding-right:3px;}
+.sheet th{background:#f1f1f1;height:45px;line-height:45px;text-align:center;}
+.artiEdit{height:33px;line-height:33px;border-bottom:1px #eee solid;margin-top:15px;}
+.big{font-size:18px;font-weight:bold;color:#6e6e6e;float:left;margin-right:10px;}
+.small{font-size:12px;color:#6e6e6e;float:left}
+.addList{float:left;width:81px;height:33px;line-height:33px;text-align:center;color:#fff;font-weight:bold;background:url(../img/look.gif) no-repeat;border:0px;cursor:pointer;margin:15px 0px;}
+.addList:hover{background:url(../img/lookOver.gif) no-repeat;}
+.search{width:150px;height:20px;line-height:20px;padding-left:5px;border:1px #aaa solid;font-size:12px;color:#6e6e6e;float:right;}
+.searchPress{float:left;width:42px;height:22px;line-height:22px;text-align:center;color:#fff;font-weight:bold;background:url(../img/searchImg.gif) no-repeat;border:0px;float:right;font-size:12px;cursor:pointer;}
+.searchPress:hover{background:url(../img/searchOver.gif) no-repeat;}
+.listBox{height:35px;background:#f1f1f1;border-bottom:1px #d7dde6 solid; }
+.listBox li{height:30px;padding:0px 10px;float:left;border:1px #d7dde6 solid;line-height:30px;color:#6e6d6e;font-weight:bold;cursor:pointer;margin-left:15px;margin-top:4px;background:#f6f6f6;}
+.listBox li.onOver{height:31px;border-bottom:0px;background:#fff;}
+.listBox li:hover{color:#009900;}
+.pressBox{height:33px;}
+.showBox{margin-top:10px;}
+.same{height:27px;line-height:27px;color:#696969;margin-top:25px;padding-left:10px;}
+.Tex{width:90px;height:auto;color:#676767;float:left;text-align:right;margin-right:15px;display:inline;color:#444;font-weight:bold;}
+.circle{width:560px;height:25px;line-height:25px;float:left;border:1px #adacb4 solid;padding-left:5px;font-size:12px;color:#676767}
+.keyWord{font-size:12px;color:red;}
+.areaSame{height:140px;line-height:27px;color:#696969;padding-left:10px;margin-top:25px;}
+.circleArea{width:560px;height:130px;float:left;border:1px #adacb4 solid;padding-left:5px;font-size:12px;color:#676767;padding-top:5px;}
+.example{height:20px;line-height:20px;padding-left:115px;font-size:12px;color:#ea533f;}
+.expBox{height:35px;line-height:15px;font-size:12px;padding-left:105px;margin-top:5px;color:#696969;}
+.surePress{float:left;width:72px;height:33px;line-height:33px;text-align:center;color:#fff;background:url(../img/savePress.gif) no-repeat;border:0px;margin-top:13px;margin-left:10px;cursor:pointer;}
+.surePress:hover{background:url(../img/saveX.gif) no-repeat;}

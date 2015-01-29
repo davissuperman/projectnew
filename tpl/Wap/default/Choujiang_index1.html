@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>年会抽奖</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link href="{pigcms::RES}/css/newyear/index.css" type="text/css" rel="stylesheet"/>
+</head>
+
+<body>
+	<div class="box">
+    	<img src="{pigcms::RES}/images/newyear/topImg.png" class="topImg"/>
+        <img src="{pigcms::RES}/images/newyear/rightImg.png" class="rightImg"/>
+        <img src="{pigcms::RES}/images/newyear/bottomImg.png" class="bottomImg"/>
+        <p class="content">
+        	<a class="btnBox">
+            	<img src="{pigcms::RES}/images/newyear/leftImg.gif" class="leftImg"/>
+                <span class="imgTex">年会指南</span>
+            </a>
+            <a class="btnBox" id="coverGo">
+            	<img src="{pigcms::RES}/images/newyear/leftImg1.gif" class="leftImg"/>
+                <span class="imgTex1">抽奖</span>
+            </a>
+        </p>
+    </div>
+
+	<div id="testBox" class="cover">
+	 <form method="post"  action="{pigcms::U('Choujiang/denglu')}">
+		<input type='hidden' name='token' value='{pigcms:$_GET.token}'/>
+		  <input type='hidden' name='wecha_id' value='{pigcms:$_GET.wecha_id}'/>
+    	<img src="{pigcms::RES}/images/newyear/hezi.png" class="hezi"/>
+        <p class="caseBox">
+        	<span class="caseText">姓名</span>
+            <input type="text" name='username' value='' placeholder="" class="case"/>
+        </p>
+        <p class="caseBox">
+        	<span class="caseText">密码</span>
+            <input type="text" name='psd' value='' placeholder="" class="case"/>
+        </p>
+        <p class="pressBox">
+        	<a href=""><input type="submit" value="确定" class="surBtn"/></a>
+            <a href=""><input type="reset" value="取消" class="canBtn"/></a>
+        </p>
+		</form>
+    </div>
+	
+    <script src="{pigcms::RES}/js/newyear/easydialog.min.js" type="text/javascript"></script>
+    <script src="{pigcms::RES}/js/newyear/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    	$(function(){
+			
+				$("#coverGo").click(function(){
+					
+						easyDialog.open({
+						container : 'testBox'
+						});
+					})
+			
+			})
+    </script>
+<include file="Public:tongji"/>
+</body>
+</html>

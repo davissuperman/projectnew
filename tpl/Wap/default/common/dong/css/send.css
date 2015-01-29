@@ -1,0 +1,17 @@
+*{margin:0px;padding:0px;font-family:"微软雅黑"}
+html,body{width:100%;height:100%;overflow:auto;}
+body{width:100%;height:100%;overflow-x:hidden;}
+a{text-decoration:none;}
+.priceBox{padding:20px 0px;}
+.rankTitle{width:130px;height:30px;text-align:center;line-height:30px;color:#fff;margin:15px auto;background:#1ea5b4;border-radius:20px;font-size:16px;}
+.results{color:#06518b;margin-top:10px;margin-bottom:10px;}
+.coreNum{font-weight:bold;font-size:18px;}
+.solidP{height:20px;}
+.blueSolid{float:left;position:absolute;left:50%;margin:10px auto;margin-left:-90px;width:180px;}
+.telBox{margin-top:15px;color:#06518b;font-size:16px;}
+.telCase{width:200px;height:30px;border:0px;border-radius:0px;background:transparent;border-bottom:1px #06518b solid;}
+.careSelf{width:75%;margin-top:10px;}
+.join{position:absolute;margin-top:30px;left:50%;}
+.sendP{width:100%;height:35px;margin-top:20px;}
+.textTitle{padding:0px 15px;margin-top:5px;color:#ff0000;font-weight:bold;}
+.textFont{color:#06518b;padding:0px 15px;}

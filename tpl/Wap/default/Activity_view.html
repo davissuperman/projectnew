@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{pigcms:$thisForm['subject']}</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link href="{pigcms::$staticCssPath}/css/first.css" type="text/css" rel="stylesheet"/>
+<script src="{pigcms::RES}/css/style/js/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="{pigcms::$staticJSPath}/myJs.js"></script>
+<style>
+.tel{display:none}
+
+</style>
+</head>
+
+<body  style="font-family:Arial, Helvetica, sans-serif">
+	
+	<div class="box">
+        <p class="title">{pigcms:$thisForm['subject']}</p>
+        <div class="time">
+            <span>{pigcms:$thisForm['regdate']}</span>
+            <span>{pigcms:$thisForm['username']}</span>
+            <span>阅读<a>{pigcms:$thisForm['views']}</a></span>
+            <span>分享<a>{pigcms:$thisForm['shares']}</a></span>
+        </div>
+        <p class="caseBox">
+        {pigcms:$thisForm['message']}
+        </p>
+        <p class="addBox"><span>添加到公号</span><span>举报</span></p>
+        <p class="perNum">
+        	<span>已有<span>{pigcms:$thisForm['usersize']}</span>人报名</span>
+            <a class="look">查看已报名人员联系电话</a>
+        </p>
+        
+        <!--没有人报名--begain-->
+        <p class="nowBox" style="display:none">
+        	<input type="text" value="目前还没人报名" class="now"/>
+        </p>
+        <!--没有人报名--end-->
+        
+        <!--报名名单--begain-->
+        <ul class="nameList">
+        <volist name="thisUserList" id="item">
+        	<li><span class="name">{pigcms:$item['username']}</span>&nbsp;<span class='tel'>{pigcms:$item['tel']}</span><span class="nameTime">{pigcms:$item['regdate']}</span></li>
+         </volist>   
+        	
+        </ul>
+        <!--报名名单--end-->
+        
+        <p class="applyBox"><a class="apply">我要报名</a></p>
+        <p class="sendBox">
+        	<a  class="send">
+            	<img src="{pigcms::$staticImagesPath}/img/sendImg.gif" alt="sendImg" class="sendImg"/>
+                <span class="sendTex">发送给朋友</span>
+            </a>
+            <a  class="sendX">
+            	<img src="{pigcms::$staticImagesPath}/img/shareImg.gif" alt="sendImg" class="sendImg"/>
+                <span class="sendTex">分享到朋友圈</span>
+            </a>
+        </p>
+        <p class="applyBox"><a href="{pigcms::U('Wap/Activity/alist' ,array('token'=>$token,'wecha_id'=>$wecha_id))}" class="applyX">我也要组织活动</a></p>
+        <p class="teBox"><a href="" class="applyTe">服务声明</a></p>
+        <div class="out" style="display:none">
+            <div class="showBox">
+            <div class="showSpecial" style="display:none">
+            	<p class="showFont">请点击右上角将它发送给指定朋友或者分享到朋友圈</p>
+                </br>
+          <a href=""> <input type="button" value="取消" class="showPress"   /></a>
+        
+            </div>
+            </div>
+            
+            <!--输入密码--begain-->
+            <form class="show1" method="" action=""  id="inputPassword" style="display:none">
+            <input type="hidden" name='aid' value="{pigcms:$thisForm['aid']}">
+                <p class="showTex">请先输入管理密码</p>
+                <p class="passBox"><input type="text" value="输入管理密码" class="passWord" name="password"/></p>
+                <p class="putBox"><input type="button" value="提交" class="putIn" id="inputPwdSubmit"/><input type="button" value="取消" class="cancel"/></p>
+            </form>
+            <!--输入密码--end-->
+            
+            <!--已经报名--begain-->
+            <div class="show2" style="display:none"></div>
+            <!--已经报名--end-->
+            
+            <!--还没有报名--begain-->
+            <form class="show3" name="" id="inputname" style="display:none">            
+                <input type="hidden" name='aid' value="{pigcms:$thisForm['aid']}">
+                 <input type="hidden" name='open_id' value="{pigcms::$wecha_id}">
+                <p class="showTex">输入你的名字与电话</p>
+                <p class="passBox"><input type="text" value="输入你的名字" class="passWord" name="username"  id="username"/></p>
+                <p class="passBox"><input type="text" value="手机号，别轻易向别人提供" class="passWord" name="tel" id="tel"/></p>
+                <p class="putBox"><input type="button" value="提交" class="putIn" id="inputNameSubmit"/><input type="button" value="取消" class="cancel"/></p>
+            </form>
+            <!--还没有报名--end-->
+        </div>
+    </div>
+    
+</body>
+<include file="Public:tongji"/>
+</html>
+ 

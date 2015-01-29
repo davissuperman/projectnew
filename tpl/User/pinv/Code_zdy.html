@@ -1,0 +1,110 @@
+<?php $nav = "EWM"; $side = "ERWM" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Selfform_index.css" rel="stylesheet"/>
+
+<script src="./tpl/User/pinv/common/js/date/WdatePicker.js"></script>
+<script>
+$(function(){
+    
+	       
+	
+	      
+		            
+		    $('#fid').change(function(){
+				   if($('#fid').val()==6){
+
+						  $('#mm').hide();
+
+				   }else{
+				   
+				     $('#mm').show();
+				   }
+			})
+		 
+	  
+	 
+	 
+	     
+	 
+	 
+    //alert($('#fid option').length); 
+   //$('#fid').click(function(){
+   
+     
+   //})
+})
+</script>
+
+<style>
+    .cateimg {
+        position: relative;
+         
+    }
+    .cateimg .smallImg {
+        width: 50px;
+    }
+    .cateimg .bigImg {
+        position: absolute;
+        left: 51px;
+        top: 0px;
+        display: none;
+        width: 320px;
+    }
+	#date-calendar input {
+float: left;
+}
+</style>
+<div class="container main">
+<div class="row">
+<include file="Code:left"/>
+
+        <div class="col-md-10 main">
+           
+           	 
+			
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">二维码管理</h3>
+				</div>
+			  <div class="panel-body">
+			  
+			    <include file="Code:hdcpheader"/>
+            	<div style="clear:both"></div>
+           <!--自定义设置-->
+		   <div>
+		      <a href="{pigcms::U('Code/zdyhd',array('token'=>$token))}" style="margin-top:20px" class="btn btn-success">设置活动二维码的属性</a>
+			  <a href="{pigcms::U('Code/zdycp',array('token'=>$token))}" style="float:right;margin-top:20px" class="btn btn-success">设置产品二维码的属性</a>
+		   </div>
+		    <!--<div style="margin-top:50px;" id='zdy'>
+			           <span style="color:red" >设置需要添加二维码的属性</span>
+						 <form class="form-horizontal" method="post" id="form" action="{pigcms::U('Code/qudao')}">
+						<div>
+							<table class="table table-striped" cellspacing="1"  border="0">
+								<select name='fid' id='fid' onclick="dj({pigcms:$vo.fid})">
+								  <volist name='father_list' id='vo'>
+									 <option value="{pigcms:$vo.fid}">{pigcms:$vo.fproduct_name}</option>
+								   </volist>
+								</select>
+							
+							</table>
+						             <input type="hidden" name='token' value="{pigcms:$_GET['token']}"/>
+								   <div style="display:none" id='mm'>
+								   <textarea cols='30' rows='20' name='qudao'></textarea>
+								   </div>
+							
+                             <div>
+							  <input type="submit" value="保存" id="dj" class="btn btn-success"/>
+                              <input type="reset" value="取消" class="btn btn-success" />
+							 </div>
+						</div>
+                          </form>
+             </div>-->
+			 <!--end-->
+            <p class="page">{pigcms:$page}</p>
+        </div>
+	</div>
+	</div>
+    </div> 
+
+</div>
+<include file="Public:footer"/>

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>动画练习</title>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link type="text/css" href="css/style.css" rel="stylesheet"/>
+        <script src="./js/jquery.js"></script>
+        <script>
+            $(function() {
+
+
+                //开始页点击载入
+                $(".loader").on("touchstart", function() {
+
+                    $(".bj").animate({"top": "-100%", "opacity": "0.2"}, 800, function() {
+                        $(".loader").hide();
+                        $(".skipImg").fadeIn(800);
+                        $(".musicBox").fadeIn(800);
+                        $(".logo").show(800);
+                    });
+
+                    //延迟2s轮播动画
+                    setTimeout(function() {
+
+                        shuffling(true);
+                        $(".skipImg").on("touchstart", function() {
+                            isPlay = false;
+                            $(".logo").fadeOut(800);
+                        });
+
+                    }, 2000);
+
+                    //图片渐变放大
+                    function shuffling(isPlay) {
+                        var i = 0;
+                        $(".skipImg").on("touchstart", function() {
+                            isPlay = false;
+                        });
+                        var inter = setInterval(function() {
+                            if (!isPlay)
+                            {
+                                i = 5;
+                                clearInterval(inter);
+                            }
+                            if (i == 5)
+                            {
+                                clearInterval(inter);
+                                $(".fadeSpecial").fadeIn(800).siblings().remove();
+                                $(".gameBox").fadeIn(800);
+                                $(".skipImg").hide();
+                            }
+                            if (i == 0 && isPlay == true)
+                            {
+                                $(".fadeImg").eq(i).fadeIn(2000).siblings().hide();
+                            }
+                            if (0 < i < 5 && isPlay == true)
+                            {
+                                $(".logo").hide();
+                                $(".fadeImg").eq(i).fadeIn(2000).siblings().hide();
+                            }
+                            i++;
+                        }, 2000);
+
+                    }
+                    ;
+
+                });
+
+                //文本框获得焦点时按钮弹上去解决方法
+                $(":input").focus(function() {
+                    alert(1);
+                    $(".downBtn").hide();
+
+                }).blur(function() {
+                    $(".downBtn").show()
+                })
+
+                //调用图片滚动
+                $(".title").on("touchstart", function() {
+
+                    $(".gameBox").fadeOut();
+                    $(".fadeSpecial").hide();
+                    $(".slideshow").show();
+                    slider();
+
+                });
+
+                //开始游戏
+                $(".btn_game").on("touchstart", function() {
+                    $("#gameing").show();
+                    $(".gameBox").hide();
+                    $(".gameBox").hide();
+                    $(".fadeSpecial").hide();
+                    gamePlay();
+                });
+
+                //游戏再玩一次
+                $(".btn_again").on("touchstart", function() {
+
+                    $(".coreBox").hide();
+                    $("#gameing").show();
+                    gamePlay();
+                });
+
+                //点击水滴计数
+                $(".snowbox").live("touchstart", function() {
+                    $(this).hide();
+                    var get = $(".getNum").text() - 0;
+                    get = get + 1;
+                    $(".getNum").text(get);
+                });
+
+                //奖品介绍
+                $(".price_rule").on("touchstart", function() {
+                    $(".gameBox").hide();
+                    $(".fadeSpecial").hide();
+                    $(".priceRule").fadeIn(1000);
+                });
+                //奖品介绍返回
+                $(".backPrice").on("touchstart", function() {
+                    $(".fadeSpecial").fadeIn(1000);
+                    $(".gameBox").fadeIn(1000);
+                    $(".priceRule").hide();
+                });
+                //活动规则
+                $(".active_rule").on("touchstart", function() {
+                    $(".priceBox").hide();
+                    $(".fadeSpecial").hide();
+                    $(".acRule").fadeIn(1000);
+                });
+                //活动规则返回
+                $(".backActive").on("touchstart", function() {
+                    $(".acRule").hide();
+                    $(".fadeSpecial").hide();
+                    $(".priceBox").fadeIn(1000);
+
+                });
+
+                //分享到朋友圈
+                $(".shareBtn").on("touchstart", function() {
+                    $(".shareBox").hide();
+                    $(".fadeSpecial").hide();
+                    $(".friendBox").fadeIn(1000);
+
+                });
+
+                //填写手机号提交后、再接再励
+                $(".sendBtn").on("touchstart", function() {
+                    $(".priceBox").hide();
+                    $(".fadeSpecial").hide();
+                    $(".musicBox").hide();
+                    $(".listBox").hide();
+                    $(".shareBox").fadeIn(1000);
+                });
+
+                //输入手机号查看排名
+                $(".rankBtn").on("touchstart", function() {
+                    $(".shareBox").hide();
+                    $(".lookRank").fadeIn(1000);
+                });
+
+                //朋友圈查看排名
+                $(".rankBtnX").on("touchstart", function() {
+                    $(".friendBox").hide();
+                    $(".lookRank").fadeIn(1000);
+                });
+
+                //我也要参加
+                $(".join").on("touchstart", function() {
+                    $(".friendBox").hide();
+                    $(".fadeSpecial").fadeIn(1000);
+                    $(".gameBox").fadeIn(1000);
+                });
+
+
+                //查询后排行榜
+                $(".search").on("touchstart", function() {
+                    $(".lookRank").hide();
+                    $(".listBox").fadeIn(1000);
+                });
+
+                //领取奖品
+                $(".getPrice").on("touchstart", function() {
+                    $(".listBox").hide();
+                    $(".priceInfor").fadeIn(1000);
+                });
+
+                //申领成功
+                $(".getBtn").on("touchstart", function() {
+                    $(".priceInfor").hide();
+                    $(".getSuccess").fadeIn(1000);
+                });
+
+                //游戏过程函数
+                function gamePlay() {
+
+                    $(".time").text(10);
+                    $(".getNum").text(0);
+                    var num = 3;
+                    $(".countdown").show().text(3);
+                    $(".progress").animate({"width": "200px"}, 1000);
+
+                    //3、2、1倒计时
+                    var numInter = setInterval(function() {
+                        if (num == 0)
+                        {
+                            $(".countdown").hide();
+                            $("<div class='snowFall'></div>").appendTo($("#gameing"));
+                            clearInterval(numInter);
+                            waterFall();
+                        }
+                        else
+                        {
+                            num = num - 1;
+                            $(".countdown").text(num);
+                        }
+                    }, 1000);
+                }
+                ;
+
+
+                //水滴落10s、滚动条减10s过程函数
+                function waterFall(isOne) {
+                    var $flake = $('<div class="snowbox"/>').css({'position': 'absolute', 'top': '-50px', 'z-index': '4000'}),
+                            documentHeight = $(document).height(),
+                            documentWidth = $(document).width(),
+                            defaults = {
+                                minSize: 10, //雪花的最小尺寸
+                                maxSize: 20, //雪花的最大尺寸
+                                newOn: 250, //雪花出现的频率
+                                flakeColor: "#FFFFFF", //懒人建站 www.51xuediannao.com   整理
+                                isFall: true
+                            };
+
+                    var timeInter = 0; //记录水滴落下10s后清除循环
+                    var timeNum = 10;	 //显示游戏剩余时间变量
+                    var timeShow = 10000; //控制游戏剩余时间变量
+                    var interval = setInterval(function() {
+
+                        if (timeInter >= 10000)
+                        {
+                            var core = $(".getNum").text();
+                            $(".coreNum").text(core);
+                            $("#gameing").children().eq(5).remove();
+                            $("#gameing").hide();
+                            $(".priceBox").fadeIn(1000);
+                            clearInterval(interval);
+                        }
+                        else
+                        {
+                            //显示游戏剩余时间
+                            timeShow -= defaults.newOn;
+                            switch (true) {
+                                case timeShow <= 9000 && timeShow > 8000:
+                                    timeNum = 9;
+                                    break;
+                                case timeShow <= 8000 && timeShow > 7000:
+                                    timeNum = 8;
+                                    break;
+                                case timeShow <= 7000 && timeShow > 6000:
+                                    timeNum = 7;
+                                    break;
+                                case timeShow <= 6000 && timeShow > 5000:
+                                    timeNum = 6;
+                                    break;
+                                case timeShow <= 5000 && timeShow > 4000:
+                                    timeNum = 5;
+                                    break;
+                                case timeShow <= 4000 && timeShow > 3000:
+                                    timeNum = 4;
+                                    break;
+                                case timeShow <= 3000 && timeShow > 2000:
+                                    timeNum = 3;
+                                    break;
+                                case timeShow <= 2000 && timeShow > 1000:
+                                    timeNum = 2;
+                                    break;
+                                case timeShow <= 1000 && timeShow > 0:
+                                    timeNum = 1;
+                                    break;
+                                case timeShow <= 0:
+                                    timeNum = 0;
+                                    break;
+                            }
+                            ;
+                            $(".time").text(timeNum);
+
+                            //水滴落
+                            timeInter += defaults.newOn;
+                            var startPositionLeft = Math.random() * documentWidth - 50,
+                                    startOpacity = 0.5 + Math.random(),
+                                    sizeFlake = defaults.minSize + Math.random() * defaults.maxSize,
+                                    endPositionTop = documentHeight - 40,
+                                    endPositionLeft = startPositionLeft - 100 + Math.random() * 500,
+                                    durationFall = documentHeight * 5 + Math.random() * 500;
+                            $flake.html("<img src='././img/vase.png' style='width:40px' class='waterImg'/>");
+                            var $flclone = $flake.clone().appendTo($(".snowFall"));
+                            $flclone.css({
+                                left: startPositionLeft,
+                                opacity: startOpacity,
+                                'font-size': sizeFlake,
+                                color: defaults.flakeColor
+                            }).animate({
+                                top: endPositionTop,
+                                left: Math.random() * (documentWidth / 2) + 30,
+                                opacity: 0.2
+                            }, durationFall, 'linear', function() {
+                                $(this).remove();
+                                $flake.remove();
+                            }
+                            );
+                        }
+
+
+                    }, defaults.newOn);
+
+                    $(".progress").animate({"width": "0px"}, 11000);
+                }
+                ;
+
+
+                //图片滚动函数
+                function slider() {
+                    var index = 0;
+                    $("#operate span:last").addClass("hov");
+                    $("#operate span").mouseover(function() {
+                        index = $("#operate span").index(this);
+                        showImg(index);
+                    });
+                    var MyTime = setInterval(function() {
+                        showImg(index)
+                        index++;
+                        if (index == 3) {
+                            index = 0;
+                        }
+                    }, 1000);
+                }
+                ;
+
+
+            })
+            function showImg(i) {
+
+                $("#showimg img").eq(i).stop(true, true).fadeIn(1000).parent().siblings().find("img").hide();
+                $("#operate span").eq(i).addClass("hov").siblings().removeClass("hov");
+            }
+
+            window.onload = function() {
+
+                //控制声音函数
+                var toggleBgAudio = function(isPlay) {
+                    var audio = document.getElementById("audio");
+                    if (isPlay) {
+                        audio.play();
+                    } else {
+                        audio.pause();
+                    }
+                };
+
+                //载入时音乐响起
+                var oLoadImg = document.getElementById("loadImg");
+                oLoadImg.addEventListener('touchstart', function() {
+                    toggleBgAudio(true);
+                }, false);
+
+
+                //音乐图标点击播放或停止
+                var isMusic = true;
+                var musicStop = document.getElementById("musicStop");
+                var slash = document.getElementById("slash");
+                var misicMove = document.getElementById("misicMove");
+                musicStop.addEventListener('touchstart', function() {
+                    if (isMusic)
+                    {
+                        toggleBgAudio(false);
+                        isMusic = false;
+                        slash.style.visibility = "visible";
+                        misicMove.style.visibility = "hidden";
+                    }
+                    else
+                    {
+                        toggleBgAudio(true);
+                        isMusic = true;
+                        slash.style.visibility = "hidden";
+                        misicMove.style.visibility = "visible";
+                    }
+                }, false);
+
+
+            }
+        </script>
+    </head>
+
+    <body scroll="no">
+        <div class="box" >
+
+            <!--音乐-->
+            <audio id="audio" loop>
+                <source src="./audio/bg.mp3">
+                <source src="./audio/bg.ogg">
+            </audio>
+            <span class="musicBox">
+                <img src="./img/slash.png" id="slash"/>
+                <img src="./img/music_2.png" class="musicImg" id="musicStop"/>
+                <img src="./img/note.png" class="musicUnder" id="misicMove"/>
+            </span>
+
+            <!--跳过动画-->
+            <img src="./img/skip.png" class="skipImg"/>
+
+            <!--开场载入-->
+            <img src="./img/middle.jpg" class="underBj"/>
+            <img src="./img/bg.jpg" class="bj"/>
+            <img src="./img/loader.png" class="loader" id="loadImg"/>
+            <img src="./img/logox.png" class="logo logox"/>
+
+            <!--轮播图-->
+            <div class="fadeBox">
+                <img src="./img/001.jpg" class="fadeImg"/>
+                <img src="./img/002.jpg" class="fadeImg"/>
+                <img src="./img/003.jpg" class="fadeImg"/>
+                <img src="./img/004.jpg" class="fadeImg"/>
+                <img src="./img/005.jpg" class="fadeImg"/>
+                <img src="./img/006.jpg" class="fadeSpecial" id="beforeBj"/>
+            </div>
+
+            <!--轮播完后-->
+            <div class="gameBox" id="gameBefore">
+                <p class="blueBtn btn_game">开始游戏</p>
+                <p class="pinkBtn price_rule">奖品介绍</p>
+            </div>
+
+            <!--游戏界面-->
+            <div id="gameing">
+                <p class="timeText texCenter">
+                    <span class="time">10</span>
+                    <span>s</span>
+                </p>
+                <p class="proBox texCenter">
+                    <img src="./img/progress_bg.png" class="progress_bg"/>
+                    <img src="./img/progress.png" class="progress"/>
+                <p>
+                <p class="countdown">3</p>
+                <div class="getCase">
+                    <img src="./img/vase.png" class="getVase"/>
+                    <img src="./img/cheng.png" class="cheng"/>
+                    <div class="getNum">0</div>
+                </div>
+            </div>
+
+            <!--游戏分数-->
+            <!--<div class="coreBox">
+            <p class="coreText">您本次获得了<span class="coreNum"></span>滴水</p>
+            <img src="./img/end_tips_2.jpg" class="gameCore"/>
+            <p class="smallBlue btn_again">再玩一次</p>
+            <p class="smallBlue btn_prize">参与抽奖</p>
+        </div> -->
+
+            <!--图片展示-->
+            <div class="slideshow">
+                <div id="showimg">
+                    <a><img src="img/01.jpg" style="display:none;"></a>
+                    <a><img src="img/02.jpg" style="display:none;"></a>
+                    <a><img src="img/03.jpg" style="display:block;"></a>
+                </div>
+                <div id="operate" class="operate">
+                    <span>1</span>
+                    </br>
+                    <span>2</span>
+                    </br>
+                    <span>3</span>
+
+                </div>
+                <div style="display:none;" class="arrawBox" style="width:100%;">
+                    <img src="./img/prev.png" class="prev" style="width:56px;height:67px;position:absolute;z-index:9000;top:40%;left:10px;"/>
+                    <img src="./img/next.png" class="next" style="width:56px;height:67px;position:absolute;z-index:9000;top:40%;right:10px;"/>
+                </div>
+            </div>
+
+            <!--奖品介绍-->
+            <div class="priceRule">
+                <img src="./img/priceRule.jpg" class="rule"/>
+                <p class="smallBlue backPrice">返回</p>
+            </div>
+
+            <!--规则介绍-->
+            <div class="acRule">
+                <img src="./img/rule.jpg" class="rule"/>
+                <p class="smallBlue backActive">返回</p>
+            </div>
+
+            <!--填写手机号-->
+            <div class="priceBox">
+                <p class="rankTitle texCenter">游戏成绩</p>
+                <p class="results texCenter">共收集到<span class="coreNum"></span>颗玻尿酸精华</p>
+                <p class="solidP texCenter"><img src="./img/blueSolid.png" class="blueSolid"/><p>
+                <p class="results texCenter font12">输入您的姓名、手机号码作为获奖查询依据</p>
+                <p class="telBox texCenter">
+                    <span>姓名：</span>
+                    <input type="tel" class="telCase"/>
+                </p>
+                <p class="telBox texCenter">
+                    <span>手机：</span>
+                    <input type="tel" class="telCase"/>
+                </p>
+                <p class="pinkBtn active_rule downBtn">活动规则</p>
+                <p class="blueBtn sendBtn downBtn" style="position:fixed">提交</p>
+
+            </div>
+
+            <!--填写手机号提交后-->
+            <div class="shareBox">
+                <img src="./img/share.png" class="shareImg"/>
+                <p class="rankTitle texCenter">游戏成绩</p>
+                <p class="results texCenter font16">您的游戏得分是：<span class="coreNum"></span></p>
+                <p class="solidP texCenter"><img src="./img/blueSolid.png" class="blueSolid"/><p>
+                <p class="results texCenter font12">分享至朋友圈，您将得到额外积分！</br>72小时内累计得分最高的粉丝将获得终极大奖</p>
+                <p class="pinkBtn core_rule">积分规则</p>
+                <p class="pinkBtn rankBtn">查看排名</p>
+                <p class="blueBtn shareBtn">分享</p>
+            </div>
+
+            <!--朋友圈页面-->
+            <div class="friendBox">
+                <p class="texCenter"><img src="./img/logo.png" class="logoPri"/><p>
+                <p class="rankTitle texCenter">游戏成绩</p>
+                <p class="results texCenter font16">张晓明的游戏成绩得分是：<span class="coreNum"></span></p>
+                <p class="solidP texCenter"><img src="./img/blueSolid.png" class="blueSolid"/><p>
+                <p class="results texCenter font12">帮她补水提升得分前十名可得iPhone6哦！</br>帮助截止时间：72小时</p>
+                <p class="pinkBtn helpWater">帮她补水</p>
+                <p class="grayBtn catchPrice">领取试用装</p>
+                <p class="pinkBtn join">我也要参加</p>
+                <p class="pinkBtn rankBtnX">查看排名</p>
+            </div>
+
+            <!--查看排名手机查询-->
+            <div class="lookRank">
+                <p class="texCenter"><img src="./img/logo.png" class="logoPri"/><p>
+                <p class="rankTitle">补水大作战</p>
+                <p class="telTips texCenter">输入您的手机号码查询您的排名</p>
+                <p class="telBox texCenter">
+                    <span>手机：</span>
+                    <input type="tel" class="telCase"/>
+                </p>
+                <p class="pinkBtn search downBtn">查询</p>
+            </div>
+
+            <!--排行榜-->
+            <div class="listBox">
+                <p class="texCenter"><img src="./img/logo.png" class="logoPri"/><p>
+                <p class="rankTitle">补水大作战</p>
+                <p class="listFont texCenter font12">目前排在第一名的粉丝是：138******67</p>
+                <p class="listFontS texCenter font12">他的游戏最终得分为：20568分</p>
+                <p class="listFont texCenter font12">目前排在第五名的粉丝是：138******67</p>
+                <p class="listFontS texCenter font12">他的游戏最终得分为：20568分</p>
+                <p class="listFont texCenter font12">目前排在第十名的粉丝是：138******67</p>
+                <p class="listFont texCenter font12">他的游戏最终得分为：20568分</p>
+                <p class="solidP texCenter"><img src="./img/blueSolid.png" class="blueSolid"/><p>
+                <p class="listFont texCenter font14">您目前的游戏得分为：238分</p>
+                <p class="listFont texCenter font14">排名：第389位</p>
+                <p class="grayBtn getPrice">领取奖品</p>
+                <p class="pinkBtn sendBtn">再接再厉</p>
+            </div>
+
+            <!--领取奖品填写资料-->
+            <div class="priceInfor">
+                <p class="texCenter"><img src="./img/logo.png" class="logoPri"/><p>
+                <p class="rankTitle texCenter">补水大作战</p>
+                <p class="inforFont texCenter font12">试用申领信息表</p>
+                <p class="telBox texCenter">
+                    <span>城市：</span>
+                    <input type="text" class="telCase"/>
+                </p>
+                <p class="telBox texCenter">
+                    <span>姓名：</span>
+                    <input type="text" class="telCase"/>
+                </p>
+                <p class="telBox texCenter">
+                    <span>手机：</span>
+                    <input type="tel" class="telCase"/>
+                </p>
+                <p class="telBox texCenter">
+                    <span>地址：</span>
+                    <input type="text" class="telCase"/>
+                </p>
+                <p class="telBox texCenter">
+                    <span>Email：</span>
+                    <input type="text" class="telCase"/>
+                </p>
+                <p class="pinkBtn getBtn downBtn">提交申领</p>
+            </div>
+
+            <!--申领成功-->
+            <div class="getSuccess">
+                <p class="texCenter"><img src="./img/logo.png" class="logoPri"/><p>
+                <p class="rankTitle texCenter">补水大作战</p>
+                <p class="texCenter suceFont">申领成功！</p>
+                <p class="solidP texCenter"><img src="./img/blueSolid.png" class="blueSolid"/><p>
+                <p class="texCenter sutext font14">我们将在这期活动结束后</br>统一进行奖品发送！</br>敬请期待！</p>
+            </div>
+        </div>
+
+
+    </body>
+</html>

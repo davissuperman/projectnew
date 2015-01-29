@@ -1,0 +1,100 @@
+<?php $nav = "EWM"; $side = "WH" ?>
+<include file="Public:head"/>
+
+<link rel="stylesheet" type="text/css" href="./tpl/User/default/common/css/cymain.css" />
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript">
+    /*$(function() {
+
+        $("#Button1").bind("click", function() {
+            //alert(11111);return false;
+            $(".item:checkbox").prop("checked", true);
+        });
+        $("#Button2").bind("click", function() {
+            //alert(22222);return false;
+            $(".item:checkbox").prop("checked", false);
+        });
+        //批量删除
+        $('#plsc').click(function() {
+            $('#info1').attr("action", "{pigcms::U('Code/cpcodedel',array('token'=>$token))}");
+
+        })
+        //批量导出
+        $('#djdc').click(function() {
+            // alert(111);return false;
+            $('#info1').attr("action", "{pigcms::U('Code/cpcodedc',array('token'=>$token))}");
+
+        })
+        //批量下载
+        $('#djxz').click(function() {
+            $('#info1').attr("action", "{pigcms::U('Code/plbcimg',array('token'=>$token))}");
+
+        })
+    })
+*/
+</script>
+<div class="container main">
+    <div class="row main">
+        <include file="Code:left"/>
+        <div class="col-md-10">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">二维码维护</h3>
+                </div>
+                <div class="panel-body">
+                    <include file="Code:wjjwh"/>
+                    <div class="msgWrap">
+                        <div class="add-button"></div>
+
+                             
+                        <form method="post"  action="{pigcms::U('Code/cpcodedel',array('token'=>$token))}" id="info1" >
+                           
+                            <TABLE class="table table-striped">
+                                <THEAD>
+                                    <tr>              
+                                        <th class="thirdTd">序号</th>
+                                        <th class="thirdTd">产品名称</th>
+                                      
+
+                                        <th class="thirdTd">操作</th>
+
+
+                                    </tr>
+                                </THEAD>
+                                <TBODY>
+                                    <TR></TR>
+                                <volist name="list" id="vo" key='k'>
+                                    <input type="hidden" name='token' value="{pigcms:$vo.token}" />
+                                    <TR>
+                                       <td>{pigcms:$k}</td>
+                                        <td>{pigcms:$vo.cname}</td>
+
+                                      
+                                    <td class="sevenTd">
+
+                                        <a href="{pigcms::U('Code/cpcodewh',array('cname'=>$vo['cname'],'token'=>$token))}" class="hover-tooltip-edit">查看详细信息</a> 
+
+                                        
+
+                                    </td>
+                                    </TR>
+                                </volist>
+                                </TBODY>
+                            </TABLE>
+                        </form>
+
+                    </div>
+                    <div class="cLine">
+                        <div class="pageNavigator right">
+                            <div class="pages">{pigcms:$page}</div>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="Public:footer"/>

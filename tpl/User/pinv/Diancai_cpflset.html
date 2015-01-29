@@ -1,0 +1,55 @@
+<?php $nav = "BUSINESS"; $side = "CPFLLIST" ?>
+<include file="Public:head"/>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+
+<link type="text/css" href="{pigcms::RES}/css/Product_catSet.css" rel="stylesheet"/>
+ <div class="container main">
+ <div class="row main">
+<include file="Diancai:left"/>      
+    <!--right--begain-->               
+             <div class="col-md-10 main">
+                <ol class="breadcrumb">
+                    <li><a href="{pigcms::U('Diancai/index',array('token'=>$token))}">微餐饮</a></li>
+                    <li><a href="{pigcms::U('Diancai/cpfllist',array('token'=>$token))}">菜单分类管理</a></li>
+                    <li class="active">菜单分类修改</li>
+                  </ol>
+            		<!-- <p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>         
+                <p class="artiEdit"><span class="big">菜品分类添加</span><a href="javascript:history.go(-1);" class="addListX">返回</a></p> -->
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">菜品分类修改</h3>
+                    </div>
+                    <div class="panel-body">
+                   <form class="form" method="post" action="{pigcms::U('Diancai/cpflset',array('token'=>$token,'id'=>session('wxid')))}"> 
+    				 <input type="hidden" name="token" value="{pigcms:$_GET['token']}" class="circle"/>
+    				 <input type="hidden" name="cpflid" value="{pigcms:$_GET['id']}" class="circle"/>
+                <p class="same">
+                    <span class="Tex">名称：</span>
+                    <input type="text" name="cpflname" value="{pigcms:$rzt.caipname}" class="circle"/>
+                </p>
+               <!-- <p class="same">
+                    <span class="Tex">Logo地址：</span>
+                    <input type="text" name="logourl" id='url' value="" class="Scircle"/>
+					<a href="###" onclick="upyunPicUpload($(this).prev().attr('id'),'pic',700,420,'qtclsw1382672973')" class="a_upload">上传</a>
+                </p>-->
+                <p class="areBox">
+                    <span class="Tex">简介：</span>
+                   	<textarea class="areSame" name="cpfldes">{pigcms:$rzt.jieshao}</textarea>
+                </p>
+            </div>
+            <div class='panel-footer' style="text-align:right">
+                 <p class="pressBox"><input type="submit" value="保存" class="btn btn-success"/><a href="javascript:history.go(-1);" class="btn btn-link">取消</a></p>
+             </div>
+            </form>
+            
+            </div>
+             <!--/right--begain-->
+         </div>
+             </div>
+ </div>
+<include file="Public:footer"/>

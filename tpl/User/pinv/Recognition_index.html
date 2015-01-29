@@ -1,0 +1,86 @@
+<?php $nav = "CRM"; $side = "QRCODE" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/cindex.css" rel="stylesheet"/>
+ <div class="container main">
+<div class="row main">
+<include file="Crm:left"/>
+        <div class="col-md-10 main">
+           <!--  <p class="rightTop">
+                <a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                <a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="new">返回</a>
+            </p>
+            <p class="replayBox"></p>
+            <table class="sheet" cellspacing="1"  border="0"> -->
+                 <ol class="breadcrumb">
+                    <li><a href="{pigcms::U('Chat/index',array('token'=>$token))}">CRM</a></li>
+                    <li class="active">渠道二维码</li>
+                  </ol>
+                  <div class="panel panel-success">
+           <div class="panel-heading">
+                <h3 class="panel-title">渠道二维码</h3>
+              </div>
+              <div class="panel-body">
+                <table class="table table-striped" cellspacing="1"  border="0">
+                    <tr>
+                        <th >渠道ID</th>
+                        <th >渠道名称</th>
+                        <th >渠道使用量</th>
+                        <th >触发关键词</th>                  
+                        <th >渠道二维码</th>
+                        <th>状态</th>
+                        <th >操作</th>
+                    </tr>
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td> {pigcms:$vo.id}</td>
+                            <td class= 'k'>{pigcms:$vo.title}</td>
+                            <td>{pigcms:$vo.attention_num}</td>
+                            <td>{pigcms:$vo.keyword}</td>
+                            <td><if condition="$vo.code_url neq ''"><a href="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket={pigcms:$vo.code_url}" target="_blank" class="label label-primary">点击查看</a><else/><a href="{pigcms::U('Recognition/get_code',array('id'=>$vo['id']))}" class="label label-primary">点击获取二维码</a> </if></td>
+                        <td><if condition="$vo['status'] eq 0">启用<else/>暂停</if>  </td>
+                        <td><if condition="$vo['status'] eq 0"><a href="{pigcms::U('Recognition/status',array('type'=>1,'id'=>$vo['id']))}" class="hover-tooltip-stop"><span class="glyphicon glyphicon-remove"></span></a><else/><a href="{pigcms::U('Recognition/status',array('type'=>0,'id'=>$vo['id']))}" class="hover-tooltip-ok"><span class="glyphicon glyphicon-ok"></span></a></if>
+                        <a href="{pigcms::U('Recognition/del',array('id'=>$vo['id']))}" class="hover-tooltip-trash"><span class="glyphicon glyphicon-trash danger"></span></a>　</td>
+                        </tr>
+                    </volist>
+                    <tr>
+
+                        <td colspan="8" style="text-align:right">{pigcms:$page}</td>
+                    </tr>
+                </table>
+                <form class="form" method="post" action="" target="_top" enctype="multipart/form-data">
+                    <table class="userinfoArea" style=" margin:20px 0 0 0;" border="0" cellspacing="0" cellpadding="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th valign="top"><label for="title">渠道名称：</label></th>
+                                <td><input type="input" class="px" required="" id="title" value="" name="title" style="width:400px"> 请认真填写生成后不可以编辑！只能删除重建<br>
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <th valign="top"><label for="keyword">触发关键词：</label></th>
+                                <td><input type="input" class="px" id="keyword" value="" name="keyword" style="width:60px"> 非必填项，建议留空（留空保留原关注时回复的内容!）<br>
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <th></th>
+                                <td ><button type="submit" name="button" class="btn btn-success btn-block" style="width:220px">添加</button> 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <input type="hidden" name="token" value="{pigcms:$token}">
+                </form> 
+
+        </div>
+        </div>
+        <!--right--end-->
+    </div>    
+    </div>    
+
+</div>
+<include file="Public:footer"/>

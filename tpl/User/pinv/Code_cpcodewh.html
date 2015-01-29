@@ -1,0 +1,159 @@
+<?php $nav = "EWM"; $side = "WH" ?>
+<include file="Public:head"/>
+
+<link rel="stylesheet" type="text/css" href="./tpl/User/default/common/css/cymain.css" />
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script type="text/javascript">
+    $(function() {
+
+        $("#Button1").bind("click", function() {
+            //alert(11111);return false;
+            $(".item:checkbox").prop("checked", true);
+        });
+        $("#Button2").bind("click", function() {
+            //alert(22222);return false;
+            $(".item:checkbox").prop("checked", false);
+        });
+        //批量删除
+        $('#plsc').click(function() {
+            $('#info1').attr("action", "{pigcms::U('Code/cpcodedel',array('token'=>$token))}");
+
+        })
+        //批量导出
+        $('#djdc').click(function() {
+            // alert(111);return false;
+            $('#info1').attr("action", "{pigcms::U('Code/cpcodedc',array('token'=>$token))}");
+
+        })
+        //批量下载
+        $('#djxz').click(function() {
+            $('#info1').attr("action", "{pigcms::U('Code/plbcimg',array('token'=>$token))}");
+
+        })
+    })
+
+</script>
+<div class="container main">
+    <div class="row main">
+        <include file="Code:left"/>
+        <div class="col-md-10">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">二维码维护</h3>
+                </div>
+                <div class="panel-body">
+                    <include file="Code:wh"/>
+                    <div class="msgWrap">
+                        <div class="add-button"></div>
+
+                        <form method="post"  action="{pigcms::U('Code/cpcodewh',array('token'=>$token))}" id='info'>        
+                            <table style="height:30px;line-height:30px;padding-right:45px;margin-bottom:20px">
+                                <input type="hidden" name='ctoken' value='{pigcms:$_GET["token"]}' />
+                                <tr> <input type="text" name="sous" class="form-control" id="" style="width:200px;float:left" value="" /><input type="submit" value="搜索"  class="btn btn-success" style="float:left;margin-left:12px" >
+                                </tr>
+                            </table>
+                        </form>         
+                        <form method="post"  action="{pigcms::U('Code/cpcodedel',array('token'=>$token))}" id="info1" >
+                            <p style="height:40px;line-height:40px;padding-right:45px;">
+                                <input type="submit" value="批量删除" id='plsc' class="btn btn-success" style="float:left;margin-left:12px" >
+                                <input type="submit" value="批量导出" id='djdc'  class="btn btn-success" style="float:left;margin-left:12px" >
+                                <input type="submit" value="批量下载" id='djxz'  class="btn btn-success" style="float:left;margin-left:12px" >
+                            </p>
+                            <TABLE class="table table-striped">
+                                <THEAD>
+                                    <tr>                     <th style="padding-left:9px"><!--<input id="Button1" type="button" value="全选" />|--><!--<input id="Button2" type="button" value="反选" />-->
+                                            <a id="Button1" style="cursor:pointer">全选</a>|
+                                            <a id="Button2"    style="cursor:pointer">反选</a>
+                                        </th>     
+                                        <th class="thirdTd">产品名称</th>
+                                       
+
+
+                                        <th class="thirdTd">渠道</th>
+                                        <th class="thirdTd">类型</th>
+                                        <th class="thirdTd">城市</th>
+                                        <th class="thirdTd">开始时间</th>
+                                        <th class="thirdTd">结束时间</th>
+                                        <th class="thirdTd">二维码</th>
+                                        <th class="thirdTd">扫描次数</th>
+                                        <th class="thirdTd">操作</th>
+
+
+                                    </tr>
+                                </THEAD>
+                                <TBODY>
+                                    <TR></TR>
+                                <volist name="list" id="vo" key='k'>
+                                    <input type="hidden" name='token' value="{pigcms:$vo.token}" />
+                                    <TR>
+                                        <td><input type="checkbox"  style="margin-right: 10px; margin-left: 21px;" name="item[]" class="item" value="{pigcms:$vo.cid}"/>	
+                                        </td>
+                                        <td>{pigcms:$vo.cname}</td>
+
+                                       
+
+
+                                   <if condition="$vo['qudao'] neq ''">
+                                        <volist name='xxlist' id='xxvo'>
+                                            <if condition="$xxvo['xid'] eq $vo['qudao']">
+                                                <td>{pigcms:$xxvo.x_name}</td>
+                                            </if>
+                                        </volist>
+                                        <else/>
+                                        <td>无</td>
+                                    </if>
+
+                                    <if condition="$vo['huodongleixing'] neq ''">
+                                        <volist name='cpxxcitylist' id='xxcityvo'>
+                                            <if condition="$xxcityvo['cid'] eq $vo['huodongleixing']">
+                                                <td>{pigcms:$xxcityvo.c_name}</td>
+                                            </if>
+                                        </volist>
+                                        <else/>
+                                        <td>无</td>
+                                    </if>
+
+
+                                    <if condition="$vo['city'] neq ''">
+                                        <volist name='xxcity' id='cityvo'>
+                                            <if condition="$cityvo['cid'] eq $vo['city']">
+                                                <td>{pigcms:$cityvo.c_name}</td>
+                                            </if>
+                                        </volist>
+                                        <else/>
+                                        <td>无</td>
+                                    </if>
+
+
+                                    <td>{pigcms:$vo.sdate|date="Y-m-d",###}</td>
+                                    <td>{pigcms:$vo.edate|date="Y-m-d",###}</td>
+                                    <td><img src='{pigcms:$vo.ccode}' width='30px' height='30px'/></td>
+                                     <td>{pigcms:$vo.code_num}</td>
+                                    <td class="sevenTd">
+
+                                        <a href="{pigcms::U('Code/cpcode_set',array('id'=>$vo['cid'],'token'=>$token))}" class="hover-tooltip-edit"><span class="glyphicon glyphicon-edit"></span></a> 
+
+                                        <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Code/cpcode_del',array('id'=>$vo['cid'],'token'=>$token))}');" class="hover-tooltip-trash"><span class="glyphicon glyphicon-trash danger"></span></a>
+
+                                    </td>
+                                    </TR>
+                                </volist>
+                                </TBODY>
+                            </TABLE>
+                        </form>
+
+                    </div>
+                    <div class="cLine">
+                        <div class="pageNavigator right">
+                            <div class="pages">{pigcms:$page}</div>
+                        </div>
+                        <div class="clr"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="Public:footer"/>

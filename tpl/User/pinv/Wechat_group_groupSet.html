@@ -1,0 +1,52 @@
+<?php $nav = "CRM"; $side = "GGROUP" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/cindex.css" rel="stylesheet"/>
+<div class="container main">
+<div class="row main">
+<include file="Crm:left"/>
+        <div class="col-md-10 main">
+            <!-- <p class="rightTop">
+                <a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                <a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="new">返回</a>
+            </p>
+            <p class="replayBox">添加粉丝分组</p> -->
+                <ol class="breadcrumb">
+                    <li><a href="{pigcms::U('Chat/index',array('token'=>$token))}">CRM</a></li>
+                    <li><a href="{pigcms::U('Wechat_group/groups',array('token'=>$token))}">分组管理</a></li>
+                    <li class="active"><if condition="$_GET['id']">修改<else />添加</if>粉丝分组</li>
+                  </ol>
+                   <div class="panel panel-success">
+           <div class="panel-heading">
+                <h3 class="panel-title"><if condition="$_GET['id']">修改<else />添加</if>粉丝分组</h3>
+              </div>
+              <div class="panel-body">
+            <form method="post"   action=""  enctype="multipart/form-data" >
+                <TABLE class="userinfoArea" border="0" cellSpacing="0" cellPadding="0" width="100%">
+                    <TR>
+                        <TH valign="top"><label for="pic">名称：</label></TH>
+                        <TD><input class="form-control"  name="name" id="name" value="{pigcms:$thisGroup['name']}" style="width:200px;"  />
+                        </TD>
+                    </TR>
+                    <TR>
+                        <TH valign="top"><label for="info">简介：</label></TH>
+                        <TD><textarea name="intro" id="intro" class=" form-control"  rows="5" style="width:490px;height:80px">{pigcms:$thisGroup['intro']}</textarea></TD>
+                    </TR>  
+
+                        
+                       
+                   
+                    </TBODY>
+                </TABLE>      
+        </div>
+        <div class="panel-footer" style="text-align:right">
+            <if condition="$thisGroup"><input type="hidden" name="id" value="{pigcms:$thisGroup['id']}" /></if><input type="submit" value="保存" name="sbmt" class="btn btn-success" >
+                        <a href="{pigcms::U('Wechat_group/groups',array('token'=>$token))}" class="btn btn-link">取消</a>
+        </div>
+            </form> 
+
+    </div>    
+    </div>    
+    </div>    
+
+</div>
+<include file="Public:footer"/>

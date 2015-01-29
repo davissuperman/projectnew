@@ -1,0 +1,200 @@
+<?php $nav = "BUSINESS"; $side = "CAIPINLIST" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Product_set.css" rel="stylesheet"/>
+<!--<link type="text/css" href="/tpl/static/xhedit/demo/common.css" rel="stylesheet"/>-->
+<style type="text/css">
+	.btnMap {
+		width:50px !important;
+		background:transparent url(/tpl/static/xhedit/demo/googlemap/map.gif) no-repeat center center;
+	}
+	.btnCode {                     
+		background:transparent url(/tpl/static/xhedit/demo/prettify/code.gif) no-repeat 16px 16px;
+		background-position:2px 2px;
+	}
+</style>
+<script type="text/javascript" src="/tpl/static/xhedit/jquery/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/xheditor-1.2.1.min.js"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/xheditor_lang/zh-cn.js"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/xheditor_plugins/showdown.js"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/xheditor_plugins/htmldomparser.js"></script>
+<script type="text/javascript" src="/tpl/static/xhedit/xheditor_plugins/html2markdown.js"></script>
+
+<script src="{pigcms::STATICS}/kindeditor/kindeditor.js" type="text/javascript"></script>
+<script src="{pigcms::STATICS}/kindeditor/lang/zh_CN.js" type="text/javascript"></script>
+<script src="{pigcms::STATICS}/kindeditor/plugins/code/prettify.js" type="text/javascript"></script>
+<script src="/tpl/static/artDialog/jquery.artDialog.js?skin=default"></script>
+<script src="/tpl/static/artDialog/plugins/iframeTools.js"></script>
+<script src="/tpl/static/upyun.js" type="text/javascript"></script>
+<script type="text/javascript" src="{pigcms::RES}/js/formCheck/formcheck.js"> </script>
+<script type="text/javascript">
+var markdownConverter = new Showdown.converter();
+function Md2HTML(md){
+	return markdownConverter.makeHtml(md);
+}
+function HTML2Md(html){
+	var md = HTML2Markdown(html);
+    md = md.replace(/&(lt|gt|amp|quot);/ig,function(all, t){
+        return {'lt':'<','gt':'>','amp':'&','quot':'"'}[t.toLowerCase()];
+    });
+    return md;
+}
+function pageInit()
+{   
+    $.extend(XHEDITOR.settings,{shortcuts:{'ctrl+enter':submitForm}});
+	
+
+	var markdownCSS = '<style>*{margin:0;padding:0;}p {margin:1em 0;line-height:1.5em;}table {font-size:inherit;font:100%;margin:1em;}table th{border-bottom:1px solid #bbb;padding:.2em 1em;}table td{border-bottom:1px solid #ddd;padding:.2em 1em;}input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}select,option{padding:0 .25em;}optgroup{margin-top:.5em;}img{border:0;max-width:100%;}abbr{border-bottom:none;}a{color:#4183c4;text-decoration:none;}a:hover{text-decoration:underline;}a code,a:link code,a:visited code{color:#4183c4;}h2,h3{margin:1em 0;}h1,h2,h3,h4,h5,h6{border:0;}h1{font-size:170%;border-bottom:4px solid #aaa;padding-bottom:.5em;margin-top:1.5em;}h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}h2{font-size:150%;margin-top:1.5em;border-bottom:4px solid #e0e0e0;padding-bottom:.5em;}h3{margin-top:1em;}hr{border:1px solid #ddd;}ul{margin:1em 0 1em 2em;}ol{margin:1em 0 1em 2em;}ul li,ol li{margin-top:.5em;margin-bottom:.5em;}ul ul,ul ol,ol ol,ol ul{margin-top:0;margin-bottom:0;}blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555;}dt{font-weight:bold;margin-left:1em;}dd{margin-left:2em;margin-bottom:1em;}pre{margin-left:2em;border-left:3px solid #CCC;padding:0 1em;}</style>';
+	var plugins={
+	
+		map:{c:'btnMap',t:'插入Google地图',e:function(){
+			var _this=this;
+			_this.saveBookmark();
+			_this.showIframeModal('Google 地图','/tpl/static/xhedit/demo/googlemap/googlemap.html',function(v){
+				_this.loadBookmark();
+				_this.pasteHTML('<img src="'+v+'" />');
+			},538,404);
+		}}
+	};
+	$.extend(XHEDITOR.settings,{shortcuts:{'ctrl+enter':submitForm}});//修改默认设置
+	   editor=$('#elm1').xheditor({upLinkUrl:"{pigcms::U('Upload2/add')}",upImgUrl:"{pigcms::U('Upload2/add')}",upFlashUrl:"{pigcms::U('Upload2/add')}",upMediaUrl:"{pigcms::U('Upload2/add')}",localUrlTest:/^https?:\/\/[^\/]*?(xheditor\.com)\//i,remoteImgSaveUrl:"{pigcms::U('Upload2/add')}",emots:{
+		msn:{name:'MSN',count:40,width:22,height:22,line:8},
+		pidgin:{name:'Pidgin',width:22,height:25,line:8,list:{smile:'微笑',cute:'可爱',wink:'眨眼',laugh:'大笑',victory:'胜利',sad:'伤心',cry:'哭泣',angry:'生气',shout:'大骂',curse:'诅咒',devil:'魔鬼',blush:'害羞',tongue:'吐舌头',envy:'羡慕',cool:'耍酷',kiss:'吻',shocked:'惊讶',sweat:'汗',sick:'生病',bye:'再见',tired:'累',sleepy:'睡了',question:'疑问',rose:'玫瑰',gift:'礼物',coffee:'咖啡',music:'音乐',soccer:'足球',good:'赞同',bad:'反对',love:'心',brokenheart:'伤心'}},
+		ipb:{name:'IPB',width:20,height:25,line:8,list:{smile:'微笑',joyful:'开心',laugh:'笑',biglaugh:'大笑',w00t:'欢呼',wub:'欢喜',depres:'沮丧',sad:'悲伤',cry:'哭泣',angry:'生气',devil:'魔鬼',blush:'脸红',kiss:'吻',surprised:'惊讶',wondering:'疑惑',unsure:'不确定',tongue:'吐舌头',cool:'耍酷',blink:'眨眼',whistling:'吹口哨',glare:'轻视',pinch:'捏',sideways:'侧身',sleep:'睡了',sick:'生病',ninja:'忍者',bandit:'强盗',police:'警察',angel:'天使',magician:'魔法师',alien:'外星人',heart:'心动'}}
+	},plugins:plugins,loadCSS:'<style>pre{margin-left:2em;border-left:3px solid #CCC;padding:0 1em;}</style>',shortcuts:{'ctrl+enter':submitForm}});
+}
+function submitForm(){$('#frmDemo').submit();}
+$(pageInit);
+
+
+/*var editor;
+KindEditor.ready(function(K) {
+editor = K.create('#intro', {
+resizeType : 1,
+allowPreviewEmoticons : false,
+allowImageUpload : false,
+items : [
+'source','undo','clearhtml','hr',
+'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+'insertunorderedlist', '|', 'emoticons', 'image','link', 'unlink','baidumap','lineheight','table','anchor','preview','print','template','code','cut']
+});
+
+});*/
+
+function showChildCats(value){
+	$("#catid").html('<option value="0">请选择...</option>');
+	if(value==0){
+		document.getElementById('catid').disabled=true;
+	}else{
+		$.ajax({
+			url: $('#catUrl').attr("value")+'&parentid='+value,
+			success: function( data ) {
+				document.getElementById('catid').disabled=false;
+				$("#catid").html($("#catid").html()+data);
+			}
+		});
+	}
+}
+function toDecimal(x) {  
+            var f = parseFloat(x);  
+            if (isNaN(f)) {  
+                return;  
+            }  
+            f = Math.round(x*10)/10;  
+            return f;  
+        }  
+function calDiscount(){
+	var price=$('#price').attr('value');
+	var oprice=$('#oprice').attr('value');
+	if(oprice!=0&&oprice!=''){
+		var dis=oprice-price;
+		var discount=10-toDecimal((dis/oprice)*10);
+	}else{
+		discount=10;
+	}
+	$('#discount').attr('value',discount);
+}
+
+$(function(){
+
+	$("#form").valid([
+	{ name:"cpname",simple:"标题",require:true},
+
+	{ name:"catid",message:"请选择类别",require:true},
+	//{ name:"price",type:"currency",message:"价格输入不正确"},
+	{ name:"price",message:"价格不能为空",require:true},
+	//{ name:"fakemembercount",type:"int",message:"报名基数只能填写整数或0"}
+		
+	],true,true);
+
+})
+</script>
+ <div class="contaIner main">
+ <div class="row main">
+<include file="Diancai:left"/>      
+     <!--right--begain-->
+           <div class="col-md-10 main">
+              <ol class="breadcrumb">
+                    <li><a href="{pigcms::U('Diancai/index',array('token'=>$token))}">微餐饮</a></li>
+                    <li><a href="{pigcms::U('Diancai/caipinlist',array('token'=>$token))}">菜品管理</a></li>
+                    <li class="active">修改菜品</li>
+                  </ol>
+           	  <div class="panel panel-success">
+            		<!-- <p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+              </p> -->
+              
+              <!-- <p class="artiEdit"><span class="big">添加菜品 </span><a href="javascript:history.go(-1);" class="addListX">返回</a></p> -->
+                  <div class="panel panel-success">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">修改菜品</h3>
+                    </div>
+               <form class="form" method="post" action="{pigcms::U('Diancai/caipinset')}" enctype="multipart/form-data" id="form" > 
+				
+				<input type="hidden" name="token" value="{pigcms:$_GET['token']}" />
+				<input type="hidden" name="cpid" value="{pigcms:$_GET['id']}" />
+				
+                <p class="same">
+                    <span class="Tex">菜品名称：</span>
+                    <input type="text" name="cpname" value="{pigcms:$rzt.cpname}" class="circle"/>
+                </p>
+                <div class="keyWord">
+                    <span class="Tex">菜品类别：</span>
+                  <select id="catid" name="catid"><option value="0">请选择分类...
+				  </option>
+				  <volist name="qry" id="vo">
+					    <option value="{pigcms:$vo.cid}" <if condition="$vo['cid'] eq $rzt['c_did']">selected='selected'</if>>
+					     {pigcms:$vo.caipname}
+				        </option>
+					</volist>
+									
+				  
+				  </select>
+                </div>
+               
+                <p class="same">
+                    <span class="Tex">价格：</span>
+                   <input type="text" id="jiage" onchange="calDiscount();" name="price" value="{pigcms:$rzt.price}" class="Scircle"/>
+                </p>
+                
+                <p class="same">
+                    <span class="Tex">Logo图片：</span>
+                    <input type="text" id='url' name="logourl" value="{pigcms:$rzt.cpurl}"  class="circle"/><a href="###" onclick="upyunPicUpload($(this).prev().attr('id'),'pic',700,420,'qtclsw1382672973')" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-upload"></span> 上传</a>
+                </p>
+                <div style="margin-top:20px;height:245px;">
+                <span class="Tex">简要描述：</span>
+                <div class="detailTex">               
+                    <!--<textarea class="fontBox" id="intro" name="intro">{pigcms:$set.intro}</textarea>-->
+					<textarea name="info" rows="8" cols="120" style="width:  100%">{pigcms:$rzt.cpjianjie}</textarea>
+				</div>
+                </div>
+                       <div class="panel-footer" style="text-align:right"><input type="submit" value="保存" class="btn btn-success"/>
+                    <a href="javascript:history.go(-1)" class="btn btn-link">取消</a>
+                 </div>
+           </form>
+               </div>
+            <!--right--end-->
+            </div>   
+      
+ </div>
+<include file="Public:footer"/>

@@ -1,0 +1,58 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Product_index.css" rel="stylesheet"/>
+ <div class="content">
+ <div class="ffBox">
+<include file="Public:left"/>
+   
+      
+    <!--right--begain-->
+            <div class="right">
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+             <p class="artiEdit"><span class="big">桌台管理</span></p>
+             <ul class="listBox">
+                	<li><a href="{pigcms::U('Product/index',array('token'=>$token,'dining'=>$isDining))}"><if condition="$isDining neq 1">商品<else/>菜品</if>管理</a></li>
+                    <li><a href="{pigcms::U('Product/cats',array('token'=>$token,'dining'=>$isDining))}"><if condition="$isDining neq 1">商品分类<else/>菜品分类</if>管理</a></li>
+                    <li><a href="{pigcms::U('Product/orders',array('token'=>$token,'dining'=>$isDining))}">订单管理</a></li>
+                    <if condition="$isDining eq 1"><li  class="onOver"><a href="{pigcms::U('Product/tables',array('token'=>$token,'dining'=>1))}">桌台管理</a></li></if>
+						<if condition="$isDining neq 1">
+						<li><a href="{pigcms::U('Reply_info/set',array('token'=>$token,'infotype'=>'Shop'))}">商城回复配置</a></li>
+						<else/>
+						<li><a href="{pigcms::U('Reply_info/set',array('token'=>$token,'infotype'=>'Dining'))}">订餐回复配置</a></li>
+						</if>
+         
+                </ul>
+                 <div class="showBox">
+                   <p class="pressBox"><a href="{pigcms::U('Product/tableAdd',array('token'=>$token,'dining'=>$isDining))}" class="addList">新增分类</a></p>
+                   <table class="sheet" cellspacing="1">
+                            <tr>
+                                <th class="firstTd">名称</th>
+                               
+                                <th class="thirdTd">简介</th>
+                         <th>顺序</th>
+                                <th class="sevenTd">操作</th>
+                            </tr> 
+                            <volist name="tables" id="o"> 
+                            <tr>
+                            	<td>{pigcms:$o.name}</td>
+                              
+                              	<td>{pigcms:$o.intro}</td>
+                               	 <td>{pigcms:$o.taxis}</td>
+                                <td><a href="{pigcms::U('Product/tableSet',array('token'=>$token,'id'=>$o['id'],'dining'=>1))}">修改</a> <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Product/tableDel',array('token'=>$token,'id'=>$o['id'],'dining'=>1))}');">删除</a></td>
+                            
+                            </tr>   
+                            </volist>              
+                        </table> 
+                    <p class="page">{pigcms:$page}</p>
+                 </div>
+                
+                
+             
+            </div>
+            <!--right--end-->  
+            </div>  
+      
+ </div>
+<include file="Public:footer"/>

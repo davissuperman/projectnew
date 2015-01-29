@@ -1,0 +1,180 @@
+<?php $nav = "FUNCTION"; $side = "ORDER"; $sideTop = "ORDER"; ?>
+
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Product_index.css" rel="stylesheet"/>
+<link type="text/css" rel="stylesheet" href="{pigcms::RES}/css/manage.css"/>
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+ <div class="container main">
+<div class="row">
+<include file="Product:left"/>
+	<!--newright--begian-->
+	<div class="col-md-10 main">
+	<!-- <P class="titlex">订单管理</P> -->
+   <ol class="breadcrumb">
+              <li><a href="{pigcms::U('Product/index',array('token'=>$token))}">微商城</a></li>
+              <li><a href="{pigcms::U('Product/management',array('token'=>$token))}">交易管理</a></li>
+              <li class='active'>订单管理</li>
+            </ol>
+              <div class="panel panel-success">
+                 <div class="panel-heading">
+                <h3 class="panel-title">订单管理</h3>
+              </div>
+              <div class="panel-body">
+        <form method="post" action="">
+        <div class="searchx">
+            <p class="sameP">
+                <span class="fontTex">订单编号：</span>
+                <input type="text" class="textCase" name="ordernumber"/>
+                <span class="fontTex">会员名：</span>
+                <input type="text" class="textCase" name="username"/>               
+                 <span class="fontTex">订单状态：</span>  
+                 <select class="sel" name="state">
+                    <option value="1">待付款</option>
+                    <option value='4'>已关闭</option>
+                    <option value='6'>交易完成</option>
+                </select>
+            </p>    
+              <p class="sameP">
+                <span class="fontTex">配送状态：</span>
+               <select name="delivery_status" id=""><option value="4">请选择</option><option value="0">未配送</option>
+               <option value="1">配送中</option>
+               <option value="2">已配送</option></select>
+            </p>
+            <p class="sameP">
+                <span class="fontTex">下单时间：</span>
+                <input type="text" class="textCase" name="starttime" onclick="WdatePicker();"/>
+                <span class="dao">到</span>
+                <input type="text" class="textCase"  name="endtime" onclick="WdatePicker();"/>
+              <!--   <span class="fontTex">付款时间：</span>
+                <input type="text" class="textCase"  onclick="WdatePicker();"/>
+                <span class="dao">到</span>
+                <input type="text" class="textCase" onclick="WdatePicker();"/>    -->
+            </p>
+            <p class="sameP">
+                <span class="fontTex">价格区间：</span>
+                <input type="text" class="textCase" name="hprice"/>
+                <span class="dao">到</span>
+                <input type="text" class="textCase" name="fprice"/>
+                <input type="submit" value="搜索" class="btn btn-info btn-sm"/>
+            </p>
+        </div>
+        </form>
+        <div class="add-button"></div>
+     <table class="table table-striped" cellspacing="1">
+        	<tr>
+            	<th class="short"><input type="radio"/></th>
+                <th class="short">ID</th>
+                <th class="long">订单编号&状态</th>
+                <th class="second">订单金额</th>
+                <th class="long">收货人&电话</th>
+                <th class="second">配送</th>
+                <th class="long">下单&付款时间</th>
+                <th class="long">管理操作</th>
+            </tr>
+            <volist name="oRder" id="oRder">
+			<tr>
+            	<td><input type="radio"/></td>
+                <td>{pigcms:$oRder.id}</td>
+                <td>{pigcms:$oRder.number}<br><span style="color:green;font-bold:30px;"><if condition="$oRder.sc eq 1">代付款</if><if condition="$oRder.sc eq 4">已关闭</if><if condition="$oRder.sc eq 6">交易成功</if></span></td>
+                <td><span style="color:red;">￥{pigcms:$oRder.price}</span></td>
+                <td>{pigcms:$oRder.user}<br>{pigcms:$oRder.moble}</td>
+                <td><span class="delivery" ids="{pigcms:$oRder.id}"><span class="de_te"><if condition="$oRder.delivery_status eq 0">未配送<elseif condition="$oRder.delivery_status eq 1" />配送中<else />已配送</if></span></span></td>
+                <td>{pigcms:$oRder.time|date="Y-m-d",###}</td>
+                <td>
+                    <a  href="{pigcms::U('Product/manalist',array('id'=>$oRder['id'],'token'=>$token))}" class="hover-tooltip-edit"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Product/manaDel',array('id'=>$oRder['id'],'token'=>$token))}');" class="hover-tooltip-trash"><span class="glyphicon glyphicon-trash danger"></span></a>
+                </td>               
+            </tr>
+			</volist>
+        </table>
+		 <p class="page">{pigcms:$page}</p>
+    </div>
+	<!--newright--end-->      
+    <!--right--begain-->
+<!--             <div class="right">
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+             <div class="artiEdit">
+             
+             	<span class="big">商品管理</span>
+                <form method="post" action="" class="souCase">
+                     <input type="hidden" name="ac" value="hotels-list">
+                     <input type="submit" value="搜索" class="searchPress"/>
+                     <input type="text" value="输入关键词搜索" class="search"/>
+             	</form>
+             
+             </div>
+                <ul class="listBox">
+                	<li class="onOver"><a href="{pigcms::U('Product/index',array('token'=>$token,'dining'=>$isDining))}"><if condition="$isDining neq 1">商品<else/>菜品</if>管理</a></li>
+                    <li><a href="{pigcms::U('Product/cats',array('token'=>$token,'dining'=>$isDining))}"><if condition="$isDining neq 1">商品分类<else/>菜品分类</if>管理</a></li>
+                    <li><a href="{pigcms::U('Product/orders',array('token'=>$token,'dining'=>$isDining))}">订单管理</a></li>
+                    <if condition="$isDining eq 1"><li><a href="{pigcms::U('Product/tables',array('token'=>$token,'dining'=>1))}">桌台管理</a></li></if>
+						<if condition="$isDining neq 1">
+						<li><a href="{pigcms::U('Product/reply',array('token'=>$token,'infotype'=>'Shop'))}">商城回复配置</a></li>
+						<else/>
+						<li><a href="{pigcms::U('Reply_info/set',array('token'=>$token,'infotype'=>'Dining'))}">订餐回复配置</a></li>
+						</if>
+					<li><a href="{pigcms::U('Product/shop_index',array('token'=>$token,'infotype'=>'Dining'))}">商城首页图片</a></li>
+                </ul>
+                <div class="showBox">
+                	<div>
+                        <p class="pressBox"><a class="addList" href="{pigcms::U('Product/add',array('token'=>$token,'dining'=>$isDining))}" title="添加" class="btnGrayS vm bigbtn">添加<if condition="$isDining neq 1">商品<else/>菜品</if></a><a href="{pigcms::U('Alipay_config/index',array('token'=>$token))}"  class="addList"  style="margin-left:10px;">支付宝配置</a></p>
+                       <form method="post" action="" id="info">
+                        <table class="sheet" cellspacing="1">
+                            <tr>
+                                <th class="firstTd">编号</th>
+                                <th class="secondTd">商品名称</th>
+                                <th class="thirdTd">价格</th>
+                                <th class="forthTd">关键词</th>
+                                <th class="forthTd">创建时间</th>
+                                <th class="sevenTd">操作</th>
+                            </tr>
+                             <volist name="list" id="hostlist">
+                            <tr>
+                                <td class="firstTd">{pigcms:$i}</td>
+                                <td class="secondTd">{pigcms:$hostlist.name}</td>
+                                <td class="thirdTd">{pigcms:$hostlist.price}元</td>
+                                <td class="forthTd">{pigcms:$hostlist.keyword}</td>
+                                <td class="forthTd">{pigcms:$hostlist.time|date="Y-m-d H:i:s",###}</td>
+                                <td class="sevenTd"><a  class="edit" href="{pigcms::U('Product/set',array('id'=>$hostlist['id'],'token'=>$token,'dining'=>$isDining))}">修改</a> <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Product/del',array('id'=>$hostlist['id'],'token'=>$token,'dining'=>$isDining))}');" class="cancel">删除</a></td>
+                            </tr>
+                            </volist>
+                        </table>
+                         <p class="page">{pigcms:$page}</p>
+                        </form>
+                    </div>
+            </div>
+            <!--right--end-->  
+        </div>  
+        </div>  
+        </div>  
+	</div>
+    <script>
+        $(function(){
+            $(".delivery").click(function(){
+                if($(this).find('.de_te').css('display')!='none'){
+                    $('.de_te').css('display','block');
+                     $('.de_te').next().remove();
+                    $(this).append("<select name='delivery_status'><option value=''>请选择</option><option value='0'>未配送</option><option value='1'>配送中</option><option value='2'>已配送</option></select>");
+                    $(this).find('.de_te').css('display','none');
+                    $("select[name='delivery_status']").change(function(){
+                        var delivery_status=$(this).val();
+                        $.ajax({
+                            url: 'index.php?g=User&m=Product&a=delivery',
+                            type: 'post',
+                            data: {delivery_status:delivery_status,id:$(this).parent().attr('ids')},
+                            success:function(data){
+                                if(data){
+                                    // location="#";
+                                window.location.reload();
+                                };
+                            }
+                        });
+                    });
+                };
+            });
+        });
+    </script>
+<include file="Public:footer"/>

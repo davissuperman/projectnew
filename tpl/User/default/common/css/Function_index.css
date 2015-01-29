@@ -1,0 +1,15 @@
+.right{width:857px;height:1000px;float:left;}
+.back{width:98px;height:50px;border-right:1px #ebebeb solid;text-indent:25px;line-height:50px;background:url(../img/back.gif) no-repeat;float:left;color:#6a6a6a;}
+.back:hover{background:url(../img/backX.gif) no-repeat;border-left:0px;}
+.new{width:50px;height:50px;line-height:52px;text-align:center;float:right;color:#6a6a6a;border-left:1px #ebebeb solid;}
+.new:hover{background:#f7f7f7;}
+.rightTop{border-bottom:1px #ebebeb solid;height:50px;}
+.head{height:20px;line-height:20px;font-size:18px;font-weight:bold;border-left:3px #ea533f solid;padding-left:10px;color:#6a6a6a;margin:15px;}
+.serve{height:150px;}
+.serve li{float:left;margin-left:28px;}
+.serve li a{float:left;width:138px;height:76px;overflow:hidden;position:relative;}
+.serve li img{float:left;margin:10px 0px 0px 10px;}
+.firstBox p{clear:both;text-align:right;padding-right:5px;font-weight:bold;color:#fff;}
+.firstBox{width:138px;height:76px;background:#c6bf91;position:absolute;}
+.secondBox{width:138px;height:76px;background:#79755e;position:absolute;top:76px;}
+.secondBox p{color:#fff;padding:5px;}

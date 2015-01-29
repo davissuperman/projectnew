@@ -1,0 +1,56 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Host_index.css" rel="stylesheet"/>
+ <div class="content">
+ <div class="ffBox">
+<include file="Public:left"/>
+     
+    <!--right--begain-->
+             <div class="right">
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+                <form method="post" action="">
+                	<p class="artiEdit"><input type="hidden" name="ac" value="hotels-list">
+                	<span class="big">商家信息</span><span class="small">({pigcms:$page})</span>
+                	
+                <p><a href="{pigcms::U('Diancai/add',array('token'=>$token))}" title="新增订单商家"  class="addList">添加商家管理</a></p><p class="artiEdit"> <a href="javascript:history.go(-1);"  class="addListY">返回</a></p>
+            	</form>
+                <table class="sheet" cellspacing="1">
+                	<tr>
+                    	<th class="firstTd">编号</th>
+                        <th class="secondTd">菜品名字</th>
+                        <th class="thirdTd">id</th>
+                        <th class="forthTd">单价</th>
+                        <th class="forthTd">数量</th>
+                        <th class="forthTd">总价钱</th>
+                        <th class="forthTd">创建时间</th>
+                     
+                        <!--<th class="sevenTd">操作</th>-->
+                    </tr>
+                    <volist name="list" id="listshop"> 
+                    <tr>
+                    	<td class="firstTd">{pigcms:$i}</td>
+                        <td class="secondTd">{pigcms:$listshop.cpname}</td>
+                        <td class="thirdTd">{pigcms:$listshop.goods_id}</td>
+                        <td class="forthTd">{pigcms:$listshop.goods_price}</td>
+                        <td class="forthTd">{pigcms:$listshop.sub_goods_buy_number}</td>
+                        <td class="forthTd">{pigcms:$listshop.sub_goods_buy_sum}</td>
+                        <td class="forthTd">{pigcms:$listshop.cdate|date="Y-m-d H:i:s",###}</td>
+                        
+                        <!--<td class="sevenTd"><a href="{pigcms::U('Diancai/admin',array('id'=>$listshop['id'],'token'=>$token))}">订单管理</a> <a href="{pigcms::U('Diancai/set',array('id'=>$listshop['id'],'token'=>$token))}">修改</a> <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Diancai/index_del',array('id'=>$listshop['id'],'token'=>$token))}');">删除</a></td>-->
+                    </tr>
+                    </volist>
+                     
+                </table>
+				<p  style="text-align: right">{pigcms:$page}
+                   
+                     
+                    </p>
+            
+              </div>
+            <!--right--end-->  
+            </div>  
+      
+ </div>
+<include file="Public:footer"/>

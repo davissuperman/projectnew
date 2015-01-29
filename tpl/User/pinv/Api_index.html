@@ -1,0 +1,45 @@
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Api_index.css" rel="stylesheet"/>
+ <div class="content">
+<div class="ffBox">
+<include file="Public:left"/>
+     
+    <!--right--begain-->
+            <div class="right">
+            		<p class="rightTop">
+                	<a href="{pigcms::U('Function/index',array('token'=>$token,'id'=>session('wxid')))}"  class="back">回到首页</a>
+                    <a href="" onclick="reloadMainFrame();" class="new">刷新</a>
+                </p>
+            	 <p class="artiEdit"><span class="big">整合第三方接口</span><span class="small">不懂技术的,请先观看教程,请勿乱操作</span></p>
+                    
+                
+                <p class="same">
+                	<span class="Tex">接口地址：</span>
+                    <input type="text" value="" class="circle"/>
+                </p>
+                <p class="example">填写您的接口完整地址,以http开头，不支持https</p>
+                <p class="same">
+                    <span class="Tex">数据显示条数：</span>
+                    <input type="text" value="" class="circle"/>
+                </p>
+                <p class="example">调用条数,最多10条默认显示 </p>
+                <p class="same">
+                	<span class="Tex">数据排序：</span>
+                    <input type="text" value="" class="circle"/>
+                </p>
+                <p class="example">1: 按发布时间排序 2: 按评论数排序 3:随机排序</p>
+                
+                <p class="expBox"><input type="button" value="保存" class="surePress"/></p>
+                <ul class="apiBox">
+                    <li><a href="" target="_blank" class="aipTex">DedeCMS接口下载</a></br><img src="{pigcms::RES}/img/buttom_logo.gif" alt="buttom"/></li>
+                    <li><a href="" target="_blank" class="aipTex">WordPress接口下载</a></br><img src="{pigcms::RES}/img/logo-login.gif" alt="buttom" style="width:150px;height:30px;"/></li>
+                    <li><a href="" target="_blank" class="aipTex">PHPCMS接口下载</a></br><img src="{pigcms::RES}/img/logo_88_31.gif" alt="buttom" style="width:150px;height:30px;"/></li>
+                    <li><a href="" target="_blank" class="aipTex">emlog接口下载</a></br><img src="{pigcms::RES}/img/logo.png" alt="buttom" style="width:150px;height:30px;"/></li>
+            	</ul>
+            
+            </div>
+            <!--right--end-->    
+			</div> 
+      
+ </div>
+<include file="Public:footer"/>

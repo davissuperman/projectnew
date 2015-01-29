@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>开始页面</title>
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link type="text/css" rel="stylesheet" href="{pigcms::RES}/css/wdy/begain.css"/>
+</head>
+
+<body>
+	<volist name='rzt' id='vo'>
+	<if condition="$vo.inputtype eq text ">
+		
+		<div class="box">
+		     <form method="post"  action="{pigcms::U('Wdiaoyan/login')}">
+			   <input type='hidden' name='id' value='{pigcms:$_GET["id"]}' />
+			   <input type='hidden' name='token' value='{pigcms:$_GET["token"]}' />
+			   <input type='hidden' name='wecha_id' value='{pigcms:$_GET["wecha_id"]}' />
+				
+			   <p class="title">请输入您的资料</p>
+			
+				<p class="sameP">
+			
+				<input type="text" placeholder="姓名" name='xingming' class="case"/>
+				</p> 
+				<p class="sameP">
+					<input type="text" placeholder="手机号" name='shoujihao' class="case"/>
+				</p>
+			
+		   <p class="btnBox"><input type="submit" value="开始" class="btn"/></p>
+			</form>
+		</div>
+     
+	</if>
+	</volist>
+<include file="Public:tongji"/>
+</body>
+</html>

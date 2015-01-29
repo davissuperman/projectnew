@@ -1,0 +1,155 @@
+<?php $nav = "CRM"; $side = "MEMBERADD" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Text_add.css" rel="stylesheet"/>
+<script src="{pigcms::RES}/js/date/WdatePicker.js"></script>
+<style>
+    .answer_text{
+        width: 80px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+    }
+</style>
+<div class="container main">
+    <div class="row main">
+        <include file="Crm:left"/>
+        <div class="col-md-10">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">会员增减</h3>
+                </div>
+                <div class="panel-body">
+                    检索
+
+                    <div id="choose-date">
+
+                        <form   method="post" action="{pigcms::U('Chat/memberadd')}" >
+                            <input type="hidden" name="token" value='{pigcms::$token}'>
+                            <div id="condition">
+                                <select   name="tel">
+                                    <option value="0">手机号</option>
+                                    <option value="1" >有</option>
+                                    <option value="2" >无</option>
+                                </select>
+                                <select   name="sex">
+                                    <option value="0">性别</option>
+                                    <option value="1" >男</option>
+                                    <option value="2" >女</option>
+                                    <option value="3" >无</option>
+                                </select>
+                                <select  name="form"> 
+                                    <option value="0">来源</option>
+                                    <option value="1" >微信</option>
+                                    <option value="2" >活动</option>
+                                    <option value="3" >商城</option>
+                                    <option value="4" >官网</option>
+                                </select>
+                                <select  name="member">
+                                    <option value="0">级别</option>
+                                    <option value="1" >初级</option>
+                                    <option value="2" >中级</option>
+                                    <option value="3" >高级</option>
+                                </select>
+                                <select  name="money" >
+                                    <option value="0">消费</option>
+                                    <option value="1" >顺序</option>
+                                    <option value="2" >倒序</option>
+                                </select>
+                                <select  name="signscore" >
+                                    <option value="0">签到</option>
+                                    <option value="1" >顺序</option>
+                                    <option value="2" >倒序</option>
+
+                                </select>
+                                <select name="code_num" >
+                                    <option value="0">扫码</option>
+                                    <option value="1" >顺序</option>
+                                    <option value="2" >倒序</option>
+                                </select>
+                                <select name="number">
+                                    <option value="0">积分</option>
+                                    <option value="1" >顺序</option>
+                                    <option value="2" >倒序</option>
+                                </select>
+                                 <select name="subscribe">
+                                    <option value="0">粉丝增减</option>
+                                    <option value="1" >增加</option>
+                                    <option value="2" >减少</option>
+                                </select>
+
+                            </div>
+                            <div id="date-calendar">
+                                <input type="text" name="start" id="start" value="" onClick="WdatePicker()" class="form-control" style="width:112px"/><span>-</span>
+                                <input type="text" name="end" id="end" value="" onClick="WdatePicker()" class="form-control" style="width:112px"/>
+
+
+                                <input type="submit" class="btn btn-default" value="检索" />
+                                <input type="button"  value="分组" class="btn btn-default" />
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <TABLE class="table table-striped" >
+                        <tr> 
+                            <th style="padding-left:9px">
+                               ID
+                            </th>
+                            <th class="thirdTd">微信昵称</th>
+                            <th class="thirdTd">姓名</th>
+                            <th class="thirdTd">手机号</th>
+                            <th class="thirdTd">性别</th>
+                            <th class="thirdTd">共消费</th>
+                            <th class="thirdTd">城市</th>
+                            <th class="thirdTd">来源</th>
+                            <th class="thirdTd">签到</th>
+                            <th class="thirdTd">扫码</th>
+                            <th class="thirdTd">积分</th>
+                            <th class="thirdTd" ><center>操作</center></th>
+                        </tr>
+                        <volist name="list" id="vo" key='k'>
+
+                            <TR>
+                                <td>
+                                  {pigcms:$vo.uid}	
+                                </td>
+                                <TD><div  class="answer_text">{pigcms:$vo.u_name}</div></TD>
+                                <TD>{pigcms:$vo.u_username}</TD>
+                                <TD>{pigcms:$vo.u_iphone}</TD>
+                            <if condition="$vo['u_sex'] eq 1">
+                                <TD>男</TD>
+                                <elseif condition="$vo['u_sex'] eq 2"/>
+                                <TD>女</TD>
+                                <else/>
+                                <TD>无</TD>
+                            </if>
+                            <TD>{pigcms:$vo.u_money}</TD>
+                            <TD>{pigcms:$vo.u_address}</TD>
+                            <TD>{pigcms:$vo.u_form}</TD>
+                            <TD>{pigcms:$vo.signscore}</TD>
+                            <TD>{pigcms:$vo.code_num}</TD>
+                            <TD>{pigcms:$vo.u_number}</TD>
+                            <td class="sevenTd">
+                                <a href="{pigcms::U('Chat/member_set',array('id'=>$vo['uid'],'token'=>$token))}" class="hover-tooltip-edit"><span class="glyphicon glyphicon-edit"></span></a> 
+                                <a href="javascript:drop_confirm('您确定要删除吗?', '{pigcms::U('Chat/member_del',array('id'=>$vo['uid'],'token'=>$token))}');" class="hover-tooltip-trash"><span class="glyphicon glyphicon-trash danger"></span></a>
+                                <!--   <a href="{pigcms::U('Chat/money',array('openid'=>$vo['openid'],'token'=>$token,'uid'=>$vo['uid']))}">消费管理</a>-->
+                                <a href="{pigcms::U('Chat/vitality',array('openid'=>$vo['openid'],'token'=>$token,'uid'=>$vo['uid']))}">签到</a>
+                                <a href="{pigcms::U('Chat/code',array('openid'=>$vo['openid'],'token'=>$token,'uid'=>$vo['uid']))}">扫码</a>
+                            </td>
+                            </TR>
+                        </volist>
+                    </TABLE>
+
+
+
+                </div>
+                <div class="panel-footer" style="text-align:right"> 
+                    <div class="pages">{pigcms:$page}</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<include file="Public:footer"/>

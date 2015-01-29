@@ -1,0 +1,45 @@
+<?php $nav = "FUNCTION"; $side = "YUYUEBD" ?>
+<include file="Public:head"/>
+<link type="text/css" href="{pigcms::RES}/css/Product_set.css" rel="stylesheet"/>
+<div class="container main">
+<div class="row">
+<include file="Wdiaoyan:left"/>
+        
+
+           <div class="col-md-10 main">
+             <div class="panel panel-success">
+			  <div class="panel-heading cfix">
+				<h3 class="panel-title pull-left">添加大转盘|刮刮卡</h3>
+			  </div>
+			  <div class="panel-body">
+               <form class="form" method="post" action="{pigcms::U('Wdiaoyan/yuyuebd',array('token'=>$token,'id'=>session('wxid')))}" id="form" > 
+				
+				<input type="hidden" name="token" id="token" value="{pigcms:$_GET['token']}" />
+				<input type="hidden" name="kid"  value="{pigcms:$qry['keyid']}" />
+				
+                <div class="keyWord">
+                    <span class="Tex">类别：</span>
+                  <select id="catid" name="keyword"><option value="0">请选择分类...
+				  </option>
+                   
+				  <volist name="list" id="vo">
+					    <option value="{pigcms:$vo.id}" <if condition="$vo['id'] eq $qry['keyid']">selected='selected'</if>>
+					        {pigcms:$vo.keyword}
+						</option>
+				  </volist>
+					
+									
+				  </select>
+               </div>
+              </div>
+           	  <div class="panel-footer" style="text-align:right"> 
+	  			<input type="submit" value="保存" class="btn btn-success"/>
+	  			<a href="javascript:history.go(-1);"  class="btn btn-link">取消</a> 
+		      </div>
+		       </form>
+
+            </div>   
+      </div>
+      </div>
+ </div>
+<include file="Public:footer"/>
