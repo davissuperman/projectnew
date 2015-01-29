@@ -138,7 +138,20 @@ class BonusAction extends Action {
                 $code = trim($_GET["code"]);
                 $state = trim($_GET['state']);
                 if ($code && $state == 'sentian') {
-                    $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
+                    //查看web_acccess_token是否过期
+                    $web_access_token = '';
+                    if($apidata['web_access_token']){
+                        $web_access_token = $apidata['web_access_token'];
+                    }else{
+                        //重新获取
+                        $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
+                        $m['id'] = $apidata['id'];
+                        $m['web_access_token'] = $userinfoFromApi['access_token'];
+                        $m['refresh_token'] = $userinfoFromApi['refresh_token'];
+                        M('Diymen_set')->where(array('id' => $apidata['id']))->save();
+                        $web_access_token = $userinfoFromApi['access_token'];
+                    }
+
 
 
                     /**
@@ -151,6 +164,7 @@ class BonusAction extends Action {
                     [scope] => snsapi_userinfo
                     )
                      */
+
                     if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                         //code 有错误 需要重定向
                         $url = $this->url."/index.php?g=Wap&m=Bonus&a=index&gid=$this->gid";
@@ -160,8 +174,10 @@ class BonusAction extends Action {
                     $userOpenId = $userinfoFromApi['openid'];
                     $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
                     if(empty($fansInfo)){
+
+
                         //根据access_token 拉到用户基本信息
-                        $gUrl = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$apidata['access_token'].'&openid='.$userinfoFromApi['openid'].'&lang=zh_CN';
+                        $gUrl = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$web_access_token.'&openid='.$userinfoFromApi['openid'].'&lang=zh_CN';
                         $json = json_decode($this->curlGet($gUrl));
                         Log :: write( print_r("YES              ",true) );
                         Log :: write( print_r($json,true) );
