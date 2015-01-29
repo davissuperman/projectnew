@@ -776,7 +776,7 @@ class CommonAction extends Action {
     }
     function nianzhong($name) {
 //        $text = "<a href='http://newsentian.snkculture.cn/index.php?g=Wap&m=Doing&a=index'>年终抽奖</a>";
-        $text = "http://wx.djrou.cc/index.php?g=Wap&m=Bonus&a=index&gid=1";
+        $text = "http://wx.drjou.cc/index.php?g=Wap&m=Bonus&a=index&gid=1";
         return array($text, 'text');
     }
     function functionlist($keyword) {
