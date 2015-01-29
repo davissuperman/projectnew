@@ -1129,7 +1129,8 @@ class BonusAction extends Action {
         $urlOpenId = false;
         $bonusType = 0;
         $awardPhone = false;
-        $myselfopenid = cookie("user_openid");//如果没有 需要弹出页面授权
+//        $myselfopenid = cookie("user_openid");//如果没有 需要弹出页面授权
+        $myselfopenid = null;//如果没有 需要弹出页面授权
         if(isset( $_GET['openid'] ) &&  $_GET['openid']){
             //获取当前的openid
             $openid = $_GET['openid'];//当前人的首页
