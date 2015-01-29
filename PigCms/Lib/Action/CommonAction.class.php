@@ -774,12 +774,19 @@ class CommonAction extends Action {
         }
         return implode(',', $tags);
     }
-
+    function nianzhong($name) {
+//        $text = "<a href='http://newsentian.snkculture.cn/index.php?g=Wap&m=Doing&a=index'>年终抽奖</a>";
+        $text = "http://wx.djrou.cc/index.php?g=Wap&m=Bonus&a=index&gid=1";
+        return array($text, 'text');
+    }
     function functionlist($keyword) {
 
         switch ($keyword) {
             case '首页' :
                 return $this->home();
+                break;
+            case '测试年终奖' :
+                return $this->nianzhong();
                 break;
             case '主页' :
                 return $this->home();
