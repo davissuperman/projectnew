@@ -122,11 +122,25 @@ class BonusAction extends Action {
                 $selfUserInfo['nickname'] = $selfInfo['nickname'];
             }else{
                 $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
-                log :: write ( print_r($apidata,true) );
+                /*
+                 * (
+    [id] => 57
+    [token] => rggfsk1394161441
+    [appid] => wx36026301d4b1cb01
+    [appsecret] => 79311ea02ea318af5f228492bf119104
+    [access_token] => OLm6xxe7ilv67WAYOPI7BRuShRcBsy_HsQQWzzSAGgSrA2CRQvuzbosrRfBkyLqVVvfKPQ9OPh7ea1MwqjSAr59OQfuTE-2PaGnWqNqcDgw
+    [create_time] => 1422539837
+    [ticket] => sM4AOVdWfPE4DxkXGEs8VOWW8mZFJb5M5d1VppLZ6KpY7ppbstCaFh5Dt8mBW84M0RpNX4Zk-bVNlmsLM4NFYQ
+    [ticket_time] => 1422539837
+)
+
+                 */
                 $code = trim($_GET["code"]);
                 $state = trim($_GET['state']);
                 if ($code && $state == 'sentian') {
                     $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
+
+                        Log :: write( print_r($userinfoFromApi) );
                     /**
                      * $userinfoFromApi
                      * (
