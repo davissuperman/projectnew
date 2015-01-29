@@ -140,7 +140,7 @@ class BonusAction extends Action {
                 if ($code && $state == 'sentian') {
                     $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
 
-                        Log :: write( print_r($userinfoFromApi) );
+
                     /**
                      * $userinfoFromApi
                      * (
@@ -163,6 +163,8 @@ class BonusAction extends Action {
                         //根据access_token 拉到用户基本信息
                         $gUrl = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$apidata['access_token'].'&openid='.$userinfoFromApi['openid'].'&lang=zh_CN';
                         $json = json_decode($this->curlGet($gUrl));
+                        Log :: write( print_r("YES              ",true) );
+                        Log :: write( print_r($json,true) );
                         /*$json 用户信息
                          * (
                             [openid] => oYkdqs5s1IEIhB9bulM2AJ6GgZh8
