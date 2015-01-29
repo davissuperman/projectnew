@@ -1212,7 +1212,7 @@ class BonusAction extends Action {
                         header("location:$url");
                     }
                     cookie('user_openid', $userinfoInDb['openid'], 315360000);
-
+                    Log :: write("aaaaaaaaaaa   ".$userinfoInDb['openid']);
                     //判断用户是否已经在系统中存在
                     $fansInfo = M('customer_service_fans')->where(array('openid' => $userinfoInDb['openid'],'token'=>'rggfsk1394161441'))->find();
                     if(empty($fansInfo)){
@@ -1223,6 +1223,7 @@ class BonusAction extends Action {
                         }else{
                             //重新获取
                             $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
+                            Log :: write( print_r($userinfoFromApi,true) );
                             $m['id'] = $apidata['id'];
                             $m['web_access_token'] = $userinfoFromApi['access_token'];
                             $m['refresh_token'] = $userinfoFromApi['refresh_token'];
