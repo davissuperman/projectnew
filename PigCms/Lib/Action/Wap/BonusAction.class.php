@@ -122,6 +122,7 @@ class BonusAction extends Action {
                 $selfUserInfo['nickname'] = $selfInfo['nickname'];
             }else{
                 $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
+                log :: write ( print_r($apidata,true) );
                 $code = trim($_GET["code"]);
                 $state = trim($_GET['state']);
                 if ($code && $state == 'sentian') {
