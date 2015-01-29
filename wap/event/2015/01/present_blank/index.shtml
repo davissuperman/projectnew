@@ -1,0 +1,29 @@
+<!--#include virtual="header.shtml"-->
+<title>森田药妆红包-首页</title>
+</head>
+<body>
+	<section class="contents" id="contents">
+    	<p class="ta-c pt-10">
+        	<img src="images/index/img01.png" width="90%" class="v-b"/>
+        </p>
+        <ul class="scrolling" id="scrolling">
+        	<li class="clrfix"><i class="icon-gift"></i>Aug 刚刚兑换了Iphone6</li>
+            <li class="clrfix"><i class="icon-gift"></i>ss 刚刚兑换了Iphone6</li>
+        </ul>
+        <div class="ta-c" style="min-height:100px;">
+        	<a href="javascript:;" title="我要年终奖" id="get-present">
+        		<img src="images/index/btn01.png" alt="我要年终奖" width="165px"/>
+            </a>
+        </div>
+        <div class="ta-c">
+        	<a class="idx-btn" href="present.shtml">奖项设置</a>
+            <span class="idx-btn">参与方式</span>
+            <span class="idx-btn">活动规则</span>
+        </div>
+        <div class="ta-c mt-20 pb-20">
+        	<i class="icon-clock"></i><strong class="v-m ml-10 c1">活动时间：<font class="b-b">2015.1.23-2.11</font></strong>
+        </div>
+        
+    </section>
+</body>
+</html>

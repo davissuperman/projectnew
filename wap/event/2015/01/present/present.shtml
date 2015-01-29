@@ -1,0 +1,361 @@
+<!--#include virtual="header.shtml"-->
+<title>森田药妆红包-奖项设置</title>
+</head>
+<body>
+	<section class="contents" id="contents" style="padding-bottom:60px;">
+    	<div class="top-box">
+        	<div class="profile">
+            	<div class="img">
+                	<img src="images/profile.png">
+                </div>
+                <div class="ta-c c3 mt-10 fz14 lh-22">已有<strong class="c4 fz24">278</strong>人</br>为泡芙不哭加油</div>
+                <p class="mt-10">
+                	<span class="btn-red-h40" style="padding:0 20px 0 10px;"><i class="icon1"></i>活动细节</span>
+                </p>
+            </div>
+        	<div class="logo"></div>
+        </div>
+        <div class="present-wrap">
+            <div class="present-list">
+                <div class="clrfix item">
+                    <div class="p1" onClick="showLayer($('#one-present'),'1');">
+                        <i class="icon-phone fl"></i>
+                        <span class="fl mt-20">iPhone6<br/>大奖<i class="icon-arrow ml-10"></i></span>
+                    </div>
+                    <div class="pre-right b-t1">
+                    	<div class="get">
+                            <p class="fen c5 ta-r"><strong class="fz14">2000</strong></p>
+                            <p><span class="btn-red-h30 get-award NO1">领奖</span></p>
+                        </div>
+                    </div>
+                    <span class="finish c4">FINISH</span>
+                </div>
+                <div class="clrfix item">
+                    <div class="p2" onClick="showLayer($('#two-present'));">
+                        <i class="icon-ipad fl"></i>
+                        <span class="fl mt-20">iPad Mini<br/>大奖<i class="icon-arrow ml-10"></i></span>
+                    </div>
+                    <div class="pre-right b-t2">
+                    	<div class="get">
+                            <p class="fen c6 ta-r"><strong class="fz14">1000</strong></p>
+                            <p><span class="btn-red-h30 get-award NO2">领奖</span></p>
+                        </div>
+                    </div>
+                    <span class="qi4"></span>
+                </div>
+                <div class="clrfix item">
+                    <div class="p3" onClick="showLayer($('#three-present'));">
+                        <i class="icon5 fl"></i>
+                        <span class="fl mt-10">196元<i class="icon-arrow ml-10"></i><br/>森田面膜</span>
+                    </div>
+                    <div class="pre-right b-t3">
+                    	<div class="get">
+                            <p class="fen c7 ta-r"><strong class="fz14">600</strong></p>
+                            <p><span class="btn-red-h30 get-award NO3">领奖</span></p>
+                        </div>
+                    </div>
+                    <span class="qi3"></span>
+                </div>
+                <div class="clrfix item">
+                    <div class="p4" onClick="showLayer($('#four-present'));">
+                        <i class="icon6 fl"></i>
+                        <span class="fl mt-10 c8">49元<i class="icon-arrow2 ml-10"></i><br/>森田面膜</span>
+                    </div>
+                    <div class="pre-right b-t4">
+                    	<div class="get">
+                            <p class="fen c9 ta-r"><strong class="fz14">300</strong></p>
+                            <p><span class="btn-red-h30 get-award NO4">领奖</span></p>
+                        </div>
+                    </div>
+                    <span class="qi2"></span>
+                </div>
+                <div class="clrfix item">
+                    <div class="p5" onClick="showLayer($('#five-present'));">
+                        阳光奖<i class="icon-arrow ml-10" style="vertical-align:middle;"></i>
+                    </div>
+                    <div class="pre-right b-t5 b-b1">
+                    	<div class="get">
+                            <p class="fen c10 ta-r"><strong class="fz14">50</strong></p>
+                            <p><span class="btn-red-h30 get-award NO5 btn-disabled">领奖</span></p>
+                        </div>
+                    </div>
+                    <span class="c4 start">START</span>
+                    <span class="qi1"></span>
+                </div>
+                <div class="progress">
+                	<div class="s1"></div>
+                    <div class="s2"></div>
+                    <div class="s3"></div>
+                    <div class="s4"></div>
+                    <div class="s5"></div>
+                    <div class="cur"></div>
+                </div>
+                <div class="peo-pos">
+                	<p><i class="icon-peo"></i></p>
+                    <p class="c11 fz12">1800</p>
+               	</div>
+            </div>
+        </div>
+        
+        <div class="ta-c mt-20">
+        	<span class="btn-blue-h40 w160 btn-share">邀请好友为我加油</span>
+        </div>
+        
+        <div class="ta-c mt-20">
+        	<p><span class="btn-blue-h40" onClick="showLayer($('#layer-alert'));">给他加油</span><span class="btn-blue-h40 ml-10 btn-share">邀请好友帮忙</span></p>
+            <p class="mt-20"><span class="btn-zi-h40 w160">我也要参加</span></p>
+        </div>
+        
+       
+        <ul class="records-list" id="records-list">
+        	<li class="clrfix">
+            	<div class="img">
+                	<img src="images/profile.png">
+                </div>
+                <div class="des">Linda送你一片面膜</div>
+                <div class="score add">+10</div>
+            </li>
+            <li class="clrfix">
+            	<div class="img">
+                	<img src="images/profile.png">
+                </div>
+                <div class="des">Mary敷了一片玻尿酸面膜直呼好水润</div>
+                <div class="score add">+50</div>
+            </li>
+            <li class="clrfix">
+            	<div class="img">
+                	<img src="images/profile.png">
+                </div>
+                <div class="des">Slimy与你八字不合</div>
+                <div class="score redu">-30</div>
+            </li>
+            <li class="clrfix">
+            	<div class="img">
+                	<img src="images/profile.png">
+                </div>
+                <div class="des">Slimy与你八字不合</div>
+                <div class="score redu">-30</div>
+            </li>
+            <li class="clrfix">
+            	<div class="img">
+                	<img src="images/profile.png">
+                </div>
+                <div class="des">Slimy与你八字不合</div>
+                <div class="score redu">-30</div>
+            </li>
+        </ul>
+        <div class="ta-c">点击查看全部</div>
+    </section>
+    <span class="btn-blue-h40 btn-jiayou btn-share"><i class="icon2" style="margin-top:8px;"></i>给我加油</span>
+    
+    
+<div class="layer-box hide" id="layer-box">
+    <div class="layer-bg"></div>
+    <div class="layer-wrap">
+        <div class="layer-con">
+            <div class="layer-phone hide" id="one-present">
+            	<div class="phone-tit">
+                	<i class="dot1"></i>
+                    <i class="dot2"></i>
+                    <i class="dot3"></i>
+                </div>
+                <div class="phone-con fz16">
+                	<h2 class="ta-c fz20">一等奖奖品详情</h2>
+                	<p class="mt-10">价值5288元</p>
+					<p class="mt-5">Iphone6</p>
+					<p class="mt-5">（16G）</p>
+					<p class="mt-5">1部</p>
+					<p class="mt-5">颜色随机</p>
+					<p class="mt-5">以实物为准</p>
+					<p class="mt-5">共计3部</p>
+                    <span class="back btn-close">返回</span>
+                </div>
+                <i class="dot4"></i>
+            </div>
+            
+            <div class="layer-ipad hide" id="two-present">
+            	<i class="dot1"></i>
+                <i class="dot2"></i>
+                <div class="ipad-con fz16">
+                	<h2 class="ta-c fz20">二等奖奖品详情</h2>
+                	<p class="mt-10">价值2198元</p>
+					<p class="mt-5">Ipad Mini2</p>
+					<p class="mt-5">（WLAN 16G）</p>
+					<p class="mt-5">1部</p>
+					<p class="mt-5">颜色以实物为准</p>
+					<p class="mt-5">共计5部</p>
+                    <span class="back btn-close">返回</span>
+                </div>
+            </div>
+            
+            <div class="three-present hide fz16" id="three-present">
+            	<h2 class="ta-c fz20 pt-10">三等奖奖品详情</h2>
+                <p class="ta-c mt-10">
+                	<img src="images/01/i08.png" alt="" width="80%"/>
+                </p>
+                <p class="fz16 mt-10 lh-22">20元换购价值196元森田药妆大礼包四盒装（产品及包装随机发送、以实物为准）</p>
+                <p class="fz20">总计300份</p>
+                <span class="back btn-close">返回</span>
+            </div>
+            
+            <div class="four-present hide fz16" id="four-present">
+            	<h2 class="ta-c fz20 pt-10">四等奖奖品详情</h2>
+                <p class="ta-c mt-10">
+                	<img src="images/01/i10.png" alt="" width="86px"/>
+                </p>
+                <p class="mt-10 lh-22">10元换购价值49元森田药妆明星面膜一盒（产品及包装随机发送、以实物为准）</p>
+                <p class="fz20">总计3000份</p>
+                <span class="back btn-close">返回</span>
+            </div>
+            
+            <div class="five-present hide fz14" id="five-present">
+            	<h2 class="ta-c fz20 pt-10">阳光奖奖品详情</h2>
+                <div class="yhq-wrap">
+                	<div class="yhq yhq1">
+                    	<span class="i1"></span>
+                        <span class="i2">20</span>
+                        <span class="i3">优惠券</span>
+                        <span class="i4">满100元使用</span>
+                    	<i class="icon14"></i>
+                    </div>
+                    <div class="yhq yhq2">
+                    	<span class="i1">&yen;</span>
+                        <span class="i2">5</span>
+                        <span class="i3">优惠券</span>
+                        <span class="i4">无门槛使用</span>
+                    	<i class="icon14"></i>
+                    </div>
+                </div>
+                <p class="lh-22">森田药妆<br/>天猫官方旗舰店<br/>现金券，来就送！</p>
+                <p class="fz20">总计3000份</p>
+                <span class="back btn-close">返回</span>
+            </div>
+            
+            <div class="layer-alert hide" id="layer-alert">
+            	<p class="mt-10">
+                	<span class="tips">加油成功</span>
+                </p>
+                <p class="mt-20 mb-10">森田药妆<br/>台湾面膜专家</p>
+                <p class="ta-r btn-close">返回</p>
+            </div>
+            
+            <div class="award-box hide clrfix" id="award-box-NO1">
+            	<h2 class="tit">领奖规则</h2>
+                <ul class="des">
+                	<li>1、获得领奖资格后，请上传提交个人联系信息及收货地址信息（一经上传无法修改），并妥善管理。</li>
+					<li>2、活动主办方会在72小时内核实您的中奖数据。任何使用不正当方式违规参与活动，企图获取不当利益，主办方有权单方面取消其兑奖资格，并保留追究责任的权力，详见活动规则。</li>
+					<li>3、中奖数据一经核实有效，主办方会进行回访与您确认收货信息，并于三个工作日内将奖品寄出。</li>
+					<li>（活动最终解释权归主办方所有）</li>
+                </ul>
+                <ul class="form-ul">
+                	<li class="clrfix">
+                    	<div class="label">手机号码:</div>
+                        <div class="controls">
+                        	<input type="tel" class="input-text"/>
+                        </div>
+                    </li>
+                    <li class="clrfix">
+                    	<div class="label">收件人:</div>
+                        <div class="controls">
+                        	<input type="text" class="input-text"/>
+                        </div>
+                    </li>
+                    <li class="clrfix">
+                    	<div class="label">城市:</div>
+                        <div class="controls">
+                        	<input type="text" class="input-text"/>
+                        </div>
+                    </li>
+                    <li class="clrfix">
+                    	<div class="label">收件地址:</div>
+                        <div class="controls">
+                        	<input type="text" class="input-text"/>
+                        </div>
+                    </li>
+                    <li>
+                    	<p class="ta-c mt-20">
+                    		<span class="btn-blue-h45">提交</span>
+                      	</p>
+                    </li>
+                </ul>
+                <div class="btn-close back">返回</div>
+            </div>
+            
+            <div class="award-box hide clrfix" id="award-box-NO2">
+            	<h2 class="tit">重要通知</h2>
+                <ul class="des">
+                	<li class="c12">您当前的分数已经达到领取IpadMini2的资格。点击右下方“我要Ipad”按钮，则可进入领取流程，所有积分清零，放弃冲击一等奖Iphone6的机会；点击左下角“继续冲击”，则可继续冲击一等奖Iphone6，同时放弃当前已得奖项IpadMini2的兑奖机会。数量有限，先到先领，领完即止。</li>
+                </ul>
+                <div class="clrfix ta-c mt-30">
+                	<span class="btn-close btn-continue">继续冲击</span>
+                    <span class="get-award NO1 btn-get ml-10">我要IPAD</span>
+                </div>
+                <div class="btn-close back">返回</div>
+            </div>
+            
+            <div class="award-box hide clrfix" id="award-box-NO3">
+            	<h2 class="tit">填写手机号码<br/>作为领奖代码</h2>
+                <ul class="form-ul">
+                	<li class="clrfix">
+                    	<div class="label">手机号码:</div>
+                        <div class="controls">
+                        	<input type="tel" class="input-text"/>
+                        </div>
+                    </li>
+                    <li>
+                    	<p class="ta-c mt-20">
+                    		<span class="btn-blue-h45">提交</span>
+                      	</p>
+                    </li>
+                </ul>
+                <ul class="des">
+                	<li>1、本次活动三等奖为20元换购价值196元森田药妆面膜四盒装，属于超值换购非免费赠送。</li>
+					<li>2、活动页面登记的领奖手机号码请妥善保管。活动主办方不提供任何查询及监管服务。如发生冒领盗领后果自负。</li>
+					<li>3、号码登记后72小后，方可进行奖品换购。72小时内活动主办方会对中奖数据进行验证，以确保活动的公平公正。</li>
+					<li>4、任何使用不正当方式违规参与活动，企图获取不当利益，主办方有权单方面取消其兑奖资格，详见活动规则。</li>
+					<li>5、超值换购商品随机发放，以收到实物为准。</li>
+                </ul>
+                <div class="btn-close back">返回</div>
+            </div>
+            
+            <div class="award-box hide clrfix" id="award-box-NO4">
+            	<h2 class="tit">填写手机号码<br/>作为领奖代码</h2>
+                <ul class="form-ul">
+                	<li class="clrfix">
+                    	<div class="label">手机号码:</div>
+                        <div class="controls">
+                        	<input type="tel" class="input-text"/>
+                        </div>
+                    </li>
+                    <li>
+                    	<p class="ta-c mt-20">
+                    		<span class="btn-blue-h45">提交</span>
+                      	</p>
+                    </li>
+                </ul>
+                <ul class="des">
+                	<li>1、本次活动四等奖为10元换购价值49元森田药妆面膜一盒，属于超值换购非免费赠送。</li>
+					<li>2、活动页面登记的领奖手机号码请妥善保管。活动主办方不提供任何查询及监管服务。如发生冒领盗领后果自负。</li>
+					<li>3、号码登记后72小后，方可进行奖品换购。72小时内活动主办方会对中奖数据进行验证，以确保活动的公平公正。</li>
+					<li>4、任何使用不正当方式违规参与活动，企图获取不当利益，主办方有权单方面取消其兑奖资格，详见活动规则。</li>
+					<li>5、超值换购商品随机发放，以收到实物为准。</li>
+                </ul>
+                <div class="btn-close back">返回</div>
+            </div>
+            
+            <div class="share-weixin" id="share-weixin">
+            	<div class="icon-share"></div>
+            	<h2 class="fz26 ta-c">马上分享给好友<br/>为我加油</h2>
+                <div class="ta-c mt-10">
+                    <img src="images/01/img05.png" width="180px" class="va-b">
+                </div>
+                <div class="ta-c mt-20"><span class="btn-close back">分享后返回活动主页</span></div>
+            </div>
+            
+        </div>    
+    </div>
+</div>
+    
+    
+</body>
+</html>

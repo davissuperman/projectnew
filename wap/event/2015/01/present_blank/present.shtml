@@ -1,0 +1,71 @@
+<!--#include virtual="header.shtml"-->
+<title>森田药妆红包-奖项设置</title>
+</head>
+<body>
+	<section class="contents" id="contents">
+    	<div class="clrfix pt-10 pb-10 ta-c">
+        	<span class="btn-red-h30 fl ml-10 mt-30" id="go-back">上一步</span>
+            <div class="profile">
+            	<div class="img">
+                	<img src="images/profile.png"/>
+                </div>
+                <div class="name"><span class="n1">我的未来不是梦</span><span class="n2">的年终奖</span></div>
+            </div>
+            <a class="btn-red-h30 fr mr-10 mt-30" href="character.shtml">拉人品</a>
+        </div>
+        <ul class="present-list">
+        	<li>
+            	<div class="pre-box clrfix">
+                    <div class="img"><i class="icon-iphone"></i></div>
+                    <span class="btn-red-h30 fr btn-disabled">点击领取</span>
+                    <div class="con">
+                        <p><span class="fz12">需人品</span> <span class="fz26">1000</span> <i class="icon-people fr"></i></p>
+                        <p class="mt-5"><i class="icon-gift2"></i><strong class="fz18"> Iphone6</strong></p>
+                    </div>
+                </div>
+            </li>
+            <li>
+            	<div class="pre-box clrfix">
+                    <div class="img"><i class="icon-ipad"></i></div>
+                    <span class="btn-red-h30 fr">点击领取</span>
+                    <div class="con">
+                        <p><span class="fz12">需人品</span> <span class="fz26">600</span> <i class="icon-people fr"></i></p>
+                        <p class="mt-5"><i class="icon-gift2"></i><strong class="fz18">Ipad Mini2</strong></p>
+                    </div>
+                </div>
+            </li>
+            <li>
+            	<div class="pre-box clrfix">
+                    <div class="img"><i class="icon-mask"></i></div>
+                    <span class="btn-red-h30 fr">点击领取</span>
+                    <div class="con">
+                        <p><span class="fz12">需人品</span> <span class="fz26">300</span> <i class="icon-people fr"></i></p>
+                        <p class="mt-5"><i class="icon-gift2"></i><strong class="fz18">300元面膜</strong></p>
+                    </div>
+                </div>
+            </li>
+            <li>
+            	<div class="pre-box clrfix">
+                    <div class="img"><i class="icon-mask"></i></div>
+                    <span class="btn-red-h30 fr">点击领取</span>
+                    <div class="con">
+                        <p><span class="fz12">需人品</span> <span class="fz26">100</span> <i class="icon-people fr"></i></p>
+                        <p class="mt-5"><i class="icon-gift2"></i><strong class="fz18">50元面膜</strong></p>
+                    </div>
+                </div>
+            </li>
+            <li>
+            	<div class="pre-box clrfix">
+                    <div class="img"><i class="icon-gift3"></i></div>
+                    <span class="btn-red-h30 fr">点击领取</span>
+                    <div class="con">
+                        <p class="clrfix"><span class="fz18 mt-5 fl">参与即送</span><i class="icon-people fr"></i></p>
+                        <p class="mt-5"><i class="icon-gift2"></i><strong class="fz18">阳光普照奖</strong></p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <i class="icon-feiji"></i>
+    </section>
+</body>
+</html>

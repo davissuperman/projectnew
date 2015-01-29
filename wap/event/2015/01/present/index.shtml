@@ -1,0 +1,19 @@
+<!--#include virtual="header.shtml"-->
+<title>森田药妆红包-首页</title>
+</head>
+<body>
+	<img src="images/01/img01.png" width="100%" class="v-b"/>
+    <img src="images/01/img02.png" width="100%" class="v-b"/>
+    <img src="images/01/img03.png" width="100%" class="v-b"/>
+    <div class="ta-c">
+    	<a href="#" title="活动规则" class="c2">活动规则</a>
+    </div>
+    <div class="sroll-wrap">
+        <ul class="scrolling" id="scrolling">
+            <li class="clrfix">Aug 刚刚兑换了Iphone6</li>
+            <li class="clrfix">ss 刚刚兑换了Iphone6</li>
+        </ul>
+	</div>
+    <a href="present.shtml" class="btn-present">我要年终奖</a>
+</body>
+</html>

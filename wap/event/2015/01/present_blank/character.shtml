@@ -1,0 +1,60 @@
+<!--#include virtual="header.shtml"-->
+<title>森田药妆红包-拉人品</title>
+</head>
+<body>
+	<section class="contents" id="contents">
+    	<div class="clrfix pt-10 pb-10 ta-c">
+        	<span class="btn-red-h30 fl ml-10 mt-30" id="go-back">上一步</span>
+            <div class="profile">
+            	<div class="img">
+                	<img src="images/profile.png"/>
+                </div>
+                <div class="name"><span class="n1">我的未来不是梦</span><span class="n2">的年终奖</span></div>
+            </div>
+            <a class="btn-red-h30 fr mr-10 mt-30" href="character.shtml">拉人品</a>
+        </div>
+        <ul class="character-list" id="character-list">
+        	<li>
+            	<div class="chara-panel clrfix">
+                	<div class="chare-des">
+                    	<div class="pic"><img src="images/profile.png"/></div>
+                        <div class="des">Linda 送你一片森田面膜</div>
+                        <s></s>
+                    </div>
+                    <div class="chare-peo"><sub class="fl mt-10 fz14">+</sub><strong class="fz20 fl mt-5" style="margin-right:5px;">10</strong><i class="icon-people"></i>
+                   	</div>
+                    <s></s>
+                </div>
+            </li>
+            
+            <li>
+            	<div class="chara-panel clrfix">
+                	<div class="chare-des">
+                    	<div class="pic"><img src="images/profile.png"/></div>
+                        <div class="des">Linda 送你一片森田面膜送你一片森田面膜</div>
+                        <s></s>
+                    </div>
+                    <div class="chare-peo"><sub class="fl mt-10 fz14">-</sub><strong class="fz20 fl mt-5" style="margin-right:5px;">10</strong><i class="icon-people"></i>
+                   	</div>
+                    <s></s>
+                </div>
+            </li>
+            
+            <li>
+            	<div class="chara-panel clrfix">
+                	<div class="chare-des">
+                    	<div class="pic"><img src="images/profile.png"/></div>
+                        <div class="des">Linda 送你一片森田面膜</div>
+                        <s></s>
+                    </div>
+                    <div class="chare-peo"><sub class="fl mt-10 fz14">+</sub><strong class="fz20 fl mt-5" style="margin-right:5px;">10</strong><i class="icon-people"></i>
+                   	</div>
+                    <s></s>
+                </div>
+            </li>
+            
+        </ul>
+        <i class="icon-feiji"></i>
+    </section>
+</body>
+</html>
