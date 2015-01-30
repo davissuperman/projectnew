@@ -1194,6 +1194,10 @@ class BonusAction extends Action {
 
                 //查看获得的奖项
                 list($fourAward,$threeAward,$secondAward,$firstAward,$awardPhone) = $this->getAward($openid);
+            }else{
+                //此人不存在
+                $url = $this->url."/index.php?g=Wap&m=Bonus&a=index&gid=$this->gid";
+                header("location:$url");
             }
 
 
