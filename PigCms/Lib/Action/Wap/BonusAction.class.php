@@ -1134,66 +1134,72 @@ class BonusAction extends Action {
         if(isset( $_GET['openid'] ) &&  $_GET['openid']){
             //获取当前的openid
             $openid = $_GET['openid'];//当前人的首页
-            $openIdUrl = "&openid=$openid";
-            $urlOpenId = true;
-            //判断当前用户是否开过户
-            $bonusInfoRedisKey = "bonusinfo_".$openid."_".$gid;
-            $this->hashKeyBonusInfo = $bonusInfoRedisKey;
-            $bonusInfoName = $this->cache->redis->hget($bonusInfoRedisKey,'name');
-            if($bonusInfoName){
-                //已经开过户
-                $bonusType = $this->cache->redis->hget($bonusInfoRedisKey,'bonustype');
-                $imageProfile = $this->cache->redis->hget($bonusInfoRedisKey,'headimgurl');
-                $nickname = $bonusInfoName;
-                $voteNumber = $this->cache->get($this->hashKeyBonusInfo."_vote");
-            }else{
-
-                $bonusInfo = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openid))->find();
-                if(!$bonusInfo){
-                    //如果当前人ID 存在， 则获取当前人的信息
-                    $urlOpenIdInfo = M('customer_service_fans')->where(array('openid' =>$openid,'token'=>'rggfsk1394161441'))->find();
-                    $nickname = $urlOpenIdInfo['nickname'];
-                    $imageProfile = $urlOpenIdInfo['headimgurl'];
-                    $this->saveBonusInfo($gid,$openid,$nickname,$imageProfile);
-                    //存储数据到redis
-                    $this->cache->redis->hset($bonusInfoRedisKey,'gid',$gid);
-                    $this->cache->redis->hset($bonusInfoRedisKey,'name',$nickname);
-                    $this->cache->redis->hset($bonusInfoRedisKey,'headimgurl',$imageProfile);
-                    $this->cache->redis->hset($bonusInfoRedisKey,'openid',$openid);
+            //查看此OPENID 是否在表fans中存在
+            $selfInfo = M('customer_service_fans')->where(array('openid' => $openid,'token'=>'rggfsk1394161441'))->find();
+            if($selfInfo){
+                $openIdUrl = "&openid=$openid";
+                $urlOpenId = true;
+                //判断当前用户是否开过户
+                $bonusInfoRedisKey = "bonusinfo_".$openid."_".$gid;
+                $this->hashKeyBonusInfo = $bonusInfoRedisKey;
+                $bonusInfoName = $this->cache->redis->hget($bonusInfoRedisKey,'name');
+                if($bonusInfoName){
+                    //已经开过户
+                    $bonusType = $this->cache->redis->hget($bonusInfoRedisKey,'bonustype');
+                    $imageProfile = $this->cache->redis->hget($bonusInfoRedisKey,'headimgurl');
+                    $nickname = $bonusInfoName;
+                    $voteNumber = $this->cache->get($this->hashKeyBonusInfo."_vote");
                 }else{
-                    $nickname = $bonusInfo['nickname'];
-                    $voteNumber = $bonusInfo['vote'];
-                    $imageProfile = $bonusInfo['headimgurl'];
-                    //存储数据到redis
-                    $this->cache->redis->hset($bonusInfoRedisKey,'id',$bonusInfo['id']);
-                    $this->cache->redis->hset($bonusInfoRedisKey,'gid',$bonusInfo['gid']);
-                    $this->cache->redis->hset($bonusInfoRedisKey,'tel',$bonusInfo['tel']);
-                    $this->cache->redis->hset($bonusInfoRedisKey,'name',$bonusInfo['name']);
-                    $this->cache->redis->hset($bonusInfoRedisKey,'headimgurl',$bonusInfo['headimgurl']);
-                    $this->cache->redis->hset($bonusInfoRedisKey,'openid',$bonusInfo['openid']);
-                    $this->cache->set($this->hashKeyBonusInfo."_view",$bonusInfo['views']);
-                    $this->cache->set($this->hashKeyBonusInfo."_vote",$bonusInfo['vote']);
-                    $this->cache->set($this->hashKeyBonusInfo."_share",$bonusInfo['share']);
-                    $this->cache->set($this->hashKeyBonusInfo."_joins",$bonusInfo['joins']);
-                    $this->cache->set($this->hashKeyBonusInfo."_number",$bonusInfo['number']);
-                    $this->cache->redis->hset($bonusInfoRedisKey,'bonustype',$bonusInfo['bonustype']);
+
+                    $bonusInfo = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openid))->find();
+                    if(!$bonusInfo){
+                        //如果当前人ID 存在， 则获取当前人的信息
+                        $urlOpenIdInfo = M('customer_service_fans')->where(array('openid' =>$openid,'token'=>'rggfsk1394161441'))->find();
+                        $nickname = $urlOpenIdInfo['nickname'];
+                        $imageProfile = $urlOpenIdInfo['headimgurl'];
+                        $this->saveBonusInfo($gid,$openid,$nickname,$imageProfile);
+                        //存储数据到redis
+                        $this->cache->redis->hset($bonusInfoRedisKey,'gid',$gid);
+                        $this->cache->redis->hset($bonusInfoRedisKey,'name',$nickname);
+                        $this->cache->redis->hset($bonusInfoRedisKey,'headimgurl',$imageProfile);
+                        $this->cache->redis->hset($bonusInfoRedisKey,'openid',$openid);
+                    }else{
+                        $nickname = $bonusInfo['nickname'];
+                        $voteNumber = $bonusInfo['vote'];
+                        $imageProfile = $bonusInfo['headimgurl'];
+                        //存储数据到redis
+                        $this->cache->redis->hset($bonusInfoRedisKey,'id',$bonusInfo['id']);
+                        $this->cache->redis->hset($bonusInfoRedisKey,'gid',$bonusInfo['gid']);
+                        $this->cache->redis->hset($bonusInfoRedisKey,'tel',$bonusInfo['tel']);
+                        $this->cache->redis->hset($bonusInfoRedisKey,'name',$bonusInfo['name']);
+                        $this->cache->redis->hset($bonusInfoRedisKey,'headimgurl',$bonusInfo['headimgurl']);
+                        $this->cache->redis->hset($bonusInfoRedisKey,'openid',$bonusInfo['openid']);
+                        $this->cache->set($this->hashKeyBonusInfo."_view",$bonusInfo['views']);
+                        $this->cache->set($this->hashKeyBonusInfo."_vote",$bonusInfo['vote']);
+                        $this->cache->set($this->hashKeyBonusInfo."_share",$bonusInfo['share']);
+                        $this->cache->set($this->hashKeyBonusInfo."_joins",$bonusInfo['joins']);
+                        $this->cache->set($this->hashKeyBonusInfo."_number",$bonusInfo['number']);
+                        $this->cache->redis->hset($bonusInfoRedisKey,'bonustype',$bonusInfo['bonustype']);
+                    }
                 }
+
+                $this->saveBonusViewInfo($gid,$openid);
+                $this->saveViews($gid,$openid);
+
+                //获取URL open id 分数
+                $numberByUrlOpenId = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openid))->getField('number');
+
+                //保存我也要参加 - 加一
+                if(isset( $_GET['joins'] ) &&  $_GET['joins'] == 1){
+                    M("bonus_info")->where(array('gid' => $this->gid, 'openid' => $_GET['preopenid']))->setInc('joins', 1);
+                    $this->cache->redis->incr($this->hashKeyBonusInfo."_joins");
+                }
+
+                //查看获得的奖项
+                list($fourAward,$threeAward,$secondAward,$firstAward,$awardPhone) = $this->getAward($openid);
             }
 
-            $this->saveBonusViewInfo($gid,$openid);
-            $this->saveViews($gid,$openid);
 
-            //获取URL open id 分数
-            $numberByUrlOpenId = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openid))->getField('number');
-
-            //保存我也要参加 - 加一
-            if(isset( $_GET['joins'] ) &&  $_GET['joins'] == 1){
-                M("bonus_info")->where(array('gid' => $this->gid, 'openid' => $_GET['preopenid']))->setInc('joins', 1);
-                $this->cache->redis->incr($this->hashKeyBonusInfo."_joins");
-            }
-
-            //查看获得的奖项
-            list($fourAward,$threeAward,$secondAward,$firstAward,$awardPhone) = $this->getAward($openid);
         }
 
         $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
@@ -1201,6 +1207,7 @@ class BonusAction extends Action {
         if(isset( $_GET['show'] ) &&  $_GET['show']){
             $myselfopenid = $openid;
         }else{
+
             if(!$myselfopenid){
                 $code = trim($_GET["code"]);
                 $state = trim($_GET['state']);
@@ -1259,11 +1266,15 @@ class BonusAction extends Action {
 
                         )
                          */
+
                         if(!$nickname){
                             $nickname = $json->nickname;
                         }
 
                         $myselfopenid = $userinfoInDb['openid'];
+                        if($myselfopenid == $openid){
+                            $imageProfile = $json->headimgurl;
+                        }
                         $this->saveUserInfo($json);
                     }else{
                         /*
@@ -1289,7 +1300,9 @@ class BonusAction extends Action {
                         if(!$nickname){
                             $nickname = $fansInfo['nickname'];
                         }
-
+                        if($myselfopenid == $openid){
+                            $imageProfile = $fansInfo['headimgurl'];
+                        }
                     }
 
                 } else {
@@ -1345,7 +1358,7 @@ class BonusAction extends Action {
         $this->assign("openid",$openid);
         $this->assign("tel",$myselfopenid);
         $this->assign("nickname",$nickname);
-        $this->assign("imageprofile",$imageProfile);
+
         $titleArr = $this->titleInWeixin;
         $titleUsed = $nickname;
         $titleUsed .= " ".$titleArr[rand(0,count($titleArr)-1)];
@@ -1404,6 +1417,7 @@ class BonusAction extends Action {
             }
 
         }
+        $this->assign("imageprofile",$imageProfile);
         $this->assign("history",$historyArr);
         $this->assign("historycount",$historyCount);
         $this->assign("isself",$isSelf);
