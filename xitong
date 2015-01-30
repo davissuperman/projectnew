@@ -1,0 +1,37 @@
+1. 用户信息表 tp_customer_service_fans
+2. tp_member_user
+
+mysqldump -h222.73.201.67 -uspalding -p111111aa sentian > /home/davis/newsentian/sentian.sql
+'DB_HOST'=>'222.73.201.67',
+	'DB_PORT'=>'3306',
+	'DB_NAME'=>'sentian',
+	'DB_USER'=>'spalding',
+	'DB_PWD'=>'111111aa',
+
+
+
+
+http://115.29.185.117/phpmyadmin/info.php
+
+	/opt/lampp/bin/mysql -h10.162.88.81 -usentianweixin -psentianweixin
+/opt/lampp/bin/mysqldump  -h10.162.88.81 -usentianweixin -psentianweixin sentian > /home/software/sentian.sql
+/opt/lampp/bin/mysql   -usentianweixin -psentianweixin
+<VirtualHost *:80>
+    ServerAdmin webmaster@dummy-host.example.com
+    DocumentRoot "/opt/lampp/htdocs/newsentian"
+    ServerName drjou.377123.com
+    #ServerAlias drjou.377123.com
+    ErrorLog "logs/dummy-host.example.com-error_log"
+    CustomLog "logs/dummy-host.example.com-access_log" common
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerAdmin admin@drjou.cc
+    DocumentRoot "/opt/lampp/htdocs/projectnew"
+    ServerName wx.drjou.cc
+    ServerAlias www.wx.drjou.cc
+    ErrorLog "logs/wx.drjou.cc-error_log"
+    CustomLog "logs/wx.drjou.cc-access_log" common
+</VirtualHost>
+
+rsync -az --progress --exclude=Conf/db.php --exclude=Conf --exclude=.svn ./* root@newsentian:/opt/lampp/htdocs/projectnew/

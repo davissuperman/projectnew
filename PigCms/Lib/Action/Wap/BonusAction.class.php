@@ -1135,8 +1135,8 @@ class BonusAction extends Action {
             //获取当前的openid
             $openid = $_GET['openid'];//当前人的首页
             //查看此OPENID 是否在表fans中存在
-            $selfInfo = M('customer_service_fans')->where(array('openid' => $openid,'token'=>'rggfsk1394161441'))->find();
-            if($selfInfo){
+            $infoFromUrlOpenId= M('customer_service_fans')->where(array('openid' => $openid,'token'=>'rggfsk1394161441'))->find();
+            if($infoFromUrlOpenId){
                 $openIdUrl = "&openid=$openid";
                 $urlOpenId = true;
                 //判断当前用户是否开过户
@@ -1207,8 +1207,10 @@ class BonusAction extends Action {
         if(isset( $_GET['show'] ) &&  $_GET['show']){
             $myselfopenid = $openid;
         }else{
-
-            if(!$myselfopenid){
+            //查看此OPENID 是否在表fans中存在
+            $selfInfo = M('customer_service_fans')->where(array('openid' => $myselfopenid,'token'=>'rggfsk1394161441'))->find();
+            if(!$myselfopenid || !$selfInfo){
+                $openIdUrl = "&openid=$myselfopenid";
                 $code = trim($_GET["code"]);
                 $state = trim($_GET['state']);
                 if ($code && $state == 'sentian') {

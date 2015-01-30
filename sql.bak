@@ -1,0 +1,149 @@
+CREATE TABLE IF NOT EXISTS `tp_bonus` (
+  `gid` int(10) unsigned NOT NULL auto_increment,
+  `title` varchar(100) default NULL COMMENT '标题',
+  `desc` varchar(100) default NULL COMMENT '转发标题',
+  `img` varchar(255) NOT NULL,
+  `start` int(10) unsigned NOT NULL default '0',
+  `end` int(10) unsigned NOT NULL default '0',
+  `createtime` int(10) unsigned NOT NULL default '0',
+  `token` varchar(20) NOT NULL,
+  PRIMARY KEY  (`gid`),
+  KEY `token` (`token`),
+  KEY `start` (`start`),
+  KEY `end` (`end`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `tp_bonus_award` ( `id` int(11) NOT NULL auto_increment, `gid` int(11) NOT NULL, `openid` varchar(35) NOT NULL, `telephone` varchar(20) NOT NULL, `username` varchar(30) NOT NULL, `address` varchar(500) NOT NULL, `province` varchar(20) NOT NULL, `createtime` int(11) NOT NULL, `updatetime` int(11) NOT NULL, `type` int(11) NOT NULL, `orderid` varchar(100) NOT NULL, PRIMARY KEY (`id`) ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='领奖记录表' AUTO_INCREMENT=1
+
+
+CREATE TABLE IF NOT EXISTS `tp_bonus_date` (
+  `did` int(10) unsigned NOT NULL auto_increment,
+  `gid` int(10) unsigned NOT NULL,
+  `openid` varchar(120) NOT NULL,
+  `shares` int(10) unsigned NOT NULL default '0' COMMENT '分享数量',
+  `views` int(10) unsigned NOT NULL default '0' COMMENT '阅读数量',
+  `votes` int(10) unsigned NOT NULL default '0' COMMENT '投票量',
+  `jons` int(10) unsigned NOT NULL default '0' COMMENT '我也要参加量',
+  `createdate` date NOT NULL,
+  PRIMARY KEY  (`did`),
+  UNIQUE KEY `did` (`did`),
+  KEY `createdate` (`createdate`),
+  KEY `tel` (`openid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE IF NOT EXISTS `tp_bonus_description` (
+  `id` int(11) NOT NULL auto_increment,
+  `description` varchar(200) NOT NULL,
+  `number` int(11) NOT NULL COMMENT '1 正数 0 负数',
+  `sharetime` int(11) NOT NULL COMMENT '1, 10, 11次描述不一样',
+  PRIMARY KEY  (`id`),
+  KEY `sharetime` (`sharetime`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='加分文案' AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE IF NOT EXISTS `tp_bonus_history` (
+  `id` int(11) NOT NULL auto_increment,
+  `openid` varchar(35) NOT NULL,
+  `gid` int(11) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `from_open_id` varchar(35) NOT NULL,
+  `from_nickname` varchar(50) NOT NULL,
+  `number` int(11) NOT NULL,
+  `createtime` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE IF NOT EXISTS `tp_bonus_info` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `gid` int(10) unsigned NOT NULL COMMENT '游戏id',
+  `tel` varchar(12) NOT NULL COMMENT '电话',
+  `name` varchar(8) default NULL COMMENT '提交姓名',
+  `headimgurl` varchar(300) NOT NULL,
+  `openid` varchar(35) NOT NULL,
+  `createtime` int(11) unsigned NOT NULL default '0' COMMENT '参与时间',
+  `share` int(11) unsigned NOT NULL default '0' COMMENT '分享数量',
+  `views` int(10) unsigned NOT NULL default '0' COMMENT '阅读数量',
+  `vote` int(10) unsigned NOT NULL default '0' COMMENT '投票量',
+  `joins` int(10) unsigned NOT NULL default '0' COMMENT '我也要参加量',
+  `sharetime` int(10) unsigned NOT NULL default '0' COMMENT '第一次分享时间',
+  `number` int(10) unsigned NOT NULL default '0' COMMENT '总分数',
+  `updatetime` int(12) NOT NULL,
+  `bonustype` int(11) NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `gid` (`gid`),
+  KEY `tel` (`tel`),
+  KEY `sharetime` (`sharetime`),
+  KEY `tel_2` (`tel`),
+  KEY `gid_2` (`gid`),
+  KEY `tel_3` (`tel`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `tp_bonus_info_date` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `participate` int(10) unsigned NOT NULL default '0' COMMENT '点击领取',
+  `submit` int(10) unsigned NOT NULL default '0' COMMENT '提交个人信息',
+  `dateinfo` date NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `dateinfo` (`dateinfo`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE IF NOT EXISTS `tp_bonus_list` (
+  `id` int(11) NOT NULL auto_increment,
+  `type` int(11) NOT NULL COMMENT '1. view 2. 加分 ',
+  `from_open_id` varchar(35) NOT NULL COMMENT '哪个用户查看了',
+  `number` int(11) NOT NULL,
+  `to_open_id` varchar(35) NOT NULL COMMENT '哪个用户被查看了',
+  `viewpage` int(11) NOT NULL,
+  `createtime` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+ALTER TABLE `tp_diymen_set` ADD `access_token` VARCHAR(800) NOT NULL , ADD `create_time` VARCHAR(80) NOT NULL ;
+ALTER TABLE `tp_diymen_set` ADD `ticket` VARCHAR(500) NOT NULL , ADD `ticket_time` VARCHAR(80) NOT NULL ;
+
+CREATE TABLE IF NOT EXISTS `tp_bonus_award` (
+  `id` int(11) NOT NULL auto_increment,
+  `gid` int(11) NOT NULL,
+  `openid` varchar(35) NOT NULL,
+  `telephone` varchar(20) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `address` varchar(500) NOT NULL,
+  `province` varchar(20) NOT NULL,
+  `createtime` int(11) NOT NULL,
+  `updatetime` int(11) NOT NULL,
+  `type` int(11) NOT NULL,
+  `orderid` varchar(100) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='领奖记录表' AUTO_INCREMENT=1 ;
+
+
+
+ALTER TABLE `tp_diymen_set` ADD `web_access_token` VARCHAR(800) NOT NULL ;
+ALTER TABLE `tp_diymen_set` ADD `refresh_token` VARCHAR(800) NOT NULL ;
+
+
+INSERT INTO `tp_bonus_description` (`id`, `description`, `number`, `sharetime`) VALUES
+(1, '分享必然有意外惊喜，分享是美德！', 1, 1),
+(2, '森田面膜，美丽水润的秘密必须分享！', 1, 10),
+(3, '亲，分享太多就不是秘密啦！', 1, 11),
+(4, '既然曾经拥有森田，那么其他面膜都会变成将就。', 1, 0),
+(5, '春运路上敷面膜，分多分少别嫌少！', 1, 0),
+(6, '日敷森田面膜，你离女神Baby还会远吗？', 1, 0),
+(7, '超哥告诉我，面膜不能停！必须用森田！', 1, 0),
+(8, 'Iphone6大奖在向你招手啦！', 1, 0),
+(9, '爱美虽易，坚持敷面膜不易，且敷且珍惜！', 1, 0),
+(10, '帮你加油，记得送我森田面膜！', 1, 0),
+(11, '追求美的路上，姐们挺你！', 1, 0),
+(12, 'My Sunshine,支持你！', 1, 0),
+(13, '森田面膜我也爱！', 1, 0),
+(18, '手滑意外，姐儿也是醉了！', 0, 0),
+(19, '一不小心带走分数，对不住啊！', 0, 0);
+
+
+
+
+
+
