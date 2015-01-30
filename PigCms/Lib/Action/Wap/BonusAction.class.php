@@ -1169,8 +1169,6 @@ class BonusAction extends Action {
                         $this->cache->redis->set($bonusInfoRedisKey."_share",$bonusInfo['share']);
                         $this->cache->redis->set($bonusInfoRedisKey."_joins",$bonusInfo['joins']);
                         $this->cache->redis->set($bonusInfoRedisKey."_number",$bonusInfo['number']);
-                        Log :: write("redis rrrrrrrrrrrrrrrrrrrrrrr                  ".$bonusInfoRedisKey."_vote                  " . $this->cache->redis->set($bonusInfoRedisKey."_vote",$bonusInfo['vote']));
-                        Log :: write( print_r($bonusInfo,true) );
                         $this->cache->redis->hset($bonusInfoRedisKey,'id',$bonusInfo['id']);
                         $this->cache->redis->hset($bonusInfoRedisKey,'gid',$bonusInfo['gid']);
                         $this->cache->redis->hset($bonusInfoRedisKey,'tel',$bonusInfo['tel']);
