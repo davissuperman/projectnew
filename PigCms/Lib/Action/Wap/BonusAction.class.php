@@ -1162,18 +1162,18 @@ class BonusAction extends Action {
                         $imageProfile = $bonusInfo['headimgurl'];
                         //存储数据到redis
                         Log :: write("redis rrrrrrrrrrrrrrrrrrrrrrr");
-                        Log :: write( print_r($bonusInfo) );
+                        Log :: write( print_r($bonusInfo,true) );
                         $this->cache->redis->hset($bonusInfoRedisKey,'id',$bonusInfo['id']);
                         $this->cache->redis->hset($bonusInfoRedisKey,'gid',$bonusInfo['gid']);
                         $this->cache->redis->hset($bonusInfoRedisKey,'tel',$bonusInfo['tel']);
                         $this->cache->redis->hset($bonusInfoRedisKey,'name',$bonusInfo['name']);
                         $this->cache->redis->hset($bonusInfoRedisKey,'headimgurl',$bonusInfo['headimgurl']);
                         $this->cache->redis->hset($bonusInfoRedisKey,'openid',$bonusInfo['openid']);
-                        $this->cache->set($this->hashKeyBonusInfo."_view",$bonusInfo['views']);
-                        $this->cache->set($this->hashKeyBonusInfo."_vote",$bonusInfo['vote']);
-                        $this->cache->set($this->hashKeyBonusInfo."_share",$bonusInfo['share']);
-                        $this->cache->set($this->hashKeyBonusInfo."_joins",$bonusInfo['joins']);
-                        $this->cache->set($this->hashKeyBonusInfo."_number",$bonusInfo['number']);
+                        $this->cache->redis->set($this->hashKeyBonusInfo."_view",$bonusInfo['views']);
+                        $this->cache->redis->set($this->hashKeyBonusInfo."_vote",$bonusInfo['vote']);
+                        $this->cache->redis->set($this->hashKeyBonusInfo."_share",$bonusInfo['share']);
+                        $this->cache->redis->set($this->hashKeyBonusInfo."_joins",$bonusInfo['joins']);
+                        $this->cache->redis->set($this->hashKeyBonusInfo."_number",$bonusInfo['number']);
                         $this->cache->redis->hset($bonusInfoRedisKey,'bonustype',$bonusInfo['bonustype']);
                     }
                 }
