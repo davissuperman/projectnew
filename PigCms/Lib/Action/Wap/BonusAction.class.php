@@ -116,8 +116,6 @@ class BonusAction extends Action {
         } else {
             //根据open id获取用户信息，查看是否存在
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
-            Log :: write( $userOpenId." aaaaaaaaaaaaaaaaaaaaaa" );
-            Log :: write( print_r($fansInfo,true) );
             if($userOpenId && $fansInfo){
                 //如果存在 则不需要再通过weixin API调取用户信息
                 $selfUserInfo['headimgurl'] = $fansInfo['headimgurl'];
@@ -152,7 +150,6 @@ class BonusAction extends Action {
                     [scope] => snsapi_userinfo
                     )
                      */
-                    Log :: write( $userOpenId." bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" );
                     if(empty($fansInfo)){
 
                         $web_access_token = '';
@@ -174,14 +171,11 @@ class BonusAction extends Action {
                             $web_access_token = $userinfoFromApi['access_token'];
                             cookie('user_openid', $userinfoFromApi['openid'], 315360000);
                             $userOpenId = $userinfoFromApi['openid'];
-                            Log :: write( $userOpenId." cccccccccccccccccccccccccc" );
                         }
 
                         //根据access_token 拉到用户基本信息
                         $gUrl = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$web_access_token.'&openid='.$userinfoFromApi['openid'].'&lang=zh_CN';
                         $json = json_decode($this->curlGet($gUrl));
-                        Log :: write( print_r("YES          eeeeeeeeeeeeeeeeeeeeeeeeee    ",true) );
-                        Log :: write( print_r($json,true) );
                         /*$json 用户信息
                          * (
                             [openid] => oYkdqs5s1IEIhB9bulM2AJ6GgZh8
@@ -203,7 +197,6 @@ class BonusAction extends Action {
                         $selfUserInfo['nickname'] = $json->nickname;
                     }
                 } else {
-                    Log :: write(" redirect  rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
                     $url = urlencode($this->url."/index.php?g=Wap&m=Bonus&a=index&gid=$this->gid");
                     header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_userinfo&state=sentian#wechat_redirect");
                     exit;
@@ -271,7 +264,6 @@ class BonusAction extends Action {
         $this->assign('bonusdesc','');
         $this->assign("imageUrl",$bonusDes['img']);
         $this->assign("shareimageurl",$bonusDes['img']);
-        Log :: write(print_r($bonusDes,true));
 //        $this->assign("imageUrl","http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/bonus/images/profile1.png');
 
         //获取获奖名单
@@ -404,8 +396,6 @@ class BonusAction extends Action {
                 $fdata['subscribe_time'] = time();
                 $fdata['subscribe'] = 1;
                 $fdata['u_from'] = 2;
-                Log :: write("fdata");
-                Log :: write( print_r($fdata,true));
                 $fanModel->add($fdata);
                 //同时吧粉丝资料放到 tp_member_user 表
                 $memberinfo = M('member_user')->where(array('token' => $this->token, 'openid' => $json->openid))->find();
@@ -1171,6 +1161,8 @@ class BonusAction extends Action {
                         $voteNumber = $bonusInfo['vote'];
                         $imageProfile = $bonusInfo['headimgurl'];
                         //存储数据到redis
+                        Log :: write("redis rrrrrrrrrrrrrrrrrrrrrrr");
+                        Log :: write( print_r($bonusInfo) );
                         $this->cache->redis->hset($bonusInfoRedisKey,'id',$bonusInfo['id']);
                         $this->cache->redis->hset($bonusInfoRedisKey,'gid',$bonusInfo['gid']);
                         $this->cache->redis->hset($bonusInfoRedisKey,'tel',$bonusInfo['tel']);
@@ -1224,7 +1216,6 @@ class BonusAction extends Action {
                         header("location:$url");
                     }
                     cookie('user_openid', $userinfoInDb['openid'], 315360000);
-                    Log :: write("aaaaaaaaaaa   ".$userinfoInDb['openid']);
                     //判断用户是否已经在系统中存在
                     $fansInfo = M('customer_service_fans')->where(array('openid' => $userinfoInDb['openid'],'token'=>'rggfsk1394161441'))->find();
                     if(empty($fansInfo)){
@@ -1235,7 +1226,6 @@ class BonusAction extends Action {
                         }else{
                             //重新获取
                             $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
-                            Log :: write( print_r($userinfoFromApi,true) );
                             $m['id'] = $apidata['id'];
                             $m['web_access_token'] = $userinfoFromApi['access_token'];
                             $m['refresh_token'] = $userinfoFromApi['refresh_token'];
