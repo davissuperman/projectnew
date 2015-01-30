@@ -144,12 +144,18 @@ input,textarea,select,button{font-size:1em;}
 /*icons*/
 .icon1{ background:url(../images/01/i01.png) no-repeat; width:30px; height:30px; display:inline-block; background-size:auto 100%;}
 .icon2{ background:url(../images/01/i02.png) no-repeat; width:17px; height:16px; display:inline-block; background-size:auto 100%;}
-.icon-arrow{background:url(../images/01/icon-arrow.png) no-repeat; width:20px; height:20px; display:inline-block; background-size:auto 100%; vertical-align:top;}
-.icon-arrow2{background:url(../images/01/icon-arrow2.png) no-repeat; width:20px; height:20px; display:inline-block; background-size:auto 100%; vertical-align:top;}
+.icon-arrow{background:url(../images/01/icon-arrow.png) no-repeat; width:20px; height:20px; display:inline-block; background-size:auto 100%; vertical-align:top;-webkit-animation: swipeMove 1s ease-in infinite;-moz-animation: swipeMove 1s ease-in infinite;-ms-animation: swipeMove 1s ease-in infinite;-o-animation: swipeMove 1s ease-in infinite;animation: swipeMove 1s ease-in infinite;}
+.icon-arrow2{background:url(../images/01/icon-arrow2.png) no-repeat; width:20px; height:20px; display:inline-block; background-size:auto 100%; vertical-align:top;-webkit-animation: swipeMove 1s ease-in infinite;-moz-animation: swipeMove 1s ease-in infinite;-ms-animation: swipeMove 1s ease-in infinite;-o-animation: swipeMove 1s ease-in infinite;animation: swipeMove 1s ease-in infinite;}
 .icon-phone{background:url(../images/01/i03.png) no-repeat; width:40px; height:65px; display:inline-block; background-size:auto 100%;}
 .icon-ipad{background:url(../images/01/i04.png) no-repeat; width:30px; height:45px; display:inline-block; background-size:auto 100%;}
 .icon5{background:url(../images/01/i05.png) no-repeat; width:45px; height:40px; display:inline-block; background-size:auto 100%;}
 .icon6{background:url(../images/01/i06.png) no-repeat; width:26px; height:40px; display:inline-block; background-size:auto 100%;}
+
+@-webkit-keyframes swipeMove{0%{opacity:1;-webkit-transform:translate3d(-6px,0,0)}70%{opacity:0.5;-webkit-transform:translate3d(0,0,0)}100%{opacity:0;-webkit-transform:translate3d(5px,0,0)}}
+@-moz-keyframes swipeMove{0%{opacity:1;-moz-transform:translate3d(-6px,0,0)}70%{opacity:0.5;-moz-transform:translate3d(0,0,0)}100%{opacity:0;-moz-transform:translate3d(5px,0,0)}}
+@-ms-keyframes swipeMove{0%{opacity:1;-ms-transform:translate3d(-6px,0,0)}70%{opacity:0.5;-ms-transform:translate3d(0,0,0)}100%{opacity:0;-ms-transform:translate3d(5px,0,0)}}
+@-o-keyframes swipeMove{0%{opacity:1;-o-transform:translate3d(-6px,0,0)}70%{opacity:0.5;-o-transform:translate3d(0,0,0)}100%{opacity:0;-o-transform:translate3d(5px,0,0)}}
+@keyframes swipeMove{0%{opacity:1;transform:translate3d(-6px,0,0)}70%{opacity:0.5;transform:translate3d(0,0,0)}100%{opacity:0;transform:translate3d(5px,0,0)}}
 
 
 /*line-height*/
