@@ -203,7 +203,7 @@ class BonusAction extends Action {
                         $selfUserInfo['nickname'] = $json->nickname;
                     }
                 } else {
-                    Log :: write(" redirect  bbbbbbbbbbbbbbbbbbbbbbbb");
+                    Log :: write(" redirect  rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
                     $url = urlencode($this->url."/index.php?g=Wap&m=Bonus&a=index&gid=$this->gid");
                     header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_userinfo&state=sentian#wechat_redirect");
                     exit;
