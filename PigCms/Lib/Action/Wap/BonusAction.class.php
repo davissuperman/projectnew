@@ -1122,8 +1122,8 @@ class BonusAction extends Action {
         $urlOpenId = false;
         $bonusType = 0;
         $awardPhone = false;
-        $myselfopenid = cookie("user_openid");//如果没有 需要弹出页面授权
-//        $myselfopenid = null;//如果没有 需要弹出页面授权
+//        $myselfopenid = cookie("user_openid");//如果没有 需要弹出页面授权
+        $myselfopenid = null;//如果没有 需要弹出页面授权
         if(isset( $_GET['openid'] ) &&  $_GET['openid']){
             //获取当前的openid
             $openid = $_GET['openid'];//当前人的首页
@@ -1161,7 +1161,11 @@ class BonusAction extends Action {
                         $voteNumber = $bonusInfo['vote'];
                         $imageProfile = $bonusInfo['headimgurl'];
                         //存储数据到redis
-                        Log :: write("redis rrrrrrrrrrrrrrrrrrrrrrr");
+                        $this->cache->redis->set($bonusInfoRedisKey."_vote",$bonusInfo['vote']);
+                        $this->cache->redis->set($bonusInfoRedisKey."_share",$bonusInfo['share']);
+                        $this->cache->redis->set($bonusInfoRedisKey."_joins",$bonusInfo['joins']);
+                        $this->cache->redis->set($bonusInfoRedisKey."_number",$bonusInfo['number']);
+                        Log :: write("redis rrrrrrrrrrrrrrrrrrrrrrr                  ".$bonusInfoRedisKey."_vote                  " . $this->cache->redis->set($bonusInfoRedisKey."_vote",$bonusInfo['vote']));
                         Log :: write( print_r($bonusInfo,true) );
                         $this->cache->redis->hset($bonusInfoRedisKey,'id',$bonusInfo['id']);
                         $this->cache->redis->hset($bonusInfoRedisKey,'gid',$bonusInfo['gid']);
@@ -1169,11 +1173,8 @@ class BonusAction extends Action {
                         $this->cache->redis->hset($bonusInfoRedisKey,'name',$bonusInfo['name']);
                         $this->cache->redis->hset($bonusInfoRedisKey,'headimgurl',$bonusInfo['headimgurl']);
                         $this->cache->redis->hset($bonusInfoRedisKey,'openid',$bonusInfo['openid']);
-                        $this->cache->redis->set($this->hashKeyBonusInfo."_view",$bonusInfo['views']);
-                        $this->cache->redis->set($this->hashKeyBonusInfo."_vote",$bonusInfo['vote']);
-                        $this->cache->redis->set($this->hashKeyBonusInfo."_share",$bonusInfo['share']);
-                        $this->cache->redis->set($this->hashKeyBonusInfo."_joins",$bonusInfo['joins']);
-                        $this->cache->redis->set($this->hashKeyBonusInfo."_number",$bonusInfo['number']);
+                        $this->cache->redis->set($bonusInfoRedisKey."_view",$bonusInfo['views']);
+
                         $this->cache->redis->hset($bonusInfoRedisKey,'bonustype',$bonusInfo['bonustype']);
                     }
                 }
@@ -1202,23 +1203,12 @@ class BonusAction extends Action {
         if(isset( $_GET['show'] ) &&  $_GET['show']){
             $myselfopenid = $openid;
         }else{
-            //查看此OPENID 是否在表fans中存在
-            $selfInfo = M('customer_service_fans')->where(array('openid' => $myselfopenid,'token'=>'rggfsk1394161441'))->find();
-            if(!$myselfopenid || !$selfInfo){
+            if(!$myselfopenid ){
+                //self用户不存在
                 $openIdUrl = "&openid=$myselfopenid";
                 $code = trim($_GET["code"]);
                 $state = trim($_GET['state']);
                 if ($code && $state == 'sentian') {
-                    $userinfoInDb = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
-                    if(isset($userinfoInDb['errcode']) && $userinfoInDb['errcode']){
-                        //code 有错误 需要重定向
-                        $url = $this->url."/index.php?g=Wap&m=Bonus&a=present$openIdUrl&gid=$this->gid";
-                        header("location:$url");
-                    }
-                    cookie('user_openid', $userinfoInDb['openid'], 315360000);
-                    //判断用户是否已经在系统中存在
-                    $fansInfo = M('customer_service_fans')->where(array('openid' => $userinfoInDb['openid'],'token'=>'rggfsk1394161441'))->find();
-                    if(empty($fansInfo)){
                         $web_access_token = '';
 //                        if($apidata['web_access_token']){
                         if(false){
@@ -1226,11 +1216,18 @@ class BonusAction extends Action {
                         }else{
                             //重新获取
                             $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
+                            if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
+                                //code 有错误 需要重定向
+                                $url = $this->url."/index.php?g=Wap&m=Bonus&a=present$openIdUrl&gid=$this->gid";
+                                header("location:$url");
+                            }
                             $m['id'] = $apidata['id'];
                             $m['web_access_token'] = $userinfoFromApi['access_token'];
                             $m['refresh_token'] = $userinfoFromApi['refresh_token'];
                             M('Diymen_set')->where(array('id' => $apidata['id']))->save($m);
                             $web_access_token = $userinfoFromApi['access_token'];
+                            $myselfopenid = $userinfoFromApi['openid'];
+                            cookie('user_openid', $userinfoFromApi['openid'], 315360000);
                         }
                         /**
                          * $userinfo
@@ -1243,7 +1240,7 @@ class BonusAction extends Action {
                         )
                          */
                         //根据access_token 拉到用户基本信息
-                        $gUrl = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$web_access_token.'&openid='.$userinfoInDb['openid'].'&lang=zh_CN';
+                        $gUrl = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$web_access_token.'&openid='.$myselfopenid.'&lang=zh_CN';
                         $json = json_decode($this->curlGet($gUrl));
                         /*$json 用户信息
                          * (
@@ -1266,39 +1263,10 @@ class BonusAction extends Action {
                             $nickname = $json->nickname;
                         }
 
-                        $myselfopenid = $userinfoInDb['openid'];
                         if($myselfopenid == $openid){
                             $imageProfile = $json->headimgurl;
                         }
                         $this->saveUserInfo($json);
-                    }else{
-                        /*
-                         [ 2015-01-15T17:32:04+08:00 ] ERR: Array
-                            (
-                                [openid] => oYkdqs6YN282-he6W8cPxMKS2D-c
-                                [token] => rggfsk1394161441
-                                [nickname] => davis
-                                [sex] => 1
-                                [country] => 中国
-                                [province] => 上海
-                                [city] => 浦东新区
-                                [headimgurl] => http://wx.qlogo.cn/mmopen/ykF2ySc7iaKqibg3B0XP1nich7ia8FBYEUWLSF9owUlaTE3hMBcOEHWmicmWOhibRRibbcrbgtibWRITmS1gT8ZUgNsbMTqErKjCT4kG/0
-                                [tel] =>
-                                [remark] =>
-                                [gid] => 0
-                                [subscribe_time] => 1421313121
-                                [subscribe] => 1
-                                [u_from] => 2
-                            )
-                         */
-                        $myselfopenid = $fansInfo['openid'];
-                        if(!$nickname){
-                            $nickname = $fansInfo['nickname'];
-                        }
-                        if($myselfopenid == $openid){
-                            $imageProfile = $fansInfo['headimgurl'];
-                        }
-                    }
 
                 } else {
                     $url = urlencode($this->url."/index.php?g=Wap&m=Bonus&a=present$openIdUrl&gid=$this->gid");
