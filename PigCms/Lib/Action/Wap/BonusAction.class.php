@@ -152,14 +152,6 @@ class BonusAction extends Action {
                     [scope] => snsapi_userinfo
                     )
                      */
-
-                    if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
-                        //code 有错误 需要重定向
-                        $url = $this->url."/index.php?g=Wap&m=Bonus&a=index&gid=$this->gid";
-                        header("location:$url");
-                    }
-
-                    $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
                     if(empty($fansInfo)){
 
                         $web_access_token = '';
@@ -169,6 +161,11 @@ class BonusAction extends Action {
                         }else{
                             //重新获取
                             $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
+                            if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
+                                //code 有错误 需要重定向
+                                $url = $this->url."/index.php?g=Wap&m=Bonus&a=index&gid=$this->gid";
+                                header("location:$url");
+                            }
                             $m['id'] = $apidata['id'];
                             $m['web_access_token'] = $userinfoFromApi['access_token'];
                             $m['refresh_token'] = $userinfoFromApi['refresh_token'];
@@ -204,6 +201,7 @@ class BonusAction extends Action {
                         $selfUserInfo['nickname'] = $json->nickname;
                     }
                 } else {
+                    Log :: write(" redirect  bbbbbbbbbbbbbbbbbbbbbbbb");
                     $url = urlencode($this->url."/index.php?g=Wap&m=Bonus&a=index&gid=$this->gid");
                     header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_userinfo&state=sentian#wechat_redirect");
                     exit;
