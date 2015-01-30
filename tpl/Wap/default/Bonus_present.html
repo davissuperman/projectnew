@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>森田药妆红包-</title>
+    <title>森田药妆奔跑吧年终奖</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <meta content="yes" name="apple-mobile-web-app-capable" />
@@ -40,9 +40,9 @@
                     <else/>
                         0
                     </if>
-                </strong>人</br>为{pigcms::$nickname}加油</div>
+                </strong>人</br>为<span class="color:#08c;">{pigcms::$nickname}</span>加油</div>
             <p class="mt-10">
-                <span class="btn-red-h40" style="padding:0 20px 0 10px;"><i class="icon1"></i>活动细节</span>
+                <span class="btn-red-h40" style="padding:0 20px 0 10px;" onClick="showLayer($('#showIntroduce'),'2');"><i class="icon1"></i>活动规则</span>
             </p>
         </div>
         <div class="logo"></div>
@@ -80,7 +80,7 @@
             <div class="clrfix item">
                 <div class="p2" onClick="showLayer($('#two-present'));">
                     <i class="icon-ipad fl"></i>
-                    <span class="fl mt-20">iPad Mini<br/>大奖<i class="icon-arrow ml-10"></i></span>
+                    <span class="fl mt-20">iPad Mini2<br/>大奖<i class="icon-arrow ml-10"></i></span>
                 </div>
                 <div class="pre-right b-t2">
                     <div class="get">
@@ -234,20 +234,22 @@
     <!--<div class="ta-c mt-20">-->
         <!--<span class="btn-blue-h40 w160 btn-share">邀请好友为我加油</span>-->
     <!--</div>-->
-
+	<div class="ta-c mt-20">
+        <span class="btn-blue-h40 btn-share"><i class="icon2" style="margin-top:8px;"></i>给我投票加油</span>
+    </div>
     <div class="ta-c mt-20">
         <p>
             <if condition="$tel neq $openid and $voteinfo eq false">
-                <span class="btn-blue-h40" onClick="showget();" >给他加油</span>
+                <span class="btn-blue-h40" onClick="showget();" >投他一票</span>
             <elseif condition="$tel neq $openid and $voteinfo eq true" />
-                 <span class="btn-blue-h40 btn-disabled" >已经加油</span>
+                 <span class="btn-blue-h40 btn-disabled" >已经投票</span>
             </if>
-            <!--<span class="btn-blue-h40 ml-10 btn-share">邀请好友帮忙</span>-->
+            <span class="btn-blue-h40 ml-10 btn-share">帮他拉票</span>
         </p>
         <if condition="$tel neq $openid ">
             <p class="mt-20">
                 <a href="./index.php?g=Wap&m=Bonus&a=present&gid={pigcms::$gid}&openid={pigcms::$tel}&joins=1&preopenid={pigcms::$openid}">
-                    <span class="btn-zi-h40 w160">我也要参加</span>
+                    <span class="btn-zi-h40 w160">我也要年终奖</span>
                 </a>
             </p>
         </if>
@@ -256,7 +258,7 @@
 
     <ul class="records-list" id="records-list">
         <if condition="($tel eq $openid) and ($number gt 0)">
-            <p>积分历史</p>
+            <p>加油史</p>
             <volist name="history" id="eachitem">
                 <li class="clrfix">
                     <div class="img">
@@ -278,7 +280,6 @@
         </if>
     </ul>
 </section>
-<span class="btn-blue-h40 btn-jiayou btn-share"><i class="icon2" style="margin-top:8px;"></i>给我加油</span>
 
 
 <div class="layer-box hide" id="layer-box">
@@ -299,7 +300,7 @@
                     <p class="mt-5">1部</p>
                     <p class="mt-5">颜色随机</p>
                     <p class="mt-5">以实物为准</p>
-                    <p class="mt-5">共计3部</p>
+                    <p class="mt-5">共计3部,兑完为止</p>
                     <span class="back btn-close">返回</span>
                 </div>
                 <i class="dot4"></i>
@@ -315,7 +316,7 @@
                     <p class="mt-5">（WLAN 16G）</p>
                     <p class="mt-5">1部</p>
                     <p class="mt-5">颜色以实物为准</p>
-                    <p class="mt-5">共计5部</p>
+                    <p class="mt-5">共计5部,兑完为止</p>
                     <span class="back btn-close">返回</span>
                 </div>
             </div>
@@ -325,8 +326,8 @@
                 <p class="ta-c mt-10">
                     <img src="{pigcms::RES}/bonus/images/01/i08.png" alt="" width="80%"/>
                 </p>
-                <p class="mt-10 lh-22">20元换购价值196元森田药妆大礼包四盒装（产品及包装随机发送、以实物为准）</p>
-                <p class="fz20">总计300份</p>
+                <p class="mt-10 lh-22">20元换购价值196元森田药妆大礼包四盒装（奖品随机发送、以实物为准）</p>
+                <p class="fz20">总计300份,兑完为止</p>
                 <span class="back btn-close">返回</span>
             </div>
 
@@ -336,11 +337,11 @@
                     <img src="{pigcms::RES}/bonus/images/01/i10.png" alt="" width="86px"/>
                 </p>
                 <p class="mt-10 lh-22">10元换购价值49元森田药妆明星面膜一盒（产品及包装随机发送、以实物为准）</p>
-                <p class="fz20">总计3000份</p>
+                <p class="fz20">总计3000份,兑完为止</p>
                 <span class="back btn-close">返回</span>
             </div>
 
-            <div class="five-present fz16 hide" id="five-present">
+            <div class="five-present fz14 hide" id="five-present">
                 <h2 class="ta-c fz20 pt-10">阳光奖奖品详情</h2>
                  <div class="yhq-wrap">
                 	<div class="yhq yhq1">
@@ -348,18 +349,16 @@
                         <span class="i2">20</span>
                         <span class="i3">优惠券</span>
                         <span class="i4">满100元使用</span>
-                    	<i class="icon14"></i>
                     </div>
                     <div class="yhq yhq2">
                     	<span class="i1">&yen;</span>
                         <span class="i2">5</span>
                         <span class="i3">优惠券</span>
                         <span class="i4">无门槛使用</span>
-                    	<i class="icon14"></i>
                     </div>
                 </div>
                 <p class="lh-22">森田药妆<br/>天猫官方旗舰店<br/>现金券，来就送！</p>
-                <p class="fz20">总计3000份</p>
+                <p class="fz18">总计100000份,兑完为止</span></p>
                 <span class="back btn-close">返回</span>
             </div>
             <div class="layer-alert hide" id="layer-alert-share-success">
@@ -547,6 +546,44 @@
                 </div>
                 <div class="ta-c mt-20"><span class="btn-close back">分享后返回活动主页</span></div>
             </div>
+            
+            <div id="showIntroduce" class="hide">
+            	<p>
+            		<span class="btn-close back">返回</span>
+                </p>
+                <h2 class="intr-tit-index hover">活动规则</h2>
+                <dl class="intr-wrap-index hover">
+                    <dt><i class="icon-dot"></i>一、活动时间：2015年2月4日——2015年2月15日</dt>
+					<dt>二、奖项设置：</dt>
+					<dd>一等奖 IPHONE6——3部</dd>
+					<dd>二等奖 IPAD MINI2——5部</dd>
+					<dd>三等奖 20元换购市值196元森田面膜礼包——300份</dd>
+					<dd>四等奖 10元换购市值49元森田面膜礼包——3000份</dd>
+					<dd>五等奖 森田药妆天猫旗舰店优惠券 ——200000份</dd>
+					<dt>三、参与方式：</dt>
+					<dd>Step1：点击“我要年终奖”参加活动。</dd>
+					<dd>Step2：点击“给我加油”或直接发送给好友及朋友圈，要求好友帮助投票加分即可（注意:偶有少量负分出现）。</dd>
+					<dd>Step3：投票所获积分，达到各级奖项对应分数，“领奖”按钮会亮起，点击进入领奖流程。</dd>
+ 					<dt>四、活动规则：</dt>
+					<dd>1、活动范围仅限微信平台。</dd>
+					<dd>2、每位微信用户仅能投一票。</dd>
+ 					<dd>3、点击投票主页面中奖项图标，即可了解更多奖品详情。</dd>
+					<dd>4、当对应奖项图标变灰时，则代表该奖项已经兑完。</dd>
+					<dd>5、奖品数量有限，“领奖”按钮亮起时请及时领取，未及时领奖，造成因奖品被领完导致无法领取，主办方概不负责。</dd>
+					<dd>6、二等奖以下奖项积分可累积使用，兑换后积分不清零，可保留积分继续冲击上一级奖品。</dd>
+					<dd>7、积分达到二等奖领奖分数，客户需选择是否冲击一等奖。如选择继续冲击一等奖，则自动放弃二等奖兑奖权力；如选择兑换二等奖，则积分清零，进入兑奖流程。</dd>
+					<dd>8、领奖流程及相关细则，请在积分达到兑奖分数后，“领奖”按钮亮起时，点击“领奖”了解。</dd>
+					<dd>9、奖品兑奖截止日期：2015年3月31日截止。</dd>
+					<dd>10、违规处理：凡发现任何异常积分数据产生、或任何违反公平性原则以及利用不正当行为参与活动，主办方有权单方面取消评比及领奖资格，并且保留追究违规参与者法律责任的权力。</dd>
+					<dd>11、免责声明：活动主办方不对以下情况负责</dd>
+					<dd>1)任何形式的技术故障、包括软硬件的损坏或网络问题。2)对本次活动的人为恶意破坏。3)技术或人为的监管问题。
+主办方保留本次活动的最终解释权！</dd>
+                    
+                </dl>
+                <div class="mt-10">
+                	<span class="btn-close back">返回</span>
+                </div>
+         	</div>
 
         </div>
     </div>
