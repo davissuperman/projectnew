@@ -152,6 +152,7 @@ class BonusAction extends Action {
                     [scope] => snsapi_userinfo
                     )
                      */
+                    Log :: write( $userOpenId." bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" );
                     if(empty($fansInfo)){
 
                         $web_access_token = '';
@@ -173,12 +174,13 @@ class BonusAction extends Action {
                             $web_access_token = $userinfoFromApi['access_token'];
                             cookie('user_openid', $userinfoFromApi['openid'], 315360000);
                             $userOpenId = $userinfoFromApi['openid'];
+                            Log :: write( $userOpenId." cccccccccccccccccccccccccc" );
                         }
 
                         //根据access_token 拉到用户基本信息
                         $gUrl = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$web_access_token.'&openid='.$userinfoFromApi['openid'].'&lang=zh_CN';
                         $json = json_decode($this->curlGet($gUrl));
-                        Log :: write( print_r("YES              ",true) );
+                        Log :: write( print_r("YES          eeeeeeeeeeeeeeeeeeeeeeeeee    ",true) );
                         Log :: write( print_r($json,true) );
                         /*$json 用户信息
                          * (
