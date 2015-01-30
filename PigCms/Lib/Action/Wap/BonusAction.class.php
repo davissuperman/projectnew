@@ -1197,6 +1197,10 @@ class BonusAction extends Action {
             }
 
 
+        }else{
+            //没有openid 系统有误  重定向到首页
+            $url = $this->url."/index.php?g=Wap&m=Bonus&a=index&gid=$this->gid";
+            header("location:$url");
         }
 
         $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
