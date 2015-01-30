@@ -1200,13 +1200,12 @@ class BonusAction extends Action {
         }
 
         $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
-
+        $openIdUrl = "&openid=$openid";
         if(isset( $_GET['show'] ) &&  $_GET['show']){
             $myselfopenid = $openid;
         }else{
             if(!$myselfopenid ){
                 //self用户不存在
-                $openIdUrl = "&openid=$myselfopenid";
                 $code = trim($_GET["code"]);
                 $state = trim($_GET['state']);
                 if ($code && $state == 'sentian') {
