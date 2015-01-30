@@ -1003,10 +1003,13 @@ class BonusAction extends Action {
      * 用户转发到朋友圈 得到转发数
      */
     public function sharetimeline() {
+        //需要考虑的问题 如果A 分享了 B 的主页
+
+
         $urlOpenId = $_GET['openid'];//当前转发的openid
         $gid = $_GET['gid'];//当前转发的openid
         $openId = cookie("user_openid");
-        $bonusInfoRedisKey = "bonusinfo_".$urlOpenId."_".$gid;
+        $bonusInfoRedisKey = "bonusinfo_".$openId."_".$gid;
         //判断selfOpenId是否有个人主页，如果有 则selfOpenId获得第一次分享的奖励
         $bonusInfo = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openId))->find();
         $return = 1;
