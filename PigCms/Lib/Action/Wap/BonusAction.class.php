@@ -101,6 +101,7 @@ class BonusAction extends Action {
         $gid = $_GET['gid'];
         //统计end
         $userOpenId= cookie('user_openid');
+        //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
         if ($_GET['show']) {
             $userOpenId= $_GET['openid'];
