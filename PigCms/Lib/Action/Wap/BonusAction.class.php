@@ -1123,8 +1123,8 @@ class BonusAction extends Action {
         $urlOpenId = false;
         $bonusType = 0;
         $awardPhone = false;
-//        $myselfopenid = cookie("user_openid");//如果没有 需要弹出页面授权
-        $myselfopenid = null;//如果没有 需要弹出页面授权
+        $myselfopenid = cookie("user_openid");//如果没有 需要弹出页面授权
+//        $myselfopenid = null;//如果没有 需要弹出页面授权
         if(isset( $_GET['openid'] ) &&  $_GET['openid']){
             //获取当前的openid
             $openid = $_GET['openid'];//当前人的首页
@@ -1209,7 +1209,7 @@ class BonusAction extends Action {
             $myselfopenid = $openid;
         }else{
             if(!$myselfopenid ){
-                //self用户不存在
+                //self用户不存在 需要重新输入
                 $code = trim($_GET["code"]);
                 $state = trim($_GET['state']);
                 if ($code && $state == 'sentian') {
@@ -1276,6 +1276,48 @@ class BonusAction extends Action {
                     $url = urlencode($this->url."/index.php?g=Wap&m=Bonus&a=present$openIdUrl&gid=$this->gid");
                     header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_userinfo&state=sentian#wechat_redirect");
                     exit;
+                }
+            }else{
+                //$myselfopenid 存在 但是在表fans 中不存在
+                $fansInfo = M('customer_service_fans')->where(array('openid' => $myselfopenid,'token'=>'rggfsk1394161441'))->find();
+                if(!$fansInfo){
+                    //需要重新获取用户信息
+                    $code = trim($_GET["code"]);
+                    $state = trim($_GET['state']);
+                    if ($code && $state == 'sentian') {
+                        if(false){
+                            $web_access_token = $apidata['web_access_token'];
+                        }else{
+                            //重新获取
+                            $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
+                            if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
+                                //code 有错误 需要重定向
+                                $url = $this->url."/index.php?g=Wap&m=Bonus&a=present$openIdUrl&gid=$this->gid";
+                                header("location:$url");
+                            }
+                            $m['id'] = $apidata['id'];
+                            $m['web_access_token'] = $userinfoFromApi['access_token'];
+                            $m['refresh_token'] = $userinfoFromApi['refresh_token'];
+                            M('Diymen_set')->where(array('id' => $apidata['id']))->save($m);
+                            $web_access_token = $userinfoFromApi['access_token'];
+                            $myselfopenid = $userinfoFromApi['openid'];
+                            cookie('user_openid', $userinfoFromApi['openid'], 315360000);
+                        }
+                        $gUrl = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$web_access_token.'&openid='.$myselfopenid.'&lang=zh_CN';
+                        $json = json_decode($this->curlGet($gUrl));
+                        if(!$nickname){
+                            $nickname = $json->nickname;
+                        }
+
+                        if($myselfopenid == $openid){
+                            $imageProfile = $json->headimgurl;
+                        }
+                        $this->saveUserInfo($json);
+                    }else{
+                        $url = urlencode($this->url."/index.php?g=Wap&m=Bonus&a=present$openIdUrl&gid=$this->gid");
+                        header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_userinfo&state=sentian#wechat_redirect");
+                        exit;
+                    }
                 }
             }
             $accessToken = $apidata['access_token'];
