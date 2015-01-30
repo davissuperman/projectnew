@@ -104,22 +104,24 @@ class BonusAction extends Action {
         $selfUserInfo = array();
         if ($_GET['show']) {
             $userOpenId= $_GET['openid'];
-            $selfInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
+            $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
                 //测试的时候使用
             //如果存在 则不需要再通过weixin API调取用户信息
-            $selfUserInfo['headimgurl'] = $selfInfo['headimgurl'];
-            $selfUserInfo['nickname'] = $selfInfo['nickname'];
+            $selfUserInfo['headimgurl'] = $fansInfo['headimgurl'];
+            $selfUserInfo['nickname'] = $fansInfo['nickname'];
             $this->assign('gid', $gid);
             $this->assign('openid', $userOpenId);
             $this->assign('userinfo', $selfUserInfo);
             $this->assign('title', $selfUserInfo['nickname']."我要年终奖");
         } else {
             //根据open id获取用户信息，查看是否存在
-            $selfInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
-            if($userOpenId && $selfInfo){
+            $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
+            Log :: write( $userOpenId." aaaaaaaaaaaaaaaaaaaaaa" );
+            Log :: write( print_r($fansInfo,true) );
+            if($userOpenId && $fansInfo){
                 //如果存在 则不需要再通过weixin API调取用户信息
-                $selfUserInfo['headimgurl'] = $selfInfo['headimgurl'];
-                $selfUserInfo['nickname'] = $selfInfo['nickname'];
+                $selfUserInfo['headimgurl'] = $fansInfo['headimgurl'];
+                $selfUserInfo['nickname'] = $fansInfo['nickname'];
             }else{
                 $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
                 /*
@@ -156,8 +158,7 @@ class BonusAction extends Action {
                         $url = $this->url."/index.php?g=Wap&m=Bonus&a=index&gid=$this->gid";
                         header("location:$url");
                     }
-                    cookie('user_openid', $userinfoFromApi['openid'], 315360000);
-                    $userOpenId = $userinfoFromApi['openid'];
+
                     $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
                     if(empty($fansInfo)){
 
@@ -173,6 +174,8 @@ class BonusAction extends Action {
                             $m['refresh_token'] = $userinfoFromApi['refresh_token'];
                             M('Diymen_set')->where(array('id' => $apidata['id']))->save($m);
                             $web_access_token = $userinfoFromApi['access_token'];
+                            cookie('user_openid', $userinfoFromApi['openid'], 315360000);
+                            $userOpenId = $userinfoFromApi['openid'];
                         }
 
                         //根据access_token 拉到用户基本信息
