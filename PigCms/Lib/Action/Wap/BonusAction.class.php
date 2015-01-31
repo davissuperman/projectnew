@@ -1220,25 +1220,20 @@ class BonusAction extends Action {
                 $state = trim($_GET['state']);
                 if ($code && $state == 'sentian') {
                         $web_access_token = '';
-//                        if($apidata['web_access_token']){
-                        if(false){
-                            $web_access_token = $apidata['web_access_token'];
-                        }else{
-                            //重新获取
-                            $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
-                            if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
-                                //code 有错误 需要重定向
-                                $url = $this->url."/index.php?g=Wap&m=Bonus&a=present$openIdUrl&gid=$this->gid";
-                                header("location:$url");
-                            }
-                            $m['id'] = $apidata['id'];
-                            $m['web_access_token'] = $userinfoFromApi['access_token'];
-                            $m['refresh_token'] = $userinfoFromApi['refresh_token'];
-                            M('Diymen_set')->save($m);
-                            $web_access_token = $userinfoFromApi['access_token'];
-                            $myselfopenid = $userinfoFromApi['openid'];
-                            cookie('user_openid', $userinfoFromApi['openid'], 315360000);
+                        //重新获取
+                        $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
+                        if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
+                            //code 有错误 需要重定向
+                            $url = $this->url."/index.php?g=Wap&m=Bonus&a=present$openIdUrl&gid=$this->gid";
+                            header("location:$url");
                         }
+                        $m['id'] = $apidata['id'];
+                        $m['web_access_token'] = $userinfoFromApi['access_token'];
+                        $m['refresh_token'] = $userinfoFromApi['refresh_token'];
+                        M('Diymen_set')->save($m);
+                        $web_access_token = $userinfoFromApi['access_token'];
+                        $myselfopenid = $userinfoFromApi['openid'];
+                        cookie('user_openid', $userinfoFromApi['openid'], 315360000);
                         /**
                          * $userinfo
                          * (
