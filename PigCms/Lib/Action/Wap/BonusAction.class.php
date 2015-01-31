@@ -152,11 +152,25 @@ class BonusAction extends Action {
                     )
                      */
                     if(empty($fansInfo)){
-
+                        $webCreatetime = $apidata['web_createtime'];
                         $web_access_token = '';
-//                        if($apidata['web_access_token']){
-                        if(false){
+
+                        if($webCreatetime>(time()-7200) && $userOpenId){
+                            //未过期
                             $web_access_token = $apidata['web_access_token'];
+                        }else if($webCreatetime<=(time()-7200) && $userOpenId && isset($apidata['refresh_token']) && ($apidata['refresh_token_createtime']>(time()-7*3600*24))  ){
+                                //从新获取通过
+                                $urlRefreshToken = 'https://api.weixin.qq.com/sns/oauth2/refresh_token?appid='.
+                                    $apidata['appid'].'&grant_type=refresh_token&refresh_token='.$apidata['refresh_token'];
+                                $jsonRefresh = json_decode($this->curlGet($urlRefreshToken));
+                            $web_access_token = $jsonRefresh->access_token;
+                            $refresh_token = $jsonRefresh->refresh_token;
+                            $m['id'] = $apidata['id'];
+                            $m['web_access_token'] = $web_access_token;
+                            $m['refresh_token'] =$refresh_token;
+                            $m['web_createtime'] = time();
+                            $m['refresh_token_createtime'] = time();
+                            M('Diymen_set')->save($m);
                         }else{
                             //重新获取
                             $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
@@ -168,14 +182,17 @@ class BonusAction extends Action {
                             $m['id'] = $apidata['id'];
                             $m['web_access_token'] = $userinfoFromApi['access_token'];
                             $m['refresh_token'] = $userinfoFromApi['refresh_token'];
+                            $m['web_createtime'] = time();
+                            $m['refresh_token_createtime'] = time();
                             M('Diymen_set')->save($m);
                             $web_access_token = $userinfoFromApi['access_token'];
                             cookie('user_openid', $userinfoFromApi['openid'], 315360000);
                             $userOpenId = $userinfoFromApi['openid'];
+                            Log :: write("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
                         }
 
                         //根据access_token 拉到用户基本信息
-                        $gUrl = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$web_access_token.'&openid='.$userinfoFromApi['openid'].'&lang=zh_CN';
+                        $gUrl = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$web_access_token.'&openid='.$userOpenId.'&lang=zh_CN';
                         $json = json_decode($this->curlGet($gUrl));
 
                         $this->saveUserInfo($json);
