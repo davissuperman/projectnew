@@ -168,7 +168,7 @@ class BonusAction extends Action {
                             $m['id'] = $apidata['id'];
                             $m['web_access_token'] = $userinfoFromApi['access_token'];
                             $m['refresh_token'] = $userinfoFromApi['refresh_token'];
-                            M('Diymen_set')->where(array('id' => $apidata['id']))->save($m);
+                            M('Diymen_set')->save($m);
                             $web_access_token = $userinfoFromApi['access_token'];
                             cookie('user_openid', $userinfoFromApi['openid'], 315360000);
                             $userOpenId = $userinfoFromApi['openid'];
@@ -177,22 +177,7 @@ class BonusAction extends Action {
                         //根据access_token 拉到用户基本信息
                         $gUrl = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$web_access_token.'&openid='.$userinfoFromApi['openid'].'&lang=zh_CN';
                         $json = json_decode($this->curlGet($gUrl));
-                        /*$json 用户信息
-                         * (
-                            [openid] => oYkdqs5s1IEIhB9bulM2AJ6GgZh8
-                            [nickname] => 慢慢羊
-                            [sex] => 2
-                            [language] => zh_CN
-                            [city] =>
-                            [province] =>
-                            [country] => 埃及
-                            [headimgurl] => http://wx.qlogo.cn/mmopen/ib5dhAucxDgklImqj0d3PDdYjaR0jYjibhGR6JVGS0mGoqPkFIqweib7UIb4amYYDo0NOzvy4pqOShD1FlJib4Zc8gibQpCzP6eU8/0
-                            [privilege] => Array
-                                (
-                                )
 
-                        )
-                         */
                         $this->saveUserInfo($json);
                         $selfUserInfo['headimgurl'] = $json->headimgurl;
                         $selfUserInfo['nickname'] = $json->nickname;
@@ -379,7 +364,7 @@ class BonusAction extends Action {
         if ($ffind) {
             //$this->subscribe(1); //如果粉丝表中有此用户则重新关注
         } else {
-            if ($json->errcode) {//有些用户没有高级接口，不能获得用户信息
+            if (property_exists($json, 'errcode') && $json->errcode) {//有些用户没有高级接口，不能获得用户信息
             } else {
                 $fdata['openid'] =  $json->openid;
                 $fdata['token'] = $token;
@@ -1232,7 +1217,7 @@ class BonusAction extends Action {
                             $m['id'] = $apidata['id'];
                             $m['web_access_token'] = $userinfoFromApi['access_token'];
                             $m['refresh_token'] = $userinfoFromApi['refresh_token'];
-                            M('Diymen_set')->where(array('id' => $apidata['id']))->save($m);
+                            M('Diymen_set')->save($m);
                             $web_access_token = $userinfoFromApi['access_token'];
                             $myselfopenid = $userinfoFromApi['openid'];
                             cookie('user_openid', $userinfoFromApi['openid'], 315360000);
