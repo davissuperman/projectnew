@@ -1291,8 +1291,25 @@ class BonusAction extends Action {
                     $code = trim($_GET["code"]);
                     $state = trim($_GET['state']);
                     if ($code && $state == 'sentian') {
-                        if(false){
+                        $webCreatetime = $apidata['web_createtime'];
+                        $web_access_token = '';
+
+                        if($webCreatetime>(time()-7200) && $myselfopenid){
+                            //未过期
                             $web_access_token = $apidata['web_access_token'];
+                        }else if($webCreatetime<=(time()-7200) && $myselfopenid && isset($apidata['refresh_token']) && ($apidata['refresh_token_createtime']>(time()-7*3600*24))  ){
+                            //从新获取通过
+                            $urlRefreshToken = 'https://api.weixin.qq.com/sns/oauth2/refresh_token?appid='.
+                                $apidata['appid'].'&grant_type=refresh_token&refresh_token='.$apidata['refresh_token'];
+                            $jsonRefresh = json_decode($this->curlGet($urlRefreshToken));
+                            $web_access_token = $jsonRefresh->access_token;
+                            $refresh_token = $jsonRefresh->refresh_token;
+                            $m['id'] = $apidata['id'];
+                            $m['web_access_token'] = $web_access_token;
+                            $m['refresh_token'] =$refresh_token;
+                            $m['web_createtime'] = time();
+                            $m['refresh_token_createtime'] = time();
+                            M('Diymen_set')->save($m);
                         }else{
                             //重新获取
                             $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
