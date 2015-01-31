@@ -1151,9 +1151,8 @@ class BonusAction extends Action {
                     $bonusInfo = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openid))->find();
                     if(!$bonusInfo){
                         //如果当前人ID 存在， 则获取当前人的信息
-                        $urlOpenIdInfo = M('customer_service_fans')->where(array('openid' =>$openid,'token'=>'rggfsk1394161441'))->find();
-                        $nickname = $urlOpenIdInfo['nickname'];
-                        $imageProfile = $urlOpenIdInfo['headimgurl'];
+                        $nickname = $infoFromUrlOpenId['nickname'];
+                        $imageProfile = $infoFromUrlOpenId['headimgurl'];
                         $this->saveBonusInfo($gid,$openid,$nickname,$imageProfile);
                         //存储数据到redis
                         $this->cache->redis->hset($bonusInfoRedisKey,'gid',$gid);
@@ -1161,7 +1160,7 @@ class BonusAction extends Action {
                         $this->cache->redis->hset($bonusInfoRedisKey,'headimgurl',$imageProfile);
                         $this->cache->redis->hset($bonusInfoRedisKey,'openid',$openid);
                     }else{
-                        $nickname = $bonusInfo['nickname'];
+                        $nickname = $bonusInfo['name'];
                         $voteNumber = $bonusInfo['vote'];
                         $imageProfile = $bonusInfo['headimgurl'];
                         //存储数据到redis
