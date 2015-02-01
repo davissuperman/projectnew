@@ -117,7 +117,9 @@ class BonusAction extends UserAction {
                 $tmp['sex'] = "未知";
             }
             $tmp['province'] = $fansInfo['province'];
-            $res = M('bonus_award')->where(array( 'openid' =>  $each['openid'] ))->field('type,telephone')->find();
+            $map['openid']  = $each['openid'];
+            $map['telephone']  = array('gt',0);
+            $res = M('bonus_award')->where($map)->field('type,telephone')->find();
             $tmp['tel'] = $res['telephone'];
 
             $infoList[] = $tmp;
