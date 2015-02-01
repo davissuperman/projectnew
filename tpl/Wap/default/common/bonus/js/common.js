@@ -114,6 +114,7 @@ function showLayer($elem,isBlack,title){
 	$layerbox.show().css({right:'-'+wini});
 	$layerbox.animate({right:0}, 'fast', '' ,'');
 	$elem.show().siblings().hide();
+	document.body.scrollTop = 0;
 }
 
 function cal_con_hg(){
