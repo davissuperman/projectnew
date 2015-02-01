@@ -834,7 +834,6 @@
         //四等奖需要输入手机号
         $("#submitphone").click(function(){
             var phone = $("#telephone_four_level").val();
-            alert(phone.length);
             if(phone == ''){
                 mnAlert("请输入手机号");
             }else if(phone.length != 11){
