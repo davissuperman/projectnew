@@ -82,14 +82,47 @@ class BonusAction extends UserAction {
     }
 
     public function slist() {
+        $gid = $_GET['gid'];
         $db = M('bonus_info');
-        $where = array('gid' => $_GET['gid']);
+        $where = array('gid' => $gid);
         $count = $db->where($where)->count();
         $page = new Page($count, 25);
         $info = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->order('createtime desc')->select();
-        $this->assign('info', $info);
+//根据GID 得到渠道
+        $gidInfo = M('bonus')->where(array('gid' => $gid))->find();
+        $infoList = array();
+        foreach($info as $each ){
+            $tmp = array();
+            $tmp['name'] = $each['name'];
+            $tmp['views'] = $each['views'];
+            $tmp['share'] = $each['share'];
+            $tmp['vote'] = $each['vote'];
+            $tmp['joins'] = $each['joins'];
+            $tmp['openid'] = $each['openid'];
+            $tmp['number'] = $each['number'];
+            $fansInfo = M('customer_service_fans')->where(array('openid' => $each['openid'],'token'=>'rggfsk1394161441'))->find();
+            $whetherSbuscribe = $fansInfo['subscribe'];
+            if($whetherSbuscribe == 1){
+                $tmp['subscribe'] = "是";
+            }else{
+                $tmp['subscribe'] = "否";
+            }
+            $sex = $fansInfo['sex'];
+            if($sex == 1){
+                $tmp['sex'] = "男";
+            }else if($sex == 2){
+                $tmp['sex'] = "女";
+            }else{
+                $tmp['sex'] = "未知";
+            }
+            $tmp['province'] = $fansInfo['province'];
+            $infoList[] = $tmp;
+        }
+        $this->assign('info', $infoList);
         $this->assign('page', $page->show());
         $this->assign('token', $this->token);
+        $this->assign('comefrom', $gidInfo['title']);
+
         $this->display('list');
     }
 
