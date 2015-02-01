@@ -489,7 +489,7 @@
                             <if condition="$awardphone eq  false">
                                 <input type="tel" name="telephone" class="input-text" id="telephone_three_level"/>
                                 <else />
-                                <input type="tel" name="telephone" class="input-text btn-disabled" id="telephone_three_level" value="{pigcms::$awardphone}"/>
+                                <input type="tel" name="telephone" readonly="readonly" class="input-text btn-disabled" id="telephone_three_level" value="{pigcms::$awardphone}"/>
                             </if>
                         </div>
                     </li>
@@ -518,7 +518,7 @@
                             <if condition="$awardphone eq  false">
                                 <input type="tel" name="telephone" class="input-text" id="telephone_four_level"/>
                             <else />
-                                <input type="tel" name="telephone" class="input-text btn-disabled" id="telephone_four_level" value="{pigcms::$awardphone}"/>
+                                <input type="tel" name="telephone" class="input-text btn-disabled" readonly="readonly" id="telephone_four_level" value="{pigcms::$awardphone}"/>
                             </if>
                         </div>
                     </li>
@@ -927,7 +927,7 @@
             var province = $("#firstprovince").val();
             var gid = "{pigcms::$gid}";
             var openid = "{pigcms::$openid}";
-            if(telephone == '' || !isMobile){
+            if(telephone == ''){
                 mnAlert("请输入正确的手机号码！");
                 return false;
             }else if(username == ""){
