@@ -809,7 +809,7 @@
             var phone = $("#telephone_three_level").val();
             if(phone == ''){
                 mnAlert("请输入手机号");
-            }else if(!phone.match(/^[1][3][0-9]{9}$/)){
+            }else if(phone.length != 11){
                 mnAlert("请输入正确的手机号");
             }else{
                 $.get(
@@ -834,9 +834,10 @@
         //四等奖需要输入手机号
         $("#submitphone").click(function(){
             var phone = $("#telephone_four_level").val();
+            alert(phone.length);
             if(phone == ''){
                 mnAlert("请输入手机号");
-            }else if(!phone.match(/^[1][3][0-9]{9}$/)){
+            }else if(phone.length != 11){
                 mnAlert("请输入正确的手机号");
             }else{
                 $.get(
