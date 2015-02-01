@@ -249,7 +249,7 @@
         <if condition="$tel neq $openid ">
             <p class="mt-20">
                 <a href="./index.php?g=Wap&m=Bonus&a=present&gid={pigcms::$gid}&openid={pigcms::$tel}&joins=1&preopenid={pigcms::$openid}">
-                    <span class="btn-zi-h40 w160">我也要年终奖</span>
+                    <span class="btn-zi-h40">我也要年终奖</span>
                 </a>
             </p>
         </if>
@@ -769,6 +769,8 @@
         $("#showallhistory").click(function(){
 			var $this =  $(this);
 			$this.html("加载中...");
+			if($this.hasClass("btn-disabled")){return false;}
+			$this.addClass("btn-disabled");
             $.ajax({
                 url: "{pigcms::$siteurl}/index.php?g=Wap&m=Bonus&a=showAllHistory&gid={pigcms::$gid}&openid={pigcms::$openid}",
                 type:'GET',
@@ -792,6 +794,7 @@
                         }
                         $("#historylistall").html(html);
                         $("#showallhistory").hide();
+						$this.removeClass("btn-disabled");
                     }
 
             });
@@ -806,6 +809,8 @@
         });
         //三等奖 submitphone_threelevel
         $("#submitphone_threelevel").click(function(){
+			var $this = $(this);
+			if($this.hasClass("btn-disabled")){return false;}
             var phone = $("#telephone_three_level").val();
             if(phone == ''){
                 mnAlert("请输入手机号");
@@ -833,6 +838,8 @@
         });
         //四等奖需要输入手机号
         $("#submitphone").click(function(){
+			var $this = $(this);
+			if($this.hasClass("btn-disabled")){return false;}
             var phone = $("#telephone_four_level").val();
             if(phone == ''){
                 mnAlert("请输入手机号");
@@ -860,6 +867,8 @@
         });
 
         $("#secondconfirm").click(function(){
+			var $this = $(this);
+			if($this.hasClass("btn-disabled")){return false;}
             var username = $.trim($("#seconduser").val());
             var telephone = $.trim($("#secondphone").val());
             var address = $.trim($("#secondaddress").val());
@@ -909,6 +918,9 @@
 
         //一等奖需要输入详细地址
         $("#firstconfirm").click(function(){
+			var $this = $(this);
+			if($this.hasClass("btn-disabled")){return false;}
+			
             var username = $("#firstuser").val();
             var telephone = $("#firstphone").val();
             var address = $("#firstaddress").val();
