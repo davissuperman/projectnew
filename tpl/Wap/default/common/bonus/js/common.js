@@ -92,6 +92,7 @@ function closeLayer(){
 		//$layerbox.hide();
 		var wini = document.documentElement.clientWidth+"px";
 		$layerbox.animate({right:'-'+wini}, 'fast', '', function(){$layerbox.hide();});
+		$("#body").css({"background":"#c70d25 url(/tpl/Wap/default/common/bonus/images/01/bg.png) repeat"});
 	});
 }
 /*show layer*/
@@ -115,6 +116,7 @@ function showLayer($elem,isBlack,title){
 	$layerbox.animate({right:0}, 'fast', '' ,'');
 	$elem.show().siblings().hide();
 	document.body.scrollTop = 0;
+	$("#body").css({"background":"none"});
 }
 
 function cal_con_hg(){
