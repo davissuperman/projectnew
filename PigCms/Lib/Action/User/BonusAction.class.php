@@ -100,6 +100,7 @@ class BonusAction extends UserAction {
             $tmp['joins'] = $each['joins'];
             $tmp['openid'] = $each['openid'];
             $tmp['number'] = $each['number'];
+            $tmp['sharetime'] = $each['sharetime'];
             $fansInfo = M('customer_service_fans')->where(array('openid' => $each['openid'],'token'=>'rggfsk1394161441'))->find();
             $whetherSbuscribe = $fansInfo['subscribe'];
             if($whetherSbuscribe == 1){
@@ -116,6 +117,9 @@ class BonusAction extends UserAction {
                 $tmp['sex'] = "未知";
             }
             $tmp['province'] = $fansInfo['province'];
+            $res = M('bonus_award')->where(array( 'openid' =>  $each['openid'] ))->field('type,telephone')->find();
+            $tmp['tel'] = $res['telephone'];
+
             $infoList[] = $tmp;
         }
         $this->assign('info', $infoList);
