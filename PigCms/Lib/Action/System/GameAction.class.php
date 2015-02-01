@@ -3,7 +3,7 @@
 class GameAction extends BackAction {
 
     public function index() {
-        $db = M('doing_info');
+        $db = M('bonus_info');
         $count = $db->count();
         $page = new Page($count, 25);
         $info = $db->limit($page->firstRow . ',' . $page->listRows)->order('createtime desc')->select();
@@ -14,8 +14,8 @@ class GameAction extends BackAction {
     }
 
     public function rsum() {
-        $db = M('doing_info');
-        $sql = "SELECT DATE_FORMAT(FROM_UNIXTIME(createtime),'%Y-%m-%d') as d,COUNT(id) as n, sum(share) as s, sum(views) as v, sum(vote) as vo , sum(joins) as js FROM `tp_doing_info` group by d";
+        $db = M('bonus_info');
+        $sql = "SELECT DATE_FORMAT(FROM_UNIXTIME(createtime),'%Y-%m-%d') as d,COUNT(id) as n, sum(share) as s, sum(views) as v, sum(vote) as vo , sum(joins) as js FROM `tp_bonus_info` group by d";
         $list1 = $db->query($sql);
         $num = count($list1);
         $p = new Page($num, 25);
