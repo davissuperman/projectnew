@@ -327,6 +327,7 @@ class BonusAction extends Action {
                     $fourOrderId = $each['orderid'];
                     $fourlevelId = $each['id'];
                     $fourTime = $each['createtime'];
+                    $fourOrderTime = $each['order_time'];
                 }
                 if($type == 3){
                     //四等奖存在
@@ -334,6 +335,7 @@ class BonusAction extends Action {
                     $threeOrderId = $each['orderid'];
                     $threelevelId = $each['id'];
                     $threeTime = $each['createtime'];
+                    $threeOrderTime = $each['order_time'];
                 }
             }
         }else{
@@ -355,8 +357,21 @@ class BonusAction extends Action {
 
         $this->assign('fourtime',date("Y-m-d H:i:s",$fourTime));
         $this->assign('fourtimediff',$this->timediff($fourTime,time()));
+        if($fourOrderTime){
+            $this->assign('fourordertime',date("Y-m-d H:i:s",$fourOrderTime));
+        }else{
+            $this->assign('fourordertime',false);
+        }
+
         $this->assign('threetime',date("Y-m-d H:i:s",$threeTime));
         $this->assign('threetimediff',$this->timediff($threeTime,time()));
+        if($threeOrderTime){
+            $this->assign('threeordertime',date("Y-m-d H:i:s",$threeOrderTime));
+        }else{
+            $this->assign('threeordertime',false);
+        }
+
+
         $this->display();
     }
     function timediff($begin_time,$end_time)
@@ -392,6 +407,7 @@ class BonusAction extends Action {
         $id = $_POST['id'];
         $h['id'] = $id;
         $h['orderid'] = $orderid;
+        $h['order_time'] = time();
         $return = M("bonus_award")->where(array('id' =>$id))->save($h);
 
         echo $return;
