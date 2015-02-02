@@ -1517,6 +1517,12 @@ class BonusAction extends Action {
                 if( !$phone && $each['type'] == 3){
                     $phone = $each['telephone'];
                 }
+                if( !$phone && $each['type'] == 2){
+                    $phone = $each['telephone'];
+                }
+                if( !$phone && $each['type'] == 1){
+                    $phone = $each['telephone'];
+                }
             }
             if(in_array(4,$awardList)){
                 //四等奖已经领奖
@@ -1616,6 +1622,7 @@ class BonusAction extends Action {
         $address = (isset($_REQUEST['address']) && $_REQUEST['address'])?$_REQUEST['address']:''   ;
         $province = (isset($_REQUEST['province']) && $_REQUEST['province'])?$_REQUEST['province']:''    ;
         $type =2;
+        $bonusInfoRedisKey = "bonusinfo_".$openId."_".$gid;
         if(isset($_REQUEST['type']) && $_REQUEST['type']){
             $type = $_REQUEST['type'];
         }
@@ -1660,11 +1667,13 @@ class BonusAction extends Action {
                             $r = M('bonus_award')->add($d);
                         }
                         //此用户是中奖用户，需要清空此用户的分数 活动结束
-                        $bonusInfoId = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openId))->getField('id');
-                        $h['bonustype'] = 2;
-                        $this->cache->redis->hset($this->hashKeyBonusInfo,'bonustype',2);
-                        $h['id'] = $bonusInfoId;
-                        M('bonus_info')->save($h);
+                        $bonusInfo = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openId))->field('id,bonustype')->find();
+                        if($bonusInfo['bonustype'] == 0 || $bonusInfo['bonustype'] >2){
+                            $h['bonustype'] = 2;
+                            $h['id'] = $bonusInfo['id'];
+                            M('bonus_info')->save($h);
+                            $this->cache->redis->hset($bonusInfoRedisKey,'bonustype',2);
+                        }
                         $r = 2;
                     }
                     break;
@@ -1702,11 +1711,13 @@ class BonusAction extends Action {
                             $r = M('bonus_award')->add($d);
                         }
                         //此用户是中奖用户，需要清空此用户的分数 活动结束
-                        $bonusInfoId = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openId))->getField('id');
-                        $h['bonustype'] = 1;
-                        $this->cache->redis->hset($this->hashKeyBonusInfo,'bonustype',1);
-                        $h['id'] = $bonusInfoId;
-                        M('bonus_info')->save($h);
+                        $bonusInfo = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openId))->field('id,bonustype')->find();
+                        if($bonusInfo['bonustype'] == 0 || $bonusInfo['bonustype'] >1){
+                            $h['bonustype'] = 1;
+                            $h['id'] = $bonusInfo['id'];
+                            M('bonus_info')->save($h);
+                            $this->cache->redis->hset($bonusInfoRedisKey,'bonustype',1);
+                        }
                         $r = 2;
                     }
                     break;
@@ -1738,11 +1749,14 @@ class BonusAction extends Action {
                             $r = M('bonus_award')->add($d);
                         }
                         //此用户是中奖用户，需要清空此用户的分数 活动结束
-                        $bonusInfoId = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openId))->getField('id');
-                        $h['bonustype'] = 4;
-                        $this->cache->redis->hset($this->hashKeyBonusInfo,'bonustype',4);
-                        $h['id'] = $bonusInfoId;
-                        M('bonus_info')->save($h);
+//                        $bonusInfoId = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openId))->getField('id');
+                        $bonusInfo = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openId))->field('id,bonustype')->find();
+                        if($bonusInfo['bonustype'] == 0 || $bonusInfo['bonustype'] >4){
+                            $h['bonustype'] = 4;
+                            $h['id'] = $bonusInfo['id'];
+                            M('bonus_info')->save($h);
+                            $this->cache->redis->hset($bonusInfoRedisKey,'bonustype',4);
+                        }
                         $r = 2;
                     }
 
@@ -1775,11 +1789,13 @@ class BonusAction extends Action {
                             $r = M('bonus_award')->add($d);
                         }
                         //此用户是中奖用户，需要清空此用户的分数 活动结束
-                        $bonusInfoId = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openId))->getField('id');
-                        $h['bonustype'] = 3;
-                        $this->cache->redis->hset($this->hashKeyBonusInfo,'bonustype',3);
-                        $h['id'] = $bonusInfoId;
-                        M('bonus_info')->save($h);
+                        $bonusInfo = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openId))->field('id,bonustype')->find();
+                        if($bonusInfo['bonustype'] == 0 || $bonusInfo['bonustype'] >3){
+                            $h['bonustype'] = 3;
+                            $h['id'] = $bonusInfo['id'];
+                            M('bonus_info')->save($h);
+                            $this->cache->redis->hset($bonusInfoRedisKey,'bonustype',3);
+                        }
                         $r = 2;
                     }
 
