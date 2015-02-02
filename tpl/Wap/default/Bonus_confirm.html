@@ -54,7 +54,8 @@
                         <li class="clrfix">
                             <div class="label">一盒换购订单号：</div>
                             <div class="controls">
-                                <span>提交时间： {pigcms:$fourtime}</span>
+                                <span>提交时间： {pigcms:$fourtime}</span><br/>
+                                <span>距离当前时间为{pigcms:$fourtimediff['day']}天{pigcms:$fourtimediff['hour']}小时{pigcms:$fourtimediff['min']}分钟{pigcms:$fourtimediff['sec']}秒</span><br/>
                                 <input type="hidden" id="fourlevelid" value="{pigcms::$fourlevelid}">
                                 <input type="text" class="input-text" id="orderNumberForFourLevel" placeholder="请输入一盒换购订单号" name="fourorderid" value="{pigcms::$fourorderid}">
                             </div>
@@ -69,7 +70,8 @@
                         <li class="clrfix">
                             <div class="label">六盒换购订单号：</div>
                             <div class="controls">
-                                <span>提交时间： {pigcms:$threetime}</span>
+                                <span>提交时间： {pigcms:$threetime}</span><br/>
+                                <span>距离当前时间为{pigcms:$threetimediff['day']}天{pigcms:$threetimediff['hour']}小时{pigcms:$threetimediff['min']}分钟{pigcms:$threetimediff['sec']}秒</span><br/>
                                 <input type="hidden" id="threelevelid" value="{pigcms::$threelevelid}">
                                 <input type="text" class="input-text" placeholder="请输入六盒换购订单号"  name="threeorderid"  id="orderNumberForThreeLevel" value="{pigcms::$threeorderid}">
                             </div>
