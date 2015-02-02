@@ -13,6 +13,14 @@
     <link href="{pigcms::RES}/bonus/css/common.css?v=201501302217" rel="stylesheet" type="text/css" />
     <script src="{pigcms::RES}/bonus/js/zepto.min.js?v=201501242217" type="text/javascript"></script>
     <script src="{pigcms::RES}/bonus/js/common.js?v=201501282217" type="text/javascript"></script>
+    <if condition="$redirect eq 4">
+        <meta http-equiv="refresh" content="2; url=http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=204135881&idx=1&sn=9de48901e372517b6df47567eaf12db7&key=79cf83ea5128c3e5ebc3820644240638ac8d1d1fc0973441774626ae76b54bb5c99c5aec5a344b4033e3f6ce0560cb6d&ascene=1&uin=MTU2NjU5Mjc2Mw%3D%3D&devicetype=webwx&version=70000001&pass_ticket=bYdmw9sWe7e4D8EzqjZcxyDcK9ctRYxCKuoE6bnnzDYuJLbCWxaKt5Xpe4OBZvgh">
+        <elseif condition="$redirect eq 3" />
+        <meta http-equiv="refresh" content="2; url=http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=204136724&idx=1&sn=3528d785ae3d1f179339d8bfb8ad2606&key=79cf83ea5128c3e52dd08bb48805d5d9a414a6ed0c95b948fc15a3e0c1da2f54735493dec4987c77fc02bf29425103a7&ascene=1&uin=MTU2NjU5Mjc2Mw%3D%3D&devicetype=webwx&version=70000001&pass_ticket=bYdmw9sWe7e4D8EzqjZcxyDcK9ctRYxCKuoE6bnnzDYuJLbCWxaKt5Xpe4OBZvgh">
+        <elseif condition="$redirect eq 2 or $redirect eq 1" />
+        <meta http-equiv="refresh" content="2; url=http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=204136816&idx=1&sn=c303154d60fa85db0e02e5c34630b4b8&key=79cf83ea5128c3e5030c6f84deb44928b238a8430d75db85b3fb163d3e824ee6b2123137cb9b7496262f71bd726d898f&ascene=1&uin=MTU2NjU5Mjc2Mw%3D%3D&devicetype=webwx&version=70000001&pass_ticket=bYdmw9sWe7e4D8EzqjZcxyDcK9ctRYxCKuoE6bnnzDYuJLbCWxaKt5Xpe4OBZvgh">
+        <else />
+    </if>
 </head>
 <body id="body">
 <!--<button  onclick="showLayer($('#layer-alert-share-success'))" >onMenuShareAppMessage</button>
@@ -829,7 +837,8 @@
                                 mnAlert("保存成功！");
                                 $("#layer-box").hide();
                                 $("#contents").show();
-                                location.href="http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=204136724&idx=1&sn=3528d785ae3d1f179339d8bfb8ad2606&key=79cf83ea5128c3e52dd08bb48805d5d9a414a6ed0c95b948fc15a3e0c1da2f54735493dec4987c77fc02bf29425103a7&ascene=1&uin=MTU2NjU5Mjc2Mw%3D%3D&devicetype=webwx&version=70000001&pass_ticket=bYdmw9sWe7e4D8EzqjZcxyDcK9ctRYxCKuoE6bnnzDYuJLbCWxaKt5Xpe4OBZvgh";
+                                location.href = "./index.php?g=Wap&m=Bonus&a=present&gid={pigcms::$gid}&openid={pigcms::$openid}&redirect=3";
+                                //location.href="http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=204136724&idx=1&sn=3528d785ae3d1f179339d8bfb8ad2606&key=79cf83ea5128c3e52dd08bb48805d5d9a414a6ed0c95b948fc15a3e0c1da2f54735493dec4987c77fc02bf29425103a7&ascene=1&uin=MTU2NjU5Mjc2Mw%3D%3D&devicetype=webwx&version=70000001&pass_ticket=bYdmw9sWe7e4D8EzqjZcxyDcK9ctRYxCKuoE6bnnzDYuJLbCWxaKt5Xpe4OBZvgh";
                             }
                         }
                 );
@@ -858,7 +867,8 @@
                                 mnAlert("保存成功！");
                                 $("#layer-box").hide();
                                 $("#contents").show();
-                                location.href="http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=204135881&idx=1&sn=9de48901e372517b6df47567eaf12db7&key=79cf83ea5128c3e5ebc3820644240638ac8d1d1fc0973441774626ae76b54bb5c99c5aec5a344b4033e3f6ce0560cb6d&ascene=1&uin=MTU2NjU5Mjc2Mw%3D%3D&devicetype=webwx&version=70000001&pass_ticket=bYdmw9sWe7e4D8EzqjZcxyDcK9ctRYxCKuoE6bnnzDYuJLbCWxaKt5Xpe4OBZvgh";
+                                location.href = "./index.php?g=Wap&m=Bonus&a=present&gid={pigcms::$gid}&openid={pigcms::$openid}&redirect=4";
+                               // location.href="http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=204135881&idx=1&sn=9de48901e372517b6df47567eaf12db7&key=79cf83ea5128c3e5ebc3820644240638ac8d1d1fc0973441774626ae76b54bb5c99c5aec5a344b4033e3f6ce0560cb6d&ascene=1&uin=MTU2NjU5Mjc2Mw%3D%3D&devicetype=webwx&version=70000001&pass_ticket=bYdmw9sWe7e4D8EzqjZcxyDcK9ctRYxCKuoE6bnnzDYuJLbCWxaKt5Xpe4OBZvgh";
                             }
                         }
                 );
@@ -909,7 +919,8 @@
                         $("#layer-box").hide();
 						$("#contents").show();
                         //需要重新加载页面，重置个人主页
-                        location.href = "http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=204136816&idx=1&sn=c303154d60fa85db0e02e5c34630b4b8&key=79cf83ea5128c3e5030c6f84deb44928b238a8430d75db85b3fb163d3e824ee6b2123137cb9b7496262f71bd726d898f&ascene=1&uin=MTU2NjU5Mjc2Mw%3D%3D&devicetype=webwx&version=70000001&pass_ticket=bYdmw9sWe7e4D8EzqjZcxyDcK9ctRYxCKuoE6bnnzDYuJLbCWxaKt5Xpe4OBZvgh";
+                        location.href = "./index.php?g=Wap&m=Bonus&a=present&gid={pigcms::$gid}&openid={pigcms::$openid}&redirect=2";
+                        //location.href = "http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=204136816&idx=1&sn=c303154d60fa85db0e02e5c34630b4b8&key=79cf83ea5128c3e5030c6f84deb44928b238a8430d75db85b3fb163d3e824ee6b2123137cb9b7496262f71bd726d898f&ascene=1&uin=MTU2NjU5Mjc2Mw%3D%3D&devicetype=webwx&version=70000001&pass_ticket=bYdmw9sWe7e4D8EzqjZcxyDcK9ctRYxCKuoE6bnnzDYuJLbCWxaKt5Xpe4OBZvgh";
                     }
                 }
 
@@ -960,7 +971,8 @@
                         $("#firstlevel_address").hide();
                         $("#fade").hide();
                         //需要重新加载页面，重置个人主页
-                        location.href = "http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=204136816&idx=1&sn=c303154d60fa85db0e02e5c34630b4b8&key=79cf83ea5128c3e5030c6f84deb44928b238a8430d75db85b3fb163d3e824ee6b2123137cb9b7496262f71bd726d898f&ascene=1&uin=MTU2NjU5Mjc2Mw%3D%3D&devicetype=webwx&version=70000001&pass_ticket=bYdmw9sWe7e4D8EzqjZcxyDcK9ctRYxCKuoE6bnnzDYuJLbCWxaKt5Xpe4OBZvgh";
+                        location.href = "./index.php?g=Wap&m=Bonus&a=present&gid={pigcms::$gid}&openid={pigcms::$openid}&redirect=1";
+                        //location.href = "http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=204136816&idx=1&sn=c303154d60fa85db0e02e5c34630b4b8&key=79cf83ea5128c3e5030c6f84deb44928b238a8430d75db85b3fb163d3e824ee6b2123137cb9b7496262f71bd726d898f&ascene=1&uin=MTU2NjU5Mjc2Mw%3D%3D&devicetype=webwx&version=70000001&pass_ticket=bYdmw9sWe7e4D8EzqjZcxyDcK9ctRYxCKuoE6bnnzDYuJLbCWxaKt5Xpe4OBZvgh";
                     }
                 }
 

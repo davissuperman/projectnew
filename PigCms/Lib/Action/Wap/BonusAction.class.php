@@ -1129,6 +1129,7 @@ class BonusAction extends Action {
         $bonusType = 0;
         $awardPhone = false;
         $myselfopenid = cookie("user_openid");//如果没有 需要弹出页面授权
+        $redirect = 0;
 //        $myselfopenid = null;//如果没有 需要弹出页面授权
         if(isset( $_GET['openid'] ) &&  $_GET['openid']){
             //获取当前的openid
@@ -1486,6 +1487,10 @@ class BonusAction extends Action {
 
         //获得三四等奖的手机号
         $this->assign("awardphone",$awardPhone);
+
+        //重定向页面
+        $redirect = $_GET['redirect'];
+        $this->assign("redirect",$redirect);
 
         $this->display();
     }
