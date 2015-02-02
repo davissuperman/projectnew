@@ -35,7 +35,7 @@
     </if>
 </section>
 -->
-<section class="contents" id="contents" style="padding-bottom:60px;">
+<section class="contents" id="contents" style="padding-bottom:100px;">
     <div class="top-box">
         <div class="profile">
             <div class="img">
@@ -59,7 +59,7 @@
         <div class="present-list">
             <!-- 1等奖 -->
             <div class="clrfix item">
-                <div class="p1" onClick="showLayer($('#one-present'),'1');">
+                <div class="p1" onClick="showLayer($('#one-present'));">
                     <i class="icon-phone fl"></i>
                     <span class="fl mt-20">iPhone6<br/>大奖<i class="icon-arrow ml-10"></i></span>
                 </div>
@@ -239,13 +239,13 @@
         </div>
     </div>
 
-    <!--<div class="ta-c mt-20">-->
+    <!--<div class="ta-c mt-20 btn-wrap">-->
         <!--<span class="btn-blue-h40 w160 btn-share">邀请好友为我加油</span>-->
     <!--</div>-->
-	<div class="ta-c mt-20">
+	<div class="ta-c mt-20 btn-wrap">
         <span class="btn-blue-h40 btn-share"><i class="icon2" style="margin-top:8px;"></i>给我投票加油</span>
     </div>
-    <div class="ta-c mt-20">
+    <div class="ta-c mt-20 btn-wrap">
         <p>
             <if condition="$tel neq $openid and $voteinfo eq false">
                 <span class="btn-blue-h40" onClick="showget();" >投他一票</span>
@@ -295,38 +295,29 @@
     <div class="layer-wrap">
         <div class="layer-con">
             <div class="layer-phone hide" id="one-present">
-                <div class="phone-tit">
-                    <i class="dot1"></i>
-                    <i class="dot2"></i>
-                    <i class="dot3"></i>
-                </div>
-                <div class="phone-con fz16">
-                    <h2 class="ta-c fz20">一等奖奖品详情</h2>
-                    <p class="mt-10">价值5288元</p>
-                    <p class="mt-5">Iphone6</p>
-                    <p class="mt-5">（16G）</p>
-                    <p class="mt-5">1部</p>
-                    <p class="mt-5">颜色随机</p>
-                    <p class="mt-5">以实物为准</p>
-                    <p class="mt-5">共计3部,兑完为止</p>
-                    <span class="back btn-close">返回</span>
-                </div>
-                <i class="dot4"></i>
+               	<h2 class="ta-c fz20 pt-10">一等奖奖品详情</h2>
+                <p class="ta-c mt-10">
+                	<img src="images/01/i16.png" alt="" width="60px">
+                </p>
+                <p>价值5288元</p>
+				<p>IPHONE6 (16G)</p>
+				<p>1部</p>
+				<p>颜色以实物为准</p>
+				<p>总计3部，领完为止</p>
+                <span class="back btn-close">返回</span>
             </div>
 
             <div class="layer-ipad hide" id="two-present">
-                <i class="dot1"></i>
-                <i class="dot2"></i>
-                <div class="ipad-con fz16">
-                    <h2 class="ta-c fz20">二等奖奖品详情</h2>
-                    <p class="mt-10">价值2198元</p>
-                    <p class="mt-5">Ipad Mini2</p>
-                    <p class="mt-5">（WLAN 16G）</p>
-                    <p class="mt-5">1部</p>
-                    <p class="mt-5">颜色以实物为准</p>
-                    <p class="mt-5">共计5部,兑完为止</p>
-                    <span class="back btn-close">返回</span>
-                </div>
+                <h2 class="ta-c fz20 pt-10">二等奖奖品详情</h2>
+                <p class="ta-c mt-10">
+                	<img src="images/01/i18.png" alt="" width="90px">
+                </p>
+                <p>价值2198元</p>
+				<p>IPAD Mini2(wlan 16G)</p>
+				<p>1部</p>
+				<p>颜色以实物为准</p>
+				<p>总计5部，领完为止</p>
+                <span class="back btn-close">返回</span>
             </div>
 
             <div class="three-present hide fz16" id="three-present">
@@ -342,7 +333,7 @@
             <div class="four-present hide fz16" id="four-present">
                 <h2 class="ta-c fz20 pt-10">四等奖奖品详情</h2>
                 <p class="ta-c mt-10">
-                    <img src="{pigcms::RES}/bonus/images/01/i10.png" alt="" width="86px"/>
+                    <img src="{pigcms::RES}/bonus/images/01/i19.png" alt="" width="86px"/>
                 </p>
                 <p class="mt-10 lh-22">10元换购价值49元森田药妆明星面膜一盒（产品及包装随机发送、以实物为准）</p>
                 <p class="fz20">总计3000份,兑完为止</p>

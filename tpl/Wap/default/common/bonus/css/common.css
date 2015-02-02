@@ -595,23 +595,49 @@ animation: rubberBand 2s ease-in 0 infinite;}
 .layer-box{position: absolute; width: 100%;height: 100%;top: 0;z-index: 99;}
 .layer-bg{position: fixed;width: 100%;height: 100%;background: #fff7da;top: 0;left: 0;z-index: 99;}
 .layer-wrap{ width:100%; position:absolute; top:0; left:50%;z-index:100;margin-left: -50%;}
-.layer-phone{ background:#fff; -moz-border-radius:20px;-ms-border-radius:20px;-o-border-radius:20px;-webkit-border-radius:20px;border-radius:20px; height:320px;width:190px; margin:0 auto; margin-top:10%; position:relative;}
+.layer-phone{ background: #fc4c4a;
+-moz-border-radius: 10px;
+-ms-border-radius: 10px;
+-o-border-radius: 10px;
+-webkit-border-radius: 10px;
+border-radius: 10px;
+height: 300px;
+width: 200px;
+margin: 0 auto;
+margin-top: 10%;
+position: relative;
+color: #fff;
+padding: 10px;}
 .phone-tit{height:40px;width:40px; margin:0 auto; position:relative;}
 .phone-tit .dot1{ width:8px; height:8px; background:#000; position:absolute; -moz-border-radius:100%;-o-border-radius:100%;-ms-border-radius:100%;-webkit-border-radius:100%;border-radius:100%;top:10px;left:50%; margin-left:-4px;}
 .phone-tit .dot2{ width:6px; height:6px; background:#000; position:absolute; -moz-border-radius:100%;-o-border-radius:100%;-ms-border-radius:100%;-webkit-border-radius:100%;border-radius:100%;top:25px;left:0;}
 .phone-tit .dot3{ width:25px; height:6px; background:#000; position:absolute; -moz-border-radius:5px;-o-border-radius:5px;-ms-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;top:25px;left:26%;}
-.phone-con{ background:#c70d25; width:150px; margin:0 auto; height:220px; padding:10px; color:#fff; position:relative;}
+.phone-con{ width:150px; margin:0 auto; height:220px; padding:10px; color:#fff; position:relative;}
 .layer-phone .dot4{width:20px; height:20px; border:1px solid #000;background:#fff; position:absolute; bottom:10px; left:50%;-moz-border-radius:100%;-o-border-radius:100%;-ms-border-radius:100%;-webkit-border-radius:100%;border-radius:100%; margin-left:-10px;}
 
-.layer-ipad{ background:#000; -moz-border-radius:20px;-ms-border-radius:20px;-o-border-radius:20px;-webkit-border-radius:20px;border-radius:20px; height:310px;width:240px; margin:0 auto;margin-top:10%; position:relative;}
+.layer-ipad{ background: #f76a3e;
+-moz-border-radius: 10px;
+-ms-border-radius: 10px;
+-o-border-radius: 10px;
+-webkit-border-radius: 10px;
+border-radius: 10px;
+height: 300px;
+width: 200px;
+margin: 0 auto;
+margin-top: 10%;
+position: relative;
+color: #fff;
+padding: 10px;}
 .layer-ipad .dot1{ width:6px; height:6px; background:#fff; position:absolute; -moz-border-radius:100%;-o-border-radius:100%;-ms-border-radius:100%;-webkit-border-radius:100%;border-radius:100%;top:10px;left:50%; margin-left:-3px;}
 .layer-ipad .dot2{ width:16px; height:16px; background:#fff; position:absolute; -moz-border-radius:100%;-o-border-radius:100%;-ms-border-radius:100%;-webkit-border-radius:100%;border-radius:100%;bottom:10px;left:50%; margin-left:-8px;}
-.ipad-con{background:#f9f8c5; width:200px; height:225px; padding:10px; color:#3e3a39; position: absolute;top:30px; left:50%; margin-left:-110px;}
-.ipad-con .back,.three-present .back,.four-present .back,.five-present .back,.phone-con .back{ position:absolute; right:10px; bottom:10px;width:60px;height:20px; line-height:20px; text-align:right; cursor:pointer;}
+.ipad-con{ width:200px; height:225px; padding:10px; position: absolute;top:30px; left:50%; margin-left:-110px;}
+.layer-ipad .back,.three-present .back,.four-present .back,.five-present .back,.layer-phone .back{ position:absolute; right:10px; bottom:10px;width:65px;height:20px; line-height:20px; text-align:right; cursor:pointer; text-indent: 9999px;overflow: hidden;}
+.five-present .back,.three-present .back,.four-present .back{background:url(../images/01/i15.png) no-repeat; background-size:auto 100%;}
+.layer-phone .back,.layer-ipad .back{background:url(../images/01/i17.png) no-repeat; background-size:auto 100%;}
 
 .three-present{background:#fdae4a; -moz-border-radius:10px;-ms-border-radius:10px;-o-border-radius:10px;-webkit-border-radius:10px;border-radius:10px; height:300px;width:200px; margin:0 auto;margin-top:10%; position:relative; color:#fff;padding:10px;}
 .four-present{background:#f7ce3f; -moz-border-radius:10px;-ms-border-radius:10px;-o-border-radius:10px;-webkit-border-radius:10px;border-radius:10px; height:300px;width:200px; margin:0 auto;margin-top:10%; position:relative; color:#0087a4;padding:10px;}
-.five-present{background:#aace27; -moz-border-radius:10px;-ms-border-radius:10px;-o-border-radius:10px;-webkit-border-radius:10px;border-radius:10px; height:300px;width:200px; margin:0 auto;margin-top:10%; position:relative; color:#fff;padding:10px;}
+.five-present{background:#aace27; -moz-border-radius:10px;-ms-border-radius:10px;-o-border-radius:10px;-webkit-border-radius:10px;border-radius:10px; height:320px;width:200px; margin:0 auto;margin-top:10%; position:relative; color:#fff;padding:10px;}
 
 .layer-alert{background:#8c97cb; -moz-border-radius:10px;-ms-border-radius:10px;-o-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;width:200px; margin:0 auto;margin-top:10%; position:relative; color:#fff;padding:10px; text-align:center;}
 .layer-alert .tips{ background:#f29c9f; height:40px; line-height:40px; padding:0 15px; text-align:center; display:inline-block;-moz-border-radius:10px;-ms-border-radius:10px;-o-border-radius:10px;-webkit-border-radius:10px;border-radius:10px; font-size:20px; font-weight:bold;}
@@ -676,3 +702,5 @@ animation: rubberBand 2s ease-in 0 infinite;}
 .intr-tit-index{ text-align:center;font-size:16px;}
 #showIntroduce .back{display: inline-block;background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAoBAMAAAAWIydmAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAeUExURQAAAP///////////////////////////////////yR8m5UAAAAJdFJOUwC6nYwKBlX7L4oKPJgAAABVSURBVCjPY2CAAaYEBgTQLEOwmWZOR0hpzpxZhpCYOXMSksRMUSSJiQFkS1giSTCjS4ggSzhQRQKVg6KM7lKiDNg8jhJWqIGFRQprZKFGI0oEg6IeAOhYU8u9E2IdAAAAAElFTkSuQmCC) no-repeat;
 width: 40px;height: 24px;background-size: auto 100%; line-height:24px; padding-left:20px;color:#fff;font-weight: bold;font-size: 16px;}
+
+.btn-wrap{ position:fixed; bottom:0;left:50%;z-index: 9; width:250px; margin-left:-125px;}
