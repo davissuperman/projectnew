@@ -1436,7 +1436,7 @@ class BonusAction extends Action {
                     if($m < 10){
                         $historyArr[] = $tmpArr;
                     }
-                    $this->cache->lpush($idForHistoryArr,$tmpArr);
+                    $this->cache->rpush($idForHistoryArr,$tmpArr);
                     $m++;
                 }
             }else{

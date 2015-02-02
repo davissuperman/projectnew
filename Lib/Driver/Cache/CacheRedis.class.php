@@ -125,6 +125,10 @@ class CacheRedis extends Cache
         $value = (is_object($value) || is_array($value)) ? json_encode($value) : $value;
         return $this->handler->lPush($key,$value);
     }
+    public function rpush($key,$value){
+        $value = (is_object($value) || is_array($value)) ? json_encode($value) : $value;
+        return $this->handler->rPush($key,$value);
+    }
 
     public function lrange($key, $start, $end){
         $arr = $this->handler->lrange($key, $start, $end);
