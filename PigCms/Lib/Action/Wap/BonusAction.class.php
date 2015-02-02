@@ -1609,17 +1609,21 @@ class BonusAction extends Action {
      */
     public function saveAwardInfo() {
         $r = 0;
-//        if (IS_POST) {
-            $gid = $_REQUEST['gid'];
-            $openId = $_REQUEST['openid'];
-            $telephone = (isset($_REQUEST['telephone']) && $_REQUEST['telephone'])?$_REQUEST['telephone']:'';
-            $username = (isset($_REQUEST['username']) && $_REQUEST['username'])?$_REQUEST['username']:'' ;
-            $address = (isset($_REQUEST['address']) && $_REQUEST['address'])?$_REQUEST['address']:''   ;
-            $province = (isset($_REQUEST['province']) && $_REQUEST['province'])?$_REQUEST['province']:''    ;
-            $type =2;
-            if(isset($_REQUEST['type']) && $_REQUEST['type']){
-                $type = $_REQUEST['type'];
-            }
+        $gid = $_REQUEST['gid'];
+        $openId = $_REQUEST['openid'];
+        $telephone = (isset($_REQUEST['telephone']) && $_REQUEST['telephone'])?$_REQUEST['telephone']:'';
+        $username = (isset($_REQUEST['username']) && $_REQUEST['username'])?$_REQUEST['username']:'' ;
+        $address = (isset($_REQUEST['address']) && $_REQUEST['address'])?$_REQUEST['address']:''   ;
+        $province = (isset($_REQUEST['province']) && $_REQUEST['province'])?$_REQUEST['province']:''    ;
+        $type =2;
+        if(isset($_REQUEST['type']) && $_REQUEST['type']){
+            $type = $_REQUEST['type'];
+        }
+        //判断此telephone 和 type 是否存在系统中
+        $data = M('bonus_award')->where(array('telephone' =>$telephone,'type' => $type))->find();
+        if($data){
+            $r = 10;
+        }else{
             switch($type){
                 case 2:
                     //需要查看此次IPAD 是否还有
@@ -1782,7 +1786,8 @@ class BonusAction extends Action {
                     break;
 
             }
-//        }
+        }
+
         echo  $r;
     }
     public function submitTelephone(){
