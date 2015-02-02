@@ -1118,15 +1118,20 @@ class BonusAction extends Action {
      * 开户
      */
     public function saveBonusInfo($gid,$openId,$nickname,$imageProfile){
-        //创建个人主页
-        $d['gid'] = $gid;
-        $d['openid'] = $openId;
-        $d['name'] = $nickname;
-        $d['headimgurl'] = $imageProfile;
-        $d['views'] = 1;
-        $this->cache->redis->set($this->hashKeyBonusInfo."_view",1);
-        $d['createtime'] = time();
-        M("bonus_info")->add($d);
+        //首先查看此OPENID 是否存在 无论gid
+        $bonusInfo = M('bonus_info')->where(array('openid' => $openId))->find();
+        if(!$bonusInfo){
+            //创建个人主页
+            $d['gid'] = $gid;
+            $d['openid'] = $openId;
+            $d['name'] = $nickname;
+            $d['headimgurl'] = $imageProfile;
+            $d['views'] = 1;
+            $this->cache->redis->set($this->hashKeyBonusInfo."_view",1);
+            $d['createtime'] = time();
+            M("bonus_info")->add($d);
+        }
+
     }
     //保存阅读量历史记录
     public function saveViews($gid,$openId,$index=false){
