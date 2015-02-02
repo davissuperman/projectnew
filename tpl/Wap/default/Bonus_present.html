@@ -243,12 +243,12 @@
         <!--<span class="btn-blue-h40 w160 btn-share">邀请好友为我加油</span>-->
     <!--</div>-->
 	<div class="ta-c mt-20 btn-wrap">
-        <span class="btn-blue-h40 btn-share"><i class="icon2" style="margin-top:8px;"></i>给我投票加油</span>
+        <span class="btn-blue-h40 btn-share"><i class="icon2" style="margin-top:8px;"></i>帮我拉票</span>
     </div>
     <div class="ta-c mt-20 btn-wrap">
         <p>
             <if condition="$tel neq $openid and $voteinfo eq false">
-                <span class="btn-blue-h40" onClick="showget();" >投他一票</span>
+                <span class="btn-blue-h40" onClick="showget();" >投票</span>
             <elseif condition="$tel neq $openid and $voteinfo eq true" />
                  <span class="btn-blue-h40 btn-disabled" >已经投票</span>
             </if>
