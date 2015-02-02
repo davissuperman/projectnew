@@ -1409,7 +1409,7 @@ class BonusAction extends Action {
             //首先查看此historyArr是否存在缓存中
             if($historyArrLen<= 0){
                 //缓存不存在 需要PUSH
-                $history = M('bonus_history')->where(array('openid' => $openid,'gid'=>$gid))->select();
+                $history = M('bonus_history')->where(array('openid' => $openid,'gid'=>$gid))->order('createtime desc')->select();
                 $historyCount = count($history);
                 $m = 0;
                 foreach($history as $each){
