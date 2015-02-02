@@ -326,12 +326,14 @@ class BonusAction extends Action {
                     $fourlevel = true;
                     $fourOrderId = $each['orderid'];
                     $fourlevelId = $each['id'];
+                    $fourTime = $each['createtime'];
                 }
                 if($type == 3){
                     //四等奖存在
                     $threelevel = true;
                     $threeOrderId = $each['orderid'];
                     $threelevelId = $each['id'];
+                    $threeTime = $each['createtime'];
                 }
             }
         }else{
@@ -351,6 +353,8 @@ class BonusAction extends Action {
         $this->assign('threeorderid',$threeOrderId);
         $this->assign('threelevelid',$threelevelId);
 
+        $this->assign('fourtime',date("Y-m-d H:i:s",$fourTime));
+        $this->assign('threetime',date("Y-m-d H:i:s",$threeTime));
         $this->display();
     }
     public function checkPhone(){
