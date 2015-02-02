@@ -76,7 +76,7 @@
                         </if>
 
                         <li class="clrfix">
-                            <div class="label">一盒换购订单号：</div>
+                            <div class="label" style="width:110px;">一盒换购订单号：</div>
                             <div class="controls">
                                 <input type="text" class="input-text" id="orderNumberForFourLevel" placeholder="请输入一盒换购订单号" name="fourorderid" value="{pigcms::$fourorderid}">
                             </div>
@@ -89,13 +89,13 @@
                     </ul>
                     <ul class="form-ul mt-20 hide" id="threeform">
                         <li class="clrfix">
-                            <div class="label">提交时间：</div>
+                            <div class="label" style="width:110px;">提交时间：</div>
                             <div class="controls">
                                 {pigcms:$threetime}
                             </div>
                         </li>
                         <li class="clrfix">
-                            <div class="label">距离当前时间为：</div>
+                            <div class="label" style="width:110px;">距离当前时间为：</div>
                             <div class="controls">
                                {pigcms:$threetimediff['day']}天{pigcms:$threetimediff['hour']}小时{pigcms:$threetimediff['min']}分钟{pigcms:$threetimediff['sec']}秒
                                 <input type="hidden" id="threelevelid" value="{pigcms::$threelevelid}">
@@ -103,12 +103,12 @@
                         </li>
                         <if condition="$threeordertime neq false">
                             <li class="clrfix">
-                                <div class="label">淘宝订单号提交时间：</div>
+                                <div class="label" style="width:110px;">淘宝订单号提交时间：</div>
                                 <div class="controls">{pigcms:$threeordertime}</div>
                             </li>
                         </if>
                         <li class="clrfix">
-                            <div class="label">六盒换购订单号：</div>
+                            <div class="label" style="width:110px;">六盒换购订单号：</div>
                             <div class="controls">
                                 <input type="text" class="input-text" placeholder="请输入六盒换购订单号"  name="threeorderid"  id="orderNumberForThreeLevel" value="{pigcms::$threeorderid}">
                             </div>
