@@ -1165,6 +1165,29 @@ class BonusAction extends Action {
         M("bonus_list")->add($d);
     }
 
+    public function getCurrentNumber(){
+        //四等奖人数
+        $mapFour['type'] = 4;
+        $mapFour['orderid'] = array('neq','');
+        $fourBonusNumber= M('bonus_award')->where($mapFour)->count('id');
+
+        //三等奖人数
+        $mapThree['type'] = 3;
+        $mapThree['orderid'] = array('neq','');
+        $threeBonusNumber= M('bonus_award')->where($mapThree)->count('id');
+
+        //二等奖人数
+        $mapSecond['type'] = 2;
+        $secondBonusNumber= M('bonus_award')->where($mapSecond)->count('id');
+
+        //一等奖人数
+        $mapFirst['type'] = 1;
+        $firstBonusNumber= M('bonus_award')->where($mapFirst)->count('id');
+
+        return array($fourBonusNumber,$threeBonusNumber,$secondBonusNumber,$firstBonusNumber);
+
+    }
+
     //保存拉人品历史记录
     public function saveLaRenPing($gid,$openId,$number){
         //保存阅读记录
@@ -1269,7 +1292,6 @@ class BonusAction extends Action {
             $url = $this->url."/index.php?g=Wap&m=Bonus&a=index&gid=$this->gid";
             header("location:$url");
         }
-
         $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
         $openIdUrl = "&openid=$openid";
         if(isset( $_GET['show'] ) &&  $_GET['show']){
@@ -1551,6 +1573,13 @@ class BonusAction extends Action {
         //重定向页面
         $redirect = $_GET['redirect'];
         $this->assign("redirect",$redirect);
+
+        //奖品个数
+        list($fourBonusNumber,$threeBonusNumber,$secondBonusNumber,$firstBonusNumber) = $this->getCurrentNumber();
+        $this->assign("fourleft",$this->fourLevelNumber - $fourBonusNumber*1);
+        $this->assign("threeleft",$this->threeLevelNumber - $threeBonusNumber*1);
+        $this->assign("secondleft",$this->secondLevelNumber - $secondBonusNumber*1);
+        $this->assign("firstleft",$this->firstLevelNumber - $firstBonusNumber*1);
 
         $this->display();
     }
