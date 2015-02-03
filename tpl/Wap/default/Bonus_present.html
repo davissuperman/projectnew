@@ -23,18 +23,6 @@
     </if>
 </head>
 <body id="body">
-<!--<button  onclick="showLayer($('#layer-alert-share-success'))" >onMenuShareAppMessage</button>
-<section class="contents" id="contents1">
-    <if condition="$bonusType eq 0">
-    <else/>
-        恭喜您已获取
-        <if condition="$bonusType eq 2"> IPAD
-            <elseif condition="$bonusType eq 1"/>IPHONE
-            <else />
-        </if>
-    </if>
-</section>
--->
 <section class="contents" id="contents" style="padding-bottom:120px;">
     <div class="top-box">
         <div class="profile">
@@ -139,10 +127,18 @@
             </div>
             <!-- 4等奖 -->
             <div class="clrfix item">
-                <div class="p4" onClick="if($(this).hasClass('btn-disabled')){return false;}showLayer($('#four-present'));">
-                    <i class="icon6 fl"></i>
-                    <span class="fl mt-10 c8">49元<i class="icon-arrow2 ml-10"></i><br/>森田面膜</span>
-                </div>
+                <if condition="$number egt  $scoreList[1] and $fouraward eq true" >
+                    <div class="p4 btn-disabled" onClick="if($(this).hasClass('btn-disabled')){return false;}showLayer($('#four-present'));">
+                        <i class="icon6 fl"></i>
+                        <span class="fl mt-10 c8">49元<i class="icon-arrow2 ml-10"></i><br/>森田面膜</span>
+                    </div>
+                <else />
+                    <div class="p4" onClick="if($(this).hasClass('btn-disabled')){return false;}showLayer($('#four-present'));">
+                        <i class="icon6 fl"></i>
+                        <span class="fl mt-10 c8">49元<i class="icon-arrow2 ml-10"></i><br/>森田面膜</span>
+                    </div>
+                </if>
+
                 <div class="pre-right b-t4">
                     <div class="get">
                         <p class="fen c9 ta-r"><strong class="fz14">{pigcms:$scoreList[1]}</strong></p>
