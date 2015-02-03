@@ -19,9 +19,11 @@ class BonusAction extends UserAction {
     }
 
     public function award() {
-        $count = M('doing_info')->count();
+        $count = M('bonus_info')->count();
         $page = new Page($count, 25);
-        $list = M('doing_info')->query("SELECT b.addres,b.city,b.tel as tels,b.name as names,a.*,a.share*10+a.number as n FROM `tp_doing_info` as a left join `tp_doing_list` as b on a.tel=b.temptel order by n desc limit $page->firstRow,$page->listRows"); //第二名和你最近的
+        $list = M('bonus_info')->query("SELECT info.*, bonus.title from tp_bonus_info as info
+         left join tp_bonus as bonus on (bonus.gid=info.gid)
+         order by info.number desc limit $page->firstRow,$page->listRows"); //第二名和你最近的
         $this->assign('page', $page->show());
         $this->assign('token', $this->token);
         $this->assign('info', $list);
