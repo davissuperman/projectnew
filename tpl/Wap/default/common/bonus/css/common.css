@@ -392,13 +392,13 @@ animation: rubberBand 2s ease-in 0 infinite;}
 .present-list .pre-right{ position:absolute;right:0;top:0; height:100%; width:90%; z-index:1}
 .present-list .get{ position:absolute; right:0;top:0;}
 
-.p1.btn-disabled,.p2.btn-disabled,.p3.btn-disabled,.p4.btn-disabled,.p5.btn-disabled{box-shadow: 1px 4px 0px #999 !important;
+.p1.btn-disabled,.p2.btn-disabled,.p3.btn-disabled,.p4.btn-disabled,.p5.btn-disabled{box-shadow: 1px 4px 0px #999 !important; color:#fff !important;
 }
-.btn-disabled .icon-arrow {-webkit-animation: none;
+.btn-disabled .icon-arrow,.btn-disabled .icon-arrow2 {-webkit-animation: none;
 -moz-animation: none;
 -ms-animation: none;
 -o-animation: none;
-animation: none;}
+animation: none;background: url(../images/01/icon-arrow.png) no-repeat;background-size: auto 100%;}
 
 .progress{ background:#e1e4e9; position:absolute; width:8px; height:366px; right:-2px;top:18px; -moz-border-radius:5px;-ms-border-radius:5px;-webkit-border-radius:5px;-o-border-radius:5px;border-radius:5px; overflow:hidden;}
 .progress .s1{ background:#aed12d; width:8px; height:50px; max-height:50px; position:absolute; bottom:0; left:0;}
