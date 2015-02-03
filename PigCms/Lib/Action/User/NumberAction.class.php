@@ -81,7 +81,7 @@ class NumberAction extends UserAction {
         $map['token']  = array('eq','rggfsk1394161441');
 
         //分享给了X个人
-        $a =  M("bonus_info")->where(array('gid' => $gid, 'openid' => $openId))->setInc('share', $shareX);
+        $a =  M("bonus_info")->where(array('openid' => $openId))->setInc('share', $shareX);
 
         //其中有五十人拉了分数
 
@@ -95,23 +95,23 @@ class NumberAction extends UserAction {
             $this->saveViews($fronopenid,$gid,$openId);
 
 
-            $bonusHistory = M('bonus_history')->where(array('gid' => $gid, 'openid' => $openId,'from_open_id'=>$fronopenid))->find();
+            $bonusHistory = M('bonus_history')->where(array( 'openid' => $openId,'from_open_id'=>$fronopenid))->find();
             if($bonusHistory){
                 echo "此用户 $fronopenid 已经拉过分 "."<br/>";
             }else{
                 $i++;
-                $bonusInfo = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openId))->find();
+                $bonusInfo = M('bonus_info')->where(array('openid' => $openId))->find();
                 //随机生成分数
                 $number =  $this->getNumberByOpenId($gid,$openId,$bonusInfo);
                 echo "此用户 $fronopenid 拉分 ".$number."<br/>";
-                M("bonus_info")->where(array('gid' => $gid, 'openid' => $openId))->setInc('vote', 1);
+                M("bonus_info")->where(array('openid' => $openId))->setInc('vote', 1);
                 M("bonus_info")->where(array('id' =>$bonusInfo['id']))->setInc('number', $number);
                 $this->saveBonusHistory($gid,$openId,$number,$fronopenid);
                 $n = M("bonus_info")->where(array('id' =>$bonusInfo['id']))->getField('number');
                 echo "当前分数为： $n";
                 //随机 产生 我也要参加
                 if(rand(-5,5) > 0){
-                    M("bonus_info")->where(array('gid' => $gid, 'openid' => $openId))->setInc('joins', 1);
+                    M("bonus_info")->where(array('openid' => $openId))->setInc('joins', 1);
                 }
             }
         }
@@ -119,8 +119,8 @@ class NumberAction extends UserAction {
     }
 
     public function setNum(){
-        //http://newsentian.snkculture.cn/index.php?g=User&m=Number&a=setNum&score=800&openid=oYkdqs5-65RgzU7fC10pH1MKXIVM
-        $openId = "oYkdqs6YN282-he6W8cPxMKS2D-c";
+        //http://wx.drjou.cc/index.php?g=User&m=Number&a=setNum&score=300&openid=oP9fCtxIGfuDZkYTS9PSzhvZuvcs
+        $openId = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         if(isset($_GET['openid']) && $_GET['openid']){
             $openId = $_GET['openid'];
         }
@@ -132,24 +132,24 @@ class NumberAction extends UserAction {
         $map['openid']  = array('neq',$openId);
         $userList = M('customer_service_fans')->where($map)->select();
         $i = 0;
-        $hashKeyBonusInfo  = "bonusinfo_".$openId."_".$gid;
+        $hashKeyBonusInfo  = "bonusinfo_".$openId;
         foreach($userList as $each){
             //每一个用户访问此OPENID 主页
             $fronopenid = $each['openid'];
             $viewNum =  rand(1,4);
-            $a =  M("bonus_info")->where(array('gid' => $gid, 'openid' => $openId))->setInc('views', $viewNum);
+            $a =  M("bonus_info")->where(array('openid' => $openId))->setInc('views', $viewNum);
             $this->cache->redis->incrBy($hashKeyBonusInfo."_view",$viewNum);
             $this->saveViews($fronopenid,$gid,$openId);
-            $bonusHistory = M('bonus_history')->where(array('gid' => $gid, 'openid' => $openId,'from_open_id'=>$fronopenid))->find();
+            $bonusHistory = M('bonus_history')->where(array('openid' => $openId,'from_open_id'=>$fronopenid))->find();
             if($bonusHistory){
                 echo "此用户 $fronopenid 已经拉过分 ".$bonusHistory['description']."<br/>";
             }else{
                 $i++;
-                $bonusInfo = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openId))->find();
+                $bonusInfo = M('bonus_info')->where(array('openid' => $openId))->find();
                 //随机生成分数
                 $number =  $this->getNumberByOpenId($gid,$openId,$bonusInfo);
                 echo "此用户 $fronopenid 拉分 ".$number."<br/>";
-                M("bonus_info")->where(array('gid' => $gid, 'openid' => $openId))->setInc('vote', 1);
+                M("bonus_info")->where(array('openid' => $openId))->setInc('vote', 1);
                 M("bonus_info")->where(array('id' =>$bonusInfo['id']))->setInc('number', $number);
 
                 $this->cache->redis->incr($hashKeyBonusInfo."_vote");
@@ -163,14 +163,14 @@ class NumberAction extends UserAction {
                 }
                 //随机 产生 我也要参加
                 if(rand(-5,5) > 0){
-                    M("bonus_info")->where(array('gid' => $gid, 'openid' => $openId))->setInc('joins', 1);
+                    M("bonus_info")->where(array('openid' => $openId))->setInc('joins', 1);
                     $this->cache->redis->incr($hashKeyBonusInfo."_joins");
                 }
 
             }
 
         }
-        $a =  M("bonus_info")->where(array('gid' => $gid, 'openid' => $openId))->setInc('share', $i+50);
+        $a =  M("bonus_info")->where(array( 'openid' => $openId))->setInc('share', $i+50);
         $this->cache->redis->incrBy($hashKeyBonusInfo."_share",$i+50);
     }
     /**
@@ -227,7 +227,7 @@ class NumberAction extends UserAction {
         $h['from_open_id'] = $fromOpenId;
         M("bonus_history")->add($h);
 
-        $bonusInfoRedisKey = "bonusinfo_".$fromOpenId."_".$gid;
+        $bonusInfoRedisKey = "bonusinfo_".$fromOpenId;
         $bonusInfoName = $this->cache->redis->hget($bonusInfoRedisKey,'name');
         if($bonusInfoName){
             //此用户信息存在与redis中
@@ -242,10 +242,10 @@ class NumberAction extends UserAction {
             $this->cache->redis->hset($bonusInfoRedisKey,'nickname',$fansInfo['nickname']);
         }
         //URL OPEN ID的加分历史加一
-        $this->cache->redis->lPush("bonusinfo_".$openId."_".$gid."_history",json_encode($h));
+        $this->cache->redis->lPush("bonusinfo_".$openId."_history",json_encode($h));
     }
     public function saveBonusViewInfo($gid,$openId){
-       $a =  M("bonus_info")->where(array('gid' => $gid, 'openid' => $openId))->setInc('views', 1);
+       $a =  M("bonus_info")->where(array('openid' => $openId))->setInc('views', 1);
     }
 
     //保存阅读量历史记录
