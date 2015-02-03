@@ -95,6 +95,11 @@ class BonusAction extends UserAction {
             $tmp = array();
             $tmp['name'] = $each['name'];
             $tmp['views'] = $each['views'];
+            $cheat = '否';
+            if( $each['views'] < $each['vote']){
+                $cheat = '是';
+            }
+            $tmp['cheat'] = $cheat;
             $tmp['share'] = $each['share'];
             $tmp['vote'] = $each['vote'];
             $tmp['joins'] = $each['joins'];
