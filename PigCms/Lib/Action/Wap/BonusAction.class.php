@@ -7,8 +7,8 @@ class BonusAction extends Action {
     private $url;
     //前几票都是加法
     public $before = 1;
-    public $secondLevelNumber = 10;//二等奖的个数
-    public $firstLevelNumber = 5;//一等奖的个数
+    public $secondLevelNumber = 5;//二等奖的个数
+    public $firstLevelNumber = 3;//一等奖的个数
     public $fourLevelNumber = 3000;//四等奖的个数
     public $threeLevelNumber = 300;//三等奖的个数
 
@@ -188,7 +188,6 @@ class BonusAction extends Action {
                             $web_access_token = $userinfoFromApi['access_token'];
                             cookie('user_openid', $userinfoFromApi['openid'], 315360000);
                             $userOpenId = $userinfoFromApi['openid'];
-                            Log :: write("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
                         }
 
                         //根据access_token 拉到用户基本信息
@@ -731,7 +730,7 @@ class BonusAction extends Action {
         M("bonus_history")->add($h);
         //添加历史到REDIS
         //此时 需要获取 from_open_id的nickname headimage url 和 description
-        $bonusInfoRedisKey = "bonusinfo_".$fromOpenId."_".$gid;
+        $bonusInfoRedisKey = "bonusinfo_".$fromOpenId;
         $bonusInfoName = $this->cache->redis->hget($bonusInfoRedisKey,'name');
         if($bonusInfoName){
             //此用户信息存在与redis中
@@ -746,7 +745,7 @@ class BonusAction extends Action {
             $this->cache->redis->hset($bonusInfoRedisKey,'nickname',$fansInfo['nickname']);
         }
         //URL OPEN ID的加分历史加一
-        $this->cache->redis->lPush("bonusinfo_".$openId."_".$gid."_history",json_encode($h));
+        $this->cache->redis->lPush("bonusinfo_".$openId."_history",json_encode($h));
     }
 
     /**
@@ -801,7 +800,7 @@ class BonusAction extends Action {
     public function shareget() {
         $openId = $_GET['openid'];
         $gid = $_GET['gid'];
-        $bonusInfoRedisKey = "bonusinfo_".$openId."_".$gid;
+        $bonusInfoRedisKey = "bonusinfo_".$openId;
         $selfOpenId = cookie("user_openid");
         if(!cookie("user_openid")){
             $selfOpenId = "localenv";
@@ -813,7 +812,7 @@ class BonusAction extends Action {
             //已经加过分数
             $return = 2;
         }else{
-            $bonusInfo = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openId))->find();
+            $bonusInfo = M('bonus_info')->where(array('openid' => $openId))->find();
             //随机生成分数
             $number =  $this->getNumberByOpenId($gid,$openId,$bonusInfo);
             //投票个数加一
@@ -1053,9 +1052,9 @@ class BonusAction extends Action {
         $urlOpenId = $_GET['openid'];//当前转发的openid
         $gid = $_GET['gid'];//当前转发的openid
         $openId = cookie("user_openid");
-        $bonusInfoRedisKey = "bonusinfo_".$openId."_".$gid;
+        $bonusInfoRedisKey = "bonusinfo_".$openId;
         //判断selfOpenId是否有个人主页，如果有 则selfOpenId获得第一次分享的奖励
-        $bonusInfo = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openId))->find();
+        $bonusInfo = M('bonus_info')->where(array( 'openid' => $openId))->find();
         $return = 1;
         if($bonusInfo){
 
@@ -1097,9 +1096,9 @@ class BonusAction extends Action {
     }
 
     public function saveBonusDate($openId){
-        $gamedata = M('bonus_date')->where(array('gid' => $this->gid, 'openid' => $openId, 'createdate' => date("Y-m-d")))->find();
+        $gamedata = M('bonus_date')->where(array('openid' => $openId, 'createdate' => date("Y-m-d")))->find();
         if ($gamedata) {
-            M("bonus_date")->where(array('gid' => $this->gid, 'openid' => $openId, 'createdate' => date("Y-m-d")))->setInc('views', 1);
+            M("bonus_date")->where(array('openid' => $openId, 'createdate' => date("Y-m-d")))->setInc('views', 1);
         } else {
             $d['gid'] = $this->gid;
             $d['openid'] = $openId;
@@ -1111,7 +1110,7 @@ class BonusAction extends Action {
     }
 
     public function saveBonusViewInfo($gid,$openId){
-        M("bonus_info")->where(array('gid' => $this->gid, 'openid' => $openId))->setInc('views', 1);
+        M("bonus_info")->where(array('openid' => $openId))->setInc('views', 1);
         $this->cache->redis->incr($this->hashKeyBonusInfo."_view");
     }
     /*
@@ -1187,7 +1186,7 @@ class BonusAction extends Action {
                 $openIdUrl = "&openid=$openid";
                 $urlOpenId = true;
                 //判断当前用户是否开过户
-                $bonusInfoRedisKey = "bonusinfo_".$openid."_".$gid;
+                $bonusInfoRedisKey = "bonusinfo_".$openid;
                 $this->hashKeyBonusInfo = $bonusInfoRedisKey;
                 $bonusInfoName = $this->cache->redis->hget($bonusInfoRedisKey,'name');
                 if($bonusInfoName){
@@ -1198,7 +1197,7 @@ class BonusAction extends Action {
                     $voteNumber = $this->cache->get($this->hashKeyBonusInfo."_vote");
                 }else{
 
-                    $bonusInfo = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openid))->find();
+                    $bonusInfo = M('bonus_info')->where(array('openid' => $openid))->find();
                     if(!$bonusInfo){
                         //如果当前人ID 存在， 则获取当前人的信息
                         $nickname = $infoFromUrlOpenId['nickname'];
@@ -1218,14 +1217,13 @@ class BonusAction extends Action {
                         $this->cache->redis->set($bonusInfoRedisKey."_share",$bonusInfo['share']);
                         $this->cache->redis->set($bonusInfoRedisKey."_joins",$bonusInfo['joins']);
                         $this->cache->redis->set($bonusInfoRedisKey."_number",$bonusInfo['number']);
+                        $this->cache->redis->set($bonusInfoRedisKey."_view",$bonusInfo['views']);
                         $this->cache->redis->hset($bonusInfoRedisKey,'id',$bonusInfo['id']);
                         $this->cache->redis->hset($bonusInfoRedisKey,'gid',$bonusInfo['gid']);
                         $this->cache->redis->hset($bonusInfoRedisKey,'tel',$bonusInfo['tel']);
                         $this->cache->redis->hset($bonusInfoRedisKey,'name',$bonusInfo['name']);
                         $this->cache->redis->hset($bonusInfoRedisKey,'headimgurl',$bonusInfo['headimgurl']);
                         $this->cache->redis->hset($bonusInfoRedisKey,'openid',$bonusInfo['openid']);
-                        $this->cache->redis->set($bonusInfoRedisKey."_view",$bonusInfo['views']);
-
                         $this->cache->redis->hset($bonusInfoRedisKey,'bonustype',$bonusInfo['bonustype']);
                     }
                 }
@@ -1234,11 +1232,11 @@ class BonusAction extends Action {
                 $this->saveViews($gid,$openid);
 
                 //获取URL open id 分数
-                $numberByUrlOpenId = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openid))->getField('number');
+                $numberByUrlOpenId = M('bonus_info')->where(array('openid' => $openid))->getField('number');
 
                 //保存我也要参加 - 加一
                 if(isset( $_GET['joins'] ) &&  $_GET['joins'] == 1){
-                    M("bonus_info")->where(array('gid' => $this->gid, 'openid' => $_GET['preopenid']))->setInc('joins', 1);
+                    M("bonus_info")->where(array('openid' => $_GET['preopenid']))->setInc('joins', 1);
                     $this->cache->redis->incr($this->hashKeyBonusInfo."_joins");
                 }
 
@@ -1457,7 +1455,7 @@ class BonusAction extends Action {
             //首先查看此historyArr是否存在缓存中
             if($historyArrLen<= 0){
                 //缓存不存在 需要PUSH
-                $history = M('bonus_history')->where(array('openid' => $openid,'gid'=>$gid))->order('createtime desc')->select();
+                $history = M('bonus_history')->where(array('openid' => $openid))->order('createtime desc')->select();
                 $historyCount = count($history);
                 $m = 0;
                 foreach($history as $each){
@@ -1543,7 +1541,7 @@ class BonusAction extends Action {
     }
     //查看用户是否已经加过油
     public function checkVote($openId,$fromOpenId,$gid){
-        $bonusHistory = M('bonus_history')->where(array('gid' => $gid, 'openid' => $openId,'from_open_id'=>$fromOpenId))->field('id')->find();
+        $bonusHistory = M('bonus_history')->where(array('openid' => $openId,'from_open_id'=>$fromOpenId))->field('id')->find();
         return $bonusHistory;
     }
     //查看获得的奖项
@@ -1616,13 +1614,13 @@ class BonusAction extends Action {
         $openId = $_GET['openid'];
         $gId = $_GET['gid'];
         $historyArr = array();
-        $hashKeyBonusInfo = "bonusinfo_".$openId."_".$gId;
+        $hashKeyBonusInfo = "bonusinfo_".$openId;
         $idForHistoryArr = $hashKeyBonusInfo."_history";
         $historyArrLen = $this->cache->redis->llen($idForHistoryArr);
         //首先查看此historyArr是否存在缓存中
         if($historyArrLen<= 0){
             //缓存不存在
-            $history = M('bonus_history')->where(array('openid' => $openId,'gid'=>$gId))->select();
+            $history = M('bonus_history')->where(array('openid' => $openId))->select();
             $historyCount = count($history);
             $m = 0;
             foreach($history as $each){
@@ -1669,7 +1667,7 @@ class BonusAction extends Action {
         $address = (isset($_REQUEST['address']) && $_REQUEST['address'])?$_REQUEST['address']:''   ;
         $province = (isset($_REQUEST['province']) && $_REQUEST['province'])?$_REQUEST['province']:''    ;
         $type =2;
-        $bonusInfoRedisKey = "bonusinfo_".$openId."_".$gid;
+        $bonusInfoRedisKey = "bonusinfo_".$openId;
         if(isset($_REQUEST['type']) && $_REQUEST['type']){
             $type = $_REQUEST['type'];
         }
@@ -1687,7 +1685,7 @@ class BonusAction extends Action {
                         //IPAD已经被抢光
                         $r = 3;
                     }else{
-                        $bonusAwardId = M('bonus_award')->where(array('gid' => $gid, 'openid' => $openId,'type' => 2))->getField('id');
+                        $bonusAwardId = M('bonus_award')->where(array('openid' => $openId,'type' => 2))->getField('id');
                         if($bonusAwardId){
                             //则更新
                             $d['id'] = $bonusAwardId;
@@ -1714,7 +1712,7 @@ class BonusAction extends Action {
                             $r = M('bonus_award')->add($d);
                         }
                         //此用户是中奖用户，需要清空此用户的分数 活动结束
-                        $bonusInfo = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openId))->field('id,bonustype')->find();
+                        $bonusInfo = M('bonus_info')->where(array( 'openid' => $openId))->field('id,bonustype')->find();
                         if($bonusInfo['bonustype'] == 0 || $bonusInfo['bonustype'] >2){
                             $h['bonustype'] = 2;
                             $h['id'] = $bonusInfo['id'];
@@ -1731,7 +1729,7 @@ class BonusAction extends Action {
                         //IPHONE已经被抢光
                         $r = 3;
                     }else{
-                        $bonusAwardId = M('bonus_award')->where(array('gid' => $gid, 'openid' => $openId,'type' => 1))->getField('id');
+                        $bonusAwardId = M('bonus_award')->where(array('openid' => $openId,'type' => 1))->getField('id');
                         if($bonusAwardId){
                             //则更新
                             $d['id'] = $bonusAwardId;
@@ -1758,7 +1756,7 @@ class BonusAction extends Action {
                             $r = M('bonus_award')->add($d);
                         }
                         //此用户是中奖用户，需要清空此用户的分数 活动结束
-                        $bonusInfo = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openId))->field('id,bonustype')->find();
+                        $bonusInfo = M('bonus_info')->where(array('openid' => $openId))->field('id,bonustype')->find();
                         if($bonusInfo['bonustype'] == 0 || $bonusInfo['bonustype'] >1){
                             $h['bonustype'] = 1;
                             $h['id'] = $bonusInfo['id'];
@@ -1775,7 +1773,7 @@ class BonusAction extends Action {
                         //四等奖已经被抢光
                         $r = 3;
                     }else{
-                        $bonusAwardId = M('bonus_award')->where(array('gid' => $gid, 'openid' => $openId,'type' => 4))->getField('id');
+                        $bonusAwardId = M('bonus_award')->where(array( 'openid' => $openId,'type' => 4))->getField('id');
                         if($bonusAwardId){
                             //则更新
                             $d['id'] = $bonusAwardId;
@@ -1797,7 +1795,7 @@ class BonusAction extends Action {
                         }
                         //此用户是中奖用户，需要清空此用户的分数 活动结束
 //                        $bonusInfoId = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openId))->getField('id');
-                        $bonusInfo = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openId))->field('id,bonustype')->find();
+                        $bonusInfo = M('bonus_info')->where(array( 'openid' => $openId))->field('id,bonustype')->find();
                         if($bonusInfo['bonustype'] == 0 || $bonusInfo['bonustype'] >4){
                             $h['bonustype'] = 4;
                             $h['id'] = $bonusInfo['id'];
@@ -1815,7 +1813,7 @@ class BonusAction extends Action {
                         //四等奖已经被抢光
                         $r = 3;
                     }else{
-                        $bonusAwardId = M('bonus_award')->where(array('gid' => $gid, 'openid' => $openId,'type' => 3))->getField('id');
+                        $bonusAwardId = M('bonus_award')->where(array('openid' => $openId,'type' => 3))->getField('id');
                         if($bonusAwardId){
                             //则更新
                             $d['id'] = $bonusAwardId;
@@ -1836,7 +1834,7 @@ class BonusAction extends Action {
                             $r = M('bonus_award')->add($d);
                         }
                         //此用户是中奖用户，需要清空此用户的分数 活动结束
-                        $bonusInfo = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openId))->field('id,bonustype')->find();
+                        $bonusInfo = M('bonus_info')->where(array( 'openid' => $openId))->field('id,bonustype')->find();
                         if($bonusInfo['bonustype'] == 0 || $bonusInfo['bonustype'] >3){
                             $h['bonustype'] = 3;
                             $h['id'] = $bonusInfo['id'];
@@ -1858,7 +1856,7 @@ class BonusAction extends Action {
         $phone = $_GET['phone'];
         $gid = $_GET['gid'];
 
-        $id = M('bonus_info')->where(array('gid' => $gid, 'openid' => $openId))->getField('id');
+        $id = M('bonus_info')->where(array('openid' => $openId))->getField('id');
 
         $d['id'] = $id;
         $d['openid'] = $openId;
