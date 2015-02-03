@@ -84,12 +84,6 @@ class BonusAction extends Action {
 //            exit;
 //        }
         $this->url= C('site_url');
-        $data = M('doing')->where(array('gid' => $this->gid))->find();
-        if ($data) {
-            $this->gameinfo = $data;
-            $this->assign('gameinfo', $this->gameinfo);
-            
-        }
         $this->cache = Cache::getInstance('Redis',array('host'=>'127.0.0.1','expire'=>1296000));
     }
 
