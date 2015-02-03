@@ -418,14 +418,15 @@
                     <li>3、中奖数据一经核实有效，主办方会进行回访与您确认收货信息，并于三个工作日内将奖品寄出。</li>
                     <li>（活动最终解释权归主办方所有）</li>
                 </ul>
-                <ul class="form-ul">
+                <div class="ta-c mt-10" style="color:#999">电话号码不能修改并会用于兑换其他奖项</div>
+                <ul class="form-ul mt-10">
                     <li class="clrfix">
                         <div class="label">手机号码:</div>
                         <div class="controls">
                             <if condition="$awardphone eq  false">
-                                <input type="tel" class="input-text"  id="firstphone" placeholder="电话号码不能修改并会用于兑换其他奖项"/>
+                                <input type="tel" class="input-text"  id="firstphone"/>
                                 <else />
-                                <input type="tel" readonly class="input-text btn-disabled"  id="firstphone"  value="{pigcms::$awardphone}"  placeholder="电话号码不能修改并会用于兑换其他奖项"/>
+                                <input type="tel" readonly class="input-text btn-disabled"  id="firstphone"  value="{pigcms::$awardphone}"/>
                             </if>
 
                         </div>
@@ -466,14 +467,15 @@
                     <li>3、中奖数据一经核实有效，主办方会进行回访与您确认收货信息，并于三个工作日内将奖品寄出。</li>
                     <li>（活动最终解释权归主办方所有）</li>
                 </ul>
-                <ul class="form-ul">
+                <div class="ta-c mt-10" style="color:#999">电话号码不能修改并会用于兑换其他奖项</div>
+                <ul class="form-ul mt-10">
                     <li class="clrfix">
                         <div class="label">手机号码:</div>
                         <div class="controls">
                             <if condition="$awardphone eq  false">
-                                <input type="tel" class="input-text"  id="secondphone"  placeholder="电话号码不能修改并会用于兑换其他奖项"/>
+                                <input type="tel" class="input-text"  id="secondphone"/>
                                 <else />
-                                <input type="tel" readonly  class="input-text btn-disabled"  id="secondphone"  value="{pigcms::$awardphone}"  placeholder="电话号码不能修改并会用于兑换其他奖项"/>
+                                <input type="tel" readonly  class="input-text btn-disabled"  id="secondphone"  value="{pigcms::$awardphone}"/>
                             </if>
 
                         </div>
@@ -519,14 +521,15 @@
             <!-- 三等将 -->
             <div class="award-box hide clrfix" id="award-box-NO3">
                 <h2 class="tit">填写手机号码<br/>作为领奖代码</h2>
-                <ul class="form-ul">
+                <div class="ta-c mt-10" style="color:#999">电话号码不能修改并会用于兑换其他奖项</div>
+                <ul class="form-ul mt-10">
                     <li class="clrfix">
                         <div class="label">手机号码:</div>
                         <div class="controls">
                             <if condition="$awardphone eq  false">
-                                <input type="tel" name="telephone" class="input-text" id="telephone_three_level"  placeholder="电话号码不能修改并会用于兑换其他奖项"/>
+                                <input type="tel" name="telephone" class="input-text" id="telephone_three_level" />
                                 <else />
-                                <input type="tel" name="telephone" readonly class="input-text btn-disabled" id="telephone_three_level" value="{pigcms::$awardphone}"  placeholder="电话号码不能修改并会用于兑换其他奖项"/>
+                                <input type="tel" name="telephone" readonly class="input-text btn-disabled" id="telephone_three_level" value="{pigcms::$awardphone}"/>
                             </if>
                         </div>
                     </li>
@@ -548,14 +551,15 @@
             <!-- 四等将 -->
             <div class="award-box hide clrfix" id="award-box-NO4">
                 <h2 class="tit">填写手机号码<br/>作为领奖代码</h2>
-                <ul class="form-ul">
+                <div class="ta-c mt-10" style="color:#999">电话号码不能修改并会用于兑换其他奖项</div>
+                <ul class="form-ul mt-10">
                     <li class="clrfix">
                         <div class="label">手机号码:</div>
                         <div class="controls">
                             <if condition="$awardphone eq  false">
-                                <input type="tel" name="telephone" class="input-text" id="telephone_four_level"  placeholder="电话号码不能修改并会用于兑换其他奖项"/>
+                                <input type="tel" name="telephone" class="input-text" id="telephone_four_level" />
                             <else />
-                                <input type="tel" name="telephone" class="input-text btn-disabled" readonly id="telephone_four_level" value="{pigcms::$awardphone}"  placeholder="电话号码不能修改并会用于兑换其他奖项"/>
+                                <input type="tel" name="telephone" class="input-text btn-disabled" readonly id="telephone_four_level" value="{pigcms::$awardphone}"/>
                             </if>
                         </div>
                     </li>
