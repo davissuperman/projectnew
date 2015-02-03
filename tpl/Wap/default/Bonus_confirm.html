@@ -36,93 +36,96 @@
                     </li>
                 </ul>
             </form>
-            <if condition="$show eq true">
-                <div id="show">
-                    <ul class="tab mt-50 clrfix">
-                        <if condition="$fourlevel eq true">
-                            <li  class="cur fourlevelenable" >换购一盒</li>
-                            <else/>
-                            <li class="btn-disabled" >换购一盒</li>
-                        </if>
-                        <if condition="$threelevel eq true">
-                            <li  class="cur threelevelenable" >换购六盒</li>
-                            <else/>
-                            <li id="threelevel" class="btn-disabled">换购六盒</li>
-                        </if>
+            <if condition="$cheat eq true">
+                <span>此数据是作弊数据</span>
+            <else/>
+                <if condition="$show eq true">
+                    <div id="show">
+                        <ul class="tab mt-50 clrfix">
+                            <if condition="$fourlevel eq true">
+                                <li  class="cur fourlevelenable" >换购一盒</li>
+                                <else/>
+                                <li class="btn-disabled" >换购一盒</li>
+                            </if>
+                            <if condition="$threelevel eq true">
+                                <li  class="cur threelevelenable" >换购六盒</li>
+                                <else/>
+                                <li id="threelevel" class="btn-disabled">换购六盒</li>
+                            </if>
 
-                    </ul>
-                    <!--<div class="tab-con">-->
-                    <ul class="form-ul mt-20 hide" id="fourform">
-                        <li class="clrfix">
-                            <div class="label" style="width:110px;">提交时间：</div>
-                            <div class="controls">
-                                {pigcms:$fourtime}
-                            </div>
-                        </li>
-                        <li class="clrfix">
-                            <div class="label" style="width:110px;">距离当前时间为：</div>
-                            <div class="controls">
-                               {pigcms:$fourtimediff['day']}天{pigcms:$fourtimediff['hour']}小时{pigcms:$fourtimediff['min']}分钟{pigcms:$fourtimediff['sec']}秒
-                                <input type="hidden" id="fourlevelid" value="{pigcms::$fourlevelid}">
-                            </div>
-                        </li>
-                        <if condition="$fourordertime neq false">
+                        </ul>
+                        <!--<div class="tab-con">-->
+                        <ul class="form-ul mt-20 hide" id="fourform">
                             <li class="clrfix">
-                                <div class="label" style="width:110px;">淘宝订单号提交时间：</div>
+                                <div class="label" style="width:110px;">提交时间：</div>
                                 <div class="controls">
-                                   {pigcms:$fourordertime}
+                                    {pigcms:$fourtime}
                                 </div>
                             </li>
-                        </if>
-
-                        <li class="clrfix">
-                            <div class="label" style="width:110px;">一盒换购订单号：</div>
-                            <div class="controls">
-                                <input type="text" class="input-text" id="orderNumberForFourLevel" placeholder="请输入一盒换购订单号" name="fourorderid" value="{pigcms::$fourorderid}">
-                            </div>
-                        </li>
-                        <li>
-                            <p class="ta-c mt-30">
-                                <span class="btn-blue-h45 foursubmit">提交</span>
-                            </p>
-                        </li>
-                    </ul>
-                    <ul class="form-ul mt-20 hide" id="threeform">
-                        <li class="clrfix">
-                            <div class="label" style="width:110px;">提交时间：</div>
-                            <div class="controls">
-                                {pigcms:$threetime}
-                            </div>
-                        </li>
-                        <li class="clrfix">
-                            <div class="label" style="width:110px;">距离当前时间为：</div>
-                            <div class="controls">
-                               {pigcms:$threetimediff['day']}天{pigcms:$threetimediff['hour']}小时{pigcms:$threetimediff['min']}分钟{pigcms:$threetimediff['sec']}秒
-                                <input type="hidden" id="threelevelid" value="{pigcms::$threelevelid}">
-                            </div>
-                        </li>
-                        <if condition="$threeordertime neq false">
                             <li class="clrfix">
-                                <div class="label" style="width:110px;">淘宝订单号提交时间：</div>
-                                <div class="controls">{pigcms:$threeordertime}</div>
+                                <div class="label" style="width:110px;">距离当前时间为：</div>
+                                <div class="controls">
+                                    {pigcms:$fourtimediff['day']}天{pigcms:$fourtimediff['hour']}小时{pigcms:$fourtimediff['min']}分钟{pigcms:$fourtimediff['sec']}秒
+                                    <input type="hidden" id="fourlevelid" value="{pigcms::$fourlevelid}">
+                                </div>
                             </li>
-                        </if>
-                        <li class="clrfix">
-                            <div class="label" style="width:110px;">六盒换购订单号：</div>
-                            <div class="controls">
-                                <input type="text" class="input-text" placeholder="请输入六盒换购订单号"  name="threeorderid"  id="orderNumberForThreeLevel" value="{pigcms::$threeorderid}">
-                            </div>
-                        </li>
-                        <li>
-                            <p class="ta-c mt-30">
-                                <span class="btn-blue-h45 threesubmit">提交</span>
-                            </p>
-                        </li>
-                    </ul>
-                    <!--</div>-->
-                </div>
-            </if>
+                            <if condition="$fourordertime neq false">
+                                <li class="clrfix">
+                                    <div class="label" style="width:110px;">淘宝订单号提交时间：</div>
+                                    <div class="controls">
+                                        {pigcms:$fourordertime}
+                                    </div>
+                                </li>
+                            </if>
 
+                            <li class="clrfix">
+                                <div class="label" style="width:110px;">一盒换购订单号：</div>
+                                <div class="controls">
+                                    <input type="text" class="input-text" id="orderNumberForFourLevel" placeholder="请输入一盒换购订单号" name="fourorderid" value="{pigcms::$fourorderid}">
+                                </div>
+                            </li>
+                            <li>
+                                <p class="ta-c mt-30">
+                                    <span class="btn-blue-h45 foursubmit">提交</span>
+                                </p>
+                            </li>
+                        </ul>
+                        <ul class="form-ul mt-20 hide" id="threeform">
+                            <li class="clrfix">
+                                <div class="label" style="width:110px;">提交时间：</div>
+                                <div class="controls">
+                                    {pigcms:$threetime}
+                                </div>
+                            </li>
+                            <li class="clrfix">
+                                <div class="label" style="width:110px;">距离当前时间为：</div>
+                                <div class="controls">
+                                    {pigcms:$threetimediff['day']}天{pigcms:$threetimediff['hour']}小时{pigcms:$threetimediff['min']}分钟{pigcms:$threetimediff['sec']}秒
+                                    <input type="hidden" id="threelevelid" value="{pigcms::$threelevelid}">
+                                </div>
+                            </li>
+                            <if condition="$threeordertime neq false">
+                                <li class="clrfix">
+                                    <div class="label" style="width:110px;">淘宝订单号提交时间：</div>
+                                    <div class="controls">{pigcms:$threeordertime}</div>
+                                </li>
+                            </if>
+                            <li class="clrfix">
+                                <div class="label" style="width:110px;">六盒换购订单号：</div>
+                                <div class="controls">
+                                    <input type="text" class="input-text" placeholder="请输入六盒换购订单号"  name="threeorderid"  id="orderNumberForThreeLevel" value="{pigcms::$threeorderid}">
+                                </div>
+                            </li>
+                            <li>
+                                <p class="ta-c mt-30">
+                                    <span class="btn-blue-h45 threesubmit">提交</span>
+                                </p>
+                            </li>
+                        </ul>
+                        <!--</div>-->
+                    </div>
+                </if>
+            </if>
         </div>
     
     <div id="awardinfo"></div>

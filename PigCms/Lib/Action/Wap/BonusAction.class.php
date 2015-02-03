@@ -316,12 +316,24 @@ class BonusAction extends Action {
         $threelevelId = '';
         $show = false;
         $res = M('bonus_award')->where(array('telephone' => $phone))->select();
+
+        $cheat = false;
         if($res){
             $show = true;
             foreach($res as $each){
                 $type = $each['type'];
                 if($type == 4){
                     //四等奖存在
+                    //根据openid 取得阅读数和投票数 查看是否是作弊数据
+                    $openId = $each['openid'];
+                    $bonusInfo = M('bonus_info')->where(array('openid' => $openId))->find();
+                    $views = $bonusInfo['views'];
+                    $vote = $bonusInfo['vote'];
+                    if($views < $vote){
+                        //作弊数据
+                        $cheat = true;
+                        break;
+                    }
                     $fourlevel = true;
                     $fourOrderId = $each['orderid'];
                     $fourlevelId = $each['id'];
@@ -329,7 +341,15 @@ class BonusAction extends Action {
                     $fourOrderTime = $each['order_time'];
                 }
                 if($type == 3){
-                    //四等奖存在
+                    //三等奖存在
+                    $bonusInfo = M('bonus_info')->where(array('openid' => $openId))->find();
+                    $views = $bonusInfo['views'];
+                    $vote = $bonusInfo['vote'];
+                    if($views < $vote){
+                        //作弊数据
+                        $cheat = true;
+                        break;
+                    }
                     $threelevel = true;
                     $threeOrderId = $each['orderid'];
                     $threelevelId = $each['id'];
@@ -343,6 +363,7 @@ class BonusAction extends Action {
             }
         }
 
+        $this->assign('cheat',$cheat);
         $this->assign('show',$show);
         $this->assign('error',$error);
         $this->assign('phone',$phone);
