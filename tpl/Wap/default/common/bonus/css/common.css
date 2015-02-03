@@ -394,6 +394,7 @@ animation: rubberBand 2s ease-in 0 infinite;}
 
 .p1.btn-disabled,.p2.btn-disabled,.p3.btn-disabled,.p4.btn-disabled,.p5.btn-disabled{box-shadow: 1px 4px 0px #999 !important; color:#fff !important;
 }
+.p4.btn-disabled .c8{color:#fff !important;}
 .btn-disabled .icon-arrow,.btn-disabled .icon-arrow2 {-webkit-animation: none;
 -moz-animation: none;
 -ms-animation: none;
