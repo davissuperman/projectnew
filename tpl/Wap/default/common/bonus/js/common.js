@@ -97,21 +97,6 @@ function closeLayer(){
 }
 /*show layer*/
 function showLayer($elem,isBlack,title){
-	if($(".p1").hasClass("btn-disabled")){
-		return false;
-	}
-	if($(".p2").hasClass("btn-disabled")){
-		return false;
-	}
-	if($(".p3").hasClass("btn-disabled")){
-		return false;
-	}
-	if($(".p4").hasClass("btn-disabled")){
-		return false;
-	}
-	if($(".p5").hasClass("btn-disabled")){
-		return false;
-	}
 	var $layerbox = $("#layer-box"),
 	$layerbg = $layerbox.find(".layer-bg"),
 	$title = $layerbox.find(".layer-title .title"),
