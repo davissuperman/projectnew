@@ -79,10 +79,10 @@ class BonusAction extends Action {
         define('STATICS', TMPL_PATH . 'static');
         $this->gid = $_REQUEST['gid'];
         $agent = $_SERVER['HTTP_USER_AGENT'];
-//        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
-//            echo '此功能只能在微信浏览器中使用';
-//            exit;
-//        }
+        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
+            echo '此功能只能在微信浏览器中使用';
+            exit;
+        }
         $this->url= C('site_url');
         $this->cache = Cache::getInstance('Redis',array('host'=>'127.0.0.1','expire'=>1296000));
     }
@@ -862,11 +862,13 @@ class BonusAction extends Action {
         $vote = $vote*1 + 1;
         $number = $bonusInfo['number'];
         $return = 0;
-        $five = 50;
-        $four = 300;
-        $three = 500;
-        $second = 800;
-        $first = 1000;
+        $scoreList = array_keys($this->configBonus);
+        array_unshift($scoreList,$this->fiveScore);
+        $five = $scoreList[0];
+        $four =  $scoreList[1];
+        $three =  $scoreList[2];
+        $second =  $scoreList[3];
+        $first =  $scoreList[4];
 
         $before = $this->before;
 
@@ -1571,7 +1573,7 @@ class BonusAction extends Action {
         $this->assign("voteinfo",$voteInfo);
 
         //获得三四等奖的手机号
-        $this->assign("awardphone",$awardPhone);
+        $this->assign("awardphone",$awdardPhone);
 
         //重定向页面
         if($redirect == 3){
