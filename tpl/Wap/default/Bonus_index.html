@@ -150,14 +150,16 @@
     </div>
     <div class="sroll-wrap">
         <ul class="scrolling" id="scrolling">
-            <if condition="$hasaward eq false ">
-                <li class="clrfix">一等奖  Iphone6</li>
-                <li class="clrfix">二等奖 IPAD</li>
-            <else/>
-                <volist name="awardlist" id="eachitem">
-                    <li class="clrfix">{pigcms:$eachitem.username}刚刚兑换了{pigcms:$eachitem.type}</li>
-                </volist>
-            </if>
+            <li class="clrfix">一等奖  Iphone6</li>
+            <li class="clrfix">二等奖 IPAD</li>
+            <!--<if condition="$hasaward eq false ">-->
+                <!--<li class="clrfix">一等奖  Iphone6</li>-->
+                <!--<li class="clrfix">二等奖 IPAD</li>-->
+            <!--<else/>-->
+                <!--<volist name="awardlist" id="eachitem">-->
+                    <!--<li class="clrfix">{pigcms:$eachitem.username}刚刚兑换了{pigcms:$eachitem.type}</li>-->
+                <!--</volist>-->
+            <!--</if>-->
         </ul>
     </div>
     <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Bonus&a=present&gid={pigcms::$gid}&openid={pigcms::$openid}" class="btn-present">我要年终奖</a>
