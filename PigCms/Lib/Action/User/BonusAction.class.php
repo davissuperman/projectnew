@@ -156,7 +156,11 @@ class BonusAction extends UserAction {
         $end = $_POST['end'];
         $end=$end-$start;
         $start=$start-1;
-        $list = M('doing_info')->query("SELECT b.addres,b.city,b.tel as tels,b.name as names,a.*,a.share*10+a.number as n FROM `tp_doing_info` as a left join `tp_doing_list` as b on a.tel=b.temptel  order by n desc limit $start,$end"); //第二名和你最近的
+        $list = M('bonus_info')->query(
+            "SELECT info.*, info.number n,award.telephone tels,bonus.title tel from tp_bonus_info as info
+             left join tp_bonus_award as award on (award.openid=info.openid)
+             left join tp_bonus as bonus on (bonus.gid=info.gid)
+             order by info.number desc limit $start,$end"); //第二名和你最近的
         $i = $start+1;
         foreach ($list as $k => $v) {
             $list[$k]['sort'] = $i;
