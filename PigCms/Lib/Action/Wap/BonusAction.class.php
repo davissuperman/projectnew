@@ -70,9 +70,9 @@ class BonusAction extends Action {
     public $hashKeyBonusInfo;
 
 //    public $score = array(-14,-13,-12,-11,-10,-9,-8,-7,-6,-5,-4,-3,-2,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,35,36,37,38,39,40,41,42,43,44);
-    public $score = array(-14,-13,-12,-11,-10,-9,-8,-7,-6,-5,-4,-3,-2,10,11,12,13,14,15,16,17,18,19,20);
+    public $score = array(-14,-13,-12,-11,-10,-9,-8,-7,-6,-5,-4,-3,-2,10,11,12,13,14);
     public $leftIntval = 10;
-    public $minus = 20;
+    public $minus = 10;
 
     public $cache;
 
@@ -854,9 +854,9 @@ class BonusAction extends Action {
     public function getRandScore($typeBigZero = false){
         $score = $this->score;
         if($typeBigZero){
-            $num = rand(14,26);
+            $num = rand(14,count($this->score)-1);
         }else{
-            $num = rand(0,26);
+            $num = rand(0,count($this->score)-1);
         }
         $return = $score[$num];
         return $return;
