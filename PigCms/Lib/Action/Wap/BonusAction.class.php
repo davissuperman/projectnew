@@ -48,14 +48,14 @@ class BonusAction extends Action {
             1 => array(
                 'count' => 1,
 //                'vote' => 500
-                'vote' => 10000
+                'vote' => 1000
 //                'vote' => 5//测试用2等奖
             ),
         ),
         2000 => array(
             1 => array(
                 'count' => 1,
-                'vote' => 20000
+                'vote' => 2000
 //                    'vote' => 6//测试用1等奖
             ),
         )
