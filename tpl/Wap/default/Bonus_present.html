@@ -47,7 +47,7 @@
         <div class="present-list">
             <!-- 1等奖 -->
             <div class="clrfix item">
-                <if condition="($firstleft elt 0) or ($number egt  $scoreList[4] and $firstaward eq true)">
+                <if condition="($firstleft elt 0)">
                     <div class="p1 btn-disabled" onClick="if($(this).hasClass('btn-disabled')){return false;}showLayer($('#one-present'));">
                         <i class="icon-phone fl"></i>
                         <span class="fl mt-20">iPhone6<br/>大奖<i class="icon-arrow ml-10"></i></span>
@@ -64,7 +64,7 @@
                         <p class="fen c5 ta-r"><strong class="fz14">{pigcms:$scoreList[4]}</strong></p>
                         <if condition="$isself eq false">
                             <a href="./index.php?g=Wap&m=Bonus&a=present&gid={pigcms::$gid}&openid={pigcms::$tel}">
-                                <p><span class="btn-red-h30 get-award NOTop1  {pigcms::$buttondisable}">领奖</span></p>
+                                <p><span class="btn-red-h30 NOTop1  {pigcms::$buttondisable}">领奖</span></p>
                             </a>
                             <else/>
                             <if condition="$firstleft elt 0">
@@ -84,7 +84,7 @@
             </div>
             <!-- 2等奖 -->
             <div class="clrfix item">
-                <if condition=" ($number egt  $scoreList[3] and $secondaward eq true) or ($secondleft elt 0)" >
+                <if condition=" ($secondleft elt 0)" >
                     <div class="p2 btn-disabled" onClick="if($(this).hasClass('btn-disabled')){return false;}showLayer($('#two-present'));">
                         <i class="icon-ipad fl"></i>
                         <span class="fl mt-20">iPad Mini2<br/>大奖<i class="icon-arrow ml-10"></i></span>
@@ -101,7 +101,7 @@
                         <p class="fen c6 ta-r"><strong class="fz14">{pigcms:$scoreList[3]}</strong></p>
                         <if condition="$isself  eq false ">
                             <a href="./index.php?g=Wap&m=Bonus&a=present&gid={pigcms::$gid}&openid={pigcms::$tel}">
-                                <p><span class="btn-red-h30 get-award NO2 {pigcms::$buttondisable}">领奖</span></p>
+                                <p><span class="btn-red-h30 NO2 {pigcms::$buttondisable}">领奖</span></p>
                             </a>
                             <else/>
                             <if condition="$secondleft elt 0">
@@ -121,7 +121,7 @@
             </div>
             <!-- 3等奖 -->
             <div class="clrfix item">
-                <if condition=" ($number egt  $scoreList[2] and $threeaward eq true) or ($threeleft elt 0)" >
+                <if condition=" ($threeleft elt 0)" >
                     <div class="p3 btn-disabled" onClick="if($(this).hasClass('btn-disabled')){return false;}showLayer($('#three-present'));">
                         <i class="icon5 fl"></i>
                         <span class="fl mt-10">196元<i class="icon-arrow ml-10"></i><br/>森田面膜</span>
@@ -138,7 +138,7 @@
                         <p class="fen c7 ta-r"><strong class="fz14">{pigcms:$scoreList[2]}</strong></p>
                         <if condition="$isself eq false">
                             <a href="./index.php?g=Wap&m=Bonus&a=present&gid={pigcms::$gid}&openid={pigcms::$tel}">
-                                <p><span class="btn-red-h30 get-award NO3 {pigcms::$buttondisable} ">领奖</span></p>
+                                <p><span class="btn-red-h30 NO3 {pigcms::$buttondisable} ">领奖</span></p>
                             </a>
                             <else/>
                             <if condition="$threeleft elt 0">
@@ -157,7 +157,7 @@
             </div>
             <!-- 4等奖 -->
             <div class="clrfix item">
-                <if condition=" ($number egt  $scoreList[1] and $fouraward eq true) or ($fourleft elt 0)" >
+                <if condition=" ($fourleft elt 0)" >
                     <div class="p4 btn-disabled" onClick="if($(this).hasClass('btn-disabled')){return false;}showLayer($('#four-present'));">
                         <i class="icon6 fl"></i>
                         <span class="fl mt-10 c8">49元<i class="icon-arrow2 ml-10"></i><br/>森田面膜</span>
@@ -174,7 +174,7 @@
                         <p class="fen c9 ta-r"><strong class="fz14">{pigcms:$scoreList[1]}</strong></p>
                         <if condition="$isself eq false">
                             <a href="./index.php?g=Wap&m=Bonus&a=present&gid={pigcms::$gid}&openid={pigcms::$tel}">
-                                <p><span class="btn-red-h30 get-award NO4 {pigcms::$buttondisable}">领奖</span></p>
+                                <p><span class="btn-red-h30 NO4 {pigcms::$buttondisable}">领奖</span></p>
                             </a>
                             <else/>
                             <if condition="$fourleft elt 0">

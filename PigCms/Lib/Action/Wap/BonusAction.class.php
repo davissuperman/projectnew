@@ -1214,6 +1214,9 @@ class BonusAction extends Action {
         $awardPhone = false;
         $myselfopenid = cookie("user_openid");//如果没有 需要弹出页面授权
         $redirect = 0;
+        if(isset($_GET['redirect']) && $_GET['redirect']){
+            $redirect = $_GET['redirect'];
+        }
 //        $myselfopenid = null;//如果没有 需要弹出页面授权
         if(isset( $_GET['openid'] ) &&  $_GET['openid']){
             //获取当前的openid
@@ -1571,7 +1574,14 @@ class BonusAction extends Action {
         $this->assign("awardphone",$awardPhone);
 
         //重定向页面
-        $redirect = $_GET['redirect'];
+        if($redirect == 3){
+            header('Location: http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=204136724&idx=1&sn=3528d785ae3d1f179339d8bfb8ad2606&key=79cf83ea5128c3e52dd08bb48805d5d9a414a6ed0c95b948fc15a3e0c1da2f54735493dec4987c77fc02bf29425103a7&ascene=1&uin=MTU2NjU5Mjc2Mw%3D%3D&devicetype=webwx&version=70000001&pass_ticket=bYdmw9sWe7e4D8EzqjZcxyDcK9ctRYxCKuoE6bnnzDYuJLbCWxaKt5Xpe4OBZvgh');
+        }else if($redirect == 4){
+            header('Location: http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=204135881&idx=1&sn=9de48901e372517b6df47567eaf12db7&key=79cf83ea5128c3e5ebc3820644240638ac8d1d1fc0973441774626ae76b54bb5c99c5aec5a344b4033e3f6ce0560cb6d&ascene=1&uin=MTU2NjU5Mjc2Mw%3D%3D&devicetype=webwx&version=70000001&pass_ticket=bYdmw9sWe7e4D8EzqjZcxyDcK9ctRYxCKuoE6bnnzDYuJLbCWxaKt5Xpe4OBZvgh');
+        }else if($redirect == 2 || $redirect == 1 ){
+            header('Location: http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=204136816&idx=1&sn=c303154d60fa85db0e02e5c34630b4b8&key=79cf83ea5128c3e5030c6f84deb44928b238a8430d75db85b3fb163d3e824ee6b2123137cb9b7496262f71bd726d898f&ascene=1&uin=MTU2NjU5Mjc2Mw%3D%3D&devicetype=webwx&version=70000001&pass_ticket=bYdmw9sWe7e4D8EzqjZcxyDcK9ctRYxCKuoE6bnnzDYuJLbCWxaKt5Xpe4OBZvgh');
+        }
+
         $this->assign("redirect",$redirect);
 
         //奖品个数
