@@ -47,14 +47,15 @@ class BonusAction extends Action {
         1000 => array(
             1 => array(
                 'count' => 1,
-                'vote' => 500
+//                'vote' => 500
+                'vote' => 10000
 //                'vote' => 5//测试用2等奖
             ),
         ),
         2000 => array(
             1 => array(
                 'count' => 1,
-                'vote' => 1000
+                'vote' => 20000
 //                    'vote' => 6//测试用1等奖
             ),
         )
@@ -68,8 +69,9 @@ class BonusAction extends Action {
 
     public $hashKeyBonusInfo;
 
-    public $score = array(-14,-13,-12,-11,-10,-9,-8,-7,-6,-5,-4,-3,-2,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,35,36,37,38,39,40,41,42,43,44);
-    public $leftIntval = 44;
+//    public $score = array(-14,-13,-12,-11,-10,-9,-8,-7,-6,-5,-4,-3,-2,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,35,36,37,38,39,40,41,42,43,44);
+    public $score = array(-14,-13,-12,-11,-10,-9,-8,-7,-6,-5,-4,-3,-2,10,11,12,13,14,15,16,17,18,19,20);
+    public $leftIntval = 10;
     public $minus = 20;
 
     public $cache;
@@ -79,15 +81,20 @@ class BonusAction extends Action {
         define('STATICS', TMPL_PATH . 'static');
         $this->gid = $_REQUEST['gid'];
         $agent = $_SERVER['HTTP_USER_AGENT'];
-        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
-            echo '此功能只能在微信浏览器中使用';
-            exit;
-        }
+//        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
+//            echo '此功能只能在微信浏览器中使用';
+//            exit;
+//        }
         $this->url= C('site_url');
         $this->cache = Cache::getInstance('Redis',array('host'=>'127.0.0.1','expire'=>1296000));
     }
 
     public function index() {
+        $agent = $_SERVER['HTTP_USER_AGENT'];
+        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
+            echo '此功能只能在微信浏览器中使用';
+            exit;
+        }
 //         if (time() > $this->gameinfo['end']) {//活动是否结束
 //                exit('<center>游戏已经结束！谢谢你的参与</center>');
 //          }
@@ -1053,6 +1060,10 @@ class BonusAction extends Action {
 
 
         }
+
+        if($return > 50) {
+            $return = 35;
+        }
         return $return;
 
         //判断当前有20票的用户数
@@ -1206,6 +1217,11 @@ class BonusAction extends Action {
         M("bonus_list")->add($d);
     }
     public function present(){
+        $agent = $_SERVER['HTTP_USER_AGENT'];
+        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
+            echo '此功能只能在微信浏览器中使用';
+            exit;
+        }
         $gid = $_GET['gid'];
         $str = '';
         $nickname = "";
