@@ -280,7 +280,9 @@
             <elseif condition="$tel neq $openid and $voteinfo eq true" />
                  <span class="btn-blue-h40 btn-disabled" >已经投票</span>
             </if>
-            <!--span class="btn-blue-h40 ml-10 btn-share">帮他拉票</span-->
+            <if condition="$tel neq $openid ">
+                <span class="btn-blue-h40 ml-10 btn-share">帮他拉票</span>
+            </if>
         </p>
         <if condition="$tel neq $openid ">
             <p class="mt-20">
