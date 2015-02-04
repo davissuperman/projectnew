@@ -8,7 +8,7 @@ class BonusAction extends Action {
     //前几票都是加法
     public $before = 1;
     public $secondLevelNumber = 5;//二等奖的个数
-    public $firstLevelNumber = 3;//一等奖的个数
+    public $firstLevelNumber = 1;//一等奖的个数
     public $fourLevelNumber = 3000;//四等奖的个数
     public $threeLevelNumber = 300;//三等奖的个数
 
@@ -48,14 +48,14 @@ class BonusAction extends Action {
             1 => array(
                 'count' => 1,
 //                'vote' => 500
-                'vote' => 1000
+                'vote' => 2000
 //                'vote' => 5//测试用2等奖
             ),
         ),
         2000 => array(
             1 => array(
                 'count' => 1,
-                'vote' => 2000
+                'vote' => 4000
 //                    'vote' => 6//测试用1等奖
             ),
         )
@@ -71,8 +71,8 @@ class BonusAction extends Action {
 
 //    public $score = array(-14,-13,-12,-11,-10,-9,-8,-7,-6,-5,-4,-3,-2,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,35,36,37,38,39,40,41,42,43,44);
     public $score = array(-11,-10,-9,-8,-7,-6,-5,-4,-3,-2,1,2,3,4,5,6,7,8,9,10,11,12,13,14);
-    public $leftIntval = 10;
-    public $minus = 10;
+    public $leftIntval = 14;
+    public $minus = 20;
 
     public $cache;
 
@@ -1062,7 +1062,7 @@ class BonusAction extends Action {
         }
 
         if($return > 50) {
-            $return = 35;
+            $return = -5;
         }
         return $return;
 

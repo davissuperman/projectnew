@@ -152,8 +152,16 @@ class BonusAction extends UserAction {
     }
 
     public function exportstore() {
-        $start = $_POST['start'];
-        $end = $_POST['end'];
+        $start = 1;
+        $end = 100;
+        if(isset($_POST['start']) && $_POST['start']){
+            $start = $_POST['start'];
+        }
+        if(isset($_POST['end']) && $_POST['end']){
+            $end = $_POST['end'];
+        }
+//        $start = $_POST['start'];
+//        $end = $_POST['end'];
         $end=$end-$start;
         $start=$start-1;
         $list = M('bonus_info')->query(
@@ -225,8 +233,9 @@ class BonusAction extends UserAction {
         $enda = $_POST['end'];
         $start = strtotime($_POST['start']);
         $end = strtotime($_POST['end']);
-        $db = M('doing_info');
-        $sql = "select tel,name,createtime,sharetime,share,views,vote,joins,share*10+number as n from tp_doing_info  where createtime>" . $start . " and createtime<" . $end . " order by createtime desc";
+        $db = M('bonus_info');
+        $sql = "select  openid as ID,tel,name,createtime,sharetime,share,views,vote,joins,number as n
+        from tp_bonus_info  where createtime>" . $start . " and createtime<" . $end . " order by number desc";
         $list = M()->query($sql);
         foreach ($list as $key => $value) {
             $list[$key]['ID'] = $key;
@@ -258,12 +267,12 @@ class BonusAction extends UserAction {
                 ->setCellValue('H1', '浏览数')
                 ->setCellValue('I1', '点赞数')->setCellValue('j1', '扩散数');
         //写出内容 UTF-8
-
+//        log :: write( print_r($data,true)  );
         for ($n = 0; $n < count($data); $n++) {
             $objPHPExcel->setActiveSheetIndex(0)
                     ->setCellValue('A' . ($n + 2), $data[$n]['ID'])
                     ->setCellValue('B' . ($n + 2), $data[$n]['tel'])
-                    ->setCellValue('C' . ($n + 2), $data[$n]['name'])
+                    ->setCellValue('C' . ($n + 2),  iconv('UTF-8', 'GB2312//IGNORE', $data[$n]['name'])   )
                     ->setCellValue('D' . ($n + 2), $data[$n]['createtime'])
                     ->setCellValue('E' . ($n + 2), $data[$n]['sharetime'])
                     ->setCellValue('F' . ($n + 2), $data[$n]['n'])
