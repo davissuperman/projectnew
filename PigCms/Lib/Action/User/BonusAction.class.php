@@ -89,7 +89,7 @@ class BonusAction extends UserAction {
         $where = array('gid' => $gid);
         $count = $db->where($where)->count();
         $page = new Page($count, 25);
-        $info = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->order('createtime desc')->select();
+        $info = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->order('number desc')->select();
 //根据GID 得到渠道
         $gidInfo = M('bonus')->where(array('gid' => $gid))->find();
         $infoList = array();
