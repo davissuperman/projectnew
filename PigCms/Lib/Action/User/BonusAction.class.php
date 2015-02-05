@@ -209,11 +209,13 @@ class BonusAction extends UserAction {
         //写出内容 UTF-8
 
         for ($n = 0; $n < count($data); $n++) {
+            $name = $data[$n]['name'];
+            $name = $this->ReplaceSpecialChar($name);
             $objPHPExcel->setActiveSheetIndex(0)
                     ->setCellValue('A' . ($n + 2), $data[$n]['sort'])
                     ->setCellValue('B' . ($n + 2), $data[$n]['n'])
                     ->setCellValue('C' . ($n + 2), $data[$n]['tel'])
-                    ->setCellValue('D' . ($n + 2), $data[$n]['name'])
+                    ->setCellValue('D' . ($n + 2), $name)
                     ->setCellValue('E' . ($n + 2), $data[$n]['tels'])
                     ->setCellValue('F' . ($n + 2), $data[$n]['city'])
                     ->setCellValue('G' . ($n + 2), $data[$n]['addres'])
@@ -250,7 +252,19 @@ class BonusAction extends UserAction {
         $filename = $starta . "~" . $enda . "统计";
         $this->exportexcel($list, $title, $filename);
     }
-
+    function ReplaceSpecialChar($C_char){//过滤特殊字符
+        $C_char=HTMLSpecialChars($C_char); //将特殊字元转成 HTML 格式
+        $C_char=str_replace(",","",$C_char); //替换英文逗号,
+        $C_char=str_replace("<","",$C_char); //替换英文小破折号<
+        $C_char=str_replace(">","",$C_char);//替换英文小破折号>
+        $C_char=str_replace("'","",$C_char);//替换英文单引号 '
+        $C_char=str_replace("{","",$C_char);//替换英文大括号{
+        $C_char=str_replace("}","",$C_char);//替换英文大括号}
+        $C_char=str_replace("(","",$C_char);//替换英文小括号(
+        $C_char=str_replace("）","",$C_char);//替换英文小括号）
+        $C_char=str_replace("=","",$C_char);//替换英文小括号）
+        return $C_char;//返回处理结果
+    }
     public function exportexcel($data = array(), $title = array(), $filename = 'report') {
         $str = substr(THINK_PATH, 0, -1);
         require_once $str . '/PigCms/Lib/Action/User/Classes/PHPExcel.php';
@@ -267,12 +281,15 @@ class BonusAction extends UserAction {
                 ->setCellValue('H1', '浏览数')
                 ->setCellValue('I1', '点赞数')->setCellValue('j1', '扩散数');
         //写出内容 UTF-8
-//        log :: write( print_r($data,true)  );
+        //log :: write( print_r($data,true)  );
         for ($n = 0; $n < count($data); $n++) {
+            $name = $data[$n]['name'];
+            $name = $this->ReplaceSpecialChar($name);
+//            $name = str_replace('=','',$name);
             $objPHPExcel->setActiveSheetIndex(0)
                     ->setCellValue('A' . ($n + 2), $data[$n]['ID'])
                     ->setCellValue('B' . ($n + 2), $data[$n]['tel'])
-                    ->setCellValue('C' . ($n + 2),  iconv('UTF-8', 'GB2312//IGNORE', $data[$n]['name'])   )
+                    ->setCellValue('C' . ($n + 2),  $name)
                     ->setCellValue('D' . ($n + 2), $data[$n]['createtime'])
                     ->setCellValue('E' . ($n + 2), $data[$n]['sharetime'])
                     ->setCellValue('F' . ($n + 2), $data[$n]['n'])
