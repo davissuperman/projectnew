@@ -27,7 +27,17 @@ class BonusAction extends UserAction {
          order by info.number desc limit $page->firstRow,$page->listRows"); //第二名和你最近的
         $this->assign('page', $page->show());
         $this->assign('token', $this->token);
-        $this->assign('info', $list);
+        $listArr = array();
+        foreach($list as $each){
+            $tmp = $each;
+            if($each['views']< $each['vote']){
+                $tmp['illegal'] = "<font style='color:red'>是</font>";
+            }else{
+                $tmp['illegal'] = "否";
+            }
+            $listArr[] = $tmp;
+        }
+        $this->assign('info', $listArr);
         $this->display();
     }
 

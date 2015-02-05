@@ -59,6 +59,7 @@
                                     <th class="sevenTd">得分</th>
                                     <th class="sevenTd">城市</th>
                                     <th class="sevenTd">地址</th>    
+                                    <th class="sevenTd">非法数据</th>
                                 </tr>
                                 
                                 <volist name="info" id="o"> 
@@ -78,6 +79,7 @@
                                         <td>{pigcms:$o.number}</td>
                                         <td>{pigcms:$o.city}</td>
                                         <td>{pigcms:$o.addres}|{pigcms:$o.tels}|{pigcms:$o.names}</td>
+                                        <td>{pigcms:$o.illegal}</td>
                                     </tr>
                                 </volist>
                                 <td colspan="9" style="text-align:right">{pigcms:$page}</td>
