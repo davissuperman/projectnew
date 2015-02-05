@@ -165,7 +165,7 @@ class BonusAction extends UserAction {
         $end=$end-$start;
         $start=$start-1;
         $list = M('bonus_info')->query(
-            "SELECT info.*, info.number n,award.telephone tels,bonus.title tel from tp_bonus_info as info
+            "SELECT info.*, info.number n,award.telephone tels,bonus.title tel,award.province as city, award.address as addres from tp_bonus_info as info
              left join tp_bonus_award as award on (award.openid=info.openid)
              left join tp_bonus as bonus on (bonus.gid=info.gid)
              order by info.number desc limit $start,$end"); //第二名和你最近的
