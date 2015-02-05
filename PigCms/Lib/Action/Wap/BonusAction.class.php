@@ -1735,15 +1735,29 @@ class BonusAction extends Action {
         $r = 0;
         $gid = $_REQUEST['gid'];
         $openId = $_REQUEST['openid'];
-        $telephone = (isset($_REQUEST['telephone']) && $_REQUEST['telephone'])?$_REQUEST['telephone']:'';
-        $username = (isset($_REQUEST['username']) && $_REQUEST['username'])?$_REQUEST['username']:'' ;
-        $address = (isset($_REQUEST['address']) && $_REQUEST['address'])?$_REQUEST['address']:''   ;
-        $province = (isset($_REQUEST['province']) && $_REQUEST['province'])?$_REQUEST['province']:''    ;
         $type =2;
         $bonusInfoRedisKey = "bonusinfo_".$openId;
         if(isset($_REQUEST['type']) && $_REQUEST['type']){
             $type = $_REQUEST['type'];
         }
+        $bonusInfo = M('bonus_info')->where(array('openid' => $openId))->find();
+        $vote = $bonusInfo['vote'];
+        $views = $bonusInfo['views'];
+        if($views < $vote){
+            //非法数据
+            $r=9;
+            return $r;
+        }else if($type=2 && $vote<1000){
+            return 9;
+        }else if($type=1 && $vote<2000){
+            return 9;
+        }
+
+        $telephone = (isset($_REQUEST['telephone']) && $_REQUEST['telephone'])?$_REQUEST['telephone']:'';
+        $username = (isset($_REQUEST['username']) && $_REQUEST['username'])?$_REQUEST['username']:'' ;
+        $address = (isset($_REQUEST['address']) && $_REQUEST['address'])?$_REQUEST['address']:''   ;
+        $province = (isset($_REQUEST['province']) && $_REQUEST['province'])?$_REQUEST['province']:''    ;
+
         //判断此telephone 和 type 是否存在系统中
         $data = M('bonus_award')->where(array('telephone' =>$telephone,'type' => $type))->find();
         if($data){
