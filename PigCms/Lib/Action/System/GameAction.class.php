@@ -38,8 +38,8 @@ class GameAction extends BackAction {
         $end = $_POST['tend'] ? $_POST['tend'] : date('Y-m-d');
         $start = strtotime($start . " 00:00:00");
         $end = strtotime($end . " 23:59:59");
-        $sql = "SELECT createtime, DATE_FORMAT(FROM_UNIXTIME(createtime),'%Y-%m-%d') as d,COUNT(id) as n, sum(share) as s, sum(views) as v, sum(vote) as vo , sum(joins) as js FROM `tp_doing_info` where createtime>=$start  and createtime<$end  group by d";
-        $info = M('doing_info')->query($sql);
+        $sql = "SELECT createtime, DATE_FORMAT(FROM_UNIXTIME(createtime),'%Y-%m-%d') as d,COUNT(id) as n, sum(share) as s, sum(views) as v, sum(vote) as vo , sum(joins) as js FROM `tp_bonus_info` where createtime>=$start  and createtime<$end  group by d";
+        $info = M('bonus_info')->query($sql);
         $objPHPExcel->setActiveSheetIndex(0)
                 ->setCellValue('A1', '日期')
                 ->setCellValue('B1', '模版数')

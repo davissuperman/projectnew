@@ -1029,10 +1029,10 @@ class BonusAction extends Action {
                 }else if($vote >= $needVote){
                     $return = $leftNumber;
                 }
-                if($number + $return < $three){
-                    //不可以回到上一个等级
-                    $return = $return + $three - ($number + $return) + 5;
-                }
+//                if($number + $return < $three){
+//                    //不可以回到上一个等级
+//                    $return = $return + $three - ($number + $return) + 5;
+//                }
                 break;
             case 1://一等将
                 $map['vote']  = array('egt',$configBonus[$first][1]['vote']);
