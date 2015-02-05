@@ -133,7 +133,7 @@ class BonusAction extends UserAction {
             $tmp['views'] = $each['views'];
             $cheat = '否';
             if( $each['views'] < $each['vote']){
-                $cheat = '是';
+                $cheat = "<font style='color:red'>是</font>";
             }
             $tmp['cheat'] = $cheat;
             $tmp['share'] = $each['share'];
