@@ -1202,10 +1202,12 @@ class BonusAction extends Action {
 
         //二等奖人数
         $mapSecond['type'] = 2;
+        $mapSecond['confirm'] = 1;
         $secondBonusNumber= M('bonus_award')->where($mapSecond)->count('id');
 
         //一等奖人数
         $mapFirst['type'] = 1;
+        $mapFirst['confirm'] = 1;
         $firstBonusNumber= M('bonus_award')->where($mapFirst)->count('id');
 
         return array($fourBonusNumber,$threeBonusNumber,$secondBonusNumber,$firstBonusNumber);
