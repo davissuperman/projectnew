@@ -48,9 +48,9 @@ class BonusAction extends UserAction {
                             $awardInfo .= '一等奖； ';
                         }else if($award['type'] == 2){
                             $awardInfo .= '二等奖； ';
-                        }else if($award['type'] == 3){
+                        }else if($award['type'] == 3 && $award['orderid'] != ''){
                             $awardInfo .= '三等奖； ';
-                        }else if($award['type'] == 4){
+                        }else if($award['type'] == 4 & $award['orderid'] != ''){
                             $awardInfo .= '四等奖；';
                         }
                     }
