@@ -8,7 +8,7 @@ class BonusAction extends Action {
     //前几票都是加法
     public $before = 1;
     public $secondLevelNumber = 5;//二等奖的个数
-    public $firstLevelNumber = 1;//一等奖的个数
+    public $firstLevelNumber = 3;//一等奖的个数
     public $fourLevelNumber = 3000;//四等奖的个数
     public $threeLevelNumber = 300;//三等奖的个数
 
