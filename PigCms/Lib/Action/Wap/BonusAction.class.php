@@ -1789,7 +1789,10 @@ class BonusAction extends Action {
 
         //判断此telephone 和 type 是否存在系统中
         $data = M('bonus_award')->where(array('telephone' =>$telephone,'type' => $type))->find();
-        if($data){
+
+        //已经领过信息
+        $data2 = M('bonus_award')->where(array('openid' =>$openId,'type' => $type))->find();
+        if($data || $data2){
             $r = 10;
         }else{
             switch($type){

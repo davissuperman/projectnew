@@ -872,6 +872,8 @@
                                 mnAlert("系统忙，请重试");
                             }else if(data == 3){
                                 mnAlert("您来晚了，三等奖已经被抢光了！");
+                            }else if(data == 10 || data == "10"){
+                                mnAlert("已经保存了三等奖领奖信息！");
                             }else{
                                 mnAlert("保存成功！");
                                 $("#layer-box").hide();
