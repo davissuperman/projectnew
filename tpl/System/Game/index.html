@@ -85,7 +85,7 @@ and open the template in the editor.
                                 <td>{pigcms:$o.name}</td>
                                 <td>{pigcms:$o.createtime|date="y-m-d H:i",###}</td>
                                 <td><if condition="$o.sharetime gt 0">{pigcms:$o.sharetime|date="Y-m-d H:i",###}<else/>-------------- --:-- </if></td>
-                            <td>{pigcms:$o[share]*10+$o[number]}</td>
+                            <td>{pigcms:$o[number]}</td>
                             <th class="sevenTd">{pigcms:$o.views}</th>
                             <th class="sevenTd">{pigcms:$o.share}</th>
                             <th class="sevenTd">{pigcms:$o.vote}</th>

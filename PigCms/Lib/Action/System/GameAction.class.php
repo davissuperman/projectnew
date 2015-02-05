@@ -6,7 +6,7 @@ class GameAction extends BackAction {
         $db = M('bonus_info');
         $count = $db->count();
         $page = new Page($count, 25);
-        $info = $db->limit($page->firstRow . ',' . $page->listRows)->order('createtime desc')->select();
+        $info = $db->limit($page->firstRow . ',' . $page->listRows)->order('number desc')->select();
         $this->assign('info', $info);
         $this->assign('page', $page->show());
         $this->assign('token', $this->token);
@@ -277,7 +277,7 @@ class GameAction extends BackAction {
             $where = $where .' AND views>=vote';
         }
       //$where
-        $info = M('doing_info')->where($where)->order('createtime desc')->select();
+        $info = M('bonus_info')->where($where)->order('createtime desc')->select();
         $tels = array('浏览数', '转发数', '点赞数', '扩散数');
         $str = 'CDEFGHIJKLMNOPQRSTUVWXYZAAABACADAEAFAGAHAIAJAKALAMANAOAPAQARASATAUAVAWAXAYAZBABBBCBDBEBFBGBHBIBJBKBLBMBN';
         $cj = (strtotime($end) - strtotime($start)) / (24 * 3600);
