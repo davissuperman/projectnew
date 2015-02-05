@@ -208,9 +208,51 @@ class BonusAction extends UserAction {
             $list[$k]['sort'] = $i;
             $i = $i + 1;
         }
+        $listArr = array();
+        foreach($list as $key => $each){
+            $awardInfo = '';
+            $tmp = $each;
+            if($each['sharetime']){
+                $tmp['sharetime'] = date('Y-m-d H:i:s', $tmp['createtime']);
+            }else{
+                $tmp['sharetime'] = "无";
+            }
+            if($each['createtime']){
+                $tmp['createtime'] = date('Y-m-d H:i:s', $tmp['createtime']);
+            }else{
+                $tmp['createtime'] = "无";
+            }
+            if($each['views']< $each['vote']){
+                $tmp['illegal'] = "是";
+            }else{
+                $tmp['illegal'] = "否";
+            }
+            $condition['openid'] = $each['openid'];
+            $resAwardList = M('bonus_award')->where($condition)->field('type,telephone')->select();
+            if($resAwardList){
+                $phone = '';
+                foreach($resAwardList as $award){
+                    if($award['telephone']){
+                        $phone = $award['telephone'];
+                    }
+                    if($award['type'] == 1){
+                        $awardInfo .= '一等奖； ';
+                    }else if($award['type'] == 2){
+                        $awardInfo .= '二等奖； ';
+                    }else if($award['type'] == 3 && $award['orderid'] != ''){
+                        $awardInfo .= '三等奖； ';
+                    }else if($award['type'] == 4 & $award['orderid'] != ''){
+                        $awardInfo .= '四等奖；';
+                    }
+                }
+            }
+            $tmp['awardlist'] = $awardInfo;
+            $tmp['phone'] = $phone;
 
+            $listArr[] = $tmp;
+        }
         $filename = $start . "~" . $end . "统计";
-        $this->exportexcelx($list, $filename);
+        $this->exportexcelx($listArr, $filename);
     }
 
     public function exportcheckbox() {
@@ -238,7 +280,10 @@ class BonusAction extends UserAction {
                 ->setCellValue('D1', '姓名')
                 ->setCellValue('E1', '手机号')
                 ->setCellValue('F1', '城市')
-                ->setCellValue('G1', '地址');
+                ->setCellValue('G1', '地址')
+                ->setCellValue('H1', '浏览量')
+                ->setCellValue('I1', '投票量')
+                ->setCellValue('J1', '非法数据');
 
         //写出内容 UTF-8
 
@@ -253,6 +298,9 @@ class BonusAction extends UserAction {
                     ->setCellValue('E' . ($n + 2), $data[$n]['tels'])
                     ->setCellValue('F' . ($n + 2), $data[$n]['city'])
                     ->setCellValue('G' . ($n + 2), $data[$n]['addres'])
+                    ->setCellValue('H' . ($n + 2), $data[$n]['views'])
+                    ->setCellValue('I' . ($n + 2), $data[$n]['vote'])
+                    ->setCellValue('J' . ($n + 2), $data[$n]['illegal'])
             ;
         }
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
