@@ -1759,7 +1759,7 @@ class BonusAction extends Action {
         $type =2;
         $bonusInfoRedisKey = "bonusinfo_".$openId;
         if(isset($_REQUEST['type']) && $_REQUEST['type']){
-            $type = $_REQUEST['type'];
+            $type = $_REQUEST['type']*1;
         }
         $bonusInfo = M('bonus_info')->where(array('openid' => $openId))->find();
         $vote = $bonusInfo['vote'];
@@ -1769,9 +1769,9 @@ class BonusAction extends Action {
             //非法数据
             $r=9;
             return $r;
-        }else if(($type=2 && $vote<1000) || ($type=2 && $number<1000)){
+        }else if(($type==2 && $number<1000)){//($type==2 && $vote<1000) ||
             return 9;
-        }else if($type=1 && $vote<2000|| ($type=1 && $number<2000)){
+        }else if(($type==1 && $number<2000)){//$type==1 && $vote<2000||
             return 9;
         }
 
@@ -1806,6 +1806,7 @@ class BonusAction extends Action {
                             $d['province'] = $province;
                             $d['updatetime'] = time();
                             $d['type'] = 2;
+                            $d['confirm'] = 1;
                             $r = M('bonus_award')->save($d);
                         }else{
                             //插入数据
@@ -1816,6 +1817,7 @@ class BonusAction extends Action {
                             $d['address'] = $address;
                             $d['province'] = $province;
                             $d['type'] = 2;
+                            $d['confirm'] = 1;
                             $d['createtime'] = time();
                             $d['updatetime'] = time();
                             $r = M('bonus_award')->add($d);
@@ -1850,6 +1852,7 @@ class BonusAction extends Action {
                             $d['province'] = $province;
                             $d['updatetime'] = time();
                             $d['type'] = 1;
+                            $d['confirm'] = 1;
                             $r = M('bonus_award')->save($d);
                         }else{
                             //插入数据
@@ -1862,6 +1865,7 @@ class BonusAction extends Action {
                             $d['type'] = 1;
                             $d['createtime'] = time();
                             $d['updatetime'] = time();
+                            $d['confirm'] = 1;
                             $r = M('bonus_award')->add($d);
                         }
                         //此用户是中奖用户，需要清空此用户的分数 活动结束
