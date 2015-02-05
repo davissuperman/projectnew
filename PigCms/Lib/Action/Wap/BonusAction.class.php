@@ -835,17 +835,27 @@ class BonusAction extends Action {
             $return = 2;
         }else{
             $bonusInfo = M('bonus_info')->where(array('openid' => $openId))->find();
-            //随机生成分数
-            $number =  $this->getNumberByOpenId($gid,$openId,$bonusInfo);
-            //投票个数加一
-            M("bonus_info")->where(array('id' =>$bonusInfo['id']))->setInc('vote', 1);
-            $this->cache->redis->incr($bonusInfoRedisKey."_vote");
-            //给URL OPEN ID 加分
-            M("bonus_info")->where(array('id' =>$bonusInfo['id']))->setInc('number', $number);
-            $this->cache->redis->incrBy($bonusInfoRedisKey."_number",$number);
-            //保存拉人品记录历史
-            $this->saveLaRenPing($gid,$openId,$number);
-            $this->saveBonusHistory($gid,$openId,$number,$selfOpenId,$bonusInfoRedisKey);
+            $vote = $bonusInfo['vote'];
+            $views = $bonusInfo['views'];
+            $number = $bonusInfo['number'];
+            if($views < $vote){
+                //非法数据
+                $r=9;
+                return $r;
+            }else{
+                //随机生成分数
+                $number =  $this->getNumberByOpenId($gid,$openId,$bonusInfo);
+                //投票个数加一
+                M("bonus_info")->where(array('id' =>$bonusInfo['id']))->setInc('vote', 1);
+                $this->cache->redis->incr($bonusInfoRedisKey."_vote");
+                //给URL OPEN ID 加分
+                M("bonus_info")->where(array('id' =>$bonusInfo['id']))->setInc('number', $number);
+                $this->cache->redis->incrBy($bonusInfoRedisKey."_number",$number);
+                //保存拉人品记录历史
+                $this->saveLaRenPing($gid,$openId,$number);
+                $this->saveBonusHistory($gid,$openId,$number,$selfOpenId,$bonusInfoRedisKey);
+            }
+
 
         }
         echo $return;

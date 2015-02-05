@@ -803,6 +803,9 @@
                     if (data == '1') {
                         showLayer($('#layer-alert'));
                         location.href = "./index.php?g=Wap&m=Bonus&a=present&gid={pigcms::$gid}&openid={pigcms::$openid}";
+                    }else if (data == '9') {
+                        mnAlert("非法数据");
+                        location.href = "./index.php?g=Wap&m=Bonus&a=present&gid={pigcms::$gid}&openid={pigcms::$openid}";
                     }else{
                         showLayer($('#layer-alert-haveadded'));
                     }
