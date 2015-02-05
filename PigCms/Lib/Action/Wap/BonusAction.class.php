@@ -1602,7 +1602,7 @@ class BonusAction extends Action {
         $this->assign("voteinfo",$voteInfo);
 
         //获得三四等奖的手机号
-        $this->assign("awardphone",$awdardPhone);
+        $this->assign("awardphone",$awardPhone);
 
         //重定向页面
         if($redirect == 3){
@@ -1789,6 +1789,7 @@ class BonusAction extends Action {
                 case 2:
                     //需要查看此次IPAD 是否还有
                     $map['type']  = array('eq',2);
+                    $map['confirm']  = array('eq',1);
                     $numberForSecond= M('bonus_award')->where($map)->count('id');
                     if($numberForSecond >= $this->secondLevelNumber){
                         //IPAD已经被抢光
@@ -1835,6 +1836,7 @@ class BonusAction extends Action {
                     break;
                 case 1:
                     $map['type']  = array('eq',1);
+                    $map['confirm']  = array('eq',1);
                     $numberForSecond= M('bonus_award')->where($map)->count('id');
                     if($numberForSecond >= $this->firstLevelNumber){
                         //IPHONE已经被抢光
