@@ -1776,9 +1776,9 @@ class BonusAction extends Action {
             //非法数据
             $r=9;
             return $r;
-        }else if(($type==2 && $number<1000)){//($type==2 && $vote<1000) ||
+        }else if(($type==2 && $number<1000) || ($type==2 && $views<500) ){
             return 9;
-        }else if(($type==1 && $number<2000)){//$type==1 && $vote<2000||
+        }else if(($type==1 && $number<2000) || ($type==1 && $views<1000)){
             return 9;
         }
 
