@@ -1743,13 +1743,14 @@ class BonusAction extends Action {
         $bonusInfo = M('bonus_info')->where(array('openid' => $openId))->find();
         $vote = $bonusInfo['vote'];
         $views = $bonusInfo['views'];
+        $number = $bonusInfo['number'];
         if($views < $vote){
             //非法数据
             $r=9;
             return $r;
-        }else if($type=2 && $vote<1000){
+        }else if(($type=2 && $vote<1000) || ($type=2 && $number<1000)){
             return 9;
-        }else if($type=1 && $vote<2000){
+        }else if($type=1 && $vote<2000|| ($type=1 && $number<2000)){
             return 9;
         }
 
