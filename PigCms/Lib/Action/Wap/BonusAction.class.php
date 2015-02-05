@@ -1640,7 +1640,16 @@ class BonusAction extends Action {
         $res = M('bonus_award')->where(array(  'openid' => $openId ))->field('type,telephone')->select();
         if($res){
             foreach($res as $each){
-                $awardList[] = $each['type'];
+                if($each['type'] == 2 && $each['confirm'] == 1){
+                    $awardList[] = $each['type'];
+                }else if($each['type'] == 1 && $each['confirm'] == 1){
+                    $awardList[] = $each['type'];
+                }else if($each['type'] == 3){
+                    $awardList[] = $each['type'];
+                }else if($each['type'] == 4){
+                    $awardList[] = $each['type'];
+                }
+
                 if( $each['type'] == 4){
                     $phone = $each['telephone'];
                 }
