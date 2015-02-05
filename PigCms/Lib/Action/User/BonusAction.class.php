@@ -301,6 +301,7 @@ class BonusAction extends UserAction {
                     ->setCellValue('H' . ($n + 2), $data[$n]['views'])
                     ->setCellValue('I' . ($n + 2), $data[$n]['vote'])
                     ->setCellValue('J' . ($n + 2), $data[$n]['illegal'])
+                    ->setCellValue('J' . ($n + 2), $data[$n]['illegal'])
             ;
         }
         $objPHPExcel->getActiveSheet()->setTitle('Simple');

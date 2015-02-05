@@ -826,11 +826,17 @@ class BonusAction extends Action {
         $bonusInfoRedisKey = "bonusinfo_".$openId;
         $selfOpenId = cookie("user_openid");
         if(!cookie("user_openid")){
-            $selfOpenId = "localenv";
+            return 9;
+        }
+        $infoFromUrlOpenId= M('customer_service_fans')->where(array('openid' => $selfOpenId,'token'=>'rggfsk1394161441'))->find();
+        if(!$infoFromUrlOpenId){
+            return 9;
         }
         $return = 1;//2: 已经加过分数
         //首先判断此用户是否已经给URL OPENID 加过分
         $bonusHistory = M('bonus_history')->where(array('gid' => $gid, 'openid' => $openId,'from_open_id'=>$selfOpenId))->find();
+        //判断此用户是否存在与fans
+
         if($bonusHistory){
             //已经加过分数
             $return = 2;
@@ -1638,7 +1644,7 @@ class BonusAction extends Action {
         $secondAward = false;
         $firstAward = false;
         $awardList = array();
-        $res = M('bonus_award')->where(array(  'openid' => $openId ))->field('type,telephone')->select();
+        $res = M('bonus_award')->where(array(  'openid' => $openId ))->field('type,telephone,confirm')->select();
         if($res){
             foreach($res as $each){
                 if($each['type'] == 2 && $each['confirm'] == 1){
