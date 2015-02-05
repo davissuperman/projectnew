@@ -1006,10 +1006,10 @@ class BonusAction extends Action {
                         $return =  $left;
                     }
                 }
-                if($number + $return < $four){
-                    //不可以回到上一个等级
-                    $return = $return + $four - ($number + $return) + 5;
-                }
+//                if($number + $return < $four){
+//                    //不可以回到上一个等级
+//                    $return = $return + $four - ($number + $return) + 5;
+//                }
                 break;
             case 2: //二等奖
                 $map['vote']  = array('egt',$configBonus[$second][1]['vote']);
@@ -1033,6 +1033,9 @@ class BonusAction extends Action {
 //                    //不可以回到上一个等级
 //                    $return = $return + $three - ($number + $return) + 5;
 //                }
+                if($return > 18) {
+                    $return = -5;
+                }
                 break;
             case 1://一等将
                 $map['vote']  = array('egt',$configBonus[$first][1]['vote']);
@@ -1061,9 +1064,7 @@ class BonusAction extends Action {
 
         }
 
-        if($return > 50) {
-            $return = -5;
-        }
+
         return $return;
 
         //判断当前有20票的用户数
@@ -2036,5 +2037,21 @@ class BonusAction extends Action {
 
 // Printing additional info
         echo  $retval;
+    }
+
+    public function test(){
+//        echo 1111111111111;
+        $openId = 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';//davis
+        $gid = 6;
+        //generate test data
+        $bonusInfo = M('bonus_info')->where(array('openid' => $openId))->find();
+        //随机生成分数
+        echo $bonusInfo['number']."<br/>";
+        $number =  $this->getNumberByOpenId($gid,$openId,$bonusInfo);
+        M("bonus_info")->where(array('id' =>$bonusInfo['id']))->setInc('vote', 1);
+        //给URL OPEN ID 加分
+        M("bonus_info")->where(array('id' =>$bonusInfo['id']))->setInc('number', $number);
+        Log :: write($number);
+        echo $number;
     }
 }
