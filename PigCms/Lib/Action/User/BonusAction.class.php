@@ -273,18 +273,61 @@ class BonusAction extends UserAction {
         $sql = "select  openid as ID,tel,name,createtime,sharetime,share,views,vote,joins,number as n
         from tp_bonus_info  where createtime>" . $start . " and createtime<" . $end . " order by number desc";
         $list = M()->query($sql);
-        foreach ($list as $key => $value) {
-            $list[$key]['ID'] = $key;
-            $list[$key]['createtime'] = date('Y-m-d H:i:s', $list[$key]['createtime']);
-            if ($list[$key]['sharetime'] == 0) {
-                $list[$key]['sharetime'] = '无';
-            } else {
-                $list[$key]['sharetime'] = date('Y-m-d H:i:s', $list[$key]['sharetime']);
+//        foreach ($list as $key => $value) {
+//            $list[$key]['ID'] = $key;
+//            $list[$key]['createtime'] = date('Y-m-d H:i:s', $list[$key]['createtime']);
+//            if ($list[$key]['sharetime'] == 0) {
+//                $list[$key]['sharetime'] = '无';
+//            } else {
+//                $list[$key]['sharetime'] = date('Y-m-d H:i:s', $list[$key]['sharetime']);
+//            }
+//        }
+        $listArr = array();
+        foreach($list as $key => $each){
+            $awardInfo = '';
+            $tmp = $each;
+            if($each['sharetime']){
+                $tmp['sharetime'] = date('Y-m-d H:i:s', $tmp['createtime']);
+            }else{
+                $tmp['sharetime'] = "无";
             }
+            if($each['createtime']){
+                $tmp['createtime'] = date('Y-m-d H:i:s', $tmp['createtime']);
+            }else{
+                $tmp['createtime'] = "无";
+            }
+            if($each['views']< $each['vote']){
+                $tmp['illegal'] = "是";
+            }else{
+                $tmp['illegal'] = "否";
+            }
+            $condition['openid'] = $each['openid'];
+            $resAwardList = M('bonus_award')->where($condition)->field('type,telephone')->select();
+            if($resAwardList){
+                $phone = '';
+                foreach($resAwardList as $award){
+                    if($award['telephone']){
+                        $phone = $award['telephone'];
+                    }
+                    if($award['type'] == 1){
+                        $awardInfo .= '一等奖； ';
+                    }else if($award['type'] == 2){
+                        $awardInfo .= '二等奖； ';
+                    }else if($award['type'] == 3 && $award['orderid'] != ''){
+                        $awardInfo .= '三等奖； ';
+                    }else if($award['type'] == 4 & $award['orderid'] != ''){
+                        $awardInfo .= '四等奖；';
+                    }
+                }
+            }
+            $tmp['awardlist'] = $awardInfo;
+            $tmp['phone'] = $phone;
+
+            $listArr[] = $tmp;
         }
         //   $title = array('ID', '电话', '姓名', '参与时间', '首次分享时间', '总分数', '转发数', '浏览数', '点赞数', '扩散数');
         $filename = $starta . "~" . $enda . "统计";
-        $this->exportexcel($list, $title, $filename);
+        $this->exportexcel($listArr, $title, $filename);
     }
     function ReplaceSpecialChar($C_char){//过滤特殊字符
         $C_char=HTMLSpecialChars($C_char); //将特殊字元转成 HTML 格式
@@ -313,7 +356,9 @@ class BonusAction extends UserAction {
                 ->setCellValue('F1', '总分数')
                 ->setCellValue('G1', '转发数')
                 ->setCellValue('H1', '浏览数')
-                ->setCellValue('I1', '点赞数')->setCellValue('j1', '扩散数');
+                ->setCellValue('I1', '投票数')
+                ->setCellValue('J1', '我也要参加数')
+                ->setCellValue('K1', '非法数据');
         //写出内容 UTF-8
         //log :: write( print_r($data,true)  );
         for ($n = 0; $n < count($data); $n++) {
@@ -330,7 +375,8 @@ class BonusAction extends UserAction {
                     ->setCellValue('G' . ($n + 2), $data[$n]['share'])
                     ->setCellValue('H' . ($n + 2), $data[$n]['views'])
                     ->setCellValue('I' . ($n + 2), $data[$n]['vote'])
-                    ->setCellValue('j' . ($n + 2), $data[$n]['joins']);
+                    ->setCellValue('j' . ($n + 2), $data[$n]['joins'])
+                    ->setCellValue('k' . ($n + 2), $data[$n]['illegal']);
         }
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
         $objPHPExcel->setActiveSheetIndex(0);
