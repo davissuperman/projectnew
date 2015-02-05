@@ -55,10 +55,13 @@
                                     </th>
                                     <th class="firstTd">排名</th>
                                     <th class="secondTd">模版号</th>
-                                    <th class="thirdTd">姓名</th>                      
+                                    <th class="thirdTd">OPENID</th>
+                                    <th class="thirdTd">姓名</th>
                                     <th class="sevenTd">得分</th>
+                                    <th class="sevenTd">电话</th>
                                     <th class="sevenTd">城市</th>
                                     <th class="sevenTd">地址</th>    
+                                    <th class="sevenTd">已兑奖项</th>
                                     <th class="sevenTd">非法数据</th>
                                 </tr>
                                 
@@ -75,10 +78,13 @@
                                         <td><input type="checkbox"  style="margin-right: 10px; margin-left: 21px;" name="item[<?php echo $store ?>]" class="item" value="{pigcms:$o.id}"/></td>
                                         <td><?php echo $store ?></td>
                                         <td>{pigcms:$o.title}</td>
+                                        <td>{pigcms:$o.openid}</td>
                                         <td>{pigcms:$o.name}</td>
                                         <td>{pigcms:$o.number}</td>
+                                        <td>{pigcms:$o.phone}</td>
                                         <td>{pigcms:$o.city}</td>
                                         <td>{pigcms:$o.addres}|{pigcms:$o.tels}|{pigcms:$o.names}</td>
+                                        <td>{pigcms:$o.awardlist}</td>
                                         <td>{pigcms:$o.illegal}</td>
                                     </tr>
                                 </volist>

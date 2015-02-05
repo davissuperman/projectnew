@@ -343,6 +343,7 @@ class BonusAction extends Action {
                 }
                 if($type == 3){
                     //三等奖存在
+                    $openId = $each['openid'];
                     $bonusInfo = M('bonus_info')->where(array('openid' => $openId))->find();
                     $views = $bonusInfo['views'];
                     $vote = $bonusInfo['vote'];

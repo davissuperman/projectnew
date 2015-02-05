@@ -29,12 +29,35 @@ class BonusAction extends UserAction {
         $this->assign('token', $this->token);
         $listArr = array();
         foreach($list as $each){
+            $awardInfo = '';
             $tmp = $each;
             if($each['views']< $each['vote']){
                 $tmp['illegal'] = "<font style='color:red'>是</font>";
             }else{
                 $tmp['illegal'] = "否";
             }
+            $condition['openid'] = $each['openid'];
+            $resAwardList = M('bonus_award')->where($condition)->field('type,telephone')->select();
+                if($resAwardList){
+                    $phone = '';
+                    foreach($resAwardList as $award){
+                        if($award['telephone']){
+                            $phone = $award['telephone'];
+                        }
+                        if($award['type'] == 1){
+                            $awardInfo .= '一等奖； ';
+                        }else if($award['type'] == 2){
+                            $awardInfo .= '二等奖； ';
+                        }else if($award['type'] == 3){
+                            $awardInfo .= '三等奖； ';
+                        }else if($award['type'] == 4){
+                            $awardInfo .= '四等奖；';
+                        }
+                    }
+                }
+            $tmp['awardlist'] = $awardInfo;
+            $tmp['phone'] = $phone;
+
             $listArr[] = $tmp;
         }
         $this->assign('info', $listArr);
