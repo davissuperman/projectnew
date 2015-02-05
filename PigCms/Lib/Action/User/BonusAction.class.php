@@ -286,7 +286,7 @@ class BonusAction extends UserAction {
         for ($n = 0; $n < count($data); $n++) {
             $name = $data[$n]['name'];
             $name = $this->ReplaceSpecialChar($name);
-//            $name = str_replace('=','',$name);
+            $name = str_replace('=','',$name);
             $objPHPExcel->setActiveSheetIndex(0)
                     ->setCellValue('A' . ($n + 2), $data[$n]['ID'])
                     ->setCellValue('B' . ($n + 2), $data[$n]['tel'])
@@ -302,7 +302,7 @@ class BonusAction extends UserAction {
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
         $objPHPExcel->setActiveSheetIndex(0);
         header('Content-Type: application/vnd.ms-excel');
-        header("Content-Disposition: attachment;filename=" . date("Y-m-d h:i") . "xsl");
+        header("Content-Disposition: attachment;filename=" . date("Y-m-d h:i") . ".xls");
         header('Cache-Control: max-age=0');
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
         $objWriter->save('php://output');
