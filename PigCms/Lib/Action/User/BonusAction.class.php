@@ -209,7 +209,7 @@ class BonusAction extends UserAction {
         $start=$start-1;
         $list = M('bonus_info')->query(
             "SELECT info.*, info.number n,award.telephone tels,bonus.title tel,award.province as city, award.address as addres,award.type as type,award.telephone as tels,award.province as city,
-award.address as addres,award.orderid as orderid from tp_bonus_info as info
+award.address as addres,award.orderid as orderid,award.username as username from tp_bonus_info as info
              left join tp_bonus_award as award on (award.openid=info.openid)
              left join tp_bonus as bonus on (bonus.gid=info.gid)
              order by info.number desc limit $start,$end"); //第二名和你最近的
@@ -282,13 +282,14 @@ award.address as addres,award.orderid as orderid from tp_bonus_info as info
                 ->setCellValue('C1', '模版号')
                 ->setCellValue('D1', '姓名')
                 ->setCellValue('E1', '手机号')
-                ->setCellValue('F1', '城市')
-                ->setCellValue('G1', '地址')
-                ->setCellValue('H1', '浏览量')
-                ->setCellValue('I1', '投票量')
-                ->setCellValue('J1', '已领奖项')
-                ->setCellValue('K1', '天锚订单号')
-                ->setCellValue('L1', '非法数据');
+                ->setCellValue('F1', '收货人姓名')
+                ->setCellValue('G1', '城市')
+                ->setCellValue('H1', '地址')
+                ->setCellValue('I1', '浏览量')
+                ->setCellValue('K1', '投票量')
+                ->setCellValue('L1', '已领奖项')
+                ->setCellValue('L1', '天锚订单号')
+                ->setCellValue('M1', '非法数据');
 
         //写出内容 UTF-8
 
@@ -301,13 +302,14 @@ award.address as addres,award.orderid as orderid from tp_bonus_info as info
                     ->setCellValue('C' . ($n + 2), $data[$n]['tel'])
                     ->setCellValue('D' . ($n + 2), $name)
                     ->setCellValue('E' . ($n + 2), $data[$n]['tels'])
-                    ->setCellValue('F' . ($n + 2), $data[$n]['city'])
-                    ->setCellValue('G' . ($n + 2), $data[$n]['addres'])
-                    ->setCellValue('H' . ($n + 2), $data[$n]['views'])
-                    ->setCellValue('I' . ($n + 2), $data[$n]['vote'])
-                    ->setCellValue('J' . ($n + 2), $data[$n]['awardlist'])
-                    ->setCellValue('K' . ($n + 2), $data[$n]['orderid'])
-                    ->setCellValue('L' . ($n + 2), $data[$n]['illegal'])
+                    ->setCellValue('F' . ($n + 2), $data[$n]['username'])
+                    ->setCellValue('G' . ($n + 2), $data[$n]['city'])
+                    ->setCellValue('H' . ($n + 2), $data[$n]['addres'])
+                    ->setCellValue('I' . ($n + 2), $data[$n]['views'])
+                    ->setCellValue('J' . ($n + 2), $data[$n]['vote'])
+                    ->setCellValue('K' . ($n + 2), $data[$n]['awardlist'])
+                    ->setCellValue('L' . ($n + 2), $data[$n]['orderid'])
+                    ->setCellValue('M' . ($n + 2), $data[$n]['illegal'])
             ;
         }
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
