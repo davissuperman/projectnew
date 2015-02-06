@@ -2099,10 +2099,4 @@ class BonusAction extends Action {
 // Printing additional info
         echo  $retval;
     }
-
-    public function test(){
-        $openid = 'oP9fCt9zdeeEmtnDgsrWAvdfi6Uc';
-        $history = M('bonus_history')->where(array('openid' => $openid))->order('createtime desc')->limit(15)->select();
-        var_dump($history);
-    }
 }
