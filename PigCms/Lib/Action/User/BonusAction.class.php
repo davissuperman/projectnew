@@ -40,14 +40,21 @@ class BonusAction extends UserAction {
             $resAwardList = M('bonus_award')->where($condition)->field('type,telephone')->select();
                 if($resAwardList){
                     $phone = '';
+                    $address = '';
+                    $city = '';
                     foreach($resAwardList as $award){
                         if($award['telephone']){
                             $phone = $award['telephone'];
                         }
                         if($award['type'] == 1){
                             $awardInfo .= '一等奖； ';
+                            $address = $award['address'];
+                            echo $address;
+                            $city = $award['province'];
                         }else if($award['type'] == 2){
                             $awardInfo .= '二等奖； ';
+                            $address = $award['address'];
+                            $city = $award['province'];
                         }else if($award['type'] == 3 && $award['orderid'] != ''){
                             $awardInfo .= '三等奖； ';
                         }else if($award['type'] == 4 & $award['orderid'] != ''){
@@ -57,6 +64,8 @@ class BonusAction extends UserAction {
                 }
             $tmp['awardlist'] = $awardInfo;
             $tmp['phone'] = $phone;
+            $tmp['addres'] = $address;
+            $tmp['city'] = $city;
 
             $listArr[] = $tmp;
         }
@@ -199,7 +208,8 @@ class BonusAction extends UserAction {
         $end=$end-$start;
         $start=$start-1;
         $list = M('bonus_info')->query(
-            "SELECT info.*, info.number n,award.telephone tels,bonus.title tel,award.province as city, award.address as addres from tp_bonus_info as info
+            "SELECT info.*, info.number n,award.telephone tels,bonus.title tel,award.province as city, award.address as addres,award.type as type,award.telephone as tels,award.province as city,
+award.address as addres,award.orderid as orderid from tp_bonus_info as info
              left join tp_bonus_award as award on (award.openid=info.openid)
              left join tp_bonus as bonus on (bonus.gid=info.gid)
              order by info.number desc limit $start,$end"); //第二名和你最近的
@@ -228,26 +238,23 @@ class BonusAction extends UserAction {
                 $tmp['illegal'] = "否";
             }
             $condition['openid'] = $each['openid'];
-            $resAwardList = M('bonus_award')->where($condition)->field('type,telephone')->select();
-            if($resAwardList){
-                $phone = '';
-                foreach($resAwardList as $award){
-                    if($award['telephone']){
-                        $phone = $award['telephone'];
-                    }
-                    if($award['type'] == 1){
-                        $awardInfo .= '一等奖； ';
-                    }else if($award['type'] == 2){
-                        $awardInfo .= '二等奖； ';
-                    }else if($award['type'] == 3 && $award['orderid'] != ''){
-                        $awardInfo .= '三等奖； ';
-                    }else if($award['type'] == 4 & $award['orderid'] != ''){
-                        $awardInfo .= '四等奖；';
-                    }
-                }
+            $condition['type'] = $each['type'];
+            $condition['orderid'] =array('neq','');
+            if('oP9fCtxF6G7-8-bM1VK6wZIteHPA' == $each['openid']){
+                log :: write( print_r($each,true) );
             }
+            $resAwardList = M('bonus_award')->where($condition)->find();
+            if($each['type'] == 1){
+                $awardInfo = '一等奖';
+            }else if($each['type'] == 2){
+                $awardInfo = '二等奖';
+            }else if($each['type'] == 3 ){
+                $awardInfo = '三等奖';
+            }else if($each['type'] == 4 ){
+                $awardInfo = '四等奖';
+            }
+
             $tmp['awardlist'] = $awardInfo;
-            $tmp['phone'] = $phone;
 
             $listArr[] = $tmp;
         }
@@ -283,7 +290,9 @@ class BonusAction extends UserAction {
                 ->setCellValue('G1', '地址')
                 ->setCellValue('H1', '浏览量')
                 ->setCellValue('I1', '投票量')
-                ->setCellValue('J1', '非法数据');
+                ->setCellValue('J1', '已领奖项')
+                ->setCellValue('K1', '天锚订单号')
+                ->setCellValue('L1', '非法数据');
 
         //写出内容 UTF-8
 
@@ -300,8 +309,9 @@ class BonusAction extends UserAction {
                     ->setCellValue('G' . ($n + 2), $data[$n]['addres'])
                     ->setCellValue('H' . ($n + 2), $data[$n]['views'])
                     ->setCellValue('I' . ($n + 2), $data[$n]['vote'])
-                    ->setCellValue('J' . ($n + 2), $data[$n]['illegal'])
-                    ->setCellValue('J' . ($n + 2), $data[$n]['illegal'])
+                    ->setCellValue('J' . ($n + 2), $data[$n]['awardlist'])
+                    ->setCellValue('K' . ($n + 2), $data[$n]['orderid'])
+                    ->setCellValue('L' . ($n + 2), $data[$n]['illegal'])
             ;
         }
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
