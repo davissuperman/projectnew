@@ -1540,7 +1540,7 @@ class BonusAction extends Action {
             //首先查看此historyArr是否存在缓存中
             if($historyArrLen<= 0){
                 //缓存不存在 需要PUSH
-                $history = M('bonus_history')->where(array('openid' => $openid))->order('createtime desc')->select();
+                $history = M('bonus_history')->where(array('openid' => $openid))->order('createtime desc')->limit(15)->select();
                 $historyCount = count($history);
                 $m = 0;
                 foreach($history as $each){
@@ -2101,18 +2101,8 @@ class BonusAction extends Action {
     }
 
     public function test(){
-//        echo 1111111111111;
-        $openId = 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';//davis
-        $gid = 6;
-        //generate test data
-        $bonusInfo = M('bonus_info')->where(array('openid' => $openId))->find();
-        //随机生成分数
-        echo $bonusInfo['number']."<br/>";
-        $number =  $this->getNumberByOpenId($gid,$openId,$bonusInfo);
-        M("bonus_info")->where(array('id' =>$bonusInfo['id']))->setInc('vote', 1);
-        //给URL OPEN ID 加分
-        M("bonus_info")->where(array('id' =>$bonusInfo['id']))->setInc('number', $number);
-        Log :: write($number);
-        echo $number;
+        $openid = 'oP9fCt9zdeeEmtnDgsrWAvdfi6Uc';
+        $history = M('bonus_history')->where(array('openid' => $openid))->order('createtime desc')->limit(15)->select();
+        var_dump($history);
     }
 }
