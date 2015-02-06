@@ -240,10 +240,6 @@ award.address as addres,award.orderid as orderid from tp_bonus_info as info
             $condition['openid'] = $each['openid'];
             $condition['type'] = $each['type'];
             $condition['orderid'] =array('neq','');
-            if('oP9fCtxF6G7-8-bM1VK6wZIteHPA' == $each['openid']){
-                log :: write( print_r($each,true) );
-            }
-            $resAwardList = M('bonus_award')->where($condition)->find();
             if($each['type'] == 1){
                 $awardInfo = '一等奖';
             }else if($each['type'] == 2){
