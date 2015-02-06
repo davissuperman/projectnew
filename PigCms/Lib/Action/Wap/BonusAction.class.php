@@ -7,7 +7,7 @@ class BonusAction extends Action {
     private $url;
     //前几票都是加法
     public $before = 1;
-    public $secondLevelNumber = 5;//二等奖的个数
+    public $secondLevelNumber = 3;//二等奖的个数
     public $firstLevelNumber = 3;//一等奖的个数
     public $fourLevelNumber = 3000;//四等奖的个数
     public $threeLevelNumber = 300;//三等奖的个数
@@ -1274,6 +1274,7 @@ class BonusAction extends Action {
                     $imageProfile = $this->cache->redis->hget($bonusInfoRedisKey,'headimgurl');
                     $nickname = $bonusInfoName;
                     $voteNumber = $this->cache->get($this->hashKeyBonusInfo."_vote");
+                    $viewUrlOpen =  $this->cache->get($this->hashKeyBonusInfo."_view");
                 }else{
 
                     $bonusInfo = M('bonus_info')->where(array('openid' => $openid))->find();
@@ -1290,6 +1291,7 @@ class BonusAction extends Action {
                     }else{
                         $nickname = $bonusInfo['name'];
                         $voteNumber = $bonusInfo['vote'];
+                        $viewUrlOpen = $bonusInfo['views'];
                         $imageProfile = $bonusInfo['headimgurl'];
                         //存储数据到redis
                         $this->cache->redis->set($bonusInfoRedisKey."_vote",$bonusInfo['vote']);
@@ -1305,6 +1307,11 @@ class BonusAction extends Action {
                         $this->cache->redis->hset($bonusInfoRedisKey,'openid',$bonusInfo['openid']);
                         $this->cache->redis->hset($bonusInfoRedisKey,'bonustype',$bonusInfo['bonustype']);
                     }
+                }
+                if($viewUrlOpen < $voteNumber){
+                    //重定向到首页
+                    $url = $this->url."/index.php?g=Wap&m=Bonus&a=index&gid=$gid";
+                    header("location:$url");
                 }
 
                 $this->saveBonusViewInfo($gid,$openid);
