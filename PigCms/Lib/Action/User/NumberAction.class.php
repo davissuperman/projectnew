@@ -117,7 +117,153 @@ class NumberAction extends UserAction {
         }
 
     }
+    public function test(){
+        $openId = 'oP9fCt8lV5Oy18eopCjTCBHPykCE';
+        $updateTIme = $this->getUpdateTime($openId);
+        echo $updateTIme;
+    }
+    public function getUpdateTime($openId){
+        $map['openid'] = $openId;
+        $map['address'] = array('neq','');
+        $res = M('bonus_award')->where($map)->field('updatetime')->find();
+        $updateTIme = $res['updatetime'];
+        return $updateTIme;
+    }
+    public function push(){
+        //http://wx.drjou.cc/index.php?g=User&m=Number&a=push&openid=oP9fCtxIGfuDZkYTS9PSzhvZuvcs
+//        http://wx.drjou.cc/index.php?g=User&m=Number&a=push&openid=oP9fCt8lV5Oy18eopCjTCBHPykCE //肖
+//        http://wx.drjou.cc/index.php?g=User&m=Number&a=push&openid=oP9fCt_8XNH7wF0ERFC2VukVAZXo //manmanyang
+//        http://wx.drjou.cc/index.php?g=User&m=Number&a=push&openid=oP9fCt-qEyri5k-GXEp2nWiRPpHs //april
+//        http://wx.drjou.cc/index.php?g=User&m=Number&a=push&openid=oP9fCt4FMhkETNDNMTQRirg4qRWI //妖精哪里走
+//        http://wx.drjou.cc/index.php?g=User&m=Number&a=push&openid=oP9fCtxF6G7-8-bM1VK6wZIteHPA //去年夏天我是瘦子
+//        http://wx.drjou.cc/index.php?g=User&m=Number&a=push&openid=oP9fCt9zdeeEmtnDgsrWAvdfi6Uc //zhao
+        $openId = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+        if(isset($_GET['openid']) && $_GET['openid']){
+            $openId = $_GET['openid'];
+        }
+        $bonusInfo = M('bonus_info')->where(array('openid' => $openId))->find();
+        $gid = $bonusInfo['gid'];
+        $score =  $bonusInfo['number'];
 
+        $i=0;
+        $current = M("bonus_history")->where(array('openid' =>$openId))->sum('number');
+//        if($current != $score){
+//            return;
+//        }
+
+
+        $count = M("bonus_history")->where(array('openid' =>$openId))->count('id');
+        $vote = $bonusInfo['vote'];
+        //相差多少记录
+        $left = $vote - $count;
+        //if($left > 0){
+            $ap['openid'] = $openId;
+            $ap['from_open_id'] = array('neq','');
+            M("bonus_history")->where($ap)->delete();
+      //  }
+        //重新生成记录
+        $map['openid']  = array('neq',$openId);
+        $needVote = $vote;
+        $userList = M('customer_service_fans')->where($map)->limit($needVote)->select();
+        //需要插入616条记录
+        //生成616个number
+        $s = $score - 50;
+        $sList = $this->getNumber($needVote,$s);
+        foreach($userList as $key => $each){
+            //每一个用户访问此OPENID 主页
+            $fronopenid = $each['openid'];
+            $number = $sList[$key];
+            $this->saveBonusHistory($gid,$openId,$number,$fronopenid,$bonusInfo['sharetime']);
+            $this->saveViews($fronopenid,$gid,$openId);
+            echo "加分 ： $number <br/>";
+        }
+
+    }
+
+    public function getRandDate($s,$openId){
+       //生成随机时间戳
+        $e = $this->getUpdateTime($openId);;
+        $n = rand($s,$e);
+        return date("Y-m-d H:i:s",$n);
+    }
+    public function getNumber($n,$s){
+        $sum = 0;
+        $a = array();
+        for($i=0;$i<$n;$i++){
+            $m = rand(-14,44);
+            if($sum + $m > $s){
+                $m = $s - $sum -2;
+            }
+            if($m == 0){
+                $m = -1;
+            }
+            if($i == $n-1){
+                $m = $s - $sum;
+            }
+            $a[] = $m;
+            $sum += $m;
+        }
+       return $a;
+    }
+    public function generate(){
+        //http://wx.drjou.cc/index.php?g=User&m=Number&a=generate&openid=oP9fCtxIGfuDZkYTS9PSzhvZuvcs
+//        http://wx.drjou.cc/index.php?g=User&m=Number&a=generate&openid=oP9fCt8lV5Oy18eopCjTCBHPykCE //肖
+//        http://wx.drjou.cc/index.php?g=User&m=Number&a=generate&openid=oP9fCt_8XNH7wF0ERFC2VukVAZXo //manmanyang
+//        http://wx.drjou.cc/index.php?g=User&m=Number&a=generate&openid=oP9fCt-qEyri5k-GXEp2nWiRPpHs //april
+//        http://wx.drjou.cc/index.php?g=User&m=Number&a=generate&openid=oP9fCt4FMhkETNDNMTQRirg4qRWI //妖精哪里走
+//        http://wx.drjou.cc/index.php?g=User&m=Number&a=generate&openid=oP9fCtxF6G7-8-bM1VK6wZIteHPA //去年夏天我是瘦子
+//        http://wx.drjou.cc/index.php?g=User&m=Number&a=generate&openid=oP9fCt9zdeeEmtnDgsrWAvdfi6Uc //zhao
+        $openId = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+        if(isset($_GET['openid']) && $_GET['openid']){
+            $openId = $_GET['openid'];
+        }
+        $score = "300";
+        if(isset($_GET['score']) && $_GET['score']){
+            $score = $_GET['score'];
+        }
+        $bonusInfo = M('bonus_info')->where(array('openid' => $openId))->find();
+        $gid = $bonusInfo['gid'];
+        $score =  $bonusInfo['number'];
+        $map['openid']  = array('neq',$openId);
+        $userList = M('customer_service_fans')->where($map)->select();
+
+        $i=0;
+        $current = M("bonus_history")->where(array('openid' =>$openId))->sum('number');
+        $left = $score - $current;
+        if($left<=0){
+            return;
+        }
+        foreach($userList as $each){
+            //每一个用户访问此OPENID 主页
+            $fronopenid = $each['openid'];
+            $viewNum =  rand(1,4);
+            //$a =  M("bonus_info")->where(array('openid' => $openId))->setInc('views', $viewNum);
+            //$this->cache->redis->incrBy($hashKeyBonusInfo."_view",$viewNum);
+            //$this->saveViews($fronopenid,$gid,$openId);
+            $bonusHistory = M('bonus_history')->where(array('openid' => $openId,'from_open_id'=>$fronopenid))->find();
+            if($bonusHistory){
+                echo "此用户 $fronopenid 已经拉过分 ".$bonusHistory['description']."<br/>";
+            }else{
+                $i++;
+
+                //随机生成分数
+                $cNumber = M("bonus_history")->where(array('openid' =>$openId))->sum('number');
+                $number =  $this->getRandScore();
+                if($cNumber >= $score){
+                    break;
+                }
+                if($cNumber + $number > $score){
+                    $number = $score - $cNumber;
+                }
+
+                $this->saveBonusHistory($gid,$openId,$number,$fronopenid);
+                $this->saveViews($fronopenid,$gid,$openId);
+                echo "加分 ： $number <br/>";
+
+            }
+
+        }
+    }
     public function setNum(){
         //http://wx.drjou.cc/index.php?g=User&m=Number&a=setNum&score=300&openid=oP9fCtxIGfuDZkYTS9PSzhvZuvcs
         $openId = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
@@ -219,30 +365,15 @@ class NumberAction extends UserAction {
         $n = rand(0,$count-1);
         return $list[$n];
     }
-    public function saveBonusHistory($gid,$openId,$number,$fromOpenId){
+    public function saveBonusHistory($gid,$openId,$number,$fromOpenId,$s=null){
         $h['openid'] = $openId;
         $h['gid'] = $gid;
         $h['description'] = $this->getRandDescriptionByNumber($number);
         $h['number'] = $number;
         $h['from_open_id'] = $fromOpenId;
+        $h['createtime'] = $this->getRandDate($s,$openId);
+        echo $h['createtime']  . "   ".$number."   <br/>";
         M("bonus_history")->add($h);
-
-        $bonusInfoRedisKey = "bonusinfo_".$fromOpenId;
-        $bonusInfoName = $this->cache->redis->hget($bonusInfoRedisKey,'name');
-        if($bonusInfoName){
-            //此用户信息存在与redis中
-            $h['headimgurl'] = $this->cache->redis->hget($bonusInfoRedisKey,'headimgurl');
-            $h['nickname'] = $this->cache->redis->hget($bonusInfoRedisKey,'name');
-        }else{
-            //不存在 需要通过数据库 bonus_info获取
-            $fansInfo = M('customer_service_fans')->where(array('openid' => $fromOpenId,'token'=>'rggfsk1394161441'))->find();
-            $h['nickname'] = $fansInfo['nickname'];
-            $h['headimgurl'] = $fansInfo['headimgurl'];
-            $this->cache->redis->hset($bonusInfoRedisKey,'headimgurl',$fansInfo['headimgurl']);
-            $this->cache->redis->hset($bonusInfoRedisKey,'nickname',$fansInfo['nickname']);
-        }
-        //URL OPEN ID的加分历史加一
-        $this->cache->redis->lPush("bonusinfo_".$openId."_history",json_encode($h));
     }
     public function saveBonusViewInfo($gid,$openId){
        $a =  M("bonus_info")->where(array('openid' => $openId))->setInc('views', 1);
