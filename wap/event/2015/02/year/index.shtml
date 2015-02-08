@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="css/animate.css" rel="stylesheet" type="text/css" />
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+
+
+<script src="js/zepto.min.js" type="text/javascript"></script>
+<script src="js/common.js" type="text/javascript"></script>
+<title>森田药妆-新年贺卡</title>
+</head>
+<body>
+	<div class="container">
+        <ul class="content-list" id="content-list">
+            <li class="content-li">
+                <div class="page p0">
+                    <p class="pt-20 ml-10"><img src="images/p0/img01.png" height="24px" /></p>
+                    <p class="mt-10 ml-10"><img src="images/p0/img02.png" height="24px" /></p>
+                    <div class="cloud">
+                    	<div class="cloud1">
+                        	<div class="zi1"></div>
+                            <div class="zi2"></div>
+                        </div>
+                        <div class="cloud2">
+                        	<div class="zi1"></div>
+                            <div class="zi2"></div>
+                        </div>
+                        <div class="cloud3"></div>
+                        <div class="cloud4"></div>
+                        <div class="cloud5"></div>
+                        <div class="cloud6"></div>
+                        <div class="cloud7">
+                        	<div class="zi1"></div>
+                        </div>
+                    </div>
+                    <div class="sheep swing">
+                    	<div class="brow1"></div>
+                        <div class="brow2"></div>
+                    </div>
+                    <div class="shake hand-animate"></div>
+                    <div class="btn" id="btn-shake"></div>
+                    
+                </div>
+                <div class="inscribe"></div>
+            </li>
+            <li class="content-li">
+            	 <div class="p1-top">
+                    <div class="page p1">
+                       <div class="top">
+                            <p class="pt-20 ml-10"><img src="images/p0/img01.png" height="24px"></p>
+                            <div class="lantern-firecrackers">
+                                <div class="lantern flash"></div>
+                                <div class="firecrackers"></div>
+                                <div class="fire1 flash"></div>
+                                <div class="fire2 flash1"></div>
+                                <div class="fire3 flash2"></div>
+                            </div>
+                            <div class="sheep">
+                                <div class="zi flash"></div>
+                            </div>
+                            <div class="cloud1"></div>
+                        </div>
+                        
+                    </div>
+            	</div>
+                <div class="inscribes"></div>
+                <div class="index-arrow-down swipeMove"></div>
+            </li>
+            <li class="content-li">
+                <div class="page p2">
+                   	<p class="pt-20 ml-10"><img src="images/p0/img01.png" height="24px"></p>
+                   	<div class="couplet">
+                    	<div class="zi flash3"></div>
+                    </div>
+                    
+                </div>
+                <div class="wmn-wrap">
+                    <div class="wmn"></div>
+                    <div class="mm riseUp"></div>
+                </div>
+                
+                <div class="inscribe2"></div>
+                <div class="index-arrow-down swipeMove"></div>
+            </li>
+            <li class="content-li">
+            	<img src="images/p3/img01.jpg" width="100%">
+                <div class="page p3">
+                </div>
+                <div class="index-arrow-down swipeMove"></div>
+            </li>
+            <li class="content-li">
+                <div class="page p4">
+                	<p class="pt-20 ml-10"><img src="images/p0/img01.png" height="24px"></p>
+                    <div class="couplet">
+                    	<div class="zi flash3"></div>
+                    </div>
+                    <div class="wmn"></div>
+                </div>
+                <div class="inscribe2"></div>
+                <div class="index-arrow-down swipeMove"></div>
+            </li>
+            <li class="content-li">
+                <div class="page p5">
+                	<p class="pt-20 ml-10"><img src="images/p0/img01.png" height="24px"></p>
+                    <div class="couplet">
+                    	<div class="zi flash3"></div>
+                    </div>
+                    <div class="wmn"><div class="yan"></div></div>
+                </div>
+                <div class="inscribe2"></div>
+                <div class="index-arrow-down swipeMove"></div>
+            </li>
+            <li class="content-li">
+                <div class="page p6">
+                	<p class="pt-20 ml-10"><img src="images/p0/img01.png" height="24px"></p>
+                    <div class="hua hua1"></div>
+                    <div class="hua hua2"></div>
+                    <div class="hua hua3"></div>
+                    <div class="hua hua4"></div>
+                    <div class="hua hua5"></div>
+                    <div class="hua hua6"></div>
+                    <div class="hua hua7"></div>
+                    <div class="hua hua8"></div>
+                    <div class="hua hua9"></div>
+                    <div class="wmn">
+                    	<div class="zi flash3"></div>
+                    </div>
+                    <div class="btn flash4" id="btnGoNext"></div>
+                </div>
+                <div class="inscribe2"></div>
+            </li>
+            <li class="content-li">
+                <div class="page p7">
+                    <div class="hua hua1"></div>
+                    <div class="hua hua2"></div>
+                    <div class="hua hua3"></div>
+                    <div class="hua hua4"></div>
+                    <div class="hua hua5"></div>
+                    <div class="hua hua6"></div>
+                    <div class="hua hua7"></div>
+                    <div class="hua hua8"></div>
+                    <div class="hua hua9"></div>
+                    <div class="btn1"></div>
+                    <div class="btn2"></div>
+                    
+                </div>
+                <div class="inscribe3"></div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
