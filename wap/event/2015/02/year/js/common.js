@@ -142,6 +142,7 @@ function swithPage(page){
 
 
 function startTouch(event) {
+	alert("startTouch: "+ event.touches.length);
     if (!event.touches.length) {
         return;
     }
