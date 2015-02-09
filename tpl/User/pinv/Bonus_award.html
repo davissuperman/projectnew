@@ -15,6 +15,11 @@
         });
     });
 </script>
+        <style>
+            #date-calendar{
+                height:100px;
+            }
+        </style>
 <div class="container main">
     <div class="row">
         <include file="Doing:left"/>
@@ -33,15 +38,22 @@
                             <div id="choose-date">
  
                                 <div id="date-calendar">
-                                   
-                                     
                                     <form method="post" action="{pigcms::U('Bonus/exportstore',array('token'=>$token))}">
-                                       <span>导出名次从</span>
+
                                        <input type="text" name="start" id="start" value="" class="form-control" style="width:112px"/><span>到</span>
                                         <input type="text" name="end" id="end" value="" class="form-control" style="width:112px"/> <span>过滤</span> <input type="checkbox"  name="g">
                                         <button type="submit" class="btn btn-default" style="width:50px"/>导出</button>
                                     </form>
-                                </div> 
+                                </div>
+                                <div>
+                                    <form method="post" action="{pigcms::U('Bonus/exporthistory',array('token'=>$token))}">
+                                        <span style="float:left">
+                                            请输入openid
+                                        </span>
+                                        <input type="text" name="openid" id="openid" value="" class="form-control" style="width:112px;float:left"/>
+                                        <button type="submit" class="btn btn-default" style="width:150px"/>导出积分历史</button>
+                                    </form>
+                                </div>
                               
                             </div>
                         <form method="post" action="{pigcms::U('Doing/exportcheckbox',array('token'=>$token))}" id="info">

@@ -257,7 +257,22 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $filename = $start . "~" . $end . "统计";
         $this->exportexcelx($listArr, $filename);
     }
+    public function exporthistory() {
+        $start = 1;
+        $end = 100;
+        $openId = $_POST['openid'];
+        $list = M('bonus_history')->query(
+            "SELECT h.*,info.nickname as name from tp_bonus_history as h
+              left join tp_customer_service_fans info on (info.openid=h.from_open_id)
+              where h.openid='".$openId."'
+             order by h.createtime desc"); //第二名和你最近的
 
+
+
+
+        $filename = $start . "~" . $end . "统计";
+        $this->exportexcelhistory($list, $filename);
+    }
     public function exportcheckbox() {
         $sorts = $_REQUEST['item'];
         $in = implode(' , ', $sorts);
@@ -270,7 +285,39 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $filename = "统计";
         $this->exportexcelx($list, $filename);
     }
+    public function exportexcelhistory($data = array(), $filename = 'report') {
+        $str = substr(THINK_PATH, 0, -1);
+        require_once $str . '/PigCms/Lib/Action/User/Classes/PHPExcel.php';
+        $objPHPExcel = new PHPExcel();
+        //写出表头
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'ID')
+            ->setCellValue('B1', '姓名')
+            ->setCellValue('C1', '描述')
+            ->setCellValue('D1', '分数')
+            ->setCellValue('E1', '加分时间');
 
+        //写出内容 UTF-8
+
+        for ($n = 0; $n < count($data); $n++) {
+            $name = $data[$n]['name'];
+            $name = $this->ReplaceSpecialChar($name);
+            $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A' . ($n + 2), $n+1)
+                ->setCellValue('B' . ($n + 2), $data[$n]['name'])
+                ->setCellValue('C' . ($n + 2), $data[$n]['description'])
+                ->setCellValue('D' . ($n + 2), $data[$n]['number'])
+                ->setCellValue('E' . ($n + 2), $data[$n]['createtime'])
+            ;
+        }
+        $objPHPExcel->getActiveSheet()->setTitle('加分历史');
+        $objPHPExcel->setActiveSheetIndex(0);
+        header('Content-Type: application/vnd.ms-excel');
+        header("Content-Disposition: attachment;filename=" . date("Y-m-d h:i") . "xsl");
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        $objWriter->save('php://output');
+    }
     public function exportexcelx($data = array(), $filename = 'report') {
         $str = substr(THINK_PATH, 0, -1);
         require_once $str . '/PigCms/Lib/Action/User/Classes/PHPExcel.php';
