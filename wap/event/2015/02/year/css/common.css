@@ -207,9 +207,9 @@ width: 60px;height: 85px;position: absolute;top: 30px;left: 60px;}
 width: 82px;height: 70px; margin:10px auto; position:relative;}
 
 .page.p7 .btn1{background: url(../images/p7/img01.png) no-repeat;background-size: auto 100%;
-width: 130px;height: 40px;position: absolute;left:50%;top:150px; margin-left:-65px; cursor:pointer;}
+width: 114px;height: 35px;position: absolute;left:50%;top:150px; margin-left:-57px; cursor:pointer;}
 .page.p7 .btn2{background: url(../images/p7/img02.png) no-repeat;background-size: auto 100%;
-width: 130px;height: 40px;position: absolute;top:100px;left:50%; margin-left:-65px; cursor:pointer;}
+width: 114px;height: 35px;position: absolute;top:100px;left:50%; margin-left:-57px; cursor:pointer;}
 
 .inscribe3{position: absolute;
 background: url(../images/p7/img03.png) no-repeat;
