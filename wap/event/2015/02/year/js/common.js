@@ -163,7 +163,10 @@ function moveTouch(event) {
 function endTouch() {
     var endY = tmpEndY;
     var startY = tmpStartY;
-
+	
+	alert("endY: "+ endY);
+	alert("startY: "+ startY);
+	alert("endY-startY : "+ endY-startY);
     if (endY && endY !== startY && endY-startY<=-25) {
         //console.log(pageNumber+":"+isFlip[pageNumber]);
         //if(isFlip[pageNumber]<=1){
