@@ -86,7 +86,7 @@ function init() {
 	alert("window.DeviceMotionEvent :" + window.DeviceMotionEvent);
 	if (window.DeviceMotionEvent) {
 		alert('$("#content-list").css("top") :' + $("#content-list").css("top"));
-		if($("#content-list").css("top") == 0){
+		if($.trim($("#content-list").css("top")) == '0px'){
 			window.addEventListener('devicemotion', deviceMotionHandler, false);
 		}
 	} else {
