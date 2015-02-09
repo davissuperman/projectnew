@@ -55,6 +55,16 @@ $(document).ready(function(e) {
 	
 });
 
+//模拟alert
+function mnAlert (mes){
+	var htmlStr = "<div class=\"layerBox\">";
+		htmlStr += "<div class=\"layerBg\">";
+		htmlStr += "<p class=\"layerMsg\">"+mes+"</p>";
+		htmlStr += "<button class=\"layerBtn\" onClick=\"javascript:$(this).closest('.layerBox').remove();\">我知道了</button>";
+		htmlStr += "</div></div>";
+	$("body").append(htmlStr);
+}
+
 function goNextPage(page){
 	var $content_list = $("#content-list"),hg = $content_list.parent().height();
 	hg = page * hg;
@@ -91,7 +101,7 @@ function init() {
 			window.addEventListener('devicemotion', deviceMotionHandler, false);
 		}
 	} else {
-		alert('您的手机不支持摇一摇,请点击摇一摇按钮');
+		mnAlert ('您的手机不支持摇一摇,请点击摇一摇按钮');
 	}
 	$("#btn-shake").bind('click',function(){
 		doResult();
@@ -104,10 +114,10 @@ function init() {
 		var $rec_name = $("#rec-name"),$send_name = $("#send-name"),
 		rec_name = $.trim($rec_name.val()),send_name = $.trim($send_name.val());
 		if(rec_name == ""){
-			alert("填写您想祝福的人的姓名");
+			mnAlert ('填写您想祝福的人的姓名');
 			return false;
 		}else if(send_name == ""){
-			alert("填写您的姓名");
+			mnAlert ('填写您的姓名');
 			return false;
 		}
 		goNextPage(9);
@@ -161,7 +171,6 @@ function swithPage(page){
 
 
 function startTouch(event) {
-	//alert("startTouch: "+ event.touches.length);
     if (!event.touches.length) {
         return;
     }
@@ -184,9 +193,9 @@ function endTouch() {
     var endY = tmpEndY;
     var startY = tmpStartY;
 	
-	alert("endY: "+ endY);
-	alert("startY: "+ startY);
-	alert("endY-startY : "+ parseFloat(endY)- parseFloat(startY));
+	mnAlert("endY: "+ endY);
+	mnAlert("startY: "+ startY);
+	mnAlert("endY-startY : "+ parseFloat(endY)- parseFloat(startY));
     if (endY && endY !== startY && parseFloat(endY)- parseFloat(startY)<=-25){
         //console.log(pageNumber+":"+isFlip[pageNumber]);
         //if(isFlip[pageNumber]<=1){
@@ -494,7 +503,7 @@ function screenBack(){
 
 // 下一屏
 function screenForward(){
-	alert("pageNumber: " + pageNumber);
+	mnAlert("pageNumber: " + pageNumber);
 	if(pageNumber == 1){
 		$(".wmn-wrap").find(".mm").animate({"right":+ 0 +'px'}, 1000, '', function(){});
 	}
