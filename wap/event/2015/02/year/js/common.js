@@ -43,6 +43,9 @@ $(document).ready(function(e) {
 				
 				//$(".wmn-wrap").find(".mm")
 			}
+			if($(this).hasClass("dis")){
+				return false;
+			}
 			if(index == 0 || index == (contentList.children().length -1)){
 				return false;
 			}
@@ -83,9 +86,7 @@ var index=0;
 var x = y = z = last_x = last_y = last_z = 0;
 var w_curTime=0;
 function init() {
-	alert("window.DeviceMotionEvent :" + window.DeviceMotionEvent);
 	if (window.DeviceMotionEvent) {
-		alert('$("#content-list").css("top") :' + $("#content-list").css("top"));
 		if($.trim($("#content-list").css("top")) == '0px'){
 			window.addEventListener('devicemotion', deviceMotionHandler, false);
 		}
@@ -94,6 +95,22 @@ function init() {
 	}
 	$("#btn-shake").bind('click',function(){
 		doResult();
+	});
+	$("#btn-isend").bind('click',function(){
+		goNextPage(8);
+	});
+	
+	$("#btn-send-zhufu").bind('click',function(){
+		var $rec_name = $("#rec-name"),$send_name = $("#send-name"),
+		rec_name = $.trim($rec_name.val()),send_name = $.trim($send_name.val());
+		if(rec_name == ""){
+			alert("填写您想祝福的人的姓名");
+			return false;
+		}else if(send_name == ""){
+			alert("填写您的姓名");
+			return false;
+		}
+		goNextPage(9);
 	});
 	
 }
@@ -169,7 +186,7 @@ function endTouch() {
 	
 	alert("endY: "+ endY);
 	alert("startY: "+ startY);
-	alert("endY-startY : "+ endY-startY);
+	alert("endY-startY : "+ parseFloat(endY)- parseFloat(startY));
     if (endY && endY !== startY && parseFloat(endY)- parseFloat(startY)<=-25){
         //console.log(pageNumber+":"+isFlip[pageNumber]);
         //if(isFlip[pageNumber]<=1){
