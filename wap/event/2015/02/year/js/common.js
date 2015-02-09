@@ -83,7 +83,9 @@ var index=0;
 var x = y = z = last_x = last_y = last_z = 0;
 var w_curTime=0;
 function init() {
+	alert("window.DeviceMotionEvent :" + window.DeviceMotionEvent);
 	if (window.DeviceMotionEvent) {
+		alert('$("#content-list").css("top") :' + $("#content-list").css("top"));
 		if($("#content-list").css("top") == 0){
 			window.addEventListener('devicemotion', deviceMotionHandler, false);
 		}
@@ -168,7 +170,7 @@ function endTouch() {
 	alert("endY: "+ endY);
 	alert("startY: "+ startY);
 	alert("endY-startY : "+ endY-startY);
-    if (endY && endY !== startY && endY-startY<=-25) {
+    if (endY && endY !== startY && parseFloat(endY)- parseFloat(startY)<=-25){
         //console.log(pageNumber+":"+isFlip[pageNumber]);
         //if(isFlip[pageNumber]<=1){
             screenForward();
@@ -178,7 +180,7 @@ function endTouch() {
             //flipCard();
        // }
 		
-    }else if(endY && endY !== startY && endY-startY>=25){
+    }else if(endY && endY !== startY && parseFloat(endY)-parseFloat(startY) >=25){
         //console.log(pageNumber+":"+isFlip[pageNumber]);
 		screenBack();
        // if(!isFlip[pageNumber] || isFlip[pageNumber]===2){
@@ -475,6 +477,7 @@ function screenBack(){
 
 // 下一屏
 function screenForward(){
+	alert("pageNumber: " + pageNumber);
 	if(pageNumber == 1){
 		$(".wmn-wrap").find(".mm").animate({"right":+ 0 +'px'}, 1000, '', function(){});
 	}
