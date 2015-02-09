@@ -1633,8 +1633,8 @@ class BonusAction extends Action {
         list($fourBonusNumber,$threeBonusNumber,$secondBonusNumber,$firstBonusNumber) = $this->getCurrentNumber();
         $this->assign("fourleft",$this->fourLevelNumber - $fourBonusNumber*1);
 //        $this->assign("fourleft",0);
-//        $this->assign("threeleft",$this->threeLevelNumber - $threeBonusNumber*1);
-        $this->assign("threeleft",0);
+        $this->assign("threeleft",$this->threeLevelNumber - $threeBonusNumber*1);
+//        $this->assign("threeleft",0);
         $this->assign("secondleft",$this->secondLevelNumber - $secondBonusNumber*1);
         $this->assign("firstleft",$this->firstLevelNumber - $firstBonusNumber*1);
 
