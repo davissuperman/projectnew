@@ -519,6 +519,7 @@ function screenForward(){
 
     if(pageNumber>6){
         pageNumber=6;
+		return false;
     }
     currentDistance=screenHeight*pageNumber;
     translateString="translate3d(0, -"+currentDistance+"px, 0)";
