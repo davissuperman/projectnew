@@ -503,6 +503,9 @@ function flipCard(){
 
 // 上一屏
 function screenBack(){
+	if(pageNumber == 0){
+		return false;
+	}
 
     var translateString,transitionString;
 	if(pageNumber>=6){
@@ -513,9 +516,6 @@ function screenBack(){
     if(pageNumber<0){
         pageNumber=0;
     }
-	if(pageNumber == 0){
-		return false;
-	}
 	
     currentDistance=screenHeight*pageNumber;
     translateString="translate3d(0, -"+currentDistance+"px, 0)";
