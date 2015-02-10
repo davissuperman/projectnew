@@ -513,7 +513,7 @@ function screenForward(eve){
 		$(".wmn-wrap").find(".mm").animate({"right":+ 0 +'px'}, 1000, '', function(){});
 	}
     var translateString,transitionString;
-	
+	alert(pageNumber);
     pageNumber++;
 	if(eve == 'touch'){
 		if(pageNumber>6){
