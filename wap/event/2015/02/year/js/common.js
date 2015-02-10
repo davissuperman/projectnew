@@ -526,6 +526,8 @@ function screenForward(){
 
     contentList.css({"-webkit-transform":translateString,"transform":translateString,"-webkit-transition":transitionString,"transition":transitionString});
 	
+	mnAlert("-webkit-transform: " + contentList.css("-webkit-transform"));
+	mnAlert("-webkit-transition: " + contentList.css("-webkit-transition"));
 	
 
     // 显示元素
