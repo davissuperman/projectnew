@@ -55,7 +55,7 @@
                        <div class="top">
                             <p class="pt-20 ml-10"><img src="images/p0/img01.png" height="15px"></p>
                             <div class="lantern-firecrackers">
-                                <div class="lantern flash"></div>
+                                <div class="lantern flash4"></div>
                                 <div class="firecrackers"></div>
                                 <div class="fire1 flash"></div>
                                 <div class="fire2 flash1"></div>
@@ -132,7 +132,7 @@
                         <div class="wmn">
                             <div class="zi flash3"></div>
                         </div>
-                        <div class="btn flash4" id="btnGoNext"></div>
+                        <div class="btn bounceIn" id="btnGoNext"></div>
                     </div>
                     <div class="inscribe2"></div>
                 </div>
