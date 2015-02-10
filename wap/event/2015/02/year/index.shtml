@@ -18,7 +18,7 @@
 <body>
 	<div class="container">
         <ul class="content-list" id="content-list">
-            <li class="content-li hide">
+            <li class="content-li">
             	
                 <div class="page p0">
                     <div class="zhufu">
