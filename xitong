@@ -35,3 +35,6 @@ http://115.29.185.117/phpmyadmin/info.php
 </VirtualHost>
 
 rsync -az --progress --exclude=Conf/db.php --exclude=Conf --exclude=.svn ./* root@newsentian:/opt/lampp/htdocs/projectnew/
+
+
+test
