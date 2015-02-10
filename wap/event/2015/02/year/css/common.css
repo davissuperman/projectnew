@@ -220,7 +220,7 @@ left: 50%;
 bottom: 10px;
 margin-left: -55px;}
 
-.form-ul{ position:absolute; width:300px; height:200px; top:20px; left:50%; margin-left:-150px;color:#fff;font-weight:bold;}
+.form-ul{ position: relative; width:300px; height:200px; top:20px; left:50%; margin-left:-150px;color:#fff;font-weight:bold;}
 .form-item{ margin:25px 0;}
 .input-text{ border:none; background:none; border-bottom:2px solid #fff; padding:0 5px; width:175px;color:#fff;}
 .btn-send{ background:url(../images/p8/img01.png) no-repeat; width:112px; height:35px; background-size:auto 100%; display:inline-block; cursor:pointer;}
