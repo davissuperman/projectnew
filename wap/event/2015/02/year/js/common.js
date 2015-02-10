@@ -35,27 +35,6 @@ $(document).ready(function(e) {
 		
 	});
 	
-	/*contentList.children().each(function(index, element) {
-        $(this).bind('click',function(){
-			if(index == 1){
-				//$(".wmn-wrap").find(".mm").css({"right":"-125px"});
-				setTimeout(function(){
-                   $(".wmn-wrap").find(".mm").animate({"right":+ 0 +'px'}, 1000, '', function(){});
-                },1000);
-				
-				//$(".wmn-wrap").find(".mm")
-			}
-			if($(this).hasClass("dis")){
-				return false;
-			}
-			if(index == 0 || index == (contentList.children().length -1)){
-				return false;
-			}
-			goNextPage(index + 1);
-		});
-		
-    });*/
-	
 });
 
 //模拟alert
@@ -68,12 +47,6 @@ function mnAlert (mes){
 	$("body").append(htmlStr);
 }
 
-function goNextPage(page){
-	var $content_list = $("#content-list"),hg = $content_list.parent().height();
-	hg = page * hg;
-	$content_list.animate({"top":'-'+hg + 'px'}, 1000, '', function(){});
-
-}
 
 $(window).resize(function(){
 	cal_con_hg();
@@ -110,18 +83,16 @@ function init() {
 		doResult();
 	});
 	$("#btn-isend").bind('click',function(){
-		//goNextPage(8);
-		// screenForward('click');
 		 $(this).parents(".page-item").next().show().siblings().hide();
 	});
 	$("#btnGoNext").bind('click',function(){
-		// screenForward('click');
 		 $(this).parents(".page-item").next().show().siblings().hide();
 	});
 	
 	
 	
 	$("#btn-send-zhufu").bind('click',function(){
+		var $this = $(this);
 		var $rec_name = $("#rec-name"),$send_name = $("#send-name"),
 		rec_name = $.trim($rec_name.val()),send_name = $.trim($send_name.val());
 		if(rec_name == ""){
@@ -131,7 +102,7 @@ function init() {
 			mnAlert ('填写您的姓名');
 			return false;
 		}
-		goNextPage(9);
+		$this.parents(".page-item").next().show().siblings().hide();
 	});
 	
 }
@@ -170,7 +141,6 @@ function deviceMotionHandler(eventData) {
 			$content_list.find(".p0 .cloud6").addClass("zoomOutDown");
 			$content_list.find(".p0 .cloud7").addClass("zoomOutDown");
 			$content_list.find(".p0 .cloud5").addClass("zoomOutRight");
-			//swithPage(1);
 			setTimeout(function(){
 				screenForward('touch');
 			},2000);
@@ -185,17 +155,10 @@ function deviceMotionHandler(eventData) {
 		$content_list.find(".p0 .cloud6").addClass("zoomOutDown");
 		$content_list.find(".p0 .cloud7").addClass("zoomOutDown");
 		$content_list.find(".p0 .cloud5").addClass("zoomOutRight");
-		//swithPage(1);
 		setTimeout(function(){
 			screenForward('touch');
 		},2000);
 	}
-	
-	
- 	if($("#content-list").css("-webkit-transform") == 'none' || $.trim($("#content-list").css("-webkit-transform")) == 'translate3d(0px,0px,0px)'){
-		
-	}	
-
  	
 }
 function swithPage(page){
