@@ -503,9 +503,6 @@ function flipCard(){
 
 // 上一屏
 function screenBack(){
-	if(pageNumber == 0){
-		return false;
-	}
 
     var translateString,transitionString;
 	if(pageNumber>=6){
@@ -522,6 +519,7 @@ function screenBack(){
     transitionString="all 0.5s ease-in";
 
     $("#content-list").css({"-webkit-transform":translateString,"transform":translateString,"-webkit-transition":transitionString,"transition":transitionString});
+	alert($("#content-list").css("-webkit-transform"));
 }
 
 // 下一屏
