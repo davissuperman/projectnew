@@ -523,7 +523,7 @@ function screenForward(eve){
     var translateString,transitionString;
     pageNumber++;
 	if(eve == 'touch'){
-		if(pageNumber >= 6){
+		if(pageNumber > 6){
 			pageNumber=6;
 			return false;
 		}
