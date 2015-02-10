@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 body,ul,ol,dl,li,dd,p,form,h1,h2,h3{margin:0;padding:0;}
-body{font-size:16px; background:#fff; color:#000;}
+body{font-size:16px; background:#e8465a; color:#000;}
 i,em{font-style:normal; vertical-align:middle;}
 img{border:none;}
 a,input,button{outline:none;}
