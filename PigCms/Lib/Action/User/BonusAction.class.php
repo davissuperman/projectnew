@@ -261,6 +261,10 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $start = 1;
         $end = 100;
         $openId = $_POST['openid'];
+        if(!$openId){
+            echo '请输入OPENID';
+            return;
+        }
         $list = M('bonus_history')->query(
             "SELECT h.*,info.nickname as name from tp_bonus_history as h
               left join tp_customer_service_fans info on (info.openid=h.from_open_id)
