@@ -159,7 +159,8 @@ function deviceMotionHandler(eventData) {
 	}
 }
  function doResult() {	
- 	if($("#content-list").css("-webkit-transform") == 'none' || $("#content-list").css("-webkit-transform") == 'translate3d(0px,0px,0px)'){
+ alert($.trim($("#content-list").css("-webkit-transform")));
+ 	if($("#content-list").css("-webkit-transform") == 'none' || $.trim($("#content-list").css("-webkit-transform")) == 'translate3d(0px,0px,0px)'){
 		var $content_list = $("#content-list");
 		$content_list.find(".p0 .cloud1").addClass("zoomOutUp");
 		$content_list.find(".p0 .cloud4").addClass("zoomOutUp");
