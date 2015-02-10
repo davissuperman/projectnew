@@ -162,7 +162,8 @@ function deviceMotionHandler(eventData) {
  	if($("#content-list").css("-webkit-transform") != 'none'){
 		var atrr = $.trim($("#content-list").css("-webkit-transform")).split(",");
 		alert(atrr[1]);
-		if(atrr[1] == '0px'){
+		if($.trim(atrr[1]) == '0px'){
+			alert("good");
 			var $content_list = $("#content-list");
 			$content_list.find(".p0 .cloud1").addClass("zoomOutUp");
 			$content_list.find(".p0 .cloud4").addClass("zoomOutUp");
