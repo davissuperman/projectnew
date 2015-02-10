@@ -183,7 +183,7 @@ class NumberAction extends UserAction {
     public function getRandDate($s,$openId){
        //生成随机时间戳
         $e = $this->getUpdateTime($openId);;
-        $n = rand($s,$e);
+        $n = rand($s*1+200,$e);
         return date("Y-m-d H:i:s",$n);
     }
     public function getNumber($n,$s){
