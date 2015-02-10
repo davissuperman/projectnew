@@ -192,11 +192,12 @@ function moveTouch(event) {
 function endTouch() {
     var endY = tmpEndY;
     var startY = tmpStartY;
-	
+	var result = parseFloat(endY) - parseFloat(startY);
 	mnAlert("endY: "+ endY);
 	mnAlert("startY: "+ startY);
-	mnAlert("endY-startY : "+ parseFloat(endY)- parseFloat(startY));
-    if (endY && endY !== startY && parseFloat(endY)- parseFloat(startY)<=-25){
+	mnAlert("result :"+ result);
+    if (endY && endY !== startY && result <= -25){
+		mnAlert("if :"+ result);
         //console.log(pageNumber+":"+isFlip[pageNumber]);
         //if(isFlip[pageNumber]<=1){
             screenForward();
@@ -206,7 +207,8 @@ function endTouch() {
             //flipCard();
        // }
 		
-    }else if(endY && endY !== startY && parseFloat(endY)-parseFloat(startY) >=25){
+    }else if(endY && endY !== startY && result >=25){
+		mnAlert("else :"+ result);
         //console.log(pageNumber+":"+isFlip[pageNumber]);
 		screenBack();
        // if(!isFlip[pageNumber] || isFlip[pageNumber]===2){
