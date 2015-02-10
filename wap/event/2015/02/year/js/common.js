@@ -34,9 +34,7 @@ $(document).ready(function(e) {
 		endTouch(e);
 		
 	});
-	$("#btnGoNext").bind('click',function(){
-		 screenForward('click');
-	});
+	
 	/*contentList.children().each(function(index, element) {
         $(this).bind('click',function(){
 			if(index == 1){
@@ -112,7 +110,8 @@ function init() {
 		doResult();
 	});
 	$("#btn-isend").bind('click',function(){
-		goNextPage(8);
+		//goNextPage(8);
+		screenForward('click');
 	});
 	
 	
@@ -495,7 +494,6 @@ function flipCard(){
 function screenBack(){
 
     var translateString,transitionString;
-	alert(pageNumber);
 	if(pageNumber>=6){
 		return false;
 	}
