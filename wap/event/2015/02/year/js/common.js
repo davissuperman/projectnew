@@ -100,6 +100,8 @@ var x = y = z = last_x = last_y = last_z = 0;
 var w_curTime=0;
 function init() {
 	if (window.DeviceMotionEvent) {
+		alert($("#content-list").css("-webkit-transform"));
+		alert('TOP: '+$("#content-list").css("top"));
 		if($.trim($("#content-list").css("top")) == '0px'){
 			window.addEventListener('devicemotion', deviceMotionHandler, false);
 		}
@@ -167,7 +169,10 @@ function deviceMotionHandler(eventData) {
 	$content_list.find(".p0 .cloud6").addClass("zoomOutDown");
 	$content_list.find(".p0 .cloud7").addClass("zoomOutDown");
 	$content_list.find(".p0 .cloud5").addClass("zoomOutRight");
-	swithPage(1);
+	//swithPage(1);
+	setTimeout(function(){
+		screenForward('touch');
+	},2000);
 }
 function swithPage(page){
 	var $content_list = $("#content-list"),hg = $content_list.parent().height();
