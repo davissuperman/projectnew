@@ -32,6 +32,10 @@ $(document).ready(function(e) {
 	});
 	contentList.on("touchend",function(e){
 		endTouch(e);
+		
+	});
+	$("#btnGoNext").bind('click',function(){
+		 screenForward('click');
 	});
 	/*contentList.children().each(function(index, element) {
         $(this).bind('click',function(){
@@ -111,14 +115,7 @@ function init() {
 		goNextPage(8);
 	});
 	
-	$("#btnGoNext").bind('click',function(){
-		pageNumber++;
-		 var translateString,transitionString;
-		var currentDistance = screenHeight*7;
-		translateString="translate3d(0, -"+currentDistance+"px, 0)";
-		transitionString="all 0.5s ease-in";
-		$("#content-list").css({"-webkit-transform":translateString,"transform":translateString,"-webkit-transition":transitionString,"transition":transitionString});
-	});
+	
 	
 	$("#btn-send-zhufu").bind('click',function(){
 		var $rec_name = $("#rec-name"),$send_name = $("#send-name"),
@@ -207,7 +204,8 @@ function endTouch() {
     if (endY && endY !== startY && result <= -25){
         //console.log(pageNumber+":"+isFlip[pageNumber]);
         //if(isFlip[pageNumber]<=1){
-            screenForward();
+            //screenForward();
+			screenForward('touch');
             //$(".notice-swipe-up").removeClass("swipeMove");
 
        // }else{
@@ -510,18 +508,20 @@ function screenBack(){
 }
 
 // 下一屏
-function screenForward(){
+function screenForward(eve){
 	if(pageNumber == 1){
 		$(".wmn-wrap").find(".mm").animate({"right":+ 0 +'px'}, 1000, '', function(){});
 	}
     var translateString,transitionString;
 	
     pageNumber++;
-
-    if(pageNumber>6){
-       // pageNumber=6;
-		return false;
-    }
+	if(eve == 'touch'){
+		if(pageNumber>6){
+			pageNumber=6;
+			return false;
+		}
+	}
+    
     currentDistance=screenHeight*pageNumber;
     translateString="translate3d(0, -"+currentDistance+"px, 0)";
     transitionString="all 0.5s ease-in";
