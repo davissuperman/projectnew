@@ -83,7 +83,7 @@ input,textarea,select,button{font-size:1em;}
 .page { width:320px; margin:0 auto; position:relative;}
 .page.p0 { position:absolute;top:50%;left:50%; height:402px; margin-top:-201px; width:320px; margin-left:-160px;}
 
-.zhufu{ width:320px; margin:0 auto;color:#fff;font-size:18px; font-weight:bold; font-style:oblique;}
+.zhufu{ width:320px; margin:0 auto;color:#fff;font-size:18px; font-weight:bold;}
 
 .page.p0 .cloud{ position:relative; height:210px;}
 .page.p0 .cloud1{ position:absolute; background:url(../images/p0/img03.png) no-repeat; width:102px; height:70px; background-size:auto 100%;left:60px;top:0px; z-index:1;}
