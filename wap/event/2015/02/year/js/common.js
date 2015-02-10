@@ -513,6 +513,9 @@ function screenBack(){
     if(pageNumber<0){
         pageNumber=0;
     }
+	if(pageNumber == 0){
+		return false;
+	}
 	
     currentDistance=screenHeight*pageNumber;
     translateString="translate3d(0, -"+currentDistance+"px, 0)";
@@ -523,6 +526,7 @@ function screenBack(){
 
 // 下一屏
 function screenForward(eve){
+	
 	if(pageNumber == 1){
 		$(".wmn-wrap").find(".mm").animate({"right":+ 0 +'px'}, 1000, '', function(){});
 	}
@@ -533,6 +537,9 @@ function screenForward(eve){
 			pageNumber=6;
 			return false;
 		}
+	}
+	if(pageNumber == 1){
+		return false;
 	}
     
     currentDistance=screenHeight*pageNumber;
