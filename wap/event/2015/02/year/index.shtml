@@ -9,7 +9,7 @@
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="css/animate.css" rel="stylesheet" type="text/css" />
-<link href="css/common.css?v=201502093232" rel="stylesheet" type="text/css" />
+<link href="css/common.css?v=2015020103232" rel="stylesheet" type="text/css" />
 
 <script src="js/zepto.min.js" type="text/javascript"></script>
 <script src="js/common.js?v=2015020902" type="text/javascript"></script>
@@ -18,11 +18,11 @@
 <body>
 	<div class="container">
         <ul class="content-list" id="content-list">
-            <li class="content-li">
+            <li class="content-li hide">
             	
                 <div class="page p0">
                     <div class="zhufu">
-                        <p class="pt-10 ml-10">祝：<span>张学友</span></p>
+                        <p class="pt-10 ml-10">祝：<span>您</span></p>
                         <p class="mt-5 ml-10"><img src="images/p0/img02.png" height="18px" /></p>
                     </div>
                     <div class="cloud">
@@ -50,29 +50,50 @@
                     <div class="btn" id="btn-shake"></div>
                     
                 </div>
-                <div class="inscribe"></div>
+                <div class="inscribe">
+                	<div>
+                    	<img src="images/p0/img22.png" height="18"/>
+                        <span class="name">森田药妆</span>
+                        <img src="images/p0/img23.png" height="18"/>
+                  	</div>
+                    <div><img src="images/p0/img21.png" height="18"/></div>
+                    
+                </div>
             </li>
             <li class="content-li">
+            	 <div><img src="images/p1/img07.png" width="100%"/></div>
             	 <div class="p1-top">
-                    <div class="page p1">
-                       <div class="top">
-                            <p class="pt-20 ml-10"><img src="images/p0/img01.png" height="15px"></p>
-                            <div class="lantern-firecrackers">
-                                <div class="lantern flash4"></div>
-                                <div class="firecrackers"></div>
-                                <div class="fire1 flash"></div>
-                                <div class="fire2 flash1"></div>
-                                <div class="fire3 flash2"></div>
-                            </div>
-                            <div class="sheep">
-                                <div class="zi flash"></div>
-                            </div>
-                            <div class="cloud1"></div>
-                        </div>
-                        
+                 	<div class="zhufu">
+                        <p class="pt-10 ml-10">祝：<span>您</span></p>
+                    </div>
+                 	<div class="lantern-wrap">
+                    	<div class="lantern flash4"></div>
+                    </div>
+                    <div class="fire1 flash"></div>
+                    <div class="fire2 flash1"></div>
+                    <div class="fire3 flash2"></div>
+                 	
+                    <div class="firecrackers-wrap">
+                    	<div class="firecrackers flash4"></div>
                     </div>
             	</div>
+                <div class="p1box-top">
+                    <div class="sheep">
+                        <div class="zi flash"></div>
+                    </div>
+                </div>
                 <div class="inscribes"></div>
+                
+                <div class="inscribes">
+                	<div>
+                    	<img src="images/p1/img15.png" height="18"/>
+                        <span class="name">森田药妆</span>
+                        <img src="images/p1/img16.png" height="18"/>
+                  	</div>
+                    <div><img src="images/p1/img17.png" height="18"/></div>
+                    
+                </div>
+                
                 <div class="index-arrow-down swipeMove"></div>
             </li>
             <li class="content-li">
