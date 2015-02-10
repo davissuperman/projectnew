@@ -81,11 +81,12 @@ input,textarea,select,button{font-size:1em;}
 .content-li:nth-child(10) {background-color: #e8465a;}
 
 .page { width:320px; margin:0 auto; position:relative;}
+.page.p0 { position:absolute;top:50%;left:0; height:490px; margin-top:-245px;}
 
 .page.p0 .cloud{ position:relative; height:210px;}
-.page.p0 .cloud1{ position:absolute; background:url(../images/p0/img03.png) no-repeat; width:100px; height:65px; background-size:auto 100%;left:80px;top:5px; z-index:1;}
-.page.p0 .cloud1 .zi1{ position:absolute; background:url(../images/p0/img04.png) no-repeat; width:70px; height:25px; background-size:auto 100%;left:15px;top:16px;}
-.page.p0 .cloud1 .zi2{ position:absolute; background:url(../images/p0/img05.png) no-repeat; width:22px; height:22px; background-size:auto 100%;left:49px;top:19px;
+.page.p0 .cloud1{ position:absolute; background:url(../images/p0/img03.png) no-repeat; width:102px; height:70px; background-size:auto 100%;left:60px;top:0px; z-index:1;}
+.page.p0 .cloud1 .zi1{ position:absolute; background:url(../images/p0/img04.png) no-repeat; width:80px; height:30px; background-size:auto 100%;left:15px;top:16px;}
+.page.p0 .cloud1 .zi2{ position:absolute; background:url(../images/p0/img05.png) no-repeat; width:25px; height:25px; background-size:auto 100%;left:57px;top:19px;
 -webkit-animation-duration: 2s;-moz-animation-duration: 2s;
 -o-animation-duration: 2s;-ms-animation-duration: 2s;animation-duration: 2s;
 -webkit-animation-iteration-count: infinite;-moz-animation-iteration-count: infinite;-ms-animation-iteration-count: infinite;-o-animation-iteration-count: infinite;animation-iteration-count: infinite;
@@ -99,9 +100,9 @@ input,textarea,select,button{font-size:1em;}
 -webkit-animation-iteration-count: infinite;-moz-animation-iteration-count: infinite;-ms-animation-iteration-count: infinite;-o-animation-iteration-count: infinite;animation-iteration-count: infinite;
 -webkit-animation-name: flash;-o-animation-name: flash;-moz-animation-name: flash;-ms-animation-name: flash;animation-name: flash;}
 
-.page.p0 .cloud3{ position:absolute; background:url(../images/p0/img09.png) no-repeat; width:70px; height:60px; background-size:auto 100%;left:145px;top:40px; z-index:2;}
-.page.p0 .cloud4{ position:absolute; background:url(../images/p0/img10.png) no-repeat; width:71px; height:50px; background-size:auto 100%;left:210px;top:2px; z-index:2;}
-.page.p0 .cloud5{ position:absolute; background:url(../images/p0/img11.png) no-repeat; width:98px; height:65px; background-size:auto 100%;left:215px;top:50px; z-index:2;}
+.page.p0 .cloud3{ position:absolute; background:url(../images/p0/img09.png) no-repeat; width:85px; height:70px; background-size:auto 100%;left:125px;top:50px; z-index:2;}
+.page.p0 .cloud4{ position:absolute; background:url(../images/p0/img10.png) no-repeat; width:71px; height:50px; background-size:auto 100%;left:180px;top:2px; z-index:2;}
+.page.p0 .cloud5{ position:absolute; background:url(../images/p0/img11.png) no-repeat; width:80px; height:65px; background-size:auto 100%;left:215px;top:40px; z-index:2;}
 .page.p0 .cloud6{ position:absolute; background:url(../images/p0/img12.png) no-repeat; width:88px; height:60px; background-size:auto 100%;left:15px;top:100px; z-index:1;}
 
 .page.p0 .cloud7{ position:absolute; background:url(../images/p0/img14.png) no-repeat; width:90px; height:75px; background-size:auto 100%;left: 195px;top: 90px;z-index: 2;}
@@ -110,12 +111,12 @@ input,textarea,select,button{font-size:1em;}
 -webkit-animation-iteration-count: infinite;-moz-animation-iteration-count: infinite;-ms-animation-iteration-count: infinite;-o-animation-iteration-count: infinite;animation-iteration-count: infinite;
 -webkit-animation-name: flash;-o-animation-name: flash;-moz-animation-name: flash;-ms-animation-name: flash;animation-name: flash;}
 
-.page.p0 .sheep{position: relative; background:url(../images/p0/img15.png) no-repeat; width:85px; height:125px; background-size:auto 100%;left:106px;top:-115px;}
+.page.p0 .sheep{position: relative; background:url(../images/p0/img15.png) no-repeat; width:85px; height:125px; background-size:auto 100%;left:106px;top:-80px;}
 .page.p0 .brow1{ position:absolute;background:url(../images/p0/img16.png) no-repeat; width:25px; height:34px; background-size:auto 100%;left:18px;top:18px;}
 .page.p0 .brow2{ position:absolute;background:url(../images/p0/img17.png) no-repeat; width:25px; height:34px; background-size:auto 100%;left:45px;top:16px;}
 
-.page.p0 .shake{position: relative; background:url(../images/p0/img18.png) no-repeat; width:45px; height:45px; background-size:auto 100%;margin:10px auto;top:-115px;}
-.page.p0 .btn{position: relative; background:url(../images/p0/img19.png) no-repeat; width:96px; height:30px; background-size:auto 100%;margin:10px auto;top:-115px;}
+.page.p0 .shake{position: relative; background:url(../images/p0/img18.png) no-repeat; width:45px; height:45px; background-size:auto 100%;margin:10px auto;top:-80px;}
+.page.p0 .btn{position: relative; background:url(../images/p0/img19.png) no-repeat; width:96px; height:30px; background-size:auto 100%;margin:10px auto;top:-80px;}
 .inscribe{position: absolute; background:url(../images/p0/img20.png) no-repeat; width:80px; height:30px; background-size:auto 100%;right:10px;bottom:10px;}
 
 
