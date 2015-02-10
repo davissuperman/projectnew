@@ -33,7 +33,7 @@ $(document).ready(function(e) {
 	contentList.on("touchend",function(e){
 		endTouch(e);
 	});
-	contentList.children().each(function(index, element) {
+	/*contentList.children().each(function(index, element) {
         $(this).bind('click',function(){
 			if(index == 1){
 				//$(".wmn-wrap").find(".mm").css({"right":"-125px"});
@@ -51,7 +51,8 @@ $(document).ready(function(e) {
 			}
 			goNextPage(index + 1);
 		});
-    });
+		
+    });*/
 	
 });
 
@@ -509,7 +510,7 @@ function screenForward(){
 	
     pageNumber++;
 
-    if(!showTheLast && pageNumber===6){
+    if(!showTheLast && pageNumber===8){
         pageNumber=5;
     }
 
