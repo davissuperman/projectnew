@@ -159,9 +159,10 @@ function deviceMotionHandler(eventData) {
 	}
 }
  function doResult() {	
- 	if($("#content-list").css("-webkit-transform") != 'none'){
+ 	if($("#content-list").css("-webkit-transform") != 'none' || $("#content-list").css("-webkit-transform") != 'translate3d(0px,0px,0px)'){
 		return false;
 	}	
+
  	var $content_list = $("#content-list");
 	$content_list.find(".p0 .cloud1").addClass("zoomOutUp");
 	$content_list.find(".p0 .cloud4").addClass("zoomOutUp");
@@ -519,7 +520,7 @@ function screenBack(){
     transitionString="all 0.5s ease-in";
 
     $("#content-list").css({"-webkit-transform":translateString,"transform":translateString,"-webkit-transition":transitionString,"transition":transitionString});
-	alert($("#content-list").css("-webkit-transform"));
+	
 }
 
 // 下一屏
