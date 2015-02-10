@@ -525,7 +525,7 @@ function screenForward(){
     currentDistance=screenHeight*pageNumber;
     translateString="translate3d(0, -"+currentDistance+"px, 0)";
     transitionString="all 0.5s ease-in";
-
+	mnAlert("translateString" + translateString);
     $("#content-list").css({"-webkit-transform":translateString,"transform":translateString,"-webkit-transition":transitionString,"transition":transitionString});
 	
 	mnAlert("-webkit-transform: " + $("#content-list").css("-webkit-transform"));
