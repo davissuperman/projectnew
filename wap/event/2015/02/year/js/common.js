@@ -517,8 +517,8 @@ function screenForward(eve){
     pageNumber++;
 	if(eve == 'touch'){
 		if(pageNumber>6){
-			//pageNumber=6;
-			return false;
+			pageNumber=6;
+			//return false;
 		}
 	}
     
