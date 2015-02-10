@@ -521,14 +521,14 @@ function screenForward(eve){
 		$(".wmn-wrap").find(".mm").animate({"right":+ 0 +'px'}, 1000, '', function(){});
 	}
     var translateString,transitionString;
-    pageNumber++;
+    
 	if(eve == 'touch'){
-		if(pageNumber>6){
+		if(pageNumber >= 6){
 			pageNumber=6;
 			return false;
 		}
 	}
-    
+    pageNumber++;
     currentDistance=screenHeight*pageNumber;
     translateString="translate3d(0, -"+currentDistance+"px, 0)";
     transitionString="all 0.5s ease-in";
