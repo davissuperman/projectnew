@@ -111,10 +111,12 @@ function init() {
 	});
 	$("#btn-isend").bind('click',function(){
 		//goNextPage(8);
-		 screenForward('click');
+		 //screenForward('click');
+		 $(this).parent().next().show().siblings().hide();
 	});
 	$("#btnGoNext").bind('click',function(){
-		 screenForward('click');
+		 //screenForward('click');
+		 $(this).parent().next().show().siblings().hide();
 	});
 	
 	
