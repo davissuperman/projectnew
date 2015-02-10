@@ -100,9 +100,7 @@ var x = y = z = last_x = last_y = last_z = 0;
 var w_curTime=0;
 function init() {
 	if (window.DeviceMotionEvent) {
-		alert($("#content-list").css("-webkit-transform"));
-		alert('TOP: '+$("#content-list").css("top"));
-		if($.trim($("#content-list").css("top")) == '0px'){
+		if($("#content-list").css("-webkit-transform") == 'none'){
 			window.addEventListener('devicemotion', deviceMotionHandler, false);
 		}
 	} else {
