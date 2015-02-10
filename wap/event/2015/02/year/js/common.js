@@ -112,11 +112,11 @@ function init() {
 	$("#btn-isend").bind('click',function(){
 		//goNextPage(8);
 		 //screenForward('click');
-		 $(this).parent().next().show().siblings().hide();
+		 $(this).parents("li").next().show().siblings().hide();
 	});
 	$("#btnGoNext").bind('click',function(){
 		 //screenForward('click');
-		 $(this).parent().next().show().siblings().hide();
+		 $(this).parents("li").next().show().siblings().hide();
 	});
 	
 	
