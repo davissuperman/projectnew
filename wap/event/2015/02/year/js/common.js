@@ -496,7 +496,7 @@ function screenBack(){
 
     var translateString,transitionString;
 	alert(pageNumber);
-	if(pageNumber>6){
+	if(pageNumber>=6){
 		return false;
 	}
     pageNumber--;
