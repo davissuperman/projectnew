@@ -204,7 +204,7 @@ width: 140px;height: 155px; margin:0 auto; position:relative;}
 .page.p6 .wmn .zi{background: url(../images/p6/img04.png) no-repeat;background-size: auto 100%;
 width: 60px;height: 85px;position: absolute;top: 30px;left: 60px;}
 .page.p6 .btn{background: url(../images/p6/img03.png) no-repeat;background-size: auto 100%;
-width: 82px;height: 70px; margin:10px auto; position:relative;}
+width: 95px;height: 80px;margin: 20px auto;position:relative; cursor:pointer;}
 
 .page.p7 .btn1{background: url(../images/p7/img01.png) no-repeat;background-size: auto 100%;
 width: 114px;height: 35px;position: absolute;left:50%;top:150px; margin-left:-57px; cursor:pointer;}

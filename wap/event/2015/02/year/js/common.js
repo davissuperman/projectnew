@@ -111,6 +111,14 @@ function init() {
 		goNextPage(8);
 	});
 	
+	$("#btnGoNext").bind('click',function(){
+		 var translateString,transitionString;
+		var currentDistance = screenHeight*7;
+		translateString="translate3d(0, -"+currentDistance+"px, 0)";
+		transitionString="all 0.5s ease-in";
+		$("#content-list").css({"-webkit-transform":translateString,"transform":translateString,"-webkit-transition":transitionString,"transition":transitionString});
+	});
+	
 	$("#btn-send-zhufu").bind('click',function(){
 		var $rec_name = $("#rec-name"),$send_name = $("#send-name"),
 		rec_name = $.trim($rec_name.val()),send_name = $.trim($send_name.val());
