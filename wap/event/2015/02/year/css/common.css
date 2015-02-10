@@ -86,9 +86,9 @@ input,textarea,select,button{font-size:1em;}
 .zhufu{ width:320px; margin:0 auto;color:#fff;font-size:18px; font-weight:bold;}
 
 .page.p0 .cloud{ position:relative; height:210px;}
-.page.p0 .cloud1{ position:absolute; background:url(../images/p0/img03.png) no-repeat; width:102px; height:70px; background-size:auto 100%;left:60px;top:0px; z-index:1;}
-.page.p0 .cloud1 .zi1{ position:absolute; background:url(../images/p0/img04.png) no-repeat; width:80px; height:30px; background-size:auto 100%;left:15px;top:16px;}
-.page.p0 .cloud1 .zi2{ position:absolute; background:url(../images/p0/img05.png) no-repeat; width:25px; height:25px; background-size:auto 100%;left:57px;top:19px;
+.page.p0 .cloud1{ position:absolute; background:url(../images/p0/img03.png) no-repeat; width:102px; height:65px; background-size:auto 100%;left:60px;top:5px; z-index:1;}
+.page.p0 .cloud1 .zi1{ position:absolute; background:url(../images/p0/img04.png) no-repeat; width:70px; height:26px; background-size:auto 100%;left:15px;top:16px;}
+.page.p0 .cloud1 .zi2{ position:absolute; background:url(../images/p0/img05.png) no-repeat; width:25px; height:25px; background-size:auto 100%;left:50px;top:19px;
 -webkit-animation-duration: 2s;-moz-animation-duration: 2s;
 -o-animation-duration: 2s;-ms-animation-duration: 2s;animation-duration: 2s;
 -webkit-animation-iteration-count: infinite;-moz-animation-iteration-count: infinite;-ms-animation-iteration-count: infinite;-o-animation-iteration-count: infinite;animation-iteration-count: infinite;
