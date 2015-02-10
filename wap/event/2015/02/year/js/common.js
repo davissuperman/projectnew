@@ -495,11 +495,16 @@ function flipCard(){
 function screenBack(){
 
     var translateString,transitionString;
+	alert(pageNumber);
+	if(pageNumber>6){
+		return false;
+	}
     pageNumber--;
 
     if(pageNumber<0){
         pageNumber=0;
     }
+	
     currentDistance=screenHeight*pageNumber;
     translateString="translate3d(0, -"+currentDistance+"px, 0)";
     transitionString="all 0.5s ease-in";
@@ -513,12 +518,11 @@ function screenForward(eve){
 		$(".wmn-wrap").find(".mm").animate({"right":+ 0 +'px'}, 1000, '', function(){});
 	}
     var translateString,transitionString;
-	alert(pageNumber);
     pageNumber++;
 	if(eve == 'touch'){
 		if(pageNumber>6){
 			pageNumber=6;
-			//return false;
+			return false;
 		}
 	}
     
