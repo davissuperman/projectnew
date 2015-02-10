@@ -193,11 +193,8 @@ function endTouch() {
     var endY = tmpEndY;
     var startY = tmpStartY;
 	var result = parseFloat(endY) - parseFloat(startY);
-	mnAlert("endY: "+ endY);
-	mnAlert("startY: "+ startY);
-	mnAlert("result :"+ result);
+
     if (endY && endY !== startY && result <= -25){
-		mnAlert("if :"+ result);
         //console.log(pageNumber+":"+isFlip[pageNumber]);
         //if(isFlip[pageNumber]<=1){
             screenForward();
@@ -208,7 +205,6 @@ function endTouch() {
        // }
 		
     }else if(endY && endY !== startY && result >=25){
-		mnAlert("else :"+ result);
         //console.log(pageNumber+":"+isFlip[pageNumber]);
 		screenBack();
        // if(!isFlip[pageNumber] || isFlip[pageNumber]===2){
@@ -500,7 +496,7 @@ function screenBack(){
     translateString="translate3d(0, -"+currentDistance+"px, 0)";
     transitionString="all 0.5s ease-in";
 
-    contentList.css({"-webkit-transform":translateString,"transform":translateString,"-webkit-transition":transitionString,"transition":transitionString});
+    $("#content-list").css({"-webkit-transform":translateString,"transform":translateString,"-webkit-transition":transitionString,"transition":transitionString});
 }
 
 // 下一屏
@@ -520,16 +516,10 @@ function screenForward(){
     if(pageNumber>6){
         pageNumber=6;
     }
-	mnAlert("screenHeight: " + screenHeight);
-	mnAlert("currentDistance: " + screenHeight*pageNumber);
     currentDistance=screenHeight*pageNumber;
     translateString="translate3d(0, -"+currentDistance+"px, 0)";
     transitionString="all 0.5s ease-in";
-	mnAlert("translateString" + translateString);
     $("#content-list").css({"-webkit-transform":translateString,"transform":translateString,"-webkit-transition":transitionString,"transition":transitionString});
-	
-	mnAlert("-webkit-transform: " + $("#content-list").css("-webkit-transform"));
-	mnAlert("-webkit-transition: " + $("#content-list").css("-webkit-transition"));
 	
 
     // 显示元素
