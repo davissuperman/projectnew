@@ -159,22 +159,22 @@ function deviceMotionHandler(eventData) {
 	}
 }
  function doResult() {	
- 	if($("#content-list").css("-webkit-transform") != 'none' || $("#content-list").css("-webkit-transform") != 'translate3d(0px,0px,0px)'){
-		return false;
+ 	if($("#content-list").css("-webkit-transform") == 'none' || $("#content-list").css("-webkit-transform") == 'translate3d(0px,0px,0px)'){
+		var $content_list = $("#content-list");
+		$content_list.find(".p0 .cloud1").addClass("zoomOutUp");
+		$content_list.find(".p0 .cloud4").addClass("zoomOutUp");
+		$content_list.find(".p0 .cloud3").addClass("zoomOutUp");
+		$content_list.find(".p0 .cloud2").addClass("zoomOutLeft");
+		$content_list.find(".p0 .cloud6").addClass("zoomOutDown");
+		$content_list.find(".p0 .cloud7").addClass("zoomOutDown");
+		$content_list.find(".p0 .cloud5").addClass("zoomOutRight");
+		//swithPage(1);
+		setTimeout(function(){
+			screenForward('touch');
+		},2000);
 	}	
 
- 	var $content_list = $("#content-list");
-	$content_list.find(".p0 .cloud1").addClass("zoomOutUp");
-	$content_list.find(".p0 .cloud4").addClass("zoomOutUp");
-	$content_list.find(".p0 .cloud3").addClass("zoomOutUp");
-	$content_list.find(".p0 .cloud2").addClass("zoomOutLeft");
-	$content_list.find(".p0 .cloud6").addClass("zoomOutDown");
-	$content_list.find(".p0 .cloud7").addClass("zoomOutDown");
-	$content_list.find(".p0 .cloud5").addClass("zoomOutRight");
-	//swithPage(1);
-	setTimeout(function(){
-		screenForward('touch');
-	},2000);
+ 	
 }
 function swithPage(page){
 	var $content_list = $("#content-list"),hg = $content_list.parent().height();
