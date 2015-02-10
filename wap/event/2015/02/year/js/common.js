@@ -520,6 +520,8 @@ function screenForward(){
     if(pageNumber>6){
         pageNumber=6;
     }
+	mnAlert("screenHeight: " + screenHeight);
+	mnAlert("currentDistance: " + screenHeight*pageNumber);
     currentDistance=screenHeight*pageNumber;
     translateString="translate3d(0, -"+currentDistance+"px, 0)";
     transitionString="all 0.5s ease-in";
