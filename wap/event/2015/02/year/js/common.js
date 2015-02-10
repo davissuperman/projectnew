@@ -111,7 +111,10 @@ function init() {
 	});
 	$("#btn-isend").bind('click',function(){
 		//goNextPage(8);
-		screenForward('click');
+		 screenForward('click');
+	});
+	$("#btnGoNext").bind('click',function(){
+		 screenForward('click');
 	});
 	
 	
