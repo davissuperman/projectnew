@@ -19,9 +19,12 @@
 	<div class="container">
         <ul class="content-list" id="content-list">
             <li class="content-li">
+            	<div class="zhufu">
+                	<p class="pt-10 ml-10">祝：<span>张学友</span></p>
+                    <p class="mt-5 ml-10">新的一年，所有烦恼统统甩掉</p>
+                </div>
                 <div class="page p0">
-                    <p class="pt-10 ml-10"><img src="images/p0/img01.png" height="15px" /></p>
-                    <p class="mt-5 ml-10"><img src="images/p0/img02.png" height="15px" /></p>
+                    
                     <div class="cloud">
                     	<div class="cloud1">
                         	<div class="zi1"></div>
