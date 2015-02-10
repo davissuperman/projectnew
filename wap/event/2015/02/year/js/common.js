@@ -538,9 +538,7 @@ function screenForward(eve){
 			return false;
 		}
 	}
-	if(pageNumber == 1){
-		return false;
-	}
+	
     
     currentDistance=screenHeight*pageNumber;
     translateString="translate3d(0, -"+currentDistance+"px, 0)";
