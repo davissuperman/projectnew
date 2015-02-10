@@ -81,7 +81,7 @@ input,textarea,select,button{font-size:1em;}
 .content-li:nth-child(10) {background-color: #e8465a;}
 
 .page { width:320px; margin:0 auto; position:relative;}
-.page.p0 { position:absolute;top:50%;left:50%; height:410px; margin-top:-205px; width:320px; margin-left:-160px;}
+.page.p0 { position:absolute;top:50%;left:50%; height:410px; margin-top:-215px; width:320px; margin-left:-160px;}
 
 .zhufu{color:#fff;font-size:18px; font-weight:bold;}
 
@@ -111,7 +111,7 @@ input,textarea,select,button{font-size:1em;}
 .page.p0 .shake{position: relative; background:url(../images/p0/img18.png) no-repeat; width:45px; height:45px; background-size:auto 100%;margin:10px auto;top:-80px;}
 .page.p0 .btn{position: relative; background:url(../images/p0/img19.png) no-repeat; width:96px; height:30px; background-size:auto 100%;margin:10px auto;top:-80px;}
 .inscribe{position: absolute; right:10px;bottom:10px;  }
-.inscribe .name{ font-weight:bold;color:#435189; float:left; margin:0 3px 0 5px; font-size:16px;line-height:20px;}
+.inscribe .name{ font-weight:bold;color:#435189; float:left; margin:0 3px 0 5px; font-size:14px;line-height:16px;}
 .inscribe img{float:left;}
 
 
@@ -146,7 +146,7 @@ background-size: auto 100%;
 right: 10px;
 bottom: 10px;
 }
-.inscribes .name{ font-weight:bold;color:#d10f31; float:left; margin:0 3px 0 5px; font-size:16px;line-height:20px;}
+.inscribes .name{ font-weight:bold;color:#d10f31; float:left; margin:0 3px 0 5px; font-size:14px;line-height:16px;}
 .inscribes img{float:left;}
 
 .inscribe2{position: absolute;

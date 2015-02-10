@@ -52,11 +52,11 @@
                 </div>
                 <div class="inscribe">
                 	<div>
-                    	<img src="images/p0/img22.png" height="18"/>
+                    	<img src="images/p0/img22.png" height="16"/>
                         <span class="name">森田药妆</span>
-                        <img src="images/p0/img23.png" height="18"/>
+                        <img src="images/p0/img23.png" height="16"/>
                   	</div>
-                    <div><img src="images/p0/img21.png" height="18"/></div>
+                    <div><img src="images/p0/img21.png" height="16"/></div>
                     
                 </div>
             </li>
@@ -86,11 +86,11 @@
                 
                 <div class="inscribes">
                 	<div>
-                    	<img src="images/p1/img15.png" height="18"/>
+                    	<img src="images/p1/img15.png" height="16"/>
                         <span class="name">森田药妆</span>
-                        <img src="images/p1/img16.png" height="18"/>
+                        <img src="images/p1/img16.png" height="16"/>
                   	</div>
-                    <div><img src="images/p1/img17.png" height="18"/></div>
+                    <div><img src="images/p1/img17.png" height="16"/></div>
                     
                 </div>
                 
