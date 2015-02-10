@@ -159,8 +159,25 @@ function deviceMotionHandler(eventData) {
 	}
 }
  function doResult() {	
- alert($.trim($("#content-list").css("-webkit-transform")));
- 	if($("#content-list").css("-webkit-transform") == 'none' || $.trim($("#content-list").css("-webkit-transform")) == 'translate3d(0px,0px,0px)'){
+ 	if($("#content-list").css("-webkit-transform") != 'none'){
+		var atrr = $.trim($("#content-list").css("-webkit-transform")).split(",");
+		alert(atrr[1]);
+		if(atrr[1] == '0px'){
+			var $content_list = $("#content-list");
+			$content_list.find(".p0 .cloud1").addClass("zoomOutUp");
+			$content_list.find(".p0 .cloud4").addClass("zoomOutUp");
+			$content_list.find(".p0 .cloud3").addClass("zoomOutUp");
+			$content_list.find(".p0 .cloud2").addClass("zoomOutLeft");
+			$content_list.find(".p0 .cloud6").addClass("zoomOutDown");
+			$content_list.find(".p0 .cloud7").addClass("zoomOutDown");
+			$content_list.find(".p0 .cloud5").addClass("zoomOutRight");
+			//swithPage(1);
+			setTimeout(function(){
+				screenForward('touch');
+			},2000);
+		}
+		
+	}else{
 		var $content_list = $("#content-list");
 		$content_list.find(".p0 .cloud1").addClass("zoomOutUp");
 		$content_list.find(".p0 .cloud4").addClass("zoomOutUp");
@@ -173,6 +190,11 @@ function deviceMotionHandler(eventData) {
 		setTimeout(function(){
 			screenForward('touch');
 		},2000);
+	}
+	
+	
+ 	if($("#content-list").css("-webkit-transform") == 'none' || $.trim($("#content-list").css("-webkit-transform")) == 'translate3d(0px,0px,0px)'){
+		
 	}	
 
  	
