@@ -100,9 +100,9 @@ var x = y = z = last_x = last_y = last_z = 0;
 var w_curTime=0;
 function init() {
 	if (window.DeviceMotionEvent) {
-		if($("#content-list").css("-webkit-transform") == 'none'){
-			window.addEventListener('devicemotion', deviceMotionHandler, false);
-		}
+		
+		window.addEventListener('devicemotion', deviceMotionHandler, false);
+
 	} else {
 		mnAlert ('您的手机不支持摇一摇,请点击摇一摇按钮');
 	}
@@ -158,7 +158,10 @@ function deviceMotionHandler(eventData) {
 		last_z = z;
 	}
 }
- function doResult() {		
+ function doResult() {	
+ 	if($("#content-list").css("-webkit-transform") != 'none'){
+		return false;
+	}	
  	var $content_list = $("#content-list");
 	$content_list.find(".p0 .cloud1").addClass("zoomOutUp");
 	$content_list.find(".p0 .cloud4").addClass("zoomOutUp");
