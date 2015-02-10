@@ -112,6 +112,7 @@ function init() {
 	});
 	
 	$("#btnGoNext").bind('click',function(){
+		pageNumber++;
 		 var translateString,transitionString;
 		var currentDistance = screenHeight*7;
 		translateString="translate3d(0, -"+currentDistance+"px, 0)";
@@ -518,7 +519,7 @@ function screenForward(){
     pageNumber++;
 
     if(pageNumber>6){
-        pageNumber=6;
+       // pageNumber=6;
 		return false;
     }
     currentDistance=screenHeight*pageNumber;
