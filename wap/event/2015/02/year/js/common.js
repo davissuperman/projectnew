@@ -502,14 +502,12 @@ function screenBack(){
 
 // 下一屏
 function screenForward(){
-	mnAlert("pageNumber: " + pageNumber);
 	if(pageNumber == 1){
 		$(".wmn-wrap").find(".mm").animate({"right":+ 0 +'px'}, 1000, '', function(){});
 	}
     var translateString,transitionString;
 	
     pageNumber++;
-
 
     if(pageNumber>6){
         pageNumber=6;
