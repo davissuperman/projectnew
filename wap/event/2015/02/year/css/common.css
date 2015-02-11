@@ -102,7 +102,7 @@ top: .3rem;
 height: 1.4rem;
 background-size: auto 100%;
 left: 0.2rem;
-top: 1rem;z-index:0;}
+top: 0.9rem;z-index:0;}
 .page.p0 .cloud2 .zi1{ position:absolute; background:url(../images/p0/img07.png) no-repeat;width: 1.6rem;
 height: 0.55rem;
 background-size: auto 100%;
@@ -118,9 +118,9 @@ top: .35rem;}
 height: 1.5rem;
 background-size: auto 100%;
 right: 2.1rem;
-top: 1.1rem;z-index:2;}
-.page.p0 .cloud4{ position:absolute; background:url(../images/p0/img10.png) no-repeat;width: 1.72rem;
-height: 1.2rem;
+top: 0.8rem;z-index:2;}
+.page.p0 .cloud4{ position:absolute; background:url(../images/p0/img10.png) no-repeat;width: 1.42rem;
+height: 1.0rem;
 background-size: auto 100%;
 left: 3.1rem;
 top: 0;z-index:2;}
@@ -128,51 +128,51 @@ top: 0;z-index:2;}
 height: 1.6rem;
 background-size: auto 100%;
 right: 0;
-top: 0.7rem;
+top: 0.4rem;
 z-index: 3;}
-.page.p0 .cloud6{ position:absolute; background:url(../images/p0/img12.png) no-repeat;width: 2.1rem;
-height: 1.4rem;
+.page.p0 .cloud6{ position:absolute; background:url(../images/p0/img12.png) no-repeat;width: 1.75rem;
+height: 1.2rem;
 background-size: auto 100%;
 left: 0.35rem;
-top: 2.24rem; z-index:1;}
+top: 2.1rem; z-index:1;}
 
 .page.p0 .cloud7{ position:absolute; background:url(../images/p0/img14.png) no-repeat;width: 1.8rem;
 height: 1.5rem;
 background-size: auto 100%;
 right: 0.5rem;
-top: 2rem;z-index: 2;}
+top: 1.7rem;z-index: 2;}
 .page.p0 .cloud7 .zi1{ position:absolute; background:url(../images/p0/img13.png) no-repeat;width: .5rem;
 height: .4rem;
 background-size: auto 100%;
 left: 0.16rem;
 top: 0.5rem;}
 
-.page.p0 .sheep{position: relative; background:url(../images/p0/img15.png) no-repeat;width: 1.65rem;
-height: 2.5rem;
+.page.p0 .sheep{position: relative; background:url(../images/p0/img15.png) no-repeat;width: 1.5rem;
+height: 2.2rem;
 background-size: auto 100%;
-left: 2.5rem;
-top: 2.6rem;}
+left: 2.35rem;
+top: 2.3rem;}
 .page.p0 .brow1{ position:absolute;background:url(../images/p0/img16.png) no-repeat;width: 0.48rem;
 height: 0.68rem;
 background-size: auto 100%;
-left: 0.35rem;
+left: 0.25rem;
 top: 0.35rem;}
 .page.p0 .brow2{ position:absolute;background:url(../images/p0/img17.png) no-repeat;width: .8rem;
-height: .68rem;
+height: .6rem;
 background-size: auto 100%;
-left: .9rem;
-top: 0.3rem;}
+left: .8rem;
+top: 0.34rem;}
 
 .page.p0 .shake{position: relative; background:url(../images/p0/img18.png) no-repeat;width: .88rem;
 height: 1rem;
 background-size: auto 100%;
 margin: 0 auto;
-top: 2.7rem;}
-.page.p0 .btn{position: relative; background:url(../images/p0/img19.png) no-repeat;width: 2.30rem;
-height: 0.7rem;
+top: 2.4rem;}
+.page.p0 .btn{position: relative; background:url(../images/p0/img19.png) no-repeat;width: 1.94rem;
+height: 0.6rem;
 background-size: auto 100%;
 margin: 0 auto;
-top: 2.8rem;}
+top: 2.55rem;}
 .inscribe{position: absolute; right:10px;bottom:10px;  }
 .inscribe .name{ font-weight:bold;color:#435189; float:left; margin:0 3px 0 5px; font-size:14px;line-height:16px;}
 .inscribe img{float:left;}
