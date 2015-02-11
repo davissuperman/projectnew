@@ -34,7 +34,7 @@ $(document).ready(function(e) {
 		endTouch(e);
 		
 	});
-	
+	controlMusic();
 });
 
 //模拟alert
@@ -263,18 +263,19 @@ function endTouch() {
     }
 }
 
-
-// 控制声音
-$(".speaker").on("click",function(){
-    var audioEle=document.querySelector("audio");
-    if(audioEle.paused){
-        $(".speaker").removeClass("speaker_muted");
-        audioEle.play();
-    }else{
-        $(".speaker").addClass("speaker_muted");
-        audioEle.pause();
-    }
-});
+function controlMusic(){
+	// 控制声音
+	$(".speaker").on("click",function(){
+		var audioEle=document.querySelector("audio");
+		if(audioEle.paused){
+			$(".speaker").removeClass("speaker_muted");
+			audioEle.play();
+		}else{
+			$(".speaker").addClass("speaker_muted");
+			audioEle.pause();
+		}
+	});
+}
 
 
 
