@@ -22,9 +22,8 @@ td, form {
 video, object {
 	z-index: 1;
 }
-table, svg, img, iframe {
+table, svg, iframe {
 	table-layout: fixed;
-	display: none;
 	position: absolute;
 	background-color: transparent;
 	-webkit-user-select: none;
@@ -34,7 +33,11 @@ img, image, v:image {
 background-repeat:no-repeat;
 image-rendering:-webkit-optimize-contrast;
 }
-#C0 img{ position:absolute;}
+#C0 img{ position:absolute; display:none;table-layout: fixed;
+	position: absolute;
+	background-color: transparent;
+	-webkit-user-select: none;
+	-webkit-touch-callout: none;}
 .LoaderPercent {
 	font-family: Arial;
 	color: #808080;
@@ -655,8 +658,7 @@ image-rendering:-webkit-optimize-contrast;
                 <div class="index-arrow-down swipeMove"></div>
             </li>
             <li class="content-li">
-                <div class="page p2">
-                   	<p class="pt-20 ml-10"><img src="images/p0/img01.png" height="15px"></p>
+            	<p class="pt-20 ml-10"><img src="images/p0/img01.png" height="15px"></p>
                     
                     <audio id="Sound_luoxia" preload="auto" autobuffer="true" src="img/Sound_luoxia.mp3"></audio>
 					<audio id="Sound_gundong" preload="auto" autobuffer="true" src="img/Sound_gundong.mp3"></audio>
@@ -670,15 +672,18 @@ image-rendering:-webkit-optimize-contrast;
                         </tr>
                       </tbody>
                     </table>
-                    <div id="C0" style="top: 277.810344827586px; width: 323px; height: 111.379310344828px; display: block; overflow: hidden;">
-                        <img id="C0L1S5" src="images/p2/heng.png" style="left: 27.57px; top: 28.4px; width: 275.66px; height: 67.94px; display: block;">
-                        <img id="C0L1S4" src="images/p2/img02.png" style="left: 49.01px; top: 33.69px; width: 210px; height: 38px; display: block;" class="flash3">
+                    <div id="C0" style="top: 30px; width: 300px; height: 70px; display: block; overflow: hidden;">
+                        <img id="C0L1S5" src="images/p2/heng.png" style="left: 27.57px; top: 55px; width: 265.66px; height: 60px; display: block;">
+                        <img id="C0L1S4" src="images/p2/img02.png" style="left: 52px; top:70px; width: 210px; height: 30px; display: block;" class="flash3">
                         <img id="C0L1S3" src="images/p2/yingzhang.png" style="left: 263.31px; top: 42.69px; width: 11.14px; height: 15.04px; display: none;">
-                        <img id="C0L1S2" src="images/p2/zuo.png" style="left: 19.49px; top: 22px; width: 18.93px; height: 84.09px; display: block;">
+                        <img id="C0L1S2" src="images/p2/zuo.png" style="left: 19.49px; top: 42px; width: 18.93px; height: 84.09px; display: block;">
                         <svg id="C0L1S1" viewBox="0 0 321 101" preserveAspectRatio="none" style="left: 299.16px; top: 20.05px; width: 255.06px; height: 81.86px; display: block;">
                         <path d=" M0,0 L319.05,0 L319.05,100 L0,100 L0,0 Z" fill-rule="evenodd" fill="#e8465a" fill-opacity="1.00" stroke="none"></path>
                       </svg>
-                      <img id="C0L1S0" src="images/p2/you.png" style="left: 289.03px; top: 22px; width: 18.93px; height: 84.09px; display: block;"></div>
+                      <img id="C0L1S0" src="images/p2/you.png" style="left: 278px; top: 42px; width: 18.93px; height: 84.09px; display: block;"></div>
+            
+                <div class="page p2">
+                   	
                     
                     
                 </div>
