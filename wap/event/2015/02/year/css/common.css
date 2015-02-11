@@ -83,7 +83,7 @@ input,textarea,select,button{font-size:1em;}
 .page {position: absolute; height:100%; width:100%;}
 .page.p0 { position:absolute;top:50%;left:50%; height:410px; margin-top:-215px; width:320px; margin-left:-160px;}
 
-.zhufu{color:#fff;font-size:0.4rem; font-weight:bold;}
+.zhufu{color:#fff;font-size:20px; font-weight:bold;}
 
 .page.p0 .cloud{ position:relative; height:210px;}
 .page.p0 .cloud1{ position:absolute; background:url(../images/p0/img03.png) no-repeat; width:102px; height:65px; background-size:auto 100%;left:60px;top:5px; z-index:1;}

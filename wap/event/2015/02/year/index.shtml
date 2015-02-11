@@ -11,7 +11,7 @@
 <link href="css/animate.min.css?v=4324242" rel="stylesheet" type="text/css" />
 <link href="css/common.min.css?v=5354533" rel="stylesheet" type="text/css" />
 <script src="js/zepto.min.js" type="text/javascript"></script>
-<script src="js/common.min.js?v=20153223232" type="text/javascript"></script>
+<script src="js/common.js?v=20153223232" type="text/javascript"></script>
  <script type="text/javascript">
 	var V2, V3, V4;
 	var MF = "images/p2/";
