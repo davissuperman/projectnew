@@ -86,7 +86,7 @@ function screenBack(){
 }
 
 // 下一屏
-window.setTimeout('F19();', 100);
+
 function screenForward(eve){
 	
 	if(pageNumber == 1){
