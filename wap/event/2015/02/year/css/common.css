@@ -279,7 +279,7 @@ display: inline-block;
 cursor: pointer}
 
 .share-wrap .wmn{background: url(../images/p8/img02.png) no-repeat right;background-size: auto 100%;width: 2.4rem;
-height: 3rem; position:absolute; right:20px;top:20px;}
+height: 3rem; position:absolute; right:40px;top:20px;}
 .share-wrap .share{position:absolute; left:20px;top:2rem;color:#fff; text-align:center;}
 .share-wrap .icon-share{background: url(../images/p8/img03.png) no-repeat right;background-size: auto 100%;width: 1.4rem;
 height: 1.4rem;display:inline-block;}
