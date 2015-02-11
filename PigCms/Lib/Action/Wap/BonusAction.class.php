@@ -1027,6 +1027,9 @@ class BonusAction extends Action {
 //                    //不可以回到上一个等级
 //                    $return = $return + $four - ($number + $return) + 5;
 //                }
+                if($return > 15) {
+                    $return = -5;
+                }
                 break;
             case 2: //二等奖
                 $map['vote']  = array('egt',$configBonus[$second][1]['vote']);
@@ -1050,7 +1053,7 @@ class BonusAction extends Action {
 //                    //不可以回到上一个等级
 //                    $return = $return + $three - ($number + $return) + 5;
 //                }
-                if($return > 18) {
+                if($return > 15) {
                     $return = -5;
                 }
                 break;
