@@ -513,6 +513,7 @@ function screenForward(eve){
 	
 	if(pageNumber == 1){
 		$(".wmn-wrap").find(".mm").animate({"right":+ 0 +'px'}, 1000, '', function(){});
+		window.setTimeout('F19();', 100);
 	}
     var translateString,transitionString;
     pageNumber++;

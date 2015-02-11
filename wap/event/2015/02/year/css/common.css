@@ -104,12 +104,12 @@ input,textarea,select,button{font-size:1em;}
 .page.p0 .cloud7{ position:absolute; background:url(../images/p0/img14.png) no-repeat; width:90px; height:75px; background-size:auto 100%;left: 195px;top: 90px;z-index: 2;}
 .page.p0 .cloud7 .zi1{ position:absolute; background:url(../images/p0/img13.png) no-repeat; width:25px; height:20px; background-size:auto 100%;left:8px;top:22px;}
 
-.page.p0 .sheep{position: relative; background:url(../images/p0/img15.png) no-repeat; width:85px; height:125px; background-size:auto 100%;left:106px;top:-90px;}
-.page.p0 .brow1{ position:absolute;background:url(../images/p0/img16.png) no-repeat; width:25px; height:34px; background-size:auto 100%;left:18px;top:18px;}
-.page.p0 .brow2{ position:absolute;background:url(../images/p0/img17.png) no-repeat; width:25px; height:34px; background-size:auto 100%;left:45px;top:16px;}
+.page.p0 .sheep{position: relative; background:url(../images/p0/img15.png) no-repeat; width:77px; height:115px; background-size:auto 100%;left:106px;top:-95px;}
+.page.p0 .brow1{ position:absolute;background:url(../images/p0/img16.png) no-repeat; width:25px; height:34px; background-size:auto 100%;left:16px;top:16px;}
+.page.p0 .brow2{ position:absolute;background:url(../images/p0/img17.png) no-repeat; width:25px; height:34px; background-size:auto 100%;left:42px;top:16px;}
 
-.page.p0 .shake{position: relative; background:url(../images/p0/img18.png) no-repeat; width:45px; height:45px; background-size:auto 100%;margin:10px auto;top:-90px;}
-.page.p0 .btn{position: relative; background:url(../images/p0/img19.png) no-repeat; width:96px; height:30px; background-size:auto 100%;margin:10px auto;top:-90px;}
+.page.p0 .shake{position: relative; background:url(../images/p0/img18.png) no-repeat; width:45px; height:45px; background-size:auto 100%;margin:10px auto;top:-100px;}
+.page.p0 .btn{position: relative; background:url(../images/p0/img19.png) no-repeat; width:96px; height:30px; background-size:auto 100%;margin:10px auto;top:-100px;}
 .inscribe{position: absolute; right:10px;bottom:10px;  }
 .inscribe .name{ font-weight:bold;color:#435189; float:left; margin:0 3px 0 5px; font-size:14px;line-height:16px;}
 .inscribe img{float:left;}
@@ -167,11 +167,14 @@ bottom: 10px;margin-left: -12px;left: 50%;
 width: 220px;height: 70px;margin: 10px auto; text-align:center;}
 .page.p2 .couplet .zi{background: url(../images/p2/img02.png) no-repeat;background-size: auto 100%;
 width:165px;height: 30px;display: inline-block;margin-top: 20px;}
-.wmn-wrap{ position:relative;}
+.wmn-wrap{position: absolute;
+height: 160px;
+top: 50%;
+width: 100%; margin-top:-80px;}
 .wmn-wrap .wmn{background: url(../images/p2/img04.png) no-repeat;background-size: auto 100%;
-width: 165px;height: 160px; position:absolute;left:50px;top:20px;}
+width: 165px;height: 160px; position:absolute;left:50px;top:0;}
 .wmn-wrap .mm{background: url(../images/p2/img05.png) no-repeat;background-size: auto 100%;
-width: 100px;height:95px;position: absolute;right: -125px;top: 65px;}
+width: 100px;height:95px;position: absolute;right: -110px;top: 65px;}
 
 .page.p4 .couplet{background: url(../images/p4/img01.png) no-repeat;background-size: auto 100%;
 width: 240px;height: 70px; position: relative;left:40px;top:0px; text-align:center;}
@@ -241,3 +244,6 @@ margin-left: -55px;}
 .layerMsg{ padding:50px 10px;}
 .layerBtn{ border:0; border-top:1px solid #d6d6dc; width:100%; height:45px; background:none;}
 .layerLoginmes { padding:10px; text-align:left; line-height:24px;}
+
+
+#C0L1S4{ height:38px !important; width:auto !important;top:42px !important; left:60px !important;}
