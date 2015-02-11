@@ -258,14 +258,13 @@ left: 50%;
 bottom: 10px;
 margin-left: -55px;}
 
-.form-ul{ width: 6rem;
-height: 3.2rem;
+.form-ul{width: 6rem;
+height: 3.4rem;
 color: #fff;
 font-weight: bold;
-margin-left: -3rem;
-top: 50%;
-margin-top: -1.6rem;
-left: 50%; position:absolute;}
+margin: 0 auto;
+top: 2.5rem;
+position: relative;}
 .form-item{ margin: 0;font-size: 0.32rem; height:58px;}
 .input-text{ border:none;background: none;
 border-bottom: 2px solid #fff;
