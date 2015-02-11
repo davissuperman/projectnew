@@ -86,7 +86,6 @@ function screenBack(){
 }
 
 // 下一屏
-
 function screenForward(eve){
 	
 	if(pageNumber == 1){
@@ -107,28 +106,7 @@ function screenForward(eve){
     translateString="translate3d(0, -"+currentDistance+"px, 0)";
     transitionString="all 0.5s ease-in";
     $("#content-list").css({"-webkit-transform":translateString,"transform":translateString,"-webkit-transition":transitionString,"transition":transitionString});
-	
 
-    // 显示元素
-    //showElement();
-
-    // 显示引导
-    /*if(pageNumber!==6 ){
-        if(pageNumber===5){
-            if(showTheLast){
-                setTimeout(function(){
-                    $(".notice-swipe-up").addClass("swipeMove");
-                },800);
-            }
-        }else{
-            setTimeout(function(){
-                $(".notice-swipe-up").addClass("swipeMove");
-            },800);
-        }
-
-    }else{
-      $(".notice-swipe-up").css("display","none");
-    }*/
 }
 
 var SHAKE_THRESHOLD = 400;
@@ -301,5 +279,85 @@ $(".speaker").on("click",function(){
 
 
 
+const NUMBER_OF_LEAVES = 50;
+ 
+function initXue()
+	{
+		
+		var container = document.getElementById('leafContainer');
+	   
+		for (var i = 0; i < NUMBER_OF_LEAVES; i++) 
+		{
+			container.appendChild(createALeaf());
+		}
+	}
 
+	function randomInteger(low, high)
+	{
+		return low + Math.floor(Math.random() * (high - low));
+	}
+
+	 
+	function randomFloat(low, high)
+	{
+		return low + Math.random() * (high - low);
+	}
+
+	 
+	function pixelValue(value)
+	{
+		return value + 'px';
+	}
+	 
+	function durationValue(value)
+	{
+		return value + 's';
+	}
+	 
+	function createALeaf()
+	{
+    
+    var leafDiv = document.createElement('div');
+    var image = document.createElement('img');
+    
+   
+    image.src ='images/p3/snow' + randomInteger(1, 5) + '.png';
+    
+    leafDiv.style.top = "-10px";
+
+    
+    leafDiv.style.left = pixelValue(randomInteger(0, 1000));
+    
+   
+    var spinAnimationName = (Math.random() < 0.5) ? 'clockwiseSpin' : 'counterclockwiseSpinAndFlip';
+    
+    
+    leafDiv.style.webkitAnimationName = 'fade, drop';
+    image.style.webkitAnimationName = spinAnimationName;
+    
+   
+    var fadeAndDropDuration = durationValue(randomFloat(5, 11));
+   
+    var spinDuration = durationValue(randomFloat(4, 8));
+     
+    leafDiv.style.webkitAnimationDuration = fadeAndDropDuration + ', ' + fadeAndDropDuration;
+
+    var leafDelay = durationValue(randomFloat(0, 5));
+    leafDiv.style.webkitAnimationDelay = leafDelay + ', ' + leafDelay;
+
+    image.style.webkitAnimationDuration = spinDuration;
+ 
+    leafDiv.appendChild(image);
+ 
+    return leafDiv;
+	}
+ 
+window.addEventListener('load', initXue);
+
+$(document).ready(function(e) {
+    $("html").css({"font-size":(100*$(window).width()) / 640});
+});
+$(window).resize(function(){
+	$("html").css({"font-size":(100*$(window).width()) / 640});
+});
 
