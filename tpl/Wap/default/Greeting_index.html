@@ -398,8 +398,11 @@
                 }
         );
         alert("{pigcms::$formurl}");
+		var url = "{pigcms::$formurl}";
         $("#formurl").submit();
-        window.location = "{pigcms::$formurl}";
+		alert(url);
+        window.location.href = url;
+		
         //$btn.parents(".page-item").next().show().siblings().hide();
     });
 </script>
