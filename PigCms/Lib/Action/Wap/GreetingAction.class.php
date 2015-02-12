@@ -194,7 +194,7 @@ class GreetingAction extends Action {
         $titleUsed = $selfUserInfo['nickname'];
         $titleUsed .= " ".$titleArr[rand(0,count($titleArr)-1)];
 
-        $bonusDes = $this->getTitleAndImageByGid($gid);
+        $bonusDes = $this->getTitleAndImageByGid(1);
         $this->assign('title',$selfUserInfo['nickname'].":".$bonusDes['desc']);
         $this->assign('bonusdesc','');
         $this->assign("imageUrl",$bonusDes['img']);
@@ -202,7 +202,11 @@ class GreetingAction extends Action {
 
         $this->display();
     }
-
+    public function getTitleAndImageByGid($gid){
+        $condition['gid'] = $gid;
+        $bonusDes = M('bonus')->where($condition)->field('title,img,desc')->find();
+        return $bonusDes;
+    }
     /**
      * @return 当前网页的URL
      */
