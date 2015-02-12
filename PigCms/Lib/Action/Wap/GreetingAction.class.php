@@ -32,7 +32,16 @@ class GreetingAction extends Action {
 //          }
         //统计添加浏览数和浏览记录 tel 相当与open_id
         $isRealCard = false;
-
+        $f = null;
+        if(isset($_GET['f']) && $_GET['f']){
+            $f = $_GET['f'];
+        }
+        if(isset($_GET['t']) && $_GET['t']){
+            $t = $_GET['t'];
+        }
+        if($f && $t){
+            $isRealCard = true;
+        }
         $gid = $_GET['gid'];
         //统计end
         $userOpenId= cookie('user_openid');
@@ -191,7 +200,7 @@ class GreetingAction extends Action {
         $this->assign('gid', $gid);
         $this->assign('openid', $userOpenId);
         $this->assign('userinfo', $selfUserInfo);
-        $this->assign('nickname',  $selfUserInfo['nickname']);
+
         $titleArr = $this->titleInWeixin;
         $titleUsed = $selfUserInfo['nickname'];
         $titleUsed .= " ".$titleArr[rand(0,count($titleArr)-1)];
@@ -205,6 +214,17 @@ class GreetingAction extends Action {
         $url = "http://". $this->_server('HTTP_HOST');
         $postUrl = $url."/index.php?g=Wap&m=Greeting&a=show";
         $this->assign("posturl",$postUrl);
+
+
+        $fromUser = "森田药妆";
+        $nickname = $selfUserInfo['nickname'];
+        if($isRealCard){
+            $nickname = $t;
+            $fromUser = $f;
+        }
+
+        $this->assign('nickname',  $nickname);
+        $this->assign('fromuser',  $fromUser);
         $this->display();
     }
 
@@ -374,7 +394,7 @@ class GreetingAction extends Action {
         $this->assign("recName",$recName);
         $this->assign("sendName",$sendName);
         $url = "http://". $this->_server('HTTP_HOST');
-        $shareUrl = "http://". $this->_server('HTTP_HOST')."/index.php?g=Wap&m=Greeting&a=index&f=$recName&t=$sendName";
+        $shareUrl = "http://". $this->_server('HTTP_HOST')."/index.php?g=Wap&m=Greeting&a=index&t=$recName&f=$sendName";
         $this->assign("url",$shareUrl);
         $this->display();
     }
