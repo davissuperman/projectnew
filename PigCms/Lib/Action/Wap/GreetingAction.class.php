@@ -374,7 +374,7 @@ class GreetingAction extends Action {
         $this->assign("recName",$recName);
         $this->assign("sendName",$sendName);
         $url = "http://". $this->_server('HTTP_HOST');
-        $shareUrl = "http://". $this->_server('HTTP_HOST')."/index.php?g=Wap&m=Greeting&a=index&a=$recName&b=$sendName";
+        $shareUrl = "http://". $this->_server('HTTP_HOST')."/index.php?g=Wap&m=Greeting&a=index&f=$recName&t=$sendName";
         $this->assign("url",$shareUrl);
         $this->display();
     }
