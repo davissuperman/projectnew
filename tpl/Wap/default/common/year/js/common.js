@@ -52,7 +52,7 @@ $(window).resize(function(){
 	cal_con_hg();
 });
 function cal_con_hg(){
-	var wh = $(window).height(),$content_list = $("#content-list");
+	var wh = $(window).height(),$content_list = $(".content-list");
 	$content_list.parent().height(wh);
 	$content_list.find("li").height(wh);
 }
