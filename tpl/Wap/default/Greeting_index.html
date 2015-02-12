@@ -383,6 +383,7 @@
 
     });
     $("#btn-isend").bind('click',function(){
+        alert(1);
         $.get(
                 "{pigcms::$siteurl}/index.php?g=Wap&m=Greeting&a=saveData&type=3",
                 function(data) {
