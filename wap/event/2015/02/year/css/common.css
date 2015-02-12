@@ -234,8 +234,25 @@ right: 0; overflow:hidden;}
 width: 9.2rem;
 position: absolute;
 top: 0;
-left: 0; overflow:hidden;-webkit-animation:marquee 5s linear infinite;}
+left: 0; overflow:hidden;}
+.marquee{-webkit-animation:marquee 7s linear infinite;-moz-animation:marquee 7s linear infinite;-ms-animation:marquee 7s linear infinite;-o-animation:marquee 7s linear infinite;animation:marquee 7s linear infinite;}
+@-o-keyframes marquee{
+	0%{left:0;}
+	100%{left:-100%;}
+}
+@-moz-keyframes marquee{
+	0%{left:0;}
+	100%{left:-100%;}
+}
+@-ms-keyframes marquee{
+	0%{left:0;}
+	100%{left:-100%;}
+}
 @-webkit-keyframes marquee{
+	0%{left:0;}
+	100%{left:-100%;}
+}
+@keyframes marquee{
 	0%{left:0;}
 	100%{left:-100%;}
 }

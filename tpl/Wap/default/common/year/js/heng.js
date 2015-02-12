@@ -1,5 +1,6 @@
+var cur_url = $("#cur-url").val();
 var V2, V3, V4;
-	var MF = "images/p2/";
+	var MF = cur_url + "/year/images/p2/";
 	var V6;
 	var V7 = new Array(64);
 	var V8 = new Array("场景1");
