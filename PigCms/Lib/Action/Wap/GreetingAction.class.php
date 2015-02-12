@@ -216,7 +216,7 @@ class GreetingAction extends BonusAction {
         $postUrl = $url."/index.php?g=Wap&m=Greeting&a=show";
         $this->assign("posturl",$postUrl);
 
-
+        $this->assign("formurl",$url."/index.php?g=Wap&m=Greeting&a=inputdata");
         $fromUser = "森田药妆";
         $nickname = $selfUserInfo['nickname'];
         if($isRealCard){
