@@ -191,7 +191,13 @@
     </div>
     <div class="p1box-top">
         <div class="sheep">
-            <div class="zi flash"></div>
+            <!--div class="zi flash"></div-->
+            <div class="zi-box">
+                <div class="zi-wrap">
+                    <div class="zi"></div>
+                    <div class="zi"></div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="inscribes"></div>
@@ -393,7 +399,7 @@
         );
         alert("{pigcms::$formurl}");
         $("#formurl").submit();
-        window.location("{pigcms::$formurl}");
+        window.location = "{pigcms::$formurl}";
         //$btn.parents(".page-item").next().show().siblings().hide();
     });
 </script>

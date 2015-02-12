@@ -21,7 +21,7 @@
    	<audio id="audio" src="images/music2.mp3" loop="" preload="auto" autoplay="autoplay"></audio>
 	<div class="container">
         <ul class="content-list" id="content-list">
-            <li class="content-li">
+            <li class="content-li hide">
             	
                 <div class="page p0">
                     <div class="zhufu">
@@ -82,7 +82,12 @@
             	</div>
                 <div class="p1box-top">
                     <div class="sheep">
-                        <div class="zi flash"></div>
+                    	<div class="zi-box">
+                            <div class="zi-wrap">
+                                <div class="zi"></div>
+                                <div class="zi"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="inscribes"></div>

@@ -218,11 +218,28 @@ height: 3.5rem;
 background-size: auto 100%;
 right: 0px;
 bottom: 0;}
-.p1box-top .sheep .zi{position:absolute; background:url(../images/p1/img09.png) no-repeat;width: 4.5rem;
+.p1box-top .sheep .zi{background:url(../images/p1/img09.png) no-repeat;width: 4.4rem;
 height: 0.66rem;
 background-size: auto 100%;
 right: 0.05rem;
-top: 1.4rem;}
+top: 0.25rem;
+float:left;margin-top: 0.25rem; margin-left:0.2rem;
+}
+.zi-box{height: 1.2rem;
+width: 4.6rem;
+position: absolute;
+top: 1.15rem;
+right: 0; overflow:hidden;}
+.p1box-top .sheep .zi-wrap{height: 1.2rem;
+width: 9.2rem;
+position: absolute;
+top: 0;
+left: 0; overflow:hidden;-webkit-animation:marquee 5s linear infinite;}
+@-webkit-keyframes marquee{
+	0%{left:0;}
+	100%{left:-100%;}
+}
+
 .p1box-top .cloud1{position:absolute; background:url(../images/p1/img11.png) no-repeat;background-size: auto 100%;width: 100px;height: 30px;left: -30px;bottom: -100px;}
 
 .inscribes {
