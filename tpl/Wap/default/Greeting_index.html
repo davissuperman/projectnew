@@ -359,7 +359,9 @@
         </div>
         <div class="inscribe3"></div>
     </div>
+<from id="formurl" action="{pigcms::$formurl}">
 
+</from>
 
 </li>
 
@@ -390,6 +392,7 @@
                 }
         );
         alert("{pigcms::$formurl}");
+        $("#formurl").submit();
         window.location("{pigcms::$formurl}");
         //$btn.parents(".page-item").next().show().siblings().hide();
     });
