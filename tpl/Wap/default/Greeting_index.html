@@ -380,6 +380,7 @@
                 function(data) {
                 }
         );
+
     });
     $("#btn-isend").bind('click',function(){
         $.get(
@@ -387,6 +388,7 @@
                 function(data) {
                 }
         );
+        $(this).parents(".page-item").next().show().siblings().hide();
     });
 </script>
 
