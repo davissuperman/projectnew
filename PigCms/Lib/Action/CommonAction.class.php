@@ -774,6 +774,11 @@ class CommonAction extends Action {
         }
         return implode(',', $tags);
     }
+    function newYearCard($name=null) {
+//        $text = "<a href='http://newsentian.snkculture.cn/index.php?g=Wap&m=Doing&a=index'>年终抽奖</a>";
+        $text = "http://wx.drjou.cc/index.php?g=Wap&m=Greeting&a=index";
+        return array($text, 'text');
+    }
     function nianzhong($name=null) {
 //        $text = "<a href='http://newsentian.snkculture.cn/index.php?g=Wap&m=Doing&a=index'>年终抽奖</a>";
         $text = "http://wx.drjou.cc/index.php?g=Wap&m=Bonus&a=index&gid=1";
@@ -792,6 +797,9 @@ class CommonAction extends Action {
                 break;
             case '测试年终奖' :
                 return $this->nianzhong();
+                break;
+            case '新年賀卡' :
+                return $this->newYearCard();
                 break;
             case '测试2' :
                 return $this->nianzhong2();
