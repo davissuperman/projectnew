@@ -26,7 +26,7 @@
                 <div class="page p0">
                     <div class="zhufu">
                         <p class="pt-10 ml-10">祝：<span>您</span></p>
-                        <p class="mt-5 ml-10"><img src="images/p0/img02.png" height="18px"/></p>
+                        <p class="mt-5 ml-10"><img src="images/p0/img02.png" height="18px" style="height: 0.4rem;"/></p>
                     </div>
                     <div class="cloud">
                     	<div class="cloud1">

@@ -83,7 +83,7 @@ input,textarea,select,button{font-size:1em;}
 .page {position: absolute; height:100%; width:100%;}
 .page.p0 { position:absolute;top:0;left:0; height:100%;width:100%;}
 
-.zhufu{color:#fff;font-size:20px; font-weight:bold;}
+.zhufu{color:#fff;font-size:0.4rem; font-weight:bold;}
 
 .page.p0 .zhufu{ margin-bottom:10px;}
 
