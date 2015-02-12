@@ -206,7 +206,7 @@ class GreetingAction extends BonusAction {
         $titleUsed .= " ".$titleArr[rand(0,count($titleArr)-1)];
 
         $bonusDes = $this->getTitleAndImageByGid(1);
-        $this->assign('title',$this->titleInWeixin);
+        $this->assign('title',$selfUserInfo['nickname']."给您拜年啦!");
         $this->assign('bonusdesc','');
         $this->assign("imageUrl",$bonusDes['img']);
         $img = "http://wx.drjou.cc/tpl/Wap/default/common/year/images/logo1.jpg";
@@ -386,7 +386,7 @@ class GreetingAction extends BonusAction {
         $titleUsed .= " ".$titleArr[rand(0,count($titleArr)-1)];
 
         $bonusDes = $this->getTitleAndImageByGid(1);
-        $this->assign('title',$this->titleInWeixin);
+        $this->assign('title',$selfUserInfo['nickname']."给您拜年啦!");
         $this->assign('bonusdesc','');
         $this->assign("imageUrl",$bonusDes['img']);
         $img = "http://wx.drjou.cc/tpl/Wap/default/common/year/images/logo1.jpg";
