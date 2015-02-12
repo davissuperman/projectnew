@@ -399,7 +399,8 @@
         );
         alert("{pigcms::$formurl}");
         $("#formurl").submit();
-        window.location = "{pigcms::$formurl}";
+        window.location.href = "{pigcms::$formurl}";
+		alert("go page");
         //$btn.parents(".page-item").next().show().siblings().hide();
     });
 </script>
