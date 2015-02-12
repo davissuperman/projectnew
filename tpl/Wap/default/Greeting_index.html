@@ -16,7 +16,7 @@
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
     <script>
         wx.config({
-            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
             appId: '{pigcms::$appid}', // 必填，公众号的唯一标识
             timestamp:  '{pigcms::$timestamp}', // 必填，生成签名的时间戳
             nonceStr: '{pigcms::$nonceStr}', // 必填，生成签名的随机串
@@ -66,7 +66,7 @@
                     'previewImage'
                 ],
                 success: function (res) {
-                    alert(JSON.stringify(res));
+                   // alert(JSON.stringify(res));
                 }
             });
 
@@ -114,7 +114,7 @@
 
         });
         wx.error(function (res) {
-            alert(res.errMsg);
+            //alert(res.errMsg);
         });
 
         $(function(){
@@ -131,7 +131,7 @@
 
     <div class="page p0">
         <div class="zhufu">
-            <p class="pt-10 ml-10">祝：<span>您</span></p>
+            <p class="pt-10 ml-10">祝：<span>您"{pigcms::$nickname}"</span></p>
             <p class="mt-5 ml-10"><img src="{pigcms::RES}/year/images/p0/img02.png" height="18px" style="height: 0.4rem;"/></p>
         </div>
         <div class="cloud">
@@ -207,7 +207,7 @@
 </li>
 <li class="content-li">
     <div class="zhufu">
-        <p class="pt-10 ml-10">祝：<span>您</span></p>
+        <p class="pt-10 ml-10">祝：<span>您"{pigcms::$nickname}"</span></p>
     </div>
     <audio id="Sound_luoxia" preload="auto" autobuffer="true" src="{pigcms::RES}/year/img/Sound_luoxia.mp3"></audio>
     <audio id="Sound_gundong" preload="auto" autobuffer="true" src="{pigcms::RES}/year/img/Sound_gundong.mp3"></audio>
@@ -254,7 +254,7 @@
     <img src="{pigcms::RES}/year/images/p3/img01.jpg" width="100%">
     <div class="page p3">
         <div class="zhufu">
-            <p class="pt-10 ml-10">祝：<span>您</span></p>
+            <p class="pt-10 ml-10">祝：<span>您"{pigcms::$nickname}"</span></p>
         </div>
         <div id="leafContainer"></div>
     </div>
@@ -272,7 +272,7 @@
 <li class="content-li">
     <div class="page p4">
         <div class="zhufu">
-            <p class="pt-10 ml-10">祝：<span>您</span></p>
+            <p class="pt-10 ml-10">祝：<span>您"{pigcms::$nickname}"</span></p>
         </div>
         <div class="couplet top-bottom-animate">
             <div class="zi flash3"></div>
@@ -292,7 +292,7 @@
 <li class="content-li">
     <div class="page p5">
         <div class="zhufu">
-            <p class="pt-10 ml-10">祝：<span>您</span></p>
+            <p class="pt-10 ml-10">祝：<span>您"{pigcms::$nickname}"</span></p>
         </div>
         <div class="couplet">
             <div class="zi flash3"></div>
@@ -315,7 +315,7 @@
     <div class="page-item">
         <div class="page p6">
             <div class="zhufu">
-                <p class="pt-10 ml-10">祝：<span>您</span></p>
+                <p class="pt-10 ml-10">祝：<span>您"{pigcms::$nickname}"</span></p>
             </div>
             <div class="hua hua1"></div>
             <div class="hua hua2"></div>
