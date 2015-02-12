@@ -374,6 +374,20 @@
         );
         $(this).parents(".page-item").next().show().siblings().hide();
     });
+    $("#btn-share").bind('click',function(){
+        $.get(
+                "{pigcms::$siteurl}/index.php?g=Wap&m=Greeting&a=saveData&type=2",
+                function(data) {
+                }
+        );
+    });
+    $("#btn-isend").bind('click',function(){
+        $.get(
+                "{pigcms::$siteurl}/index.php?g=Wap&m=Greeting&a=saveData&type=3",
+                function(data) {
+                }
+        );
+    });
 </script>
 
 </body>
