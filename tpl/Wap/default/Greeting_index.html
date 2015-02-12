@@ -126,6 +126,8 @@
 <body onresize="F12();" onorientationchange="F12();" ondragstart="return false;" style="cursor:default;" onmousedown="var m=F4(event);">
 <div class="part speaker" style="display: block;"></div>
 <audio id="audio" src="images/music2.mp3" loop="" preload="auto" autoplay="autoplay"></audio>
+
+
 <div class="container">
 <ul class="content-list" id="content-list">
 <li class="content-li">
@@ -374,10 +376,10 @@
         <div class="form-ul">
             <form action="{pigcms::$posturl}" method="post" id="formzhufu">
                 <div class="form-item">
-                    祝： <input type="text" placeholder="填写您想祝福的人的姓名" class="input-text" id="rec-name"/>
+                    祝： <input type="text" placeholder="填写您想祝福的人的姓名" class="input-text" id="rec-name" name="rec-name"/>
                 </div>
                 <div class="form-item">
-                    来自 <input type="text" placeholder="填写您的姓名" class="input-text" id="send-name"/> 的祝福
+                    来自 <input type="text" placeholder="填写您的姓名" class="input-text" id="send-name" name="send-name"/> 的祝福
                 </div>
                 <div class="form-item">
                     <span class="btn-send" style="margin-left:40px;" id="btn-send-zhufu"></span>

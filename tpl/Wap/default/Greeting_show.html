@@ -16,7 +16,7 @@
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
     <script>
         wx.config({
-            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
             appId: '{pigcms::$appid}', // 必填，公众号的唯一标识
             timestamp:  '{pigcms::$timestamp}', // 必填，生成签名的时间戳
             nonceStr: '{pigcms::$nonceStr}', // 必填，生成签名的随机串
@@ -124,7 +124,7 @@
 </head>
 <body onresize="F12();" onorientationchange="F12();" ondragstart="return false;" style="cursor:default;" onmousedown="var m=F4(event);">
 <div class="part speaker" style="display: block;"></div>
-<audio id="audio" src="images/music2.mp3" loop="" preload="auto" autoplay="autoplay"></audio>
+<audio id="audio" src="{pigcms::RES}/year/images/music2.mp3" loop="" preload="auto" autoplay="autoplay"></audio>
 <div class="container">
 <ul class="content-list" id="content-list">
 
