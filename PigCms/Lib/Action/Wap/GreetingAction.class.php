@@ -200,6 +200,9 @@ class GreetingAction extends Action {
         $this->assign("imageUrl",$bonusDes['img']);
         $this->assign("shareimageurl",$bonusDes['img']);
 
+
+        $postUrl = $this->url."/index.php?g=Wap&m=Greeting&a=show";
+        $this->assign("posturl",$postUrl);
         $this->display();
     }
     public function getTitleAndImageByGid($gid){

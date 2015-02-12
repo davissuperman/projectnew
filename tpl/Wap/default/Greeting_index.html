@@ -371,15 +371,17 @@
             <div class="hua hua9"></div>
         </div>
         <div class="form-ul">
-            <div class="form-item">
-                祝： <input type="text" placeholder="填写您想祝福的人的姓名" class="input-text" id="rec-name"/>
-            </div>
-            <div class="form-item">
-                来自 <input type="text" placeholder="填写您的姓名" class="input-text" id="send-name"/> 的祝福
-            </div>
-            <div class="form-item">
-                <span class="btn-send" style="margin-left:40px;" id="btn-send-zhufu"></span>
-            </div>
+            <form action="{pigcms::$posturl}" method="post">
+                <div class="form-item">
+                    祝： <input type="text" placeholder="填写您想祝福的人的姓名" class="input-text" id="rec-name"/>
+                </div>
+                <div class="form-item">
+                    来自 <input type="text" placeholder="填写您的姓名" class="input-text" id="send-name"/> 的祝福
+                </div>
+                <div class="form-item">
+                    <span class="btn-send" style="margin-left:40px;" id="btn-send-zhufu"></span>
+                </div>
+            </form>
         </div>
         <div class="inscribe3"></div>
     </div>
