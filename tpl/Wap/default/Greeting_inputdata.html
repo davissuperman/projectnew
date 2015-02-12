@@ -128,8 +128,8 @@
 <div class="container">
 <ul class="content-list" id="content-list">
 
-<li class="content-li">
-    <div class="page-item">
+<li class="content-li" style="background:#e8465a;">
+	<div class="page-item">
         <div class="page p8">
             <div class="hua hua1 flash1"></div>
             <div class="hua hua2 flash2"></div>
@@ -140,21 +140,19 @@
             <div class="hua hua7 flash1"></div>
             <div class="hua hua8 flash2"></div>
             <div class="hua hua9 flash3"></div>
-
-            <div class="share-wrap">
-                <div class="wmn"></div>
-
-                <div class="share">
-                    <div class="icon-share"></div>
-                    <div class="mt-10">发送给朋友</div>
+        </div>
+        <div class="form-ul">
+            <form action="{pigcms::$posturl}" method="post" id="formzhufu">
+                <div class="form-item">
+                    祝： <input type="text" placeholder="填写您想祝福的人的姓名" class="input-text" id="rec-name" name="rec-name"/>
                 </div>
-                <div class="share-text">
-                    <p>点击右上角</p>
-                    <p>将你的新年祝福</p>
-                    <p>发送给你的朋友吧~！</p>
+                <div class="form-item">
+                    来自 <input type="text" placeholder="填写您的姓名" class="input-text" id="send-name" name="send-name"/> 的祝福
                 </div>
-            </div>
-
+                <div class="form-item">
+                    <span class="btn-send" style="margin-left:40px;" id="btn-send-zhufu"></span>
+                </div>
+            </form>
         </div>
         <div class="inscribe3"></div>
     </div>
