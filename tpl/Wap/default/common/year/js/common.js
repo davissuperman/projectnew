@@ -145,7 +145,8 @@ function init() {
 			mnAlert ('填写您的姓名');
 			return false;
 		}
-		$this.parents(".page-item").next().show().siblings().hide();
+        $("#formzhufu").submit();
+		//$this.parents(".page-item").next().show().siblings().hide();
 	});
 	
 }
