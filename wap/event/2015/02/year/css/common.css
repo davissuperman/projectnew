@@ -179,27 +179,50 @@ top: 2.55rem;}
 
 
 .p1-top{ position: absolute; width:100%;top:10px;}
-.lantern-wrap{ position:absolute; background:url(../images/p1/img13.png) no-repeat; background-size:auto 100%; height:80px; width:150px;left:0;top:10px;}
-.lantern-wrap .lantern{position:absolute; background:url(../images/p1/img02.png) no-repeat; width:60px; height:70px; background-size:auto 100%;left: 100px;
-top: 20px;}
-
-.firecrackers-wrap{ position:absolute; background:url(../images/p1/img14.png) no-repeat; background-size:auto 100%; height:120px; width:136px;right:0;top:5px;}
-.firecrackers-wrap .firecrackers{position:absolute; background:url(../images/p1/img03.png) no-repeat;width: 75px;height: 67px;background-size: auto 100%;left: 190px;top: 91px;}
-.p1-top .fire1{position:absolute; background:url(../images/p1/img04.png) no-repeat;width: 68px;
-height: 67px;background-size: auto 100%;left: 50%;top: 10px; margin-left:-10px;}
-.p1-top .fire2{position:absolute; background:url(../images/p1/img04.png) no-repeat;background-size: auto 100%;width: 55px;
-height: 55px;
-left: 30px;
-top: 120px;}
-.p1-top .fire3{position:absolute; background:url(../images/p1/img04.png) no-repeat;background-size: auto 100%;width: 75px;height: 75px;background-size: auto 100%;right: -20px;top: 86px;}
-
-.p1box-top{ height:170px; position: absolute;right:0;width:320px;top:50%; margin-top:-85px;}
-.p1box-top .sheep{position:absolute; background:url(../images/p1/img08.png) no-repeat; width:275px; height:160px; background-size:auto 100%;right:0px;bottom:8px;}
-.p1box-top .sheep .zi{position:absolute; background:url(../images/p1/img09.png) no-repeat;width: 200px;
-height: 30px;
+.lantern-wrap{ position:absolute; background:url(../images/p1/img13.png) no-repeat; background-size:auto 100%;height: 1.6rem;
+width: 3rem;
+left: 0;
+top: 0.4rem;}
+.lantern-wrap .lantern{position:absolute; background:url(../images/p1/img02.png) no-repeat;width: 1.3rem;
+height: 1.5rem;
 background-size: auto 100%;
-right: 10px;
-bottom: 65px;}
+left: 2rem;
+top: 0.4rem;}
+
+.firecrackers-wrap{ position:absolute; background:url(../images/p1/img14.png) no-repeat; background-size:auto 100%;height: 2.5rem;
+width: 3.15rem;
+right: 0;
+top: 0.5rem;}
+.p1-top .fire1{position:absolute; background:url(../images/p1/img04.png) no-repeat;width: 1.3rem;
+height: 1.3rem;
+background-size: auto 100%;
+left: 3rem;
+top: 0rem;}
+.p1-top .fire2{position:absolute; background:url(../images/p1/img04.png) no-repeat;background-size: auto 100%;width: 1.2rem;
+height: 1.2rem;
+left: 0.6rem;
+top: 2rem;}
+.p1-top .fire3{position:absolute; background:url(../images/p1/img04.png) no-repeat;background-size: auto 100%;width: 1.6rem;
+height: 1.6rem;
+background-size: auto 100%;
+right: -0.1rem;
+top: 1.3rem;}
+
+.p1box-top{height: 3.5rem;
+position: absolute;
+right: 0;
+width: 7rem;
+top: 3.8rem;}
+.p1box-top .sheep{position:absolute; background:url(../images/p1/img08.png) no-repeat;width: 6rem;
+height: 3.5rem;
+background-size: auto 100%;
+right: 0px;
+bottom: 0;}
+.p1box-top .sheep .zi{position:absolute; background:url(../images/p1/img09.png) no-repeat;width: 4.5rem;
+height: 0.66rem;
+background-size: auto 100%;
+right: 0.05rem;
+top: 1.4rem;}
 .p1box-top .cloud1{position:absolute; background:url(../images/p1/img11.png) no-repeat;background-size: auto 100%;width: 100px;height: 30px;left: -30px;bottom: -100px;}
 
 .inscribes {
