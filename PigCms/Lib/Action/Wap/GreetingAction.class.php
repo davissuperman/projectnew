@@ -206,7 +206,7 @@ class GreetingAction extends Action {
         $titleUsed .= " ".$titleArr[rand(0,count($titleArr)-1)];
 
         $bonusDes = $this->getTitleAndImageByGid(1);
-        $this->assign('title',$selfUserInfo['nickname'].":".$bonusDes['desc']);
+        $this->assign('title',$this->titleInWeixin);
         $this->assign('bonusdesc','');
         $this->assign("imageUrl",$bonusDes['img']);
         $this->assign("shareimageurl",$bonusDes['img']);
