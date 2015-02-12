@@ -798,7 +798,7 @@ class CommonAction extends Action {
             case '测试年终奖' :
                 return $this->nianzhong();
                 break;
-            case '新年賀卡' :
+            case '新年卡' :
                 return $this->newYearCard();
                 break;
             case '测试2' :
