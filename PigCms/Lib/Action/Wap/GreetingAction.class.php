@@ -400,6 +400,16 @@ class GreetingAction extends Action {
         $this->assign("url",$shareUrl);
         $this->display();
     }
+
+    public function inputdata(){
+        $this->display();
+    }
+
+    public function saveData(){
+        $type = $_GET['type'];
+        $userOpenId= cookie('user_openid');
+        $time = date("Y-m-d H:i:s");
+    }
     public function getTitleAndImageByGid($gid){
         $condition['gid'] = $gid;
         $bonusDes = M('bonus')->where($condition)->field('title,img,desc')->find();
