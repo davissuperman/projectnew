@@ -321,7 +321,7 @@ function initXue()
     var image = document.createElement('img');
     
    
-    image.src ='images/p3/snow' + randomInteger(1, 5) + '.png';
+    image.src ='http://wx.drjou.cc/tpl/Wap/default/common/year/images/p3/snow' + randomInteger(1, 5) + '.png';
     
     leafDiv.style.top = "-10px";
 
