@@ -1,6 +1,6 @@
 <?php
 
-class GreetingAction extends Action {
+class GreetingAction extends BonusAction {
 
 
     public $cache;
@@ -408,7 +408,27 @@ class GreetingAction extends Action {
     public function saveData(){
         $type = $_GET['type'];
         $userOpenId= cookie('user_openid');
-        $time = date("Y-m-d H:i:s");
+        $m['type'] = $type;
+        if(!$userOpenId){
+            $userOpenId = "local";
+        }
+        $m['openid'] = $userOpenId;
+        $fanModel =  M('greeting_data');
+        $fanModel->add($m);
+        $greeting = M('greeting')->where(array('openid' => $userOpenId))->select();
+        if($greeting){
+            if($type == 1){
+                M("greeting")->where(array('openid' =>$userOpenId))->setInc('accept', 1);
+            }
+        }else{
+            //添加
+            $n['openid'] = $userOpenId;
+            if($type == 1){
+                $n['accept'] = 1;;
+            }
+            M('greeting')->add($n);
+        }
+
     }
     public function getTitleAndImageByGid($gid){
         $condition['gid'] = $gid;
