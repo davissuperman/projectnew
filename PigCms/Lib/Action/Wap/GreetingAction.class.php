@@ -396,6 +396,9 @@ class GreetingAction extends BonusAction {
         $this->assign("recName",$recName);
         $this->assign("sendName",$sendName);
         //保存记录
+        if(!$userOpenId){
+            $userOpenId = 'localenv';
+        }
         $cardArr['openid'] = $userOpenId;
         $cardArr['fromname'] = $sendName;
         $cardArr['toname'] = $recName;
