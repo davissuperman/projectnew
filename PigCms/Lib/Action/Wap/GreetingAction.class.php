@@ -395,6 +395,12 @@ class GreetingAction extends BonusAction {
         $sendName = $_POST['send-name'];
         $this->assign("recName",$recName);
         $this->assign("sendName",$sendName);
+        //保存记录
+        $cardArr['openid'] = $userOpenId;
+        $cardArr['fromname'] = $sendName;
+        $cardArr['toname'] = $recName;
+        M('greeting_card')->add($cardArr);
+
         $url = "http://". $this->_server('HTTP_HOST');
         $shareUrl = "http://". $this->_server('HTTP_HOST')."/index.php?g=Wap&m=Greeting&a=index&t=$recName&f=$sendName";
         $this->assign("url",$shareUrl);
