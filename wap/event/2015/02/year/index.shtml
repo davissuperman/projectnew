@@ -210,15 +210,15 @@
                         <div class="zhufu">
                             <p class="pt-10 ml-10">祝：<span>您</span></p>
                         </div>
-                        <div class="hua hua1"></div>
-                        <div class="hua hua2"></div>
-                        <div class="hua hua3"></div>
-                        <div class="hua hua4"></div>
-                        <div class="hua hua5"></div>
-                        <div class="hua hua6"></div>
-                        <div class="hua hua7"></div>
-                        <div class="hua hua8"></div>
-                        <div class="hua hua9"></div>
+                        <div class="hua hua1 flash1"></div>
+                        <div class="hua hua2 flash2"></div>
+                        <div class="hua hua3 flash3"></div>
+                        <div class="hua hua4 flash1"></div>
+                        <div class="hua hua5 flash2"></div>
+                        <div class="hua hua6 flash3"></div>
+                        <div class="hua hua7 flash1"></div>
+                        <div class="hua hua8 flash2"></div>
+                        <div class="hua hua9 flash3"></div>
                         <div class="wmn">
                             <div class="zi flash3"></div>
                         </div>
@@ -235,15 +235,15 @@
                 </div>
                 <div class="page-item hide">
                 	<div class="page p7">
-                        <div class="hua hua1"></div>
-                        <div class="hua hua2"></div>
-                        <div class="hua hua3"></div>
-                        <div class="hua hua4"></div>
-                        <div class="hua hua5"></div>
-                        <div class="hua hua6"></div>
-                        <div class="hua hua7"></div>
-                        <div class="hua hua8"></div>
-                        <div class="hua hua9"></div>
+                        <div class="hua hua1 flash1"></div>
+                        <div class="hua hua2 flash2"></div>
+                        <div class="hua hua3 flash3"></div>
+                        <div class="hua hua4 flash1"></div>
+                        <div class="hua hua5 flash2"></div>
+                        <div class="hua hua6 flash3"></div>
+                        <div class="hua hua7 flash1"></div>
+                        <div class="hua hua8 flash2"></div>
+                        <div class="hua hua9 flash3"></div>
                         <div class="btn1" id="btn-share"></div>
                         <div class="btn2" id="btn-isend"></div>
                         
@@ -253,15 +253,15 @@
                 
                 <div class="page-item hide">
                 	<div class="page p8">
-                        <div class="hua hua1"></div>
-                        <div class="hua hua2"></div>
-                        <div class="hua hua3"></div>
-                        <div class="hua hua4"></div>
-                        <div class="hua hua5"></div>
-                        <div class="hua hua6"></div>
-                        <div class="hua hua7"></div>
-                        <div class="hua hua8"></div>
-                        <div class="hua hua9"></div>
+                        <div class="hua hua1 flash1"></div>
+                        <div class="hua hua2 flash2"></div>
+                        <div class="hua hua3 flash3"></div>
+                        <div class="hua hua4 flash1"></div>
+                        <div class="hua hua5 flash2"></div>
+                        <div class="hua hua6 flash3"></div>
+                        <div class="hua hua7 flash1"></div>
+                        <div class="hua hua8 flash2"></div>
+                        <div class="hua hua9 flash3"></div>
                     </div>
                     <div class="form-ul">
                         <div class="form-item">
@@ -279,15 +279,15 @@
                 
                 <div class="page-item hide">
                 	<div class="page p8">
-                        <div class="hua hua1"></div>
-                        <div class="hua hua2"></div>
-                        <div class="hua hua3"></div>
-                        <div class="hua hua4"></div>
-                        <div class="hua hua5"></div>
-                        <div class="hua hua6"></div>
-                        <div class="hua hua7"></div>
-                        <div class="hua hua8"></div>
-                        <div class="hua hua9"></div>
+                        <div class="hua hua1 flash1"></div>
+                        <div class="hua hua2 flash2"></div>
+                        <div class="hua hua3 flash3"></div>
+                        <div class="hua hua4 flash1"></div>
+                        <div class="hua hua5 flash2"></div>
+                        <div class="hua hua6 flash3"></div>
+                        <div class="hua hua7 flash1"></div>
+                        <div class="hua hua8 flash2"></div>
+                        <div class="hua hua9 flash3"></div>
                         
                         <div class="share-wrap">
                             <div class="wmn"></div>
