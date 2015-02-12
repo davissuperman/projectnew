@@ -128,15 +128,7 @@ function init() {
 	$("#btn-isend").bind('click',function(){
 		 $(this).parents(".page-item").next().show().siblings().hide();
 	});
-	$("#btnGoNext").bind('click',function(){
-        $.get(
-            "{pigcms::$siteurl}/index.php?g=Wap&m=Greeting&a=saveData&type=1",
-            function(data) {
-                alert(data);
-            }
-        );
-		 $(this).parents(".page-item").next().show().siblings().hide();
-	});
+
 	
 	
 	
