@@ -200,8 +200,8 @@ class GreetingAction extends Action {
         $this->assign("imageUrl",$bonusDes['img']);
         $this->assign("shareimageurl",$bonusDes['img']);
 
-
-        $postUrl = $this->url."/index.php?g=Wap&m=Greeting&a=show";
+        $url = "http://". $this->_server('HTTP_HOST');
+        $postUrl = $url."/index.php?g=Wap&m=Greeting&a=show";
         $this->assign("posturl",$postUrl);
         $this->display();
     }
