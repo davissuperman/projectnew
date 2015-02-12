@@ -404,6 +404,11 @@ class GreetingAction extends BonusAction {
         $url = "http://". $this->_server('HTTP_HOST');
         $shareUrl = "http://". $this->_server('HTTP_HOST')."/index.php?g=Wap&m=Greeting&a=index&t=$recName&f=$sendName";
         $this->assign("url",$shareUrl);
+
+
+        $img = "http://wx.drjou.cc/tpl/Wap/default/common/year/images/logo1.jpg";
+        $this->assign("shareimage",$img);
+
         $this->display();
     }
 
