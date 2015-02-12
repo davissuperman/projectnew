@@ -210,7 +210,7 @@ class GreetingAction extends BonusAction {
         $this->assign('bonusdesc','');
         $this->assign("imageUrl",$bonusDes['img']);
         $img = "http://wx.drjou.cc/tpl/Wap/default/common/year/images/logo.jpg";
-        $this->assign("shareimageurl",$img);
+        $this->assign("shareimage",$img);
 
         $url = "http://". $this->_server('HTTP_HOST');
         $postUrl = $url."/index.php?g=Wap&m=Greeting&a=show";
@@ -390,7 +390,7 @@ class GreetingAction extends BonusAction {
         $this->assign('bonusdesc','');
         $this->assign("imageUrl",$bonusDes['img']);
         $img = "http://wx.drjou.cc/tpl/Wap/default/common/year/images/logo.jpg";
-        $this->assign("shareimageurl",$img);
+        $this->assign("shareimage",$img);
         $recName = $_POST['rec-name'];
         $sendName = $_POST['send-name'];
         $this->assign("recName",$recName);
