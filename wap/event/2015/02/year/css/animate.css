@@ -3629,42 +3629,42 @@ animation:myfirst 5s linear 2s infinite alternate;
 
 @keyframes top-bottom-animate
 {
-0%   {top:0.7rem;}
-25%  {top:0.9rem;}
-50%  {top:1.2rem;}
-75%  {top:0.9rem;}
-100% {top:0.7rem;}
+0%   {top:5%;}
+25%  {top:6%;}
+50%  {top:7%;}
+75%  {top:6%;}
+100% {top:5%;}
 }
 
 @-webkit-keyframes top-bottom-animate 
 {
 0%   {top:5%;}
-25%  {top:7%;}
-50%  {top:9%;}
-75%  {top:7%;}
+25%  {top:6%;}
+50%  {top:7%;}
+75%  {top:6%;}
 100% {top:5%;}
 }
 @-moz-keyframes top-bottom-animate 
 {
-0%   {top:0px;}
-25%  {top:5px;}
-50%  {top:15px;}
-75%  {top:5px;}
-100% {top:0px;}
+0%   {top:5%;}
+25%  {top:6%;}
+50%  {top:7%;}
+75%  {top:6%;}
+100% {top:5%;}
 }
 @-ms-keyframes top-bottom-animate 
 {
-0%   {top:0px;}
-25%  {top:5px;}
-50%  {top:15px;}
-75%  {top:5px;}
-100% {top:0px;}
+0%   {top:5%;}
+25%  {top:6%;}
+50%  {top:7%;}
+75%  {top:6%;}
+100% {top:5%;}
 }
 @-o-keyframes top-bottom-animate 
 {
-0%   {top:0px;}
-25%  {top:5px;}
-50%  {top:15px;}
-75%  {top:5px;}
-100% {top:0px;}
+0%   {top:5%;}
+25%  {top:6%;}
+50%  {top:7%;}
+75%  {top:6%;}
+100% {top:5%;}
 }
