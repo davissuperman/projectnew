@@ -21,7 +21,7 @@
    	<audio id="audio" src="images/music2.mp3" loop="" preload="auto" autoplay="autoplay"></audio>
 	<div class="container">
         <ul class="content-list" id="content-list">
-            <li class="content-li hide">
+            <li class="content-li">
             	
                 <div class="page p0">
                     <div class="zhufu">
@@ -63,7 +63,7 @@
                     
                 </div>
             </li>
-            <li class="content-li hide">
+            <li class="content-li">
             	 <div><img src="images/p1/img07.png" width="100%"/></div>
             	 <div class="p1-top">
                  	<div class="zhufu">
@@ -99,7 +99,7 @@
                 
                 <div class="index-arrow-down swipeMove"></div>
             </li>
-            <li class="content-li hide">
+            <li class="content-li">
             		<div class="zhufu">
                         <p class="pt-10 ml-10">祝：<span>您</span></p>
                     </div>
@@ -144,7 +144,7 @@
                 
                 <div class="index-arrow-down swipeMove"></div>
             </li>
-            <li class="content-li hide">
+            <li class="content-li">
             	<img src="images/p3/img01.jpg" width="100%">
                 <div class="page p3">
                 	<div class="zhufu">
@@ -169,7 +169,6 @@
                         <p class="pt-10 ml-10">祝：<span>您</span></p>
                     </div>
                     <div class="couplet top-bottom-animate">
-                    	<div class="zi"></div>
                     </div>
                     <div class="wmn"></div>
                 </div>
