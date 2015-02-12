@@ -402,6 +402,9 @@ class GreetingAction extends BonusAction {
     }
 
     public function inputdata(){
+        $url = "http://". $this->_server('HTTP_HOST');
+        $postUrl = $url."/index.php?g=Wap&m=Greeting&a=show";
+        $this->assign("posturl",$postUrl);
         $this->display();
     }
 
