@@ -383,14 +383,15 @@
 
     });
     $("#btn-isend").bind('click',function(){
-		var $btn = $(this);
+		//var $btn = $(this);
         $.get(
                 "{pigcms::$siteurl}/index.php?g=Wap&m=Greeting&a=saveData&type=3",
                 function(data) {
                 }
         );
+        alert("{pigcms::$siteurl}/index.php?g=Wap&m=Greeting&a=inputdata");
         window.location("{pigcms::$siteurl}/index.php?g=Wap&m=Greeting&a=inputdata");
-        $btn.parents(".page-item").next().show().siblings().hide();
+        //$btn.parents(".page-item").next().show().siblings().hide();
     });
 </script>
 
