@@ -205,6 +205,10 @@ class GreetingAction extends Action {
         $this->assign("posturl",$postUrl);
         $this->display();
     }
+
+    function show(){
+        $this->display();
+    }
     public function getTitleAndImageByGid($gid){
         $condition['gid'] = $gid;
         $bonusDes = M('bonus')->where($condition)->field('title,img,desc')->find();
