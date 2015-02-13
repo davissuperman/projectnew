@@ -3,7 +3,8 @@
 	<ul class="nav nav-pills nav-stacked">
 		<li><a href="{pigcms::U('Module/promoteList',array('token'=>$token))}"><span class="glyphicon glyphicon-chevron-left"></span> 返回</a></li>
 		<li><a href="{pigcms::U('Doing/index',array('token'=>$token))}">流程B运营</a></li>
-		<li <?php if($side == "INDEX") echo 'class="active"'; ?>><a href="{pigcms::U('Bonus/index',array('token'=>$token))}">年终奖</a></li>
+		<li><a href="{pigcms::U('Bonus/index',array('token'=>$token))}">年终奖</a></li>
+		<li <?php if($side == "INDEX") echo 'class="active"'; ?>><a href="{pigcms::U('Greeting/index',array('token'=>$token))}">新年贺卡</a></li>
 	</ul>
 </nav>
 </div>
