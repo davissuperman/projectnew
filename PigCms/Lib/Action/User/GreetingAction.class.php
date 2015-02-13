@@ -43,12 +43,8 @@ class GreetingAction  extends BonusAction {
         $list = M('greeting')->query(
             "SELECT g.*, f.nickname as name from tp_greeting as g
             left join tp_customer_service_fans f on (f.openid=g.openid)
-             order by g.view desc limit $start,$end"); //第二名和你最近的
+             order by g.view desc limit $start,$end");
         $i = $start+1;
-        foreach ($list as $k => $v) {
-            $list[$k]['sort'] = $i;
-            $i = $i + 1;
-        }
         $listArr = array();
         foreach($list as $key => $each){
             $awardInfo = '';
@@ -81,19 +77,14 @@ class GreetingAction  extends BonusAction {
             $name = $data[$n]['name'];
             $name = $this->ReplaceSpecialChar($name);
             $objPHPExcel->setActiveSheetIndex(0)
-                ->setCellValue('A' . ($n + 2), $data[$n]['sort'])
-                ->setCellValue('B' . ($n + 2), $data[$n]['n'])
-                ->setCellValue('C' . ($n + 2), $data[$n]['tel'])
-                ->setCellValue('D' . ($n + 2), $name)
-                ->setCellValue('E' . ($n + 2), $data[$n]['tels'])
-                ->setCellValue('F' . ($n + 2), $data[$n]['username'])
-                ->setCellValue('G' . ($n + 2), $data[$n]['city'])
-                ->setCellValue('H' . ($n + 2), $data[$n]['addres'])
-                ->setCellValue('I' . ($n + 2), $data[$n]['views'])
-                ->setCellValue('J' . ($n + 2), $data[$n]['vote'])
-                ->setCellValue('K' . ($n + 2), $data[$n]['awardlist'])
-                ->setCellValue('L' . ($n + 2), $data[$n]['orderid'])
-                ->setCellValue('M' . ($n + 2), $data[$n]['illegal'])
+                ->setCellValue('A' . ($n + 2), $n+1)
+                ->setCellValue('B' . ($n + 2), $name)
+                ->setCellValue('C' . ($n + 2), $data[$n]['view'])
+                ->setCellValue('D' . ($n + 2), $data[$n]['share'])
+                ->setCellValue('E' . ($n + 2), $data[$n]['joins'])
+                ->setCellValue('F' . ($n + 2), $data[$n]['accept'])
+                ->setCellValue('G' . ($n + 2), $data[$n]['wantcard'])
+                ->setCellValue('H' . ($n + 2), $data[$n]['subscribe'])
             ;
         }
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
