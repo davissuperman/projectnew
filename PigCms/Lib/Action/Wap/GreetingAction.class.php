@@ -195,7 +195,11 @@ class GreetingAction extends BonusAction {
         $this->assign("timestamp",$timestamp);
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
-        $this->assign("url",$url);
+
+
+        //根据openid获取ID
+        $id = $this->getIdByOpenId($userOpenId);
+        $this->assign("url",$url."&id=".$id);
 
         $this->assign('gid', $gid);
         $this->assign('openid', $userOpenId);
@@ -227,6 +231,18 @@ class GreetingAction extends BonusAction {
         $this->assign('nickname',  $nickname);
         $this->assign('fromuser',  $fromUser);
         $this->display();
+    }
+
+    function getIdByOpenId($openId){
+        $greetingId = M('greeting')->where(array('openid' => $openId))->getField('id');
+        if($greetingId){
+            return $greetingId;
+        }else{
+            //插入数据 取得id
+            $m['openid'] = $openId;
+            $lastInsId = M('greeting')->add($m);
+            return $lastInsId;
+        }
     }
 
     function show(){
@@ -405,7 +421,9 @@ class GreetingAction extends BonusAction {
         M('greeting_card')->add($cardArr);
 
         $url = "http://". $this->_server('HTTP_HOST');
-        $shareUrl = "http://". $this->_server('HTTP_HOST')."/index.php?g=Wap&m=Greeting&a=index&t=$recName&f=$sendName";
+        //根据openid获取ID
+        $id = $this->getIdByOpenId($userOpenId);
+        $shareUrl = "http://". $this->_server('HTTP_HOST')."/index.php?g=Wap&m=Greeting&a=index&t=$recName&f=$sendName&id=$id";
         $this->assign("url",$shareUrl);
 
 
