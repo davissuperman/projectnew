@@ -83,7 +83,16 @@
                 },
                 success: function (res) {
                     //如果分享成功 加50分
-                  // alert(1);
+                    $.get(
+                            "{pigcms::$siteurl}/index.php?g=Wap&m=Greeting&a=saveShareInfo",
+                            function(data) {
+                                if(data == '1'){
+                                    mnAlert("分享成功!");
+                                }else{
+                                    mnAlert("系统忙!");
+                                }
+                            }
+                    );
                 },
                 cancel: function (res) {
                     //alert('已取消');
@@ -103,7 +112,16 @@
                 },
                 success: function (res) {
                     //如果分享成功 加50分
-                   //alert(2);
+                    $.get(
+                            "{pigcms::$siteurl}/index.php?g=Wap&m=Greeting&a=saveShareInfo",
+                            function(data) {
+                                if(data == '1'){
+                                    mnAlert("分享成功!");
+                                }else{
+                                    mnAlert("系统忙!");
+                                }
+                            }
+                    );
                 },
                 cancel: function (res) {
                     //alert('已取消');

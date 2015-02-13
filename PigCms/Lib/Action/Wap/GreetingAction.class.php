@@ -240,11 +240,32 @@ class GreetingAction extends BonusAction {
 
         $this->assign('nickname',  $nickname);
         $this->assign('fromuser',  $fromUser);
+
+        $this->assign("siteurl",$this->url);
+
         $this->display();
     }
 
     function saveIdInfo($id){
         M("greeting")->where(array('id' => $id))->setInc('view', 1);
+    }
+
+    public function saveShareInfo(){
+//        $type = $_GET['type'];
+        $userOpenId= cookie('user_openid');
+        $a = M("greeting")->where(array('openid' => $userOpenId))->setInc('share', 1);
+        if($a){
+            echo 1;
+        }else{
+            echo 0;
+        }
+//        $m['type'] = $type;
+//        if(!$userOpenId){
+//            $userOpenId = "local";
+//        }
+//        $m['openid'] = $userOpenId;
+//        $fanModel =  M('greeting_data');
+//        $fanModel->add($m);
     }
 
     function getIdByOpenId($openId){
@@ -443,7 +464,7 @@ class GreetingAction extends BonusAction {
 
         $img = "http://wx.drjou.cc/tpl/Wap/default/common/year/images/logo2.jpg";
         $this->assign("shareimage",$img);
-
+        $this->assign("siteurl",$this->url);
         $this->display();
     }
 
