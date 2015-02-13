@@ -43,6 +43,16 @@ class GreetingAction extends BonusAction {
             $isRealCard = true;
         }
         $gid = $_GET['gid'];
+
+        //判断是否有ID
+        $id = null;
+        if(isset($_GET['id']) && $_GET['id']){
+            $id = $_GET['id'];
+            //保存ID相关信息
+            $this->saveIdInfo($id);
+        }
+
+
         //统计end
         $userOpenId= cookie('user_openid');
         //即使存在与cookie但是fans中不存在必须重新获取
@@ -231,6 +241,10 @@ class GreetingAction extends BonusAction {
         $this->assign('nickname',  $nickname);
         $this->assign('fromuser',  $fromUser);
         $this->display();
+    }
+
+    function saveIdInfo($id){
+        M("greeting")->where(array('id' => $id))->setInc('view', 1);
     }
 
     function getIdByOpenId($openId){
