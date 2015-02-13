@@ -27,4 +27,82 @@ class GreetingAction  extends BonusAction {
         $this->display();
     }
 
+    public function exportstore() {
+        $start = 1;
+        $end = 100;
+        if(isset($_POST['start']) && $_POST['start']){
+            $start = $_POST['start'];
+        }
+        if(isset($_POST['end']) && $_POST['end']){
+            $end = $_POST['end'];
+        }
+//        $start = $_POST['start'];
+//        $end = $_POST['end'];
+        $end=$end-$start;
+        $start=$start-1;
+        $list = M('greeting')->query(
+            "SELECT g.*, f.nickname as name from tp_greeting as g
+            left join tp_customer_service_fans f on (f.openid=g.openid)
+             order by g.view desc limit $start,$end"); //第二名和你最近的
+        $i = $start+1;
+        foreach ($list as $k => $v) {
+            $list[$k]['sort'] = $i;
+            $i = $i + 1;
+        }
+        $listArr = array();
+        foreach($list as $key => $each){
+            $awardInfo = '';
+            $tmp = $each;
+
+            $listArr[] = $tmp;
+        }
+        $filename = $start . "~" . $end . "统计";
+        $this->exportexcelx($listArr, $filename);
+    }
+
+    public function exportexcelx($data = array(), $filename = 'report') {
+        $str = substr(THINK_PATH, 0, -1);
+        require_once $str . '/PigCms/Lib/Action/User/Classes/PHPExcel.php';
+        $objPHPExcel = new PHPExcel();
+        //写出表头
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A1', '排名')
+            ->setCellValue('B1', '姓名')
+            ->setCellValue('C1', '浏览量')
+            ->setCellValue('D1', '分享量')
+            ->setCellValue('E1', '送祝福点击数')
+            ->setCellValue('F1', '接收祝福点击数')
+            ->setCellValue('G1', '我也要送贺卡点击数')
+            ->setCellValue('H1', '关注森天药妆点击数');
+
+        //写出内容 UTF-8
+
+        for ($n = 0; $n < count($data); $n++) {
+            $name = $data[$n]['name'];
+            $name = $this->ReplaceSpecialChar($name);
+            $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A' . ($n + 2), $data[$n]['sort'])
+                ->setCellValue('B' . ($n + 2), $data[$n]['n'])
+                ->setCellValue('C' . ($n + 2), $data[$n]['tel'])
+                ->setCellValue('D' . ($n + 2), $name)
+                ->setCellValue('E' . ($n + 2), $data[$n]['tels'])
+                ->setCellValue('F' . ($n + 2), $data[$n]['username'])
+                ->setCellValue('G' . ($n + 2), $data[$n]['city'])
+                ->setCellValue('H' . ($n + 2), $data[$n]['addres'])
+                ->setCellValue('I' . ($n + 2), $data[$n]['views'])
+                ->setCellValue('J' . ($n + 2), $data[$n]['vote'])
+                ->setCellValue('K' . ($n + 2), $data[$n]['awardlist'])
+                ->setCellValue('L' . ($n + 2), $data[$n]['orderid'])
+                ->setCellValue('M' . ($n + 2), $data[$n]['illegal'])
+            ;
+        }
+        $objPHPExcel->getActiveSheet()->setTitle('Simple');
+        $objPHPExcel->setActiveSheetIndex(0);
+        header('Content-Type: application/vnd.ms-excel');
+        header("Content-Disposition: attachment;filename=" . date("Y-m-d h:i") . "xsl");
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        $objWriter->save('php://output');
+    }
+
 }
