@@ -454,7 +454,7 @@ class GreetingAction extends BonusAction {
         $cardArr['fromname'] = $sendName;
         $cardArr['toname'] = $recName;
         M('greeting_card')->add($cardArr);
-        M("greeting")->where(array('openid' =>$userOpenId))->setInc('join', 1);
+        //M("greeting")->where(array('openid' =>$userOpenId))->setInc('join', 1);
         $url = "http://". $this->_server('HTTP_HOST');
         //根据openid获取ID
         $id = $this->getIdByOpenId($userOpenId);
