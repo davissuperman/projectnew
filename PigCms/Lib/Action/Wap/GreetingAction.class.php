@@ -31,6 +31,7 @@ class GreetingAction extends BonusAction {
 //                exit('<center>游戏已经结束！谢谢你的参与</center>');
 //          }
         //统计添加浏览数和浏览记录 tel 相当与open_id
+        $userOpenId= cookie('user_openid');
         $isRealCard = false;
         $f = null;
         if(isset($_GET['f']) && $_GET['f']){
@@ -50,11 +51,17 @@ class GreetingAction extends BonusAction {
             $id = $_GET['id'];
             //保存ID相关信息
             $this->saveIdInfo($id);
+        }else{
+            $greetingId = M('greeting')->where(array('openid' => $userOpenId))->getField('id');
+            if($greetingId){
+                $this->saveIdInfo($greetingId);
+            }
+
         }
 
 
         //统计end
-        $userOpenId= cookie('user_openid');
+
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
         if ($_GET['show']) {
