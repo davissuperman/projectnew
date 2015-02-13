@@ -13,20 +13,20 @@ class GreetingAction extends BonusAction {
         define('STATICS', TMPL_PATH . 'static');
         $this->gid = $_REQUEST['gid'];
         $agent = $_SERVER['HTTP_USER_AGENT'];
-//        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
-//            echo '此功能只能在微信浏览器中使用';
-//            exit;
-//        }
+        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
+            echo '此功能只能在微信浏览器中使用';
+            exit;
+        }
         $this->url= C('site_url');
        // $this->cache = Cache::getInstance('Redis',array('host'=>'127.0.0.1','expire'=>1296000));
     }
 
     public function index() {
-//        $agent = $_SERVER['HTTP_USER_AGENT'];
-//        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
-//            echo '此功能只能在微信浏览器中使用';
-//            exit;
-//        }
+        $agent = $_SERVER['HTTP_USER_AGENT'];
+        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
+            echo '此功能只能在微信浏览器中使用';
+            exit;
+        }
 //         if (time() > $this->gameinfo['end']) {//活动是否结束
 //                exit('<center>游戏已经结束！谢谢你的参与</center>');
 //          }
