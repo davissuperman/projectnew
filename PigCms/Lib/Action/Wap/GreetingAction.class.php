@@ -490,9 +490,9 @@ class GreetingAction extends BonusAction {
             if($type == 1){
                 M("greeting")->where(array('openid' =>$userOpenId))->setInc('accept', 1);
             }else if($type == 2){
-                M("greeting")->where(array('openid' =>$userOpenId))->setInc('wantcard', 1);
-            }else if($type == 3){
                 M("greeting")->where(array('openid' =>$userOpenId))->setInc('subscribe', 1);
+            }else if($type == 3){
+                M("greeting")->where(array('openid' =>$userOpenId))->setInc('wantcard', 1);
             }
         }else{
             //添加
