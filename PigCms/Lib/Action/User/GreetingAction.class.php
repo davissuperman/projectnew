@@ -8,7 +8,7 @@ class GreetingAction  extends BonusAction {
 
     public function index() {
         // join tp_bonus_award as award on (info.openid=award.openid ) ,award.province as city, award.address as addres
-        $count = M('bonus')->count();
+        $count = M('greeting')->count();
         $page = new Page($count, 25);
         $list = M('greeting')->query("SELECT* from tp_greeting order by view desc limit $page->firstRow,$page->listRows"); //第二名和你最近的
         $this->assign('page', $page->show());
