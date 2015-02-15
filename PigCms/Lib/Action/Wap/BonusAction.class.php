@@ -95,11 +95,16 @@ class BonusAction extends Action {
             echo '此功能只能在微信浏览器中使用';
             exit;
         }
-//         if (time() > $this->gameinfo['end']) {//活动是否结束
-//                exit('<center>游戏已经结束！谢谢你的参与</center>');
-//          }
+        $gid = 1;
+        if(isset($_GET['gid']) && $_GET['gid']){
+            $gid = $_GET['gid'];
+        }
+        $bonusDes = $this->getTitleAndImageByGid($gid);
+         if (time() > $bonusDes['end']) {//活动是否结束
+                exit('<center>游戏已经结束！谢谢你的参与</center>');
+          }
         //统计添加浏览数和浏览记录 tel 相当与open_id
-        $gid = $_GET['gid'];
+
         //统计end
         $userOpenId= cookie('user_openid');
         //即使存在与cookie但是fans中不存在必须重新获取
@@ -262,7 +267,7 @@ class BonusAction extends Action {
         $titleUsed = $selfUserInfo['nickname'];
         $titleUsed .= " ".$titleArr[rand(0,count($titleArr)-1)];
 
-        $bonusDes = $this->getTitleAndImageByGid($gid);
+
         $this->assign('title',$selfUserInfo['nickname'].":".$bonusDes['desc']);
         $this->assign('bonusdesc','');
         $this->assign("imageUrl",$bonusDes['img']);
@@ -294,7 +299,7 @@ class BonusAction extends Action {
 
     public function getTitleAndImageByGid($gid){
         $condition['gid'] = $gid;
-        $bonusDes = M('bonus')->where($condition)->field('title,img,desc')->find();
+        $bonusDes = M('bonus')->where($condition)->field('title,img,desc,end')->find();
         return $bonusDes;
     }
 
@@ -1245,7 +1250,14 @@ class BonusAction extends Action {
             echo '此功能只能在微信浏览器中使用';
             exit;
         }
-        $gid = $_GET['gid'];
+        $gid = 1;
+        if(isset($_GET['gid']) && $_GET['gid']){
+            $gid = $_GET['gid'];
+        }
+        $bonusDes = $this->getTitleAndImageByGid($gid);
+        if (time() > $bonusDes['end']) {//活动是否结束
+            exit('<center>游戏已经结束！谢谢你的参与</center>');
+        }
         $str = '';
         $nickname = "";
         $voteNumber = 0;
@@ -1523,7 +1535,6 @@ class BonusAction extends Action {
         $titleArr = $this->titleInWeixin;
         $titleUsed = $nickname;
         $titleUsed .= " ".$titleArr[rand(0,count($titleArr)-1)];
-        $bonusDes = $this->getTitleAndImageByGid($gid);
         $this->assign('title',$nickname.":".$bonusDes['desc']);
         $this->assign('bonusdesc','');
         $this->assign("imageUrl",$bonusDes['img']);
