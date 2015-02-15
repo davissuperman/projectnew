@@ -34,6 +34,7 @@ class GreetingAction extends BonusAction {
         $userOpenId= cookie('user_openid');
         $isRealCard = false;
         $f = null;
+        $t = null;
         if(isset($_GET['f']) && $_GET['f']){
             $f = $_GET['f'];
         }
@@ -137,7 +138,7 @@ class GreetingAction extends BonusAction {
                             $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                             if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                                 //code 有错误 需要重定向
-                                $url = $this->url."/index.php?g=Wap&m=Greeting&a=index";
+                                $url = $this->url."/index.php?g=Wap&m=Greeting&a=index&f=$f&t=$t";
                                 header("location:$url");
                             }
                             $m['id'] = $apidata['id'];
@@ -160,7 +161,7 @@ class GreetingAction extends BonusAction {
                         $selfUserInfo['nickname'] = $json->nickname;
                     }
                 } else {
-                    $url = urlencode($this->url."/index.php?g=Wap&m=Greeting&a=index");
+                    $url = urlencode($this->url."/index.php?g=Wap&m=Greeting&a=index&f=$f&t=$t");
                     header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_userinfo&state=sentian#wechat_redirect");
                     exit;
                 }
