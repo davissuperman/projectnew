@@ -58,6 +58,86 @@ class NumberAction extends UserAction {
         $this->cache = Cache::getInstance('Redis',array('host'=>'127.0.0.1','expire'=>3600));
         parent::_initialize();
     }
+
+    public function saveIllegal(){
+        $url = '/home/dev/html/projectnew/wap/wrong.txt';
+
+        $handle = fopen($url, 'r');
+        while(!feof($handle)){
+            $openId = fgets($handle);
+            $openId = trim($openId);
+            $openId = trim($openId,'\n');
+            $id = M('bonus_info')->where(array('openid' => $openId))->getField('id');
+            $d['id'] = $id;
+            $d['openid'] = $openId;
+            $d['illegal'] = 1;
+            $r = M("bonus_info")->save($d);
+            echo $openId ."      aaaa        ".$r."<br/>";
+        }
+        fclose($handle);
+
+
+
+    }
+
+
+    public function saveIllegalByPhone(){
+        $url = '/home/dev/html/projectnew/wap/phone.txt';
+
+        $handle = fopen($url, 'r');
+        while(!feof($handle)){
+            $phone = fgets($handle);
+            $phone = trim($phone);
+            $phone = trim($phone,'\n');
+            $res = M('bonus_award')->where(array('telephone' => $phone))->select();
+
+//            echo "<pre>";
+//            var_dump($res);
+            $openId = $res[0]['openid'];
+            if($openId){
+                $id = M('bonus_info')->where(array('openid' => $openId))->getField('id');
+                $d['id'] = $id;
+                $d['openid'] = $openId;
+                $d['illegal'] = 1;
+                $r = M("bonus_info")->save($d);
+            }else{
+                echo $openId." bbbbbbbbb ". $phone ."      aaaa        "."<br/>";
+            }
+
+
+        }
+        fclose($handle);
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function getRandScore($typeBigZero = false){
         $score = $this->score;
         if($typeBigZero){

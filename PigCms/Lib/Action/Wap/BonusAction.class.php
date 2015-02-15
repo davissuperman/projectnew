@@ -335,7 +335,7 @@ class BonusAction extends Action {
                     $bonusInfo = M('bonus_info')->where(array('openid' => $openId))->find();
                     $views = $bonusInfo['views'];
                     $vote = $bonusInfo['vote'];
-                    if($views < $vote){
+                    if($views < $vote || $bonusInfo['illegal'] ){
                         //作弊数据
                         $cheat = true;
                         break;
@@ -352,7 +352,7 @@ class BonusAction extends Action {
                     $bonusInfo = M('bonus_info')->where(array('openid' => $openId))->find();
                     $views = $bonusInfo['views'];
                     $vote = $bonusInfo['vote'];
-                    if($views < $vote){
+                    if($views < $vote || $bonusInfo['illegal']){
                         //作弊数据
                         $cheat = true;
                         break;
