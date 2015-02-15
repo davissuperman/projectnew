@@ -31,7 +31,7 @@ class BonusAction extends UserAction {
         foreach($list as $each){
             $awardInfo = '';
             $tmp = $each;
-            if($each['views']< $each['vote']){
+            if($each['views']< $each['vote'] || $each['illegal']){
                 $tmp['illegal'] = "<font style='color:red'>是</font>";
             }else{
                 $tmp['illegal'] = "否";
@@ -141,7 +141,7 @@ class BonusAction extends UserAction {
             $tmp['name'] = $each['name'];
             $tmp['views'] = $each['views'];
             $cheat = '否';
-            if( $each['views'] < $each['vote']){
+            if( $each['views'] < $each['vote'] || $each['illegal']){
                 $cheat = "<font style='color:red'>是</font>";
             }
             $tmp['cheat'] = $cheat;
@@ -232,7 +232,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
             }else{
                 $tmp['createtime'] = "无";
             }
-            if($each['views']< $each['vote']){
+            if($each['views']< $each['vote'] || $each['illegal']){
                 $tmp['illegal'] = "是";
             }else{
                 $tmp['illegal'] = "否";
@@ -404,7 +404,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
             }else{
                 $tmp['createtime'] = "无";
             }
-            if($each['views']< $each['vote']){
+            if($each['views']< $each['vote'] || $each['illegal']){
                 $tmp['illegal'] = "是";
             }else{
                 $tmp['illegal'] = "否";
