@@ -81,6 +81,72 @@ class NumberAction extends UserAction {
     }
 
 
+    public function saveCard(){
+        $res = M('bonus_info')->where(array('illegal' => 0))->select();
+        $n = 15;
+        $i = 0;
+        foreach($res as $each){
+            $openId = $each['openid'];
+            //判断这个人是否留下手机号
+            $mapFour['telephone'] = array('neq','');
+            $mapFour['openid'] = array('eq',$openId);
+            $phone = M('bonus_award')->where($mapFour)->getField('telephone');
+            if($phone){
+                //手机号存在
+            }else{
+                //查看此用户在greeting是否存在
+                $greeting = M('greeting')->where(array('openid' => $openId))->select();
+                if(!$greeting){
+                    //将此用户加入到GREETING中
+                    $views = rand(2,1800);
+                    $map['view'] = $views;
+
+                    if($views > 20 ){
+                        if($views > 50){
+                            $accept = rand(20,50);
+                        }else{
+                            $accept = rand(6,30);
+                        }
+                    }else{
+                        $accept = rand(0,18);
+                    }
+
+
+                    $subscribe = rand(0,$accept);
+
+                    $wantCard = rand(0,$accept);
+
+                    if($wantCard <= $subscribe ){
+                        $wantCard = rand($subscribe,$accept);
+                    }
+
+                    $share = rand(0,40);
+
+                    $joins = rand(0,45);
+
+                    $map['view'] = $views;
+                    $map['accept'] = $accept;
+                    $map['subscribe'] = $subscribe;
+                    $map['wantcard'] = $wantCard;
+                    $map['share'] = $share;
+                    $map['joins'] = $joins;
+                    $map['openid'] = $openId;
+                    M('greeting')->add($map);
+                    $i++;
+                }
+
+
+
+            }
+
+        }
+
+        echo $i ."<br/>";
+    }
+
+
+
+
     public function saveIllegalByPhone(){
         $url = '/home/dev/html/projectnew/wap/phone.txt';
 
