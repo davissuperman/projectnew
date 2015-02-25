@@ -211,6 +211,88 @@ class WomensdayAction extends BonusAction {
         $this->display();
     }
 
+    public function page2() {
+        $agent = $_SERVER['HTTP_USER_AGENT'];
+//        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
+//            echo '此功能只能在微信浏览器中使用';
+//            exit;
+//        }
+//         if (time() > $this->gameinfo['end']) {//活动是否结束
+//                exit('<center>游戏已经结束！谢谢你的参与</center>');
+//          }
+        //统计添加浏览数和浏览记录 tel 相当与open_id
+        $userOpenId= cookie('user_openid');
+        if(!$userOpenId)
+            $userOpenId = 'localenv';
+
+        $this->display();
+    }
+    public function page3() {
+        $agent = $_SERVER['HTTP_USER_AGENT'];
+//        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
+//            echo '此功能只能在微信浏览器中使用';
+//            exit;
+//        }
+//         if (time() > $this->gameinfo['end']) {//活动是否结束
+//                exit('<center>游戏已经结束！谢谢你的参与</center>');
+//          }
+        //统计添加浏览数和浏览记录 tel 相当与open_id
+        $userOpenId= cookie('user_openid');
+        if(!$userOpenId)
+            $userOpenId = 'localenv';
+
+        $this->display();
+    }
+    public function page4() {
+        $agent = $_SERVER['HTTP_USER_AGENT'];
+//        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
+//            echo '此功能只能在微信浏览器中使用';
+//            exit;
+//        }
+//         if (time() > $this->gameinfo['end']) {//活动是否结束
+//                exit('<center>游戏已经结束！谢谢你的参与</center>');
+//          }
+        //统计添加浏览数和浏览记录 tel 相当与open_id
+        $userOpenId= cookie('user_openid');
+        if(!$userOpenId)
+            $userOpenId = 'localenv';
+
+        $this->display();
+    }
+    public function page5() {
+        $agent = $_SERVER['HTTP_USER_AGENT'];
+//        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
+//            echo '此功能只能在微信浏览器中使用';
+//            exit;
+//        }
+//         if (time() > $this->gameinfo['end']) {//活动是否结束
+//                exit('<center>游戏已经结束！谢谢你的参与</center>');
+//          }
+        //统计添加浏览数和浏览记录 tel 相当与open_id
+        $userOpenId= cookie('user_openid');
+        if(!$userOpenId)
+            $userOpenId = 'localenv';
+
+        $this->display();
+    }
+    public function page6() {
+        $agent = $_SERVER['HTTP_USER_AGENT'];
+//        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
+//            echo '此功能只能在微信浏览器中使用';
+//            exit;
+//        }
+//         if (time() > $this->gameinfo['end']) {//活动是否结束
+//                exit('<center>游戏已经结束！谢谢你的参与</center>');
+//          }
+        //统计添加浏览数和浏览记录 tel 相当与open_id
+        $userOpenId= cookie('user_openid');
+        if(!$userOpenId)
+            $userOpenId = 'localenv';
+
+        $this->display();
+    }
+
+
     function saveIdInfo($id){
         M("greeting")->where(array('id' => $id))->setInc('view', 1);
     }
