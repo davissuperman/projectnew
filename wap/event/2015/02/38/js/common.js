@@ -6,6 +6,8 @@ $(window).resize(function(){
 });
 function initPageFontSize(){
 	$("html").css({"font-size":(100*$(window).width()) / 640});
+	var wh = $(window).height(),dh = $(document).height();
+	$(".bd-bg").css({"min-height":wh+'px'});
 }
 
 //模拟alert

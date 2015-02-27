@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="css/common.css?v=2015322254544432" rel="stylesheet" type="text/css" />
+<script src="js/zepto.min.js" type="text/javascript"></script>
+<script src="js/common.js?v=20153224323232" type="text/javascript"></script>
+
+<title>38女人节特别奉献</title>
+</head>
+<body class="bd-bg">
+	<div class="get-sucai">
+    	<h1 style="font-size:0.4rem;" class="mt-30">还没集齐四个素材哦！<br/>继续加油！</h1>
+        <div class="mt-10">
+        	<a class="btn-red" href="javascript:;">点击获得更多素材</a>
+        </div>
+        <div class="times clrfix">
+        	<div class="bd-lf"></div>
+        	<div class="text">您还有 3 次机会</div>
+            <div class="bd-rg"></div>
+        </div>
+        <div class="btn-box">
+            <a class="btn" href="javascript:;">邀请TA获<br/>得更多机会</a>
+        </div>
+        <div class="btn-box">
+            <a class="btn-red" href="javascript:;" style="width:3.5rem;">更多优惠套餐<i class="icon01 fr"></i></a>
+        </div>
+        <div class="btn-box">
+            <a class="btn-red" href="javascript:;" style="width:3.5rem;">关注森田<i class="icon01 fr"></i></a>
+        </div>
+    </div>
+</body>
+</html>
