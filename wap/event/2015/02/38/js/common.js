@@ -6,7 +6,12 @@ $(window).resize(function(){
 });
 function initPageFontSize(){
 	$("html").css({"font-size":(100*$(window).width()) / 640});
-	var wh = $(window).height(),dh = $(document).height();
+	var wh = $(window).height(),dh = $("#contents").height();
+	if((parseFloat($(".bd-bg").css("padding-bottom")) + dh) < wh){
+		$(".bd-bg").css({"padding-bottom":'0'});
+	}else{
+		$(".bd-bg").css({"padding-bottom":'1.5rem'});
+	}
 	$(".bd-bg").css({"min-height":wh+'px'});
 }
 

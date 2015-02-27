@@ -15,19 +15,21 @@
 <title>38女人节特别奉献</title>
 </head>
 <body class="bd-bg">
-	<div class="success-wrap">
-    	<h1>恭喜您！</h1>
-        <div class="text">
-        	提交成功！<br/>奖品将在活动结束后统一发送，<br/>感谢您的参与！
-        </div>
-        <div class="mt-20">
-        	<img src="images/get/img02.png" width="60%" />
-        </div>
-        <div class="text">
-        	快将您的幸运分享给您的好友<br/>一起收获“女神套装”
-        </div>
-       <div>
-            <a class="btn-red" href="javascript:;">分享给好友</a>
+	<div id="contents">
+        <div class="success-wrap">
+            <h1>恭喜您！</h1>
+            <div class="text">
+                提交成功！<br/>奖品将在活动结束后统一发送，<br/>感谢您的参与！
+            </div>
+            <div class="mt-20">
+                <img src="images/get/img02.png" width="60%" />
+            </div>
+            <div class="text">
+                快将您的幸运分享给您的好友<br/>一起收获“女神套装”
+            </div>
+           <div>
+                <a class="btn-red" href="javascript:;">分享给好友</a>
+            </div>
         </div>
     </div>
 </body>

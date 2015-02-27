@@ -15,62 +15,64 @@
 <title>38女人节特别奉献</title>
 </head>
 <body class="bd-bg">
-	<div class="sucai-box">
-    	<div class="ta-c mt-20">
-        	<img src="images/get/img01.png" width="86%"/>
-        </div>
-        <div class="sucai-list clrfix">
-        	<div class="item">
-                <div class="name">玻尿酸</div>
-                <div class="clrfix">
-                    <div class="img has">
-                        <img src="images/get/img01.jpg" class="v-b"/>
+	<div id="contents">
+        <div class="sucai-box">
+            <div class="ta-c">
+                <img src="images/get/img01.png" width="86%"/>
+            </div>
+            <div class="sucai-list clrfix">
+                <div class="item">
+                    <div class="name">玻尿酸</div>
+                    <div class="clrfix">
+                        <div class="img has">
+                            <img src="images/get/img01.jpg" class="v-b"/>
+                        </div>
+                        <div class="num">X32</div>
                     </div>
-                    <div class="num">X32</div>
+                </div>
+                <div class="item">
+                    <div class="name">天羽丝</div>
+                    <div class="clrfix">
+                        <div class="img has">
+                            <img src="images/get/img02.jpg" class="v-b"/>
+                        </div>
+                        <div class="num">X21</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="name">竹炭颗粒</div>
+                    <div class="clrfix">
+                        <div class="img has">
+                            <img src="images/get/img03.jpg" class="v-b"/>
+                        </div>
+                        <div class="num">X9</div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="name">蝴蝶眼膜</div>
+                    <div class="clrfix">
+                        <div class="img">
+                            <img src="images/get/img04.jpg" class="v-b"/>
+                        </div>
+                        <div class="num">X0</div>
+                    </div>
                 </div>
             </div>
-            <div class="item">
-                <div class="name">天羽丝</div>
-                <div class="clrfix">
-                    <div class="img has">
-                        <img src="images/get/img02.jpg" class="v-b"/>
-                    </div>
-                    <div class="num">X21</div>
+            
+            <div class="ta-c btn-box">
+                <div class="mt-30">
+                    <a class="btn-red btn-disabled" href="javascript:;">领取女神礼盒<i class="icon01 fr"></i></a>
                 </div>
+                <div class="mt-10">素材还没有集齐哦！请继续加油！</div>
             </div>
-            <div class="item">
-                <div class="name">竹炭颗粒</div>
-                <div class="clrfix">
-                    <div class="img has">
-                        <img src="images/get/img03.jpg" class="v-b"/>
-                    </div>
-                    <div class="num">X9</div>
+            <div class="ta-c btn-box">
+                <div class="mt-30">
+                    <a class="btn-red" href="javascript:;">领取女神礼盒<i class="icon01 fr"></i></a>
                 </div>
+                <div class="mt-10">素材收集完毕！快去领奖吧！</div>
             </div>
-            <div class="item">
-                <div class="name">蝴蝶眼膜</div>
-                <div class="clrfix">
-                    <div class="img">
-                        <img src="images/get/img04.jpg" class="v-b"/>
-                    </div>
-                    <div class="num">X0</div>
-                </div>
-            </div>
+            
         </div>
-		
-        <div class="ta-c btn-box">
-        	<div class="mt-30">
-        		<a class="btn-red btn-disabled" href="javascript:;">领取女神礼盒<i class="icon01 fr"></i></a>
-            </div>
-            <div class="mt-10">素材还没有集齐哦！请继续加油！</div>
-        </div>
-        <div class="ta-c btn-box">
-        	<div class="mt-30">
-        		<a class="btn-red" href="javascript:;">领取女神礼盒<i class="icon01 fr"></i></a>
-            </div>
-            <div class="mt-10">素材收集完毕！快去领奖吧！</div>
-        </div>
-        
     </div>
 </body>
 </html>
