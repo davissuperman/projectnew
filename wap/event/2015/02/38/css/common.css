@@ -112,3 +112,11 @@ input,textarea,select,button{font-size:1em;}
 .success-wrap{ text-align:center;}
 .success-wrap h1{font-size:0.5rem; padding:0.3rem 0;}
 .success-wrap .text{color:#005982;font-size:0.38rem;font-weight:bold; line-height:0.5rem;}
+
+/*提交信息*/
+.reg-box h1{font-size:0.55rem; text-align:center; padding:0.3rem 0;}
+.reg-box .text{color:#005982;font-size:0.4rem; padding:0 10px; line-height:0.55rem;}
+.form-ul{ margin:20px;}
+.form-ul li{background:#005e9a; margin-bottom:2px; height:40px;}
+.form-ul li .control-label{ float:left; line-height:40px;width:22%; text-align:center;font-size:18px;color:#fff;}
+.form-ul .input-text{float:right;font-size:18px; margin-right:5px; height:30px; margin:0; padding:0; width:75%; margin-top:3px; margin-right:3px;}
