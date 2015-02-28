@@ -15,9 +15,35 @@
 <title>38女人节特别奉献</title>
 </head>
 <body>
-	<img src="images/p3/img_01.png" class="v-b" width="100%" />
-    <img src="images/p3/img_02.png" class="v-b" width="100%" />
-    <img src="images/p3/img_03.png" class="v-b" width="100%" />
-    <img src="images/p3/img_04.png" class="v-b" width="100%" />
+	<div id="contents">
+        <img src="images/p3/img_01.png" class="v-b" width="100%" />
+        <img src="images/p3/img_02.png" class="v-b" width="100%" />
+        <img src="images/p3/img_03.png" class="v-b" width="100%" />
+        <img src="images/p3/img_04.png" class="v-b" width="100%" />
+    </div>
+    <footer class="footer">
+    	<ul class="menu" id="menu">
+        	<li>
+            	<a href="/wap/event/2015/02/38/2.shtml">
+                    了解密<br/>集系列
+                </a>
+            </li>
+            <li>
+            	<a href="/wap/event/2015/02/38/rule.shtml">
+                    如何<br/>采集
+                </a>
+            </li>
+            <li>
+            	<a href="/wap/event/2015/02/38/sucai.shtml">
+                    我的<br/>素材
+                </a>
+            </li>
+            <li>
+            	<a href="/wap/event/2015/02/38/lottery.shtml">
+                    我的<br/>森田
+                </a>
+            </li>
+        </ul>
+    </footer>
 </body>
 </html>

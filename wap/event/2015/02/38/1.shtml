@@ -15,13 +15,39 @@
 <title>38女人节特别奉献</title>
 </head>
 <body>
-	<div class="p-r">
-        <img src="images/p1/img01.png" width="100%" class="v-b"/>
-        <img src="images/p1/img02.png" width="100%" class="v-b"/>
-        <img src="images/p1/img03.png" width="100%" class="v-b"/>
-        <img src="images/p1/img04.png" width="100%" class="v-b"/>
-        <img src="images/p1/img05.png" width="100%" class="v-b"/>
-        <a class="index-btn" href="javascript:;"></a>
+	<div id="contents">
+        <div class="p-r">
+            <img src="images/p1/img01.png" width="100%" class="v-b"/>
+            <img src="images/p1/img02.png" width="100%" class="v-b"/>
+            <img src="images/p1/img03.png" width="100%" class="v-b"/>
+            <img src="images/p1/img04.png" width="100%" class="v-b"/>
+            <img src="images/p1/img05.png" width="100%" class="v-b"/>
+            <a class="index-btn" href="javascript:;"></a>
+        </div>
     </div>
+    <footer class="footer">
+    	<ul class="menu" id="menu">
+        	<li>
+            	<a href="/wap/event/2015/02/38/2.shtml">
+                    了解密<br/>集系列
+                </a>
+            </li>
+            <li>
+            	<a href="/wap/event/2015/02/38/rule.shtml">
+                    如何<br/>采集
+                </a>
+            </li>
+            <li>
+            	<a href="/wap/event/2015/02/38/sucai.shtml">
+                    我的<br/>素材
+                </a>
+            </li>
+            <li>
+            	<a href="/wap/event/2015/02/38/lottery.shtml">
+                    我的<br/>森田
+                </a>
+            </li>
+        </ul>
+    </footer>
 </body>
 </html>

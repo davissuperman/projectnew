@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 body,ul,ol,dl,li,dd,p,form,h1,h2,h3{margin:0;padding:0;}
-body{font-size:100%; background:#bdddf2; color:#000;}
+body{font-size:100%; background:#ddf0f6; color:#000;}
 .bd-bg{background:#ddf0f6 url(../images/bg.jpg) no-repeat bottom;background-size: 100% auto; padding-bottom:1.5rem;}
 i,em{font-style:normal; vertical-align:middle;}
 img{border:none;}
@@ -134,3 +134,17 @@ height: 1.8rem;
 background-position: right center;
 margin-right: 20px; margin-top:20px; margin-bottom:20px;
 }
+
+#contents{position: absolute;top: 0;bottom: 60px;width: 100%;left: 0;overflow-y: scroll;}
+
+.footer{ height:60px; text-align:center; font-weight:bold;background:#fff; position: absolute; bottom:0; width:100%; overflow: hidden;}
+.footer .menu{display: -webkit-box;display: -moz-box;display: -o-box;display: -ms-box;display: box;color:#999;  background:#333; height:60px;}
+.footer .menu li{-webkit-box-flex: 1;-o-box-flex: 1;-moz-box-flex: 1;-ms-box-flex: 1;box-flex: 1; font-size:12px;}
+.footer .menu li.cur{background-image: none;background-color: #262626;
+background-image: -webkit-linear-gradient(top, #0d0d0d,#1a1a1a 10%,#262626 65%,#282828);
+background-image: -moz-linear-gradient(top, #0d0d0d,#1a1a1a 10%,#262626 65%,#282828);
+background-image: -o-linear-gradient(top, #0d0d0d,#1a1a1a 10%,#262626 65%,#282828);
+background-image: linear-gradient(top, #0d0d0d,#1a1a1a 10%,#262626 65%,#282828);
+text-shadow: rgba(0,0,0,0.5) 0 -0.08em 0;-webkit-box-shadow: #1a1a1a 0 0 0.25em inset;-moz-box-shadow: #1a1a1a 0 0 0.25em inset;box-shadow: #1a1a1a 0 0 0.25em inset;color:#fff;}
+.footer .menu li a{color:#999; text-decoration:none; display:block; height:60px;}
+.footer .menu li.cur a{color:#fff;}

@@ -14,8 +14,8 @@
 
 <title>38女人节特别奉献</title>
 </head>
-<body class="bd-bg">
-	<div id="contents">
+<body>
+	<div id="contents" class="bd-bg">
         <div class="get-sucai">
             <h1 style="font-size:0.5rem;">还没集齐四个素材哦！<br/>继续加油！</h1>
             <div class="mt-10">
@@ -37,5 +37,29 @@
             </div>
         </div>
    	</div>
+    <footer class="footer">
+    	<ul class="menu" id="menu">
+        	<li>
+            	<a href="/wap/event/2015/02/38/2.shtml">
+                    了解密<br/>集系列
+                </a>
+            </li>
+            <li>
+            	<a href="/wap/event/2015/02/38/rule.shtml">
+                    如何<br/>采集
+                </a>
+            </li>
+            <li>
+            	<a href="/wap/event/2015/02/38/sucai.shtml">
+                    我的<br/>素材
+                </a>
+            </li>
+            <li>
+            	<a href="/wap/event/2015/02/38/lottery.shtml">
+                    我的<br/>森田
+                </a>
+            </li>
+        </ul>
+    </footer>
 </body>
 </html>

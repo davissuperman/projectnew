@@ -14,8 +14,8 @@
 
 <title>38女人节特别奉献</title>
 </head>
-<body class="bd-bg">
-	<div id="contents">
+<body>
+	<div id="contents" class="bd-bg">
         <div class="reg-box">
         	<h1>恭喜您！</h1>
             <div class="text">还差一步！请准确完整的填写您的收货信息，我们会尽快将密集系列限量礼盒送到您的手中。</div>
@@ -38,5 +38,29 @@
             </div>
         </div>
    	</div>
+    <footer class="footer">
+    	<ul class="menu" id="menu">
+        	<li>
+            	<a href="/wap/event/2015/02/38/2.shtml">
+                    了解密<br/>集系列
+                </a>
+            </li>
+            <li>
+            	<a href="/wap/event/2015/02/38/rule.shtml">
+                    如何<br/>采集
+                </a>
+            </li>
+            <li>
+            	<a href="/wap/event/2015/02/38/sucai.shtml">
+                    我的<br/>素材
+                </a>
+            </li>
+            <li>
+            	<a href="/wap/event/2015/02/38/lottery.shtml">
+                    我的<br/>森田
+                </a>
+            </li>
+        </ul>
+    </footer>
 </body>
 </html>
