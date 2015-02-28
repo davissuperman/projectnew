@@ -1,5 +1,6 @@
 $(document).ready(function(e) {
     initPageFontSize();
+	closeLayer();
 });
 $(window).resize(function(){
 	initPageFontSize();
@@ -13,6 +14,29 @@ function initPageFontSize(){
 		$(".bd-bg").css({"padding-bottom":'1.5rem'});
 	}
 	$(".bd-bg").css({"min-height":wh+'px'});
+}
+
+/*close layer*/
+function closeLayer(){
+	var $layerbox = $("#layer-box"),$btn_close = $layerbox.find(".btn-close");
+	$btn_close.bind('click',function(){
+		//$layerbox.hide();
+		var wini = document.documentElement.clientWidth+"px";
+		$layerbox.animate({right:'-'+wini}, 'fast', '', function(){$layerbox.hide();});
+	});
+}
+/*show layer*/
+function showLayer($elem,title){
+	var $layerbox = $("#layer-box"),
+	$layerbg = $layerbox.find(".layer-bg"),
+	$title = $layerbox.find(".layer-title .title"),
+	$layerwrap = $layerbox.find(".layer-wrap");
+	$title.html(title);
+	
+	var wini = document.documentElement.clientWidth+"px";
+	$layerbox.show().css({right:'-'+wini});
+	$layerbox.animate({right:0}, 'fast', '' ,'');
+	$elem.show().siblings().hide();
 }
 
 //模拟alert

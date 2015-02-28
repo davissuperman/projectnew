@@ -28,9 +28,23 @@
                 快将您的幸运分享给您的好友<br/>一起收获“女神套装”
             </div>
            <div>
-                <a class="btn-red" href="javascript:;">分享给好友</a>
+                <a class="btn-red" href="javascript:;" onClick="showLayer($('#share-weixin'))">分享给好友</a>
             </div>
         </div>
     </div>
+    
+    <div class="layer-box hide" id="layer-box">
+    	<div class="layer-bg"></div>
+        <div class="layer-wrap">
+            <div class="layer-con">
+                <div class="share-weixin" id="share-weixin">
+                    <div class="icon-share"></div>
+                    <h2 class="ta-c">点击右上角，分享给好友<br>一起收获“女神套装”</h2>
+                    <div class="ta-c mt-20"><a class="btn-red btn-close" href="javascript:;">返回</a></div>
+                </div>
+            </div>    
+        </div>
+    </div>
+    
 </body>
 </html>

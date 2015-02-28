@@ -120,3 +120,17 @@ input,textarea,select,button{font-size:1em;}
 .form-ul li{background:#005e9a; margin-bottom:2px; height:40px;}
 .form-ul li .control-label{ float:left; line-height:40px;width:22%; text-align:center;font-size:18px;color:#fff;}
 .form-ul .input-text{float:right;font-size:18px; height:30px; margin:0; padding:0; width:75%; margin-top:5px; margin-right:5px; border:none;}
+
+.layer-box{position: absolute; width: 100%;height: 100%;top: 0;z-index: 99;}
+.layer-bg{position: fixed;width: 100%;height: 100%;background: #000;top: 0;left: 0;z-index: 99; opacity:0.9;}
+.layer-wrap{ width:100%; position:absolute; top:0; left:50%;z-index:100;margin-left: -50%;}
+.layer-con{color:#fff;}
+.share-weixin h2{font-size:0.4rem; line-height:0.6rem;}
+
+.icon-share {
+background: url(../images/icon-share.png) no-repeat;
+background-size: auto 100%;
+height: 1.8rem;
+background-position: right center;
+margin-right: 20px; margin-top:20px; margin-bottom:20px;
+}
