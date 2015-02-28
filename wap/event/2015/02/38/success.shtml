@@ -39,7 +39,7 @@
             <div class="layer-con">
                 <div class="share-weixin" id="share-weixin">
                     <div class="icon-share"></div>
-                    <h2 class="ta-c">点击右上角，分享给好友<br>一起收获“女神套装”</h2>
+                    <h2 class="ta-c">点击右上角，<br />分享给好友，<br />一起收获“女神套装”</h2>
                     <div class="ta-c mt-20"><a class="btn-red btn-close" href="javascript:;">返回</a></div>
                 </div>
             </div>    
