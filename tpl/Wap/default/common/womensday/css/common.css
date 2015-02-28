@@ -119,4 +119,4 @@ input,textarea,select,button{font-size:1em;}
 .form-ul{ margin:20px;}
 .form-ul li{background:#005e9a; margin-bottom:2px; height:40px;}
 .form-ul li .control-label{ float:left; line-height:40px;width:22%; text-align:center;font-size:18px;color:#fff;}
-.form-ul .input-text{float:right;font-size:18px; margin-right:5px; height:30px; margin:0; padding:0; width:75%; margin-top:3px; margin-right:3px;}
+.form-ul .input-text{float:right;font-size:18px; margin-right:5px; height:30px; margin:0; padding:0; width:75%; margin-top:3px; margin-right:3px; border:none;}
