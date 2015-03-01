@@ -16,15 +16,41 @@
 </head>
 <body>
 	<div id="contents" class="bd-bg">
-        <div class="get-sucai">
-            <h1 style="font-size:0.5rem;">您已获得密集系列<br/>限量礼盒一份！</h1>
-            <div class="btn-box">
-                <a class="btn-red" href="javascript:;" style="width:3.5rem;">更多优惠套餐<i class="icon01 fr"></i></a>
+    	<div style="padding:10px;">
+        	<div style="font-size:0.3rem;">输入您登记的手机号码</div>
+        	<div style="font-size:0.3rem;">查询自己是否中奖：</div>
+            <div style="font-size:0.3rem;" class="mt-10">
+            	<input type="tel" value="13888888888" style="font-size:0.3rem;width:100%; padding:0; margin:0; height:0.5rem;" disabled/>
             </div>
-            <div class="btn-box">
-                <a class="btn-red" href="http://mp.weixin.qq.com/s?__biz=MjM5OTE0NzY2MQ==&mid=203004830&idx=1&sn=cceb19debe91fef2752a7441a071fa57#rd" style="width:3.5rem;">关注森田<i class="icon01 fr"></i></a>
+            <div class="ta-c mt-20" style="font-size:0.3rem;">
+            	<a class="btn-red" href="javascript:;">查询</a>
             </div>
+            <div class="no-lottery">
+            	<p>很可惜您未中奖</p>
+                <p>非常感谢参与活动</p>
+                <p>点击更多优惠套装</p>
+                <p>即可进入森田天猫旗舰店</p>
+                <p>购买官方正品面膜</p>
+            </div>
+            <div class="has-lottery">
+            	<p>恭喜您被抽中了！</p>
+                <p>我们将在活动结束后</p>
+                <p>统一寄送奖品</p>
+                <p>敬请期待</p>
+            </div>
+            
+            <div class="ta-c">
+                <div class="btn-box">
+                    <a class="btn-red" href="javascript:;" style="width:3.5rem;">更多优惠套餐<i class="icon01 fr"></i></a>
+                </div>
+                <div class="btn-box">
+                    <a class="btn-red" href="http://mp.weixin.qq.com/s?__biz=MjM5OTE0NzY2MQ==&mid=203004830&idx=1&sn=cceb19debe91fef2752a7441a071fa57#rd" style="width:3.5rem;">关注森田<i class="icon01 fr"></i></a>
+                </div>
+            </div>
+            
+            
         </div>
+        
    	</div>
     <footer class="footer">
     	<ul class="menu" id="menu">

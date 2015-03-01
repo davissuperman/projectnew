@@ -25,7 +25,9 @@
                     <div class="name">玻尿酸</div>
                     <div class="clrfix">
                         <div class="img has">
-                            <img src="images/get/img01.jpg" class="v-b"/>
+                        	<a href="/wap/event/2015/02/38/3.shtml">
+                            	<img src="images/get/img01.jpg" class="v-b"/>
+                            </a>
                         </div>
                         <div class="num">X32</div>
                     </div>
@@ -34,7 +36,9 @@
                     <div class="name">天羽丝</div>
                     <div class="clrfix">
                         <div class="img has">
-                            <img src="images/get/img02.jpg" class="v-b"/>
+                        	<a href="/wap/event/2015/02/38/5.shtml">
+                            	<img src="images/get/img02.jpg" class="v-b"/>
+                            </a>
                         </div>
                         <div class="num">X21</div>
                     </div>
@@ -43,7 +47,9 @@
                     <div class="name">竹炭颗粒</div>
                     <div class="clrfix">
                         <div class="img has">
-                            <img src="images/get/img03.jpg" class="v-b"/>
+                        	<a href="/wap/event/2015/02/38/4.shtml">
+                           		<img src="images/get/img03.jpg" class="v-b"/>
+                            </a>
                         </div>
                         <div class="num">X9</div>
                     </div>
@@ -52,7 +58,9 @@
                     <div class="name">蝴蝶眼膜</div>
                     <div class="clrfix">
                         <div class="img">
-                            <img src="images/get/img04.jpg" class="v-b"/>
+                        	<a href="/wap/event/2015/02/38/6.shtml">
+                            	<img src="images/get/img04.jpg" class="v-b"/>
+                            </a>
                         </div>
                         <div class="num">X0</div>
                     </div>
@@ -67,9 +75,9 @@
             </div>
             <div class="ta-c btn-box">
                 <div class="mt-30">
-                    <a class="btn-red" href="javascript:;">领取女神礼盒<i class="icon01 fr"></i></a>
+                    <a class="btn-red" href="/wap/event/2015/02/38/reg.shtml">领取女神礼盒<i class="icon01 fr"></i></a>
                 </div>
-                <div class="mt-10">素材收集完毕！快去领奖吧！</div>
+                <div class="mt-10">素材集齐完毕！</div>
             </div>
             
         </div>

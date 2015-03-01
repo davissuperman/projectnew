@@ -17,15 +17,15 @@
 <body>
 	<div id="contents" class="bd-bg">
         <div class="success-wrap">
-            <h1>恭喜您！</h1>
+            <h1>提交成功</h1>
             <div class="text">
-                提交成功！<br/>奖品将在活动结束后统一发送，<br/>感谢您的参与！
+                中奖者名单将于次日公布<br/>您也可于次日点击右下方<br/>“我的森田”查询是否获奖<br/>请继续关注本次活动！
             </div>
             <div class="mt-20">
                 <img src="images/get/img02.png" width="60%" />
             </div>
             <div class="text">
-                快将您的幸运分享给您的好友<br/>一起收获“女神套装”
+                把活动告诉您的好友<br/>一起收获“女神套装”吧
             </div>
            <div>
                 <a class="btn-red" href="javascript:;" onClick="showLayer($('#share-weixin'))">分享给好友</a>

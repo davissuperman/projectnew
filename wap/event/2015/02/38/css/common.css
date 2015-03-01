@@ -73,7 +73,7 @@ input,textarea,select,button{font-size:1em;}
 .index-btn{ background:url(../images/p1/img06.png) no-repeat;background-size:auto 100%;width: 3.56rem;height: 0.7rem;position: absolute;top: 9rem;left:50%; margin-left:-1.78rem; cursor:pointer;}
 
 /*btn*/
-.btn-red,.btn-red:active,.btn-red:visited{background:#d6000f; height:0.8rem; line-height:0.8rem; padding:0 0.4rem;color:#fff; font-size:0.46rem; display:inline-block; cursor:pointer; -moz-border-radius:3rem;-ms-border-radius:3rem;-o-border-radius:3rem;-webkit-border-radius:3rem;border-radius:3rem; text-decoration:none;}
+.btn-red,.btn-red:active,.btn-red:visited{background:#d6000f; height:0.7rem; line-height:0.7rem; padding:0 0.4rem;color:#fff; font-size:0.4rem; display:inline-block; cursor:pointer; -moz-border-radius:3rem;-ms-border-radius:3rem;-o-border-radius:3rem;-webkit-border-radius:3rem;border-radius:3rem; text-decoration:none;}
 .btn-disabled{ background:#646464 !important;}
 
 /*icon*/
@@ -111,11 +111,11 @@ input,textarea,select,button{font-size:1em;}
 /*提交成功*/
 .success-wrap{ text-align:center;}
 .success-wrap h1{font-size:0.5rem; padding:0.3rem 0;}
-.success-wrap .text{color:#005982;font-size:0.38rem;font-weight:bold; line-height:0.5rem;}
+.success-wrap .text{color:#005982;font-size:0.35rem;font-weight:bold; line-height:0.45rem;}
 
 /*提交信息*/
-.reg-box h1{font-size:0.55rem; text-align:center; padding:0.3rem 0;}
-.reg-box .text{color:#005982;font-size:0.4rem; padding:0 10px; line-height:0.55rem;}
+.reg-box h1{font-size:0.4rem; text-align:center; padding:0.3rem 0;}
+.reg-box .text{color:#005982;font-size:0.3rem; padding:0 10px; line-height:0.45rem;}
 .form-ul{ margin:20px;}
 .form-ul li{background:#005e9a; margin-bottom:2px; height:40px;}
 .form-ul li .control-label{ float:left; line-height:40px;width:22%; text-align:center;font-size:18px;color:#fff;}
@@ -148,3 +148,6 @@ background-image: linear-gradient(top, #0d0d0d,#1a1a1a 10%,#262626 65%,#282828);
 text-shadow: rgba(0,0,0,0.5) 0 -0.08em 0;-webkit-box-shadow: #1a1a1a 0 0 0.25em inset;-moz-box-shadow: #1a1a1a 0 0 0.25em inset;box-shadow: #1a1a1a 0 0 0.25em inset;color:#fff;}
 .footer .menu li a{color:#999; text-decoration:none; display:block; height:40px;font-size: 14px; padding:10px 0; line-height:20px;}
 .footer .menu li.cur a{color:#fff;}
+
+.no-lottery{ text-align:center;font-size:0.3rem;color:#005982; line-height:0.4rem; margin-top:10px;}
+.has-lottery{text-align:center;font-size:0.3rem;color:red; line-height:0.4rem; margin-top:10px;}
