@@ -15,13 +15,23 @@
 <title>38女人节特别奉献</title>
 </head>
 <body>
-	<div id="contents">
-        <img src="images/p5/img_01.png" class="v-b" width="100%" />
-        <img src="images/p5/img_02.png" class="v-b" width="100%" />
-        <img src="images/p5/img_03.png" class="v-b" width="100%" />
-        <img src="images/p5/img_04.png" class="v-b" width="100%" />
+	<div id="contents" class="bd-bg">
+        <div class="get-sucai">
+            <h1 style="font-size:0.4rem;">还没集齐四个素材哦！<br/>继续加油！</h1>
+            <div class="mt-10">
+                <a class="btn-red" href="javascript:;">点击获得更多素材</a>
+            </div>
+            <div class="times clrfix">
+                <div class="bd-lf"></div>
+                <div class="text">您还有 3 次机会</div>
+                <div class="bd-rg"></div>
+            </div>
+            <div class="btn-box">
+                <a class="btn" href="javascript:;">邀请TA获<br/>得更多机会</a>
+            </div>
+        </div>
     </div>
-    <footer class="footer">
+     <footer class="footer">
     	<ul class="menu" id="menu">
         	<li>
             	<a href="/wap/event/2015/02/38/2.shtml">

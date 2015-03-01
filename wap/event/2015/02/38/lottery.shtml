@@ -8,19 +8,24 @@
 <meta content="telephone=no" name="format-detection" />
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<link href="css/common.css?v=432432" rel="stylesheet" type="text/css" />
+<link href="css/common.css?v=323232" rel="stylesheet" type="text/css" />
 <script src="js/zepto.min.js" type="text/javascript"></script>
 <script src="js/common.js?v=432432" type="text/javascript"></script>
 
 <title>38女人节特别奉献</title>
 </head>
 <body>
-	<div id="contents">
-        <img src="images/p5/img_01.png" class="v-b" width="100%" />
-        <img src="images/p5/img_02.png" class="v-b" width="100%" />
-        <img src="images/p5/img_03.png" class="v-b" width="100%" />
-        <img src="images/p5/img_04.png" class="v-b" width="100%" />
-    </div>
+	<div id="contents" class="bd-bg">
+        <div class="get-sucai">
+            <h1 style="font-size:0.5rem;">您已获得密集系列<br/>限量礼盒一份！</h1>
+            <div class="btn-box">
+                <a class="btn-red" href="javascript:;" style="width:3.5rem;">更多优惠套餐<i class="icon01 fr"></i></a>
+            </div>
+            <div class="btn-box">
+                <a class="btn-red" href="http://mp.weixin.qq.com/s?__biz=MjM5OTE0NzY2MQ==&mid=203004830&idx=1&sn=cceb19debe91fef2752a7441a071fa57#rd" style="width:3.5rem;">关注森田<i class="icon01 fr"></i></a>
+            </div>
+        </div>
+   	</div>
     <footer class="footer">
     	<ul class="menu" id="menu">
         	<li>
@@ -38,7 +43,7 @@
                     我的<br/>素材
                 </a>
             </li>
-            <li>
+            <li class="cur">
             	<a href="/wap/event/2015/02/38/lottery.shtml">
                     我的<br/>森田
                 </a>
