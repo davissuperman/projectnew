@@ -81,6 +81,157 @@ class NumberAction extends UserAction {
     }
 
 
+    public function change(){
+        $res = M('greeting')->select();
+        $i = 0;
+        $viewSum = 0;
+        $sum = 254850;
+        $leftSum = 0;
+
+
+        //share info
+        $shareSum = 0;
+
+        //accept
+        $acceptSum = 0;
+        $leftAccept = 0;
+        $acceptNum = 18654;
+
+
+        //wantcard
+        $wantCardSum = 0;
+        $leftWantCard = 0;
+        $wantCardNum = 10533;
+
+        //subscribe
+        $subcribeSum = 0;
+        $leftSubcribe = 0;
+        $subcribeNum = 12378;
+
+
+        foreach($res as $each){
+            $openId = $each['openid'];
+            $map = array();
+            $arr = array();
+            $view= $each['view'];
+            $id = $each['id'];
+            $i++;
+            if($i < 200){
+                $view = rand(70,260);
+            }else if($i<1800){
+                $view = rand(20,80);
+            }else if($i<11000){
+                $view = rand(6,20);
+            }else if($i<=14991){
+                $view = rand(0,6);
+            }else if($i<=16901){
+                $leftSum = $sum - $viewSum;
+                $view = rand(0,8);
+                //echo "Left:  ". $leftSum ." sum ".$viewSum. "  i  ".$i."  view ".$view."<br/>";
+            }else if($i<=16991){
+                $leftSum = $sum - $viewSum;
+
+                if($i > 16961){
+
+                    if($leftSum == 0){
+                        $view = 0;
+                    }else{
+                        if($leftSum <= 150){
+                            $view = $leftSum;
+                        }else{
+                            $view = rand(90,250);
+                        }
+
+                    }
+                   // echo "Left:  ". $leftSum ." sum ".$viewSum. "  i  ".$i."  view ".$view."<br/>";
+                }else{
+                    $view = rand(0,8);
+                }
+
+            }
+            $viewSum += $view;
+
+            if($view > 20 ){
+                $accept = rand(2,11);
+            }else{
+                $accept = rand(0,1);
+            }
+
+            $leftAccept = $acceptNum - $acceptSum;
+            if($leftAccept <= 11){
+                $accept = $leftAccept;
+            }else if($leftAccept == 0){
+                $accept  = 0;
+            }
+            $acceptSum += $accept;
+
+
+            //subscribe
+            if($view > 20){
+                $subscribe = rand($accept - 5,$accept);
+                if($subscribe <= 0){
+                    $subscribe = 1;
+                }
+            }else{
+                $subscribe = rand(0,$accept);
+            }
+            $leftSubcribe = $subcribeNum - $subcribeSum;
+            if($leftSubcribe <= 11){
+                $subscribe = $leftSubcribe;
+            }else if($leftSubcribe == 0){
+                $subscribe  = 0;
+            }
+            $subcribeSum += $subscribe;
+            echo $subcribeSum . "   ".$i."   ".$subscribe."<br/>";
+
+            //want card
+            $wantCard = rand(0,$accept);
+
+            if($wantCard <= $subscribe ){
+                $wantCard = rand($subscribe,$accept);
+            }
+
+            $leftWantCard = $wantCardNum - $wantCardSum;
+            if($leftWantCard <= 11){
+                $wantCard = $leftWantCard;
+            }else if($leftWantCard == 0){
+                $wantCard  = 0;
+            }
+            $wantCardSum += $wantCard;
+
+
+
+
+            if($view > 150 ){
+                $share = rand(5,10);
+            }else if($view>20){
+                $share = rand(2,5);
+            }else if($view == 0){
+                $share = 0;
+            }else {
+                $share = rand(0,2);
+            }
+            $shareSum += $share;
+
+
+            //joins
+            $joins = rand(0,$accept);
+
+            $map['view'] = $view;
+            $map['accept'] = $accept;
+            $map['subscribe'] = $subscribe;
+            $map['wantcard'] = $wantCard;
+            $map['share'] = $share;
+            $map['joins'] = $joins;
+            $map['openid'] = $openId;
+            M('greeting_list')->add($map);
+        }
+
+        echo $subcribeSum ."    ".$i;
+    }
+
+
+
     public function saveCard(){
         $res = M('bonus_info')->where(array('illegal' => 0))->select();
         $n = 15;
