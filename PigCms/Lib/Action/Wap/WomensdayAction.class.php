@@ -196,15 +196,7 @@ class WomensdayAction extends BonusAction {
         $this->assign("shareimage",$img);
 
         $url = "http://". $this->_server('HTTP_HOST');
-        $postUrl = $url."/index.php?g=Wap&m=Greeting&a=show";
-        $this->assign("posturl",$postUrl);
-
-        $this->assign("formurl",$url."/index.php?g=Wap&m=Greeting&a=inputdata");
-        $fromUser = "森田药妆";
-        $nickname = $selfUserInfo['nickname'];
-
-        $this->assign('nickname',  $nickname);
-        $this->assign('fromuser',  $fromUser);
+        $this->assign('url',  $url."/index.php?g=Wap&m=Womensday&a=index");
 
         $this->assign("siteurl",$this->url);
 
