@@ -17,7 +17,6 @@
 <body>
 	<div id="contents" class="bd-bg">
     	<div style="padding:10px;">
-        	<div style="font-size:0.3rem;">输入您登记的手机号码</div>
         	<div style="font-size:0.3rem;">查询自己是否中奖：</div>
             <div style="font-size:0.3rem;" class="mt-10">
             	<input type="tel" value="13888888888" style="font-size:0.3rem;width:100%; padding:0; margin:0; height:0.5rem;" disabled/>
