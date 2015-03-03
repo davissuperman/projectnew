@@ -34,8 +34,20 @@
             </div>
             <div class="btn-box">
                 <a class="btn" style="line-height:1rem;" href="/wap/event/2015/02/38/no_col.shtml">领取礼品</a>
-                <a class="btn" href="javascript:;">邀请TA获<br/>得更多机会</a>
+                <a class="btn" href="javascript:;" onClick="showLayer($('#share-weixin'))">邀请TA获<br/>得更多机会</a>
             </div>
+        </div>
+    </div>
+    <div class="layer-box hide" id="layer-box">
+    	<div class="layer-bg"></div>
+        <div class="layer-wrap">
+            <div class="layer-con">
+                <div class="share-weixin" id="share-weixin">
+                    <div class="icon-share"></div>
+                    <h2 class="ta-c">点击右上角，<br />分享给好友，<br />邀请TA获得更多机会</h2>
+                    <div class="ta-c mt-20"><a class="btn-red btn-close" href="javascript:;">返回</a></div>
+                </div>
+            </div>    
         </div>
     </div>
     <footer class="footer">
