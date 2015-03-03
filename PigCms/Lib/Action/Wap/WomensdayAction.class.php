@@ -198,11 +198,31 @@ class WomensdayAction extends BonusAction {
         $url = "http://". $this->_server('HTTP_HOST');
         $this->assign('url',  $url."/index.php?g=Wap&m=Womensday&a=index");
 
+        //$userOpenId 是否在表womensday中存在 不存在则创建模板
+
         $this->assign("siteurl",$this->url);
 
         $this->display();
     }
+    /*
+     * 开户
+     */
+    public function saveInfo($openId){
+        //首先查看此OPENID 是否存在 无论gid
+        $bonusInfo = M('womensday')->where(array('openid' => $openId))->find();
+        if(!$bonusInfo){
+            //创建个人主页
+            $d['openid'] = $openId;
+            $d['item1'] = 0;
+            $d['item2'] = 0;
+            $d['item3'] = 0;
+            $d['item4'] = 0;
+            $d['clicksum'] = 4;
+            $d['createtime'] = time();
+            M("womensday")->add($d);
+        }
 
+    }
     public function getReward(){
         $agent = $_SERVER['HTTP_USER_AGENT'];
 //        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
@@ -364,6 +384,9 @@ class WomensdayAction extends BonusAction {
         $this->assign("shareimage",$img);
 
         $this->assign("siteurl",$this->url);
+
+        //$userOpenId在表womensday中是否存在 如果不存在则是第一次参见 创建模板
+
 
         $this->display();
     }
