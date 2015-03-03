@@ -85,7 +85,7 @@ input,textarea,select,button{font-size:1em;}
 .rule dt{font-size:0.6rem; text-align:center;font-weight:bold; margin-bottom:10px;}
 .rule dd{font-size:0.4rem; line-height:0.6rem;}
 
-/*活动素材*/
+/*娲诲姩绱犳潗*/
 .get-sucai{ text-align:center; padding-top:30px;}
 .get-sucai h1{font-size:0.6rem; padding:0.2rem 0; font-weight:normal;}
 .get-sucai .name{color:#005982;font-size:0.4rem;font-weight:bold; margin-bottom:0.2rem;}
@@ -108,12 +108,12 @@ input,textarea,select,button{font-size:1em;}
 .sucai-box{ padding-top:20px;}
 .sucai-box .btn-box{font-size:0.4rem;color:#292929;}
 
-/*提交成功*/
+/*鎻愪氦鎴愬姛*/
 .success-wrap{ text-align:center;}
 .success-wrap h1{font-size:0.5rem; padding:0.3rem 0;}
 .success-wrap .text{color:#005982;font-size:0.35rem;font-weight:bold; line-height:0.45rem;}
 
-/*提交信息*/
+/*鎻愪氦淇℃伅*/
 .reg-box h1{font-size:0.4rem; text-align:center; padding:0.3rem 0;}
 .reg-box .text{color:#005982;font-size:0.3rem; padding:0 10px; line-height:0.45rem;}
 .form-ul{ margin:20px;}
