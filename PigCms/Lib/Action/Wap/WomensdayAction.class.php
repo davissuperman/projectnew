@@ -393,24 +393,42 @@ class WomensdayAction extends BonusAction {
             //重定向到首页
             $url = $this->url."/index.php?g=Wap&m=womensday&a=index";
             header("location:$url");
+        }
+        //判断今天的点击数 是否还有剩余
+        //获取今天的开始 和 结束时间
+        $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d"),date("Y")));
+        $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d"),date("Y")));
+        $map['createtime'] = array('egt',$start);
+        $map['createtime'] = array('elt',$end);
+        $numberForSecond= M('womensday_list')->where($map)->count('id');
+        Log :: write("aaaaaaaaaaaaaaaaaaaaaaa   ".$numberForSecond);
+        $item = 0;
+        if($numberForSecond > 5){
+            //当天已经没有机会
         }else{
-            //判断今天的点击数 是否还有剩余
-            //获取今天的开始 和 结束时间
-            $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d"),date("Y")));
-            $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d"),date("Y")));
-            $map['createtime'] = array('egt',$start);
-            $map['createtime'] = array('elt',$end);
-            $numberForSecond= M('womensday_list')->where($map)->count('id');
-            Log :: write("aaaaaaaaaaaaaaaaaaaaaaa   ".$numberForSecond);
-            if($numberForSecond > 5){
-                //当天已经没有机会
-            }else{
-                $left = 4 - $numberForSecond -1;
-                //插入记录
-                $this->saveList($userOpenId,$numberForSecond);
+            $left = 4 - $numberForSecond -1;
+            //插入记录
+            $this->saveList($userOpenId,$numberForSecond);
+            //取得的东西
+            $clickCount = $info['clicksum']*0 + 1;
+            if($clickCount == 1){
+                $item = 1;
+            }else if($clickCount == 2){
+                $item = 2;
+            }else if($clickCount == 3){
+                $item = 3;
+            }else if($clickCount == 4){
+                $item = rand(1,3);
+            }else if($clickCount == 5){
+                $item = 4;
             }
+        }
 
-
+        if($item){
+            //根据item 取得元素
+            $itemInfo = M('womensday_item')->where(array('id' => $item))->find();
+            $this->assign('itemname',$itemInfo['des']);
+            $this->assign('itemsrc',$itemInfo['src']);
         }
         $this->assign('left',$left);
         $this->display();
