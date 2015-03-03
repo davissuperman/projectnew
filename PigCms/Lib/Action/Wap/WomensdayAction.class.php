@@ -401,7 +401,6 @@ class WomensdayAction extends BonusAction {
         $map['createtime'] = array('egt',$start);
         $map['createtime'] = array('elt',$end);
         $numberForSecond= M('womensday_list')->where($map)->count('id');
-        Log :: write("aaaaaaaaaaaaaaaaaaaaaaa   ".$numberForSecond);
         $item = 0;
         $hasOportunity = false;
         if($numberForSecond >= 4){
@@ -417,7 +416,6 @@ class WomensdayAction extends BonusAction {
 
             //取得的东西
             $clickCount = $info['clicksum']*1 + 1;
-            Log :: write("click ccccccccccccccc   ".$clickCount);
             if($clickCount == 1){
                 $item = 1;
             }else if($clickCount == 2){
