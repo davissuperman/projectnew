@@ -360,7 +360,7 @@ class WomensdayAction extends BonusAction {
 
         $this->assign('title',$selfUserInfo['nickname']."38女人节特别奉献!");
         $this->assign('bonusdesc','');
-        $img = "http://wx.drjou.cc/tpl/Wap/default/common/year/images/logo2.jpg";
+        $img = "http://wx.drjou.cc/tpl/Wap/default/common/womensday/images/logo3.png";
         $this->assign("shareimage",$img);
 
         $this->assign("siteurl",$this->url);
@@ -665,7 +665,7 @@ class WomensdayAction extends BonusAction {
         $this->assign("url",$shareUrl);
 
 
-        $img = "http://wx.drjou.cc/tpl/Wap/default/common/year/images/logo2.jpg";
+        $img = "http://wx.drjou.cc/tpl/Wap/default/common/womensday/images/logo3.png";
         $this->assign("shareimage",$img);
         $this->assign("siteurl",$this->url);
         $this->display();
