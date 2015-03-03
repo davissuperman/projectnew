@@ -82,15 +82,18 @@
                 success: function (res) {
                     //如果分享成功 加50分
                     $.get(
-                            "{pigcms::$siteurl}/index.php?g=Wap&m=Greeting&a=saveShareInfo",
+                            "{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=shareInfo",
                             function(data) {
-                                if(data == '1'){
-                                    mnAlert("分享成功!");
+                                if(data == '2'){
+                                    alert("分享成功!");
+                                }else if(data == '1'){
+                                    alert("今天已经分享过!");
                                 }else{
-                                    mnAlert("系统忙!");
+                                    alert("系统忙!");
                                 }
                             }
                     );
+                    location.href = "{pigcms::$siteurl}";
                 },
                 cancel: function (res) {
                     //alert('已取消');
@@ -111,15 +114,18 @@
                 success: function (res) {
                     //如果分享成功 加50分
                     $.get(
-                            "{pigcms::$siteurl}/index.php?g=Wap&m=Greeting&a=saveShareInfo",
+                            "{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=shareInfo",
                             function(data) {
-                                if(data == '1'){
-                                    mnAlert("分享成功!");
+                                if(data == '2'){
+                                    alert("分享成功!");
+                                }else if(data == '1'){
+                                    alert("今天已经分享过!");
                                 }else{
-                                    mnAlert("系统忙!");
+                                    alert("系统忙!");
                                 }
                             }
                     );
+                    location.href = "{pigcms::$siteurl}";
                 },
                 cancel: function (res) {
                     //alert('已取消');

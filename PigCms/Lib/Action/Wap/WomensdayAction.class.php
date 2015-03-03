@@ -41,16 +41,11 @@ class WomensdayAction extends BonusAction {
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
         if ($_GET['show']) {
-            $userOpenId= $_GET['openid'];
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
                 //测试的时候使用
             //如果存在 则不需要再通过weixin API调取用户信息
             $selfUserInfo['headimgurl'] = $fansInfo['headimgurl'];
             $selfUserInfo['nickname'] = $fansInfo['nickname'];
-            $this->assign('gid', $gid);
-            $this->assign('openid', $userOpenId);
-            $this->assign('userinfo', $selfUserInfo);
-            $this->assign('title', $selfUserInfo['nickname']."我要年终奖");
         } else {
             //根据open id获取用户信息，查看是否存在
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
@@ -402,13 +397,24 @@ class WomensdayAction extends BonusAction {
         $map['createtime'] = array('elt',$end);
         $numberForSecond= M('womensday_list')->where($map)->count('id');
         $item = 0;
+        $totalNumber = 4;
+        //判断是否有分享
+        $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d"),date("Y")));
+        $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d"),date("Y")));
+        $map['sharetime'] = array('egt',$start);
+        $map['sharetime'] = array('elt',$end);
+        $numberShare= M('womensday_share')->where($map)->count('id');
+        if($numberShare){
+            $totalNumber = 5;
+        }
+
         $hasOportunity = false;
-        if($numberForSecond >= 4){
+        if($numberForSecond >= $totalNumber){
             //当天已经没有机会
 
         }else{
             $hasOportunity = true;
-            $left = 4 - $numberForSecond -1;
+            $left = $totalNumber - $numberForSecond -1;
             //插入记录
             $this->saveList($userOpenId,$numberForSecond);
             //总点击数加1
@@ -626,6 +632,39 @@ class WomensdayAction extends BonusAction {
         $this->display();
     }
 
+    public function shareInfo(){
+        //只要分享了 额外获取一次机会
+        $userOpenId= cookie('user_openid');
+        if(!$userOpenId){
+            $userOpenId = "localenv";
+        }
+        if($userOpenId){
+            //判断OPENID是否存在
+            $info = M('womensday')->where(array('openid' => $userOpenId))->find();
+            if($info){
+                //判断是否已经分享过
+                $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d"),date("Y")));
+                $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d"),date("Y")));
+                $map['sharetime'] = array('egt',$start);
+                $map['sharetime'] = array('elt',$end);
+                $number= M('womensday_share')->where($map)->count('id');
+                if($number){
+                    //已经分享过
+                    echo 1;
+                }else{
+                    $d['openid'] = $userOpenId;
+                    M("womensday_share")->add($d);
+                    echo 2;
+                }
+            }else{
+                echo 0;
+            }
+
+        }else{
+            echo 0;
+        }
+
+    }
 
 
     public function saveList($openId,$numberForSecond=0){
