@@ -101,7 +101,7 @@ input,textarea,select,button{font-size:1em;}
 .sucai-list{width:5.6rem; margin:0 auto;}
 .sucai-list .item{width:50%;float:left; margin-top:0.3rem;}
 .sucai-list .name{color:#005982;font-size:0.4rem; margin-bottom:5px;}
-.sucai-list .img{float:left;width:2rem; border:2px solid #00489a;}
+.sucai-list .img{float:left;width:1.6rem; border:2px solid #00489a;}
 .sucai-list .img.has{border:2px solid #e60012;}
 .sucai-list .img img{width:100%;}
 .sucai-list .num{float:left;width:0.5rem;font-size:0.4rem; margin-top:0.8rem;color:#005982; margin-left:5px;}
