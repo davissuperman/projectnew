@@ -394,19 +394,32 @@ class WomensdayAction extends BonusAction {
             $url = $this->url."/index.php?g=Wap&m=womensday&a=index";
             header("location:$url");
         }else{
-            //取得当前的个数
-            $clickSum = $info['clicksum'];
-            if($clickSum > 0){
-                //表示还有机会
-                $left = $clickSum - 1;
+            //判断今天的点击数 是否还有剩余
+            //获取今天的开始 和 结束时间
+            $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d"),date("Y")));
+            $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d"),date("Y")));
+            $map['createtime'] = array('egt',$start);
+            $map['createtime'] = array('elt',$end);
+            $numberForSecond= M('womensday_list')->where($map)->count('id');
+            Log :: write("aaaaaaaaaaaaaaaaaaaaaaa   ".$numberForSecond);
+            if($numberForSecond > 5){
+                //当天已经没有机会
             }else{
-                //已经没有机会了
-                $left = 0;
+                $left = 4 - $numberForSecond;
+                //插入记录
+                $this->saveList($userOpenId,$numberForSecond);
             }
+
 
         }
         $this->assign('left',$left);
         $this->display();
+    }
+
+    public function saveList($openId,$numberForSecond=0){
+        $d['openid'] = $openId;
+        $d['click'] = $numberForSecond*1 + 1;
+        M("womensday_list")->add($d);
     }
     public function page2() {
         $agent = $_SERVER['HTTP_USER_AGENT'];
