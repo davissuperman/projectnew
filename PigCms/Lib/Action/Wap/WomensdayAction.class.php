@@ -428,7 +428,7 @@ class WomensdayAction extends BonusAction {
             //根据item更新个数
             M("womensday")->where(array('id' => $info['id']))->setInc('item'.$item, 1);
         }
-
+        Log :: write( $item ."  itemmmmmmmmmmmmmmmmmmmmmmmm ");
         if($item){
             //根据item 取得元素
             $itemInfo = M('womensday_item')->where(array('id' => $item))->find();
