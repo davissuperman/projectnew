@@ -404,7 +404,7 @@ class WomensdayAction extends BonusAction {
         Log :: write("aaaaaaaaaaaaaaaaaaaaaaa   ".$numberForSecond);
         $item = 0;
         $hasOportunity = false;
-        if($numberForSecond > 4){
+        if($numberForSecond >= 4){
             //当天已经没有机会
 
         }else{
