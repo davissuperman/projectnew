@@ -616,6 +616,13 @@ class WomensdayAction extends BonusAction {
         $this->assign('item2',$info['item2']);
         $this->assign('item3',$info['item3']);
         $this->assign('item4',$info['item4']);
+        //判断四种素材是否都有
+        $fourItems =  false;
+        if($info['item1'] && $info['item2'] && $info['item3'] && $info['item4']){
+            $fourItems = true;
+        }
+        $this->assign('fouritems',$fourItems);
+
         $this->display();
     }
 
