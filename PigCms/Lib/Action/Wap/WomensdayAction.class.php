@@ -402,13 +402,24 @@ class WomensdayAction extends BonusAction {
         $map['createtime'] = array('elt',$end);
         $numberForSecond= M('womensday_list')->where($map)->count('id');
         $item = 0;
+        $totalNumber = 4;
+        //判断是否有分享
+        $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d"),date("Y")));
+        $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d"),date("Y")));
+        $map['sharetime'] = array('egt',$start);
+        $map['sharetime'] = array('elt',$end);
+        $numberShare= M('womensday_share')->where($map)->count('id');
+        if($numberShare){
+            $totalNumber = 5;
+        }
+
         $hasOportunity = false;
-        if($numberForSecond >= 4){
+        if($numberForSecond >= $totalNumber){
             //当天已经没有机会
 
         }else{
             $hasOportunity = true;
-            $left = 4 - $numberForSecond -1;
+            $left = $totalNumber - $numberForSecond -1;
             //插入记录
             $this->saveList($userOpenId,$numberForSecond);
             //总点击数加1
