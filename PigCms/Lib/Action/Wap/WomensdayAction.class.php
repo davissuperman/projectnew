@@ -413,7 +413,7 @@ class WomensdayAction extends BonusAction {
             M("womensday")->where(array('id' => $info['id']))->setInc('clicksum', 1);
 
             //取得的东西
-            $clickCount = $info['clicksum']*0 + 1;
+            $clickCount = $info['clicksum']*1 + 1;
             Log :: write("click ccccccccccccccc   ".$clickCount);
             if($clickCount == 1){
                 $item = 1;
