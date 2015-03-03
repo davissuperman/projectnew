@@ -82,10 +82,12 @@
                 success: function (res) {
                     //如果分享成功 加50分
                     $.get(
-                            "{pigcms::$siteurl}/index.php?g=Wap&m=Greeting&a=saveShareInfo",
+                            "{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=shareInfo",
                             function(data) {
-                                if(data == '1'){
+                                if(data == '2'){
                                     mnAlert("分享成功!");
+                                }else if(data == '1'){
+                                    mnAlert("今天已经分享过!");
                                 }else{
                                     mnAlert("系统忙!");
                                 }
@@ -111,10 +113,12 @@
                 success: function (res) {
                     //如果分享成功 加50分
                     $.get(
-                            "{pigcms::$siteurl}/index.php?g=Wap&m=Greeting&a=saveShareInfo",
+                            "{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=shareInfo",
                             function(data) {
-                                if(data == '1'){
+                                if(data == '2'){
                                     mnAlert("分享成功!");
+                                }else if(data == '1'){
+                                    mnAlert("今天已经分享过!");
                                 }else{
                                     mnAlert("系统忙!");
                                 }

@@ -626,6 +626,36 @@ class WomensdayAction extends BonusAction {
         $this->display();
     }
 
+    public function shareInfo(){
+        //只要分享了 额外获取一次机会
+        $userOpenId= cookie('user_openid');
+        if($userOpenId){
+            //判断OPENID是否存在
+            $info = M('womensday')->where(array('openid' => $userOpenId))->find();
+            if($info){
+                //判断是否已经分享过
+                $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d"),date("Y")));
+                $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d"),date("Y")));
+                $map['sharetime'] = array('egt',$start);
+                $map['sharetime'] = array('elt',$end);
+                $number= M('womensday_share')->where($map)->count('id');
+                if($number){
+                    //已经分享过
+                    echo 1;
+                }else{
+                    $d['openid'] = $userOpenId;
+                    M("womensday_share")->add($d);
+                    echo 2;
+                }
+            }else{
+                echo 0;
+            }
+
+        }else{
+            echo 0;
+        }
+
+    }
 
 
     public function saveList($openId,$numberForSecond=0){
