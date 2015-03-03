@@ -27,16 +27,28 @@
                 <div class="bd-rg"></div>
             </div>
             <div class="btn-box">
-                <a class="btn" href="javascript:;">邀请TA获<br/>得更多机会</a>
+                <a class="btn" href="javascript:;" onClick="showLayer($('#share-weixin'))">邀请TA获<br/>得更多机会</a>
             </div>
             <div class="btn-box">
-                <a class="btn-red" href="javascript:;" style="width:3.5rem;">更多优惠套餐<i class="icon01 fr"></i></a>
+                <a class="btn-red" href="http://sentianyaozhuang.tmall.com/p/shuihuoxinyan.htm?spm=a1z10.1-b.w5001-2626526147.7.Nwb0X4&scene=taobao_shop" style="width:3.5rem;" target="_blank">更多优惠套餐<i class="icon01 fr"></i></a>
             </div>
             <div class="btn-box">
                 <a class="btn-red" href="http://mp.weixin.qq.com/s?__biz=MjM5OTE0NzY2MQ==&mid=203004830&idx=1&sn=cceb19debe91fef2752a7441a071fa57#rd" style="width:3.5rem;">关注森田<i class="icon01 fr"></i></a>
             </div>
         </div>
    	</div>
+    <div class="layer-box hide" id="layer-box">
+    	<div class="layer-bg"></div>
+        <div class="layer-wrap">
+            <div class="layer-con">
+                <div class="share-weixin" id="share-weixin">
+                    <div class="icon-share"></div>
+                    <h2 class="ta-c">点击右上角，<br />分享给好友，<br />邀请TA获得更多机会</h2>
+                    <div class="ta-c mt-20"><a class="btn-red btn-close" href="javascript:;">返回</a></div>
+                </div>
+            </div>    
+        </div>
+    </div>
     <footer class="footer">
     	<ul class="menu" id="menu">
         	<li>
