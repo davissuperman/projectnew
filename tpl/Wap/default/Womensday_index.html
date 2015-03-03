@@ -85,11 +85,11 @@
                             "{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=shareInfo",
                             function(data) {
                                 if(data == '2'){
-                                    mnAlert("分享成功!");
+                                    alert("分享成功!");
                                 }else if(data == '1'){
-                                    mnAlert("今天已经分享过!");
+                                    alert("今天已经分享过!");
                                 }else{
-                                    mnAlert("系统忙!");
+                                    alert("系统忙!");
                                 }
                             }
                     );
@@ -117,11 +117,11 @@
                             "{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=shareInfo",
                             function(data) {
                                 if(data == '2'){
-                                    mnAlert("分享成功!");
+                                    alert("分享成功!");
                                 }else if(data == '1'){
-                                    mnAlert("今天已经分享过!");
+                                    alert("今天已经分享过!");
                                 }else{
-                                    mnAlert("系统忙!");
+                                    alert("系统忙!");
                                 }
                             }
                     );
@@ -142,12 +142,33 @@
         });
 
         $(function(){
+            $("#testbutton").click(function(){
+                $.get(
+                        "{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=shareInfo",
+                        function(data) {
+                            if(data == '2'){
+                                alert("分享成功!");
+                            }else if(data == '1'){
+                                alert("今天已经分享过!");
+                            }else{
+                                alert("系统忙!");
+                            }
+                        }
+                );
+                //刷新当前URL
+               // location.href = "{pigcms::$siteurl}";
+            });
+
         });
     </script>
     <title>38女人节特别奉献</title>
 </head>
+
 <body>
 <div id="contents">
+    <!--<div class="p-r">-->
+        <!--<button id="testbutton">testbutton</button>-->
+    <!--</div>-->
     <div class="p-r">
         <img src="{pigcms::RES}/womensday/images/p1/img01.png" width="100%" class="v-b"/>
         <img src="{pigcms::RES}/womensday/images/p1/img02.png" width="100%" class="v-b"/>

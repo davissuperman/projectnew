@@ -41,16 +41,11 @@ class WomensdayAction extends BonusAction {
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
         if ($_GET['show']) {
-            $userOpenId= $_GET['openid'];
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
                 //测试的时候使用
             //如果存在 则不需要再通过weixin API调取用户信息
             $selfUserInfo['headimgurl'] = $fansInfo['headimgurl'];
             $selfUserInfo['nickname'] = $fansInfo['nickname'];
-            $this->assign('gid', $gid);
-            $this->assign('openid', $userOpenId);
-            $this->assign('userinfo', $selfUserInfo);
-            $this->assign('title', $selfUserInfo['nickname']."我要年终奖");
         } else {
             //根据open id获取用户信息，查看是否存在
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
@@ -640,6 +635,9 @@ class WomensdayAction extends BonusAction {
     public function shareInfo(){
         //只要分享了 额外获取一次机会
         $userOpenId= cookie('user_openid');
+        if(!$userOpenId){
+            $userOpenId = "localenv";
+        }
         if($userOpenId){
             //判断OPENID是否存在
             $info = M('womensday')->where(array('openid' => $userOpenId))->find();
