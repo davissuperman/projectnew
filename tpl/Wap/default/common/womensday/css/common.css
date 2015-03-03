@@ -78,7 +78,7 @@ input,textarea,select,button{font-size:1em;}
 
 /*icon*/
 .icon01{ background:url(../images/get/i01.png) no-repeat; background-size:auto 100%; display:inline-block; width:0.5rem;height:0.5rem; vertical-align:middle;}
-.btn-red .icon01{float:right; margin:0.15rem 0 0 0.2rem;}
+.btn-red .icon01{float:right; margin:0.1rem 0 0 0.1rem;}
 
 /*rule*/
 .rule{color:#005982; padding:0.2rem;}
