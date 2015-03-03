@@ -199,7 +199,7 @@ class WomensdayAction extends BonusAction {
         $this->assign('url',  $url."/index.php?g=Wap&m=Womensday&a=index");
 
         //$userOpenId 是否在表womensday中存在 不存在则创建模板
-
+        $this->saveInfo($userOpenId);
         $this->assign("siteurl",$this->url);
 
         $this->display();
