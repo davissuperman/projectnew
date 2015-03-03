@@ -385,9 +385,27 @@ class WomensdayAction extends BonusAction {
 
         $this->assign("siteurl",$this->url);
 
-        //$userOpenId在表womensday中是否存在 如果不存在则是第一次参见 创建模板
+        //$userOpenId
+        //判断OPENID是否存在 在表womensday中
+        $info = M('womensday')->where(array('openid' => $userOpenId))->find();
+        $left = 0;
+        if(!$info){
+            //重定向到首页
+            $url = $this->url."/index.php?g=Wap&m=womensday&a=index";
+            header("location:$url");
+        }else{
+            //取得当前的个数
+            $clickSum = $info['clicksum'];
+            if($clickSum > 0){
+                //表示还有机会
+                $left = $clickSum - 1;
+            }else{
+                //已经没有机会了
+                $left = 0;
+            }
 
-
+        }
+        $this->assign('left',$left);
         $this->display();
     }
     public function page2() {
