@@ -217,7 +217,7 @@ class WomensdayAction extends BonusAction {
             $d['item2'] = 0;
             $d['item3'] = 0;
             $d['item4'] = 0;
-            $d['clicksum'] = 4;
+            $d['clicksum'] = 0;
             $d['createtime'] = time();
             M("womensday")->add($d);
         }
@@ -409,6 +409,9 @@ class WomensdayAction extends BonusAction {
             $left = 4 - $numberForSecond -1;
             //插入记录
             $this->saveList($userOpenId,$numberForSecond);
+            //总点击数加1
+            M("womensday")->where(array('id' => $info['id']))->setInc('clicksum', 1);
+
             //取得的东西
             $clickCount = $info['clicksum']*0 + 1;
             if($clickCount == 1){
