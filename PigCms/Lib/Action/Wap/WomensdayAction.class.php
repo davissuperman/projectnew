@@ -414,6 +414,7 @@ class WomensdayAction extends BonusAction {
 
             //取得的东西
             $clickCount = $info['clicksum']*0 + 1;
+            Log :: write("click ccccccccccccccc   ".$clickCount);
             if($clickCount == 1){
                 $item = 1;
             }else if($clickCount == 2){
