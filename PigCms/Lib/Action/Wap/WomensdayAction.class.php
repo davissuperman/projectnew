@@ -405,7 +405,7 @@ class WomensdayAction extends BonusAction {
             if($numberForSecond > 5){
                 //当天已经没有机会
             }else{
-                $left = 4 - $numberForSecond;
+                $left = 4 - $numberForSecond -1;
                 //插入记录
                 $this->saveList($userOpenId,$numberForSecond);
             }
