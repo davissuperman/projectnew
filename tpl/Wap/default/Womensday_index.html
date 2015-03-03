@@ -181,37 +181,6 @@
         </li>
     </ul>
 </footer>
-<script>
-    $("#btnGoNext").bind('click',function(){
-        $.get(
-                "{pigcms::$siteurl}/index.php?g=Wap&m=Greeting&a=saveData&type=1",
-                function(data) {
-                }
-        );
-        $(this).parents(".page-item").next().show().siblings().hide();
-    });
-    $("#btn-share").bind('click',function(){
-        $.get(
-                "{pigcms::$siteurl}/index.php?g=Wap&m=Greeting&a=saveData&type=2",
-                function(data) {
-                }
-        );
-
-    });
-    $("#btn-isend").bind('click',function(){
-		//var $btn = $(this);
-        $.get(
-                "{pigcms::$siteurl}/index.php?g=Wap&m=Greeting&a=saveData&type=3",
-                function(data) {
-                }
-        );
-		var url = "{pigcms::$formurl}";
-        $("#formurl").submit();
-        window.location.href = url;
-		
-        //$btn.parents(".page-item").next().show().siblings().hide();
-    });
-</script>
 
 </body>
 </html>
