@@ -193,8 +193,6 @@ class WomensdayAction extends BonusAction {
         $this->assign('url',  $url."/index.php?g=Wap&m=Womensday&a=index");
         $this->assign('shareurl',  $this->get_url());
 
-        Log :: write($userOpenId .' openiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii ');
-
         //$userOpenId 是否在表womensday中存在 不存在则创建模板
         $this->saveInfo($userOpenId);
         $this->assign("siteurl",$this->url);
@@ -1614,9 +1612,7 @@ class WomensdayAction extends BonusAction {
     public function shareInfo(){
         //只要分享了 额外获取一次机会
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId){
-            $userOpenId = "localenv";
-        }
+        Log :: write($userOpenId.' openiddddddddddddddddddddddddddddddddddddddddddd');
         if($userOpenId){
             //判断OPENID是否存在
             $info = M('womensday')->where(array('openid' => $userOpenId))->find();
