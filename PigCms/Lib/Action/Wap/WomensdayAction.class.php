@@ -661,7 +661,6 @@ class WomensdayAction extends BonusAction {
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
         if ($_GET['show']) {
-            $userOpenId= $_GET['openid'];
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
 
         } else {
@@ -936,6 +935,10 @@ class WomensdayAction extends BonusAction {
             $url = $this->url."/index.php?g=Wap&m=womensday&a=index";
             header("location:$url");
         }
+        $username = $_POST['username'];
+        $telephone = $_POST['telephone'];
+        $province = $_POST['province'];
+        $address = $_POST['address'];
 
 
         $this->display();
