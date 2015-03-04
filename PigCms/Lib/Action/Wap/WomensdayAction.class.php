@@ -1132,8 +1132,8 @@ class WomensdayAction extends BonusAction {
 
         $award = false;
         $isPost = false;
-        if(isset( $_POST['telephone'] )  &&  $_POST['telephone']){
-            $telephoneFromForm = $_POST['telephone'];
+        if(isset( $_POST['telephonehidden'] )  &&  $_POST['telephonehidden']){
+            $telephoneFromForm = $_POST['telephonehidden'];
             $listAward = M('womensday_award')->where(array('openid' => $userOpenId,'telephone'=>$telephoneFromForm,'award'=>1))->find();
             if($listAward){
                 $award = true;
