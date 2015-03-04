@@ -148,10 +148,14 @@
 <body>
 <div id="contents" class="bd-bg">
     <div class="success-wrap">
-        <h1>提交成功</h1>
-        <div class="text">
-            中奖者名单将于次日公布<br/>您也可于次日点击右下方<br/>“我的森田”查询是否获奖<br/>请继续关注本次活动！
-        </div>
+        <if condition="$errormsg eq null">
+            <h1>提交成功</h1>
+            <div class="text">
+                中奖者名单将于次日公布<br/>您也可于次日点击右下方<br/>“我的森田”查询是否获奖<br/>请继续关注本次活动！
+            </div>
+        <else/>
+            <h1>{pigcms::$errormsg}</h1>
+        </if>
         <div class="mt-20">
             <img src="{pigcms::RES}/womensday/images/get/img02.png" width="60%" />
         </div>

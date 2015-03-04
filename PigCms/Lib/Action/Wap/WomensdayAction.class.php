@@ -940,7 +940,20 @@ class WomensdayAction extends BonusAction {
         $province = $_POST['province'];
         $address = $_POST['address'];
 
-
+        //判断此手机号是否存在
+        $list = M('womensday_award')->where(array('telephone' => $telephone))->find();
+        if(!$list){
+            $d['openid'] = $userOpenId;
+            $d['username'] = $username;
+            $d['telephone'] = $telephone;
+            $d['province'] = $province;
+            $d['address'] = $address;
+            M("womensday_award")->add($d);
+            $errorMsg = null;
+        }else{
+            $errorMsg = "手机号已经存在！";
+        }
+        $this->assign('errormsg',$errorMsg);
         $this->display();
     }
 
