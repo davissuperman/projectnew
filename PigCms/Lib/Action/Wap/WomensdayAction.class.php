@@ -645,6 +645,9 @@ class WomensdayAction extends BonusAction {
 
         //$userOpenId
         //判断OPENID是否存在 在表womensday中
+        if(!$userOpenId){
+            $userOpenId = 'localenv';
+        }
         $info = M('womensday')->where(array('openid' => $userOpenId))->find();
         $left = 0;
         if(!$info){
