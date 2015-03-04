@@ -153,23 +153,26 @@
             <div>还差一步！请准确填写您的收货信息，我们会从每天提交信息的用户中随机抽取获奖的幸运儿，并于次日公布中奖者名单。</div>
             <div>信息提交后无法更改，一旦得奖，我们将根据您所填写的信息寄送奖品，请准确填写。</div>
         </div>
-        <ul class="form-ul">
-            <li class="clrfix">
-                <div class="control-label">姓名</div><input type="text" class="input-text" />
-            </li>
-            <li class="clrfix">
-                <div class="control-label">电话</div><input type="tel" class="input-text" />
-            </li>
-            <li class="clrfix">
-                <div class="control-label">省市</div><input type="text" class="input-text" />
-            </li>
-            <li class="clrfix">
-                <div class="control-label">地址</div><input type="text" class="input-text" />
-            </li>
-        </ul>
-        <div class="ta-c">
-            <a class="btn-red" href="/wap/event/2015/02/38/success.shtml">确认</a>
-        </div>
+        <form method="post" action="/index.php?g=Wap&m=Womensday&a=success">
+            <ul class="form-ul">
+                <li class="clrfix">
+                    <div class="control-label">姓名</div><input type="text" class="input-text" />
+                </li>
+                <li class="clrfix">
+                    <div class="control-label">电话</div><input type="tel" class="input-text" />
+                </li>
+                <li class="clrfix">
+                    <div class="control-label">省市</div><input type="text" class="input-text" />
+                </li>
+                <li class="clrfix">
+                    <div class="control-label">地址</div><input type="text" class="input-text" />
+                </li>
+            </ul>
+            <div class="ta-c">
+                <input type="submit" name="确认"/><br/>
+                <a class="btn-red" href="/wap/event/2015/02/38/success.shtml">确认</a>
+            </div>
+        </form>
     </div>
 </div>
 <footer class="footer">
