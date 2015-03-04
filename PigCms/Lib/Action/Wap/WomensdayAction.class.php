@@ -665,6 +665,9 @@ class WomensdayAction extends BonusAction {
 
         $submitTelephone = false;
         //判断是否已经提交过个人信息
+        if(!$userOpenId){
+            $userOpenId = 'localenv';
+        }
         $infoAward = M('womensday_award')->where(array('openid' => $userOpenId))->find();
         if($infoAward){
             $submitTelephone = true;
@@ -1888,6 +1891,9 @@ class WomensdayAction extends BonusAction {
         $this->assign('shareurl',  $this->get_url());
         //$userOpenId
         //判断OPENID是否存在 在表womensday中
+        if(!$userOpenId){
+            $userOpenId = 'localenv';
+        }
         $info = M('womensday')->where(array('openid' => $userOpenId))->find();
         $left = 0;
         if(!$info){
