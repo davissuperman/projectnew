@@ -33,8 +33,6 @@ class WomensdayAction extends BonusAction {
 //          }
         //统计添加浏览数和浏览记录 tel 相当与open_id
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId)
-            $userOpenId = 'localenv';
 
         $gid = 1;
         //统计end
@@ -241,8 +239,6 @@ class WomensdayAction extends BonusAction {
 //          }
         //统计添加浏览数和浏览记录 tel 相当与open_id
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId)
-            $userOpenId = 'localenv';
 
         $gid = 1;
         //统计end
@@ -500,8 +496,6 @@ class WomensdayAction extends BonusAction {
 //                exit('<center>游戏已经结束！谢谢你的参与</center>');
 //          }
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId)
-            $userOpenId = 'localenv';
 
         $gid = 1;
         //统计end
@@ -692,8 +686,6 @@ class WomensdayAction extends BonusAction {
 //                exit('<center>游戏已经结束！谢谢你的参与</center>');
 //          }
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId)
-            $userOpenId = 'localenv';
 
         $gid = 1;
         //统计end
@@ -841,8 +833,6 @@ class WomensdayAction extends BonusAction {
 //                exit('<center>游戏已经结束！谢谢你的参与</center>');
 //          }
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId)
-            $userOpenId = 'localenv';
 
         $gid = 1;
         //统计end
@@ -1015,8 +1005,6 @@ class WomensdayAction extends BonusAction {
 //                exit('<center>游戏已经结束！谢谢你的参与</center>');
 //          }
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId)
-            $userOpenId = 'localenv';
 
         $gid = 1;
         //统计end
@@ -1192,8 +1180,6 @@ class WomensdayAction extends BonusAction {
 //                exit('<center>游戏已经结束！谢谢你的参与</center>');
 //          }
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId)
-            $userOpenId = 'localenv';
 
         $gid = 1;
         //统计end
@@ -1338,8 +1324,6 @@ class WomensdayAction extends BonusAction {
 //                exit('<center>游戏已经结束！谢谢你的参与</center>');
 //          }
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId)
-            $userOpenId = 'localenv';
 
         $gid = 1;
         //统计end
@@ -1494,8 +1478,6 @@ class WomensdayAction extends BonusAction {
 //                exit('<center>游戏已经结束！谢谢你的参与</center>');
 //          }
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId)
-            $userOpenId = 'localenv';
 
         $gid = 1;
         //统计end
