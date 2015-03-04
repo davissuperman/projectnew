@@ -1626,6 +1626,7 @@ class WomensdayAction extends BonusAction {
                 $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d"),date("Y")));
                 $map['sharetime'] = array('egt',$start);
                 $map['sharetime'] = array('elt',$end);
+                $map['openid'] = array('eq',$userOpenId);
                 $number= M('womensday_share')->where($map)->count('id');
                 if($number){
                     //已经分享过
