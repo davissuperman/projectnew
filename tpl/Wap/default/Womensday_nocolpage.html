@@ -147,20 +147,26 @@
 </head>
 <body>
 <div id="contents" class="bd-bg">
-    <div class="get-sucai">
-        <h1 style="font-size:0.4rem;">还没集齐四个素材哦！<br/>继续加油！</h1>
-        <div>
-            <a class="btn-red" href="javascript:;">点击获得更多素材</a>
+    <if condition="$totalitem eq false">
+        <div class="get-sucai">
+            <h1 style="font-size:0.4rem;">还没集齐四个素材哦！<br/>继续加油！</h1>
+            <div>
+                <a class="btn-red" href="/index.php?g=Wap&m=Womensday&a=getreward">点击获得更多素材</a>
+            </div>
+            <div class="times clrfix">
+                <div class="bd-lf"></div>
+                <div class="text">您还有 {pigcms::$left} 次机会</div>
+                <div class="bd-rg"></div>
+            </div>
+            <div class="btn-box">
+                <a class="btn" href="javascript:;" onClick="showLayer($('#share-weixin'))">邀请TA获<br/>得更多机会</a>
+            </div>
         </div>
-        <div class="times clrfix">
-            <div class="bd-lf"></div>
-            <div class="text">您还有 3 次机会</div>
-            <div class="bd-rg"></div>
+    <else/>
+        <div class="mt-30">
+            <a class="btn-red" href="/index.php?g=Wap&m=Womensday&a=reg"><span class="fl">领取女神礼盒</span><i class="icon01 fr"></i></a>
         </div>
-        <div class="btn-box">
-            <a class="btn" href="javascript:;" onClick="showLayer($('#share-weixin'))">邀请TA获<br/>得更多机会</a>
-        </div>
-    </div>
+     </if>
 </div>
 <div class="layer-box hide" id="layer-box">
     <div class="layer-bg"></div>

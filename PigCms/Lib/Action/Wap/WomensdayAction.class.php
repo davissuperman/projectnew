@@ -404,15 +404,17 @@ class WomensdayAction extends BonusAction {
         $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d"),date("Y")));
         $map['createtime'] = array('egt',$start);
         $map['createtime'] = array('elt',$end);
+        $map['openid'] = array('eq',$userOpenId);
         $numberForSecond= M('womensday_list')->where($map)->count('id');
         $item = 0;
         $totalNumber = 4;
         //判断是否有分享
-        $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d"),date("Y")));
-        $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d"),date("Y")));
-        $map['sharetime'] = array('egt',$start);
-        $map['sharetime'] = array('elt',$end);
-        $numberShare= M('womensday_share')->where($map)->count('id');
+        $start2 = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d"),date("Y")));
+        $end2 = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d"),date("Y")));
+        $map2['sharetime'] = array('egt',$start2);
+        $map2['sharetime'] = array('elt',$end2);
+        $map2['openid'] = array('eq',$userOpenId);
+        $numberShare= M('womensday_share')->where($map2)->count('id');
         if($numberShare){
             $totalNumber = 5;
         }
@@ -456,6 +458,35 @@ class WomensdayAction extends BonusAction {
         $this->display();
     }
 
+    public function getLeftNumber($openId){
+        $totalNumber = 4;
+        //判断是否有分享
+        $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d"),date("Y")));
+        $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d"),date("Y")));
+        $map['sharetime'] = array('egt',$start);
+        $map['sharetime'] = array('elt',$end);
+        $map['openid'] = array('eq',$openId);
+        $numberShare= M('womensday_share')->where($map)->count('id');
+        if($numberShare){
+            $totalNumber = 5;
+        }
+
+
+        $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d"),date("Y")));
+        $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d"),date("Y")));
+        $map2['createtime'] = array('egt',$start);
+        $map2['createtime'] = array('elt',$end);
+        $map2['openid'] = array('eq',$openId);
+        $numberForSecond= M('womensday_list')->where($map2)->count('id');
+
+        if($numberForSecond >= $totalNumber){
+            //当天已经没有机会
+            $left = 0;
+        }else{
+            $left = $totalNumber - $numberForSecond -1;
+        }
+        return $left;
+    }
     public function mysucai(){
         $agent = $_SERVER['HTTP_USER_AGENT'];
 //        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
@@ -1437,6 +1468,16 @@ class WomensdayAction extends BonusAction {
             $url ="http://wx.drjou.cc"."/index.php?g=Wap&m=Womensday&a=index";
             header("location:$url");
         }
+
+        $itemInfo = M('womensday')->where(array('openid' => $userOpenId))->find();
+        $totalItem = false;
+        if($itemInfo){
+            if($itemInfo['item1'] && $itemInfo['item2'] && $itemInfo['item3'] && $itemInfo['item4']){
+                $totalItem = true;
+            }
+        }
+        $this->assign("totalitem",$totalItem);
+        $this->assign("left",$this->getLeftNumber($userOpenId));
         $this->display();
     }
 
