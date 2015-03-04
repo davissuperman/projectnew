@@ -8,9 +8,9 @@
     <meta content="telephone=no" name="format-detection" />
     <meta name="keywords" content="" />
     <meta name="description" content="" />
-    <link href="{pigcms::RES}/womensday/css/common.css?v=3254234324324" rel="stylesheet" type="text/css" />
+    <link href="{pigcms::RES}/womensday/css/common.css?v=4534534534534534" rel="stylesheet" type="text/css" />
     <script src="{pigcms::RES}/womensday/js/zepto.min.js" type="text/javascript"></script>
-    <script src="{pigcms::RES}/womensday/js/common.js?v=432432" type="text/javascript"></script>
+    <script src="{pigcms::RES}/womensday/js/common.js?v=4534534534534534" type="text/javascript"></script>
 
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
     <script>
@@ -65,7 +65,7 @@
                     'previewImage'
                 ],
                 success: function (res) {
-                   // alert(JSON.stringify(res));
+                   // mnAlert(JSON.stringify(res));
                 }
             });
 
@@ -77,7 +77,7 @@
                 link: "{pigcms::$url}",
                 imgUrl: "{pigcms::$shareimage}",
                 trigger: function (res) {
-                    //alert('用户点击分享到朋友圈');
+                    //mnAlert('用户点击分享到朋友圈');
                 },
                 success: function (res) {
                     //如果分享成功 加50分
@@ -85,21 +85,21 @@
                             "{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=shareInfo",
                             function(data) {
                                 if(data == '2'){
-                                    alert("分享成功!");
+                                    mnAlert("分享成功!");
                                 }else if(data == '1'){
-                                    alert("今天已经分享过!");
+                                    mnAlert("今天已经分享过!");
                                 }else{
-                                    alert("系统忙!");
+                                    mnAlert("系统忙!");
                                 }
                             }
                     );
                     location.href = "{pigcms::$shareurl}";
                 },
                 cancel: function (res) {
-                    //alert('已取消');
+                    //mnAlert('已取消');
                 },
                 fail: function (res) {
-                    //alert(JSON.stringify(res));
+                    //mnAlert(JSON.stringify(res));
                 }
             });
 
@@ -109,7 +109,7 @@
                 link: '{pigcms::$url}',
                 imgUrl: '{pigcms::$shareimage}',
                 trigger: function (res) {
-                    //alert('用户点击发送给朋友');
+                    //mnAlert('用户点击发送给朋友');
                 },
                 success: function (res) {
                     //如果分享成功 加50分
@@ -117,112 +117,40 @@
                             "{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=shareInfo",
                             function(data) {
                                 if(data == '2'){
-                                    alert("分享成功!");
+                                    mnAlert("分享成功!");
                                 }else if(data == '1'){
-                                    alert("今天已经分享过!");
+                                    mnAlert("今天已经分享过!");
                                 }else{
-                                    alert("系统忙!");
+                                    mnAlert("系统忙!");
                                 }
                             }
                     );
                     location.href = "{pigcms::$shareurl}";
                 },
                 cancel: function (res) {
-                    //alert('已取消');
+                    //mnAlert('已取消');
                 },
                 fail: function (res) {
-                    //alert(JSON.stringify(res));
+                    //mnAlert(JSON.stringify(res));
                 }
             });
 
         });
         wx.error(function (res) {
-            //alert(res.errMsg);
+            //mnAlert(res.errMsg);
         });
 
-
+        $(function(){
+        });
     </script>
     <title>38女人节特别奉献</title>
 </head>
 <body>
-<div id="contents" class="bd-bg">
-    <div class="sucai-box">
-        <div class="ta-c">
-            <img src="{pigcms::RES}/womensday/images/get/img01.png" width="86%"/>
-        </div>
-        <div class="sucai-list clrfix">
-            <div class="item">
-                <div class="name">玻尿酸</div>
-                <div class="clrfix">
-                    <div class="img has">
-                        <a href="/index.php?g=Wap&m=Womensday&a=item3">
-                            <img src="{pigcms::RES}/womensday/images/get/img01.jpg" class="v-b"/>
-                        </a>
-                    </div>
-                    <div class="num">X{pigcms::$item1}</div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="name">天羽丝</div>
-                <div class="clrfix">
-                    <div class="img has">
-                        <a href="/index.php?g=Wap&m=Womensday&a=item5">
-                            <img src="{pigcms::RES}/womensday/images/get/img02.jpg" class="v-b"/>
-                        </a>
-                    </div>
-                    <div class="num">X{pigcms::$item2}</div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="name">竹炭颗粒</div>
-                <div class="clrfix">
-                    <div class="img has">
-                        <a href="/index.php?g=Wap&m=Womensday&a=item4">
-                            <img src="{pigcms::RES}/womensday/images/get/img03.jpg" class="v-b"/>
-                        </a>
-                    </div>
-                    <div class="num">X{pigcms::$item3}</div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="name">蝴蝶眼膜</div>
-                <div class="clrfix">
-                    <div class="img">
-                        <a href="/wap/event/2015/02/38/6.shtml">
-                            <img src="{pigcms::RES}/womensday/images/get/img04.jpg" class="v-b"/>
-                        </a>
-                    </div>
-                    <div class="num">X{pigcms::$item4}</div>
-                </div>
-            </div>
-        </div>
-
-        <if condition="$submittelephone eq true">
-            <div class="ta-c btn-box">
-                <div class="mt-30">
-                    <a class="btn-red btn-disabled" href="javascript:;">个人信息已经提交！<i class="icon01 fr"></i></a>
-                </div>
-                <div class="mt-10">素材集齐完毕！</div>
-            </div>
-        <elseif condition="$fouritems eq true"/>
-            <div class="ta-c btn-box">
-                <div class="mt-30">
-                    <a class="btn-red" href="/index.php?g=Wap&m=Womensday&a=reg"><span class="fl">领取女神礼盒</span><i class="icon01 fr"></i></a>
-                </div>
-                <div class="mt-10">素材集齐完毕！</div>
-            </div>
-        <else />
-            <div class="ta-c btn-box">
-                <div class="mt-30">
-                    <a class="btn-red btn-disabled" href="javascript:;"><span class="fl">领取女神礼盒</span><i class="icon01 fr"></i></a>
-                </div>
-                <div class="mt-10">素材还没有集齐哦！请继续加油！</div>
-            </div>
-        </if>
-
-
-
-    </div>
+<div id="contents">
+    <img src="images/p6/img_01.png" class="v-b" width="100%" />
+    <img src="images/p6/img_02.png" class="v-b" width="100%" />
+    <img src="images/p6/img_03.png" class="v-b" width="100%" />
+    <img src="images/p6/img_04.png" class="v-b" width="100%" />
 </div>
 <footer class="footer">
     <ul class="menu" id="menu">
@@ -236,7 +164,7 @@
                 如何<br/>采集
             </a>
         </li>
-        <li class="cur">
+        <li>
             <a href="/index.php?g=Wap&m=Womensday&a=mysucai">
                 我的<br/>素材
             </a>
@@ -249,7 +177,30 @@
     </ul>
 </footer>
 <script>
-
+    $(function(){
+        $("#submitform").click(function(event){
+//            mnAlert('a');
+            var username = $("#username").val();
+            var telephone = $("#telephone").val();
+            var province = $("#province").val();
+            var address = $("#address").val();
+            var submitform = false;
+            if(username == ''){
+                mnAlert("请输入姓名");
+            }else if(telephone == ''){
+                mnAlert("请输入手机号");
+            }else if(province == ''){
+                mnAlert("请输入省市");
+            }else if(address == ''){
+                mnAlert("请输入地址");
+            }else{
+                submitform = true;
+            }
+            if(submitform == false){
+                event.preventDefault();
+            }
+        });
+    });
 </script>
 
 </body>
