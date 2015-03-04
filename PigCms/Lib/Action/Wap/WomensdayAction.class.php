@@ -108,7 +108,7 @@ class WomensdayAction extends BonusAction {
                             $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                             if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                                 //code 有错误 需要重定向
-                                $url = $this->url."/index.php?g=Wap&m=womensday&a=index";
+                                $url = $this->url."/index.php?g=Wap&m=Womensday&a=index";
                                 header("location:$url");
                             }
                             $m['id'] = $apidata['id'];
@@ -131,7 +131,7 @@ class WomensdayAction extends BonusAction {
                         $selfUserInfo['nickname'] = $json->nickname;
                     }
                 } else {
-                    $url = urlencode($this->url."/index.php?g=Wap&m=womensday&a=index");
+                    $url = urlencode($this->url."/index.php?g=Wap&m=Womensday&a=index");
                     header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_userinfo&state=sentian#wechat_redirect");
                     exit;
                 }
@@ -247,7 +247,7 @@ class WomensdayAction extends BonusAction {
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
         if ($_GET['show']) {
-            $userOpenId= $_GET['openid'];
+            
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
 
         } else {
@@ -312,7 +312,7 @@ class WomensdayAction extends BonusAction {
                             $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                             if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                                 //code 有错误 需要重定向
-                                $url = $this->url."/index.php?g=Wap&m=womensday&a=index";
+                                $url = $this->url."/index.php?g=Wap&m=Womensday&a=index";
                                 header("location:$url");
                             }
                             $m['id'] = $apidata['id'];
@@ -335,7 +335,7 @@ class WomensdayAction extends BonusAction {
                         $selfUserInfo['nickname'] = $json->nickname;
                     }
                 } else {
-                    $url = urlencode($this->url."/index.php?g=Wap&m=womensday&a=index");
+                    $url = urlencode($this->url."/index.php?g=Wap&m=Womensday&a=index");
                     header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_userinfo&state=sentian#wechat_redirect");
                     exit;
                 }
@@ -395,7 +395,7 @@ class WomensdayAction extends BonusAction {
         $left = 0;
         if(!$info){
             //重定向到首页
-            $url = "http://wx.drjou.cc"."/index.php?g=Wap&m=womensday&a=index";
+            $url = "http://wx.drjou.cc"."/index.php?g=Wap&m=Womensday&a=index";
             header("location:$url");
         }
         //判断今天的点击数 是否还有剩余
@@ -539,7 +539,7 @@ class WomensdayAction extends BonusAction {
                             $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                             if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                                 //code 有错误 需要重定向
-                                $url = $this->url."/index.php?g=Wap&m=womensday&a=index";
+                                $url = $this->url."/index.php?g=Wap&m=Womensday&a=index";
                                 header("location:$url");
                             }
                             $m['id'] = $apidata['id'];
@@ -562,7 +562,7 @@ class WomensdayAction extends BonusAction {
                         $selfUserInfo['nickname'] = $json->nickname;
                     }
                 } else {
-                    $url = urlencode($this->url."/index.php?g=Wap&m=womensday&a=index");
+                    $url = urlencode($this->url."/index.php?g=Wap&m=Womensday&a=index");
                     header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_userinfo&state=sentian#wechat_redirect");
                     exit;
                 }
@@ -623,7 +623,7 @@ class WomensdayAction extends BonusAction {
         $left = 0;
         if(!$info){
             //重定向到首页
-            $url = "http://wx.drjou.cc"."/index.php?g=Wap&m=womensday&a=index";
+            $url = "http://wx.drjou.cc"."/index.php?g=Wap&m=Womensday&a=index";
             header("location:$url");
         }
         $this->assign('item1',$info['item1']);
@@ -707,7 +707,7 @@ class WomensdayAction extends BonusAction {
                             $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                             if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                                 //code 有错误 需要重定向
-                                $url = $this->url."/index.php?g=Wap&m=womensday&a=index";
+                                $url = $this->url."/index.php?g=Wap&m=Womensday&a=index";
                                 header("location:$url");
                             }
                             $m['id'] = $apidata['id'];
@@ -730,7 +730,7 @@ class WomensdayAction extends BonusAction {
                         $selfUserInfo['nickname'] = $json->nickname;
                     }
                 } else {
-                    $url = urlencode($this->url."/index.php?g=Wap&m=womensday&a=index");
+                    $url = urlencode($this->url."/index.php?g=Wap&m=Womensday&a=index");
                     header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_userinfo&state=sentian#wechat_redirect");
                     exit;
                 }
@@ -788,7 +788,7 @@ class WomensdayAction extends BonusAction {
         $left = 0;
         if(!$info){
             //重定向到首页
-            $url = "http://wx.drjou.cc"."/index.php?g=Wap&m=womensday&a=index";
+            $url = "http://wx.drjou.cc"."/index.php?g=Wap&m=Womensday&a=index";
             header("location:$url");
         }
 
@@ -816,7 +816,7 @@ class WomensdayAction extends BonusAction {
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
         if ($_GET['show']) {
-            $userOpenId= $_GET['openid'];
+            
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
 
         } else {
@@ -857,7 +857,7 @@ class WomensdayAction extends BonusAction {
                             $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                             if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                                 //code 有错误 需要重定向
-                                $url = $this->url."/index.php?g=Wap&m=womensday&a=index";
+                                $url = $this->url."/index.php?g=Wap&m=Womensday&a=index";
                                 header("location:$url");
                             }
                             $m['id'] = $apidata['id'];
@@ -880,7 +880,7 @@ class WomensdayAction extends BonusAction {
                         $selfUserInfo['nickname'] = $json->nickname;
                     }
                 } else {
-                    $url = urlencode("http://wx.drjou.cc"."/index.php?g=Wap&m=womensday&a=index");
+                    $url = urlencode("http://wx.drjou.cc"."/index.php?g=Wap&m=Womensday&a=index");
                     header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_userinfo&state=sentian#wechat_redirect");
                     exit;
                 }
@@ -938,7 +938,7 @@ class WomensdayAction extends BonusAction {
         $left = 0;
         if(!$info){
             //重定向到首页
-            $url ="http://wx.drjou.cc"."/index.php?g=Wap&m=womensday&a=index";
+            $url ="http://wx.drjou.cc"."/index.php?g=Wap&m=Womensday&a=index";
             header("location:$url");
         }
         $username = $_POST['username'];
@@ -990,7 +990,6 @@ class WomensdayAction extends BonusAction {
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
         if ($_GET['show']) {
-            $userOpenId= $_GET['openid'];
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
 
         } else {
@@ -1031,7 +1030,7 @@ class WomensdayAction extends BonusAction {
                             $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                             if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                                 //code 有错误 需要重定向
-                                $url = $this->url."/index.php?g=Wap&m=womensday&a=index";
+                                $url = $this->url."/index.php?g=Wap&m=Womensday&a=index";
                                 header("location:$url");
                             }
                             $m['id'] = $apidata['id'];
@@ -1054,7 +1053,7 @@ class WomensdayAction extends BonusAction {
                         $selfUserInfo['nickname'] = $json->nickname;
                     }
                 } else {
-                    $url = urlencode("http://wx.drjou.cc"."/index.php?g=Wap&m=womensday&a=index");
+                    $url = urlencode("http://wx.drjou.cc"."/index.php?g=Wap&m=Womensday&a=index");
                     header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_userinfo&state=sentian#wechat_redirect");
                     exit;
                 }
@@ -1112,7 +1111,7 @@ class WomensdayAction extends BonusAction {
         $left = 0;
         if(!$info){
             //重定向到首页
-            $url ="http://wx.drjou.cc"."/index.php?g=Wap&m=womensday&a=index";
+            $url ="http://wx.drjou.cc"."/index.php?g=Wap&m=Womensday&a=index";
             header("location:$url");
         }
         //判断此人是否收集到四个元素
