@@ -193,6 +193,7 @@ class WomensdayAction extends BonusAction {
 
         $url = "http://". $this->_server('HTTP_HOST');
         $this->assign('url',  $url."/index.php?g=Wap&m=Womensday&a=index");
+        $this->assign('shareurl',  $this->get_url());
 
         //$userOpenId 是否在表womensday中存在 不存在则创建模板
         $this->saveInfo($userOpenId);
