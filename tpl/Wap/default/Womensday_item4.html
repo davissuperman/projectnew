@@ -93,7 +93,7 @@
                                 }
                             }
                     );
-                    location.href = "{pigcms::$shareurl}";
+                  //  location.href = "{pigcms::$shareurl}";
                 },
                 cancel: function (res) {
                     //mnAlert('已取消');
@@ -113,7 +113,6 @@
                 },
                 success: function (res) {
                     //如果分享成功 加50分
-                    alert( "{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=shareInfo");
                     $.get(
                             "{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=shareInfo",
                             function(data) {
