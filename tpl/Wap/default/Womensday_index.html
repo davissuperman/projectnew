@@ -112,10 +112,10 @@
                     //alert('用户点击发送给朋友');
                 },
                 success: function (res) {
-                    alert("{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=shareinfo");
+                    alert("{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=shareInfo");
                     //如果分享成功 加50分
                     $.get(
-                            "{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=shareinfo",
+                            "{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=shareInfo",
                             function(data) {
                                 if(data == '2'){
                                     alert("分享成功!");
