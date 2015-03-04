@@ -140,89 +140,24 @@
             //alert(res.errMsg);
         });
 
-
+        $(function(){
+        });
     </script>
     <title>38女人节特别奉献</title>
 </head>
 <body>
 <div id="contents" class="bd-bg">
-    <div class="sucai-box">
-        <div class="ta-c">
-            <img src="{pigcms::RES}/womensday/images/get/img01.png" width="86%"/>
-        </div>
-        <div class="sucai-list clrfix">
-            <div class="item">
-                <div class="name">玻尿酸</div>
-                <div class="clrfix">
-                    <div class="img has">
-                        <a href="/wap/event/2015/02/38/3.shtml">
-                            <img src="{pigcms::RES}/womensday/images/get/img01.jpg" class="v-b"/>
-                        </a>
-                    </div>
-                    <div class="num">X{pigcms::$item1}</div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="name">天羽丝</div>
-                <div class="clrfix">
-                    <div class="img has">
-                        <a href="/wap/event/2015/02/38/5.shtml">
-                            <img src="{pigcms::RES}/womensday/images/get/img02.jpg" class="v-b"/>
-                        </a>
-                    </div>
-                    <div class="num">X{pigcms::$item2}</div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="name">竹炭颗粒</div>
-                <div class="clrfix">
-                    <div class="img has">
-                        <a href="/wap/event/2015/02/38/4.shtml">
-                            <img src="{pigcms::RES}/womensday/images/get/img03.jpg" class="v-b"/>
-                        </a>
-                    </div>
-                    <div class="num">X{pigcms::$item3}</div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="name">蝴蝶眼膜</div>
-                <div class="clrfix">
-                    <div class="img">
-                        <a href="/wap/event/2015/02/38/6.shtml">
-                            <img src="{pigcms::RES}/womensday/images/get/img04.jpg" class="v-b"/>
-                        </a>
-                    </div>
-                    <div class="num">X{pigcms::$item4}</div>
-                </div>
-            </div>
-        </div>
-
-        <if condition="$submittelephone eq true">
-            <div class="ta-c btn-box">
-                <div class="mt-30">
-                    <a class="btn-red btn-disabled" href="/index.php?g=Wap&m=Womensday&a=reg">个人信息已经提交！<i class="icon01 fr"></i></a>
-                </div>
-                <div class="mt-10">素材集齐完毕！</div>
-            </div>
-        <elseif condition="$fouritems eq true"/>
-            <div class="ta-c btn-box">
-                <div class="mt-30">
-                    <a class="btn-red" href="/index.php?g=Wap&m=Womensday&a=reg">领取女神礼盒<i class="icon01 fr"></i></a>
-                </div>
-                <div class="mt-10">素材集齐完毕！</div>
-            </div>
-        <else />
-            <div class="ta-c btn-box">
-                <div class="mt-30">
-                    <a class="btn-red btn-disabled" href="javascript:;">领取女神礼盒<i class="icon01 fr"></i></a>
-                </div>
-                <div class="mt-10">素材还没有集齐哦！请继续加油！</div>
-            </div>
-        </if>
-
-
-
-    </div>
+    <dl class="rule">
+        <dt>活动规则</dt>
+        <dd>游戏一共设置搜集四种素材；</dd>
+        <dd>进入游戏后，用户每天有四次机会开启素材，分享游戏每天可多获得一次开启素材的机会；</dd>
+        <dd>待收集完四种不同的素材后，即可领取“闺蜜限量礼盒”一份；</dd>
+        <dd>每位用户仅可领取一个礼盒；</dd>
+        <dd style="margin-top:0.5rem;">游戏时间：</dd>
+        <dd>03月08日-03月14日 </dd>
+        <dd>奖品设置： </dd>
+        <dd>200份限量礼盒等你来拿！</dd>
+    </dl>
 </div>
 <footer class="footer">
     <ul class="menu" id="menu">
@@ -249,7 +184,30 @@
     </ul>
 </footer>
 <script>
-
+    $(function(){
+        $("#submitform").click(function(event){
+//            mnAlert('a');
+            var username = $("#username").val();
+            var telephone = $("#telephone").val();
+            var province = $("#province").val();
+            var address = $("#address").val();
+            var submitform = false;
+            if(username == ''){
+                alert("请输入姓名");
+            }else if(telephone == ''){
+                alert("请输入手机号");
+            }else if(province == ''){
+                alert("请输入省市");
+            }else if(address == ''){
+                alert("请输入地址");
+            }else{
+                submitform = true;
+            }
+            if(submitform == false){
+                event.preventDefault();
+            }
+        });
+    });
 </script>
 
 </body>
