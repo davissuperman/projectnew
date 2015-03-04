@@ -147,31 +147,33 @@
 </head>
 <body>
 <div id="contents" class="bd-bg">
-    <div class="reg-box">
-        <h1>恭喜您，集齐了四种素材！</h1>
+    <div class="success-wrap">
+        <h1>提交成功</h1>
         <div class="text">
-            <div>还差一步！请准确填写您的收货信息，我们会从每天提交信息的用户中随机抽取获奖的幸运儿，并于次日公布中奖者名单。</div>
-            <div>信息提交后无法更改，一旦得奖，我们将根据您所填写的信息寄送奖品，请准确填写。</div>
+            中奖者名单将于次日公布<br/>您也可于次日点击右下方<br/>“我的森田”查询是否获奖<br/>请继续关注本次活动！
         </div>
-        <form method="post" action="/index.php?g=Wap&m=Womensday&a=success">
-            <ul class="form-ul">
-                <li class="clrfix">
-                    <div class="control-label">姓名</div><input type="text" class="input-text"  name="username" id="username"/>
-                </li>
-                <li class="clrfix">
-                    <div class="control-label">电话</div><input type="tel" class="input-text" name="telephone" id="telephone"/>
-                </li>
-                <li class="clrfix">
-                    <div class="control-label">省市</div><input type="text" class="input-text" name="province" id="province"/>
-                </li>
-                <li class="clrfix">
-                    <div class="control-label">地址</div><input type="text" class="input-text" name="address" id="address"/>
-                </li>
-            </ul>
-            <div class="ta-c">
-                <input class="btn-red" type="submit" name="确认" value="确认" id="submitform"/><br/>
+        <div class="mt-20">
+            <img src="{pigcms::RES}/womensday/images/get/img02.png" width="60%" />
+        </div>
+        <div class="text">
+            把活动告诉您的好友<br/>一起收获“女神套装”吧
+        </div>
+        <div>
+            <a class="btn-red" href="javascript:;" onClick="showLayer($('#share-weixin'))">分享给好友</a>
+        </div>
+    </div>
+</div>
+
+<div class="layer-box hide" id="layer-box">
+    <div class="layer-bg"></div>
+    <div class="layer-wrap">
+        <div class="layer-con">
+            <div class="share-weixin" id="share-weixin">
+                <div class="icon-share"></div>
+                <h2 class="ta-c">点击右上角，<br />分享给好友，<br />一起收获“女神套装”</h2>
+                <div class="ta-c mt-20"><a class="btn-red btn-close" href="javascript:;">返回</a></div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 <footer class="footer">
@@ -208,7 +210,7 @@
             var address = $("#address").val();
             var submitform = false;
             if(username == ''){
-                mnAlert("请输入姓名");
+                alert("请输入姓名");
             }else if(telephone == ''){
                 alert("请输入手机号");
             }else if(province == ''){
