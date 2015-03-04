@@ -86,7 +86,7 @@ input,textarea,select,button{font-size:1em;}
 .rule dd{font-size:0.4rem; line-height:0.6rem;}
 
 /*活动素材*/
-.get-sucai{ text-align:center; padding-top:30px;}
+.get-sucai{ text-align:center; padding-top:10px;}
 .get-sucai h1{font-size:0.6rem; padding:0.2rem 0; font-weight:normal;}
 .get-sucai .name{color:#005982;font-size:0.4rem;font-weight:bold; margin-bottom:0.2rem;}
 .get-sucai img{width:3rem; height:3rem;}
