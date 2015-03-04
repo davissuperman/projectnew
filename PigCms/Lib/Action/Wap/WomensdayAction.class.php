@@ -452,6 +452,15 @@ class WomensdayAction extends BonusAction {
         }
         $this->assign('oportunity',$hasOportunity);
         $this->assign('left',$left);
+
+        $itemInfo = M('womensday')->where(array('openid' => $userOpenId))->find();
+        $totalItem = false;
+        if($itemInfo){
+            if($itemInfo['item1'] && $itemInfo['item2'] && $itemInfo['item3'] && $itemInfo['item4']){
+                $totalItem = true;
+            }
+        }
+        $this->assign('totalitem',$totalItem);
         $this->display();
     }
 

@@ -163,7 +163,12 @@
                 <div class="bd-rg"></div>
             </div>
             <div class="btn-box">
-                <a class="btn" style="line-height:1rem;" href="/index.php?g=Wap&m=Womensday&a=nocolpage">领取礼品</a>
+                <if condition="$totalitem eq true">
+                    <a class="btn" style="line-height:1rem;" href="/index.php?g=Wap&m=Womensday&a=nocolpage">领取礼品</a>
+                <else/>
+                    <a class="btn btn-disabled" style="line-height:1rem;" href="/index.php?g=Wap&m=Womensday&a=nocolpage">领取礼品</a>
+                </if>
+
                 <a class="btn" href="javascript:;" onClick="showLayer($('#share-weixin'))">邀请TA获<br/>得更多机会</a>
             </div>
          <else/>
