@@ -73,7 +73,7 @@ input,textarea,select,button{font-size:1em;}
 .index-btn{ background:url(../images/p1/img06.png) no-repeat;background-size:auto 100%;width: 3.56rem;height: 0.7rem;position: absolute;top: 9rem;left:50%; margin-left:-1.78rem; cursor:pointer;}
 
 /*btn*/
-.btn-red,.btn-red:active,.btn-red:visited{background:#d6000f; height:0.7rem; line-height:0.7rem; padding:0 0.4rem;color:#fff; font-size:0.4rem; display:inline-block; cursor:pointer; -moz-border-radius:3rem;-ms-border-radius:3rem;-o-border-radius:3rem;-webkit-border-radius:3rem;border-radius:3rem; text-decoration:none;}
+.btn-red,.btn-red:active,.btn-red:visited{background:#d6000f; height:0.7rem; line-height:0.7rem; padding:0 0.4rem;color:#fff; font-size:0.4rem; display:inline-block; cursor:pointer; -moz-border-radius:3rem;-ms-border-radius:3rem;-o-border-radius:3rem;-webkit-border-radius:3rem;border-radius:3rem; text-decoration:none; border:none;}
 .btn-disabled{ background:#646464 !important;}
 
 /*icon*/
@@ -92,9 +92,9 @@ input,textarea,select,button{font-size:1em;}
 .get-sucai img{width:3rem; height:3rem;}
 .get-sucai .times{ margin:0.3rem;}
 .get-sucai .times div{ float:left;}
-.get-sucai .times .bd-lf{ border-bottom:2px solid #d6000f; width:0.8rem; margin-top:0.25rem;}
-.get-sucai .times .bd-rg{ border-bottom:2px solid #d6000f; width:0.8rem; margin-top:0.25rem;float:right;}
-.get-sucai .times .text{font-size:0.45rem; height:0.6rem;color:#d6000f;font-weight:bold;width:4rem;}
+.get-sucai .times .bd-lf{ border-bottom:2px solid #d6000f; width:0.5rem; margin-top:0.25rem;}
+.get-sucai .times .bd-rg{ border-bottom:2px solid #d6000f; width:0.5rem; margin-top:0.25rem;float:right;}
+.get-sucai .times .text{font-size:0.45rem; height:0.6rem;color:#d6000f;font-weight:bold;width:4.75rem;}
 .get-sucai .btn{ background:#d6000f; font-size:0.42rem; width:2.4rem; display:inline-block;color:#fff; cursor:pointer; -moz-border-radius:0.2rem;-webkit-border-radius:0.2rem;-ms-border-radius:0.2rem;-o-border-radius:0.2rem;border-radius:0.2rem; padding:6px 0; height:1rem; vertical-align:top; text-decoration:none;}
 
 /*sucai-list*/
