@@ -1129,6 +1129,17 @@ class WomensdayAction extends BonusAction {
                 $telephone = $list['telephone'];
             }
         }
+
+        $award = false;
+        if(isset( $_POST['telephone'] )  &&  $_POST['telephone']){
+            $telephoneFromForm = $_POST['telephone'];
+            $listAward = M('womensday_award')->where(array('openid' => $userOpenId,'telephone'=>$telephoneFromForm,'award'=>1))->find();
+            if($listAward){
+                $award = true;
+            }
+        }
+
+        $this->assign("award",$award);
         $this->assign("totalitem",$totalItem);
         $this->assign("telephone",$telephone);
         $this->display();

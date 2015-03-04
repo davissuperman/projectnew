@@ -159,29 +159,37 @@
                     <a class="btn-red" href="/index.php?g=Wap&m=Womensday&a=reg">领取女神礼盒<i class="icon01 fr"></i></a>
                 </div>
              <else/>
-                <div style="font-size:0.3rem;">查询自己是否中奖：</div>
-                <div style="font-size:0.3rem;" class="mt-10">
-                    <input type="tel" value="{pigcms::$telephone}" style="font-size:0.3rem;width:100%; padding:0; margin:0; height:0.5rem;" disabled/>
+                <form method="post" action="">
+                    <div style="font-size:0.3rem;">查询自己是否中奖：</div>
+                    <div style="font-size:0.3rem;" class="mt-10">
+                        <input type="tel" name="telephone" value="{pigcms::$telephone}" style="font-size:0.3rem;width:100%; padding:0; margin:0; height:0.5rem;" disabled/>
+                    </div>
+                    <div class="ta-c mt-20" style="font-size:0.3rem;">
+                        <input class="btn-red"  type="submit" name="查询" value="查询"/>
+                    </div>
+                </form>
+            </if>
+        </if>
+        <if condition="$telephone neq null">
+            <if condition="$award eq true">
+                <div class="has-lottery">
+                    <p>恭喜您被抽中了！</p>
+                    <p>我们将在活动结束后</p>
+                    <p>统一寄送奖品</p>
+                    <p>敬请期待</p>
                 </div>
-                <div class="ta-c mt-20" style="font-size:0.3rem;">
-                    <a class="btn-red" href="javascript:;">查询</a>
+            <else/>
+                <div class="no-lottery">
+                    <p>很可惜您未中奖</p>
+                    <p>非常感谢参与活动</p>
+                    <p>点击更多优惠套装</p>
+                    <p>即可进入森田天猫旗舰店</p>
+                    <p>购买官方正品面膜</p>
                 </div>
             </if>
         </if>
 
-        <div class="no-lottery">
-            <p>很可惜您未中奖</p>
-            <p>非常感谢参与活动</p>
-            <p>点击更多优惠套装</p>
-            <p>即可进入森田天猫旗舰店</p>
-            <p>购买官方正品面膜</p>
-        </div>
-        <div class="has-lottery">
-            <p>恭喜您被抽中了！</p>
-            <p>我们将在活动结束后</p>
-            <p>统一寄送奖品</p>
-            <p>敬请期待</p>
-        </div>
+
 
         <div class="ta-c">
             <div class="btn-box">
