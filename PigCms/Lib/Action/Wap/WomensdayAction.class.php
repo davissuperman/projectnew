@@ -197,6 +197,15 @@ class WomensdayAction extends BonusAction {
         $this->saveInfo($userOpenId);
         $this->assign("siteurl",$this->url);
 
+        //查看是否收集到4中元素
+        $itemInfo = M('womensday')->where(array('openid' => $userOpenId))->find();
+        $totalItem = false;
+        if($itemInfo){
+            if($itemInfo['item1'] && $itemInfo['item2'] && $itemInfo['item3'] && $itemInfo['item4']){
+                $totalItem = true;
+            }
+        }
+        $this->assign('totalitem',  $totalItem);
         $this->display();
     }
     /*
