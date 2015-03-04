@@ -8,9 +8,9 @@
     <meta content="telephone=no" name="format-detection" />
     <meta name="keywords" content="" />
     <meta name="description" content="" />
-    <link href="{pigcms::RES}/womensday/css/common.css?v=432432" rel="stylesheet" type="text/css" />
+    <link href="{pigcms::RES}/womensday/css/common.css?v=4534534534534534" rel="stylesheet" type="text/css" />
     <script src="{pigcms::RES}/womensday/js/zepto.min.js" type="text/javascript"></script>
-    <script src="{pigcms::RES}/womensday/js/common.js?v=432432" type="text/javascript"></script>
+    <script src="{pigcms::RES}/womensday/js/common.js?v=4534534534534534" type="text/javascript"></script>
 
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
     <script>
@@ -65,7 +65,7 @@
                     'previewImage'
                 ],
                 success: function (res) {
-                   // alert(JSON.stringify(res));
+                   // mnAlert(JSON.stringify(res));
                 }
             });
 
@@ -77,7 +77,7 @@
                 link: "{pigcms::$url}",
                 imgUrl: "{pigcms::$shareimage}",
                 trigger: function (res) {
-                    //alert('用户点击分享到朋友圈');
+                    //mnAlert('用户点击分享到朋友圈');
                 },
                 success: function (res) {
                     //如果分享成功 加50分
@@ -85,21 +85,21 @@
                             "{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=shareInfo",
                             function(data) {
                                 if(data == '2'){
-                                    alert("分享成功!");
+                                    mnAlert("分享成功!");
                                 }else if(data == '1'){
-                                    alert("今天已经分享过!");
+                                    mnAlert("今天已经分享过!");
                                 }else{
-                                    alert("系统忙!");
+                                    mnAlert("系统忙!");
                                 }
                             }
                     );
                     location.href = "{pigcms::$siteurl}";
                 },
                 cancel: function (res) {
-                    //alert('已取消');
+                    //mnAlert('已取消');
                 },
                 fail: function (res) {
-                    //alert(JSON.stringify(res));
+                    //mnAlert(JSON.stringify(res));
                 }
             });
 
@@ -109,7 +109,7 @@
                 link: '{pigcms::$url}',
                 imgUrl: '{pigcms::$shareimage}',
                 trigger: function (res) {
-                    //alert('用户点击发送给朋友');
+                    //mnAlert('用户点击发送给朋友');
                 },
                 success: function (res) {
                     //如果分享成功 加50分
@@ -117,27 +117,27 @@
                             "{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=shareInfo",
                             function(data) {
                                 if(data == '2'){
-                                    alert("分享成功!");
+                                    mnAlert("分享成功!");
                                 }else if(data == '1'){
-                                    alert("今天已经分享过!");
+                                    mnAlert("今天已经分享过!");
                                 }else{
-                                    alert("系统忙!");
+                                    mnAlert("系统忙!");
                                 }
                             }
                     );
                     location.href = "{pigcms::$siteurl}";
                 },
                 cancel: function (res) {
-                    //alert('已取消');
+                    //mnAlert('已取消');
                 },
                 fail: function (res) {
-                    //alert(JSON.stringify(res));
+                    //mnAlert(JSON.stringify(res));
                 }
             });
 
         });
         wx.error(function (res) {
-            //alert(res.errMsg);
+            //mnAlert(res.errMsg);
         });
 
         $(function(){
@@ -210,11 +210,11 @@
             if(username == ''){
                 mnAlert("请输入姓名");
             }else if(telephone == ''){
-                alert("请输入手机号");
+                mnAlert("请输入手机号");
             }else if(province == ''){
-                alert("请输入省市");
+                mnAlert("请输入省市");
             }else if(address == ''){
-                alert("请输入地址");
+                mnAlert("请输入地址");
             }else{
                 submitform = true;
             }
