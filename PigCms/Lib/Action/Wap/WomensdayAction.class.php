@@ -638,6 +638,13 @@ class WomensdayAction extends BonusAction {
         }
         $this->assign('fouritems',$fourItems);
 
+        $submitTelephone = false;
+        //判断是否已经提交过个人信息
+        $infoAward = M('womensday_award')->where(array('openid' => $userOpenId))->find();
+        if($infoAward){
+            $submitTelephone = true;
+        }
+        $this->assign('submittelephone',$submitTelephone);
         $this->display();
     }
 
