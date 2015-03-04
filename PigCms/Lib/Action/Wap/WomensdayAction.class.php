@@ -939,20 +939,26 @@ class WomensdayAction extends BonusAction {
         $telephone = $_POST['telephone'];
         $province = $_POST['province'];
         $address = $_POST['address'];
-
-        //判断此手机号是否存在
-        $list = M('womensday_award')->where(array('telephone' => $telephone))->find();
-        if(!$list){
-            $d['openid'] = $userOpenId;
-            $d['username'] = $username;
-            $d['telephone'] = $telephone;
-            $d['province'] = $province;
-            $d['address'] = $address;
-            M("womensday_award")->add($d);
-            $errorMsg = null;
+        //判断此人是否提交郭信息
+        $info = M('womensday_award')->where(array('openid' => $userOpenId))->find();
+        if($info){
+            $errorMsg = "已经提交过个人信息!";
         }else{
-            $errorMsg = "手机号已经存在！";
+            //判断此手机号是否存在
+            $list = M('womensday_award')->where(array('telephone' => $telephone))->find();
+            if(!$list){
+                $d['openid'] = $userOpenId;
+                $d['username'] = $username;
+                $d['telephone'] = $telephone;
+                $d['province'] = $province;
+                $d['address'] = $address;
+                M("womensday_award")->add($d);
+                $errorMsg = null;
+            }else{
+                $errorMsg = "手机号已经存在！";
+            }
         }
+
         $this->assign('errormsg',$errorMsg);
         $this->display();
     }
