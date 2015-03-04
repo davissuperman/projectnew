@@ -156,16 +156,16 @@
         <form method="post" action="/index.php?g=Wap&m=Womensday&a=success">
             <ul class="form-ul">
                 <li class="clrfix">
-                    <div class="control-label">姓名</div><input type="text" class="input-text" />
+                    <div class="control-label">姓名</div><input type="text" class="input-text"  name="username" id="username"/>
                 </li>
                 <li class="clrfix">
-                    <div class="control-label">电话</div><input type="tel" class="input-text" />
+                    <div class="control-label">电话</div><input type="tel" class="input-text" name="telephone" id="telephone"/>
                 </li>
                 <li class="clrfix">
-                    <div class="control-label">省市</div><input type="text" class="input-text" />
+                    <div class="control-label">省市</div><input type="text" class="input-text" name="province" id="province"/>
                 </li>
                 <li class="clrfix">
-                    <div class="control-label">地址</div><input type="text" class="input-text" />
+                    <div class="control-label">地址</div><input type="text" class="input-text" name="address" id="address"/>
                 </li>
             </ul>
             <div class="ta-c">
@@ -201,8 +201,26 @@
 <script>
     $(function(){
         $("#submitform").click(function(event){
-            mnAlert('a');
-            event.preventDefault();
+//            mnAlert('a');
+            var username = $("#username").val();
+            var telephone = $("#telephone").val();
+            var province = $("#province").val();
+            var address = $("#address").val();
+            var submitform = false;
+            if(username == ''){
+                alert("请输入姓名");
+            }else if(telephone == ''){
+                alert("请输入手机号");
+            }else if(province == ''){
+                alert("请输入省市");
+            }else if(address == ''){
+                alert("请输入地址");
+            }else{
+                submitform = true;
+            }
+            if(submitform == false){
+                event.preventDefault();
+            }
         });
     });
 </script>
