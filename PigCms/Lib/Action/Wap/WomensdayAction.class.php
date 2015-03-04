@@ -389,7 +389,7 @@ class WomensdayAction extends BonusAction {
         $this->assign("shareimage",$img);
         $this->assign('url',  $url."/index.php?g=Wap&m=Womensday&a=index");
         $this->assign("siteurl",$this->url);
-
+        $this->assign('shareurl',  $this->get_url());
         //$userOpenId
         //判断OPENID是否存在 在表womensday中
         $info = M('womensday')->where(array('openid' => $userOpenId))->find();
@@ -646,7 +646,7 @@ class WomensdayAction extends BonusAction {
         $img = "http://wx.drjou.cc/tpl/Wap/default/common/womensday/images/logo3.png";
         $this->assign("shareimage",$img);
         $this->assign('url',  $url."/index.php?g=Wap&m=Womensday&a=index");
-
+        $this->assign('shareurl',  $this->get_url());
         $this->assign("siteurl",$this->url);
 
         //$userOpenId
@@ -813,7 +813,7 @@ class WomensdayAction extends BonusAction {
         $this->assign('url',  $url."/index.php?g=Wap&m=Womensday&a=index");
 
         $this->assign("siteurl",$this->url);
-
+        $this->assign('shareurl',  $this->get_url());
         //$userOpenId
         //判断OPENID是否存在 在表womensday中
         $info = M('womensday')->where(array('openid' => $userOpenId))->find();
@@ -963,7 +963,7 @@ class WomensdayAction extends BonusAction {
         $this->assign('url',  $url."/index.php?g=Wap&m=Womensday&a=index");
 
         $this->assign("siteurl",$this->url);
-
+        $this->assign('shareurl',  $this->get_url());
         //$userOpenId
         //判断OPENID是否存在 在表womensday中
         $info = M('womensday')->where(array('openid' => $userOpenId))->find();
@@ -1136,7 +1136,7 @@ class WomensdayAction extends BonusAction {
         $this->assign('url',  $url."/index.php?g=Wap&m=Womensday&a=index");
 
         $this->assign("siteurl",$this->url);
-
+        $this->assign('shareurl',  $this->get_url());
         //$userOpenId
         //判断OPENID是否存在 在表womensday中
         $info = M('womensday')->where(array('openid' => $userOpenId))->find();
@@ -1313,7 +1313,7 @@ class WomensdayAction extends BonusAction {
         $this->assign('url',  $url."/index.php?g=Wap&m=Womensday&a=index");
 
         $this->assign("siteurl",$this->url);
-
+        $this->assign('shareurl',  $this->get_url());
         //$userOpenId
         //判断OPENID是否存在 在表womensday中
         $info = M('womensday')->where(array('openid' => $userOpenId))->find();
@@ -1459,7 +1459,7 @@ class WomensdayAction extends BonusAction {
         $this->assign('url',  $url."/index.php?g=Wap&m=Womensday&a=index");
 
         $this->assign("siteurl",$this->url);
-
+        $this->assign('shareurl',  $this->get_url());
         //$userOpenId
         //判断OPENID是否存在 在表womensday中
         $info = M('womensday')->where(array('openid' => $userOpenId))->find();
@@ -1615,7 +1615,7 @@ class WomensdayAction extends BonusAction {
         $this->assign('url',  $url."/index.php?g=Wap&m=Womensday&a=index");
 
         $this->assign("siteurl",$this->url);
-
+        $this->assign('shareurl',  $this->get_url());
         //$userOpenId
         //判断OPENID是否存在 在表womensday中
         $info = M('womensday')->where(array('openid' => $userOpenId))->find();
