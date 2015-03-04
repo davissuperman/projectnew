@@ -5,7 +5,7 @@ class WomensdayAction extends BonusAction {
 
     public $cache;
     public $titleInWeixin = '森田药妆-38女人节特别奉献';
-
+    public $url;
 
 
     public function _initialize() {
@@ -18,6 +18,7 @@ class WomensdayAction extends BonusAction {
 //            exit;
 //        }
         $this->url= C('site_url');
+
        // $this->cache = Cache::getInstance('Redis',array('host'=>'127.0.0.1','expire'=>1296000));
     }
 
@@ -196,7 +197,6 @@ class WomensdayAction extends BonusAction {
         //$userOpenId 是否在表womensday中存在 不存在则创建模板
         $this->saveInfo($userOpenId);
         $this->assign("siteurl",$this->url);
-
         //查看是否收集到4中元素
         $itemInfo = M('womensday')->where(array('openid' => $userOpenId))->find();
         $totalItem = false;
