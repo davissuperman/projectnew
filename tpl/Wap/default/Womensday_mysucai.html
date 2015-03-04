@@ -113,6 +113,8 @@
                 },
                 success: function (res) {
                     //如果分享成功 加50分
+                    alert("{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=shareInfo");
+
                     $.get(
                             "{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=shareInfo",
                             function(data) {
