@@ -482,7 +482,7 @@ class WomensdayAction extends BonusAction {
             //当天已经没有机会
             $left = 0;
         }else{
-            $left = $totalNumber - $numberForSecond -1;
+            $left = $totalNumber - $numberForSecond;
         }
         return $left;
     }
