@@ -797,7 +797,7 @@ class WomensdayAction extends BonusAction {
     }
 
     //成功页面
-    public function success(){
+    public function successpage(){
         $agent = $_SERVER['HTTP_USER_AGENT'];
 //        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
 //            echo '此功能只能在微信浏览器中使用';
