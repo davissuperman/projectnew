@@ -33,8 +33,6 @@ class WomensdayAction extends BonusAction {
 //          }
         //统计添加浏览数和浏览记录 tel 相当与open_id
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId)
-            $userOpenId = 'localenv';
 
         $gid = 1;
         //统计end
@@ -195,8 +193,6 @@ class WomensdayAction extends BonusAction {
         $this->assign('url',  $url."/index.php?g=Wap&m=Womensday&a=index");
         $this->assign('shareurl',  $this->get_url());
 
-        Log :: write($userOpenId .' openiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii ');
-
         //$userOpenId 是否在表womensday中存在 不存在则创建模板
         $this->saveInfo($userOpenId);
         $this->assign("siteurl",$this->url);
@@ -241,8 +237,6 @@ class WomensdayAction extends BonusAction {
 //          }
         //统计添加浏览数和浏览记录 tel 相当与open_id
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId)
-            $userOpenId = 'localenv';
 
         $gid = 1;
         //统计end
@@ -486,7 +480,7 @@ class WomensdayAction extends BonusAction {
             //当天已经没有机会
             $left = 0;
         }else{
-            $left = $totalNumber - $numberForSecond -1;
+            $left = $totalNumber - $numberForSecond;
         }
         return $left;
     }
@@ -500,8 +494,6 @@ class WomensdayAction extends BonusAction {
 //                exit('<center>游戏已经结束！谢谢你的参与</center>');
 //          }
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId)
-            $userOpenId = 'localenv';
 
         $gid = 1;
         //统计end
@@ -692,8 +684,6 @@ class WomensdayAction extends BonusAction {
 //                exit('<center>游戏已经结束！谢谢你的参与</center>');
 //          }
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId)
-            $userOpenId = 'localenv';
 
         $gid = 1;
         //统计end
@@ -841,8 +831,6 @@ class WomensdayAction extends BonusAction {
 //                exit('<center>游戏已经结束！谢谢你的参与</center>');
 //          }
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId)
-            $userOpenId = 'localenv';
 
         $gid = 1;
         //统计end
@@ -1015,8 +1003,6 @@ class WomensdayAction extends BonusAction {
 //                exit('<center>游戏已经结束！谢谢你的参与</center>');
 //          }
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId)
-            $userOpenId = 'localenv';
 
         $gid = 1;
         //统计end
@@ -1192,8 +1178,6 @@ class WomensdayAction extends BonusAction {
 //                exit('<center>游戏已经结束！谢谢你的参与</center>');
 //          }
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId)
-            $userOpenId = 'localenv';
 
         $gid = 1;
         //统计end
@@ -1338,8 +1322,6 @@ class WomensdayAction extends BonusAction {
 //                exit('<center>游戏已经结束！谢谢你的参与</center>');
 //          }
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId)
-            $userOpenId = 'localenv';
 
         $gid = 1;
         //统计end
@@ -1494,8 +1476,6 @@ class WomensdayAction extends BonusAction {
 //                exit('<center>游戏已经结束！谢谢你的参与</center>');
 //          }
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId)
-            $userOpenId = 'localenv';
 
         $gid = 1;
         //统计end
@@ -1632,9 +1612,7 @@ class WomensdayAction extends BonusAction {
     public function shareInfo(){
         //只要分享了 额外获取一次机会
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId){
-            $userOpenId = "localenv";
-        }
+        Log :: write($userOpenId.' openiddddddddddddddddddddddddddddddddddddddddddd');
         if($userOpenId){
             //判断OPENID是否存在
             $info = M('womensday')->where(array('openid' => $userOpenId))->find();
@@ -1644,6 +1622,7 @@ class WomensdayAction extends BonusAction {
                 $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d"),date("Y")));
                 $map['sharetime'] = array('egt',$start);
                 $map['sharetime'] = array('elt',$end);
+                $map['openid'] = array('eq',$userOpenId);
                 $number= M('womensday_share')->where($map)->count('id');
                 if($number){
                     //已经分享过
@@ -1783,23 +1762,6 @@ class WomensdayAction extends BonusAction {
     private function https_request($url, $method = 'get', $data = '') {
         $ch = curl_init();
         $header[] = "Accept-Charset: utf-8";
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, strtoupper($method));
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
-        curl_setopt($ch, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (compatible; MSIE 5.01; Windows NT 5.0)');
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($ch, CURLOPT_AUTOREFERER, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $temp = curl_exec($ch);
-        return $temp;
-    }
-    public function curlGet($url, $method = 'get', $data = '') {
-        $ch = curl_init();
-        $header = "Accept-Charset: utf-8";
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, strtoupper($method));
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
