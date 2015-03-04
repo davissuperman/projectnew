@@ -169,8 +169,7 @@
                 </li>
             </ul>
             <div class="ta-c">
-                <input class="btn-red" type="submit" name="确认" value="确认"/><br/>
-                <a class="btn-red" href="/wap/event/2015/02/38/success.shtml">确认</a>
+                <input class="btn-red" type="submit" name="确认" value="确认" id="submitform"/><br/>
             </div>
         </form>
     </div>
@@ -200,7 +199,12 @@
     </ul>
 </footer>
 <script>
-
+    $(function(){
+        $("#submitform").click(function(event){
+            alert('a');
+            event.preventDefault();
+        });
+    });
 </script>
 
 </body>
