@@ -1140,9 +1140,10 @@ class WomensdayAction extends BonusAction {
             }
             $isPost = true;
             Log :: write( " tttttttttt           ttttttttttttttttt    ".$isPost.$telephoneFromForm);
-            log :: write(print_r($telephoneFromForm,true));
-        }
 
+        }
+        log :: write("gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg");
+        log :: write(print_r($_POST,true));
         $this->assign("ispost",$isPost);
         $this->assign("award",$award);
         $this->assign("totalitem",$totalItem);
