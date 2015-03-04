@@ -185,7 +185,7 @@ class WomensdayAction extends BonusAction {
         $this->assign("signature",$signature);
 
 
-        $this->assign('title',$selfUserInfo['nickname']."38女人节特别奉献!");
+        $this->assign('title',$selfUserInfo['nickname']."寻找密集系列的奇迹<br/>获取四种素材可获得森田药妆水活新颜女神定制礼盒");
         $this->assign('bonusdesc','');
         $img = "http://wx.drjou.cc/tpl/Wap/default/common/womensday/images/logo3.png";
         $this->assign("shareimage",$img);
