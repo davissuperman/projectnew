@@ -17,11 +17,11 @@
 <body>
 	<div id="contents">
         <div class="p-r">
-            <img src="images/p1/img01.png" width="100%" class="v-b"/>
-            <img src="images/p1/img02.png" width="100%" class="v-b"/>
-            <img src="images/p1/img03.png" width="100%" class="v-b"/>
-            <img src="images/p1/img04.png" width="100%" class="v-b"/>
-            <img src="images/p1/img05.png" width="100%" class="v-b"/>
+            <img src="images/p1/img06.jpg" width="100%" class="v-b"/>
+            <img src="images/p1/img07.jpg" width="100%" class="v-b"/>
+            <img src="images/p1/img08.jpg" width="100%" class="v-b"/>
+            <img src="images/p1/img09.jpg" width="100%" class="v-b"/>
+            <img src="images/p1/img10.jpg" width="100%" class="v-b"/>
             <a class="index-btn" href="/wap/event/2015/02/38/get.shtml"></a>
         </div>
     </div>

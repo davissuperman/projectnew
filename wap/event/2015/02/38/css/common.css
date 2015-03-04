@@ -70,7 +70,7 @@ input,textarea,select,button{font-size:1em;}
 .p-r{ position:relative;}
 
 /*index*/
-.index-btn{ background:url(../images/p1/img06.png) no-repeat;background-size:auto 100%;width: 3.56rem;height: 0.7rem;position: absolute;top: 9rem;left:50%; margin-left:-1.78rem; cursor:pointer;}
+.index-btn{ background:url(../images/p1/img06.png) no-repeat;background-size:auto 100%;width: 3.56rem;height: 0.7rem;position: absolute;top: 5.4rem;left:50%; margin-left:-1.78rem; cursor:pointer;}
 
 /*btn*/
 .btn-red,.btn-red:active,.btn-red:visited{background:#d6000f; height:0.7rem; line-height:0.7rem; padding:0 0.4rem;color:#fff; font-size:0.4rem; display:inline-block; cursor:pointer; -moz-border-radius:3rem;-ms-border-radius:3rem;-o-border-radius:3rem;-webkit-border-radius:3rem;border-radius:3rem; text-decoration:none; border:none;}
