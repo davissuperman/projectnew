@@ -153,7 +153,7 @@
             <div>还差一步！请准确填写您的收货信息，我们会从每天提交信息的用户中随机抽取获奖的幸运儿，并于次日公布中奖者名单。</div>
             <div>信息提交后无法更改，一旦得奖，我们将根据您所填写的信息寄送奖品，请准确填写。</div>
         </div>
-        <form method="post" action="/index.php?g=Wap&m=Womensday&a=successpage">
+        <form method="post" action="/index.php?g=Wap&m=Womensday&a=successpage" id="reg-form">
             <ul class="form-ul">
                 <li class="clrfix">
                     <div class="control-label">姓名</div><input type="text" class="input-text"  name="username" id="username"/>
@@ -169,7 +169,7 @@
                 </li>
             </ul>
             <div class="ta-c">
-                <input class="btn-red" type="submit" name="确认" value="确认" id="submitform"/><br/>
+                <span class="btn-red" id="submitform">确认</span>
             </div>
         </form>
     </div>
@@ -220,7 +220,9 @@
             }
             if(submitform == false){
                 event.preventDefault();
-            }
+            }else{
+				$("#reg-form").submit();
+			}
         });
     });
 </script>
