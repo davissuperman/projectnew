@@ -61,10 +61,7 @@
                                     <th class="thirdTd">姓名</th>
                                     <th class="sevenTd">View</th>
                                     <th class="sevenTd">分享量</th>
-                                    <th class="sevenTd">Join(送祝福点击数)</th>
-                                    <th class="sevenTd">接收祝福点击数</th>
-                                    <th class="sevenTd">我也要送贺卡点击数</th>
-                                    <th class="sevenTd">关注森天药妆点击数</th>
+                                    <th class="sevenTd">首次参与时间</th>
                                 </tr>
 
                                 <volist name="info" id="o">
@@ -81,12 +78,9 @@
                                         <td><?php echo $store ?></td>
                                         <td>{pigcms:$o.openid}</td>
                                         <td>{pigcms:$o.name}</td>
-                                        <td>{pigcms:$o.view}</td>
-                                        <td>{pigcms:$o.share}</td>
-                                        <td>{pigcms:$o.joins}</td>
-                                        <td>{pigcms:$o.accept}</td>
-                                        <td>{pigcms:$o.wantcard}</td>
-                                        <td>{pigcms:$o.subscribe}</td>
+                                        <td>{pigcms:$o.views}</td>
+                                        <td>{pigcms:$o.shares}</td>
+                                        <td>{pigcms:$o.createtime}</td>
                                     </tr>
                                 </volist>
                                 <td colspan="9" style="text-align:right">{pigcms:$page}</td>
