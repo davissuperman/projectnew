@@ -1635,6 +1635,9 @@ class WomensdayAction extends BonusAction {
             $url ="http://wx.drjou.cc"."/index.php?g=Wap&m=Womensday&a=index";
             header("location:$url");
         }
+        if($userOpenId){
+            $this->saveViews($info['id']);
+        }
         $this->display();
     }
     //item 3 - 玻尿酸
@@ -1778,6 +1781,9 @@ class WomensdayAction extends BonusAction {
             //重定向到首页
             $url ="http://wx.drjou.cc"."/index.php?g=Wap&m=Womensday&a=index";
             header("location:$url");
+        }
+        if($userOpenId){
+            $this->saveViews($info['id']);
         }
         $this->display();
     }
@@ -1926,6 +1932,9 @@ class WomensdayAction extends BonusAction {
             $url ="http://wx.drjou.cc"."/index.php?g=Wap&m=Womensday&a=index";
             header("location:$url");
         }
+        if($userOpenId){
+            $this->saveViews($info['id']);
+        }
         $this->display();
     }
 //item 4 竹炭颗粒
@@ -2069,6 +2078,9 @@ class WomensdayAction extends BonusAction {
             //重定向到首页
             $url ="http://wx.drjou.cc"."/index.php?g=Wap&m=Womensday&a=index";
             header("location:$url");
+        }
+        if($userOpenId){
+            $this->saveViews($info['id']);
         }
         $this->display();
     }
@@ -2214,6 +2226,9 @@ class WomensdayAction extends BonusAction {
             $url ="http://wx.drjou.cc"."/index.php?g=Wap&m=Womensday&a=index";
             header("location:$url");
         }
+        if($userOpenId){
+            $this->saveViews($info['id']);
+        }
         $this->display();
     }
     public function shareInfo(){
@@ -2223,6 +2238,7 @@ class WomensdayAction extends BonusAction {
             //判断OPENID是否存在
             $info = M('womensday')->where(array('openid' => $userOpenId))->find();
             if($info){
+                M("womensday")->where(array('id' =>$info['id']))->setInc('shares', 1);
                 //判断是否已经分享过
                 $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d"),date("Y")));
                 $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d"),date("Y")));

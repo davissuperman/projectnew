@@ -10,7 +10,7 @@ class WomensdayAction  extends BonusAction {
         // join tp_bonus_award as award on (info.openid=award.openid ) ,award.province as city, award.address as addres
         $count = M('greeting')->count();
         $page = new Page($count, 25);
-        $list = M('greeting')->query("SELECT* from tp_greeting order by view desc limit $page->firstRow,$page->listRows"); //第二名和你最近的
+        $list = M('greeting')->query("SELECT* from tp_womensday order by views desc limit $page->firstRow,$page->listRows"); //第二名和你最近的
         $this->assign('page', $page->show());
         $this->assign('token', $this->token);
         $listArr = array();
