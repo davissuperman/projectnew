@@ -21,6 +21,11 @@ class WomensdayAction extends BonusAction {
 
        // $this->cache = Cache::getInstance('Redis',array('host'=>'127.0.0.1','expire'=>1296000));
         log :: write(cookie('user_openid') .'  openiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+        //将VIEWS 加一
+        if(cookie('user_openid')){
+            M("womensday")->where(array('openid' =>cookie('user_openid')))->setInc('views', 1);
+        }
+
     }
 
     public function index() {
@@ -210,7 +215,9 @@ class WomensdayAction extends BonusAction {
         //今天次数是否用完
         $leftNum = $this->getLeftNumber($userOpenId);
         $this->assign('leftnum',  $leftNum);
-
+        if($userOpenId){
+            M("womensday")->where(array('openid' =>$userOpenId))->setInc('views', 1);
+        }
         $this->display();
     }
     /*
