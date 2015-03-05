@@ -403,7 +403,7 @@ class WomensdayAction extends BonusAction {
         $map['createtime'] = array('elt',$end);
         $map['openid'] = array('eq',$userOpenId);
         $numberForSecond= M('womensday_list')->where($map)->count('id');
-        Log :: write($numberForSecond ."    openid   ".$userOpenId." dddddddddddddddddddddddddddddddddddd");
+        Log :: write($numberForSecond ."    openid   ".$userOpenId." dddddddddddddddddddddddddddddddddddd        ".$start."      ".$end);
         $item = 0;
         $totalNumber = 4;
         //判断是否有分享
