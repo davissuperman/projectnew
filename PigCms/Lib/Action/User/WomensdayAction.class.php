@@ -8,9 +8,12 @@ class WomensdayAction  extends BonusAction {
 
     public function index() {
         // join tp_bonus_award as award on (info.openid=award.openid ) ,award.province as city, award.address as addres
-        $count = M('greeting')->count();
+        $count = M('womensday')->count();
         $page = new Page($count, 25);
-        $list = M('greeting')->query("SELECT* from tp_womensday order by views desc limit $page->firstRow,$page->listRows"); //第二名和你最近的
+        $list = M('greeting')->query(
+            "SELECT w.*,award.* from tp_womensday as w
+              left join tp_womensday_award as award on (award.openid=w.openid)
+        order by views desc limit $page->firstRow,$page->listRows"); //第二名和你最近的
         $this->assign('page', $page->show());
         $this->assign('token', $this->token);
         $listArr = array();
@@ -68,7 +71,7 @@ class WomensdayAction  extends BonusAction {
                     {
                         $openId = $v[1];
                         $award = $v[9];
-                        if(strtolower($award) == 'yes'){
+                        if(strtolower($award) == 'yes' || strtolower($award) == 'y'){
                             //此openid 为中奖号码
 
                             $info = M('womensday_award')->where(array('openid' => $openId))->find();
