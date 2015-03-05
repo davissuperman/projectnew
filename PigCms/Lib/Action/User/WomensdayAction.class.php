@@ -40,10 +40,10 @@ class WomensdayAction  extends BonusAction {
 //        $end = $_POST['end'];
         $end=$end-$start;
         $start=$start-1;
-        $list = M('greeting')->query(
-            "SELECT g.*, f.nickname as name from tp_greeting as g
+        $list = M('womensday')->query(
+            "SELECT g.*, f.nickname as name from tp_womensday as g
             left join tp_customer_service_fans f on (f.openid=g.openid)
-             order by g.view desc limit $start,$end");
+             order by g.views desc limit $start,$end");
         $i = $start+1;
         $listArr = array();
         foreach($list as $key => $each){
@@ -66,10 +66,7 @@ class WomensdayAction  extends BonusAction {
             ->setCellValue('B1', '姓名')
             ->setCellValue('C1', '浏览量')
             ->setCellValue('D1', '分享量')
-            ->setCellValue('E1', '送祝福点击数')
-            ->setCellValue('F1', '接收祝福点击数')
-            ->setCellValue('G1', '我也要送贺卡点击数')
-            ->setCellValue('H1', '关注森天药妆点击数');
+            ->setCellValue('E1', '首次参与时间');
 
         //写出内容 UTF-8
 
@@ -79,12 +76,9 @@ class WomensdayAction  extends BonusAction {
             $objPHPExcel->setActiveSheetIndex(0)
                 ->setCellValue('A' . ($n + 2), $n+1)
                 ->setCellValue('B' . ($n + 2), $name)
-                ->setCellValue('C' . ($n + 2), $data[$n]['view'])
-                ->setCellValue('D' . ($n + 2), $data[$n]['share'])
-                ->setCellValue('E' . ($n + 2), $data[$n]['joins'])
-                ->setCellValue('F' . ($n + 2), $data[$n]['accept'])
-                ->setCellValue('G' . ($n + 2), $data[$n]['wantcard'])
-                ->setCellValue('H' . ($n + 2), $data[$n]['subscribe'])
+                ->setCellValue('C' . ($n + 2), $data[$n]['views'])
+                ->setCellValue('D' . ($n + 2), $data[$n]['shares'])
+                ->setCellValue('E' . ($n + 2), $data[$n]['createtime'])
             ;
         }
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
