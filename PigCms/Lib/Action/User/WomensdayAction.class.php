@@ -140,7 +140,34 @@ class WomensdayAction  extends BonusAction {
         $filename = $start . "~" . $end . "统计";
         $this->exportexcelx($listArr, $filename);
     }
+    public function exportstorebydate() {
+        $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d"),date("Y")));
+        $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d"),date("Y")));
+        if(isset($_POST['startdate']) && $_POST['startdate']){
+            $start = $_POST['startdate'];
+        }
+        if(isset($_POST['enddate']) && $_POST['enddate']){
+            $end = $_POST['enddate'];
+        }
+//        $start = $_POST['start'];
+//        $end = $_POST['end'];
+        $list = M('womensday')->query(
+            "SELECT g.*,award.*, f.nickname as name from tp_womensday_award as award
+              left join tp_womensday as g on (g.openid = award.openid)
+              left join tp_customer_service_fans f on (f.openid=g.openid)
+              where award.createtime >= '$start' and award.createtime<='$end'
+               order by g.views desc");
+        $i = $start+1;
+        $listArr = array();
+        foreach($list as $key => $each){
+            $awardInfo = '';
+            $tmp = $each;
 
+            $listArr[] = $tmp;
+        }
+        $filename = $start . "~" . $end . "统计";
+        $this->exportexcelx($listArr, $filename);
+    }
     public function exportexcelx($data = array(), $filename = 'report') {
         $str = substr(THINK_PATH, 0, -1);
         require_once $str . '/PigCms/Lib/Action/User/Classes/PHPExcel.php';

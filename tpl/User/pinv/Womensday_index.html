@@ -46,7 +46,7 @@
                                 </form>
                             </div>
                             <div id="date-calendar">
-                                <form method="post" action="{pigcms::U('Womensday/exportstore',array('token'=>$token))}">
+                                <form method="post" action="{pigcms::U('Womensday/exportstorebydate',array('token'=>$token))}">
                                     按照日期
                                     <input type="text" name="startdate" id="startdate" value="" onClick="WdatePicker()" class="form-control" style="width:112px"/><span>到</span>
                                     <input type="text" name="enddate" id="enddate" value="" onClick="WdatePicker()" class="form-control" style="width:112px"/> <span>过滤</span> <input type="checkbox"  name="g">

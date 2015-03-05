@@ -680,7 +680,7 @@ class WomensdayAction extends BonusAction {
         }
         $this->assign('submittelephone',$submitTelephone);
         if($userOpenId){
-            $this->saveViews($itemInfo['id']);
+            $this->saveViews($info['id']);
         }
         $this->display();
     }
