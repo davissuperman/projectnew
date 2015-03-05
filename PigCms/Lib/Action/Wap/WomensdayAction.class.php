@@ -233,7 +233,6 @@ class WomensdayAction extends BonusAction {
             $d['item3'] = 0;
             $d['item4'] = 0;
             $d['clicksum'] = 0;
-            $d['createtime'] = time();
             M("womensday")->add($d);
         }
 
