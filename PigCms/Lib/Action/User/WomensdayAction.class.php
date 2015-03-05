@@ -79,6 +79,12 @@ class WomensdayAction  extends BonusAction {
                             $d['award'] = 1;
                             M("womensday_award")->save($d);
                             echo "OPENID ".$openId ." 姓名  ".$v[2] ." 手机号为 ".$v[6]."  设置为中奖<br/>";
+                        }else{
+                            $info = M('womensday_award')->where(array('openid' => $openId))->find();
+                            $d['id'] = $info['id'];
+                            $d['award'] = 0;
+                            M("womensday_award")->save($d);
+                            echo "OPENID ".$openId ." 姓名  ".$v[2] ." 手机号为 ".$v[6]."  设置为<font color='red'>未中奖</font><br/>";
                         }
                     }
                 }
@@ -156,6 +162,11 @@ class WomensdayAction  extends BonusAction {
 
         for ($n = 0; $n < count($data); $n++) {
             $name = $data[$n]['name'];
+            $award =  $data[$n]['award'];
+            $awardDes = 'NO';
+            if($award == 1){
+                $awardDes = "YES";
+            }
             $name = $this->ReplaceSpecialChar($name);
             $objPHPExcel->setActiveSheetIndex(0)
                 ->setCellValue('A' . ($n + 2), $n+1)
@@ -167,7 +178,7 @@ class WomensdayAction  extends BonusAction {
                 ->setCellValue('G' . ($n + 2), $data[$n]['telephone'])
                 ->setCellValue('H' . ($n + 2), $data[$n]['province'])
                 ->setCellValue('I' . ($n + 2), $data[$n]['address'])
-                ->setCellValue('J' . ($n + 2), '')
+                ->setCellValue('J' . ($n + 2), $awardDes)
             ;
         }
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
