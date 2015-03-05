@@ -207,6 +207,13 @@ class WomensdayAction extends BonusAction {
         }
         $this->assign('totalitem',  $totalItem);
 
+        //是否提交过个人信息
+        $infoAward = M('womensday_award')->where(array('openid' => $userOpenId))->find();
+        $submitTelephone = false;
+        if($infoAward){
+            $submitTelephone = true;
+        }
+        $this->assign('submitphone',  $submitTelephone);
         //今天次数是否用完
         $leftNum = $this->getLeftNumber($userOpenId);
         $this->assign('leftnum',  $leftNum);
