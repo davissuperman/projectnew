@@ -216,7 +216,7 @@ class WomensdayAction extends BonusAction {
         $leftNum = $this->getLeftNumber($userOpenId);
         $this->assign('leftnum',  $leftNum);
         if($userOpenId){
-            M("womensday")->where(array('openid' =>$userOpenId))->setInc('views', 1);
+            M("womensday")->where(array('id' =>$itemInfo['id']))->setInc('views', 1);
         }
         $this->display();
     }
