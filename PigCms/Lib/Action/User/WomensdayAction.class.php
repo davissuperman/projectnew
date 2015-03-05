@@ -66,7 +66,8 @@ class WomensdayAction  extends BonusAction {
             ->setCellValue('B1', '姓名')
             ->setCellValue('C1', '浏览量')
             ->setCellValue('D1', '分享量')
-            ->setCellValue('E1', '首次参与时间');
+            ->setCellValue('E1', '首次参与时间')
+            ->setCellValue('F1', '中奖');
 
         //写出内容 UTF-8
 
@@ -79,6 +80,7 @@ class WomensdayAction  extends BonusAction {
                 ->setCellValue('C' . ($n + 2), $data[$n]['views'])
                 ->setCellValue('D' . ($n + 2), $data[$n]['shares'])
                 ->setCellValue('E' . ($n + 2), $data[$n]['createtime'])
+                ->setCellValue('F' . ($n + 2), '')
             ;
         }
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
