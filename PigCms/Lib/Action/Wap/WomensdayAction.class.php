@@ -399,10 +399,10 @@ class WomensdayAction extends BonusAction {
         //获取今天的开始 和 结束时间
         $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d"),date("Y")));
         $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d"),date("Y")));
-        $map['createtime'] = array('egt',$start);
-        $map['createtime'] = array('elt',$end);
-        $map['openid'] = array('eq',$userOpenId);
-        $numberForSecond= M('womensday_list')->where($map)->count('id');
+        $mapCount['createtime'] = array('egt',$start);
+        $mapCount['createtime'] = array('elt',$end);
+        $mapCount['openid'] = array('eq',$userOpenId);
+        $numberForSecond= M('womensday_list')->where($mapCount)->count('id');
         Log :: write($numberForSecond ."    openid   ".$userOpenId." dddddddddddddddddddddddddddddddddddd        ".$start."      ".$end);
         $item = 0;
         $totalNumber = 4;
