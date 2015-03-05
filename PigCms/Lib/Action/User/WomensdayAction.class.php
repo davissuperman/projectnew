@@ -27,6 +27,81 @@ class WomensdayAction  extends BonusAction {
         $this->display();
     }
 
+    public function importstore(){
+        if (! empty ( $_FILES ['file_stu'] ['name'] ))
+        {
+            $tmp_file = $_FILES ['file_stu'] ['tmp_name'];
+            $file_types = explode ( ".", $_FILES ['file_stu'] ['name'] );
+            $file_type = $file_types [count ( $file_types ) - 1];
+            /*判别是不是.xls文件，判别是不是excel文件*/
+            if (strtolower ( $file_type ) != "xls")
+            {
+                $this->error ( '不是Excel文件，重新上传' );
+            }
+            /*设置上传路径*/
+            $savePath =  "./PUBLIC/Excel/";
+            /*以时间来命名上传的文件*/
+            $str = date ( 'Ymdhis' );
+            $file_name = $str . "." . $file_type;
+            /*是否上传成功*/
+            if (! copy ( $tmp_file, $savePath . $file_name ))
+            {
+                $this->error ( '上传失败' );
+            }
+            /*
+               *对上传的Excel数据进行处理生成编程数据,这个函数会在下面第三步的ExcelToArray类中
+              注意：这里调用执行了第三步类里面的read函数，把Excel转化为数组并返回给$res,再进行数据库写入
+            */
+            $res = $this->read ( $savePath . $file_name );
+            /*
+                 重要代码 解决Thinkphp M、D方法不能调用的问题
+                 如果在thinkphp中遇到M 、D方法失效时就加入下面一句代码
+             */
+            //spl_autoload_register ( array ('Think', 'autoload' ) );
+            if(count($res)>=1){
+                /*对生成的数组进行数据库的写入*/
+
+                foreach ( $res as $k => $v )
+                {
+                    $d = array();
+                    if ($k*1 > 1)
+                    {
+                        $openId = $v[1];
+                        $award = $v[9];
+                        if(strtolower($award) == 'yes'){
+                            //此openid 为中奖号码
+
+                            $info = M('womensday_award')->where(array('openid' => $openId))->find();
+                            $d['id'] = $info['id'];
+                            $d['award'] = 1;
+                            M("womensday_award")->save($d);
+                            echo "OPENID ".$openId ." 姓名  ".$v[2] ." 手机号为 ".$v[6]."  设置为中奖<br/>";
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+    public function read($filename,$encode='utf-8'){
+        $str = substr(THINK_PATH, 0, -1);
+        require_once $str . '/PigCms/Lib/Action/User/Classes/PHPExcel.php';
+        $objReader = PHPExcel_IOFactory::createReader('Excel5');
+        $objReader->setReadDataOnly(true);
+        $objPHPExcel = $objReader->load($filename);
+        $objWorksheet = $objPHPExcel->getActiveSheet();
+        $highestRow = $objWorksheet->getHighestRow();
+        $highestColumn = $objWorksheet->getHighestColumn();
+        $highestColumnIndex = PHPExcel_Cell::columnIndexFromString($highestColumn);
+        $excelData = array();
+        for ($row = 1; $row <= $highestRow; $row++) {
+            for ($col = 0; $col < $highestColumnIndex; $col++) {
+                $excelData[$row][] =(string)$objWorksheet->getCellByColumnAndRow($col, $row)->getValue();
+            }
+        }
+        return $excelData;
+    }
+
     public function exportstore() {
         $start = 1;
         $end = 100;
@@ -41,9 +116,10 @@ class WomensdayAction  extends BonusAction {
         $end=$end-$start;
         $start=$start-1;
         $list = M('womensday')->query(
-            "SELECT g.*, f.nickname as name from tp_womensday as g
-            left join tp_customer_service_fans f on (f.openid=g.openid)
-             order by g.views desc limit $start,$end");
+            "SELECT g.*,award.*, f.nickname as name from tp_womensday_award as award
+              left join tp_womensday as g on (g.openid = award.openid)
+              left join tp_customer_service_fans f on (f.openid=g.openid)
+               order by g.views desc limit $start,$end");
         $i = $start+1;
         $listArr = array();
         foreach($list as $key => $each){
@@ -68,7 +144,10 @@ class WomensdayAction  extends BonusAction {
             ->setCellValue('D1', '浏览量')
             ->setCellValue('E1', '分享量')
             ->setCellValue('F1', '首次参与时间')
-            ->setCellValue('G1', '中奖');
+            ->setCellValue('G1', '手机号')
+            ->setCellValue('H1', '省')
+            ->setCellValue('I1', '地址')
+            ->setCellValue('J1', '中奖');
 
         //写出内容 UTF-8
 
@@ -82,7 +161,10 @@ class WomensdayAction  extends BonusAction {
                 ->setCellValue('D' . ($n + 2), $data[$n]['views'])
                 ->setCellValue('E' . ($n + 2), $data[$n]['shares'])
                 ->setCellValue('F' . ($n + 2), $data[$n]['createtime'])
-                ->setCellValue('G' . ($n + 2), '')
+                ->setCellValue('G' . ($n + 2), $data[$n]['telephone'])
+                ->setCellValue('H' . ($n + 2), $data[$n]['province'])
+                ->setCellValue('I' . ($n + 2), $data[$n]['address'])
+                ->setCellValue('J' . ($n + 2), '')
             ;
         }
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
