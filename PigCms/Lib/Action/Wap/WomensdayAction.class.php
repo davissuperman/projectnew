@@ -20,11 +20,6 @@ class WomensdayAction extends BonusAction {
         $this->url= C('site_url');
 
        // $this->cache = Cache::getInstance('Redis',array('host'=>'127.0.0.1','expire'=>1296000));
-        log :: write(cookie('user_openid') .'  openiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
-        //将VIEWS 加一
-        if(cookie('user_openid')){
-            M("womensday")->where(array('openid' =>cookie('user_openid')))->setInc('views', 1);
-        }
 
     }
 
@@ -216,9 +211,13 @@ class WomensdayAction extends BonusAction {
         $leftNum = $this->getLeftNumber($userOpenId);
         $this->assign('leftnum',  $leftNum);
         if($userOpenId){
-            M("womensday")->where(array('id' =>$itemInfo['id']))->setInc('views', 1);
+            $this->saveViews($itemInfo['id']);
         }
         $this->display();
+    }
+
+    public function saveViews($id){
+        M("womensday")->where(array('id' =>$id))->setInc('views', 1);
     }
     /*
      * 开户
@@ -465,6 +464,9 @@ class WomensdayAction extends BonusAction {
             }
         }
         $this->assign('totalitem',$totalItem);
+        if($userOpenId){
+            $this->saveViews($itemInfo['id']);
+        }
         $this->display();
     }
     public function getLeftNumber($openId){
@@ -678,6 +680,9 @@ class WomensdayAction extends BonusAction {
             $submitTelephone = true;
         }
         $this->assign('submittelephone',$submitTelephone);
+        if($userOpenId){
+            $this->saveViews($itemInfo['id']);
+        }
         $this->display();
     }
 
@@ -824,7 +829,9 @@ class WomensdayAction extends BonusAction {
             header("location:$url");
         }
 
-
+        if($userOpenId){
+            $this->saveViews($info['id']);
+        }
         $this->display();
     }
 
@@ -996,6 +1003,9 @@ class WomensdayAction extends BonusAction {
         }
 
         $this->assign('errormsg',$errorMsg);
+        if($userOpenId){
+            $this->saveViews($info['id']);
+        }
         $this->display();
     }
 
@@ -1173,6 +1183,10 @@ class WomensdayAction extends BonusAction {
         $this->assign("award",$award);
         $this->assign("totalitem",$totalItem);
         $this->assign("telephone",$telephone);
+
+        if($userOpenId){
+            $this->saveViews($info['id']);
+        }
         $this->display();
     }
 
@@ -1316,6 +1330,9 @@ class WomensdayAction extends BonusAction {
             //重定向到首页
             $url ="http://wx.drjou.cc"."/index.php?g=Wap&m=Womensday&a=index";
             header("location:$url");
+        }
+        if($userOpenId){
+            $this->saveViews($info['id']);
         }
         $this->display();
     }
@@ -1471,6 +1488,9 @@ class WomensdayAction extends BonusAction {
         }
         $this->assign("totalitem",$totalItem);
         $this->assign("left",$this->getLeftNumber($userOpenId));
+        if($userOpenId){
+            $this->saveViews($info['id']);
+        }
         $this->display();
     }
 
@@ -2199,7 +2219,6 @@ class WomensdayAction extends BonusAction {
     public function shareInfo(){
         //只要分享了 额外获取一次机会
         $userOpenId= cookie('user_openid');
-        Log :: write($userOpenId.' openiddddddddddddddddddddddddddddddddddddddddddd');
         if($userOpenId){
             //判断OPENID是否存在
             $info = M('womensday')->where(array('openid' => $userOpenId))->find();
