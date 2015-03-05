@@ -20,6 +20,7 @@ class WomensdayAction extends BonusAction {
         $this->url= C('site_url');
 
        // $this->cache = Cache::getInstance('Redis',array('host'=>'127.0.0.1','expire'=>1296000));
+        log :: write(cookie('user_openid') .'  openiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
     }
 
     public function index() {
