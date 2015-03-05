@@ -407,7 +407,6 @@ class WomensdayAction extends BonusAction {
         if($numberShare){
             $totalNumber = 5;
         }
-        log :: write($numberShare .' aaaaaaaaaaaaaaaaaaaaaaaaaaaaa   ');
         $hasOportunity = false;
         if($numberForSecond >= $totalNumber){
             //当天已经没有机会
