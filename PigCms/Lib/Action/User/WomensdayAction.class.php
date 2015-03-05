@@ -63,11 +63,12 @@ class WomensdayAction  extends BonusAction {
         //写出表头
         $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('A1', '排名')
-            ->setCellValue('B1', '姓名')
-            ->setCellValue('C1', '浏览量')
-            ->setCellValue('D1', '分享量')
-            ->setCellValue('E1', '首次参与时间')
-            ->setCellValue('F1', '中奖');
+            ->setCellValue('B1', 'OPENID')
+            ->setCellValue('C1', '姓名')
+            ->setCellValue('D1', '浏览量')
+            ->setCellValue('E1', '分享量')
+            ->setCellValue('F1', '首次参与时间')
+            ->setCellValue('G1', '中奖');
 
         //写出内容 UTF-8
 
@@ -76,11 +77,12 @@ class WomensdayAction  extends BonusAction {
             $name = $this->ReplaceSpecialChar($name);
             $objPHPExcel->setActiveSheetIndex(0)
                 ->setCellValue('A' . ($n + 2), $n+1)
-                ->setCellValue('B' . ($n + 2), $name)
-                ->setCellValue('C' . ($n + 2), $data[$n]['views'])
-                ->setCellValue('D' . ($n + 2), $data[$n]['shares'])
-                ->setCellValue('E' . ($n + 2), $data[$n]['createtime'])
-                ->setCellValue('F' . ($n + 2), '')
+                ->setCellValue('B' . ($n + 2), $data[$n]['openid'])
+                ->setCellValue('C' . ($n + 2), $name)
+                ->setCellValue('D' . ($n + 2), $data[$n]['views'])
+                ->setCellValue('E' . ($n + 2), $data[$n]['shares'])
+                ->setCellValue('F' . ($n + 2), $data[$n]['createtime'])
+                ->setCellValue('G' . ($n + 2), '')
             ;
         }
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
