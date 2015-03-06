@@ -12,7 +12,7 @@ class WomensdayAction  extends BonusAction {
         $page = new Page($count, 25);
         $list = M('womensday')->query(
             "SELECT w.openid as openid, w.shares as shares,w.views as views , a.telephone as telephone,
-              a.province as province, a.address as address, w.createtime, a.award as award  from tp_womensday as w
+              a.province as province, a.address as address, w.createtime, a.award as award, w.getsucaiclicknum as getsucaiclicknum from tp_womensday as w
               left join tp_womensday_award as a on (a.openid=w.openid)
         order by views desc limit $page->firstRow,$page->listRows"); //第二名和你最近的
         $this->assign('page', $page->show());
