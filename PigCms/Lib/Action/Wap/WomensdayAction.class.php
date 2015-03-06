@@ -46,7 +46,6 @@ class WomensdayAction extends BonusAction {
             $selfUserInfo['headimgurl'] = $fansInfo['headimgurl'];
             $selfUserInfo['nickname'] = $fansInfo['nickname'];
         } else {
-            log :: write("cccccccccccccccccccccccccccccccccccc");
             //根据open id获取用户信息，查看是否存在
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
             if($userOpenId && $fansInfo){
@@ -83,9 +82,7 @@ class WomensdayAction extends BonusAction {
                     [scope] => snsapi_userinfo
                     )
                      */
-                    log :: write("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
                     if(empty($fansInfo)){
-                        log :: write("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa             ".$userOpenId);
                         $webCreatetime = $apidata['web_createtime'];
                         $web_access_token = '';
 /*
@@ -110,8 +107,6 @@ class WomensdayAction extends BonusAction {
                         }else{
                             //重新获取
                             $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
-                            Log :: write("ddddddddddddddddddddddddddddddddddddddddddddddd");
-                            Log :: write(print_r($userinfoFromApi,true));
                             if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                                 //code 有错误 需要重定向
                                 $url = $this->url."/index.php?g=Wap&m=Womensday&a=index";
