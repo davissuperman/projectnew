@@ -18,37 +18,40 @@
 	<div id="contents" class="bd-bg">
         <div class="sucai-box">
             <div class="ta-c">
-                <img src="images/img02.png" width="86%"/>
+                <img src="images/get/img01.png" width="86%"/>
             </div>
             <div class="sucai-list clrfix">
                 <div class="item">
                     <div class="name">玻尿酸</div>
                     <div class="clrfix">
-                        <div class="img">
+                        <div class="img has">
                         	<a href="/wap/event/2015/02/38/3.shtml">
                             	<img src="images/get/img01.jpg" class="v-b"/>
                             </a>
                         </div>
+                        <div class="num">X32</div>
                     </div>
                 </div>
                 <div class="item">
                     <div class="name">天羽丝</div>
                     <div class="clrfix">
-                        <div class="img">
+                        <div class="img has">
                         	<a href="/wap/event/2015/02/38/5.shtml">
                             	<img src="images/get/img02.jpg" class="v-b"/>
                             </a>
                         </div>
+                        <div class="num">X21</div>
                     </div>
                 </div>
                 <div class="item">
                     <div class="name">竹炭颗粒</div>
                     <div class="clrfix">
-                        <div class="img">
+                        <div class="img has">
                         	<a href="/wap/event/2015/02/38/4.shtml">
                            		<img src="images/get/img03.jpg" class="v-b"/>
                             </a>
                         </div>
+                        <div class="num">X9</div>
                     </div>
                 </div>
                 <div class="item">
@@ -59,6 +62,7 @@
                             	<img src="images/get/img04.jpg" class="v-b"/>
                             </a>
                         </div>
+                        <div class="num">X0</div>
                     </div>
                 </div>
             </div>

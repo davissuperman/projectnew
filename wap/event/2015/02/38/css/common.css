@@ -81,9 +81,9 @@ input,textarea,select,button{font-size:1em;}
 .btn-red .icon01{float:right; margin:0.1rem 0 0 2px;}
 
 /*rule*/
-.rule{color:#005982; padding:0.2rem;}
-.rule dt{font-size:0.6rem; text-align:center;font-weight:bold; margin-bottom:10px;}
-.rule dd{font-size:0.4rem; line-height:0.6rem;}
+.rule{color:#000; padding:0.2rem;}
+.rule dt{font-size:0.5rem; text-align:center;font-weight:bold; margin-bottom:5px;}
+.rule dd{font-size:0.35rem; line-height:0.55rem;}
 
 /*活动素材*/
 .get-sucai{ text-align:center; padding-top:10px;}
@@ -100,11 +100,11 @@ input,textarea,select,button{font-size:1em;}
 /*sucai-list*/
 .sucai-list{width:5.6rem; margin:0 auto;}
 .sucai-list .item{width:50%;float:left; margin-top:0.3rem;}
-.sucai-list .name{color:#005982;font-size:0.4rem; margin-bottom:5px;}
-.sucai-list .img{float:left;width:1.6rem; border:2px solid #00489a;}
+.sucai-list .name{color:#000;font-size:0.4rem; margin-bottom:5px; margin-left:20px;}
+.sucai-list .img{float:left;width:1.6rem; border:2px solid #020741;margin-left:20px;}
 .sucai-list .img.has{border:2px solid #e60012;}
 .sucai-list .img img{width:100%;}
-.sucai-list .num{float:left;width:0.5rem;font-size:0.4rem; margin-top:0.8rem;color:#005982; margin-left:5px;}
+.sucai-list .num{float:left;width:0.5rem;font-size:0.4rem; margin-top:0.8rem;color:#000; margin-left:5px;}
 .sucai-box{ padding-top:20px;}
 .sucai-box .btn-box{font-size:0.4rem;color:#292929;}
 
