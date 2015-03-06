@@ -124,7 +124,7 @@ class WomensdayAction extends BonusAction {
 
                         //根据access_token 拉到用户基本信息
                         $gUrl = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$web_access_token.'&openid='.$userOpenId.'&lang=zh_CN';
-                        $json = json_decode($this->curlGet($gUrl));
+                        $json = json_decode($this->curlGetV2($gUrl));
 
                         $this->saveUserInfo($json);
                         $selfUserInfo['headimgurl'] = $json->headimgurl;
@@ -2432,6 +2432,17 @@ class WomensdayAction extends BonusAction {
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $temp = curl_exec($ch);
         return $temp;
+    }
+
+    public function curlGetV2($get_user_info_url){
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL,$get_user_info_url);
+        curl_setopt($ch,CURLOPT_HEADER,0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+        $res = curl_exec($ch);
+        curl_close($ch);
+        return $res;
     }
 
 }
