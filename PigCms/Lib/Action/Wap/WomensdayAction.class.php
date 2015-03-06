@@ -85,7 +85,7 @@ class WomensdayAction extends BonusAction {
                      */
                     log :: write("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
                     if(empty($fansInfo)){
-                        log :: write("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                        log :: write("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa             ".$userOpenId);
                         $webCreatetime = $apidata['web_createtime'];
                         $web_access_token = '';
 
