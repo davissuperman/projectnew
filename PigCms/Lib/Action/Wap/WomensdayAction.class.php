@@ -2258,6 +2258,12 @@ class WomensdayAction extends BonusAction {
 
     }
 
+    public function saveGetSucaiClickNum(){
+        $openId = cookie('user_openid');
+        if($openId){
+            M("womensday")->where(array('openid' =>$openId))->setInc('getsucaiclicknum', 1);
+        }
+    }
 
     public function saveList($openId,$numberForSecond=0){
         $d['openid'] = $openId;
