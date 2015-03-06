@@ -24,6 +24,7 @@
             <div class="ta-c mt-20" style="font-size:0.3rem;">
             	<a class="btn-red" href="javascript:;">查询</a>
             </div>
+            <div style="font-size:0.2rem;color:#F00; margin-top:10px; text-align:center;">请于提交信息后隔日查询，当日查询皆显示未中奖！</div>
             <div class="no-lottery">
             	<p>很可惜您未中奖</p>
                 <p>非常感谢参与活动</p>
