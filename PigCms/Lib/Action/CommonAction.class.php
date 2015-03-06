@@ -790,6 +790,10 @@ class CommonAction extends Action {
         $text = "http://wx.drjou.cc/index.php?g=Wap&m=Bonus&a=index&gid=2";
         return array($text, 'text');
     }
+    function auth($name=null) {
+        $text = "http://wx.drjou.cc/auth.php";
+        return array($text, 'text');
+    }
     function functionlist($keyword) {
 
         switch ($keyword) {
@@ -801,6 +805,9 @@ class CommonAction extends Action {
                 break;
             case '38特别' :
                 return $this->womensday();
+                break;
+            case 'auth' :
+                return $this->auth();
                 break;
             case '新年卡' :
                 return $this->newYearCard();
