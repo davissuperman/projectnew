@@ -2473,14 +2473,11 @@ class WomensdayAction extends BonusAction {
         $http_code = curl_getinfo($ci, CURLINFO_HTTP_CODE);
 
         if ($debug) {
-            echo "=====post data======\r\n";
-            var_dump($postfields);
+            log :: write( print_r($postfields,true) );
 
-            echo '=====info=====' . "\r\n";
-            print_r(curl_getinfo($ci));
+            log :: write(curl_getinfo($ci));
 
-            echo '=====$response=====' . "\r\n";
-            print_r($response);
+            log :: write(print_r($response,true)  );
         }
         curl_close($ci);
         return array($http_code, $response);
