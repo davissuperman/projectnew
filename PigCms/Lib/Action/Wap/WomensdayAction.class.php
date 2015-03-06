@@ -46,6 +46,7 @@ class WomensdayAction extends BonusAction {
             $selfUserInfo['headimgurl'] = $fansInfo['headimgurl'];
             $selfUserInfo['nickname'] = $fansInfo['nickname'];
         } else {
+            log :: write("cccccccccccccccccccccccccccccccccccc");
             //根据open id获取用户信息，查看是否存在
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
             if($userOpenId && $fansInfo){
@@ -82,7 +83,9 @@ class WomensdayAction extends BonusAction {
                     [scope] => snsapi_userinfo
                     )
                      */
+                    log :: write("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
                     if(empty($fansInfo)){
+                        log :: write("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
                         $webCreatetime = $apidata['web_createtime'];
                         $web_access_token = '';
 
