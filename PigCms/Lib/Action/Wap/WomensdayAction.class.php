@@ -108,6 +108,7 @@ class WomensdayAction extends BonusAction {
                         }else{
                             //重新获取
                             $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
+                            Log :: write("ddddddddddddddddddddddddddddddddddddddddddddddd");
                             Log :: write(print_r($userinfoFromApi,true));
                             if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                                 //code 有错误 需要重定向
