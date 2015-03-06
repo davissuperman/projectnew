@@ -10,7 +10,10 @@ if ($code && $state == 'sentian') {
     $token_data = httpdata($token_url);
     $obj = json_decode($token_data);
     $openId = $obj->openid;
-    echo $openId;
+    $accessToken = $obj->access_token;
+    $userUrl = "https://api.weixin.qq.com/sns/userinfo?access_token=$accessToken&openid=$openId&lang=zh_CN";
+    $useinfo =  httpdata($userUrl);
+    var_dump($useinfo);
 }else{
     header("Location: $url");
 }
