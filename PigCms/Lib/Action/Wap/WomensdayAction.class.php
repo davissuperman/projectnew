@@ -11,7 +11,6 @@ class WomensdayAction extends BonusAction {
     public function _initialize() {
         define('RES', THEME_PATH . 'common');
         define('STATICS', TMPL_PATH . 'static');
-        $this->gid = $_REQUEST['gid'];
         $agent = $_SERVER['HTTP_USER_AGENT'];
 //        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
 //            echo '此功能只能在微信浏览器中使用';
@@ -40,7 +39,7 @@ class WomensdayAction extends BonusAction {
 
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
-        if ($_GET['show']) {
+        if (isset($_GET['show']) && $_GET['show']) {
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
                 //测试的时候使用
             //如果存在 则不需要再通过weixin API调取用户信息
@@ -218,12 +217,12 @@ class WomensdayAction extends BonusAction {
         $leftNum = $this->getLeftNumber($userOpenId);
         $this->assign('leftnum',  $leftNum);
         if($userOpenId){
-            $this->saveViews($itemInfo['id']);
+            $this->savePageViews($itemInfo['id']);
         }
         $this->display();
     }
 
-    public function saveViews($id){
+    public function savePageViews($id){
         M("womensday")->where(array('id' =>$id))->setInc('views', 1);
     }
     /*
@@ -261,7 +260,7 @@ class WomensdayAction extends BonusAction {
 
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
-        if ($_GET['show']) {
+        if (isset($_GET['show']) && $_GET['show']) {
             
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
 
@@ -471,7 +470,7 @@ class WomensdayAction extends BonusAction {
         }
         $this->assign('totalitem',$totalItem);
         if($userOpenId){
-            $this->saveViews($itemInfo['id']);
+            $this->savePageViews($itemInfo['id']);
         }
         $this->display();
     }
@@ -510,7 +509,7 @@ class WomensdayAction extends BonusAction {
 
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
-        if ($_GET['show']) {
+        if (issset($_GET['show']) && $_GET['show']) {
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
 
         } else {
@@ -681,7 +680,7 @@ class WomensdayAction extends BonusAction {
         }
         $this->assign('submittelephone',$submitTelephone);
         if($userOpenId){
-            $this->saveViews($info['id']);
+            $this->savePageViews($info['id']);
         }
         $this->display();
     }
@@ -703,7 +702,7 @@ class WomensdayAction extends BonusAction {
 
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
-        if ($_GET['show']) {
+        if (isset($_GET['show']) &&  $_GET['show']) {
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
 
         } else {
@@ -830,7 +829,7 @@ class WomensdayAction extends BonusAction {
         }
 
         if($userOpenId){
-            $this->saveViews($info['id']);
+            $this->savePageViews($info['id']);
         }
         $this->display();
     }
@@ -852,7 +851,7 @@ class WomensdayAction extends BonusAction {
 
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
-        if ($_GET['show']) {
+        if (isset($_GET['show']) && $_GET['show']) {
             
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
 
@@ -1004,7 +1003,7 @@ class WomensdayAction extends BonusAction {
 
         $this->assign('errormsg',$errorMsg);
         if($userOpenId){
-            $this->saveViews($info['id']);
+            $this->savePageViews($info['id']);
         }
         $this->display();
     }
@@ -1027,7 +1026,7 @@ class WomensdayAction extends BonusAction {
 
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
-        if ($_GET['show']) {
+        if (isset($_GET['show']) && $_GET['show']) {
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
 
         } else {
@@ -1185,7 +1184,7 @@ class WomensdayAction extends BonusAction {
         $this->assign("telephone",$telephone);
 
         if($userOpenId){
-            $this->saveViews($info['id']);
+            $this->savePageViews($info['id']);
         }
         $this->display();
     }
@@ -1206,7 +1205,7 @@ class WomensdayAction extends BonusAction {
 
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
-        if ($_GET['show']) {
+        if (isset($_GET['show']) && $_GET['show']) {
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
 
         } else {
@@ -1332,7 +1331,7 @@ class WomensdayAction extends BonusAction {
             header("location:$url");
         }
         if($userOpenId){
-            $this->saveViews($info['id']);
+            $this->savePageViews($info['id']);
         }
         $this->display();
     }
@@ -1353,7 +1352,7 @@ class WomensdayAction extends BonusAction {
 
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
-        if ($_GET['show']) {
+        if (isset($_GET['show']) && $_GET['show']) {
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
 
         } else {
@@ -1489,7 +1488,7 @@ class WomensdayAction extends BonusAction {
         $this->assign("totalitem",$totalItem);
         $this->assign("left",$this->getLeftNumber($userOpenId));
         if($userOpenId){
-            $this->saveViews($info['id']);
+            $this->savePageViews($info['id']);
         }
         $this->display();
     }
@@ -1510,7 +1509,7 @@ class WomensdayAction extends BonusAction {
 
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
-        if ($_GET['show']) {
+        if (isset($_GET['show']) && $_GET['show']) {
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
 
         } else {
@@ -1636,7 +1635,7 @@ class WomensdayAction extends BonusAction {
             header("location:$url");
         }
         if($userOpenId){
-            $this->saveViews($info['id']);
+            $this->savePageViews($info['id']);
         }
         $this->display();
     }
@@ -1657,7 +1656,7 @@ class WomensdayAction extends BonusAction {
 
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
-        if ($_GET['show']) {
+        if (isset($_GET['show']) && $_GET['show']) {
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
 
         } else {
@@ -1783,7 +1782,7 @@ class WomensdayAction extends BonusAction {
             header("location:$url");
         }
         if($userOpenId){
-            $this->saveViews($info['id']);
+            $this->savePageViews($info['id']);
         }
         $this->display();
     }
@@ -1804,7 +1803,7 @@ class WomensdayAction extends BonusAction {
 
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
-        if ($_GET['show']) {
+        if (isset($_GET['show']) && $_GET['show']) {
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
 
         } else {
@@ -1930,7 +1929,7 @@ class WomensdayAction extends BonusAction {
             header("location:$url");
         }
         if($userOpenId){
-            $this->saveViews($info['id']);
+            $this->savePageViews($info['id']);
         }
         $this->display();
     }
@@ -1951,7 +1950,7 @@ class WomensdayAction extends BonusAction {
 
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
-        if ($_GET['show']) {
+        if (isset($_GET['show']) && $_GET['show']) {
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
 
         } else {
@@ -2077,7 +2076,7 @@ class WomensdayAction extends BonusAction {
             header("location:$url");
         }
         if($userOpenId){
-            $this->saveViews($info['id']);
+            $this->savePageViews($info['id']);
         }
         $this->display();
     }
@@ -2098,7 +2097,7 @@ class WomensdayAction extends BonusAction {
 
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
-        if ($_GET['show']) {
+        if (isset($_GET['show']) && $_GET['show']) {
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
 
         } else {
@@ -2224,7 +2223,7 @@ class WomensdayAction extends BonusAction {
             header("location:$url");
         }
         if($userOpenId){
-            $this->saveViews($info['id']);
+            $this->savePageViews($info['id']);
         }
         $this->display();
     }
