@@ -174,13 +174,13 @@
         <img src="{pigcms::RES}/womensday/images/p1/img09.jpg" width="100%" class="v-b"/>
         <img src="{pigcms::RES}/womensday/images/p1/img10.jpg" width="100%" class="v-b"/>
         <if condition="$totalitem eq true and  $submitphone eq true">
-            <a  class="getsucaiclick" class="index-btn btn-red btn-disabled" href="javascript:;" style="text-align:center;">获取素材<i class="icon01 fr"></i></a>
+            <a  id="getsucaiclick" class="index-btn btn-red btn-disabled" href="javascript:;" style="text-align:center;">获取素材<i class="icon01 fr"></i></a>
         <elseif condition="$totalitem eq true and  $submitphone eq false" />
-            <a class="getsucaiclick"  class="index-btn" href="{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=reg"></a><br/>
+            <a id="getsucaiclick"  class="index-btn" href="{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=reg"></a><br/>
         <elseif condition="$leftnum eq 0" />
-            <a class="getsucaiclick"  class="index-btn btn-red btn-disabled" href="javascript:;" style="text-align:center;">获取素材<i class="icon01 fr"></i></a>
+            <a id="getsucaiclick"  class="index-btn btn-red btn-disabled" href="javascript:;" style="text-align:center;">获取素材<i class="icon01 fr"></i></a>
         <else/>
-            <a class="getsucaiclick"  class="index-btn" href="{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=getreward"></a><br/>
+            <a id="getsucaiclick"  class="index-btn" href="{pigcms::$siteurl}/index.php?g=Wap&m=Womensday&a=getreward"></a><br/>
         </if>
 
     </div>
@@ -211,7 +211,7 @@
 </footer>
 <script>
     $(function(){
-        $(".getsucaiclick").click(function(){
+        $("#getsucaiclick").click(function(){
             $.get(
                     "/index.php?g=Wap&m=Womensday&a=saveGetSucaiClickNum",
                     function(data) {
