@@ -514,7 +514,7 @@ class WomensdayAction extends BonusAction {
 
         //即使存在与cookie但是fans中不存在必须重新获取
         $selfUserInfo = array();
-        if (issset($_GET['show']) && $_GET['show']) {
+        if (isset($_GET['show']) && $_GET['show']) {
             $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
 
         } else {
