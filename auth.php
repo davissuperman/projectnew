@@ -6,11 +6,11 @@ $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=$appid&redirec
 $code = trim($_GET["code"]);
 $state = trim($_GET['state']);
 if ($code && $state == 'sentian') {
-    echo $code.' aaaaaaa';
     $token_url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=$appid&secret=$appsecret&code=$code&grant_type=authorization_code";
     $token_data = httpdata($token_url);
-    echo "<pre>";
-    var_dump($token_data);
+    $obj = json_decode($token_data);
+    $openId = $obj->openid;
+    echo $openId;
 }else{
     header("Location: $url");
 }
