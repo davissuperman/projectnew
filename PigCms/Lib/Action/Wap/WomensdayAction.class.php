@@ -88,11 +88,8 @@ class WomensdayAction extends BonusAction {
                         log :: write("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa             ".$userOpenId);
                         $webCreatetime = $apidata['web_createtime'];
                         $web_access_token = '';
-
-                        if($webCreatetime>(time()-7200) && $userOpenId){
-                            //未过期
-                            $web_access_token = $apidata['web_access_token'];
-                        }else if($webCreatetime<=(time()-7200) && $userOpenId && isset($apidata['refresh_token']) && ($apidata['refresh_token_createtime']>(time()-7*3600*24))  ){
+/*
+ * else if($webCreatetime<=(time()-7200) && $userOpenId && isset($apidata['refresh_token']) && ($apidata['refresh_token_createtime']>(time()-7*3600*24))  ){
                                 //从新获取通过
                                 $urlRefreshToken = 'https://api.weixin.qq.com/sns/oauth2/refresh_token?appid='.
                                     $apidata['appid'].'&grant_type=refresh_token&refresh_token='.$apidata['refresh_token'];
@@ -105,6 +102,11 @@ class WomensdayAction extends BonusAction {
                             $m['web_createtime'] = time();
                             $m['refresh_token_createtime'] = time();
                             M('Diymen_set')->save($m);
+                        }
+ */
+                        if($webCreatetime>(time()-7200) && $userOpenId){
+                            //未过期
+                            $web_access_token = $apidata['web_access_token'];
                         }else{
                             //重新获取
                             $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
