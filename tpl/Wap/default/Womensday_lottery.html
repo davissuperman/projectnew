@@ -149,7 +149,7 @@
         <if condition="$totalitem eq false">
             <div style="font-size:0.3rem;" class="ta-c mt-20">素材还没有集齐哦！请继续加油！</div>
             <div class="mt-20 ta-c">
-                <a class="btn-red" href="/index.php?g=Wap&m=Womensday&a=getreward" style="width:3.5rem;">点击获得更多素材</a>
+                <a id="getsucaiclick"  class="btn-red" href="/index.php?g=Wap&m=Womensday&a=getreward" style="width:3.5rem;">点击获得更多素材</a>
             </div>
         <else />
             <if condition="$telephone eq null">
@@ -229,6 +229,15 @@
 </footer>
 <script>
     $(function(){
+        $("#getsucaiclick").click(function(){
+            $.get(
+                    "/index.php?g=Wap&m=Womensday&a=saveGetSucaiClickNum",
+                    function(data) {
+                    }
+            );
+        });
+
+
         $("#submitform").click(function(event){
 //            mnAlert('a');
             var username = $("#username").val();

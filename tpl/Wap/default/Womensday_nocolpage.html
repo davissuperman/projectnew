@@ -151,7 +151,7 @@
         <div class="get-sucai">
             <h1 style="font-size:0.4rem;">还没集齐四个素材哦！<br/>继续加油！</h1>
             <div>
-                <a class="btn-red" href="/index.php?g=Wap&m=Womensday&a=getreward">点击获得更多素材</a>
+                <a  id="getsucaiclick" class="btn-red" href="/index.php?g=Wap&m=Womensday&a=getreward">点击获得更多素材</a>
             </div>
             <div class="times clrfix">
                 <div class="bd-lf"></div>
@@ -205,7 +205,15 @@
     </ul>
 </footer>
 <script>
-
+    $(function(){
+        $("#getsucaiclick").click(function(){
+            $.get(
+                    "/index.php?g=Wap&m=Womensday&a=saveGetSucaiClickNum",
+                    function(data) {
+                    }
+            );
+        });
+    });
 </script>
 
 </body>
