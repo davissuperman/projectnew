@@ -57,13 +57,20 @@ class HangzhouAction extends BonusAction {
                 $phone = null;
                 if(isset($_POST['phone']) && $_POST['phone']){
                     //提交手机号
+                    //是否存在手机号
                     $phone = $_POST['phone'];
-                    $d['openid'] = $openId;
-                    $d['phone'] = $phone;
-                    M("hangzhou_index")->add($d);
-                    $msg = "提交成功";
+                    $p1 = M('hangzhou_index')->where(array('phone' => $phone))->find();
+                    $p2 = M('hangzhou_index')->where(array('openid' => $openId))->find();
+                    if($p1 || $p2){
+                        $msg = "非常抱歉，您的微信账号或登记的电话号码，已经领取过奖品。";
+                    }else{
+                        $d['openid'] = $openId;
+                        $d['phone'] = $phone;
+                        M("hangzhou_index")->add($d);
+                        $msg = "提交成功";
+                    }
                 }else{
-                    $msg = "非常抱歉，您的微信账号或登记的电话号码，已经领取过奖品。";
+
                 }
 
             }else{
