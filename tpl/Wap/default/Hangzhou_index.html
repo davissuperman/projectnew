@@ -19,18 +19,21 @@
 
     <div class="reg-box">
         <div class="mt-20 ta-c">登记手机号码，验证获得领奖资格</div>
-        <form method="get" action="/index.php?g=Wap&m=Hangzhou&a=saveHangzhouPhone" id="reg-form">
+        <form method="post" action="/index.php?g=Wap&m=Hangzhou&a=saveHangzhouPhone" id="reg-form1">
             <ul class="form-ul">
 
                 <li class="clrfix">
-                    <input type="text"  name="phone" id="phone" class="input-text" placeholder="请输入手机号码">
+                    <input type="text"  name="phone" id="phone1" class="input-text" placeholder="请输入手机号码">
+                    <input type="hidden"  name="openid" id="openid" value="{pigcms::$openid}">
                 </li>
 
             </ul>
             <div class="ta-c">
-                <span class="btn-yel" id="submitform">确认</span>
+                <span class="btn-yel" id="submitform1">确认</span>
             </div>
         </form>
+
+
         <dl>
             <dt>说明：</dt>
             <dd>1、仅限杭州3月12日-15日杭州下沙福雷德广场活动现场参与，现场领奖，非现场参与无效。</dd>
@@ -43,18 +46,22 @@
 </div>
 <script>
     $(function(){
-        $("#submitform").click(function(event){
-            var phone = $("#phone").val();
+        $("#submitform1").click(function(event){
+            var phone = $("#phone1").val();
             var submitform = false;
             if(phone == ''){
                 mnAlert("请输入手机号");
+            }else if(phone.length != 11){
+                mnAlert("请输入正确手机号");
+            }else if(isNaN(phone)){
+                mnAlert("请输入正确手机号");
             }else{
                 submitform = true;
             }
             if(submitform == false){
                 event.preventDefault();
             }else{
-                $("#reg-form").submit();
+                $("#reg-form1").submit();
             }
         });
     });

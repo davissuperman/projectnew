@@ -38,31 +38,42 @@ class HangzhouAction extends BonusAction {
         }else{
 
         }
-
+        $this->assign("siteurl",$this->url);
+        $this->assign("openid",$openId);
         $this->display();
     }
 
+    public function abc(){
+        echo 'aa';
+    }
+
     public function saveHangzhouPhone(){
-        $openId = $_GET['openid'];
+        $msg = '';
+        $openId = $_POST['openid'];
         if($openId){
             $fansInfo = M('customer_service_fans')->where(array('openid' => $openId,'token'=>'rggfsk1394161441'))->find();
             if($fansInfo){
                 //此用户已经添加 显示页面
                 $phone = null;
-                if(isset($_GET['phone']) && $_GET['phone']){
+                if(isset($_POST['phone']) && $_POST['phone']){
                     //提交手机号
-                    $phone = $_GET['phone'];
+                    $phone = $_POST['phone'];
                     $d['openid'] = $openId;
                     $d['phone'] = $phone;
                     M("hangzhou_index")->add($d);
+                    $msg = "提交成功";
+                }else{
+                    $msg = "非常抱歉，您的微信账号或登记的电话号码，已经领取过奖品。";
                 }
 
             }else{
-                //已经提交过信息
+                $msg = "非常抱歉，您的微信账号或登记的电话号码，已经领取过奖品。";
             }
         }else{
-
+            $msg = "非常抱歉，您的微信账号或登记的电话号码，已经领取过奖品。";
         }
+        $this->assign("msg",$msg);
+        $this->display();
     }
 
     /**
