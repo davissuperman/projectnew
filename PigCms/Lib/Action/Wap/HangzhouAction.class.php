@@ -43,13 +43,24 @@ class HangzhouAction extends BonusAction {
         $this->display();
     }
 
-    public function abc(){
-        echo 'aa';
+    public function updatejiangping(){
+        $openId = $_GET['openid'];
+        $p = M('hangzhou_index')->where(array('openid' => $openId))->find();
+        $return = 0;
+        if($p){
+            //更新获奖状态
+            $d['id'] = $p['id'];
+            $d['award'] = 1;
+            M('hangzhou_index')->save($d);
+            $return = 1;
+        }
+        echo $return;
     }
 
     public function saveHangzhouPhone(){
         $msg = '';
         $openId = $_POST['openid'];
+        $success = false;
         if($openId){
             $fansInfo = M('member_user')->where(array('openid' => $openId,'token'=>'rggfsk1394161441'))->find();
             if($fansInfo){
@@ -68,6 +79,7 @@ class HangzhouAction extends BonusAction {
                         $d['phone'] = $phone;
                         M("hangzhou_index")->add($d);
                         $msg = "提交成功";
+                        $success = true;
                     }
                 }else{
 
@@ -79,7 +91,9 @@ class HangzhouAction extends BonusAction {
         }else{
             $msg = "非常抱歉，您的微信账号或登记的电话号码，已经领取过奖品。";
         }
+        $this->assign("openid",$openId);
         $this->assign("msg",$msg);
+        $this->assign("success",$success);
         $this->display();
     }
 

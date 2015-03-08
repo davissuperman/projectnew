@@ -16,7 +16,46 @@
 
 <body>
 <div id="contents">
-    <div class="mt-20 ta-c" style="padding:0 10px; line-height:0.5rem;">{pigcms::$msg}</div>
+    <if condition="$success eq true">
+        <div class="reg-box">
+            <!--<div class="ta-c mt-20">-->
+                <!--<span class="btn-yel btn-disabled">发奖</span>-->
+            <!--</div>-->
+            <div class="ta-c mt-20">
+                <span class="btn-yel" id="fajiang">发奖</span>
+            </div>
+
+            <dl>
+                <dt>说明：</dt>
+                <dd>1、“发奖”按钮仅限主办方工作人员点击，工作人员点击后发奖。活动参与者点击无效。</dd>
+                <dd>2、“发奖”按钮点击后即代表奖品已经领取，即失去领取试用装奖品机会。</dd>
+                <dd>3、奖品为森田面膜试用装，数量5000份。领完即止，请与现场工作人员确认即时奖品剩余数量。</dd>
+                <dd>4、活动最终解释权归森田药妆及现场活动主办方所有。</dd>
+            </dl>
+        </div>
+    <else />
+        <div class="mt-20 ta-c" style="padding:0 10px; line-height:0.5rem;">{pigcms::$msg}</div>
+    </if>
 </div>
+<script>
+    $(function(){
+        $("#fajiang").click(function(){
+            $("#fajiang").addClass("btn-disabled");
+            $.get(
+                    "/index.php?g=Wap&m=Hangzhou&a=updatejiangping&openid={pigcms::$openid}",
+                    function(data) {
+                        if(data == 1){
+                            mnAlert("获奖成功");
+                        }else{
+                            mnAlert("非常抱歉，您的微信账号或登记的电话号码，已经领取过奖品。");
+                        }
+                    }
+            );
+            //刷新当前URL
+            // location.href = "{pigcms::$siteurl}";
+        });
+
+    });
+</script>
 </body>
 </html>
