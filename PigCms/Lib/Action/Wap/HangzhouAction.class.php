@@ -79,6 +79,7 @@ class HangzhouAction extends BonusAction {
                         $d['phone'] = $phone;
                         M("hangzhou_index")->add($d);
                         $msg = "提交成功";
+                        M("hangzhou_num")->where(array('id' =>1))->setInc('number', 1);
                         $success = true;
                     }
                 }else{
