@@ -49,10 +49,13 @@ class HangzhouAction extends BonusAction {
         $return = 0;
         if($p){
             M('hangzhou_index')->where(array('id' =>  $p['id'] ))->setInc('lingjiangsum', 1);
-            //更新获奖状态
-            $d['id'] = $p['id'];
-            $d['award'] = 1;
-            M('hangzhou_index')->save($d);
+            if(1*$p['award'] == 0){
+                //更新获奖状态
+                $d['id'] = $p['id'];
+                $d['award'] = 1;
+                M('hangzhou_index')->save($d);
+            }
+
             $return = 1;
         }
         echo $return;
