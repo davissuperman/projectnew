@@ -227,7 +227,7 @@ class WeixinAction extends CommonAction {
                 // file_put_contents('d:/d.txt', var_export($this->data, true) );
             }
 
-            return $this->functionlist($key);
+            return $this->functionlist($key,$data);
         }
     }
 

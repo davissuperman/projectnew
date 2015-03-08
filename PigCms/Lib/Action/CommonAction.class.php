@@ -794,7 +794,12 @@ class CommonAction extends Action {
         $text = "http://wx.drjou.cc/auth.php";
         return array($text, 'text');
     }
-    function functionlist($keyword) {
+    function hangzhou($keyword,$data){
+        $openId = $data['FromUserName'];
+        $text = "http://wx.drjou.cc/index.php?g=Wap&m=Hangzhou&a=index&openid=$openId";
+        return array($text, 'text');
+    }
+    function functionlist($keyword,$data=null) {
 
         switch ($keyword) {
             case '首页' :
@@ -805,6 +810,9 @@ class CommonAction extends Action {
                 break;
             case '38特别' :
                 return $this->womensday();
+                break;
+            case '杭州' :
+                return $this->hangzhou($keyword,$data);
                 break;
             case 'auth' :
                 return $this->auth();
