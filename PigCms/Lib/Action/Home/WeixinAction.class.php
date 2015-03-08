@@ -13,6 +13,7 @@ class WeixinAction extends CommonAction {
     }
 
     private function reply($data) {
+        $tmpData = $data;
         $memberinfo = M('member_user')->where(array('token' => $this->token, 'openid' => $data['FromUserName']))->find();
         if ($memberinfo) {
             $u['interaction'] = time();
@@ -227,7 +228,7 @@ class WeixinAction extends CommonAction {
                 // file_put_contents('d:/d.txt', var_export($this->data, true) );
             }
 
-            return $this->functionlist($key,$data);
+            return $this->functionlist($key,$tmpData);
         }
     }
 
