@@ -64,6 +64,7 @@ class HangzhouAction extends BonusAction {
         if($openId){
             $fansInfo = M('member_user')->where(array('openid' => $openId,'token'=>'rggfsk1394161441'))->find();
             if($fansInfo){
+                M('hangzhou_index')->where(array('openid' => $openId))->setInc('lingjiangsum', 1);
                 //此用户已经添加 显示页面
                 $phone = null;
                 if(isset($_POST['phone']) && $_POST['phone']){
