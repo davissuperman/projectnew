@@ -48,6 +48,7 @@ class HangzhouAction extends BonusAction {
         $p = M('hangzhou_index')->where(array('openid' => $openId))->find();
         $return = 0;
         if($p){
+            M('hangzhou_index')->where(array('id' =>  $p['id'] ))->setInc('lingjiangsum', 1);
             //更新获奖状态
             $d['id'] = $p['id'];
             $d['award'] = 1;
@@ -64,7 +65,6 @@ class HangzhouAction extends BonusAction {
         if($openId){
             $fansInfo = M('member_user')->where(array('openid' => $openId,'token'=>'rggfsk1394161441'))->find();
             if($fansInfo){
-                M('hangzhou_index')->where(array('openid' => $openId))->setInc('lingjiangsum', 1);
                 //此用户已经添加 显示页面
                 $phone = null;
                 if(isset($_POST['phone']) && $_POST['phone']){
