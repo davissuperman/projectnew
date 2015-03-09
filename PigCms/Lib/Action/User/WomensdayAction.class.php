@@ -19,12 +19,17 @@ class WomensdayAction  extends BonusAction {
         $this->assign('token', $this->token);
         $listArr = array();
         foreach($list as $each){
+            $click = $each['getsucaiclicknum'];
+            if($each['getsucaiclicknum'] < $each['clicksum']){
+                $click = $each['clicksum'];
+            }
             $awardInfo = '';
             $tmp = $each;
             $condition['openid'] = $each['openid'];
             $tmp['awardlist'] = $awardInfo;
             $name = M('customer_service_fans')->where(array('openid' => $condition['openid'],'token'=>'rggfsk1394161441'))->getField('nickname');
             $tmp['name'] = $name;
+            $tmp['clicktotal'] = $click;
             $listArr[] = $tmp;
         }
         $this->assign('info', $listArr);
