@@ -12,10 +12,10 @@ class HangzhouAction extends BonusAction {
         define('RES', THEME_PATH . 'common');
         define('STATICS', TMPL_PATH . 'static');
         $agent = $_SERVER['HTTP_USER_AGENT'];
-//        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
-//            echo '此功能只能在微信浏览器中使用';
-//            exit;
-//        }
+        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
+            echo '此功能只能在微信浏览器中使用';
+            exit;
+        }
         $this->url= C('site_url');
 
        // $this->cache = Cache::getInstance('Redis',array('host'=>'127.0.0.1','expire'=>1296000));

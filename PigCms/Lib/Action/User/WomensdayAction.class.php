@@ -141,7 +141,11 @@ class WomensdayAction  extends BonusAction {
         foreach($list as $key => $each){
             $awardInfo = '';
             $tmp = $each;
-
+            $click = $each['getsucaiclicknum'];
+            if($each['getsucaiclicknum'] < $each['clicksum']){
+                $click = $each['clicksum'];
+            }
+            $tmp['clicktotal'] = $click;
             $listArr[] = $tmp;
         }
         $filename = $start . "~" . $end . "统计";
@@ -169,7 +173,11 @@ class WomensdayAction  extends BonusAction {
         foreach($list as $key => $each){
             $awardInfo = '';
             $tmp = $each;
-
+            $click = $each['getsucaiclicknum'];
+            if($each['getsucaiclicknum'] < $each['clicksum']){
+                $click = $each['clicksum'];
+            }
+            $tmp['clicktotal'] = $click;
             $listArr[] = $tmp;
         }
         $filename = $start . "~" . $end . "统计";
@@ -215,7 +223,7 @@ class WomensdayAction  extends BonusAction {
                 ->setCellValue('H' . ($n + 2), $data[$n]['province'])
                 ->setCellValue('I' . ($n + 2), $data[$n]['address'])
                 ->setCellValue('J' . ($n + 2), $awardDes)
-                ->setCellValue('K' . ($n + 2), $data[$n]['clicksum'])
+                ->setCellValue('K' . ($n + 2), $data[$n]['clicktotal'])
                 ->setCellValue('L' . ($n + 2), $data[$n]['username'])
             ;
         }
