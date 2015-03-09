@@ -15,9 +15,9 @@
 <title>森田杭州线下活动产品方案</title>
 </head>
 <body>
-	<div id="contents">
-    
-        <div class="reg-box">
+	<div id="contents" style="position:relative;">
+    	<img src="images/logo2.png" alt="森田" style="position:absolute;right:10px;top:10px; height:40px;"/>
+        <div class="reg-box" style="padding-top:40px;">
         	<div class="mt-20 ta-c">登记手机号码，验证获得领奖资格</div>
             <ul class="form-ul">
             	
@@ -35,7 +35,7 @@
                 <dd>1、仅限杭州3月12日-15日杭州下沙福雷德广场活动现场参与，现场领奖，非现场参与无效。</dd>
 				<dd>2、每个微信账户、电话号码只能参与一次。</dd>
 				<dd>3、奖品为森田面膜试用装，数量5000份。领完即止，请与现场工作人员确认即时奖品剩余数量。</dd>
-				<dd>4、活动最终解释权归森田药妆及现场活动主办方所有。</dd>
+				<dd>4、活动最终解释权归森田药妆微信服务号所有。</dd>
             </dl>
         </div>
         
