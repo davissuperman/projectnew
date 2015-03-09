@@ -21,7 +21,7 @@ $param['code'] = '1234567812345678';
 $param['ip'] = '127.0.0.1';
 $param['language'] = 1;
 $param['channel'] = 'X';
-$result=$client->Get_CodeIsTrueByChannel($param);//查询中国郑州的天气，返回的是一个结构体
+$result=$client->Get_CodeIsTrueByChannel($param);
 echo ('<pre>');
 var_dump ( $result );//获取服务器上数据类型
 echo ('</pre>');
