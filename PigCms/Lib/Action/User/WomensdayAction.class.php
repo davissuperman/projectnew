@@ -12,7 +12,7 @@ class WomensdayAction  extends BonusAction {
         $page = new Page($count, 25);
         $list = M('womensday')->query(
             "SELECT w.openid as openid, w.shares as shares,w.views as views , a.telephone as telephone,
-              a.province as province, a.address as address, w.createtime, a.award as award, w.getsucaiclicknum as getsucaiclicknum from tp_womensday as w
+              a.province as province, a.address as address, w.createtime, a.award as award, w.getsucaiclicknum as getsucaiclicknum,w.clicksum as clicksum from tp_womensday as w
               left join tp_womensday_award as a on (a.openid=w.openid)
         order by views desc limit $page->firstRow,$page->listRows"); //第二名和你最近的
         $this->assign('page', $page->show());
@@ -210,7 +210,7 @@ class WomensdayAction  extends BonusAction {
                 ->setCellValue('H' . ($n + 2), $data[$n]['province'])
                 ->setCellValue('I' . ($n + 2), $data[$n]['address'])
                 ->setCellValue('J' . ($n + 2), $awardDes)
-                ->setCellValue('K' . ($n + 2), $data[$n]['getsucaiclicknum'])
+                ->setCellValue('K' . ($n + 2), $data[$n]['clicksum'])
                 ->setCellValue('L' . ($n + 2), $data[$n]['username'])
             ;
         }
