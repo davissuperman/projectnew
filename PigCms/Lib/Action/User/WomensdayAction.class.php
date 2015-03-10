@@ -131,16 +131,25 @@ class WomensdayAction  extends BonusAction {
 //        $end = $_POST['end'];
         $end=$end-$start;
         $start=$start-1;
+//        $list = M('womensday')->query(
+//            "SELECT g.*,award.*, f.nickname as name from tp_womensday_award as award
+//              left join tp_womensday as g on (g.openid = award.openid)
+//              left join tp_customer_service_fans f on (f.openid=g.openid)
+//               order by g.views desc limit $start,$end");
+
         $list = M('womensday')->query(
-            "SELECT g.*,award.*, f.nickname as name from tp_womensday_award as award
-              left join tp_womensday as g on (g.openid = award.openid)
+            "SELECT g.*,award.*, f.nickname as name,g.openid as openid, award.createtime as createtimeaward, g.createtime as createtimew   from tp_womensday as g
+              left join tp_womensday_award as award on (g.openid = award.openid)
               left join tp_customer_service_fans f on (f.openid=g.openid)
                order by g.views desc limit $start,$end");
+
+
         $i = $start+1;
         $listArr = array();
         foreach($list as $key => $each){
             $awardInfo = '';
             $tmp = $each;
+
             $click = $each['getsucaiclicknum'];
             if($each['getsucaiclicknum'] < $each['clicksum']){
                 $click = $each['clicksum'];
@@ -162,21 +171,31 @@ class WomensdayAction  extends BonusAction {
         }
 //        $start = $_POST['start'];
 //        $end = $_POST['end'];
+//        $list = M('womensday')->query(
+//            "SELECT g.*,award.*, f.nickname as name from tp_womensday_award as award
+//              left join tp_womensday as g on (g.openid = award.openid)
+//              left join tp_customer_service_fans f on (f.openid=g.openid)
+//              where award.createtime >= '$start' and award.createtime<='$end'
+//               order by g.views desc");
+
         $list = M('womensday')->query(
-            "SELECT g.*,award.*, f.nickname as name from tp_womensday_award as award
-              left join tp_womensday as g on (g.openid = award.openid)
+            "SELECT g.*,award.*, f.nickname as name, award.createtime as createtimeaward, g.createtime as createtimew, g.openid as openid from tp_womensday as g
+              left join tp_womensday_award as award on (g.openid = award.openid)
               left join tp_customer_service_fans f on (f.openid=g.openid)
-              where award.createtime >= '$start' and award.createtime<='$end'
+              where g.createtime >= '$start' and g.createtime<='$end'
                order by g.views desc");
+
         $i = $start+1;
         $listArr = array();
         foreach($list as $key => $each){
-            $awardInfo = '';
             $tmp = $each;
+            $awardInfo = '';
+
             $click = $each['getsucaiclicknum'];
             if($each['getsucaiclicknum'] < $each['clicksum']){
                 $click = $each['clicksum'];
             }
+
             $tmp['clicktotal'] = $click;
             $listArr[] = $tmp;
         }
@@ -194,13 +213,14 @@ class WomensdayAction  extends BonusAction {
             ->setCellValue('C1', '昵称')
             ->setCellValue('D1', '浏览量')
             ->setCellValue('E1', '分享量')
-            ->setCellValue('F1', '首次参与时间')
+            ->setCellValue('F1', '领取奖品时间')
             ->setCellValue('G1', '手机号')
             ->setCellValue('H1', '省')
             ->setCellValue('I1', '地址')
             ->setCellValue('J1', '中奖')
             ->setCellValue('K1', '获取素材点击数')
-            ->setCellValue('L1', '姓名');
+            ->setCellValue('L1', '姓名')
+            ->setCellValue('M1', '首次参与时间');
 
         //写出内容 UTF-8
 
@@ -218,13 +238,14 @@ class WomensdayAction  extends BonusAction {
                 ->setCellValue('C' . ($n + 2), $name)
                 ->setCellValue('D' . ($n + 2), $data[$n]['views'])
                 ->setCellValue('E' . ($n + 2), $data[$n]['shares'])
-                ->setCellValue('F' . ($n + 2), $data[$n]['createtime'])
+                ->setCellValue('F' . ($n + 2), $data[$n]['createtimeaward'])
                 ->setCellValue('G' . ($n + 2), $data[$n]['telephone'])
                 ->setCellValue('H' . ($n + 2), $data[$n]['province'])
                 ->setCellValue('I' . ($n + 2), $data[$n]['address'])
                 ->setCellValue('J' . ($n + 2), $awardDes)
                 ->setCellValue('K' . ($n + 2), $data[$n]['clicktotal'])
                 ->setCellValue('L' . ($n + 2), $data[$n]['username'])
+                ->setCellValue('M' . ($n + 2), $data[$n]['createtimew'])
             ;
         }
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
