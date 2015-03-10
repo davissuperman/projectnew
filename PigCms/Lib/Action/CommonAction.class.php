@@ -797,7 +797,7 @@ class CommonAction extends Action {
     function hangzhou($keyword,$data){
         $openId = (string)$data['FromUserName'];
         $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Hangzhou&a=index&openid=$openId";
-        $text = "<a href='$url'>请点击此链接输入手机号</a>";
+        $text = "<a href='$url'>杭州线下活动入口</a>";
         return array($text, 'text');
     }
     function functionlist($keyword,$data=null) {
