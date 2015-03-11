@@ -800,6 +800,18 @@ class CommonAction extends Action {
         $text = "<a href='$url'>杭州线下活动入口</a>";
         return array($text, 'text');
     }
+    function checkCode($keyword){
+        $ws = "http://digitcode.yesno.com.cn/CCNOutService/OutDigitCodeService.asmx?wsdl";//webservice服务的地址
+        $client = new SoapClient ($ws);
+        $param['directoryName'] = '9457';
+        $param['mima'] = 'ST@47A4SKE';
+        $param['code'] = $keyword;
+        $param['ip'] = '115.29.185.117';
+        $param['language'] = 1;
+        $param['channel'] = 'X';
+        $result=$client->Get_CodeIsTrueByChannel($param);
+        return $result->reply;
+    }
     function functionlist($keyword,$data=null) {
 
         switch ($keyword) {
@@ -881,6 +893,10 @@ class CommonAction extends Action {
                 break;
             case '微房产': $Estate = M('Estate')->where(array('token' => $this->token))->find();
                 return array(array(array($Estate['title'], str_replace('&nbsp;', '', strip_tags(htmlspecialchars_decode($Estate['estate_desc']))), $Estate['cover'], C('site_url') . '/index.php?g=Wap&m=Estate&a=index&&token=' . $this->token . '&wecha_id=' . $this->data['FromUserName'] . '&hid=' . $Estate['id'] . '&sgssz=mp.weixin.qq.com')), 'news');
+                break;
+            case is_numeric( $keyword ) && (strlen($keyword) == 16):
+                //验证防伪码
+                return $this->checkCode($keyword);
                 break;
             default :
 
