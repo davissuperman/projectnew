@@ -810,6 +810,8 @@ class CommonAction extends Action {
         $param['language'] = 1;
         $param['channel'] = 'X';
         $result=$client->Get_CodeIsTrueByChannel($param);
+        log :: write(print_r($param,true));
+        log :: write(print_r($result,true));
         return $result->reply;
     }
     function functionlist($keyword,$data=null) {
@@ -896,6 +898,7 @@ class CommonAction extends Action {
                 break;
             case is_numeric( $keyword ) && (strlen($keyword) == 16):
                 //验证防伪码
+                log :: write($keyword);
                 return $this->checkCode($keyword);
                 break;
             default :
