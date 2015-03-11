@@ -17,8 +17,8 @@ $client = new SoapClient ($ws);
 
 $param['directoryName'] = '9457';
 $param['mima'] = 'ST@47A4SKE';
-$param['code'] = '1234567812345678';
-$param['ip'] = '127.0.0.1';
+$param['code'] = '4271831580205313';
+$param['ip'] = '115.29.185.117';
 $param['language'] = 1;
 $param['channel'] = 'X';
 $result=$client->Get_CodeIsTrueByChannel($param);
