@@ -801,6 +801,7 @@ class CommonAction extends Action {
         return array($text, 'text');
     }
     function checkCode($keyword){
+        $keyword = str_replace(" ","",$keyword);
         $ws = "http://digitcode.yesno.com.cn/CCNOutService/OutDigitCodeService.asmx?wsdl";//webservice服务的地址
         $client = new SoapClient ($ws);
         $param['directoryName'] = '9457';
@@ -894,10 +895,10 @@ class CommonAction extends Action {
             case '微房产': $Estate = M('Estate')->where(array('token' => $this->token))->find();
                 return array(array(array($Estate['title'], str_replace('&nbsp;', '', strip_tags(htmlspecialchars_decode($Estate['estate_desc']))), $Estate['cover'], C('site_url') . '/index.php?g=Wap&m=Estate&a=index&&token=' . $this->token . '&wecha_id=' . $this->data['FromUserName'] . '&hid=' . $Estate['id'] . '&sgssz=mp.weixin.qq.com')), 'news');
                 break;
-//            case is_numeric( $keyword ) && (strlen($keyword) == 16):
-//                //验证防伪码
-//                return $this->checkCode($keyword);
-//                break;
+            case is_numeric( str_replace(" ","",$keyword)  ) && (strlen(str_replace(" ","",$keyword)) == 16):
+                //验证防伪码
+                return $this->checkCode($keyword);
+                break;
             default :
 
                 $check = $this->user('diynum', $keyword);
