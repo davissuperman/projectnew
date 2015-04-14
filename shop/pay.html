@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta content="yes" name="apple-mobile-web-app-capable"> 
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"> 
+<meta content="telephone=no" name="format-detection">
+<meta name="keywords" content="ipad4、APP">
+<meta name="description" content="">
+<title>支付订单</title>
+<link href="css/main.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <header class="header">
+    	<a href="index.html" title="首页" class="back">首页</a>
+        <h3>支付订单</h3>
+        <div class="btn-next btn-check"><a href="my-orders.html" title="查看订单">查看订单</a></div>
+    </header>
+	<section class="cart">
+    	<h2>订单已提交，请尽快付款！</h2>
+        <div class="line"></div>
+        <div class="recv-text">
+        	<p>您的订单号是：<span style="color: #FE7E00;font-weight: bold">13061297212624</span></p>
+        	<p>需支付金额：<span style="color: #FE7E00;font-weight: bold">&yen;304</span></p>
+       	</div>
+    	<div class="shop">
+  			<p style="display: inline; position: relative;">
+    			<strong style="color:#333;">选择支付方式：</strong>
+                我的帐户余额：<span class="order-money">&yen;204</span>
+  			</p>
+            <div class="line"></div>
+            <p class="pay-byzhanghu" >
+            	<label class="checkbox">
+                    <input type="checkbox" name="zhanghu" value="ye">&nbsp;
+                    <strong>使用余额付款，剩余<span class="order-money">&yen;100</span>元使用支付宝支付</strong>
+                    
+                </label>
+          	</p>
+            <p style="height:50px; position:relative;">
+            	<label class="radio">
+                    <input type="radio" name="defaultbank" value="zfb" style="position: absolute;top: 10px;" checked>
+                    <img src="images/zhifubao.png" alt="支付宝" style="margin-left:20px;">
+                </label>
+          	</p>
+		</div>
+		
+        <div class="checkout">
+            <div class="action">
+                <form id="pay-order-form" action="#" method="POST">
+                    <button id="checkout-btn" type="submit" class="btn btn-custome btn-large">立即付款</button>
+                </form>
+            </div>
+       	</div>
+        
+  	</section>
+  	<footer class="footer">
+    	<section class="footer-t c-footer-t">
+          	<p class="user-info c-user-info">
+           		<span>
+                	<a class="user-login" href="#">james</a>
+             	</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <span>
+                    <a id="J_footer_logout" href="#">退出</a>
+              	</span>
+			</p>
+          	<p class="gotop c-gotop"><a id="J_GoTop" href="javascript:scroll(0,0)">top<b> </b></a></p>
+            <div class="clear"></div>
+       </section>
+    	<p class="copyright c-copyright">@2013  沪1111111111</p>
+    </footer>
+</body>
+
+</html>

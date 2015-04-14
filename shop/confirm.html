@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta content="yes" name="apple-mobile-web-app-capable"> 
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"> 
+<meta content="telephone=no" name="format-detection">
+<meta name="keywords" content="ipad4、APP">
+<meta name="description" content="">
+<title>确认订单</title>
+<link href="css/main.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <header class="header">
+    	<a href="cart.html" title="返回" class="back">返回</a>
+        <h3>确认订单</h3>
+    </header>
+	<section class="cart">
+    	<h2>收货地址：</h2>
+        <div class="line"></div>
+        <a href="address-list.html">
+            <div class="recv-text">
+                <p>收货人: <strong>贺先生</strong> 13833333333</p>
+                <p> 北京 北京市 西城区 天安门广场</p>
+            </div>
+        </a>
+        <p style="padding:10px 0; text-align:center;">暂无收货地址</p>
+        <a type="button" class="btn btn-primary btn-large" id="btn-addAddress" href="address-add.html">添加地址</a>
+    	<div class="shop">
+  			<p style="display: inline; position: relative;">
+    			<span class="name handle">商品清单
+    				<b class="arrow down"></b>
+             	</span>
+  			</p>
+            <div class="line"></div>
+		</div>
+		<ul class="drawer item-list opened" style="display: block;">
+        	<li class="item">
+				<div class="pic">
+                	<a href="#"> 
+                    	<img src="images/pro1_145x145.jpg">
+                 	</a>
+				</div>
+				<div class="desc">
+  					<a class="title" href="#">
+                    	缪诗本色诱惑蕾丝雕花深V调整内衣性感聚拢文胸一片式 无痕文胸女
+                   	</a>
+    				<p class="props">颜色分类：柔嫩黄,尺码：75B=34B</p>
+    				<p class="orig-price">原价：<span>￥ 199</span></p>
+    				<p>
+      					数量：2
+      					<span class="subtotal" style="float:right;">￥138.00</span>
+    				</p>
+  				</div>
+			</li>
+            <li class="item">
+				<div class="pic">
+                	<a href="#"> 
+                    	<img src="images/pro1_145x145.jpg">
+                 	</a>
+				</div>
+				<div class="desc">
+  					<a class="title" href="#">
+                    	缪诗本色诱惑蕾丝雕花深V调整内衣性感聚拢文胸一片式 无痕文胸女
+                   	</a>
+    				<p class="props">颜色分类：柔嫩黄,尺码：75B=34B</p>
+    				<p class="orig-price">原价：<span>￥ 199</span></p>
+    				<p>
+      					数量：2
+      					<span class="subtotal" style="float:right;">￥138.00</span>
+    				</p>
+  				</div>
+			</li>
+       	</ul>
+        <section class="comm">
+        	<div class="note-text">
+            	<input type="text" maxlength="200" name="memo_23853973454" value="" placeholder="给卖家留言" class="c-form-txt-normal">
+          	</div>
+       	</section>
+        <div class="checkout">
+        	<div class="summary">
+                <p>合计: <span class="total">￥ 404.00</span></p>
+            </div>
+            <div class="summary">
+                <p>实付款: <span id="final">￥ 404.00</span></p>
+            </div>
+            
+            <div class="action">
+                <form id="place-order-form" action="#" method="POST">
+                    <input id="cart-ids" type="hidden" name="cart_ids">
+                    <a id="checkout-btn" type="submit" class="btn btn-custome btn-large" href="pay.html">提交订单</a>
+                </form>
+            </div>
+       	</div>
+        
+  	</section>
+  
+</body>
+
+</html>

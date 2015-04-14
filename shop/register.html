@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta content="yes" name="apple-mobile-web-app-capable"> 
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"> 
+<meta content="telephone=no" name="format-detection">
+<meta name="keywords" content="ipad4、APP">
+<meta name="description" content="">
+<title>新会员免费注册</title>
+<link href="css/main.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <header class="header">
+    	<a href="index.html" title="首页" class="back">首页</a>
+        <h3>免费注册</h3>
+    </header>
+	<section class="innercontent">
+        <form method="post" class="c-form re-form" action="#" id="J_Register">
+            <fieldset>
+                <div class="field username err">
+                    <div class="c-form-search st">
+                        <input type="text" id="J_UserNameTxt" placeholder="账户名" value="" class="c-f-text">
+                        <button><span></span></button>
+                    </div>
+                    <div class="tips">请填写会员名，会员名不能为空</div>
+                </div>
+                <div class="field phone">
+                    <div class="c-form-search st">
+                    	<input type="telephone" id="J_PhoneTxt" placeholder="手机号" value="" class="c-f-text">
+                        <button><span></span></button>
+                  	</div>
+                    <div class="tips"></div>
+                </div>
+                <div class="field pwd">
+                    <div class="ptxt st">
+                        <input id="J_PassWordTxt" type="password" value="" placeholder="密码" class="c-f-text">
+                        <span class="eyes off" id="J_Eyes"></span>
+                    </div>
+                     <div class="tips"></div>
+                </div>
+
+                <div class="field identifyCode">
+                    <div class="c-form-search">
+                        <div class="codeTxt">
+                            <input id="J_IdentifyCode" type="telephone" value="" placeholder="输入6位验证码" class="c-f-text">
+                        </div>
+                        <div class="codePhoto">
+                            <img src="images/get_img.jpg">
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="tips"></div>
+                </div>
+
+                <div class="field submit-btn">
+                    <button type="button" class="btn btn-primary btn-large">注册</button>
+                    <div class="tips">注册视为同意注册协议</div>
+                </div>
+
+            </fieldset>
+        </form>
+   </section>
+    
+  	<footer class="footer">
+    	<section class="footer-t c-footer-t">
+          	<p class="user-info c-user-info">
+           		<span>
+                	<a class="user-login" href="login.html">登录</a>
+             	</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <span>
+                    <a id="J_footer_logout" href="register.html">注册</a>
+              	</span>
+			</p>
+          	<p class="gotop c-gotop"><a id="J_GoTop" href="javascript:scroll(0,0)">top<b> </b></a></p>
+            <div class="clear"></div>
+       </section>
+    	<p class="copyright c-copyright">@2013  沪1111111111</p>
+    </footer>
+</body>
+
+</html>

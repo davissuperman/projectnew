@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta content="yes" name="apple-mobile-web-app-capable"> 
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"> 
+<meta content="telephone=no" name="format-detection">
+<meta name="keywords" content="ipad4、APP">
+<meta name="description" content="">
+<title>会员登录</title>
+<link href="css/main.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <header class="header">
+    	<a href="index.html" title="首页" class="back">首页</a>
+        <h3>会员登录</h3>
+    </header>
+	<section class="innercontent">
+        <div id="cookie-support-div" style="display:none;color: red; margin-top:10px;margin-bottom:10px;font-size: 14px">
+            <span>请检查您的浏览器是否支持Cookie</span>
+            </div>
+            <form method="post" class="c-form login-form" action="#" id="J_Login">
+				<fieldset>
+                    <div class="field username">
+                        <div class="c-form-search">
+							<input type="text" name="TPL_username" id="J_UserNameTxt" placeholder="手机/会员名" value="">
+                      	</div>
+                    </div>
+                    <div class="field pwd">
+                        <input type="password" name="TPL_password" id="J_PassWordTxt" placeholder="密码" class="c-form-txt-normal">
+                    </div>
+                    <div class="field submit-btn">
+                    	<button type="button" class="btn btn-primary btn-large">登录</button>
+                    </div>
+                    <div class="field login-option">
+                     	<label class="bf1" for="loginFree">两周内免登录</label>
+                        <span class="reg-find-pwd">
+                            <a href="register.html" class="reg">免费注册</a>
+                        </span>
+                    </div>
+             	</fieldset>
+            </form>
+       </section>
+    
+  	<footer class="footer">
+    	<section class="footer-t c-footer-t">
+          	<p class="user-info c-user-info">
+           		<span>
+                	<a class="user-login" href="login.html">登录</a>
+             	</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <span>
+                    <a id="J_footer_logout" href="register.html">注册</a>
+              	</span>
+			</p>
+          	<p class="gotop c-gotop"><a id="J_GoTop" href="javascript:scroll(0,0)">top<b> </b></a></p>
+            <div class="clear"></div>
+       </section>
+    	<p class="copyright c-copyright">@2013  沪1111111111</p>
+    </footer>
+</body>
+
+</html>

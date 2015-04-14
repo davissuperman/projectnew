@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta content="yes" name="apple-mobile-web-app-capable"> 
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"> 
+<meta content="telephone=no" name="format-detection">
+<meta name="keywords" content="ipad4、APP">
+<meta name="description" content="">
+<title>编辑收货地址</title>
+<link href="css/main.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <header class="header">
+    	<a href="address-list.html" title="收货地址" class="back">收货地址</a>
+        <h3>编辑收货地址</h3>
+    </header>
+	<section class="address-add innercontent">
+       	<div class="detaildz">
+      		<form action="" onsubmit="return false;">
+        		<ul>
+        			<li>
+        				<div class="left">收货人</div>
+        				<div class="right">
+        					<div><input id="J_buyer" type="text" value="" autofocus maxlength="30"></div>
+        				</div>
+        			</li>
+        			<li>
+        				<div class="left">手机号码</div>
+        				<div class="right">
+        					<div><input id="J_phone" type="tel" value=""></div>
+       		 			</div>
+        			</li>
+        			<li>
+        				<div class="left">省份</div>
+        				<!--<div class="right arrow-b">-->
+        				<div class="right">
+        				<!--<input id="J_province" type="text" value="" placeholder="请选择" />-->
+        					<div class="c-form-select">
+        						<select id="J_province">
+        							<option value="">请选择</option>
+        							<option value="110000">北京</option>
+        							<option value="120000">天津</option>
+        							<option value="130000">河北省</option>
+        							<option value="140000">山西省</option>
+									<option value="150000">内蒙古自治区</option>
+        							<option value="210000">辽宁省</option>
+        							<option value="220000">吉林省</option>
+        							<option value="230000">黑龙江省</option>
+									<option value="310000">上海</option>
+        							<option value="320000">江苏省</option>
+									<option value="330000">浙江省</option>
+        							<option value="340000">安徽省</option>
+        							<option value="350000">福建省</option>
+        							<option value="360000">江西省</option>
+        							<option value="370000">山东省</option>
+        							<option value="410000">河南省</option>
+        							<option value="420000">湖北省</option>
+									<option value="430000">湖南省</option>
+        							<option value="440000">广东省</option>
+        							<option value="450000">广西壮族自治区</option>
+        							<option value="460000">海南省</option>
+									<option value="500000">重庆</option>
+        							<option value="510000">四川省</option>
+        							<option value="520000">贵州省</option>
+        							<option value="530000">云南省</option>
+        							<option value="540000">西藏自治区</option>
+        							<option value="610000">陕西省</option>
+        							<option value="620000">甘肃省</option>
+        							<option value="630000">青海省</option>
+									<option value="640000">宁夏回族自治区</option>
+        							<option value="650000">新疆维吾尔自治区</option>
+        							<option value="710000">台湾省</option>
+        							<option value="810000">香港特别行政区</option>
+									<option value="820000">澳门特别行政区</option>
+        							<option value="990000">海外</option>
+        						</select>
+        					</div>
+        				</div>
+        			</li>
+        			<li>
+        				<div class="left">城市</div>
+        				<div class="right">
+        				<!--<input id="J_city" type="text" value="" placeholder="请选择" />-->
+        					<div class="c-form-select">
+        						<select id="J_city">
+        							<option value="">请选择</option>
+        						</select>                                    
+        					</div>
+        				</div>
+        			</li>
+        			<li>
+        				<div class="left">地区</div>
+        				<div class="right">
+        					<!--<input id="J_region" type="text" value="" placeholder="请选择" />-->
+        					<div class="c-form-select">
+        						<select id="J_region">
+        							<option value="">请选择</option>
+        						</select>                                    
+        					</div>
+        				</div>
+        			</li>
+        			<li>
+        				<div class="left">详细地址</div>
+        				<div class="right">
+        					<div><textarea id="J_dtladdr" maxlength="120"></textarea></div>
+        				</div>
+        			</li>
+        			<li>
+        				<div class="left">邮政编码</div>
+        				<div class="right">
+        					<div><input id="J_zipcode" type="tel" value="" maxlength="6"></div>
+        				</div>
+        			</li>
+        		</ul>
+        		<div class="asdefault">
+        			<label><input id="J_asdft" type="checkbox" class="c-form-checkbox">设为默认地址</label>
+        		</div>
+        		<div class="c-btn-oran-big">
+        			<!--<button type="submit" id="Button1" class="button">确定</button>-->
+        			<button id="checkout-btn" type="submit" class="btn btn-primary btn-large">确定</button>
+                    
+        		</div>
+        	</form>
+        </div>
+  	</section>
+    <footer class="footer">
+    	<section class="footer-t c-footer-t">
+          	<p class="user-info c-user-info">
+           		<span>
+                	<a class="user-login" href="#">dennis</a>
+             	</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <span>
+                    <a id="J_footer_logout" href="#">退出</a>
+              	</span>
+			</p>
+          	<p class="gotop c-gotop"><a id="J_GoTop" href="javascript:scroll(0,0)">top<b> </b></a></p>
+            <div class="clear"></div>
+       </section>
+    	<p class="copyright c-copyright">@2013  沪1111111111</p>
+    </footer>
+  
+</body>
+
+</html>
