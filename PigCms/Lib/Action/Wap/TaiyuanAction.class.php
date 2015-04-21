@@ -4,7 +4,7 @@ class TaiyuanAction extends BonusAction {
 
 
     public $cache;
-    public $titleInWeixin = '森田药妆-杭州下沙育才大润发';
+    public $titleInWeixin = '森田药妆-太原龙生美特好';
     public $url;
 
 
@@ -45,15 +45,15 @@ class TaiyuanAction extends BonusAction {
 
     public function updatejiangping(){
         $openId = $_GET['openid'];
-        $p = M('yucai_index')->where(array('openid' => $openId))->find();
+        $p = M('taiyuan_index')->where(array('openid' => $openId))->find();
         $return = 0;
         if($p){
-            M('yucai_index')->where(array('id' =>  $p['id'] ))->setInc('lingjiangsum', 1);
+            M('taiyuan_index')->where(array('id' =>  $p['id'] ))->setInc('lingjiangsum', 1);
             if(1*$p['award'] == 0){
                 //更新获奖状态
                 $d['id'] = $p['id'];
                 $d['award'] = 1;
-                M('yucai_index')->save($d);
+                M('taiyuan_index')->save($d);
             }
 
             $return = 1;
@@ -74,8 +74,8 @@ class TaiyuanAction extends BonusAction {
                     //提交手机号
                     //是否存在手机号
                     $phone = $_POST['phone'];
-                    $p1 = M('yucai_index')->where(array('phone' => $phone))->find();
-                    $p2 = M('yucai_index')->where(array('openid' => $openId))->find();
+                    $p1 = M('taiyuan_index')->where(array('phone' => $phone))->find();
+                    $p2 = M('taiyuan_index')->where(array('openid' => $openId))->find();
                     if($p1 || $p2){
                         if($p1['award'] == 1 || $p2['award'] == 1){
                             $msg = "非常抱歉，您的微信账号或登记的电话号码，已经领取过奖品。";
@@ -86,9 +86,9 @@ class TaiyuanAction extends BonusAction {
                     }else{
                         $d['openid'] = $openId;
                         $d['phone'] = $phone;
-                        M("yucai_index")->add($d);
+                        M("taiyuan_index")->add($d);
                         $msg = "提交成功";
-                        M("yucai_num")->where(array('id' =>1))->setInc('number', 1);
+                        M("taiyuan_num")->where(array('id' =>1))->setInc('number', 1);
                         $success = true;
                     }
                 }else{
