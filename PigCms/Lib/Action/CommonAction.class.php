@@ -809,7 +809,7 @@ class CommonAction extends Action {
     function taiyuan($keyword,$data){
         $openId = (string)$data['FromUserName'];
         $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Taiyuan&a=index&openid=$openId";
-        $text = "<a href='$url'>杭州线下活动入口</a>";
+        $text = "<a href='$url'>太原线下活动入口</a>";
         return array($text, 'text');
     }
     function checkCode($keyword){
