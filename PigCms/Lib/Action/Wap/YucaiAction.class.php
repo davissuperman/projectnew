@@ -77,7 +77,6 @@ class YucaiAction extends BonusAction {
                     $p1 = M('yucai_index')->where(array('phone' => $phone))->find();
                     $p2 = M('yucai_index')->where(array('openid' => $openId))->find();
                     if($p1 || $p2){
-                        Log :: write('aaaaaaaaaaaaaaaaaaaaaaaaaaa');
                         if($p1['award'] == 1 || $p2['award'] == 1){
                             $msg = "非常抱歉，您的微信账号或登记的电话号码，已经领取过奖品。";
                         }else{
@@ -85,7 +84,6 @@ class YucaiAction extends BonusAction {
                         }
 
                     }else{
-                        Log :: write('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb');
                         $d['openid'] = $openId;
                         $d['phone'] = $phone;
                         M("yucai_index")->add($d);
