@@ -803,7 +803,13 @@ class CommonAction extends Action {
     function yucai($keyword,$data){
         $openId = (string)$data['FromUserName'];
         $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Yucai&a=index&openid=$openId";
-        $text = "<a href='$url'>杭州下沙育才大润发</a>";
+        $text = "<a href='$url'>杭州线下活动入口</a>";
+        return array($text, 'text');
+    }
+    function taiyuan($keyword,$data){
+        $openId = (string)$data['FromUserName'];
+        $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Taiyuan&a=index&openid=$openId";
+        $text = "<a href='$url'>杭州线下活动入口</a>";
         return array($text, 'text');
     }
     function checkCode($keyword){
@@ -836,6 +842,9 @@ class CommonAction extends Action {
                 break;
             case '育才' :
                 return $this->yucai($keyword,$data);
+                break;
+            case '太原' :
+                return $this->taiyuan($keyword,$data);
                 break;
             case 'auth' :
                 return $this->auth();

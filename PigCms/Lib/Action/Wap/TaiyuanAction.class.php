@@ -1,6 +1,6 @@
 <?php
 
-class YucaiAction extends BonusAction {
+class TaiyuanAction extends BonusAction {
 
 
     public $cache;
