@@ -45,7 +45,7 @@
         $("#fajiang").click(function(){
             $("#fajiang").addClass("btn-disabled");
             $.get(
-                    "/index.php?g=Wap&m=Yucai&a=updatejiangping&openid={pigcms::$openid}",
+                    "/index.php?g=Wap&m=Taiyuan&a=updatejiangping&openid={pigcms::$openid}",
                     function(data) {
                         if(data == 1){
                             mnAlert("获奖成功");
