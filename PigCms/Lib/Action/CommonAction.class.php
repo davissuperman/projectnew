@@ -800,6 +800,12 @@ class CommonAction extends Action {
         $text = "<a href='$url'>杭州线下活动入口</a>";
         return array($text, 'text');
     }
+    function yucai($keyword,$data){
+        $openId = (string)$data['FromUserName'];
+        $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Yucai&a=index&openid=$openId";
+        $text = "<a href='$url'>杭州下沙育才大润发</a>";
+        return array($text, 'text');
+    }
     function checkCode($keyword){
         $keyword = str_replace(" ","",$keyword);
         $ws = "http://digitcode.yesno.com.cn/CCNOutService/OutDigitCodeService.asmx?wsdl";//webservice服务的地址
@@ -827,6 +833,9 @@ class CommonAction extends Action {
                 break;
             case '杭州' :
                 return $this->hangzhou($keyword,$data);
+                break;
+            case '育才' :
+                return $this->yucai($keyword,$data);
                 break;
             case 'auth' :
                 return $this->auth();
