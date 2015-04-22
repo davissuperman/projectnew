@@ -63,10 +63,9 @@ class CommonAction extends Action {
                         if ($infot ['url'] != false) {
                             if (!(strpos($infot ['url'], 'http') === FALSE)) {
                                 $url = html_entity_decode($infot ['url']);
-                                if(strstr($url,'OPENID')){
+                                if(strstr($url,'=OPENID')){
                                     $openId = (string)$obj['FromUserName'];
                                     $url = str_replace('OPENID',$openId,$url);
-                                    Log :: write($url ."          cccccccccccccccccccccc   ".$openId);
                                 }
                             } else {
                                 $urlInfos = explode(' ', $infot ['url']);
