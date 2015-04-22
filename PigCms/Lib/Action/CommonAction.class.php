@@ -849,7 +849,7 @@ class CommonAction extends Action {
             case '38特别' :
                 return $this->womensday();
                 break;
-            case '杭州' :
+            case 'hangzhou' :
                 return $this->hangzhou($keyword,$data);
                 break;
             case 'yucai' :
