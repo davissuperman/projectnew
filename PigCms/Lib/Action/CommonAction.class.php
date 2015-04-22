@@ -44,6 +44,7 @@ class CommonAction extends Action {
     }
 
     function keyword($key) {
+        Log :: write($key ."          bbbbbbbbbbbbbbbbbb   ");
         $this->selectService();
         $like ['keyword'] = array('like', '%' . $key . '%');
         $like ['token'] = $this->token;
