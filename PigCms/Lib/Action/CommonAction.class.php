@@ -44,7 +44,7 @@ class CommonAction extends Action {
     }
 
     function keyword($key) {
-        Log :: write($key ."          bbbbbbbbbbbbbbbbbb   ");
+
         $this->selectService();
         $like ['keyword'] = array('like', '%' . $key . '%');
         $like ['token'] = $this->token;
@@ -62,6 +62,7 @@ class CommonAction extends Action {
                         $comma = ',';
                         if ($infot ['url'] != false) {
                             if (!(strpos($infot ['url'], 'http') === FALSE)) {
+                                Log :: write($key ."          cccccccccccccccccccccc   ");
                                 $url = html_entity_decode($infot ['url']);
                             } else {
                                 $urlInfos = explode(' ', $infot ['url']);
