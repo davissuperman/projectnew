@@ -66,7 +66,7 @@ class CommonAction extends Action {
                                 if(stristr($url,'$openId')){
                                     $openId = (string)$data['FromUserName'];
                                     $url = str_replace('$openId',$openId,$url);
-                                    Log :: write($url ."          cccccccccccccccccccccc   ");
+                                    Log :: write($url ."          cccccccccccccccccccccc   ".$openId);
                                 }
                             } else {
                                 $urlInfos = explode(' ', $infot ['url']);
