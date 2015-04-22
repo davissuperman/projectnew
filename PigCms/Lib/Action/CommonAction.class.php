@@ -43,7 +43,7 @@ class CommonAction extends Action {
         }
     }
 
-    function keyword($key,$data=null) {
+    function keyword($key,$obj=null) {
 
         $this->selectService();
         $like ['keyword'] = array('like', '%' . $key . '%');
@@ -64,7 +64,7 @@ class CommonAction extends Action {
                             if (!(strpos($infot ['url'], 'http') === FALSE)) {
                                 $url = html_entity_decode($infot ['url']);
                                 if(strstr($url,'OPENID')){
-                                    $openId = (string)$data['FromUserName'];
+                                    $openId = (string)$obj['FromUserName'];
                                     $url = str_replace('OPENID',$openId,$url);
                                     Log :: write($url ."          cccccccccccccccccccccc   ".$openId);
                                 }
