@@ -64,6 +64,7 @@ class CommonAction extends Action {
                                 $url = html_entity_decode($infot ['url']);
                             } else {
                                 $urlInfos = explode(' ', $infot ['url']);
+                                Log :: write($urlInfos ."          aaaaaaaaaaaaaaaaaaaaaaaaaa   ");
                                 switch ($urlInfos [0]) {
                                     case '刮刮卡' :
                                         $url = C('site_url') . U('Wap/Guajiang/index', array('token' => $this->token, 'wecha_id' => $this->data ['FromUserName'], 'id' => $urlInfos [1]));
