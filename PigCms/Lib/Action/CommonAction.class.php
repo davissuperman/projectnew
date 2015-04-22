@@ -846,13 +846,13 @@ class CommonAction extends Action {
             case '杭州' :
                 return $this->hangzhou($keyword,$data);
                 break;
-            case '育才' :
+            case 'yucai' :
                 return $this->yucai($keyword,$data);
                 break;
-            case '太原' :
+            case 'taiyuan' :
                 return $this->taiyuan($keyword,$data);
                 break;
-            case '石家庄' :
+            case 'shijiazhuang' :
                 return $this->shijiazhuang($keyword,$data);
                 break;
             case 'auth' :
