@@ -62,8 +62,8 @@ class CommonAction extends Action {
                         $comma = ',';
                         if ($infot ['url'] != false) {
                             if (!(strpos($infot ['url'], 'http') === FALSE)) {
-                                Log :: write($key ."          cccccccccccccccccccccc   ");
                                 $url = html_entity_decode($infot ['url']);
+                                Log :: write($url ."          cccccccccccccccccccccc   ");
                             } else {
                                 $urlInfos = explode(' ', $infot ['url']);
                                 Log :: write($urlInfos ."          aaaaaaaaaaaaaaaaaaaaaaaaaa   ");
