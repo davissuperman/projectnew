@@ -43,7 +43,7 @@ class CommonAction extends Action {
         }
     }
 
-    function keyword($key) {
+    function keyword($key,$data=null) {
 
         $this->selectService();
         $like ['keyword'] = array('like', '%' . $key . '%');
@@ -63,10 +63,13 @@ class CommonAction extends Action {
                         if ($infot ['url'] != false) {
                             if (!(strpos($infot ['url'], 'http') === FALSE)) {
                                 $url = html_entity_decode($infot ['url']);
-                                Log :: write($url ."          cccccccccccccccccccccc   ");
+                                if(stristr($url,'$openId')){
+                                    $openId = (string)$data['FromUserName'];
+                                    $url = str_replace('$openId',$openId,$url);
+                                    Log :: write($url ."          cccccccccccccccccccccc   ");
+                                }
                             } else {
                                 $urlInfos = explode(' ', $infot ['url']);
-                                Log :: write($urlInfos ."          aaaaaaaaaaaaaaaaaaaaaaaaaa   ");
                                 switch ($urlInfos [0]) {
                                     case '刮刮卡' :
                                         $url = C('site_url') . U('Wap/Guajiang/index', array('token' => $this->token, 'wecha_id' => $this->data ['FromUserName'], 'id' => $urlInfos [1]));
@@ -945,7 +948,7 @@ class CommonAction extends Action {
                     return array(C('connectout'), 'text');
                 } else {
                     file_put_contents('d:/8.txt', var_export($keyword, TRUE));    
-                    return $this->keyword($keyword);
+                    return $this->keyword($keyword,$data);
                 }
         }
     }
