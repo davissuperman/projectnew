@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="{pigcms::RES}/hangzhou/css/add.css?v=5432544" rel="stylesheet" type="text/css" />
+    <link href="{pigcms::RES}/hangzhou/css/common.css?v=5432543" rel="stylesheet" type="text/css" />
+    <script src="{pigcms::RES}/hangzhou/js/zepto.min.js" type="text/javascript"></script>
+    <script src="{pigcms::RES}/hangzhou/js/common.js?v=432432" type="text/javascript"></script>
+    <title>森田南昌天虹百货京东店线下活动</title>
+</head>
+
+<body>
+<div id="contents" style="position:relative;">
+    <if condition="$success eq true">
+    	<img src="{pigcms::RES}/hangzhou/images/logo2.png" alt="森田" style="position:absolute;right:10px;top:10px; height:40px;"/>
+        <div class="reg-box" style="padding-top:30px;">
+           
+            <dl>
+            	<dt class="logbuttom"><font color="yellow">恭喜你获得森田面膜试用装一份，请将此画面交给现场工作人员进行领奖操作。</font></dt>
+                <dd>1、“发奖”按钮<strong style="color:#f00; background:#fff;">仅限工作人员点击</strong>，工作人员点击后发奖。活动参与者点击无效。</dd>
+				<dd>2、“发奖”按钮点击后即代表奖品已经领取，即失去领取试用装奖品机会。</dd>
+				<dd>3、奖品为森田面膜体验装，数量1000份。领完即止，请与现场工作人员确认即时奖品剩余数量。</dd>
+				<dd>4、活动最终解释权归森田药妆微信服务号所有。</dd>
+            </dl>
+            
+            <!--<div class="ta-c mt-20">-->
+                <!--<span class="btn-yel btn-disabled">发奖</span>-->
+            <!--</div>-->
+            <div class="ta-c">
+                <span class="btn-yeladd" id="fajiang">&nbsp;&nbsp;&nbsp;</span>
+            </div>
+            
+        </div>
+    <else />
+        <div class="mt-20 ta-c" style="padding:0 10px; line-height:0.5rem;">{pigcms::$msg}</div>
+    </if>
+</div>
+<script>
+    $(function(){
+        $("#fajiang").click(function(){
+            $("#fajiang").addClass("btn-disabled");
+            $.get(
+                    "/index.php?g=Wap&m=Nanchang&a=updatejiangping&openid={pigcms::$openid}",
+                    function(data) {
+                        if(data == 1){
+                            mnAlert("获奖成功");
+                        }else{
+                            mnAlert("非常抱歉，您的微信账号或登记的电话号码，已经领取过奖品。");
+                        }
+                    }
+            );
+            //刷新当前URL
+            // location.href = "{pigcms::$siteurl}";
+        });
+
+    });
+</script>
+</body>
+</html>
