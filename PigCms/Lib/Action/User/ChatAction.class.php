@@ -214,11 +214,20 @@ class ChatAction extends UserAction {
         $p = new Page($num, 25);
         $firstRow = $p->firstRow;
         $listRows = $p->listRows;
+        $sqlAll = $sql;
         $sql1 = $sql . " limit {$firstRow},{$listRows}";
         $list = $member_user->query($sql1);
         $page = $p->show();
         $this->assign('page', $page);
         $this->assign('list', $list);
+        $idArr = array();
+        $listAll = $member_user->query($sqlAll);
+        foreach($listAll as $eachItem){
+            $idArr[] = $eachItem['uid'] ;
+        }
+        //$idStr = implode(',',$idArr);
+        session('idlistall',$idArr);
+
         $this->display();
     }
 
@@ -648,15 +657,25 @@ class ChatAction extends UserAction {
     public function memberdc() {
         $member_user = M('member_user');
         $str1 = substr(THINK_PATH, 0, -1);
+        $from = $_REQUEST['from'];
+        if(!$from){
+            $from = 0;
+        }
+        $to = $_REQUEST['to'];
+        if(!$to){
+            $to = 10000;
+        }
         require_once $str1 . '/PigCms/Lib/Action/User/Classes/PHPExcel.php';
-        if ($_REQUEST['item'] == '') {
-            $this->error('没有选中事件');
-        } else {
+//        if ($_REQUEST['item'] == '') {
+//            $this->error('没有选中事件');
+//        } else {
             $token = $_REQUEST['token'];
-            $uid = $_REQUEST['item'];
-            $uuid = implode(',', $uid);
+//            $uid = $_REQUEST['item'];
+            $uidArr =  session("idlistall");
+            $middleArr = array_slice($uidArr,$from,($to-$from));
+            $uuid = implode(',', $middleArr);
             $dl = $member_user->where("token='$token' and uid in(" . $uuid . ")")->select();
-
+            Log :: write(print_r($uuid,true));
             // Create new PHPExcel object
             $objPHPExcel = new PHPExcel();
 
@@ -685,10 +704,10 @@ class ChatAction extends UserAction {
                     ->setCellValue('K1', '会员级别');
 
             // Miscellaneous glyphs, UTF-8
-
-            for ($i = 0; $i < count($dl); $i++) {
+            $count = count($dl);
+            for ($i = 0; $i < $count ; $i++) {
                 $objPHPExcel->setActiveSheetIndex(0)
-                        ->setCellValue('A' . ($i + 2), $dl[$i]['u_number'])
+                        ->setCellValue('A' . ($i + 2), $dl[$i]['uid'])
                         ->setCellValue('B' . ($i + 2), $dl[$i]['u_name'])
                         ->setCellValue('C' . ($i + 2), $dl[$i]['u_username'])
                         ->setCellValue('D' . ($i + 2), $dl[$i]['u_iphone']);
@@ -731,12 +750,12 @@ class ChatAction extends UserAction {
 
             // Redirect output to a client’s web browser (Excel5)
             header('Content-Type: application/vnd.ms-excel');
-            header("Content-Disposition: attachment;filename=test.xls");
+            header("Content-Disposition: attachment;filename=member.xls");
             header('Cache-Control: max-age=0');
 
             $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
             $objWriter->save('php://output');
-        }
+//        }
     }
 
     public function memberxiazai() {
