@@ -844,7 +844,7 @@ class CommonAction extends Action {
     function meibohui($keyword,$data){
         $openId = (string)$data['FromUserName'];
         $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Meibohui&a=index&openid=$openId";
-        $text = "<a href='$url'>桂林惠之林线下活动入口</a>";
+        $text = "<a href='$url'>上海新国际博览中心线下活动入口</a>";
         return array($text, 'text');
     }
     function checkCode($keyword){
