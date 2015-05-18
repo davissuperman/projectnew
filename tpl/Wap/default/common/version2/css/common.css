@@ -83,7 +83,7 @@ font-size: 0.4rem;display: inline-block;cursor: pointer;-moz-border-radius: 3rem
 -o-border-radius: 3rem;-webkit-border-radius: 3rem;border-radius: 3rem;text-decoration: none;border: 2px solid #385d8a;}
 .reg-box dl{ padding:20px;}
 .reg-box dt{font-size:0.4rem;color:#004986;font-weight:bold;}
-.reg-box dd{ line-height:0.45rem; text-indent:0.5rem; margin-top:10px;}
+.reg-box dd{ line-height:0.45rem; text-indent:0.3rem; margin-top:10px;}
 
 .btn-disabled,.btn-disabled:active, .btn-disabled:visited{background: #ccc !important;color: #999 !important;}
 
