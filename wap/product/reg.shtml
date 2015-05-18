@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="css/common.css?v=4324232332" rel="stylesheet" type="text/css" />
+<script src="js/zepto.min.js" type="text/javascript"></script>
+<script src="js/common.js?v=432432" type="text/javascript"></script>
+
+<title>森田线下活动产品方案</title>
+</head>
+<body class="bg01">
+	<div id="contents" style="position:relative;">
+    	<img src="images/logo2.png" alt="森田" style="position:absolute;right:20px;top:0.2rem; height:1rem;"/>
+        <div class="reg-box" style="padding-top:0.4rem;">
+        	<div style="margin-left: 20px;font-size: 0.35rem;font-weight: bold;line-height: 0.45rem;">登记手机号码<br/>验证获奖资格</div>
+            <ul class="form-ul">
+            	
+                <li class="clrfix">
+                	<div style="border:1px solid #fb3e00;" class="input-box">
+                		<input type="tel" class="input-text" placeholder="在此输入您的手机号码">
+                        <span class="btn-ok">确认</span>
+                    </div>
+                </li>
+                
+            </ul>
+            
+            <dl style="padding-top:0;">
+            	<dt>活动说明：</dt>
+                <dd>1、仅限5月19日至5月20日上海美博会活动现场参与，现场领奖，费现场参与无效。</dd>
+				<dd>2、每个微信用户，电话号码只能参与一次。</dd>
+				<dd>3、奖品为森田面膜试用装，数量2000份，领完即止，请与现场工作人员确认即时奖品剩余数量。</dd>
+				<dd>4、活动最终解释权归森田药妆微信服务号所有。</dd>
+            </dl>
+        </div>
+        
+    </div>
+    
+</body>
+</html>

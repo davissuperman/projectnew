@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="css/common.css?v=4324232332" rel="stylesheet" type="text/css" />
+<script src="js/zepto.min.js" type="text/javascript"></script>
+<script src="js/common.js?v=432432" type="text/javascript"></script>
+
+<title>森田线下活动产品方案</title>
+</head>
+<body>
+	<div id="contents" style="position:relative;">
+    	<img src="images/logo2.png" alt="森田" style="position:absolute;right:20px;top:0.2rem; height:1rem;"/>
+        <div class="ta-c" style="padding:0 20px; line-height:0.5rem;padding-top: 1.6rem;">非常抱歉，您的微信账号或登记的电话号码，已经领取过奖品。</div>
+        
+    </div>
+    
+</body>
+</html>
