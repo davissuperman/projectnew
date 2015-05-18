@@ -835,6 +835,18 @@ class CommonAction extends Action {
         $text = "<a href='$url'>南昌天虹百货京东店线下活动入口</a>";
         return array($text, 'text');
     }
+    function damo($keyword,$data){
+        $openId = (string)$data['FromUserName'];
+        $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Damo&a=index&openid=$openId";
+        $text = "<a href='$url'>桂林惠之林线下活动入口</a>";
+        return array($text, 'text');
+    }
+    function meibohui($keyword,$data){
+        $openId = (string)$data['FromUserName'];
+        $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Meibohui&a=index&openid=$openId";
+        $text = "<a href='$url'>桂林惠之林线下活动入口</a>";
+        return array($text, 'text');
+    }
     function checkCode($keyword){
         $keyword = str_replace(" ","",$keyword);
         $ws = "http://digitcode.yesno.com.cn/CCNOutService/OutDigitCodeService.asmx?wsdl";//webservice服务的地址
@@ -877,6 +889,12 @@ class CommonAction extends Action {
                 break;
             case 'nanchang' :
                 return $this->nanchang($keyword,$data);
+                break;
+            case 'damo' :
+                return $this->damo($keyword,$data);
+                break;
+            case 'meibohui' :
+                return $this->meibohui($keyword,$data);
                 break;
             case 'auth' :
                 return $this->auth();

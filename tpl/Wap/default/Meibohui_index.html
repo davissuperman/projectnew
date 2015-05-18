@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="{pigcms::RES}/hangzhou/css/common.css?v=5432543" rel="stylesheet" type="text/css" />
+    <script src="{pigcms::RES}/hangzhou/js/zepto.min.js" type="text/javascript"></script>
+    <script src="{pigcms::RES}/hangzhou/js/common.js?v=432432" type="text/javascript"></script>
+    <title>森田桂林惠之林线下活动</title>
+</head>
+
+<body>
+<div id="contents" style="position:relative;">
+	 <img src="{pigcms::RES}/hangzhou/images/logo2.png" alt="森田" style="position:absolute;right:10px;top:10px; height:40px;"/>
+    <div class="reg-box" style="padding-top:45px;">
+        <div class="mt-20 ta-c">登记手机号码，验证获得领奖资格</div>
+        <form method="post" action="/index.php?g=Wap&m=Meibohui&a=saveHangzhouPhone" id="reg-form1">
+            <ul class="form-ul">
+
+                <li class="clrfix">
+                    <input type="text"  name="phone" id="phone1" class="input-text" placeholder="请输入手机号码">
+                    <input type="hidden"  name="openid" id="openid" value="{pigcms::$openid}">
+                </li>
+
+            </ul>
+            <div class="ta-c">
+                <span class="btn-yel" id="submitform1">确认</span>
+            </div>
+        </form>
+
+
+        <dl>
+            <dt>说明：</dt>
+            <dd>1、仅限5月19日至5月20日上海新国际博览中心活动现场参与，现场领奖，非现场参与无效。</dd>
+            <dd>2、每个微信账户、电话号码只能参与一次。</dd>
+            <dd>3、奖品为森田面膜体验装，数量2000份。领完即止，请与现场工作人员确认即时奖品剩余数量。</dd>
+            <dd>4、活动最终解释权归森田药妆微信服务号所有。</dd>
+        </dl>
+    </div>
+
+</div>
+<script>
+    $(function(){
+        $("#submitform1").click(function(event){
+            var phone = $("#phone1").val();
+            var submitform = false;
+            if(phone == ''){
+                mnAlert("请输入手机号");
+            }else if(phone.length != 11){
+                mnAlert("请输入正确手机号");
+            }else if(isNaN(phone)){
+                mnAlert("请输入正确手机号");
+            }else{
+                submitform = true;
+            }
+            if(submitform == false){
+                event.preventDefault();
+            }else{
+                $("#reg-form1").submit();
+            }
+        });
+    });
+</script>
+</body>
+</html>
