@@ -8,35 +8,32 @@
     <meta content="telephone=no" name="format-detection" />
     <meta name="keywords" content="" />
     <meta name="description" content="" />
-    <link href="{pigcms::RES}/version2/css/common.css?v=5432543" rel="stylesheet" type="text/css" />
+    <link href="{pigcms::RES}/version2/css/common.css?v=4324232332" rel="stylesheet" type="text/css" />
     <script src="{pigcms::RES}/version2/js/zepto.min.js" type="text/javascript"></script>
     <script src="{pigcms::RES}/version2/js/common.js?v=432432" type="text/javascript"></script>
-    <title>森田桂林惠之林线下活动</title>
+    <title>森田桂林惠之林线下活动线下活动</title>
 </head>
-
-<body>
+<body class="bg01">
 <div id="contents" style="position:relative;">
-	 <img src="{pigcms::RES}/version2/images/logo2.png" alt="森田" style="position:absolute;right:10px;top:10px; height:40px;"/>
-    <div class="reg-box" style="padding-top:45px;">
-        <div class="mt-20 ta-c">登记手机号码，验证获得领奖资格</div>
+    <img src="{pigcms::RES}/version2/images/logo2.png" alt="森田" style="position:absolute;right:20px;top:0.2rem; height:1rem;"/>
+    <div class="reg-box" style="padding-top:0.4rem;">
+        <div style="margin-left: 20px;font-size: 0.35rem;font-weight: bold;line-height: 0.45rem;">登记手机号码<br/>验证获奖资格</div>
         <form method="post" action="/index.php?g=Wap&m=Damo&a=saveHangzhouPhone" id="reg-form1">
             <ul class="form-ul">
 
                 <li class="clrfix">
-                    <input type="text"  name="phone" id="phone1" class="input-text" placeholder="请输入手机号码">
-                    <input type="hidden"  name="openid" id="openid" value="{pigcms::$openid}">
+                    <div style="border:1px solid #fb3e00;" class="input-box">
+                        <input type="hidden"  name="openid" id="openid" value="{pigcms::$openid}">
+                        <input type="tel" id="phone1" name="phone" class="input-text" placeholder="在此输入您的手机号码">
+                        <span class="btn-ok" id="submitform1">确认</span>
+                    </div>
                 </li>
 
             </ul>
-            <div class="ta-c">
-                <span class="btn-yel" id="submitform1">确认</span>
-            </div>
         </form>
-
-
-        <dl>
-            <dt>说明：</dt>
-            <dd>1、仅限5月29日至5月31日桂林惠之林活动现场参与，现场领奖，非现场参与无效。</dd>
+        <dl style="padding-top:0;">
+            <dt>活动说明：</dt>
+            <dd>1、仅限5月29至31日桂林惠之林活动现场参与，现场领奖，非现场参与无效。</dd>
             <dd>2、每个微信账户、电话号码只能参与一次。</dd>
             <dd>3、奖品为森田面膜体验装，数量500份。领完即止，请与现场工作人员确认即时奖品剩余数量。</dd>
             <dd>4、活动最终解释权归森田药妆微信服务号所有。</dd>
