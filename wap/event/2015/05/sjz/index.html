@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<title>世界上分两种事儿~与你有关，与你无关~</title>
+<style>
+@-webkit-keyframes tipmove {
+0% {
+bottom:10px;
+opacity:0
+}
+50% {
+bottom:15px;
+opacity:1
+}
+100% {
+bottom:20px;
+opacity:0
+}
+}
+@-webkit-keyframes tipmove-left {
+0% {
+-webkit-transform:translateX(10px);
+opacity:0
+}
+50% {
+-webkit-transform:translateX(5px);
+opacity:1
+}
+100% {
+-webkit-transform:translateX(0);
+opacity:0
+}
+}
+@-webkit-keyframes tipmove-right {
+0% {
+-webkit-transform:translateX(-10px);
+opacity:0
+}
+50% {
+-webkit-transform:translateX(-5px);
+opacity:1
+}
+100% {
+-webkit-transform:translateX(0);
+opacity:0
+}
+}
+div.page div.form, div.pages div.form {
+	color: #fff;
+	overflow: hidden;
+	background: #772d90;
+	padding: 5px 0 10px;
+	border-width: 0;
+	border-style: solid
+}
+div.page div.form .component, div.pages div.form .component {
+	position: relative;
+	top: 0;
+	left: 0
+}
+div.page div.form p, div.pages div.form p {
+	height: 32px;
+	line-height: 32px;
+	display: block;
+	overflow: hidden;
+	padding: 0 10%;
+	width: 80%;
+	margin: 5px 0
+}
+div.page div.form p input, div.pages div.form p input {
+	border: 0;
+	height: 32px;
+	line-height: 32px;
+	width: 70%;
+	float: right;
+	font-size: 16px;
+	color: #333;
+	text-indent: 4px
+}
+div.page div.form a, div.pages div.form a {
+	background: #fff;
+	border-radius: 3px;
+	text-decoration: none;
+	height: 32px;
+	line-height: 32px;
+	padding: 0 10px;
+	text-indent: 0;
+	text-align: center;
+	float: right;
+	margin: 3px 10% 3px 0;
+	color: #772d90
+}
+div.page div.form a:active, div.pages div.form a:active {
+	background: #ccc
+}
+div.pages section.page::after {
+	content: " ";
+	position: absolute;
+	width: 24px;
+	height: 18px;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+	bottom: 10px;
+	background: url(http://7te85s.com2.z0.glb.qiniucdn.com/web-swipe-tip.png) no-repeat;
+	background-size: 100% 100%;
+	-webkit-animation: tipmove 1.5s infinite ease-in-out;
+	z-index: 300
+}
+.hor-arrow-right {
+	position: absolute;
+	width: 15px;
+	height: 18px;
+	margin: 0 auto;
+	top: 100px;
+	background: url(http://7te85s.com2.z0.glb.qiniucdn.com/web-swipe-right.png) no-repeat;
+	background-size: 100% 100%;
+	-webkit-animation: tipmove-right 1.5s infinite ease-in-out;
+	z-index: 300
+}
+.hor-arrow-left {
+	position: absolute;
+	width: 15px;
+	height: 18px;
+	margin: 0 auto;
+	left: 10px;
+	top: 100px;
+	background: url(http://7te85s.com2.z0.glb.qiniucdn.com/web-swipe-left.png) no-repeat;
+	background-size: 100% 100%;
+	-webkit-animation: tipmove-left 1.5s infinite ease-in-out;
+	z-index: 300
+}
+.lizihua-canvas {
+	position: absolute;
+	-webkit-animation: lizihuaCanvas 1s linear .4s both!important
+}
+.lizihua-source {
+	-webkit-animation: lizihuaSource 1s linear .6s both!important
+}
+@-webkit-keyframes lizihuaCanvas {
+0% {
+opacity:1
+}
+100% {
+opacity:0
+}
+}
+@-webkit-keyframes lizihuaSource {
+0% {
+opacity:0
+}
+100% {
+opacity:1
+}
+}
+@font-face {
+	font-family: '方正黄草';
+	font-weight: 400;
+	font-style: normal
+}
+@font-face {
+	font-family: '毛笔行书';
+	font-weight: 400;
+	font-style: normal
+}
+@font-face {
+	font-family: '华康少女';
+	font-weight: 400;
+	font-style: normal
+}
+@font-face {
+	font-family: '微软雅黑'
+}
+@-webkit-keyframes red-balloon {
+0% {
+background-position:0 0
+}
+5% {
+background-position:-64px 0
+}
+10% {
+background-position:-128px 0
+}
+15% {
+background-position:-192px 0
+}
+20% {
+background-position:-256px 0
+}
+25% {
+background-position:-320px 0
+}
+30% {
+background-position:-384px 0
+}
+35% {
+background-position:-448px 0
+}
+40% {
+background-position:-512px 0
+}
+45% {
+background-position:-576px 0
+}
+50% {
+background-position:-640px 0
+}
+55% {
+background-position:-704px 0
+}
+60% {
+background-position:-768px 0
+}
+65% {
+background-position:-832px 0
+}
+70% {
+background-position:-896px 0
+}
+75% {
+background-position:-960px 0
+}
+80% {
+background-position:0 -86px
+}
+85% {
+background-position:-64px -86px
+}
+90% {
+background-position:-128px -86px
+}
+95% {
+background-position:-192px -86px
+}
+100% {
+background-position:0 0
+}
+}
+@keyframes red-balloon {
+0% {
+background-position:0 0
+}
+5% {
+background-position:-64px 0
+}
+10% {
+background-position:-128px 0
+}
+15% {
+background-position:-192px 0
+}
+20% {
+background-position:-256px 0
+}
+25% {
+background-position:-320px 0
+}
+30% {
+background-position:-384px 0
+}
+35% {
+background-position:-448px 0
+}
+40% {
+background-position:-512px 0
+}
+45% {
+background-position:-576px 0
+}
+50% {
+background-position:-640px 0
+}
+55% {
+background-position:-704px 0
+}
+60% {
+background-position:-768px 0
+}
+65% {
+background-position:-832px 0
+}
+70% {
+background-position:-896px 0
+}
+75% {
+background-position:-960px 0
+}
+80% {
+background-position:-64px -86px
+}
+85% {
+background-position:-128px -86px
+}
+90% {
+background-position:-192px -86px
+}
+95% {
+background-position:-256px -86px
+}
+100% {
+background-position:0 0
+}
+}
+@-webkit-keyframes red-balloon-moving {
+0% {
+background-position:-896px -602px
+}
+25% {
+background-position:-960px -602px
+}
+50% {
+background-position:0 -688px
+}
+75% {
+background-position:-64px -688px
+}
+100% {
+background-position:-896px -602px
+}
+}
+@keyframes red-balloon-moving {
+0% {
+background-position:-896px -602px
+}
+25% {
+background-position:-960px -602px
+}
+50% {
+background-position:0 -688px
+}
+75% {
+background-position:-64px -688px
+}
+100% {
+background-position:-896px -602px
+}
+}
+#balloon {
+	width: 64px;
+	height: 86px;
+	background: url(../../img/lightgames/dots_64x86.png) no-repeat;
+	-webkit-transition: top 1s ease-out, left 1s ease-out;
+	transition: top 1s ease-out, left 1s ease-out;
+	-webkit-animation: red-balloon 1.5s step-end 0s infinite;
+	animation: red-balloon 1.5s step-end 0s infinite
+}
+#balloon.moving {
+	background-position: -896px -602px;
+	-webkit-transition: all 0s;
+	transition: all 0s;
+	-webkit-animation: red-balloon-moving .2s step-end 0s infinite;
+	animation: red-balloon-moving .2s step-end 0s infinite
+}
+.clearfix:after, .clearfix:before {
+	display: table;
+	content: "";
+	line-height: 0
+}
+.clearfix:after {
+	clear: both
+}
+:not(font):not(b):not(i):not(u) {
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑"
+}
+body {
+	background-color: #333
+}
+.hide {
+	display: none
+}
+.invisible {
+	visibility: hidden
+}
+div.music {
+	position: absolute;
+	right: 10px;
+	top: 20px;
+	z-index: 9999;
+	width: 62px;
+	height: 25px;
+	display: none
+}
+div.music .btn1 {
+	height: 100%;
+	width: 100%
+}
+div.music .btn1 .music_open {
+	display: block;
+	height: 100%;
+	width: 100%
+}
+div.music .btn1 .music_close {
+	display: none;
+	height: 100%;
+	width: 100%
+}
+div.music img {
+	float: left;
+	width: 25px;
+	height: 25px;
+	margin-right: 6px
+}
+div#loading-container {
+	z-index: 1000001;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #fff;
+}
+div#loading-container div#circle {
+	position: absolute;
+	width: 150px;
+	height: 150px
+}
+div#loading-container div#circle div#circle-filled-left, div#loading-container div#circle div#circle-filled-right, div#loading-container div#circle div#circle-unfilled, div#loading-container div#circle div#circle-unfilled-left {
+	z-index: 1000002;
+	position: relative;
+	float: left;
+	width: 0;
+	height: 0;
+	border: 75px solid #b3b3b3;
+	border-radius: 75px;
+	-webkit-transform: rotateZ(-135deg)
+}
+div#loading-container div#circle div#circle-filled-left {
+	z-index: 1000003;
+	margin-top: -149px;
+	margin-left: 1px;
+	border-top: 74px transparent solid;
+	border-right: 74px transparent solid;
+	border-bottom: 74px #772d90 solid;
+	border-left: 74px #772d90 solid
+}
+div#loading-container div#circle div#circle-filled-right {
+	z-index: 1000004;
+	margin-top: -149px;
+	margin-left: 1px;
+	border-top: 74px #772d90 solid;
+	border-right: 74px #772d90 solid;
+	border-bottom: 74px transparent solid;
+	border-left: 74px transparent solid
+}
+div#loading-container div#circle div#circle-unfilled-left {
+	z-index: 1000005;
+	margin-top: -150px;
+	border-bottom: 75px transparent solid;
+	border-left: 75px transparent solid
+}
+div#loading-container div#circle div.circle-center {
+	z-index: 1000006;
+	position: relative;
+	float: left;
+	border: 65px solid #fff;
+	left: -65px;
+	top: -65px;
+	border-radius: 65px
+}
+div#loading-container div#circle div.img, div#loading-container div#circle div.text {
+	z-index: 1000007;
+	position: relative;
+	float: left
+}
+div#loading-container div#circle div.text.percent {
+	margin-top: -120px;
+	margin-left: 33px;
+	font-size: 45px;
+	font-weight: 700
+}
+div#loading-container div#circle div.text.unit {
+	margin-top: -103px;
+	margin-left: 92px;
+	font-size: 28px
+}
+div#loading-container div#circle div.text.rabbitpre {
+	width: 100%;
+	margin-top: -58px;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 19px;
+	text-align: center
+}
+div#loading-container div#circle div.img {
+	background-image: url(http://wx.drjou.cc/wap/event/2015/05/sjz/images/rabbit-circle-loading-rabbitpre.png);
+	width: 45px;
+	height: 64px;
+	margin-top: -126px;
+	margin-left: 52px
+}
+div#loading-container div#circle div#circle-filled-left.percent80 {
+	transition: all .15s linear;
+	-moz-transition: all .15s linear;
+	-webkit-transition: all .15s linear;
+	-o-transition: all .15s linear;
+	transform: rotateZ(-27deg);
+	-ms-transform: rotateZ(-27deg);
+	-moz-transform: rotateZ(-27deg);
+	-webkit-transform: rotateZ(-27deg);
+	-o-transform: rotateZ(-27deg)
+}
+div#loading-container div#circle div#circle-filled-left.percent100 {
+	transition: all .1s ease-out;
+	-moz-transition: all .1s ease-out;
+	-webkit-transition: all .1s ease-out;
+	-o-transition: all .1s ease-out;
+	transform: rotateZ(45deg);
+	-ms-transform: rotateZ(45deg);
+	-moz-transform: rotateZ(45deg);
+	-webkit-transform: rotateZ(45deg);
+	-o-transform: rotateZ(45deg)
+}
+div#loading-container div#circle div#circle-filled-right.percent50 {
+	transition: all .25s ease-in;
+	-moz-transition: all .25s ease-in;
+	-webkit-transition: all .25s ease-in;
+	-o-transition: all .25s ease-in;
+	transform: rotateZ(45deg);
+	-ms-transform: rotateZ(45deg);
+	-moz-transform: rotateZ(45deg);
+	-webkit-transform: rotateZ(45deg);
+	-o-transform: rotateZ(45deg)
+}
+div#loading-container div#circle div#circle-filled-right.finish-percent50 {
+	transform: rotateZ(45deg);
+	-ms-transform: rotateZ(45deg);
+	-moz-transform: rotateZ(45deg);
+	-webkit-transform: rotateZ(45deg);
+	-o-transform: rotateZ(45deg)
+}
+#slide-progress {
+	position: fixed;
+	z-index: 102;
+	width: 10px;
+	top: 34%;
+	right: 5px
+}
+#slide-progress li {
+	list-style: none;
+	padding: 0;
+	background-color: #f9f9f9;
+	width: 6px;
+	height: 6px;
+	border-radius: 6px;
+	opacity: .3;
+	margin: 0 auto 6px
+}
+#slide-progress li.active {
+	opacity: .7;
+	width: 6px;
+	height: 6px;
+	background-color: transparent;
+	border: 1px solid #fff
+}
+div.unpublish {
+	text-align: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 10000;
+	background-color: #000;
+	color: #fff;
+	opacity: .4;
+	width: 100%;
+	height: 20px;
+	font-size: 14px;
+	line-height: 20px
+}
+div.pages {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	-webkit-transform: translate3d(0, 0, 0);
+	-webkit-backface-visibility: hidden;
+	background-color: #333
+}
+div.pages section.page {
+	background-color: #fff;
+	position: relative;
+	background-size: 100% 100%!important
+}
+div.pages section.page .viewCount {
+	text-align: center;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	display: block;
+	z-index: 310
+}
+div.pages section.page .viewCount span {
+	float: left;
+	color: #B0B0B0;
+	padding: 2px;
+	font-size: small;
+	border-radius: 2px
+}
+div.pages section.page .freeReg {
+	background-color: rgba(18,16,16,.6);
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	display: block;
+	z-index: 310
+}
+div.pages section.page .freeReg a {
+	text-decoration: none
+}
+div.pages section.page .freeReg span {
+	padding: 4px;
+	color: #fff;
+	font-size: small;
+	border-radius: 2px
+}
+div.pages section.page .freeReg span strong {
+	color: #772d90;
+	font-size: 16px
+}
+div.pages section.page .freeReg span a {
+	color: #fff;
+	text-decoration: none
+}
+div.pages section.page .freeReg span b {
+	font-weight: 400;
+	color: #772d90;
+	font-size: 16px
+}
+div.pages .component {
+	position: absolute
+}
+div.mask {
+	background: rgba(0,0,0,.8);
+	position: absolute;
+	opacity: 0;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	z-index: -1;
+	overflow: hidden;
+	font-weight: 700;
+	-webkit-animation-fill-mode: both;
+	color: #fff
+}
+div.mask.maskIn {
+	-webkit-animation-name: maskIn;
+	-webkit-animation-duration: .4s;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count: 1
+}
+div.mask.maskOut {
+	-webkit-animation-name: maskOut;
+	-webkit-animation-duration: .4s;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count: 1
+}
+div.ucbody {
+	background: rgba(0,0,0,.9);
+	height: 100%;
+	z-index: 110;
+	position: fixed;
+	bottom: 0;
+	-webkit-animation-fill-mode: both
+}
+div.more_container {
+	width: 190px;
+	padding: 0 5px 0 0;
+	right: -250px;
+	border-left: 1px solid #000;
+	-webkit-animation-fill-mode: both
+}
+div.more_container ul.more_menu {
+	margin: 10% 0 0 10px;
+	list-style: none;
+	opacity: 1;
+	z-index: 111
+}
+div.more_container ul.more_menu li {
+	opacity: 1;
+	width: 100%;
+	line-height: 30px;
+	font-size: 13px;
+	color: #cdcbcb;
+	padding: 15px 0;
+	border-bottom: solid 1px #333
+}
+div.more_container ul.more_menu li .icon {
+	height: 24px;
+	width: 26px;
+	margin: 0 8px 0 12px;
+	display: block;
+	float: left;
+	background-origin: content;
+	background-position: 50% 50%;
+	background-size: contain;
+	background-repeat: no-repeat
+}
+div.more_container ul.more_menu li .dicon {
+	height: 30px;
+	width: 30px;
+	margin: 0;
+	display: block;
+	float: left;
+	background-origin: content;
+	background-position: 50% 50%;
+	background-size: contain;
+	background-repeat: no-repeat
+}
+div.more_container ul.more_menu li .dcnt {
+	height: 30px;
+	margin: 0;
+	display: block;
+	float: left;
+	font-size: 12px
+}
+div.more_container ul.more_menu li .focus {
+	text-decoration: none;
+	display: block
+}
+div.more_container ul.more_menu li .menu1 {
+	background-image: url(http://7te85s.com2.z0.glb.qiniucdn.com/rabbit-menu1.png)
+}
+div.more_container ul.more_menu li .menu2 {
+	background-image: url(http://7te85s.com2.z0.glb.qiniucdn.com/rabbit-menu2.png)
+}
+div.more_container ul.more_menu li .menu3 {
+	background-image: url(http://7te85s.com2.z0.glb.qiniucdn.com/rabbit-menu3.png)
+}
+div.more_container ul.more_menu li .menu4 {
+	background-image: url(http://7te85s.com2.z0.glb.qiniucdn.com/rabbit-menu4.png)
+}
+div.more_container ul.more_menu li .menu5 {
+	background-image: url(http://7te85s.com2.z0.glb.qiniucdn.com/rabbit-menu5.png)
+}
+div.more_container ul.more_menu li .menu6 {
+	background-image: url(http://7te85s.com2.z0.glb.qiniucdn.com/rabbit-menu6.png)
+}
+div.more_container ul.more_menu li .menu7 {
+	background-image: url(http://7te85s.com2.z0.glb.qiniucdn.com/rabbit-menu7.png)
+}
+div.more_container ul.more_menu a {
+	text-decoration: none;
+	color: #FFF;
+	font-size: 14px
+}
+div.more_container.moreIn {
+	-webkit-animation-name: moreIn;
+	-webkit-animation-duration: .4s;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count: 1
+}
+div.more_container.moreOut {
+	-webkit-animation-name: moreOut;
+	-webkit-animation-duration: .4s;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count: 1
+}
+@-webkit-keyframes maskIn {
+0% {
+opacity:0;
+z-index:-1
+}
+100% {
+opacity:.5;
+z-index:105
+}
+}
+@-webkit-keyframes moreIn {
+0% {
+right:-250px;
+opacity:.5
+}
+100% {
+right:0;
+opacity:1
+}
+}
+@-webkit-keyframes maskOut {
+0% {
+opacity:.5;
+z-index:105
+}
+100% {
+opacity:0;
+z-index:-1
+}
+}
+@-webkit-keyframes moreOut {
+0% {
+right:0;
+opacity:1
+}
+100% {
+right:-250px;
+opacity:.5
+}
+}
+div.btns #btn_more {
+	position: fixed;
+	right: -1px;
+	bottom: 0;
+	width: 48px;
+	height: 48px;
+	z-index: 104;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-image: url(http://7te85s.com2.z0.glb.qiniucdn.com/rabbit-menu_btn.png)
+}
+#qrcode {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	vertical-align: center;
+	z-index: 110
+}
+#qrcode canvas {
+	border: 10px solid #FFF
+}
+.user_info {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-position: center;
+	background-size: cover;
+	background-image: url(http://7te85s.com2.z0.glb.qiniucdn.com/rabbit-user-bg.jpg);
+	z-index: -1;
+	opacity: 0;
+	color: #FFF
+}
+.user_info h4 {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 18px;
+	font-weight: bolder
+}
+.user_info h5 {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	font-size: 14px
+}
+.user_info h3 {
+	margin-top: 20px;
+	margin-bottom: 10px
+}
+.user_info .user_info_item {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0
+}
+.user_info .item_bgcol {
+	background-position: center;
+	background-size: cover;
+	background-image: url(http://7te85s.com2.z0.glb.qiniucdn.com/rabbit-user-bg2.png);
+	width: 90%;
+	height: 80%;
+	top: 10%;
+	left: 5%;
+	border-radius: 10px
+}
+.user_info .hm {
+	display: block;
+	margin: auto;
+	overflow: hidden;
+	width: 90%;
+	height: 66%;
+	position: absolute;
+	top: 17%;
+	left: 5%
+}
+.user_info .hm p {
+	display: block
+}
+.user_info .hm .user_photo {
+	border: 2px solid #FFF;
+	box-shadow: 0 0 15px #000;
+	border-radius: 50%;
+	width: 100px;
+	height: 100px
+}
+.user_info .hm .back_btn {
+	width: 80%;
+	color: #fff;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none
+}
+.text_center {
+	text-align: center
+}
+.fenxiang {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background-position: center;
+	background-size: cover;
+	background-image: url(http://7te85s.com2.z0.glb.qiniucdn.com/rabbit-fx.png);
+	background-color: rgba(0,0,0,.9);
+	z-index: -1;
+	opacity: 0
+}
+.active {
+	opacity: 1;
+	z-index: 110
+}
+@keyframes loadAni {
+from {
+opacity:1;
+display:block
+}
+to {
+	opacity: 0;
+	display: none
+}
+}
+@-webkit-keyframes loadAni {
+from {
+opacity:1;
+display:block
+}
+to {
+	opacity: 0;
+	display: none
+}
+}
+div.loadingVip {
+	z-index: 1000001;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #fff;
+	animation: loadAni 3s ease-in forwards;
+	-webkit-animation: loadAni 3s ease-in forwards
+}
+div.loadingVip div.loadingImg {
+	background-size: 100px 100px;
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	top: 35%;
+	left: 50%;
+	margin-top: -50px;
+	margin-left: -50px
+}
+div.loadingVip div.loadingImg div.loadingText {
+	margin-top: 100px;
+	text-align: center
+}
+</style>
+</head>
+<body>
+<div id="loading-container">
+  <div id="circle" class="invisible">
+    <div id="circle-unfilled">
+      <div class="circle-center"></div>
+    </div>
+    <div id="circle-filled-right">
+      <div class="circle-center"></div>
+    </div>
+    <div id="circle-unfilled-left">
+      <div class="circle-center"></div>
+    </div>
+    <div id="circle-filled-left" class="invisible">
+      <div class="circle-center"></div>
+    </div>
+    <div class="text percent">00</div>
+    <div class="text unit">%</div>
+    <div class="text rabbitpre">RabbitPre</div>
+    <div class="img hide"></div>
+  </div>
+</div>
+
+<textarea id="appContent" max="99999999999999" class="hide">&lt;section class=&quot;page&quot; data-direction=&quot;vertical&quot; style=&quot;transform: translateX(0px) translateY(0px) translateZ(0px); -webkit-transform: translateX(0px) translateY(0px) translateZ(0px); width: 320px; background-image: url(http://wx.drjou.cc/wap/event/2015/05/sjz/images/bd978500-fe9a-11e4-b474-7115c81648d8#{WEBP});&quot; data-slide=&quot;cover&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/348ba760-fe94-11e4-9d33-2dece47dcf0d#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;2.5&quot; data-delay=&quot;0.2&quot; style=&quot;width: 265px; height: 195px; left: 0px; top: 0px; transform: translateX(24px) translateY(217px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(24px) translateY(217px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 200; opacity: 0; border-width: 0px; border-radius: 0px; border-color: rgb(218, 85, 37); box-shadow: none; -webkit-box-shadow: none; -webkit-animation: none; -webkit-perspective: 1000;&quot; data-shadow=&quot;none&quot; data-shadowcolor=&quot;gray&quot; data-animation=&quot;frombottom&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;200&amp;quot;,&amp;quot;y&amp;quot;:17,&amp;quot;x&amp;quot;:24}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/88619930-fe94-11e4-a500-d351301660f4#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;2.5&quot; data-delay=&quot;2.7&quot; style=&quot;width: 265px; height: 193px; left: 0px; top: 0px; transform: translateX(19px) translateY(284px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(19px) translateY(284px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 202; opacity: 0; border-width: 0px; border-radius: 0px; -webkit-animation: none; -webkit-perspective: 1000;&quot; data-animation=&quot;frombottom&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;202&amp;quot;,&amp;quot;y&amp;quot;:84,&amp;quot;x&amp;quot;:19}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/9a5ba630-fe94-11e4-97ec-39b76277f0c9#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;2.5&quot; data-delay=&quot;5.2&quot; style=&quot;width: 263px; height: 195px; left: 0px; top: 0px; transform: translateX(29px) translateY(166px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(29px) translateY(166px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 203; opacity: 1; border-width: 0px; border-radius: 0px; -webkit-animation: none; -webkit-perspective: 1000;&quot; data-animation=&quot;frombottom&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;203&amp;quot;,&amp;quot;y&amp;quot;:166,&amp;quot;x&amp;quot;:29}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/b63c2f50-fe94-11e4-a500-d351301660f4#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;2.5&quot; data-delay=&quot;7.7&quot; style=&quot;width: 265px; height: 198px; left: 0px; top: 0px; transform: translateX(20px) translateY(236px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(20px) translateY(236px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 204; opacity: 1; border-width: 0px; border-radius: 0px; -webkit-animation: none; -webkit-perspective: 1000;&quot; data-animation=&quot;frombottom&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;204&amp;quot;,&amp;quot;y&amp;quot;:236,&amp;quot;x&amp;quot;:20}&quot;&gt;&lt;img class=&quot;component image&quot; src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/web-add-image.png&quot; style=&quot;width: 120px; height: 180px; left: 0px; top: 0px; transform: translateX(-105px) translateY(111px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(-105px) translateY(111px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 204; -webkit-animation: none; opacity: 1; border-width: 0px; border-radius: 0px;&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/0e9e1c70-fe96-11e4-af34-853711bac97c#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;1.5&quot; data-delay=&quot;10.2&quot; style=&quot;width: 321px; height: 482px; left: 0px; top: 0px; transform: translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 205; opacity: 1; border-width: 0px; border-radius: 0px; -webkit-animation: none; -webkit-perspective: 1000;&quot; data-animation=&quot;fade&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;205&amp;quot;,&amp;quot;y&amp;quot;:0,&amp;quot;x&amp;quot;:0}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/524a2d60-fe96-11e4-b72a-0bb3acfede4c#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;1.5&quot; data-delay=&quot;11.7&quot; data-animation=&quot;frombottom&quot; style=&quot;width: 321px; height: 199px; left: 0px; top: 0px; transform: translateX(0px) translateY(154px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(0px) translateY(154px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 207; opacity: 1; border-width: 0px; border-radius: 0px; -webkit-perspective: 1000;&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;207&amp;quot;,&amp;quot;y&amp;quot;:154,&amp;quot;x&amp;quot;:0}&quot;&gt;&lt;img src=&quot;http://file2.rabbitpre.com/86d1f120-fe97-11e4-b474-7115c81648d8#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;0.8&quot; data-delay=&quot;13.2&quot; data-animation=&quot;dotEffect&quot; style=&quot;width: 320px; height: 198px; left: 0px; top: 0px; transform: translateX(1px) translateY(158px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(1px) translateY(158px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 207; opacity: 1; border-width: 0px; border-radius: 0px;&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/03419030-fe98-11e4-a15c-6926aef1d9b8#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;3&quot; data-delay=&quot;14&quot; data-animation=&quot;light&quot; style=&quot;width: 320px; height: 219px; left: 0px; top: 0px; transform: translateX(1px) translateY(155px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(1px) translateY(155px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 208; opacity: 0; border-width: 0px; border-radius: 0px; -webkit-animation: light 3s ease-in-out infinite both;&quot; data-style-cache=&quot;{&amp;quot;zIndex&amp;quot;:&amp;quot;208&amp;quot;,&amp;quot;y&amp;quot;:155,&amp;quot;x&amp;quot;:1}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/bfbfffc0-fe99-11e4-a15c-6926aef1d9b8#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;0&quot; data-delay=&quot;15&quot; data-animation=&quot;jitter&quot; style=&quot;width: 321px; height: 208px; left: 0px; top: 0px; transform: translateX(0px) translateY(146px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(0px) translateY(146px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 210; opacity: 1; border-width: 0px; border-radius: 0px; -webkit-animation: jitter0 0.3s backwards;&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;210&amp;quot;,&amp;quot;scaleX&amp;quot;:1,&amp;quot;scaleY&amp;quot;:1,&amp;quot;y&amp;quot;:146,&amp;quot;x&amp;quot;:0}&quot;&gt;&lt;/section&gt;&lt;section class=&quot;page&quot; data-direction=&quot;vertical&quot; style=&quot;transform: translateX(0px) translateY(0px) translateZ(0px); -webkit-transform: translateX(0px) translateY(0px) translateZ(0px); width: 320px; background-image: url(http://wx.drjou.cc/wap/event/2015/05/sjz/images/bd978500-fe9a-11e4-b474-7115c81648d8#{WEBP});&quot; data-slide=&quot;cover&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/919baf10-fe9c-11e4-99c3-e992f08f9c53#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;2.5&quot; data-delay=&quot;0.5&quot; style=&quot;width: 280px; height: 211px; left: 0px; top: 0px; transform: translateX(15px) translateY(249px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(15px) translateY(249px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 200; opacity: 0; border-width: 0px; border-radius: 0px; -webkit-animation: none;&quot; data-animation=&quot;frombottom&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;200&amp;quot;,&amp;quot;y&amp;quot;:49,&amp;quot;x&amp;quot;:15}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/9c410e60-fe9c-11e4-b758-dd52e14631d7#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;2.5&quot; data-delay=&quot;3&quot; style=&quot;width: 279px; height: 208px; left: 0px; top: 0px; transform: translateX(17px) translateY(333px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(17px) translateY(333px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 201; opacity: 0; border-width: 0px; border-radius: 0px; -webkit-animation: none;&quot; data-animation=&quot;frombottom&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;201&amp;quot;,&amp;quot;y&amp;quot;:133,&amp;quot;x&amp;quot;:17}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/a55a4f70-fe9c-11e4-b72a-0bb3acfede4c#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;2.5&quot; data-delay=&quot;5.5&quot; style=&quot;width: 283px; height: 195px; left: 0px; top: 0px; transform: translateX(17px) translateY(447px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(17px) translateY(447px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 202; opacity: 0; border-width: 0px; border-radius: 0px; -webkit-animation: none;&quot; data-animation=&quot;frombottom&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;202&amp;quot;,&amp;quot;y&amp;quot;:247,&amp;quot;x&amp;quot;:17}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/8d6490e0-fea3-11e4-b949-554511fd2419#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;1&quot; data-delay=&quot;8&quot; style=&quot;width: 111px; height: 84px; left: 0px; top: 0px; transform: translateX(103px) translateY(459px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(103px) translateY(459px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 203; opacity: 0; border-width: 0px; border-radius: 0px;&quot; data-animation=&quot;fadeFromBottom&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;203&amp;quot;,&amp;quot;y&amp;quot;:384,&amp;quot;x&amp;quot;:103}&quot;&gt;&lt;/section&gt;&lt;section class=&quot;page&quot; data-direction=&quot;vertical&quot; style=&quot;transform: translateX(0px) translateY(0px) translateZ(0px); -webkit-transform: translateX(0px) translateY(0px) translateZ(0px); width: 320px; background-image: url(http://wx.drjou.cc/wap/event/2015/05/sjz/images/bd978500-fe9a-11e4-b474-7115c81648d8#{WEBP});&quot; data-slide=&quot;cover&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/0c41c900-feae-11e4-93f9-c5c3893c2488#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;2.5&quot; data-delay=&quot;0.5&quot; data-animation=&quot;small2big&quot; style=&quot;width: 461px; height: 342px; left: 0px; top: 0px; transform: translateX(-78px) translateY(54px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(0.5) scaleY(0.5) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(-78px) translateY(54px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(0.5) scaleY(0.5) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 200; opacity: 0; border-width: 0px; border-radius: 0px; -webkit-perspective: 1000;&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;200&amp;quot;,&amp;quot;scaleX&amp;quot;:1,&amp;quot;scaleY&amp;quot;:1,&amp;quot;y&amp;quot;:54,&amp;quot;x&amp;quot;:-78}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/a0681da0-feae-11e4-b50e-27fb5728b610#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;1.5&quot; data-delay=&quot;4&quot; data-animation=&quot;fade&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;201&amp;quot;,&amp;quot;y&amp;quot;:0,&amp;quot;x&amp;quot;:0}&quot; data-shadow=&quot;shine&quot; data-shadowcolor=&quot;gray&quot; style=&quot;width: 321px; height: 481px; left: 0px; top: 0px; transform: translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 201; opacity: 0; border-width: 0px; border-radius: 0px; -webkit-animation: none; box-shadow: gray 0px 0px 10px; -webkit-box-shadow: gray 0px 0px 10px; -webkit-perspective: 1000;&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/12696630-fe9f-11e4-a0bd-d18684ea9dec#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;2&quot; data-delay=&quot;5.5&quot; style=&quot;width: 321px; height: 205px; left: 0px; top: 0px; transform: translateX(0px) translateY(209px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(0px) translateY(209px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 202; opacity: 0; border-width: 0px; border-radius: 0px; -webkit-animation: none; -webkit-perspective: 1000;&quot; data-animation=&quot;fadeFromBottom&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;202&amp;quot;,&amp;quot;y&amp;quot;:134,&amp;quot;x&amp;quot;:0}&quot;&gt;&lt;img src=&quot;http://file2.rabbitpre.com/cc0faf80-fea0-11e4-99c3-e992f08f9c53#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;1.5&quot; data-delay=&quot;5.5&quot; style=&quot;width: 321px; height: 210px; left: 0px; top: 0px; transform: translateX(0px) translateY(137px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(0px) translateY(137px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 203; opacity: 1; border-width: 0px; border-radius: 0px; -webkit-animation: none;&quot; data-animation=&quot;dotEffect&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/f60b2e50-feae-11e4-94cc-3928754512e7#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;1&quot; data-delay=&quot;7&quot; data-animation=&quot;bounceIn&quot; style=&quot;width: 135px; height: 75px; left: 0px; top: 0px; transform: translateX(192px) translateY(188px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(192px) translateY(188px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 204; opacity: 0; border-width: 0px; border-radius: 0px;&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;204&amp;quot;,&amp;quot;scaleX&amp;quot;:1,&amp;quot;scaleY&amp;quot;:1,&amp;quot;y&amp;quot;:188,&amp;quot;x&amp;quot;:192}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/cf7d1310-feaf-11e4-93f9-c5c3893c2488#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;0&quot; data-delay=&quot;7.5&quot; data-animation=&quot;jitter&quot; style=&quot;width: 321px; height: 203px; left: 0px; top: 0px; transform: translateX(-1px) translateY(128px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(-1px) translateY(128px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 205; opacity: 0; border-width: 0px; border-radius: 0px;&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;205&amp;quot;,&amp;quot;scaleX&amp;quot;:1,&amp;quot;scaleY&amp;quot;:1,&amp;quot;y&amp;quot;:128,&amp;quot;x&amp;quot;:-1}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/e26140d0-ff92-11e4-a0bd-d18684ea9dec#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;0&quot; data-delay=&quot;7.5&quot; style=&quot;width: 102px; height: 72px; left: 0px; top: 0px; transform: translateX(108px) translateY(471px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(108px) translateY(471px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 206; opacity: 0; border-width: 0px; border-radius: 0px; -webkit-animation: none; -webkit-perspective: 1000;&quot; data-animation=&quot;fadeFromBottom&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;206&amp;quot;,&amp;quot;y&amp;quot;:396,&amp;quot;x&amp;quot;:108}&quot;&gt;&lt;/section&gt;&lt;section class=&quot;page&quot; data-direction=&quot;vertical&quot; style=&quot;transform: translateX(0px) translateY(0px) translateZ(0px); -webkit-transform: translateX(0px) translateY(0px) translateZ(0px); width: 320px; background-image: url(http://wx.drjou.cc/wap/event/2015/05/sjz/images/bd978500-fe9a-11e4-b474-7115c81648d8#{WEBP});&quot; data-slide=&quot;cover&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/0afe4650-fecb-11e4-93f9-c5c3893c2488#{WEBP}&quot; class=&quot;component image&quot; onclick= &quot;yuehui();&quot; data-duration=&quot;3&quot; data-delay=&quot;5&quot; data-animation=&quot;light&quot; style=&quot;width: 303px; height: 98px; left: 0px; top: 0px; transform: translateX(10px) translateY(368px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(10px) translateY(368px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 202; opacity: 0; border-width: 0px; border-radius: 0px;&quot; data-style-cache=&quot;{&amp;quot;zIndex&amp;quot;:&amp;quot;202&amp;quot;,&amp;quot;y&amp;quot;:368,&amp;quot;x&amp;quot;:10}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/645d4d90-fecb-11e4-b694-a3c5ddd73ffe#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;3&quot; data-delay=&quot;5&quot; style=&quot;width: 304px; height: 98px; left: 0px; top: 0px; transform: translateX(9px) translateY(368px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(9px) translateY(368px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 201; opacity: 0; border-width: 0px; border-radius: 0px; -webkit-animation: none; -webkit-perspective: 1000;&quot; data-animation=&quot;fade&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;201&amp;quot;,&amp;quot;y&amp;quot;:368,&amp;quot;x&amp;quot;:9}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/01206460-ff89-11e4-a0bd-d18684ea9dec#{WEBP}&quot; class=&quot;component image&quot; data-animation=&quot;fromleft&quot; data-duration=&quot;1&quot; data-delay=&quot;0.5&quot; style=&quot;width: 283px; height: 71px; left: 0px; top: 0px; transform: translateX(-196px) translateY(75px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(-196px) translateY(75px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 202; opacity: 0; border-width: 0px; border-radius: 0px; -webkit-animation: none; -webkit-perspective: 1000;&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;202&amp;quot;,&amp;quot;x&amp;quot;:4,&amp;quot;y&amp;quot;:75}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/21c30970-ff89-11e4-94cc-3928754512e7#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;1&quot; data-delay=&quot;1.5&quot; data-animation=&quot;fromleft&quot; style=&quot;width: 284px; height: 72px; left: 0px; top: 0px; transform: translateX(-197px) translateY(123px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(-197px) translateY(123px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 203; opacity: 0; border-width: 0px; border-radius: 0px; -webkit-animation: none; -webkit-perspective: 1000;&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;203&amp;quot;,&amp;quot;x&amp;quot;:3,&amp;quot;y&amp;quot;:123}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/3930cf20-ff89-11e4-9e63-375013b96449#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;1&quot; data-delay=&quot;2.5&quot; data-animation=&quot;fromleft&quot; style=&quot;width: 284px; height: 72px; left: 0px; top: 0px; transform: translateX(-197px) translateY(169px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(-197px) translateY(169px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 204; opacity: 0; border-width: 0px; border-radius: 0px; -webkit-animation: none; -webkit-perspective: 1000;&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;204&amp;quot;,&amp;quot;x&amp;quot;:3,&amp;quot;y&amp;quot;:169}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/4be30890-ff89-11e4-b72a-0bb3acfede4c#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;1&quot; data-delay=&quot;3.5&quot; data-animation=&quot;fromleft&quot; style=&quot;width: 284px; height: 71px; left: 0px; top: 0px; transform: translateX(-197px) translateY(215px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(-197px) translateY(215px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 205; opacity: 0; border-width: 0px; border-radius: 0px; -webkit-animation: none; -webkit-perspective: 1000;&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;205&amp;quot;,&amp;quot;x&amp;quot;:3,&amp;quot;y&amp;quot;:215}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/61b21260-ff89-11e4-a15c-6926aef1d9b8#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;1&quot; data-delay=&quot;4.5&quot; data-animation=&quot;fromright&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;206&amp;quot;,&amp;quot;x&amp;quot;:30,&amp;quot;y&amp;quot;:260}&quot; style=&quot;width: 284px; height: 107px; left: 0px; top: 0px; transform: translateX(230px) translateY(260px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(230px) translateY(260px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 206; opacity: 0; border-width: 0px; border-radius: 0px; -webkit-animation: none; -webkit-perspective: 1000;&quot;&gt;&lt;article class=&quot;component text text-contenteditable&quot; style=&quot;font-family: 黑体; left: 0px; top: 0px; transform: translateX(28px) translateY(452px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(28px) translateY(452px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 207; width: 265px; height: 28px; opacity: 0; line-height: 28px; -webkit-perspective: 1000; -webkit-animation: none;&quot; data-duration=&quot;2&quot; data-delay=&quot;3&quot; data-animation=&quot;fade&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;207&amp;quot;,&amp;quot;y&amp;quot;:452,&amp;quot;x&amp;quot;:28}&quot; contenteditable=&quot;true&quot;&gt;&lt;div style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-family: 黑体;&quot;&gt;&lt;font color=&quot;#334960&quot; size=&quot;2&quot;&gt;面膜及礼品发放以现场海报为准&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;/article&gt;&lt;/section&gt;&lt;section class=&quot;page active&quot; data-direction=&quot;vertical&quot; style=&quot;transform: translateX(0px) translateY(0px) translateZ(0px); -webkit-transform: translateX(0px) translateY(0px) translateZ(0px); width: 320px; background-image: url(http://wx.drjou.cc/wap/event/2015/05/sjz/images/bd978500-fe9a-11e4-b474-7115c81648d8#{WEBP});&quot; data-slide=&quot;cover&quot; data-index=&quot;4&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/ae45a0b0-feb2-11e4-99c3-e992f08f9c53#{WEBP}&quot; onclick=&quot;iAmAtSjz();&quot; class=&quot;component iAmAtSjz image&quot; data-duration=&quot;2&quot; data-delay=&quot;3.5&quot; data-animation=&quot;bounceIn&quot; style=&quot;width: 193px; height: 59px; left: 0px; top: 0px; transform: translateX(67px) translateY(255px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(67px) translateY(255px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 2991; opacity: 1; border-width: 0px; border-radius: 0px; -webkit-animation: bounceIn1 2s backwards;&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;2991&amp;quot;,&amp;quot;scaleX&amp;quot;:1,&amp;quot;scaleY&amp;quot;:1,&amp;quot;y&amp;quot;:255,&amp;quot;x&amp;quot;:67}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/7be716d0-feb7-11e4-97ec-39b76277f0c9#{WEBP}&quot; onclick=&quot;iAmNotAtSjz();&quot; class=&quot;component image&quot; data-duration=&quot;2&quot; data-delay=&quot;3.5&quot; data-animation=&quot;bounceIn&quot; style=&quot;width: 174px; height: 47px; left: 0px; top: 0px; transform: translateX(75px) translateY(302px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(75px) translateY(302px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 2993; opacity: 1; border-width: 0px; border-radius: 0px; -webkit-animation: bounceIn2 2s backwards;&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;2993&amp;quot;,&amp;quot;scaleX&amp;quot;:1,&amp;quot;scaleY&amp;quot;:1,&amp;quot;y&amp;quot;:302,&amp;quot;x&amp;quot;:75}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/5ced2340-feb8-11e4-b72a-0bb3acfede4c#{WEBP}&quot;  class=&quot;component image&quot; data-duration=&quot;0&quot; data-delay=&quot;3.5&quot; style=&quot;width: 195px; height: 82px; left: 0px; top: 0px; transform: translateX(67px) translateY(263px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(67px) translateY(263px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 202; opacity: 1; border-width: 0px; border-radius: 0px; -webkit-animation: none;&quot; data-animation=&quot;fireWorksEffect&quot; data-style-cache=&quot;&quot;&gt;&lt;article class=&quot;component text text-contenteditable&quot; onclick=&quot;nexActivity();&quot; style=&quot;font-family: 黑体; left: 0px; top: 0px; transform: translateX(18px) translateY(445px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(18px) translateY(445px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 205; width: 295px; height: 28px; opacity: 1; line-height: 20px; -webkit-perspective: 1000; -webkit-animation: none;&quot; data-duration=&quot;1&quot; data-delay=&quot;4.5&quot; data-animation=&quot;fadeFromBottom&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;205&amp;quot;,&amp;quot;y&amp;quot;:445,&amp;quot;x&amp;quot;:18}&quot; contenteditable=&quot;true&quot;&gt;&lt;div style=&quot;text-align: center; transform: translateX(0px) translateY(0px); -webkit-transform: translateX(0px) translateY(0px);&quot;&gt;&lt;font color=&quot;#b60927&quot;&gt;&lt;span style=&quot;font-family: 'Microsoft YaHei';&quot;&gt;&lt;font size=&quot;4&quot;&gt;&lt;b&gt;下一站活动，&lt;/b&gt;&lt;/font&gt;&lt;/span&gt;&lt;b style=&quot;font-family: 'Microsoft YaHei'; font-size: large;&quot;&gt;就到你身边！&lt;/b&gt;&lt;/font&gt;&lt;/div&gt;&lt;/article&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/13c090f0-fecf-11e4-99c3-e992f08f9c53#{WEBP}&quot; onclick=&quot;attention();&quot; class=&quot;component image&quot; data-animation=&quot;light&quot; data-duration=&quot;3&quot; data-delay=&quot;4&quot; style=&quot;width: 240px; height: 77px; left: 0px; top: 0px; transform: translateX(37px) translateY(353px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(37px) translateY(353px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 207; opacity: 0; border-width: 0px; border-radius: 0px; -webkit-animation: light 3s ease-in-out infinite both;&quot; data-style-cache=&quot;{&amp;quot;zIndex&amp;quot;:&amp;quot;207&amp;quot;,&amp;quot;y&amp;quot;:353,&amp;quot;x&amp;quot;:37}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/3c4ea570-fecf-11e4-99c3-e992f08f9c53#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;3&quot; data-delay=&quot;4&quot; style=&quot;width: 239px; height: 77px; left: 0px; top: 0px; transform: translateX(38px) translateY(353px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(38px) translateY(353px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 206; opacity: 1; border-width: 0px; border-radius: 0px; -webkit-animation: none; -webkit-perspective: 1000;&quot; data-animation=&quot;fade&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;206&amp;quot;,&amp;quot;y&amp;quot;:353,&amp;quot;x&amp;quot;:38}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/c78b2700-ff8b-11e4-af34-853711bac97c#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;3&quot; data-delay=&quot;0.2&quot; style=&quot;width: 302px; height: 196px; left: 0px; top: 0px; transform: translateX(9px) translateY(69px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(9px) translateY(69px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 206; opacity: 1; border-width: 0px; border-radius: 0px; -webkit-animation: none; -webkit-perspective: 1000;&quot; data-animation=&quot;frombottom&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;206&amp;quot;,&amp;quot;y&amp;quot;:69,&amp;quot;x&amp;quot;:9}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/e8f9f5b0-ff8b-11e4-a394-232ef0fd36c7#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;0&quot; data-delay=&quot;3.2&quot; style=&quot;width: 225px; height: 43px; left: 0px; top: 0px; transform: translateX(28px) translateY(98px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(28px) translateY(98px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 207; opacity: 1; border-width: 0px; border-radius: 0px; -webkit-perspective: 1000;&quot; data-animation=&quot;fade&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;207&amp;quot;,&amp;quot;y&amp;quot;:98,&amp;quot;x&amp;quot;:28}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/f53cff70-ff8b-11e4-94cc-3928754512e7#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;1&quot; data-delay=&quot;3.7&quot; style=&quot;width: 271px; height: 65px; left: 0px; top: 0px; transform: translateX(27px) translateY(153px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(27px) translateY(153px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 208; opacity: 1; border-width: 0px; border-radius: 0px; -webkit-perspective: 1000;&quot; data-animation=&quot;fade&quot; data-style-cache=&quot;{&amp;quot;opacity&amp;quot;:&amp;quot;1&amp;quot;,&amp;quot;zIndex&amp;quot;:&amp;quot;208&amp;quot;,&amp;quot;y&amp;quot;:153,&amp;quot;x&amp;quot;:27}&quot;&gt;&lt;img src=&quot;http://wx.drjou.cc/wap/event/2015/05/sjz/images/55e417f0-ff91-11e4-b72a-0bb3acfede4c#{WEBP}&quot; class=&quot;component image&quot; data-duration=&quot;3&quot; data-delay=&quot;3.5&quot; data-animation=&quot;light&quot; style=&quot;width: 38px; height: 63px; left: 0px; top: 0px; transform: translateX(40px) translateY(277px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); -webkit-transform: translateX(40px) translateY(277px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scaleX(1) scaleY(1) scaleZ(1) skewX(0deg) skewY(0deg); z-index: 209; opacity: 0; border-width: 0px; border-radius: 0px; -webkit-animation: light 3s ease-in-out infinite both;&quot; data-style-cache=&quot;{&amp;quot;zIndex&amp;quot;:&amp;quot;209&amp;quot;,&amp;quot;y&amp;quot;:277,&amp;quot;x&amp;quot;:40}&quot;&gt;&lt;/section&gt;</textarea>
+<div data-vip="0" data-ispublish="true" class="wrapper">
+  <div class="pages"></div>
+</div>
+
+
+<script src="js/app.min.js"></script>
+<script type="text/javascript">
+	function attention(){//关注森田药妆JS代码在此写
+		alert('关注森田');
+		//window.location = 'http://www.baidu.com';
+	}
+	function iAmNotAtSjz(){//我不在石家庄代码在此写
+		alert("我不在石家庄");
+		//window.location = 'http://www.baidu.com';
+	}
+	function iAmAtSjz(){//我在石家庄代码在此写
+		alert("我在石家庄");
+		//window.location = 'http://www.baidu.com';
+	}
+	function nexActivity(){//下一个活动在此跳转
+		alert("下一个活动");
+		//window.location = 'http://www.baidu.com';
+	}
+	function yuehui(){//约起来，走一个
+		alert("约起来，走一个");
+		//window.location = 'http://www.baidu.com';
+	}
+</script>
+
+</body>
+</html>
