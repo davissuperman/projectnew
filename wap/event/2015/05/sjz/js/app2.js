@@ -379,6 +379,7 @@ function() { !
                     name: "iphone" === d || "ipad" === d ? "ios": d,
                     version: e[2].replace("_", ".")
                 };
+				
                 break
             }
             return b
