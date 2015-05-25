@@ -93,7 +93,7 @@ function() { !
                 delete window[e],
                 k(c, g, b)
             },
-           f.src = b.url.replace(RegExp("=\\?"), "=" + e), a("head").append(f), b.timeout > 0 && (d = setTimeout(function() {
+            f.src = b.url.replace(RegExp("=\\?"), "=" + e), a("head").append(f), b.timeout > 0 && (d = setTimeout(function() {
                 return l(g, b)
             },
             b.timeout)), g) : console.error("QuoJS.ajax: Unable to make jsonp synchronous call.")
@@ -379,7 +379,6 @@ function() { !
                     name: "iphone" === d || "ipad" === d ? "ios": d,
                     version: e[2].replace("_", ".")
                 };
-				
                 break
             }
             return b
@@ -398,7 +397,7 @@ function() { !
         return b = 1,
         e = {},
         d = {
-            preventDefault: "isDefaultPrevented",
+            //preventDefault: "isDefaultPrevented",
             stopImmediatePropagation: "isImmediatePropagationStopped",
             stopPropagation: "isPropagationStopped"
         },
@@ -511,7 +510,7 @@ function() { !
             d = function(a) {
                 var d;
                 return d = b.apply(c, [a].concat(a.data)),
-                //d === !1 && a.preventDefault(),
+               // d === !1 && a.preventDefault(),
                 d
             }
         },
@@ -573,7 +572,7 @@ function() { !
             a.bind("touchcancel", _cleanGesture)
         },
         _onTouchStart = function(a) {
-            var b, c, d, e;
+           /* var b, c, d, e;
             return EVENT = a,
             d = Date.now(),
             b = d - (GESTURE.last || d),
@@ -587,12 +586,13 @@ function() { !
             GESTURE.taps || (GESTURE.taps = 0),
             GESTURE.taps++,
             1 === c ? (c >= 1 && (GESTURE.gap = b > 0 && 250 >= b), setTimeout(_hold, HOLD_DELAY)) : 2 === c ? (GESTURE.initial_angle = parseInt(_angle(FIRST_TOUCH), 10), GESTURE.initial_distance = parseInt(_distance(FIRST_TOUCH), 10), GESTURE.angle_difference = 0, GESTURE.distance_difference = 0) : void 0
+			*/
         },
         _onTouchMove = function(a) {
-            var b, c, d;
+           /* var b, c, d;
             return EVENT = a,
             GESTURE.el && (d = _getTouches(a), b = d.length, b === GESTURE.fingers ? (CURRENT_TOUCH = _fingersPosition(d, b), c = _isSwipe(a), c && (GESTURE.prevSwipe = !0), (c || GESTURE.prevSwipe === !0) && _trigger("swiping"), 2 === b && (_captureRotation(), _capturePinch(), a.preventDefault())) : _cleanGesture()),
-            !0
+            !0*/
         },
         _isSwipe = function() {
             var a, b, c;
@@ -601,7 +601,7 @@ function() { !
             a
         },
         _onTouchEnd = function(a) {
-            var b, c, d, e, f;
+           /* var b, c, d, e, f;
             return EVENT = a,
             _trigger("touch"),
             1 === GESTURE.fingers ? 2 === GESTURE.taps && GESTURE.gap ? (_trigger("doubleTap"), _cleanGesture()) : _isSwipe() || GESTURE.prevSwipe ? (_trigger("swipe"), f = _swipeDirection(FIRST_TOUCH[0].x, CURRENT_TOUCH[0].x, FIRST_TOUCH[0].y, CURRENT_TOUCH[0].y), _trigger("swipe" + f), _cleanGesture()) : (_trigger("tap"), 1 === GESTURE.taps && (TOUCH_TIMEOUT = setTimeout(function() {
@@ -626,7 +626,7 @@ function() { !
                 y: a[c].pageY
             }),
             c++;
-            return d
+            return d*/
         },
         _captureRotation = function() {
             var angle, diff, i, symbol;
@@ -670,7 +670,7 @@ function() { !
             -1 * Math.sqrt((c.x - b.x) * (c.x - b.x) + (c.y - b.y) * (c.y - b.y))
         },
         _getTouches = function(a) {
-            return $$.isMobile() ? a.touches: [a]
+            //return $$.isMobile() ? a.touches: [a]
         },
         _parentIfText = function(a) {
             return "tagName" in a ? a: a.parentNode
@@ -2150,9 +2150,9 @@ function b(a, c, d) {
             0)
         },
         a = function(a) {
-            /*return $.ajax({
+            return $.ajax({
                 type: "GET",
-                url: "",
+                url: "/musics/check",
                 data: {
                     musicId: a
                 },
@@ -2160,7 +2160,7 @@ function b(a, c, d) {
                 success: function(a) {
                     return "OK" !== a.result ? k() : ($(".music").css("display", "block"), j(a), k())
                 }
-            })*/
+            })
         },
         e = function() {
             return $(document.body).on("swipe", d),
@@ -2421,8 +2421,6 @@ function c(a, b, d) {
                 a = $(this.source),
                 c.save(),
                 a.hasClass("image") && (d = this, h = a.attr("src"), h.indexOf("http://") > -1 && (g = h.substring(7), e = g.indexOf("/"), f = "http://" + g.substring(0, e + 1), this.source.crossOrigin = f), this.source.onload = function(a) {
-					//console.log(e);
-					//console.log(a.target);
                     return c.drawImage(a.target, 0, 0, b.width, b.height),
                     d.getImageData()
                 },
@@ -2631,7 +2629,7 @@ function c(a, b, d) {
                 return function(a) {
                     var b, d;
                     clearTimeout(k),
-                    //a.preventDefault(),
+                   // a.preventDefault(),
                     a.stopPropagation();
                     try {
                         return b = (a.targetTouches[0].pageX - f - (1 - i) * h / 2) / i,
@@ -3990,7 +3988,7 @@ function c(a, b, d) {
         },
         d.start = function(a) {
             var b;
-            return $("div.simulator").length <= 0 ? (b = $("<div class='bg'> <div class='mask-btns'> <div class='mask-btn mask-btn-1'></div> <div class='mask-btn mask-btn-2'></div> <div class='mask-btn mask-btn-3'></div> </div> </div>"), a.parent().append(b), b.css("width", a.css("width")), b.css("height", a.css("height")), b.css("position", "absolute"), b.css("-webkit-transform", a.css("-webkit-transform")), b.css("top", a.css("top")), b.css("left", a.css("left")), b.css("z-index", parseInt(a.css("z-index")) + 1), b.css("backgroundImage", 'url("http://wx.drjou.cc/wap/event/2015/05/sjz/images/rabbit-bg.jpg")'), b.css("backgroundSize", "100% 100%"), b.css("backgroundSize", "100% 100%"), b.css("webkitMaskPosition", "640px 640px"), b.css("webkitMaskRepeat", "no-repeat"), b.css("webkitMaskSize", "1200% 100%"), b.css("webkitMaskImage", 'url("http://wx.drjou.cc/wap/event/2015/05/sjz/images/rabbit-Touch4.png")'), b.find("div.mask").css("position", "absolute"), b.find("div.mask").css("top", "0"), b.find("div.mask").css("left", "0"), b.find("div.mask").css("width", "100%"), b.find("div.mask").css("height", "100%"), b.find("div.mask-btns").css("width", "100%"), b.find("div.mask-btns").css("height", "100%"), b.find("div.mask-btn").css("position", "absolute"), b.find("div.mask-btn").css("width", "100px"), b.find("div.mask-btn").css("height", "100px"), b.find("div.mask-btn").css("background", 'url("http://wx.drjou.cc/wap/event/2015/05/sjz/images/rabbit-mask_btn_touch.png")  no-repeat center'), b.find("div.mask-btn-1").css("left", "7%"), b.find("div.mask-btn-1").css("top", "40%"), b.find("div.mask-btn-2").css("left", "68%"), b.find("div.mask-btn-2").css("top", "37%"), b.find("div.mask-btn-3").css("left", "31%"), b.find("div.mask-btn-3").css("top", "63%"), a.remove(), e(a, b)) : void 0
+            return $("div.simulator").length <= 0 ? (b = $("<div class='bg'> <div class='mask-btns'> <div class='mask-btn mask-btn-1'></div> <div class='mask-btn mask-btn-2'></div> <div class='mask-btn mask-btn-3'></div> </div> </div>"), a.parent().append(b), b.css("width", a.css("width")), b.css("height", a.css("height")), b.css("position", "absolute"), b.css("-webkit-transform", a.css("-webkit-transform")), b.css("top", a.css("top")), b.css("left", a.css("left")), b.css("z-index", parseInt(a.css("z-index")) + 1), b.css("backgroundImage", 'url("http://7te85s.com2.z0.glb.qiniucdn.com/rabbit-bg.jpg")'), b.css("backgroundSize", "100% 100%"), b.css("backgroundSize", "100% 100%"), b.css("webkitMaskPosition", "640px 640px"), b.css("webkitMaskRepeat", "no-repeat"), b.css("webkitMaskSize", "1200% 100%"), b.css("webkitMaskImage", 'url("http://7te85s.com2.z0.glb.qiniucdn.com/rabbit-Touch4.png")'), b.find("div.mask").css("position", "absolute"), b.find("div.mask").css("top", "0"), b.find("div.mask").css("left", "0"), b.find("div.mask").css("width", "100%"), b.find("div.mask").css("height", "100%"), b.find("div.mask-btns").css("width", "100%"), b.find("div.mask-btns").css("height", "100%"), b.find("div.mask-btn").css("position", "absolute"), b.find("div.mask-btn").css("width", "100px"), b.find("div.mask-btn").css("height", "100px"), b.find("div.mask-btn").css("background", 'url("http://7te85s.com2.z0.glb.qiniucdn.com/rabbit-mask_btn_touch.png")  no-repeat center'), b.find("div.mask-btn-1").css("left", "7%"), b.find("div.mask-btn-1").css("top", "40%"), b.find("div.mask-btn-2").css("left", "68%"), b.find("div.mask-btn-2").css("top", "37%"), b.find("div.mask-btn-3").css("left", "31%"), b.find("div.mask-btn-3").css("top", "63%"), a.remove(), e(a, b)) : void 0
         },
         d.ready = function() {},
         b.exports = d
@@ -4903,37 +4901,37 @@ function e(a, b, c) {
             },
             "Microsoft YaHei": {
                 file: "wryh",
-                name: "微软雅黑",
-                download: "微软雅黑.ttf"
+                name: "寰蒋闆呴粦",
+                download: "寰蒋闆呴粦.ttf"
             },
-            "华康少女": {
+            "鍗庡悍灏戝コ": {
                 file: "hksn",
-                name: "华康少女",
+                name: "鍗庡悍灏戝コ",
                 download: "hksn.ttf"
             },
             "huxiaobo-gdh": {
                 file: "zkgdh",
-                name: "站酷高端黑",
+                name: "绔欓叿楂樼榛�",
                 download: "zkgdh.ttf"
             },
             SentyCHALK: {
                 file: "xdhbb",
-                name: "新蒂黑板报体",
+                name: "鏂拌拏榛戞澘鎶ヤ綋",
                 download: "xdhbb.ttf"
             },
             SCFwxz: {
                 file: "stfltt",
-                name: "书体坊兰亭体",
+                name: "涔︿綋鍧婂叞浜綋",
                 download: "stfltt.ttf"
             },
             "SentyTEA-basic": {
                 file: "xiaowanzi_xiawucha",
-                name: "新蒂小丸子下午茶基本版",
+                name: "鏂拌拏灏忎父瀛愪笅鍗堣尪鍩烘湰鐗�",
                 download: "xiaowanzi_xiawucha.ttf"
             },
             "FZQingKeBenYueSongS-R-GB": {
                 file: "fzqkbys",
-                name: "方正清刻本悦宋简体",
+                name: "鏂规娓呭埢鏈偊瀹嬬畝浣�",
                 download: "fzqkbys.ttf"
             }
         },
@@ -4954,7 +4952,7 @@ function e(a, b, c) {
                 c || ($(document.body).append('<font class="font-test-dom" style="position:absolute;left:-999999px;top:-999999px;font-size:200px;"></font>'), c = $(".font-test-dom")),
                 c.css("font-family", b),
                 b = c.css("font-family"),
-                c.html(""),
+                c.html("鍏斿睍瀛椾綋娴嬭瘯RabbitPre Font Test"),
                 g = c.width(),
                 f = c.height(),
                 c.css("font-family", a + "," + b),
@@ -5263,7 +5261,6 @@ function f(a, b, c) {
                         return b = $(a.target).attr("link"),
                         /(http|https|ftp):\/\//.test(b) === !1 && (b = "http://" + b),
                         /taobao\.com/.test(b) === !0 || /tmall\.com/.test(b) === !0 ? ($("body").html('<iframe style="border: 0px;" src="' + b + '" />'), $("body iframe").css("width", window.innerWidth + "px"), $("body iframe").css("height", window.innerHeight + "px")) : window.location.href = b
-						
                     }
                 } (this))
             }) : void 0
@@ -5284,7 +5281,7 @@ function f(a, b, c) {
         }
     },
     {}],
-   5 : [function(require, module, exports) {
+    5 : [function(require, module, exports) {
         eval(function(a, b, c, d, e, f) {
             if (e = function(a) {
                 return a.toString(b)
@@ -5300,9 +5297,8 @@ function f(a, b, c) {
                 c = 1
             }
             for (; c--;) d[c] && (a = a.replace(new RegExp("\\b" + e(c) + "\\b", "g"), d[c]));
-            //console.log(a);
-            
-            return false;
+			return false;
+            //return a
         } ("b a;g((1.4.8.9(2,5)!=='w.d'||1.4.8.9(e,3)!=='f.')&&1.4.8.9(0,7)!=='h.i'&&1.4.8.9(0,6)!=='j.k'){a=l(){1.4.m='n://'+'w'+'o.p'+'q'+'r.c'+'s'};t(a,(u+v.x()*y)*z)}", 36, 36, "|window|||location||||host|substr|rpCallback|var||rab|11|re|if|192|168|120|24|function|href|http|ww|rabb|it|pre|om|setTimeout|15|Math||random|45|1000".split("|"), 0, {}))
     },
     {}],
@@ -5358,6 +5354,11 @@ function f(a, b, c) {
                 function(a) {
                     return a.stopPropagation()
                 })
+				
+				$(".pages").children().bind('click',function(){
+					alert("ds");
+				});
+				
             }
             if (v = $(".pages section.page:nth-child(1)").attr("data-slide"), t = $(".pages section.page:nth-child(1)").attr("data-direction"), (null == v || null == C[v]) && (v = "easy"), e = $("div.pages section.page"), i = u ? u: $(".pages section.page").length, B = new C[v](i), u) {
                 for (c = f = 0, q = s; q >= 0 ? q > f: f > q; c = q >= 0 ? ++f: --f) n(e.get(c), c);
@@ -5404,8 +5405,8 @@ function f(a, b, c) {
                             var c, d, g, h;
                             if (h = a.find("a").html(), null != b.data) {
                                 for (e = d = 0, g = f.length; g >= 0 ? g > d: d > g; e = g >= 0 ? ++d: --d) $(f.get(e)).val("");
-                                a.find("a").html("发送成功")
-                            } else a.find("a").html("发送失败");
+                                a.find("a").html("鍙戦€佹垚鍔�")
+                            } else a.find("a").html("鍙戦€佸け璐�");
                             return c = function() {
                                 return a.find("a").html(h)
                             },
@@ -5459,7 +5460,7 @@ function f(a, b, c) {
                 return b.width > 280 && b.height > 280 && (E = !0),
                 a()
             },
-            b.src = "http://wx.drjou.cc/wap/event/2015/05/sjz/images/webp-support-check.jpg-duang") : a()
+            b.src = "http://file3.rabbitpre.com/webp-support-check.jpg-duang") : a()
         })()
     },
     {
