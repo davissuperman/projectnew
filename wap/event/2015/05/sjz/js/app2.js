@@ -514,12 +514,20 @@ function() { !
 				
 				var ua = navigator.userAgent,
 				isIOS = ua.match(/iPhone|iPad|iPod/i) ? true : false,
+				isIpad = ua.match(/iPad/i) ? true : false,
 				isAndroid = ua.match(/Android/i) ? true : false;
 				 
 				 if(isIOS) {//IOS
-					return d = b.apply(c, [a].concat(a.data)),
-					d === !1,
-					d
+				 	if(isIpad){
+						return d = b.apply(c, [a].concat(a.data)),
+						d === !1 && a.preventDefault(),
+						d
+					}else{
+						return d = b.apply(c, [a].concat(a.data)),
+						d === !1,
+						d
+					}
+					
 				 } else if(isAndroid) {//android
 					return d = b.apply(c, [a].concat(a.data)),
 					d === !1 && a.preventDefault(),
