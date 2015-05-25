@@ -510,8 +510,9 @@ function() { !
             return b = a || b,
             d = function(a) {
                 var d;
+				
                 return d = b.apply(c, [a].concat(a.data)),
-                //d === !1 && a.preventDefault(),
+                d === !1 ,
                 d
             }
         },
