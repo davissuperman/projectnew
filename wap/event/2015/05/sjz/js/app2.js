@@ -2612,7 +2612,7 @@ function c(a, b, d) {
             n = function() {
                 return function(a) {
                     clearTimeout(k),
-                    //a.preventDefault(),
+                    a.preventDefault(),
                     a.stopPropagation();
                     try {
                         return o = (a.targetTouches[0].pageX - f - (1 - i) * h / 2) / i,
@@ -2631,7 +2631,7 @@ function c(a, b, d) {
                 return function(a) {
                     var b, d;
                     clearTimeout(k),
-                    //a.preventDefault(),
+                    a.preventDefault(),
                     a.stopPropagation();
                     try {
                         return b = (a.targetTouches[0].pageX - f - (1 - i) * h / 2) / i,
@@ -2652,7 +2652,7 @@ function c(a, b, d) {
                 return function(a) {
                     var d;
                     return b.off("touchmove", m),
-                    //a.preventDefault(),
+                    a.preventDefault(),
                     a.stopPropagation(),
                     d = function() {
                         var a, d, e, f, g, h, i, j, k, m, o;
