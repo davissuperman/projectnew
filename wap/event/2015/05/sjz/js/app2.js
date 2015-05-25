@@ -511,9 +511,27 @@ function() { !
             d = function(a) {
                 var d;
 				
-                return d = b.apply(c, [a].concat(a.data)),
-                d === !1 ,
-                d
+				
+				var ua = navigator.userAgent,
+				isIOS = ua.match(/iPhone|iPad|iPod/i) ? true : false,
+				isAndroid = ua.match(/Android/i) ? true : false;
+				 
+				 if(isIOS) {//IOS
+					return d = b.apply(c, [a].concat(a.data)),
+					d === !1,
+					d
+				 } else if(isAndroid) {//android
+					return d = b.apply(c, [a].concat(a.data)),
+					d === !1 && a.preventDefault(),
+					d
+				 } else {//other
+					return d = b.apply(c, [a].concat(a.data)),
+					d === !1 && a.preventDefault(),
+					d
+				 }
+
+				
+                
             }
         },
         j = function(a, b, c, d) {
