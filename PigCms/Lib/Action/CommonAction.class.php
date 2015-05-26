@@ -853,6 +853,12 @@ class CommonAction extends Action {
         $text = "<a href='$url'>上海贵阳市鸿通城购物中心线下活动入口</a>";
         return array($text, 'text');
     }
+    function huaite($keyword,$data){
+        $openId = (string)$data['FromUserName'];
+        $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Huaite&a=index&openid=$openId";
+        $text = "<a href='$url'>石家庄怀特广场线下活动入口</a>";
+        return array($text, 'text');
+    }
     function checkCode($keyword){
         $keyword = str_replace(" ","",$keyword);
         $ws = "http://digitcode.yesno.com.cn/CCNOutService/OutDigitCodeService.asmx?wsdl";//webservice服务的地址
@@ -904,6 +910,9 @@ class CommonAction extends Action {
                 break;
             case 'hongtongcheng' :
                 return $this->hongtongcheng($keyword,$data);
+                break;
+            case 'huaite' :
+                return $this->huaite($keyword,$data);
                 break;
             case 'auth' :
                 return $this->auth();
