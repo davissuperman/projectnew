@@ -850,7 +850,7 @@ class CommonAction extends Action {
     function hongtongcheng($keyword,$data){
         $openId = (string)$data['FromUserName'];
         $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Hongtongcheng&a=index&openid=$openId";
-        $text = "<a href='$url'>上海新国际博览中心线下活动入口</a>";
+        $text = "<a href='$url'>上海贵阳市鸿通城购物中心线下活动入口</a>";
         return array($text, 'text');
     }
     function checkCode($keyword){
