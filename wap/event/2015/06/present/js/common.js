@@ -46,6 +46,7 @@ function startGame(){
 				$face_hover.hide();
 				setTimeout ("$('#face-hover').show();",500);
 			});
+		//}else{
 		//}
 	//});
 }

@@ -78,7 +78,7 @@ input,textarea,select,button{font-size:1em;}
 .c7{color:#500047;}
 
 /*form*/
-.input-text{ height:0.6rem;border:1px solid #ccc;  background:#fff; width:100%;}
+.input-text{ height:0.6rem;border:1px solid #ccc;  background:#fff; width:100%;padding:0;}
 
 
 /*弹出层*/
