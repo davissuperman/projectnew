@@ -30,25 +30,23 @@ function initGame(){
 
 function startGame(){
 	var $mm_box = $("#mm-box"),$animation = $mm_box.find(".animation"),$face_hover = $("#face-hover"),$time = $("#time");
-	//$mm_box.bind('click',function(){
-		if(!$mm_box.hasClass("dis")){
-			$mm_box.addClass("dis");
-			var cd = new countdown($time,10);
-			cd.doTiming();
-		}
-		//if(!$mm_box.hasClass("gameover")){
-			numbers++;
-			$animation.show();
-			var top = 2.45+"rem",height = 0.5 + 'rem';
-			$animation.animate({top:'-'+top,height:height}, 'top', '', function(){
-				$animation.hide();
-				$animation.css({"top":"0.55rem","height":"2.5rem"});
-				$face_hover.hide();
-				setTimeout ("$('#face-hover').show();",500);
-			});
-		//}else{
-		//}
-	//});
+	if(!$mm_box.hasClass("dis")){
+		$mm_box.addClass("dis");
+		var cd = new countdown($time,10);
+		cd.doTiming();
+	}
+	//if(!$mm_box.hasClass("gameover")){
+		numbers++;
+		$animation.show();
+		var top = 2.45+"rem",height = 0.5 + 'rem';
+		$animation.animate({top:'-'+top,height:height}, 'top', '', function(){
+			$animation.hide();
+			$animation.css({"top":"0.55rem","height":"2.5rem"});
+			$face_hover.hide();
+			setTimeout ("$('#face-hover').show();",500);
+		});
+	//}else{
+	//}
 }
 $(document).ready(function(e) {
 	var contentList= $("#mm-box");
