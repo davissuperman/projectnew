@@ -88,7 +88,6 @@ function endTouch() {
     if (endY && endY !== startY && result <= -25){
 		startGame();
     }else if(endY && endY !== startY && result >=25){
-		alert('end');
     }
 }
 function showMmNumer(){
