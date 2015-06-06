@@ -36,7 +36,7 @@ function startGame(){
 			var cd = new countdown($time,10);
 			cd.doTiming();
 		}
-		if(!$mm_box.hasClass("gameover")){
+		//if(!$mm_box.hasClass("gameover")){
 			numbers++;
 			$animation.show();
 			var top = 2.45+"rem",height = 0.5 + 'rem';
@@ -46,7 +46,7 @@ function startGame(){
 				$face_hover.hide();
 				setTimeout ("$('#face-hover').show();",500);
 			});
-		}
+		//}
 	//});
 }
 $(document).ready(function(e) {
