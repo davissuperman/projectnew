@@ -2,12 +2,7 @@
 
 class CountmaskAction extends SjzAction {
 
-    public function index() {
-        $agent = $_SERVER['HTTP_USER_AGENT'];
-//        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
-//            echo '此功能只能在微信浏览器中使用';
-//            exit;
-//        }
+    public function getDiymenSet(){
         $gid = 1;
         $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
         $accessToken = $apidata['access_token'];
@@ -34,28 +29,31 @@ class CountmaskAction extends SjzAction {
                 M('Diymen_set')->save($fdata);
             }
         }
+        $appId = $apidata['appid'];
+        return array($ticket,$appId,$gid);
+    }
+    public function index() {
+        $agent = $_SERVER['HTTP_USER_AGENT'];
+//        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
+//            echo '此功能只能在微信浏览器中使用';
+//            exit;
+//        }
+        list($ticket,$appId,$gid) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
         $timestamp = time();
-//        $timestamp = '1414587457';
-//        $ticket = 'sM4AOVdWfPE4DxkXGEs8VMCPGGVi4C3VM0P37wVUCFvkVAy_90u5h9nbSlYy3-Sl-HhTdfl2fzFy1AOcHKP7qg';
-//        $url = "http://". $this->_server('HTTP_HOST');
         $url = $this->get_url();;
-//        $url = 'http://mp.weixin.qq.com';
         $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
-
         $signature = sha1($str);
-        $this->assign("appid",$apidata['appid']);
+        $this->assign("appid",$appId);
         $this->assign("timestamp",$timestamp);
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
         $this->assign("url",$url);
-
         $this->assign('gid', $gid);
         $titleArr = $this->titleInWeixin;
 
-
-        $this->assign('title','shu mian mo');
-        $this->assign('bonusdesc','shu mian mo');
+        $this->assign('title','森田药妆数面膜');
+        $this->assign('bonusdesc','森田药妆数面膜');
         $this->assign("imageUrl","http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/sjz/images/logo1.jpg');
         $this->assign("shareimageurl","http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/sjz/images/logo1.jpg');
 
