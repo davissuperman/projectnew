@@ -72,4 +72,7 @@ class CountmaskAction extends SjzAction {
         $this->assign('number',100);
         $this->display();
     }
+    public function rank(){
+        $this->display();
+    }
 }
