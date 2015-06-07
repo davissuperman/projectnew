@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script src="js/zepto.min.js" type="text/javascript"></script>
+<script src="js/common.js" type="text/javascript"></script>
+<title>森田药妆数面膜</title>
+</head>
+<body class="bg02">
+	<div class="logo"></div>
+	<div class="score-box">
+    	<div class="title">游戏得分</div>
+        <form id="myform">
+            <ul>
+                <li class="clrfix">
+                    <div class="des">您当前共数<span class="num" id="mmNumber"></span>张面膜，还有更多机会增加分数，请登记您的手机号码，以查询排名及中奖信息
+                    	
+                    </div>
+                </li>
+                <li class="clrfix">
+                    <input type="tel" class="input-text" placeholder="请输入您的手机号码" maxlength="11" id="phone"/>         
+                </li>
+                <li class="clrfix ta-c">
+                    <span class="btn-submit" id="btn-submit" onClick="submitMsg();">提交</span>       
+                </li>
+            </ul>
+        </form>
+    </div>
+    <script type="text/javascript">
+    	function submitMsg(){
+			var $phone = $("#phone"),phone = $.trim($phone.val()),isMobile = checkPhone(phone);
+			
+			if(phone == ''){
+				mnAlert("请输入您的手机号码！");
+				return false;
+			}else if(!isMobile){
+				mnAlert("请输入正确的手机号码！");
+				return false;
+			}else{
+				window.location.href = 'share.html';
+				//$("#myform").submit();
+			}
+		}
+    </script>
+</body>
+</html>

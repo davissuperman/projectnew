@@ -62,4 +62,10 @@ class CountmaskAction extends SjzAction {
         $this->display();
     }
 
+    public function game(){
+        $this->display();
+    }
+    public function rule(){
+        $this->display();
+    }
 }
