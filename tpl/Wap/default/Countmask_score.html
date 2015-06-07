@@ -116,33 +116,42 @@
     });
 </script>
 </head>
-<body  class="bg01">
+<body  class="bg02">
 
-<div class="game-box">
-    <div class="clrfix">
-        <div class="time-box">时间：<span id="time">10.0</span>S</div>
-        <div class="num-box">面膜：<span>7500</span>片</div>
-    </div>
-    <div class="face"></div>
-    <div class="face-hover" id="face-hover"></div>
-    <div class="mm-box" id="mm-box">
-        <div class="mm mm01"></div>
-        <div class="mm mm02"></div>
-        <div class="mm mm03"></div>
-        <div class="mm mm04"></div>
-        <div class="arrow"></div>
-        <div class="shou"></div>
-        <div class="txt01"></div>
-        <div class="txt02"></div>
-        <div class="mm animation"></div>
-    </div>
+<div class="logo"></div>
+<div class="score-box">
+    <div class="title">游戏得分</div>
+    <form id="myform">
+        <ul>
+            <li class="clrfix">
+                <div class="des">您当前共数<span class="num" id="mmNumber"></span>张面膜，还有更多机会增加分数，请登记您的手机号码，以查询排名及中奖信息
+
+                </div>
+            </li>
+            <li class="clrfix">
+                <input type="tel" class="input-text" placeholder="请输入您的手机号码" maxlength="11" id="phone"/>
+            </li>
+            <li class="clrfix ta-c">
+                <span class="btn-submit" id="btn-submit" onClick="submitMsg();">提交</span>
+            </li>
+        </ul>
+    </form>
 </div>
-<script>
-    function gameover(){//游戏结束之后的回调方法,numbers是数面膜的数量
-        //mnAlert('已数面膜' + numbers);
-        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Countmask&a=score?number=' + numbers;
-    }
+<script type="text/javascript">
+    function submitMsg(){
+        var $phone = $("#phone"),phone = $.trim($phone.val()),isMobile = checkPhone(phone);
 
+        if(phone == ''){
+            mnAlert("请输入您的手机号码！");
+            return false;
+        }else if(!isMobile){
+            mnAlert("请输入正确的手机号码！");
+            return false;
+        }else{
+            window.location.href = 'share.html';
+            //$("#myform").submit();
+        }
+    }
 </script>
 </body>
 </html>

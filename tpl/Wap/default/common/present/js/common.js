@@ -10,10 +10,6 @@ $(document).ready(function(e) {
 		cd.going();
 	}
 });
-function gameover(){//游戏结束之后的回调方法,numbers是数面膜的数量
-	//mnAlert('已数面膜' + numbers);
-	window.location.href = 'score.html?number=' + numbers;
-}
 
 
 function initGame(){

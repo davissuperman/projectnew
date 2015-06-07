@@ -68,4 +68,8 @@ class CountmaskAction extends SjzAction {
     public function rule(){
         $this->display();
     }
+    public function score(){
+        $this->assign('number',100);
+        $this->display();
+    }
 }
