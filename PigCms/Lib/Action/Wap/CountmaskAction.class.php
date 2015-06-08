@@ -216,14 +216,14 @@ class CountmaskAction extends SjzAction {
      * @param type $appsecret
      * @return type
      */
-    private function getUserInfo($code, $appid, $appsecret) {
+    public function getUserInfo($code, $appid, $appsecret) {
         $access_token_url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=$appid&secret=$appsecret&code=$code&grant_type=authorization_code";
         $access_token_json = $this->https_request($access_token_url);
         $access_token_array = json_decode($access_token_json, true);
         return $access_token_array;
     }
 
-    private function https_request($url, $method = 'get', $data = '') {
+    public function https_request($url, $method = 'get', $data = '') {
         $ch = curl_init();
         $header[] = "Accept-Charset: utf-8";
         curl_setopt($ch, CURLOPT_URL, $url);
