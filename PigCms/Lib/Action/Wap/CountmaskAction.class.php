@@ -75,10 +75,10 @@ class CountmaskAction extends SjzAction {
                     $webCreatetime = $apidata['web_createtime'];
                     $web_access_token = '';
 
-                    if($webCreatetime>(time()-7200) && $userOpenId){
-                        //未过期
-                        $web_access_token = $apidata['web_access_token'];
-                    }else{
+//                    if($webCreatetime>(time()-7200) && $userOpenId){
+//                        //未过期
+//                        $web_access_token = $apidata['web_access_token'];
+//                    }else{
                         //重新获取
                         $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                         Log :: write( print_r($userinfoFromApi,true) );
@@ -97,7 +97,7 @@ class CountmaskAction extends SjzAction {
                         $web_access_token = $userinfoFromApi['access_token'];
                         cookie('user_openid', $userinfoFromApi['openid'], 315360000);
                         $userOpenId = $userinfoFromApi['openid'];
-                    }
+//                    }
 
                     //根据access_token 拉到用户基本信息
                     $gUrl = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$web_access_token.'&openid='.$userOpenId.'&lang=zh_CN';
