@@ -57,9 +57,12 @@ class CountmaskAction extends SjzAction {
 //            exit;
 //        }
         $userOpenId= cookie('user_openid');
+        Log :: write("$userOpenId  DDDDDDDDDDDDDDDDDDDDD");
         $fansInfo = null;
         $selfUserInfo = array();
         $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
+        Log :: write( print_r($fansInfo,true) );
+        Log :: write("fffffffffffffffffffffff");
         if($userOpenId && $fansInfo){
             $selfUserInfo['headimgurl'] = $fansInfo['headimgurl'];
             $selfUserInfo['nickname'] = $fansInfo['nickname'];
@@ -78,6 +81,8 @@ class CountmaskAction extends SjzAction {
                     }else{
                         //重新获取
                         $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
+                        Log :: write( print_r($userinfoFromApi,true) );
+                        Log :: write('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb');
                         if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                             //code 有错误 需要重定向
                             $url = $this->url."/index.php?g=Wap&m=Countmask&a=index";
