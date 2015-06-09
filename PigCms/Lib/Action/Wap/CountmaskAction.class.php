@@ -173,6 +173,7 @@ class CountmaskAction extends SjzAction {
 
         $d = array();
         $d['phone'] = $phone;
+        $d['phonetime'] = time();
         $d['id'] = $info['id'];
         M('countmask')->save($d);
         $this->display();
