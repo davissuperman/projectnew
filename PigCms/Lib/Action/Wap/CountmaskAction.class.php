@@ -132,7 +132,6 @@ class CountmaskAction extends SjzAction {
         $this->assign("signature",$signature);
         $this->assign("url",$url);
         $this->assign('gid', $gid);
-        $titleArr = $this->titleInWeixin;
 
         $this->assign('title',$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
@@ -181,8 +180,29 @@ class CountmaskAction extends SjzAction {
         $d['phonetime'] = time();
         $d['id'] = $info['id'];
         M('countmask')->save($d);
+
+        list($ticket,$appId,$gid) = $this->getDiymenSet();
+        $noncestr = "Wm3WZYTPz0wzccnW";
+        $timestamp = time();
+        $url = $this->get_url();;
+        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
+        $signature = sha1($str);
+        $this->assign("appid",$appId);
+        $this->assign("timestamp",$timestamp);
+        $this->assign("nonceStr",$noncestr);
+        $this->assign("signature",$signature);
+        $this->assign("url",$this->url."/index.php?g=Wap&m=Countmask&a=sharefriend");
+        $this->assign('gid', $gid);
+
+
+
         $this->display();
     }
+
+    public function sharefriend(){
+        $this->display();
+    }
+
     public function rank(){
         $this->display();
     }
