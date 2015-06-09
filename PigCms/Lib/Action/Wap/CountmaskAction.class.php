@@ -145,7 +145,6 @@ class CountmaskAction extends SjzAction {
     }
     public function score(){
         $userOpenId= cookie('user_openid');
-        Log :: write($userOpenId .'  aaaaaaaaaaaaaaaaaaaaaaaaa');
         $number = $_GET['number'];
         if(!$userOpenId || !$number || ($number > 200)){
             //redirect
@@ -161,6 +160,21 @@ class CountmaskAction extends SjzAction {
         $this->assign('number',$number);
 
 
+        $this->display();
+    }
+    public function sharenumber(){
+        $userOpenId= cookie('user_openid');
+        $phone = $_GET['phone'];
+        if(!$userOpenId || !$phone){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+        }
+        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+
+        $d = array();
+        $d['phone'] = $phone;
+        $d['id'] = $info['id'];
+        M('countmask')->save($d);
         $this->display();
     }
     public function rank(){
