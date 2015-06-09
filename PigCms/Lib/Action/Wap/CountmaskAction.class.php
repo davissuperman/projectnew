@@ -145,6 +145,7 @@ class CountmaskAction extends SjzAction {
     }
     public function score(){
         $userOpenId= cookie('user_openid');
+        Log :: write($userOpenId .'  aaaaaaaaaaaaaaaaaaaaaaaaa');
         $number = $_GET['number'];
         if(!$userOpenId || !$number || ($number > 200)){
             //redirect
@@ -156,7 +157,7 @@ class CountmaskAction extends SjzAction {
         $d = array();
         $d['number'] = $number;
         $d['id'] = $info['id'];
-        $info->save($d);
+        M('countmask')->save($d);
         $this->assign('number',$number);
 
 
