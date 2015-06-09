@@ -110,7 +110,10 @@ class CountmaskAction extends SjzAction {
 
 
 
-            $gid = 1;
+            $gid = $_GET['gid'];
+            if(!$gid){
+                $gid = 1;
+            }
             $nickname = $selfUserInfo['nickname'];
             $imageProfile = $selfUserInfo['headimgurl'];
         $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
