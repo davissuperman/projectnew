@@ -144,7 +144,22 @@ class CountmaskAction extends SjzAction {
         $this->display();
     }
     public function score(){
-        $this->assign('number',100);
+        $userOpenId= cookie('user_openid');
+        $number = $_GET['number'];
+        if(!$userOpenId || !$number || ($number > 200)){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+        }
+
+        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+
+        $d = array();
+        $d['number'] = $number;
+        $d['id'] = $info['id'];
+        $info->save($d);
+        $this->assign('number',$number);
+
+
         $this->display();
     }
     public function rank(){
