@@ -103,7 +103,7 @@ function countdown ($elem,time){
 			st=setTimeout (arguments.callee, 1000);
 			obj.html(time);
 			if(time == 0){
-				gameover(numbers);
+				gameover();
 			}
 		}
 	}
