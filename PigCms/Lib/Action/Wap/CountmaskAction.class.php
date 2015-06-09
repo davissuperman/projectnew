@@ -1,6 +1,8 @@
 <?php
 
 class CountmaskAction extends SjzAction {
+    public $title = '森田药妆数面膜';
+    public $bonusdesc = '森田药妆数面膜';
 
     public function getDiymenSet(){
         $gid = 1;
@@ -132,10 +134,10 @@ class CountmaskAction extends SjzAction {
         $this->assign('gid', $gid);
         $titleArr = $this->titleInWeixin;
 
-        $this->assign('title','森田药妆数面膜');
-        $this->assign('bonusdesc','森田药妆数面膜');
-        $this->assign("imageUrl","http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/sjz/images/logo1.jpg');
-        $this->assign("shareimageurl","http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/sjz/images/logo1.jpg');
+        $this->assign('title',$this->title);
+        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign("imageUrl","http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/present/images/logo1.jpg');
+        $this->assign("shareimageurl","http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/present/images/logo1.jpg');
 
         $this->display();
     }
