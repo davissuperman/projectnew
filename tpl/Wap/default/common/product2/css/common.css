@@ -13,7 +13,7 @@ input,textarea,select,button{font-size:1em;}
 
 .bg01{ background:url(../images/bg01.png) no-repeat; background-position:bottom left; background-size:100% auto; padding-bottom:3rem;}
 .bg02{ background:url(../images/bg02.png) no-repeat; background-position:bottom left; background-size:100% auto; height:6rem;position:relative;}
-.img01{background:url(../images/img01.png) no-repeat; background-size:100% auto; position:absolute;width: 1.4rem;height: 1.4rem;top: 1.5rem;left:50%;margin-left:-0.7rem;}
+.img01{background:url(../images/img01.png) no-repeat; background-size:100% auto; position:absolute;width: 1.4rem;height: 1.4rem;top: 1.5rem;left:80%;margin-left:-0.7rem;}
 .btn-prize{background:url(../images/btn01.png) no-repeat; background-size:100% auto; position:absolute;width: 0.75rem;
 height: 0.6rem;
 top: 3.2rem;
