@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="css/common.css?v=4324232332" rel="stylesheet" type="text/css" />
+<script src="js/zepto.min.js" type="text/javascript"></script>
+<script src="js/common.js?v=432432" type="text/javascript"></script>
+
+<title>森田线下活动产品方案</title>
+</head>
+<body>
+	<div id="contents" style="position:relative;">
+    	<img src="images/logo2.png" alt="森田" style="position:absolute;right:20px;top:0.2rem; height:1rem;"/>
+        <span class="img01"></span>
+        <div class="reg-box" style="padding-top:3.1rem;">
+        	<div style="text-align:center;padding:0 0.1rem 0 0.1rem; line-height:0.5rem;font-size:0.4rem;">恭喜您获得<br/>森田面膜试用装一份，<br/><span style="color:#e60012;">请将此画面交给<br/>现场工作人员<br/>进行领奖操作。</span></div>
+            
+           
+            <div  class="bg02">
+            	<span class="btn-prize"></span>
+            </div>
+        </div>
+        
+    </div>
+    
+</body>
+</html>
