@@ -163,6 +163,18 @@ class CountmaskAction extends SjzAction {
         M('countmask')->save($d);
         $this->assign('number',$number);
 
+        //同时将数据保存到tp_countmask_list
+        //判断是否存在default的记录
+        $list = M('countmask_list')->where(array('openid' => $userOpenId,'sequence' => 1))->find();
+        if(!$list){
+            $l = array();
+            $l['openid'] = $userOpenId;
+            $l['number'] = $number;
+            $l['sequence'] = 1;// default
+            $l['createtime'] = time();
+            $l['vote'] = 0;//default
+            M('countmask_list')->add($l);
+        }
 
         $this->display();
     }
