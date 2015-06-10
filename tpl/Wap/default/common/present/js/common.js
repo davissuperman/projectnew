@@ -11,6 +11,10 @@ $(document).ready(function(e) {
 	}
 });
 
+function playAudio(){
+	var audio = document.getElementById('audio'); 
+ 	audio.play();
+}
 
 function initGame(){
 	var $mm_box = $("#mm-box"),$shou = $mm_box.find(".shou");
@@ -25,6 +29,7 @@ function initGame(){
 
 
 function startGame(){
+	playAudio();
 	var $mm_box = $("#mm-box"),$animation = $mm_box.find(".animation"),$face_hover = $("#face-hover"),$time = $("#time");
 	if(!$mm_box.hasClass("dis")){
 		$mm_box.addClass("dis");
