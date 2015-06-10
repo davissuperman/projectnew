@@ -158,6 +158,7 @@ class CountmaskAction extends SjzAction {
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
 
         $d = array();
+        $d['sequence'] = 1;
         $d['number'] = $number;
         $d['id'] = $info['id'];
         M('countmask')->save($d);
