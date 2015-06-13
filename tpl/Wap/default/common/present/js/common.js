@@ -39,7 +39,7 @@ function startGame(){
 	//if(!$mm_box.hasClass("gameover")){
 		numbers++;
 		$animation.show();
-		var top = 2.45+"rem",height = 0.5 + 'rem';
+		var top = 2+"rem",height = 0.5 + 'rem';
 		$animation.animate({top:'-'+top,height:height}, 'fast', '', function(){
 			$animation.hide();
 			$animation.css({"top":"0.55rem","height":"2.5rem"});
