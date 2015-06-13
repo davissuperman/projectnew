@@ -418,7 +418,7 @@ class CountmaskAction extends SjzAction {
             $d['toopenid'] = $toOpenIdFromPost;
             $d['sequence'] = $tousersequence;
             $d['createtime'] = time();
-            M('countmask_vote')->add($d);
+            M('countmask_votelist')->add($d);
             $return = 1;
         }
 
