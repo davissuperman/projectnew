@@ -54,6 +54,7 @@ function startGame(){
 	//}
 }
 $(document).ready(function(e) {
+	//e.preventDefault();
 	var contentList= $("#mm-box");
 	// 绑定翻页
 	contentList.on("touchstart",function(e){
@@ -65,8 +66,13 @@ $(document).ready(function(e) {
 	contentList.on("touchend",function(e){
 		endTouch(e);
 	});
+	/*$("#mm-box").click(function(e){
+		e.stopPropagation(); 
+		alert(2)
+	})*/
 });
 function startTouch(event) {
+	event.preventDefault();
     if (!event.touches.length) {
         return;
     }
