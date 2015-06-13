@@ -326,6 +326,7 @@ class CountmaskAction extends SjzAction {
         $userOpenId= cookie('user_openid');
         $fansInfo = null;
         $selfUserInfo = array();
+        $uid  = $_GET['uid'];
         $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
         if($userOpenId && $fansInfo){
             $selfUserInfo['headimgurl'] = $fansInfo['headimgurl'];
@@ -369,14 +370,14 @@ class CountmaskAction extends SjzAction {
                     $selfUserInfo['nickname'] = $json->nickname;
                 }
             } else {
-                $url = urlencode($this->url."/index.php?g=Wap&m=Countmask&a=sharefriend");
+                $url = urlencode($this->url."/index.php?g=Wap&m=Countmask&a=sharefriend&uid=$uid");
                 header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_userinfo&state=sentian#wechat_redirect");
                 exit;
             }
         }
         //local open id $userOpenId
 
-        $uid  = $_GET['uid'];
+
         $infoTO = M('countmask')->where(array('id' => $uid))->find();
         $toUserOpenId = $infoTO['openid'];
         $userName = $infoTO['name'];
@@ -394,6 +395,17 @@ class CountmaskAction extends SjzAction {
         $this->assign('fromopenid', $userOpenId);
         $this->assign('toopenid', $toUserOpenId);
         $this->assign('sequence', $sequence);
+
+        //local info
+        $infoLocal = M('countmask')->where(array('openid' => $userOpenId))->find();
+        if($infoLocal){
+            //这个用户是否参加过，已经参加
+            $this->assign('localuid', $infoLocal['uid']);
+            $this->assign('redirecturl', $this->url."/index.php?g=Wap&m=Countmask&a=sharefriend&uid=".$infoLocal['uid']);
+        }else{
+            $this->assign('redirecturl', $this->url."/index.php?g=Wap&m=Countmask&a=index");
+        }
+
         $this->display();
     }
 
