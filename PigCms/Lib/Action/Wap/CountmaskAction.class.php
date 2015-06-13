@@ -166,11 +166,22 @@ class CountmaskAction extends SjzAction {
                 $d['number'] = $number;
                 $d['id'] = $info['id'];
                 M('countmask')->save($d);
+
+                $list = M('countmask_list')->where(array('openid' => $userOpenId,'sequence' => 0))->find();
+                if(!$list){
+                    $l = array();
+                    $l['openid'] = $userOpenId;
+                    $l['number'] = $number;
+                    $l['sequence'] = 0;// default
+                    $l['createtime'] = time();
+                    $l['vote'] = 0;//default
+                    M('countmask_list')->add($l);
+                }
                 break;
             case 1://第一次满10票后
                 //判断用户是否满足条件
                 $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>1))->find();
-                if($infoList['vote'] == $this->eachVote){
+                if($infoList && $infoList['vote'] == $this->eachVote){
                     M("countmask")->where(array('id' =>$info['id']))->setInc('number', $number);
 
                     //更新sequence
@@ -187,7 +198,7 @@ class CountmaskAction extends SjzAction {
             case 2://第二次满10票后
                 //判断用户是否满足条件
                 $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>2))->find();
-                if($infoList['vote'] == $this->eachVote){
+                if($infoList && $infoList['vote'] == $this->eachVote){
                     M("countmask")->where(array('id' =>$info['id']))->setInc('number', $number);
 
                     //更新sequence
@@ -204,7 +215,7 @@ class CountmaskAction extends SjzAction {
             case 3://第三次满10票后
                 //判断用户是否满足条件
                 $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>3))->find();
-                if($infoList['vote'] == $this->eachVote){
+                if($infoList && $infoList['vote'] == $this->eachVote){
                     M("countmask")->where(array('id' =>$info['id']))->setInc('number', $number);
 
                     //更新sequence
@@ -226,16 +237,7 @@ class CountmaskAction extends SjzAction {
 
         //同时将数据保存到tp_countmask_list
         //判断是否存在default的记录
-        $list = M('countmask_list')->where(array('openid' => $userOpenId,'sequence' => 1))->find();
-        if(!$list){
-            $l = array();
-            $l['openid'] = $userOpenId;
-            $l['number'] = $number;
-            $l['sequence'] = 0;// default
-            $l['createtime'] = time();
-            $l['vote'] = 0;//default
-            M('countmask_list')->add($l);
-        }
+
 
         $phone = false;
         if($info['phone']){
