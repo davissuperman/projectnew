@@ -401,7 +401,7 @@ class CountmaskAction extends SjzAction {
         if($infoLocal){
             //这个用户是否参加过，已经参加
             $this->assign('localuid', $infoLocal['uid']);
-            $this->assign('redirecturl', $this->url."/index.php?g=Wap&m=Countmask&a=sharefriend&uid=".$infoLocal['uid']);
+            $this->assign('redirecturl', $this->url."/index.php?g=Wap&m=Countmask&a=sharefriend&uid=".$infoLocal['id']);
         }else{
             $this->assign('redirecturl', $this->url."/index.php?g=Wap&m=Countmask&a=index");
         }
