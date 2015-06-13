@@ -188,7 +188,7 @@ class CountmaskAction extends SjzAction {
             header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
         }
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
-
+        $uid = $info['id'];
         $d = array();
         $d['phone'] = $phone;
         $d['phonetime'] = time();
@@ -205,7 +205,7 @@ class CountmaskAction extends SjzAction {
         $this->assign("timestamp",$timestamp);
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
-        $this->assign("url",$this->url."/index.php?g=Wap&m=Countmask&a=sharefriend");
+        $this->assign("url",$this->url."/index.php?g=Wap&m=Countmask&a=sharefriend&uid=".$uid);
         $this->assign('gid', $gid);
         $this->assign('username', $info['name']);
         $this->assign('totalnumber', $info['number']);
@@ -238,6 +238,21 @@ class CountmaskAction extends SjzAction {
     }
 
     public function sharefriend(){
+        $uid  = $_GET['uid'];
+        $info = M('countmask')->where(array('id' => $uid))->find();
+        $userOpenId = $info['openid'];
+        $userName = $info['name'];
+        $number = $info['number'];
+        $this->assign('name', $userName);
+        $this->assign('number', $number);
+        $sequence = $info['sequence'];
+        if($sequence == 1){
+            //第一次 还差多少票
+            $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
+            $vote = $infoList['vote'];
+            $leftVote = $this->eachVote - $vote;
+        }
+        $this->assign('leftvote', $leftVote);
         $this->display();
     }
 
