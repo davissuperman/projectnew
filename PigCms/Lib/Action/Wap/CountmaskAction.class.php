@@ -46,6 +46,7 @@ class CountmaskAction extends SjzAction {
             $d['name'] = $nickname;
             $d['headimgurl'] = $imageProfile;
             $d['views'] = 1;
+            $d['sequence'] = 0;
             $d['createtime'] = time();
             M("countmask")->add($d);
         }
