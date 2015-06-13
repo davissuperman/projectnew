@@ -410,7 +410,7 @@ class CountmaskAction extends SjzAction {
             exit();
         }
         //检查此 local openid 是否投过票
-        $voteList = M('countmask_vote')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
+        $voteList = M('countmask_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
         if(!$voteList){
             //投票
             $d = array();
