@@ -55,6 +55,10 @@ function startGame(){
 }
 $(document).ready(function(e) {
 	//e.preventDefault();
+	var $face_hover = $("#face-hover");
+	$face_hover.on("touchstart",function(event){
+		event.preventDefault();
+	});
 	var contentList= $("#mm-box");
 	// 绑定翻页
 	contentList.on("touchstart",function(e){
