@@ -230,7 +230,7 @@ class CountmaskAction extends SjzAction {
             $l = array();
             $l['openid'] = $userOpenId;
             $l['number'] = $number;
-            $l['sequence'] = 1;// default
+            $l['sequence'] = 0;// default
             $l['createtime'] = time();
             $l['vote'] = 0;//default
             M('countmask_list')->add($l);
