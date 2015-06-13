@@ -336,7 +336,7 @@ class CountmaskAction extends SjzAction {
             M('countmask_vote')->add($d);
             $return = 1;
         }
-        
+
         echo $return;
     }
 
