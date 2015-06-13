@@ -238,22 +238,106 @@ class CountmaskAction extends SjzAction {
     }
 
     public function sharefriend(){
+        $userOpenId= cookie('user_openid');
+        $fansInfo = null;
+        $selfUserInfo = array();
+        $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
+        if($userOpenId && $fansInfo){
+            $selfUserInfo['headimgurl'] = $fansInfo['headimgurl'];
+            $selfUserInfo['nickname'] = $fansInfo['nickname'];
+        }else{
+            $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
+            $code = trim($_GET["code"]);
+            $state = trim($_GET['state']);
+            if ($code && $state == 'sentian') {
+                if(empty($fansInfo)){
+                    $webCreatetime = $apidata['web_createtime'];
+                    $web_access_token = '';
+
+                    if($webCreatetime>(time()-7200) && $userOpenId){
+                        //未过期
+                        $web_access_token = $apidata['web_access_token'];
+                    }else{
+                        //重新获取
+                        $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
+                        if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
+                            //code 有错误 需要重定向
+                            $url = $this->url."/index.php?g=Wap&m=Countmask&a=index";
+                            header("location:$url");
+                        }
+                        $m['id'] = $apidata['id'];
+                        $m['web_access_token'] = $userinfoFromApi['access_token'];
+                        $m['refresh_token'] = $userinfoFromApi['refresh_token'];
+                        $m['web_createtime'] = time();
+                        $m['refresh_token_createtime'] = time();
+                        M('Diymen_set')->save($m);
+                        $web_access_token = $userinfoFromApi['access_token'];
+                        cookie('user_openid', $userinfoFromApi['openid'], 315360000);
+                        $userOpenId = $userinfoFromApi['openid'];
+                    }
+
+                    //根据access_token 拉到用户基本信息
+                    $gUrl = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$web_access_token.'&openid='.$userOpenId.'&lang=zh_CN';
+                    $json = json_decode($this->curlGet($gUrl));
+                    $this->saveUserInfo($json);
+                    $selfUserInfo['headimgurl'] = $json->headimgurl;
+                    $selfUserInfo['nickname'] = $json->nickname;
+                }
+            } else {
+                $url = urlencode($this->url."/index.php?g=Wap&m=Countmask&a=sharefriend");
+                header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_userinfo&state=sentian#wechat_redirect");
+                exit;
+            }
+        }
+        //local open id $userOpenId
+
         $uid  = $_GET['uid'];
-        $info = M('countmask')->where(array('id' => $uid))->find();
-        $userOpenId = $info['openid'];
-        $userName = $info['name'];
-        $number = $info['number'];
+        $infoTO = M('countmask')->where(array('id' => $uid))->find();
+        $toUserOpenId = $infoTO['openid'];
+        $userName = $infoTO['name'];
+        $number = $infoTO['number'];
         $this->assign('name', $userName);
         $this->assign('number', $number);
-        $sequence = $info['sequence'];
+        $sequence = $infoTO['sequence'];
         if($sequence == 1){
             //第一次 还差多少票
-            $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
+            $infoList = M('countmask_list')->where(array('openid' => $toUserOpenId,'sequence'=>$sequence))->find();
             $vote = $infoList['vote'];
             $leftVote = $this->eachVote - $vote;
         }
         $this->assign('leftvote', $leftVote);
+        $this->assign('fromopenid', $userOpenId);
+        $this->assign('toopenid', $toUserOpenId);
+        $this->assign('sequence', $sequence);
         $this->display();
+    }
+
+    //TODO add random str to avoid auto submit
+    public function saveVote(){
+
+        $return = 0;
+        $localUserOpenIdFromCookie= cookie('user_openid');
+        $fromOpenIdFromPost = $_POST['fromopenid'];
+        $toOpenIdFromPost = $_POST['toopenid'];
+        $tousersequence = $_POST['tousersequence'];
+        if(!$localUserOpenIdFromCookie || ($localUserOpenIdFromCookie != $fromOpenIdFromPost)){
+            //非法投票
+            exit();
+        }
+        //检查此 local openid 是否投过票
+        $voteList = M('countmask_vote')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
+        if(!$voteList){
+            //投票
+            $d = array();
+            $d['fromopenid'] = $fromOpenIdFromPost;
+            $d['toopenid'] = $toOpenIdFromPost;
+            $d['sequence'] = $tousersequence;
+            $d['createtime'] = time();
+            M('countmask_vote')->add($d);
+            $return = 1;
+        }
+        
+        echo $return;
     }
 
     public function rank(){

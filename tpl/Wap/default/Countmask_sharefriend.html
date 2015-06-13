@@ -112,8 +112,7 @@
        // alert(res.errMsg);
     });
 
-    $(function(){
-    });
+
 </script>
 </head>
 <body  class="bg02">
@@ -134,5 +133,22 @@
         <div class="layer-bg"></div>
         <div class="layer-share"></div>
     </div>
+<script>
+    $(function(){
+        var formData = {fromopenid:"{pigcms::$fromopenid}",toopenid:"{pigcms::$toopenid}",'tousersequence':"{pigcms::$sequence}"}; //Array
+        $.ajax({
+            url: "{pigcms::$siteurl}/index.php?g=Wap&m=Countmask&a=saveVote",
+            type:'POST',
+            complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
+            data : formData,
+            dataType: 'json', //會把回傳的字符串自動轉換為json對象！
+            error: function() { mnAlert('系统繁忙 请稍后再试');$this.html("点击加载全部");},
+            success: function(data) {
+                //$this.removeClass("btn-disabled");
+            }
+
+        });
+    });
+</script>
 </body>
 </html>
