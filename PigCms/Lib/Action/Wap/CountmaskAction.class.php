@@ -157,12 +157,70 @@ class CountmaskAction extends SjzAction {
         }
 
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $currentSequence = $info['sequence'];
+        switch($currentSequence){
+            case 0:
+                $d = array();
+                $d['sequence'] = 1;
+                $d['number'] = $number;
+                $d['id'] = $info['id'];
+                M('countmask')->save($d);
+                break;
+            case 1://第一次满10票后
+                //判断用户是否满足条件
+                $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>1))->find();
+                if($infoList['vote'] == $this->eachVote){
+                    M("countmask")->where(array('id' =>$info['id']))->setInc('number', $number);
 
-        $d = array();
-        $d['sequence'] = 1;
-        $d['number'] = $number;
-        $d['id'] = $info['id'];
-        M('countmask')->save($d);
+                    //更新sequence
+                    M("countmask")->where(array('id' =>$info['id']))->setInc('sequence');
+
+                    //表 countmask_list更新每一次机会获取的分数
+                    $m = array();
+                    $m['number'] = $number;
+                    $m['id'] = $infoList['id'];
+                    $m['updatetime'] = time();
+                    M('countmask_list')->save($m);
+                }
+                break;
+            case 2://第二次满10票后
+                //判断用户是否满足条件
+                $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>2))->find();
+                if($infoList['vote'] == $this->eachVote){
+                    M("countmask")->where(array('id' =>$info['id']))->setInc('number', $number);
+
+                    //更新sequence
+                    M("countmask")->where(array('id' =>$info['id']))->setInc('sequence');
+
+                    //表 countmask_list更新每一次机会获取的分数
+                    $m = array();
+                    $m['number'] = $number;
+                    $m['id'] = $infoList['id'];
+                    $m['updatetime'] = time();
+                    M('countmask_list')->save($m);
+                }
+                break;
+            case 3://第三次满10票后
+                //判断用户是否满足条件
+                $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>3))->find();
+                if($infoList['vote'] == $this->eachVote){
+                    M("countmask")->where(array('id' =>$info['id']))->setInc('number', $number);
+
+                    //更新sequence
+                    M("countmask")->where(array('id' =>$info['id']))->setInc('sequence');
+
+                    //表 countmask_list更新每一次机会获取的分数
+                    $m = array();
+                    $m['number'] = $number;
+                    $m['id'] = $infoList['id'];
+                    $m['updatetime'] = time();
+                    M('countmask_list')->save($m);
+                }
+                break;
+            default:
+                //没有机会再次增加分数
+        }
+
         $this->assign('number',$number);
 
         //同时将数据保存到tp_countmask_list
@@ -219,16 +277,43 @@ class CountmaskAction extends SjzAction {
         // $sequence = 4 : 已经用过三次
         $couldCountMaskAgain = false;
         $currentNeedVote = 0;
-        if($sequence == 1){
-            $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
-            if($infoList){
-                $currentNeedVote = $this->eachVote - $infoList['vote'];
-            }else{
-                $currentNeedVote = 10;
-            }
-            if($infoList['vote'] == $this->eachVote){
-                $couldCountMaskAgain = true;
-            }
+        switch($sequence){
+            case 1:
+                //正在争取第一次机会
+                $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
+                if($infoList){
+                    $currentNeedVote = $this->eachVote - $infoList['vote'];
+                }else{
+                    $currentNeedVote = 10;
+                }
+                if($infoList['vote'] == $this->eachVote){
+                    $couldCountMaskAgain = true;
+                }
+                break;
+            case 2:
+                //正在争取第二次机会
+                $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
+                if($infoList){
+                    $currentNeedVote = $this->eachVote - $infoList['vote'];
+                }else{
+                    $currentNeedVote = 10;
+                }
+                if($infoList['vote'] == $this->eachVote){
+                    $couldCountMaskAgain = true;
+                }
+                break;
+            case 3:
+                //正在争取第三次机会
+                $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
+                if($infoList){
+                    $currentNeedVote = $this->eachVote - $infoList['vote'];
+                }else{
+                    $currentNeedVote = 10;
+                }
+                if($infoList['vote'] == $this->eachVote){
+                    $couldCountMaskAgain = true;
+                }
+                break;
         }
 
 
