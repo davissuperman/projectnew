@@ -42,7 +42,7 @@ function startGame(){
 		var top = 2+"rem",height = 0.5 + 'rem';
 		$animation.animate({top:'-'+top,height:height}, 'fast', '', function(){
 			$animation.hide();
-			$animation.css({"top":"0.55rem","height":"2.5rem"});
+			$animation.css({"top":"0.5rem","height":"2.5rem"});
 			//$face_hover.hide();
 			//setTimeout ("$('#face-hover').show();",100);
 		});

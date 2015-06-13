@@ -118,12 +118,12 @@ position: absolute;bottom: 1rem;right: 0.8rem; cursor:pointer;}
 .game-box .face-hover2{background:url(../images/g08.png) no-repeat center;background-size:auto 100%;width:100%;height:5rem;width:5rem; margin:0 auto; position:absolute;top:0;z-index:2;left:50%; margin-left:-2.5rem;}
 
 .game-box .mm-box{ position:absolute;width:6rem;height:4.2rem;top:4.4rem; z-index:3;}
-.game-box .mm-box .mm{position:absolute; background:url(../images/g03.png) no-repeat center;background-size:auto 100%;width: 2.44rem;height: 3.5rem;left:50%; margin-left:-1.22rem;}
-.game-box .mm-box .mm01{top: 0.41rem;margin-left: -1.52rem;}
-.game-box .mm-box .mm02{top: 0.31rem;margin-left: -1.42rem;}
-.game-box .mm-box .mm03{top: 0.21rem;margin-left: -1.32rem;}
-.game-box .mm-box .mm04{top: 0.11rem;margin-left: -1.22rem;}
-.game-box .mm-box .animation{ height:2.5rem;top:0.55rem; display:none;}
+.game-box .mm-box .mm{position:absolute; background:url(../images/g03.png) no-repeat center;background-size:auto 100%;width: 2.2rem;height: 3.2rem;left:50%; margin-left:-1.1rem;}
+.game-box .mm-box .mm01{top: 0.41rem;margin-left: -1.4rem;}
+.game-box .mm-box .mm02{top: 0.31rem;margin-left: -1.3rem;}
+.game-box .mm-box .mm03{top: 0.21rem;margin-left: -1.2rem;}
+.game-box .mm-box .mm04{top: 0.11rem;margin-left: -1.1rem;}
+.game-box .mm-box .animation{ height:2.5rem;top:0.5rem; display:none;}
 
 .game-box .arrow{ position:absolute; background:url(../images/g04.png) no-repeat center;background-size:auto 100%;width: 0.6rem;height: 1rem;top:-1rem;left:50%; margin-left:-0.3rem; z-index:5;}
 .game-box .shou{ position:absolute; background:url(../images/g05.png) no-repeat center;background-size:auto 100%;width: 0.7rem;
