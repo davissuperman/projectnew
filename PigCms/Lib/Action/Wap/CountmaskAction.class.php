@@ -3,6 +3,7 @@
 class CountmaskAction extends SjzAction {
     public $title = '森田药妆数面膜';
     public $bonusdesc = '森田药妆数面膜';
+    public $eachVote = 10;
 
     public function getDiymenSet(){
         $gid = 1;
@@ -206,9 +207,33 @@ class CountmaskAction extends SjzAction {
         $this->assign("signature",$signature);
         $this->assign("url",$this->url."/index.php?g=Wap&m=Countmask&a=sharefriend");
         $this->assign('gid', $gid);
+        $this->assign('username', $info['name']);
+        $this->assign('totalnumber', $info['number']);
 
 
+       //current sequence
+        $sequence = $info['sequence'];
+        // $sequence = 1 : 还没有进行过投票
+        // $sequence = 2 : 已经用过一次
+        // $sequence = 3 : 已经用过二次
+        // $sequence = 4 : 已经用过三次
+        $couldCountMaskAgain = false;
+        $currentNeedVote = 0;
+        if($sequence == 1){
+            $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
+            if($infoList){
+                $currentNeedVote = $this->eachVote - $infoList['vote'];
+            }else{
+                $currentNeedVote = 10;
+            }
+            if($infoList['vote'] == $this->eachVote){
+                $couldCountMaskAgain = true;
+            }
+        }
 
+
+        $this->assign('needvote', $currentNeedVote);
+        $this->assign('couldcountmaskagain', $couldCountMaskAgain);
         $this->display();
     }
 
