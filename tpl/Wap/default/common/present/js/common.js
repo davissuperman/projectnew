@@ -39,17 +39,22 @@ function startGame(){
 	//if(!$mm_box.hasClass("gameover")){
 		numbers++;
 		$animation.show();
-		var top = 2.45+"rem",height = 0.5 + 'rem';
-		$animation.animate({top:'-'+top,height:height}, 'top', '', function(){
+		var top = 2+"rem",height = 0.5 + 'rem';
+		$animation.animate({top:'-'+top,height:height}, 'fast', '', function(){
 			$animation.hide();
-			$animation.css({"top":"0.55rem","height":"2.5rem"});
-			$face_hover.hide();
-			setTimeout ("$('#face-hover').show();",500);
+			$animation.css({"top":"0.5rem","height":"2.5rem"});
+			//$face_hover.hide();
+			//setTimeout ("$('#face-hover').show();",100);
 		});
 	//}else{
 	//}
 }
 $(document).ready(function(e) {
+	//e.preventDefault();
+	var $face_hover = $("#game-box");
+	$face_hover.on("touchstart",function(event){
+		event.preventDefault();
+	});
 	var contentList= $("#mm-box");
 	// 绑定翻页
 	contentList.on("touchstart",function(e){
@@ -63,6 +68,7 @@ $(document).ready(function(e) {
 	});
 });
 function startTouch(event) {
+	event.preventDefault();
     if (!event.touches.length) {
         return;
     }
@@ -104,6 +110,13 @@ function countdown ($elem,time){
 		if (time<=0){
 			clearTimeout(st);
 		} else {
+			var $face_hover = $("#face-hover"),$face_hover2 = $("#face-hover2");
+			if(time < 7){
+				$face_hover2.hide();
+				if(time < 4){
+					$face_hover.hide();
+				}
+			}
 			time--;
 			st=setTimeout (arguments.callee, 1000);
 			obj.html(time);
