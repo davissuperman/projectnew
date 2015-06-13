@@ -236,6 +236,11 @@ class CountmaskAction extends SjzAction {
             M('countmask_list')->add($l);
         }
 
+        $phone = false;
+        if($info['phone']){
+            $phone = $info['phone'];
+        }
+        $this->assign('phone', $phone);
         $this->display();
     }
     public function sharenumber(){

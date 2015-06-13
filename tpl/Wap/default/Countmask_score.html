@@ -129,7 +129,11 @@
                 </div>
             </li>
             <li class="clrfix">
-                <input type="tel" class="input-text" placeholder="请输入您的手机号码" maxlength="11" id="phone"/>
+                <if condition="$phone eq false">
+                    <input type="tel" class="input-text" placeholder="请输入您的手机号码" maxlength="11" id="phone"/>
+                <else />
+                    <input type="tel" class="input-text" readonly value="{pigcms::$phone}" maxlength="11" id="phone"/>
+                </if>
             </li>
             <li class="clrfix ta-c">
                 <span class="btn-submit" id="btn-submit" onClick="submitMsg();">提交</span>
