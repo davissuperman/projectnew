@@ -442,6 +442,13 @@ class CountmaskAction extends SjzAction {
             $d['sequence'] = $tousersequence;
             $d['createtime'] = time();
             M('countmask_votelist')->add($d);
+
+            //更新当前主页人的countmask_list
+            $info = M('countmask')->where(array('openid' => $toOpenIdFromPost))->find();
+            $sequence = $info['sequence'];
+            $c = M('countmask_list')->where(array('openid' => $toOpenIdFromPost,'sequence' => $sequence))->find();
+            M("countmask_list")->where(array('openid' => $toOpenIdFromPost,'sequence' => $sequence))->setInc('vote');
+
             $return = 1;
         }
 
