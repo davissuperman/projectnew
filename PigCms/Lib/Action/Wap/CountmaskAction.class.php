@@ -193,6 +193,9 @@ class CountmaskAction extends SjzAction {
                     $m['id'] = $infoList['id'];
                     $m['updatetime'] = time();
                     M('countmask_list')->save($m);
+                }else{
+                    //非法提交 转到首页
+                    header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
                 }
                 break;
             case 2://第二次满10票后
@@ -210,6 +213,9 @@ class CountmaskAction extends SjzAction {
                     $m['id'] = $infoList['id'];
                     $m['updatetime'] = time();
                     M('countmask_list')->save($m);
+                }else{
+                    //非法提交 转到首页
+                    header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
                 }
                 break;
             case 3://第三次满10票后
@@ -227,6 +233,9 @@ class CountmaskAction extends SjzAction {
                     $m['id'] = $infoList['id'];
                     $m['updatetime'] = time();
                     M('countmask_list')->save($m);
+                }else{
+                    //非法提交 转到首页
+                    header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
                 }
                 break;
             default:
