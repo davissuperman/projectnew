@@ -241,17 +241,23 @@ class CountmaskAction extends SjzAction {
     public function sharenumber(){
         $userOpenId= cookie('user_openid');
         $phone = $_GET['phone'];
-        if(!$userOpenId || !$phone){
+        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
         }
-        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
-        $uid = $info['id'];
-        $d = array();
-        $d['phone'] = $phone;
-        $d['phonetime'] = time();
-        $d['id'] = $info['id'];
-        M('countmask')->save($d);
+        if($info['phone']){
+            //已经提交过手机号
+        }else{
+            $uid = $info['id'];
+            $d = array();
+            $d['phone'] = $phone;
+            $d['phonetime'] = time();
+            $d['id'] = $info['id'];
+            M('countmask')->save($d);
+        }
+
+
 
         list($ticket,$appId,$gid) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
@@ -401,7 +407,7 @@ class CountmaskAction extends SjzAction {
         if($infoLocal){
             //这个用户是否参加过，已经参加
             $this->assign('localuid', $infoLocal['uid']);
-            $this->assign('redirecturl', $this->url."/index.php?g=Wap&m=Countmask&a=sharefriend&uid=".$infoLocal['id']);
+            $this->assign('redirecturl', $this->url."/index.php?g=Wap&m=Countmask&a=sharenumber");
         }else{
             $this->assign('redirecturl', $this->url."/index.php?g=Wap&m=Countmask&a=index");
         }
