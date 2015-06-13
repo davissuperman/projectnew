@@ -120,7 +120,22 @@ class CountmaskAction extends SjzAction {
             }
             $nickname = $selfUserInfo['nickname'];
             $imageProfile = $selfUserInfo['headimgurl'];
-        $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
+
+        //首先判断当前用户是否有玩过第一次
+        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $firstStart = true;
+        if($info){
+                //判断当前用户 sequence
+            $currentSequence = $info['sequence'];
+            if($currentSequence > 0){
+                $firstStart = false;
+            }
+
+        }else{
+            $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
+        }
+
+
 
         list($ticket,$appId,$gid) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
@@ -140,6 +155,11 @@ class CountmaskAction extends SjzAction {
         $this->assign("imageUrl","http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/present/images/logo1.jpg');
         $this->assign("shareimageurl","http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/present/images/logo1.jpg');
 
+        $urlGame = $this->url."/index.php?g=Wap&m=Countmask&a=game";
+        if($firstStart == false){
+            $urlGame = $this->url."/index.php?g=Wap&m=Countmask&a=sharenumber";
+        }
+        $this->assign('urlgame',$urlGame);
         $this->display();
     }
 
