@@ -320,6 +320,8 @@ class CountmaskAction extends SjzAction {
         // $sequence = 4 : 已经用过三次
         $couldCountMaskAgain = false;
         $currentNeedVote = 0;
+
+        $showCountMaskAgain = true;
         switch($sequence){
             case 1:
                 //正在争取第一次机会
@@ -358,8 +360,8 @@ class CountmaskAction extends SjzAction {
                 }
                 break;
             default:
-                //三次机会用完
-                
+                //三次机会用完，在数一次按钮隐藏
+                $showCountMaskAgain = false;
         }
 
         if($currentNeedVote < 0){
@@ -367,6 +369,7 @@ class CountmaskAction extends SjzAction {
         }
         $this->assign('needvote', $currentNeedVote);
         $this->assign('couldcountmaskagain', $couldCountMaskAgain);
+        $this->assign('couldcountmaskagainbutton', $showCountMaskAgain);
         $this->display();
     }
 
