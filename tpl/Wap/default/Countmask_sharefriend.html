@@ -147,7 +147,8 @@
                         error: function() { mnAlert('系统繁忙 请稍后再试');$this.html("点击加载全部");},
                         success: function(data) {
                             if(data == 1){
-                                $("#helpvote").addClass("btn-disabled");
+                                $("#helpvote").addClass("btn05");
+                                $("#helpvote").removeClass("btn04");
                                 mnAlert("感谢您的投票一起来赢森田面膜礼盒吧！");
                                 window.location.href = '{pigcms::$redirecturl}';
                             }else{
