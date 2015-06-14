@@ -174,11 +174,11 @@ class CountmaskAction extends SjzAction {
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
 
-        $urlGame = $this->url."/index.php?g=Wap&m=Countmask&a=game";
+        $urlGame = "http://wx.drjou.cc" ."/index.php?g=Wap&m=Countmask&a=game";
         if($firstStart == false){
-            $urlGame = $this->url."/index.php?g=Wap&m=Countmask&a=sharenumber";
+            $urlGame = "http://wx.drjou.cc"."/index.php?g=Wap&m=Countmask&a=sharenumber";
         }
-        Log :: write($urlGame .' gggggggggggggg');
+        Log :: write($urlGame .' gggggggggggggg  '.$this->url);
         $this->assign('urlgame',$urlGame);
         $this->display();
     }
