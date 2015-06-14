@@ -10,7 +10,6 @@ class CountmaskAction extends SjzAction {
     public function _initialize() {
         parent :: _initialize();
         $this->url= C('site_url');
-        Log :: write('iiiiiiiiiiiiiiiii '.$this->url);
         $this->imageUrl = "http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/present/images/logo1.jpg';
         $this->shareImageUrl = "http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/present/images/logo1.jpg';
     }
@@ -167,10 +166,8 @@ class CountmaskAction extends SjzAction {
         $this->assign("timestamp",$timestamp);
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
-            Log :: write('bbbbbbbbbbbbbbbbbb '.$this->url);
         $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
-            Log :: write('eeeeeeeeeeeeeeeeeeeeee '.$this->url);
         $this->assign('title',$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
         $this->assign("imageUrl",$this->imageUrl);
