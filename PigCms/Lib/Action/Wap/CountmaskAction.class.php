@@ -201,7 +201,7 @@ class CountmaskAction extends SjzAction {
         $this->assign("timestamp",$timestamp);
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
-        $this->assign("url",$this->getShareUrl());
+        $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
 
         $this->assign('title',$this->title);
@@ -224,7 +224,7 @@ class CountmaskAction extends SjzAction {
         $this->assign("timestamp",$timestamp);
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
-        $this->assign("url",$this->getShareUrl());
+        $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
 
         $this->assign('title',$this->title);
@@ -253,7 +253,7 @@ class CountmaskAction extends SjzAction {
         $this->assign("timestamp",$timestamp);
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
-        $this->assign("url",$this->getShareUrl());
+        $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
 
         $this->assign('title',$this->title);
@@ -379,7 +379,7 @@ class CountmaskAction extends SjzAction {
         $this->assign("timestamp",$timestamp);
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
-        $this->assign("url",$this->getShareUrl());
+        $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
 
         $this->assign('title',$this->title);
@@ -412,7 +412,7 @@ class CountmaskAction extends SjzAction {
         $this->assign("timestamp",$timestamp);
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
-        $this->assign("url",$this->getShareUrl());
+        $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
 
         $this->assign('title',$this->title);
@@ -552,7 +552,7 @@ class CountmaskAction extends SjzAction {
         $this->assign("timestamp",$timestamp);
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
-        $this->assign("url",$this->getShareUrl());
+        $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
 
         $this->assign('title',$this->title);
@@ -659,7 +659,7 @@ class CountmaskAction extends SjzAction {
         $this->assign("timestamp",$timestamp);
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
-        $this->assign("url",$this->getShareUrl());
+        $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
 
         $this->assign('title',$this->title);
@@ -690,7 +690,7 @@ class CountmaskAction extends SjzAction {
         $this->assign("timestamp",$timestamp);
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
-        $this->assign("url",$this->getShareUrl());
+        $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
 
         $this->assign('title',$this->title);

@@ -72,7 +72,7 @@
         // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
         wx.onMenuShareTimeline({
             title: '{pigcms::$title}',
-            link: "{pigcms::$url}",
+            link: "{pigcms::$shareurl}",
             imgUrl: "{pigcms::$shareimageurl}",
             trigger: function (res) {
                 //alert('用户点击分享到朋友圈');
@@ -91,7 +91,7 @@
         wx.onMenuShareAppMessage({
             title: '{pigcms::$title}',
             desc:  '{pigcms::$bonusdesc}',
-            link: '{pigcms::$url}',
+            link: '{pigcms::$shareurl}',
             imgUrl: '{pigcms::$shareimageurl}',
             trigger: function (res) {
                 //alert('用户点击发送给朋友');
