@@ -570,6 +570,15 @@ class CountmaskAction extends SjzAction {
         $this->assign('showvotebutton', $showVoteButton);
         //end
 
+        //是否已经投过票
+        $hasVotedForThisUid = 1;
+        $voteList = M('countmask_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toUserOpenId))->find();
+        if($voteList){
+            $hasVotedForThisUid = 0;
+        }
+        $this->assign('hasvotedforthisuid', $hasVotedForThisUid);
+
+
         //local info
         $infoLocal = M('countmask')->where(array('openid' => $userOpenId))->find();
         if($infoLocal){
