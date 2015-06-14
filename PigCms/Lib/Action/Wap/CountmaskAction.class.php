@@ -398,29 +398,6 @@ class CountmaskAction extends SjzAction {
             M('countmask')->save($d);
         }
 
-
-
-        //begin 分享出去的URL
-        list($ticket,$appId,$gid) = $this->getDiymenSet();
-        $noncestr = "Wm3WZYTPz0wzccnW";
-        $timestamp = time();
-        $url = $this->get_url();;
-        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
-        $signature = sha1($str);
-        $this->assign("appid",$appId);
-        $this->assign("timestamp",$timestamp);
-        $this->assign("nonceStr",$noncestr);
-        $this->assign("signature",$signature);
-        $this->assign("shareurl",$this->getShareUrl());
-        $this->assign('gid', $gid);
-
-        $this->assign('title',$this->title);
-        $this->assign('bonusdesc',$this->bonusdesc);
-        $this->assign("imageUrl",$this->imageUrl);
-        $this->assign("shareimageurl",$this->shareImageUrl);
-        //end
-
-
        //current sequence
         $sequence = $info['sequence'];
         // $sequence = 1 : 还没有进行过投票
@@ -480,9 +457,10 @@ class CountmaskAction extends SjzAction {
             $currentNeedVote = 0;
         }
         $this->assign('needvote', $currentNeedVote);
+        $this->assign('username', $info['name']);
+        $this->assign('totalnumber', $info['number']);
         $this->assign('couldcountmaskagain', $couldCountMaskAgain);
         $this->assign('couldcountmaskagainbutton', $showCountMaskAgain);
-        Log :: write("$showCountMaskAgain  $sequence aaaaaaaaaaaaaaaaaaaaaaaaaa");
         $this->display();
     }
 
