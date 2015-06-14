@@ -78,7 +78,14 @@
                 //alert('用户点击分享到朋友圈');
             },
             success: function (res) {
-                //如果分享成功 加50分
+                $.get(
+                        "{pigcms::$siteurl}/index.php?g=Wap&m=Countmask&a=saveShareNumberToFriends",
+                        function(data) {
+                            if(data == '1'){
+                                mnAlert("分享成功！");
+                            }
+                        }
+                );
             },
             cancel: function (res) {
                 //alert('已取消');
@@ -97,7 +104,14 @@
                 //alert('用户点击发送给朋友');
             },
             success: function (res) {
-                //如果分享成功 加50分
+                $.get(
+                        "{pigcms::$siteurl}/index.php?g=Wap&m=Countmask&a=saveShareNumberToFriends",
+                        function(data) {
+                            if(data == '1'){
+                                mnAlert("分享成功！");
+                            }
+                        }
+                );
             },
             cancel: function (res) {
                 //alert('已取消');

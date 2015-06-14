@@ -788,6 +788,20 @@ class CountmaskAction extends SjzAction {
         }
     }
 
+
+    /*
+     * 记录转发次数
+     */
+    public function saveShareNumberToFriends(){
+        $userOpenId= cookie('user_openid');
+        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        if($info){
+            $id = $info['id'];
+            M("countmask")->where(array('id' => $id))->setInc('share');
+            echo 1;
+        }
+        echo 0;
+    }
     /**
      * 获得微信用户信息
      * @param type $code
