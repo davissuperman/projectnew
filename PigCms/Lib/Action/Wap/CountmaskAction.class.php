@@ -4,7 +4,24 @@ class CountmaskAction extends SjzAction {
     public $title = '森田药妆数面膜';
     public $bonusdesc = '森田药妆数面膜';
     public $eachVote = 10;
+    public $imageUrl;
+    public $shareImageUrl;
 
+    public function _initialize() {
+        parent :: _initialize();
+        $this->imageUrl = "http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/present/images/logo1.jpg';
+        $this->shareImageUrl = "http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/present/images/logo1.jpg';
+    }
+
+    public function getShareUrl(){
+        $userOpenId= cookie('user_openid');
+        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        if($info){
+            return $this->url."/index.php?g=Wap&m=Countmask&a=sharefriend&uid=".$info['id'];
+        }else{
+            return $this->url."/index.php?g=Wap&m=Countmask&a=index";
+        }
+    }
     public function getDiymenSet(){
         $gid = 1;
         $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
@@ -137,6 +154,7 @@ class CountmaskAction extends SjzAction {
 
 
 
+        //begin 分享出去的URL
         list($ticket,$appId,$gid) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
         $timestamp = time();
@@ -147,13 +165,14 @@ class CountmaskAction extends SjzAction {
         $this->assign("timestamp",$timestamp);
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
-        $this->assign("url",$url);
+        $this->assign("url",$this->getShareUrl());
         $this->assign('gid', $gid);
 
         $this->assign('title',$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
-        $this->assign("imageUrl","http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/present/images/logo1.jpg');
-        $this->assign("shareimageurl","http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/present/images/logo1.jpg');
+        $this->assign("imageUrl",$this->imageUrl);
+        $this->assign("shareimageurl",$this->shareImageUrl);
+        //end
 
         $urlGame = $this->url."/index.php?g=Wap&m=Countmask&a=game";
         if($firstStart == false){
@@ -164,9 +183,54 @@ class CountmaskAction extends SjzAction {
     }
 
     public function game(){
+        $userOpenId= cookie('user_openid');
+        if(!$userOpenId){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+        }
+
+        //begin 分享出去的URL
+        list($ticket,$appId,$gid) = $this->getDiymenSet();
+        $noncestr = "Wm3WZYTPz0wzccnW";
+        $timestamp = time();
+        $url = $this->get_url();;
+        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
+        $signature = sha1($str);
+        $this->assign("appid",$appId);
+        $this->assign("timestamp",$timestamp);
+        $this->assign("nonceStr",$noncestr);
+        $this->assign("signature",$signature);
+        $this->assign("url",$this->getShareUrl());
+        $this->assign('gid', $gid);
+
+        $this->assign('title',$this->title);
+        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign("imageUrl",$this->imageUrl);
+        $this->assign("shareimageurl",$this->shareImageUrl);
+        //end
+
         $this->display();
     }
     public function rule(){
+        //begin 分享出去的URL
+        list($ticket,$appId,$gid) = $this->getDiymenSet();
+        $noncestr = "Wm3WZYTPz0wzccnW";
+        $timestamp = time();
+        $url = $this->get_url();;
+        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
+        $signature = sha1($str);
+        $this->assign("appid",$appId);
+        $this->assign("timestamp",$timestamp);
+        $this->assign("nonceStr",$noncestr);
+        $this->assign("signature",$signature);
+        $this->assign("url",$this->getShareUrl());
+        $this->assign('gid', $gid);
+
+        $this->assign('title',$this->title);
+        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign("imageUrl",$this->imageUrl);
+        $this->assign("shareimageurl",$this->shareImageUrl);
+        //end
         $this->display();
     }
     public function score(){
@@ -176,6 +240,26 @@ class CountmaskAction extends SjzAction {
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
         }
+
+        //begin 分享出去的URL
+        list($ticket,$appId,$gid) = $this->getDiymenSet();
+        $noncestr = "Wm3WZYTPz0wzccnW";
+        $timestamp = time();
+        $url = $this->get_url();;
+        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
+        $signature = sha1($str);
+        $this->assign("appid",$appId);
+        $this->assign("timestamp",$timestamp);
+        $this->assign("nonceStr",$noncestr);
+        $this->assign("signature",$signature);
+        $this->assign("url",$this->getShareUrl());
+        $this->assign('gid', $gid);
+
+        $this->assign('title',$this->title);
+        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign("imageUrl",$this->imageUrl);
+        $this->assign("shareimageurl",$this->shareImageUrl);
+        //end
 
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         $currentSequence = $info['sequence'];
@@ -283,6 +367,26 @@ class CountmaskAction extends SjzAction {
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
         }
+        //begin 分享出去的URL
+        list($ticket,$appId,$gid) = $this->getDiymenSet();
+        $noncestr = "Wm3WZYTPz0wzccnW";
+        $timestamp = time();
+        $url = $this->get_url();;
+        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
+        $signature = sha1($str);
+        $this->assign("appid",$appId);
+        $this->assign("timestamp",$timestamp);
+        $this->assign("nonceStr",$noncestr);
+        $this->assign("signature",$signature);
+        $this->assign("url",$this->getShareUrl());
+        $this->assign('gid', $gid);
+
+        $this->assign('title',$this->title);
+        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign("imageUrl",$this->imageUrl);
+        $this->assign("shareimageurl",$this->shareImageUrl);
+        //end
+
         if($info['phone']){
             //已经提交过手机号
         }else{
@@ -296,6 +400,7 @@ class CountmaskAction extends SjzAction {
 
 
 
+        //begin 分享出去的URL
         list($ticket,$appId,$gid) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
         $timestamp = time();
@@ -306,10 +411,14 @@ class CountmaskAction extends SjzAction {
         $this->assign("timestamp",$timestamp);
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
-        $this->assign("url",$this->url."/index.php?g=Wap&m=Countmask&a=sharefriend&uid=".$uid);
+        $this->assign("url",$this->getShareUrl());
         $this->assign('gid', $gid);
-        $this->assign('username', $info['name']);
-        $this->assign('totalnumber', $info['number']);
+
+        $this->assign('title',$this->title);
+        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign("imageUrl",$this->imageUrl);
+        $this->assign("shareimageurl",$this->shareImageUrl);
+        //end
 
 
        //current sequence
@@ -430,6 +539,29 @@ class CountmaskAction extends SjzAction {
                 exit;
             }
         }
+
+        //begin 分享出去的URL
+        list($ticket,$appId,$gid) = $this->getDiymenSet();
+        $noncestr = "Wm3WZYTPz0wzccnW";
+        $timestamp = time();
+        $url = $this->get_url();;
+        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
+        $signature = sha1($str);
+        $this->assign("appid",$appId);
+        $this->assign("timestamp",$timestamp);
+        $this->assign("nonceStr",$noncestr);
+        $this->assign("signature",$signature);
+        $this->assign("url",$this->getShareUrl());
+        $this->assign('gid', $gid);
+
+        $this->assign('title',$this->title);
+        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign("imageUrl",$this->imageUrl);
+        $this->assign("shareimageurl",$this->shareImageUrl);
+        //end
+
+
+
         //local open id $userOpenId
 
 
@@ -514,6 +646,28 @@ class CountmaskAction extends SjzAction {
 
     public function rank(){
         $userOpenId= cookie('user_openid');
+
+        //begin 分享出去的URL
+        list($ticket,$appId,$gid) = $this->getDiymenSet();
+        $noncestr = "Wm3WZYTPz0wzccnW";
+        $timestamp = time();
+        $url = $this->get_url();;
+        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
+        $signature = sha1($str);
+        $this->assign("appid",$appId);
+        $this->assign("timestamp",$timestamp);
+        $this->assign("nonceStr",$noncestr);
+        $this->assign("signature",$signature);
+        $this->assign("url",$this->getShareUrl());
+        $this->assign('gid', $gid);
+
+        $this->assign('title',$this->title);
+        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign("imageUrl",$this->imageUrl);
+        $this->assign("shareimageurl",$this->shareImageUrl);
+        //end
+
+
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         $number = $info['number'];
         $count = M('countmask')->where("number > $number")->count();
@@ -521,6 +675,53 @@ class CountmaskAction extends SjzAction {
         $this->assign('number', $number);
         $this->assign('share', $info['share']);
         $this->display();
+    }
+
+    public function award(){
+        //begin 分享出去的URL
+        list($ticket,$appId,$gid) = $this->getDiymenSet();
+        $noncestr = "Wm3WZYTPz0wzccnW";
+        $timestamp = time();
+        $url = $this->get_url();;
+        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
+        $signature = sha1($str);
+        $this->assign("appid",$appId);
+        $this->assign("timestamp",$timestamp);
+        $this->assign("nonceStr",$noncestr);
+        $this->assign("signature",$signature);
+        $this->assign("url",$this->getShareUrl());
+        $this->assign('gid', $gid);
+
+        $this->assign('title',$this->title);
+        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign("imageUrl",$this->imageUrl);
+        $this->assign("shareimageurl",$this->shareImageUrl);
+        //end
+        $this->display();
+    }
+
+    public function  saveAward(){
+        $return = 0;
+        $userOpenId= cookie('user_openid');
+        $award = M('countmask_award')->where(array('openid' => $userOpenId))->find();
+        if(!$award){
+            $name = $_POST['name'];
+            $phone = $_POST['phone'];
+            $province = $_POST['province'];
+            $city = $_POST['city'];
+            $address = $_POST['address'];
+            $m = array();
+            $m['name'] = $name;
+            $m['phone'] = $phone;
+            $m['province'] = $province;
+            $m['city'] = $city;
+            $m['address'] = $address;
+            M('countmask_award')->add($m);
+            $return = 1;
+        }
+
+        echo $return;
+
     }
     /**
      * 获取用户基本信息并且保存到数据库
