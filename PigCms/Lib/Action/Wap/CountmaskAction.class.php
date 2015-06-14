@@ -178,6 +178,7 @@ class CountmaskAction extends SjzAction {
         if($firstStart == false){
             $urlGame = $this->url."/index.php?g=Wap&m=Countmask&a=sharenumber";
         }
+        Log :: write($urlGame .' gggggggggggggg');
         $this->assign('urlgame',$urlGame);
         $this->display();
     }
