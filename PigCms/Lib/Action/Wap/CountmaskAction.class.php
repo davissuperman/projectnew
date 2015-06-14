@@ -373,7 +373,7 @@ class CountmaskAction extends SjzAction {
         $this->assign('needvote', $currentNeedVote);
         $this->assign('couldcountmaskagain', $couldCountMaskAgain);
         $this->assign('couldcountmaskagainbutton', $showCountMaskAgain);
-        Log :: write("$showCountMaskAgain aaaaaaaaaaaaaaaaaaaaaaaaaa");
+        Log :: write("$showCountMaskAgain  $sequence aaaaaaaaaaaaaaaaaaaaaaaaaa");
         $this->display();
     }
 
