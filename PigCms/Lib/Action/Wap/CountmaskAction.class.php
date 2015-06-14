@@ -704,6 +704,7 @@ class CountmaskAction extends SjzAction {
             $m['province'] = $province;
             $m['city'] = $city;
             $m['address'] = $address;
+            $m['createtime'] = time();
             M('countmask_award')->add($m);
             $return = 1;
         }
