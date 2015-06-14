@@ -167,9 +167,10 @@ class CountmaskAction extends SjzAction {
         $this->assign("timestamp",$timestamp);
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
+            Log :: write('bbbbbbbbbbbbbbbbbb '.$this->url);
         $this->assign("url",$this->getShareUrl());
         $this->assign('gid', $gid);
-
+            Log :: write('eeeeeeeeeeeeeeeeeeeeee '.$this->url);
         $this->assign('title',$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
         $this->assign("imageUrl",$this->imageUrl);
