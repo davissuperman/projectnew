@@ -152,7 +152,7 @@
                 <div style="margin-top:0.4rem;"><span class="btn05 btn-disabled" title="帮忙投票" id="helpvote">帮忙投票</span></div>
             </if>
 
-            <div style="margin-top:0.1rem;"><a class="btn06" href="{pigcms::$siteurl}/index.php?g=Wap&m=Countmask&a=game" title="我也要参加">我也要参加</a></div>
+            <div style="margin-top:0.1rem;"><a id="ineedjoin" class="btn06" href="{pigcms::$siteurl}/index.php?g=Wap&m=Countmask&a=game" title="我也要参加">我也要参加</a></div>
         </if>
         <div style="margin-top:0.1rem;"><a class="btn07" href="{pigcms::$siteurl}/index.php?g=Wap&m=Countmask&a=rule" title="活动介绍">活动介绍</a></div>
     </div>
@@ -183,6 +183,20 @@
                     });
                 }
         );
+
+        $("#ineedjoin").click(function(){
+            var formData = {toopenid:"{pigcms::$toopenid}"};
+            $.ajax({
+                url: "{pigcms::$siteurl}/index.php?g=Wap&m=Countmask&a=saveWantJoin",
+                type:'POST',
+                complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
+                data : formData,
+                error: function() { mnAlert('系统繁忙 请稍后再试');$this.html("点击加载全部");},
+                success: function(data) {
+                }
+
+            });
+        });
 
     });
 </script>
