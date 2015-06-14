@@ -178,7 +178,6 @@ class CountmaskAction extends SjzAction {
         if($firstStart == false){
             $urlGame = "http://wx.drjou.cc"."/index.php?g=Wap&m=Countmask&a=sharenumber";
         }
-        Log :: write($urlGame .' gggggggggggggg  '.$this->url);
         $this->assign('urlgame',$urlGame);
         $this->display();
     }
@@ -573,6 +572,7 @@ class CountmaskAction extends SjzAction {
         $this->assign('name', $userName);
         $this->assign('number', $number);
         $sequence = $infoTO['sequence'];
+        $leftVote = $this->eachVote;
         if($sequence == 1){
             //第一次 还差多少票
             $infoList = M('countmask_list')->where(array('openid' => $toUserOpenId,'sequence'=>$sequence))->find();
@@ -583,6 +583,14 @@ class CountmaskAction extends SjzAction {
         $this->assign('fromopenid', $userOpenId);
         $this->assign('toopenid', $toUserOpenId);
         $this->assign('sequence', $sequence);
+
+        //是否显示 帮忙投票
+        $showVoteButton = 1;
+        if($userOpenId == $toUserOpenId){
+            $showVoteButton = 0;
+        }
+        $this->assign('showvotebutton', $showVoteButton);
+        //end
 
         //local info
         $infoLocal = M('countmask')->where(array('openid' => $userOpenId))->find();

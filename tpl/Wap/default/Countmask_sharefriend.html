@@ -125,8 +125,10 @@
             <div class="c4">只需<strong class="c1" style="font-size:0.4rem;">30票，7500张</strong><br/>免费森药妆田面膜！</div>
             <div class="c4">就看谁手快！</div>
         </div>
-        <div style="margin-top:0.4rem;"><span class="btn05" title="帮忙投票" id="helpvote">帮忙投票</span></div>
-        <div style="margin-top:0.1rem;"><a class="btn06" href="{pigcms::$siteurl}/index.php?g=Wap&m=Countmask&a=game" title="我也要参加">我也要参加</a></div>
+        <if condition="$showvotebutton eq 1">
+            <div style="margin-top:0.4rem;"><span class="btn05" title="帮忙投票" id="helpvote">帮忙投票</span></div>
+            <div style="margin-top:0.1rem;"><a class="btn06" href="{pigcms::$siteurl}/index.php?g=Wap&m=Countmask&a=game" title="我也要参加">我也要参加</a></div>
+        </if>
         <div style="margin-top:0.1rem;"><a class="btn07" href="{pigcms::$siteurl}/index.php?g=Wap&m=Countmask&a=rule" title="活动介绍">活动介绍</a></div>
     </div>
     <div class="layer-box hide" id="layer-box">
