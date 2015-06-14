@@ -201,7 +201,7 @@ class CountmaskAction extends SjzAction {
             case 1://第一次满10票后
                 //判断用户是否满足条件
                 $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>1))->find();
-                if($infoList && $infoList['vote'] == $this->eachVote){
+                if($infoList && $infoList['vote'] >= $this->eachVote){
                     M("countmask")->where(array('id' =>$info['id']))->setInc('number', $number);
 
                     //更新sequence
@@ -221,7 +221,7 @@ class CountmaskAction extends SjzAction {
             case 2://第二次满10票后
                 //判断用户是否满足条件
                 $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>2))->find();
-                if($infoList && $infoList['vote'] == $this->eachVote){
+                if($infoList && $infoList['vote'] >= $this->eachVote){
                     M("countmask")->where(array('id' =>$info['id']))->setInc('number', $number);
 
                     //更新sequence
@@ -241,7 +241,7 @@ class CountmaskAction extends SjzAction {
             case 3://第三次满10票后
                 //判断用户是否满足条件
                 $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>3))->find();
-                if($infoList && $infoList['vote'] == $this->eachVote){
+                if($infoList && $infoList['vote'] >= $this->eachVote){
                     M("countmask")->where(array('id' =>$info['id']))->setInc('number', $number);
 
                     //更新sequence
