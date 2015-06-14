@@ -137,19 +137,14 @@
     <if condition="$couldcountmaskagain eq true">
         <div style="margin-top:0.5rem;">
             <a class="btn03" href="{pigcms::$siteurl}/index.php?g=Wap&m=Countmask&a=game">
-                ccc再数一次
+                再数一次
             </a>
         </div>
-    <elseif condition="$couldcountmaskagainbutton eq 0" />
-        <div style="margin-top:0.5rem;" style="display: none">
-            <a class="btn03" href="#">
-                aaaaaaa再数一次
-            </a>
-        </div>
+    <elseif condition="$couldcountmaskagain eq false and $couldcountmaskagainbutton eq 0" />
     <else />
         <div style="margin-top:0.5rem;">
             <a class="btn03" href="#">
-                bbbbbbbbbb再数一次
+               再数一次
             </a>
         </div>
     </if>
