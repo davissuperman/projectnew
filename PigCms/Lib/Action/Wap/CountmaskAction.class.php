@@ -329,7 +329,7 @@ class CountmaskAction extends SjzAction {
                 }else{
                     $currentNeedVote = 10;
                 }
-                if($infoList['vote'] == $this->eachVote){
+                if($infoList['vote'] >= $this->eachVote){
                     $couldCountMaskAgain = true;
                 }
                 break;
@@ -341,7 +341,7 @@ class CountmaskAction extends SjzAction {
                 }else{
                     $currentNeedVote = 10;
                 }
-                if($infoList['vote'] == $this->eachVote){
+                if($infoList['vote'] >= $this->eachVote){
                     $couldCountMaskAgain = true;
                 }
                 break;
@@ -353,7 +353,7 @@ class CountmaskAction extends SjzAction {
                 }else{
                     $currentNeedVote = 10;
                 }
-                if($infoList['vote'] == $this->eachVote){
+                if($infoList['vote'] >= $this->eachVote){
                     $couldCountMaskAgain = true;
                 }
                 break;
