@@ -189,6 +189,21 @@ class CountmaskAction extends SjzAction {
             header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
         }
 
+        //首先判断当前用户是否有玩过第一次
+        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $firstStart = true;
+        if($info){
+            //判断当前用户 sequence
+            $currentSequence = $info['sequence'];
+            if($currentSequence > 0){
+                $firstStart = false;
+                header("location:$this->url/index.php?g=Wap&m=Countmask&a=sharenumber");
+            }
+
+        }else{
+            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+        }
+
         //begin 分享出去的URL
         list($ticket,$appId,$gid) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
