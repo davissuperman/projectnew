@@ -799,8 +799,10 @@ class CountmaskAction extends SjzAction {
             $id = $info['id'];
             M("countmask")->where(array('id' => $id))->setInc('share');
             echo 1;
+        }else{
+            echo 0;
         }
-        echo 0;
+
     }
     /**
      * 获得微信用户信息

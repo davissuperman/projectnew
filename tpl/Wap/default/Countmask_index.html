@@ -113,7 +113,6 @@
                     complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
                     error: function() { mnAlert('系统繁忙 请稍后再试');},
                     success: function(data) {
-                        alert(data);
                         if(data == 1){
                             mnAlert("分享成功！");
                         }
