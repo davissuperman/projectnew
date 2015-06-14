@@ -145,6 +145,7 @@ class CountmaskAction  extends BonusAction {
                 $cheat = "<font style='color:red'>是</font>";
             }
             $tmp['cheat'] = $cheat;
+            $tmp['telephone'] = $each['phone'];
             $tmp['share'] = $each['share'];
             $tmp['vote'] = $each['vote'];
             $tmp['joins'] = $each['joins'];
@@ -167,10 +168,6 @@ class CountmaskAction  extends BonusAction {
                 $tmp['sex'] = "未知";
             }
             $tmp['province'] = $fansInfo['province'];
-            $map['openid']  = $each['openid'];
-            $map['telephone']  = array('gt',0);
-            $res = M('bonus_award')->where($map)->field('type,telephone')->find();
-            $tmp['tel'] = $res['telephone'];
 
             $infoList[] = $tmp;
         }
