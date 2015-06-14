@@ -357,6 +357,9 @@ class CountmaskAction extends SjzAction {
                     $couldCountMaskAgain = true;
                 }
                 break;
+            default:
+                //三次机会用完
+                
         }
 
         if($currentNeedVote < 0){
