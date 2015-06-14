@@ -513,6 +513,13 @@ class CountmaskAction extends SjzAction {
     }
 
     public function rank(){
+        $userOpenId= cookie('user_openid');
+        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $number = $info['number'];
+        $count = M('countmask')->where("number > $number")->count();
+        $this->assign('count', $count);
+        $this->assign('number', $number);
+        $this->assign('share', $info['share']);
         $this->display();
     }
     /**
