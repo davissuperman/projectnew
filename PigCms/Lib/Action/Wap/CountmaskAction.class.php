@@ -359,9 +359,12 @@ class CountmaskAction extends SjzAction {
                     $couldCountMaskAgain = true;
                 }
                 break;
-            default:
+            case 4:
                 //三次机会用完，在数一次按钮隐藏
                 $showCountMaskAgain = false;
+                break;
+            default:
+
         }
 
         if($currentNeedVote < 0){
