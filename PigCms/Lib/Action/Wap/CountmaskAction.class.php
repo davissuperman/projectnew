@@ -660,10 +660,6 @@ class CountmaskAction extends SjzAction {
             $info = M('countmask')->where(array('openid' => $toOpenIdFromPost))->find();
             $sequence = $info['sequence'];
 
-            //帮忙投票 点击次数
-            M('countmask')->where(array('id' => $info['id']))->setInc('vote');
-
-
             $c = M('countmask_list')->where(array('openid' => $toOpenIdFromPost,'sequence' => $sequence))->find();
             //是否存在这次机会
             if(!$c){
@@ -850,12 +846,23 @@ class CountmaskAction extends SjzAction {
     }
 
     /*
-   * 记录 我也要参加 次数
-   */
+    * 记录 我也要参加 次数
+    */
     public function saveWantJoin(){
         $toOpenId = $_POST['toopenid'];
         $info = M('countmask')->where(array('openid' => $toOpenId))->find();
         M("countmask")->where(array('id' => $info['id']))->setInc('joins');
+
+    }
+
+    /*
+    * 记录 帮忙投票 次数
+    */
+    public function saveHelpVote(){
+        //帮忙投票 点击次数
+        $toOpenId = $_POST['toopenid'];
+        $info = M('countmask')->where(array('openid' => $toOpenId))->find();
+        M("countmask")->where(array('id' => $info['id']))->setInc('vote');
 
     }
     /**

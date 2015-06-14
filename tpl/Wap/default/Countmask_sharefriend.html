@@ -163,6 +163,19 @@
 <script>
     $(function(){
         $("#helpvote").click(function(){
+                    var formDataHelpVote = {toopenid:"{pigcms::$toopenid}"};
+                    $.ajax({
+                        url: "{pigcms::$siteurl}/index.php?g=Wap&m=Countmask&a=saveHelpVote",
+                        type:'POST',
+                        complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
+                        data : formDataHelpVote,
+                        error: function() { mnAlert('系统繁忙 请稍后再试');$this.html("点击加载全部");},
+                        success: function(data) {
+                        }
+
+                    });
+
+
                     var formData = {fromopenid:"{pigcms::$fromopenid}",toopenid:"{pigcms::$toopenid}",'tousersequence':"{pigcms::$sequence}"}; //Array
                     $.ajax({
                         url: "{pigcms::$siteurl}/index.php?g=Wap&m=Countmask&a=saveVote",
