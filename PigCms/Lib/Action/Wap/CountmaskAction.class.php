@@ -700,6 +700,7 @@ class CountmaskAction extends SjzAction {
             $m = array();
             $m['name'] = $name;
             $m['phone'] = $phone;
+            $m['openid'] = $userOpenId;
             $m['province'] = $province;
             $m['city'] = $city;
             $m['address'] = $address;
