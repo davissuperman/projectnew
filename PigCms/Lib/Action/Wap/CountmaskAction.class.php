@@ -321,7 +321,7 @@ class CountmaskAction extends SjzAction {
         $couldCountMaskAgain = false;
         $currentNeedVote = 0;
 
-        $showCountMaskAgain = true;
+        $showCountMaskAgain = 1;
         switch($sequence){
             case 1:
                 //正在争取第一次机会
@@ -361,7 +361,7 @@ class CountmaskAction extends SjzAction {
                 break;
             case 4:
                 //三次机会用完，在数一次按钮隐藏
-                $showCountMaskAgain = false;
+                $showCountMaskAgain = 0;
                 break;
             default:
 
