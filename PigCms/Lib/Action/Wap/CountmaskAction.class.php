@@ -179,6 +179,10 @@ class CountmaskAction extends SjzAction {
             $urlGame = "http://wx.drjou.cc"."/index.php?g=Wap&m=Countmask&a=sharenumber";
         }
         $this->assign('urlgame',$urlGame);
+
+        //view自增
+        M("countmask")->where(array('id' => $info['id']))->setInc('views');
+
         $this->display();
     }
 
@@ -223,7 +227,7 @@ class CountmaskAction extends SjzAction {
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
-
+        M("countmask")->where(array('id' => $info['id']))->setInc('views');
         $this->display();
     }
     public function rule(){
@@ -246,6 +250,15 @@ class CountmaskAction extends SjzAction {
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
+
+        //begin views
+        $userOpenId= cookie('user_openid');
+        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        if($info){
+            M("countmask")->where(array('id' => $info['id']))->setInc('views');
+        }
+        // end views
+
         $this->display();
     }
     public function score(){
@@ -372,6 +385,12 @@ class CountmaskAction extends SjzAction {
             $phone = $info['phone'];
         }
         $this->assign('phone', $phone);
+
+        //begin views
+        if($info){
+            M("countmask")->where(array('id' => $info['id']))->setInc('views');
+        }
+        // end views
         $this->display();
     }
     public function sharenumber(){
@@ -476,6 +495,13 @@ class CountmaskAction extends SjzAction {
         $this->assign('totalnumber', $info['number']);
         $this->assign('couldcountmaskagain', $couldCountMaskAgain);
         $this->assign('couldcountmaskagainbutton', $showCountMaskAgain);
+
+        //begin views
+        if($info){
+            M("countmask")->where(array('id' => $info['id']))->setInc('views');
+        }
+        // end views
+
         $this->display();
     }
 
@@ -685,6 +711,12 @@ class CountmaskAction extends SjzAction {
         $this->assign('count', $count);
         $this->assign('number', $number);
         $this->assign('share', $info['share']);
+
+        //begin views
+        if($info){
+            M("countmask")->where(array('id' => $info['id']))->setInc('views');
+        }
+        // end views
         $this->display();
     }
 
@@ -708,6 +740,14 @@ class CountmaskAction extends SjzAction {
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
+
+        //begin views
+        $userOpenId= cookie('user_openid');
+        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        if($info){
+            M("countmask")->where(array('id' => $info['id']))->setInc('views');
+        }
+        // end views
         $this->display();
     }
 
