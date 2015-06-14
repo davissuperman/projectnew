@@ -359,7 +359,9 @@ class CountmaskAction extends SjzAction {
                 break;
         }
 
-
+        if($currentNeedVote < 0){
+            $currentNeedVote = 0;
+        }
         $this->assign('needvote', $currentNeedVote);
         $this->assign('couldcountmaskagain', $couldCountMaskAgain);
         $this->display();
