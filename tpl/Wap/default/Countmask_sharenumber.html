@@ -122,7 +122,7 @@
     <div class="title">{pigcms::$username}的游戏得分:</div>
     <div class="score"><span class="score">{pigcms::$totalnumber}</span></div>
     <if condition="$couldcountmaskagainbutton eq 1">
-        <if condition="$couldcountmaskagainbutton gt 0">
+        <if condition="$needvote gt 0">
             <div class="des">再请<span class="c1">{pigcms::$needvote}</span>位好友帮忙</div>
             <div class="c2" style="font-size:0.2rem;margin-top:0.1rem;">点击“<span class="c3">找人来帮忙</span>”，获取更多数面膜机会。</div>
         <else />
