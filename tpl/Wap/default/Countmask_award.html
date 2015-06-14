@@ -182,8 +182,23 @@
             mnAlert("请输入您的具体地址！");
             return false;
         }
-        mnAlert("信息提交成功！");
-        $(".layerBtn").attr("onclick",'window.location.href="{pigcms::$siteurl}/index.php?g=Wap&m=Countmask&a=index"');
+        var formData = {name:name,phone:phone,province:province,city:city,address:address}; //Array
+        $.ajax({
+            url: "{pigcms::$siteurl}/index.php?g=Wap&m=Countmask&a=saveAward",
+            type:'POST',
+            complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
+            data : formData,
+            error: function() { mnAlert('系统繁忙 请稍后再试');$this.html("点击加载全部");},
+            success: function(data) {
+                if(data == 1){
+                    mnAlert("信息提交成功！");
+                }else{
+                    mnAlert('系统繁忙 请稍后再试');
+                }
+            }
+
+        });
+        //$(".layerBtn").attr("onclick",'window.location.href="{pigcms::$siteurl}/index.php?g=Wap&m=Countmask&a=index"');
         //$("#myform").submit();
     }
 </script>
