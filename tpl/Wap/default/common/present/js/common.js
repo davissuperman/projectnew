@@ -38,6 +38,7 @@ function startGame(){
 	}
 	//if(!$mm_box.hasClass("gameover")){
 		numbers++;
+		$("#mm-nums").html(numbers);
 		$animation.show();
 		var top = 2+"rem",height = 0.5 + 'rem';
 		$animation.animate({top:'-'+top,height:height}, 'fast', '', function(){

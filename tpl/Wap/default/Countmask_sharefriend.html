@@ -186,8 +186,12 @@
                         success: function(data) {
                             if(data == 1){
                                 $("#helpvote").addClass("btn-disabled");
-                                mnAlert("感谢您的投票一起来赢森田面膜礼盒吧！");
-                                window.location.href = '{pigcms::$redirecturl}';
+                                mnAlert("投票成功，一起参加赢取面膜好礼");
+								
+								setTimeout ("window.location.href = '{pigcms::$redirecturl}';",2000);
+                                
+								$(".layerBtn").attr("onclick",'window.location.href="{pigcms::$redirecturl}"');
+								$(".layerBtn").html("即将进入游戏首页>>>");
                             }else{
                                 window.location.href = '{pigcms::$redirecturl}';
                             }
