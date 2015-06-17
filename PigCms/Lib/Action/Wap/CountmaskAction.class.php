@@ -774,12 +774,12 @@ class CountmaskAction extends SjzAction {
         $return = 0;
         $userOpenId= cookie('user_openid');
         $award = M('countmask_award')->where(array('openid' => $userOpenId))->find();
+        $name = $_POST['name'];
+        $phone = $_POST['phone'];
+        $province = $_POST['province'];
+        $city = $_POST['city'];
+        $address = $_POST['address'];
         if(!$award){
-            $name = $_POST['name'];
-            $phone = $_POST['phone'];
-            $province = $_POST['province'];
-            $city = $_POST['city'];
-            $address = $_POST['address'];
             $m = array();
             $m['name'] = $name;
             $m['phone'] = $phone;
@@ -789,6 +789,18 @@ class CountmaskAction extends SjzAction {
             $m['address'] = $address;
             $m['createtime'] = time();
             M('countmask_award')->add($m);
+            $return = 1;
+        }else{
+            $m = array();
+            $m['id'] = $award['id'];
+            $m['name'] = $name;
+            $m['phone'] = $phone;
+            $m['openid'] = $userOpenId;
+            $m['province'] = $province;
+            $m['city'] = $city;
+            $m['address'] = $address;
+            $m['createtime'] = time();
+            M('countmask_award')->save($m);
             $return = 1;
         }
 
