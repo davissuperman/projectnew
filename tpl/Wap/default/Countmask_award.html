@@ -173,12 +173,12 @@
 </div>
 <script type="text/javascript">
     function submitMsg(){
-        var $name = $("#name"),name = $.trim($name.val()),
-                $phone = $("#phone"),phone = $.trim($phone.val()),
-                $province = $("#province"),province = $.trim($province.val()),
-                $city = $("#city"),city = $.trim($city.val()),
-                $address = $("#address"),address = $.trim($address.val()),
-                isMobile = checkPhone(phone);
+        name = $("#name").val();
+        phone = $("#phone").val();
+        province = $("#province").val();
+        city = $("#city").val();
+        address = $("#address").val();
+        
         if(name == ''){
             mnAlert("请输入您的真实姓名！");
             return false;
@@ -186,7 +186,7 @@
         if(phone == ''){
             mnAlert("请输入您的手机号码！");
             return false;
-        }else if(!isMobile){
+        }else if(phone.length != 11){
             mnAlert("请输入正确的手机号码！");
             return false;
         }

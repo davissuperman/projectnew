@@ -773,6 +773,10 @@ class CountmaskAction extends SjzAction {
     public function  saveAward(){
         $return = 0;
         $userOpenId= cookie('user_openid');
+        if(!$userOpenId){
+            echo 0;
+            return;
+        }
         $award = M('countmask_award')->where(array('openid' => $userOpenId))->find();
         $name = $_POST['name'];
         $phone = $_POST['phone'];
