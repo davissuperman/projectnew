@@ -7,7 +7,7 @@ class CountmaskAction  extends BonusAction {
     }
 
     public function index() {
-        $db = M('countmask_group');
+        $db = M('bonus');
         $where = array('token' => $this->token);
         $count = $db->where($where)->count();
         $page = new Page($count, 25);
@@ -106,12 +106,12 @@ class CountmaskAction  extends BonusAction {
             $data['end'] = strtotime($_POST['end']);
             $data['createtime'] = time();
             if ($_POST['gid']) {
-                $qry = M("countmask_group")->where(array('gid' => $_POST['gid']))->save($data);
+                $qry = M("bonus")->where(array('gid' => $_POST['gid']))->save($data);
             } else {
-                $qry = M("countmask_group")->add($data);
+                $qry = M("bonus")->add($data);
             }
             if ($qry) {
-                $this->success('操作成功', U('Countmask/index', array('token' => $token)));
+                $this->success('操作成功', U('Countmask/index'));
                 exit;
             } else {
                 $this->error('操作失败');
@@ -119,7 +119,7 @@ class CountmaskAction  extends BonusAction {
             }
         } else {
             $where = array('gid' => $_GET['gid']);
-            $info = M("countmask_group")->where($where)->find();
+            $info = M("bonus")->where($where)->find();
             $this->assign('info', $info);
             $this->assign('token', $this->token);
             $this->display();
