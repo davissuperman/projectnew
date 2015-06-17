@@ -292,7 +292,11 @@ class CountmaskAction extends SjzAction {
         //end
 
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $phone = $info['phone'];
         $currentSequence = $info['sequence'];
+        if(!$phone){
+            $currentSequence = 0;
+        }
         switch($currentSequence){
             case 0:
                 $d = array();
