@@ -170,18 +170,19 @@ class CountmaskAction  extends BonusAction {
             }
             $tmp['province'] = $fansInfo['province'];
 
-            //根据openid获取收获地址
-            $awardInfo = M("countmask_award")->where(array("openid" => $each['openid']))->find();
-            if($info){
-                $tmp['awardusername'] = $awardInfo['name'];//收货人姓名
-                $tmp['awarduserphone'] = $awardInfo['phone'];//收货人手机号
-                $tmp['awarduserprovince'] = $awardInfo['phone'];//收货人省份
-                $tmp['awardusercity'] = $awardInfo['phone'];//收货人城市
-                $tmp['awarduseraddress'] = $awardInfo['phone'];//收货人地址
-            }
+//            //根据openid获取收获地址
+//            $awardInfo = M("countmask_award")->where(array("openid" => $each['openid']))->find();
+//            if($info){
+//                $tmp['awardusername'] = $awardInfo['name'];//收货人姓名
+//                $tmp['awarduserphone'] = $awardInfo['phone'];//收货人手机号
+//                $tmp['awarduserprovince'] = $awardInfo['phone'];//收货人省份
+//                $tmp['awardusercity'] = $awardInfo['phone'];//收货人城市
+//                $tmp['awarduseraddress'] = $awardInfo['phone'];//收货人地址
+//            }
 
             $infoList[] = $tmp;
         }
+//        var_dump($infoList);
         $this->assign('info', $infoList);
         $this->assign('page', $page->show());
         $this->assign('token', $this->token);
