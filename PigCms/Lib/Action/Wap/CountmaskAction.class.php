@@ -754,6 +754,19 @@ class CountmaskAction extends SjzAction {
             M("countmask")->where(array('id' => $info['id']))->setInc('views');
         }
         // end views
+
+        $this->assign('selfpage',$this->url."/index.php?g=Wap&m=Countmask&a=sharenumber");
+
+        $award = M('countmask_award')->where(array('openid' => $userOpenId))->find();
+        if($award){
+            $this->assign('name',$award['name']);
+            $this->assign('phone',$award['phone']);
+            $this->assign('province',$award['phone']);
+            $this->assign('city',$award['city']);
+            $this->assign('address',$award['address']);
+        }
+
+
         $this->display();
     }
 
