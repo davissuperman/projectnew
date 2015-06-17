@@ -198,9 +198,10 @@ class CountmaskAction extends SjzAction {
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         $firstStart = true;
         if($info){
+            $phone = $info['phone'];
             //判断当前用户 sequence
             $currentSequence = $info['sequence'];
-            if($currentSequence > 0){
+            if($currentSequence > 0 && $phone){
                 $firstStart = false;
                 header("location:$this->url/index.php?g=Wap&m=Countmask&a=sharenumber");
             }
