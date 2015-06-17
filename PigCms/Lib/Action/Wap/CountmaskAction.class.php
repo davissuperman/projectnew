@@ -143,9 +143,10 @@ class CountmaskAction extends SjzAction {
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         $firstStart = true;
         if($info){
-                //判断当前用户 sequence
+                //判断当前用户 sequence 并且 手机已经提交
+            $phone = $info['phone'];
             $currentSequence = $info['sequence'];
-            if($currentSequence > 0){
+            if($currentSequence > 0 && $phone){
                 $firstStart = false;
             }
 
