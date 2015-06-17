@@ -872,6 +872,12 @@ class CountmaskAction extends SjzAction {
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         if($info){
             $id = $info['id'];
+            if(!$info['sharetime']){
+                $m = array();
+                $m['id'] = $info['id'];
+                $m['sharetime'] = time();
+                M("countmask")->save($m);
+            }
             M("countmask")->where(array('id' => $id))->setInc('share');
             echo 1;
         }else{

@@ -151,6 +151,7 @@ class CountmaskAction  extends BonusAction {
             $tmp['joins'] = $each['joins'];
             $tmp['openid'] = $each['openid'];
             $tmp['number'] = $each['number'];
+            $tmp['phonetime'] = $each['phonetime'];
             $tmp['sharetime'] = $each['sharetime'];
             $fansInfo = M('customer_service_fans')->where(array('openid' => $each['openid'],'token'=>'rggfsk1394161441'))->find();
             $whetherSbuscribe = $fansInfo['subscribe'];
