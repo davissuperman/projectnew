@@ -95,19 +95,37 @@ position: absolute;
 right: 0.1rem;
 top: 0.15rem;}
 .index-box .img01{ background:url(../images/img01.png) no-repeat center;background-size:auto 100%; height:5.4rem;width:100%; position:absolute;top:0.2rem;}
-.index-box .btns{ background:url(../images/img02.png) no-repeat center;background-size:auto 100%; height:2.4rem;width:6rem; position:absolute;top:6rem;left:50%;margin-left:-3rem;}
-.index-box .btn-start{ position:absolute;top: 0;height: 1.2rem;width: 4.2rem;left: 50%;margin-left: -2.1rem; text-indent:-99999px; overflow:hidden;}
-.index-box .btn-rule{ position:absolute;top: 1.5rem;height: 0.88rem;width: 3rem;left: 50%;margin-left: -1.5rem; text-indent:-99999px; overflow:hidden;}
+.index-box .btns{ background:url(../images/new/img01.png) no-repeat center;background-size:auto 100%; height:3rem;width:6rem; position:absolute;top:6rem;left:50%;margin-left:-3rem;}
+.index-box .btn-start{ position:absolute;top: 0;height: 1rem;width: 4.4rem;left: 50%;margin-left: -2.2rem; text-indent:-99999px; overflow:hidden;}
+.index-box .btn-rule{ position:absolute;top: 2rem;height: 1rem;width: 4.4rem;left: 50%;margin-left: -2.2rem;text-indent:-99999px; overflow:hidden;}
 
 /*活动规则*/
-.rule-box{ background:url(../images/rule-bg.png) no-repeat center; width:100%; height:12rem;background-size:auto 100%; position:absolute;top:0.2rem;}
-.rule-box .title{ background:url(../images/tit.png) no-repeat center bottom;width:5.2rem;margin: 1.6rem auto 0 auto;height: 0.75rem;text-align:center;font-size: 0.5rem;color: #5f5855;font-weight: bold;background-size: 100% auto;}
+.rule-box{ background:url(../images/rule-bg.png) no-repeat center; width:100%; height:12rem;background-size:auto 100%; position:absolute;top:0.2rem; z-index:1;}
+.rule-box .title{ background:url(../images/tit.png) no-repeat center bottom;width:5.2rem;margin: 1.7rem auto 0 auto;height: 0.75rem;text-align:center;font-size: 0.45rem;color: #5f5855;font-weight: bold;background-size: 100% auto;}
 .rule-box ul{width:5rem; margin:0.3rem auto;font-size:0.26rem;}
 .rule-box ul li{ margin:0.2rem 0;}
 .rule-box .btn-back{ background:url(../images/r02.png) no-repeat center;background-size:auto 100%;width: 1.4rem;height: 0.5rem;
-position: absolute;bottom: 1rem;right: 0.8rem; cursor:pointer;}
+position: absolute;top: 1.7rem;right: 0.7rem; cursor:pointer;}
 .rule-box ul .label{float:left; background:#d9552a;height:0.45rem;line-height:0.45rem;width:1.2rem; text-align:center;color:#fff;}
 .rule-box ul .des{ float:right;width:3.6rem;color:#145d82; line-height:0.35rem;}
+
+.rule-con{ width:5rem; margin:0.2rem auto 0 auto;height: 8.5rem;}
+.rule-label{background: #d9552a;height: 0.5rem;line-height: 0.5rem;width: 1.5rem;text-align: center;color: #fff; margin:0.1rem auto;}
+.game-time{color:#145d82; background:#7ecef4; text-align:center; height:0.6rem; line-height:0.6rem; border-radius:0.1rem;}
+.prize-box{ background:#acd598;color:#145d82; margin:0.1rem 0; position:relative; height:2.3rem; border-radius:0.1rem;}
+.prize-box .img{background:url(../images/new/img02.png) no-repeat; width:1.3rem;height:2rem;background-size:auto 100%; position:absolute;top:0.1rem;left:0.1rem;}
+.prize-box .num{ position:absolute;left:1.45rem;top:0.9rem;color:#06558b;font-size:0.4rem;}
+.prize-box .txt{ position:absolute;left:2.2rem;width:2.75rem;font-size:0.26rem;top:0.1rem; line-height:0.35rem;}
+
+.rule-panel{ background:#fff799; border-radius:0.1rem;color:#000; padding:0.1rem; font-size:0.25rem; line-height:0.35rem; margin-bottom:0.1rem; position:relative; height:3.2rem;}
+.rule-panel .img{background:url(../images/new/img03.png) no-repeat; width:4.4rem;height:1.2rem;background-size:auto 100%; position:absolute;bottom:0rem;left:50%; margin-left:-2.2rem;}
+.rule-panel .no{color:#7d0022; position: absolute; font-size:0.2rem;}
+.rule-panel .no1{ left:2rem; bottom:1.2rem;}
+.rule-panel .no2{ left:0.6rem; bottom:1rem;}
+.rule-panel .no3{ left:3.4rem; bottom:0.9rem;}
+
+.illegal{ background:#ffa5a8; padding:0.1rem; border-radius:0.1rem; font-size:0.26rem; line-height:0.35rem; margin-bottom:0.2rem;}
+.rule-bg{ background:#fff; position:absolute;left:0;top:11.5rem;width:100%; height:11rem; z-index:0;}
 
 /*游戏*/
 .game-box{ margin:0.3rem 0.2rem; position:relative; height:8.5rem;}
