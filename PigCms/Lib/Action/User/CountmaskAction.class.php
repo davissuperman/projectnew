@@ -129,7 +129,7 @@ class CountmaskAction  extends BonusAction {
     public function slist() {
         $gid = $_GET['gid'];
         $db = M('countmask');
-        $where = array('gid' => $gid);
+        $where = array('gid' => $gid,'phone'=>array('neq',''));
         $count = $db->where($where)->count();
         $page = new Page($count, 25);
         $info = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->order('number desc')->select();
@@ -217,7 +217,7 @@ class CountmaskAction  extends BonusAction {
 //        $end = $_POST['end'];
         $end=$end-$start;
         $start=$start-1;
-        $list = M('bonus_info')->query(
+        $list = M('countmask')->query(
             "SELECT info.*, info.number n,award.telephone tels,bonus.title tel,award.province as city, award.address as addres,award.type as type,award.telephone as tels,award.province as city,
 award.address as addres,award.orderid as orderid,award.username as username from tp_bonus_info as info
              left join tp_bonus_award as award on (award.openid=info.openid)
@@ -387,32 +387,23 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $enda = $_POST['end'];
         $start = strtotime($_POST['start']);
         $end = strtotime($_POST['end']);
-        $db = M('bonus_info');
-        $sql = "select  openid as ID,tel,name,createtime,sharetime,share,views,vote,joins,number as n
-        from tp_bonus_info  where createtime>" . $start . " and createtime<" . $end . " order by number desc";
+        $db = M('countmask');
+        $sql = "select  openid as ID,tel,name,phonetime,sharetime,share,views,uniqueviews,vote,joins,number as n
+        from tp_countmask  where phonetime>" . $start . " and phone<" . $end . " and phone != '' order by number desc";
         $list = M()->query($sql);
-//        foreach ($list as $key => $value) {
-//            $list[$key]['ID'] = $key;
-//            $list[$key]['createtime'] = date('Y-m-d H:i:s', $list[$key]['createtime']);
-//            if ($list[$key]['sharetime'] == 0) {
-//                $list[$key]['sharetime'] = '无';
-//            } else {
-//                $list[$key]['sharetime'] = date('Y-m-d H:i:s', $list[$key]['sharetime']);
-//            }
-//        }
         $listArr = array();
         foreach($list as $key => $each){
-            $awardInfo = '';
+            $awardInfo = array();
             $tmp = $each;
             if($each['sharetime']){
                 $tmp['sharetime'] = date('Y-m-d H:i:s', $tmp['createtime']);
             }else{
                 $tmp['sharetime'] = "无";
             }
-            if($each['createtime']){
-                $tmp['createtime'] = date('Y-m-d H:i:s', $tmp['createtime']);
+            if($each['phonetime']){
+                $tmp['phonetime'] = date('Y-m-d H:i:s', $tmp['phonetime']);
             }else{
-                $tmp['createtime'] = "无";
+                $tmp['phonetime'] = "无";
             }
             if($each['views']< $each['vote'] || $each['illegal']){
                 $tmp['illegal'] = "是";
@@ -420,30 +411,22 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 $tmp['illegal'] = "否";
             }
             $condition['openid'] = $each['openid'];
-            $resAwardList = M('bonus_award')->where($condition)->field('type,telephone')->select();
+            $resAwardList = M('countmask_award')->where($condition)->select();
             if($resAwardList){
-                $phone = '';
                 foreach($resAwardList as $award){
-                    if($award['telephone']){
-                        $phone = $award['telephone'];
-                    }
-                    if($award['type'] == 1){
-                        $awardInfo .= '一等奖； ';
-                    }else if($award['type'] == 2){
-                        $awardInfo .= '二等奖； ';
-                    }else if($award['type'] == 3 && $award['orderid'] != ''){
-                        $awardInfo .= '三等奖； ';
-                    }else if($award['type'] == 4 & $award['orderid'] != ''){
-                        $awardInfo .= '四等奖；';
-                    }
+                    $awardInfo['name'] = $award['name'];
+                    $awardInfo['phone'] = $award['phone'];
+                    $awardInfo['province'] = $award['province'];
+                    $awardInfo['city'] = $award['city'];
+                    $awardInfo['address'] = $award['address'];
                 }
             }
             $tmp['awardlist'] = $awardInfo;
-            $tmp['phone'] = $phone;
+            $tmp['phone'] = $each['phone'];
 
             $listArr[] = $tmp;
         }
-        //   $title = array('ID', '电话', '姓名', '参与时间', '首次分享时间', '总分数', '转发数', '浏览数', '点赞数', '扩散数');
+        $title = array('ID', '电话', '姓名', '参与时间', '首次分享时间', '总分数', '转发数', '浏览数', '点赞数', '扩散数');
         $filename = $starta . "~" . $enda . "统计";
         $this->exportexcel($listArr, $title, $filename);
     }
@@ -467,12 +450,12 @@ award.address as addres,award.orderid as orderid,award.username as username from
         //写出表头
         $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('A1', 'ID')
-            ->setCellValue('B1', '电话')
-            ->setCellValue('C1', '姓名')
-            ->setCellValue('D1', '参与时间')
-            ->setCellValue('E1', '首次分享时间')
-            ->setCellValue('F1', '总分数')
-            ->setCellValue('G1', '转发数')
+            ->setCellValue('B1', 'OPENID')
+            ->setCellValue('C1', '微信昵称')
+            ->setCellValue('D1', '联系电话')
+            ->setCellValue('E1', '来源分组')
+            ->setCellValue('F1', '参加游戏时间')
+            ->setCellValue('G1', '首次分享时间')
             ->setCellValue('H1', '浏览数')
             ->setCellValue('I1', '投票数')
             ->setCellValue('J1', '我也要参加数')
