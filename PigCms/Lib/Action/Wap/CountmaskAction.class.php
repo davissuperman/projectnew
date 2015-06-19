@@ -616,6 +616,9 @@ class CountmaskAction extends SjzAction {
             $vote = $infoList['vote'];
             $leftVote = $this->eachVote - $vote;
         }
+        if($leftVote<0){
+            $leftVote = 0;
+        }
         $this->assign('leftvote', $leftVote);
         $this->assign('fromopenid', $userOpenId);
         $this->assign('toopenid', $toUserOpenId);
