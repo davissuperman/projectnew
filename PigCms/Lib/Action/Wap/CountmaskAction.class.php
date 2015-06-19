@@ -314,6 +314,13 @@ class CountmaskAction extends SjzAction {
                     $l['createtime'] = time();
                     $l['vote'] = 0;//default
                     M('countmask_list')->add($l);
+                }else{
+                    //更新
+                    $l = array();
+                    $l['id'] = $list['id'];
+                    $l['number'] = $number;
+                    $l['sequence'] = 0;
+                    M('countmask_list')->save($l);
                 }
                 break;
             case 1://第一次满10票后
