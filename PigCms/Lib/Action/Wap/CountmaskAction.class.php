@@ -622,6 +622,8 @@ class CountmaskAction extends SjzAction {
         $voteList = M('countmask_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toUserOpenId))->find();
         if($voteList){
             $hasVotedForThisUid = 0;
+        }else{
+            M("countmask")->where(array('id' => $infoTO['id']))->setInc('uniqueviews');
         }
         $this->assign('hasvotedforthisuid', $hasVotedForThisUid);
 
@@ -637,7 +639,7 @@ class CountmaskAction extends SjzAction {
         }
 
         //当前UID对应的views自增
-        M("countmask")->where(array('id' => $infoTO['id']))->setInc('uniqueviews');
+        M("countmask")->where(array('id' => $infoTO['id']))->setInc('views');
         $this->display();
     }
 
