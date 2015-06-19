@@ -141,7 +141,7 @@
         <div class="score"><span class="score">{pigcms::$number}</span></div>
         <if condition="$sequence lt 4">
             <div class="des">还差<span class="c1">{pigcms::$leftvote}</span>位好友帮忙</div>
-        <if condition="$showvotebutton eq 1">
+        </if>
         <div style="margin:0.1rem 0;">
             <div class="c1" style="font-size:0.4rem;"><strong>数的多，拿的多！</strong></div>
             <div class="c4">只需<strong class="c1" style="font-size:0.4rem;">30票，7500张</strong><br/>免费森药妆田面膜！</div>
@@ -153,7 +153,6 @@
             <else/>
                 <div style="margin-top:0.4rem;"><span class="btn05 btn-disabled" title="帮忙投票">帮忙投票</span></div>
             </if>
-
         </if>
         <div style="margin-top:0.1rem;"><a id="ineedjoin" class="btn06" href="{pigcms::$siteurl}/index.php?g=Wap&m=Countmask&a=game" title="我也要参加">我也要参加</a></div>
 
