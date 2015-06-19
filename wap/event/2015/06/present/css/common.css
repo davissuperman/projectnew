@@ -109,7 +109,7 @@ position: absolute;top: 1.7rem;right: 0.7rem; cursor:pointer;}
 .rule-box ul .label{float:left; background:#d9552a;height:0.45rem;line-height:0.45rem;width:1.2rem; text-align:center;color:#fff;}
 .rule-box ul .des{ float:right;width:3.6rem;color:#145d82; line-height:0.35rem;}
 
-.rule-con{ width:5rem; margin:0.2rem auto 0 auto;height: 8.5rem;}
+.rule-con{ width:5rem; margin:0.2rem auto 0 auto;height: 8.5rem; overflow:hidden; overflow-y:auto;}
 .rule-label{background: #d9552a;height: 0.5rem;line-height: 0.5rem;width: 1.5rem;text-align: center;color: #fff; margin:0.1rem auto;}
 .game-time{color:#145d82; background:#7ecef4; text-align:center; height:0.6rem; line-height:0.6rem; border-radius:0.1rem;}
 .prize-box{ background:#acd598;color:#145d82; margin:0.1rem 0; position:relative; height:2.3rem; border-radius:0.1rem;}
@@ -125,7 +125,7 @@ position: absolute;top: 1.7rem;right: 0.7rem; cursor:pointer;}
 .rule-panel .no3{ left:3.4rem; bottom:0.9rem;}
 
 .illegal{ background:#ffa5a8; padding:0.1rem; border-radius:0.1rem; font-size:0.26rem; line-height:0.35rem; margin-bottom:0.2rem;}
-.rule-bg{ background:#fff; position:absolute;left:0;top:11.5rem;width:100%; height:11rem; z-index:0;}
+.rule-bg{ background:#fff; position:absolute;left:0;top:11.5rem;width:100%; height:11rem; z-index:0; display:none;}
 
 /*游戏*/
 .game-box{ margin:0.3rem 0.2rem; position:relative; height:8.5rem;}
