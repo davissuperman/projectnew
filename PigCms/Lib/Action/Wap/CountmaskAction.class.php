@@ -157,7 +157,7 @@ class CountmaskAction extends SjzAction {
 
 
         //begin 分享出去的URL
-        list($ticket,$appId,$gid) = $this->getDiymenSet();
+        list($ticket,$appId,$testgid) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
         $timestamp = time();
         $url = $this->get_url();;
