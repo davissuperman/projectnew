@@ -633,7 +633,7 @@ class CountmaskAction extends SjzAction {
 
         //是否显示 帮忙投票
         $showVoteButton = 1;
-        if($userOpenId == $toUserOpenId){
+        if($userOpenId == $toUserOpenId || $sequence >=4 ){
             $showVoteButton = 0;
         }
         $this->assign('showvotebutton', $showVoteButton);

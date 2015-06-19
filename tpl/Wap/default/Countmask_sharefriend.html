@@ -139,7 +139,9 @@
     <div class="share-box">
         <div class="title">{pigcms::$name}的游戏得分:</div>
         <div class="score"><span class="score">{pigcms::$number}</span></div>
-        <div class="des">还差<span class="c1">{pigcms::$leftvote}</span>位好友帮忙</div>
+        <if condition="$sequence lt 4">
+            <div class="des">还差<span class="c1">{pigcms::$leftvote}</span>位好友帮忙</div>
+        <if condition="$showvotebutton eq 1">
         <div style="margin:0.1rem 0;">
             <div class="c1" style="font-size:0.4rem;"><strong>数的多，拿的多！</strong></div>
             <div class="c4">只需<strong class="c1" style="font-size:0.4rem;">30票，7500张</strong><br/>免费森药妆田面膜！</div>
