@@ -201,7 +201,13 @@ class CountmaskAction extends SjzAction {
             $phone = $info['phone'];
             //判断当前用户 sequence
             $currentSequence = $info['sequence'];
-            if($currentSequence > 0 && $phone){
+            //同时判断此用户是否有再玩一次的机会
+            $vote = 0;
+            $sequenceList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>$currentSequence))->find();
+            if($sequenceList){
+                $vote = $sequenceList['vote'];
+            }
+            if($currentSequence > 0 && $phone && $vote<10){
                 $firstStart = false;
                 header("location:$this->url/index.php?g=Wap&m=Countmask&a=sharenumber");
             }
@@ -408,6 +414,7 @@ class CountmaskAction extends SjzAction {
     }
     public function sharenumber(){
         $userOpenId= cookie('user_openid');
+        $userOpenId = 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $phone = $_GET['phone'];
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         if(!$userOpenId){
