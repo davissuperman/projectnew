@@ -625,10 +625,17 @@ class CountmaskAction extends SjzAction {
         }
 
         $uniqueViewlist = M('countmask_uniqueviewlist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toUserOpenId))->find();
-        if(!$uniqueViewlist){
+        if($uniqueViewlist){
+            //不需要增加uniqueviews
+        }else{
             M("countmask")->where(array('id' => $infoTO['id']))->setInc('uniqueviews');
+            $n = array();
+            $n['fromopenid'] = $userOpenId;
+            $n['toopenid'] = $toUserOpenId;
+            $n['createtime'] = time();
+            M('countmask_uniqueviewlist')->add($n);
         }
-        
+
         $this->assign('hasvotedforthisuid', $hasVotedForThisUid);
 
 
