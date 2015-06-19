@@ -636,6 +636,8 @@ class CountmaskAction extends SjzAction {
             $this->assign('redirecturl', $this->url."/index.php?g=Wap&m=Countmask&a=index");
         }
 
+        //当前UID对应的views自增
+        M("countmask")->where(array('id' => $infoTO['id']))->setInc('uniqueviews');
         $this->display();
     }
 
