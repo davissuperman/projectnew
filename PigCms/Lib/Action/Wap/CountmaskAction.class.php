@@ -414,7 +414,6 @@ class CountmaskAction extends SjzAction {
     }
     public function sharenumber(){
         $userOpenId= cookie('user_openid');
-        $userOpenId = 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $phone = $_GET['phone'];
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         if(!$userOpenId){
