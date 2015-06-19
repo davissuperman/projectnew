@@ -3,7 +3,7 @@
 class CountmaskAction extends SjzAction {
     public $title = '森田药妆数面膜';
     public $bonusdesc = '森田药妆数面膜';
-    public $eachVote = 10;
+    public $eachVote = 1;
     public $imageUrl;
     public $shareImageUrl;
 
@@ -207,7 +207,7 @@ class CountmaskAction extends SjzAction {
             if($sequenceList){
                 $vote = $sequenceList['vote'];
             }
-            if($currentSequence > 0 && $phone && $vote<10){
+            if($currentSequence > 0 && $phone && $vote<$this->eachVote){
                 $firstStart = false;
                 header("location:$this->url/index.php?g=Wap&m=Countmask&a=sharenumber");
             }
@@ -468,7 +468,7 @@ class CountmaskAction extends SjzAction {
                 if($infoList){
                     $currentNeedVote = $this->eachVote - $infoList['vote'];
                 }else{
-                    $currentNeedVote = 10;
+                    $currentNeedVote = $this->eachVote;
                 }
                 if($infoList['vote'] >= $this->eachVote){
                     $couldCountMaskAgain = true;
@@ -480,7 +480,7 @@ class CountmaskAction extends SjzAction {
                 if($infoList){
                     $currentNeedVote = $this->eachVote - $infoList['vote'];
                 }else{
-                    $currentNeedVote = 10;
+                    $currentNeedVote = $this->eachVote;
                 }
                 if($infoList['vote'] >= $this->eachVote){
                     $couldCountMaskAgain = true;
@@ -492,7 +492,7 @@ class CountmaskAction extends SjzAction {
                 if($infoList){
                     $currentNeedVote = $this->eachVote - $infoList['vote'];
                 }else{
-                    $currentNeedVote = 10;
+                    $currentNeedVote = $this->eachVote;
                 }
                 if($infoList['vote'] >= $this->eachVote){
                     $couldCountMaskAgain = true;
