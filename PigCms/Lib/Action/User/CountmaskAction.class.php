@@ -140,6 +140,7 @@ class CountmaskAction  extends BonusAction {
             $tmp = array();
             $tmp['name'] = $each['name'];
             $tmp['views'] = $each['views'];
+            $tmp['uniqueviews'] = $each['uniqueviews'];
             $cheat = '否';
             if( $each['views'] < $each['vote'] || $each['illegal']){
                 $cheat = "<font style='color:red'>是</font>";

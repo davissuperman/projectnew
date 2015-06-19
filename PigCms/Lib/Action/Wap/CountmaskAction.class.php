@@ -622,9 +622,13 @@ class CountmaskAction extends SjzAction {
         $voteList = M('countmask_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toUserOpenId))->find();
         if($voteList){
             $hasVotedForThisUid = 0;
-        }else{
+        }
+
+        $uniqueViewlist = M('countmask_uniqueviewlist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toUserOpenId))->find();
+        if(!$uniqueViewlist){
             M("countmask")->where(array('id' => $infoTO['id']))->setInc('uniqueviews');
         }
+        
         $this->assign('hasvotedforthisuid', $hasVotedForThisUid);
 
 
