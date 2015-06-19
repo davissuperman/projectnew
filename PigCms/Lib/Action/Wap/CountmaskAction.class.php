@@ -929,9 +929,12 @@ class CountmaskAction extends SjzAction {
     public function saveHelpVote(){
         //帮忙投票 点击次数
         $toOpenId = $_POST['toopenid'];
-        $info = M('countmask')->where(array('openid' => $toOpenId))->find();
-        M("countmask")->where(array('id' => $info['id']))->setInc('vote');
-
+        $userOpenId = cookie('user_openid');
+        $voteList = M('countmask_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toOpenId))->find();
+        if(!$voteList){
+            $info = M('countmask')->where(array('openid' => $toOpenId))->find();
+            M("countmask")->where(array('id' => $info['id']))->setInc('vote');
+        }
     }
     /**
      * 获得微信用户信息
