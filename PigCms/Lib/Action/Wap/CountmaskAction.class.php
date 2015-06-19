@@ -404,6 +404,15 @@ class CountmaskAction extends SjzAction {
             $phone = $info['phone'];
         }
         $this->assign('phone', $phone);
+        if($currentSequence == 0){
+            $oportunityleft = 3;
+        }else{
+            $oportunityleft = 3-$currentSequence;
+        }
+        if($oportunityleft<0){
+            $oportunityleft = 0;
+        }
+        $this->assign('oportunityleft', $oportunityleft);
 
         //begin views
         if($info){
