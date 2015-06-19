@@ -388,8 +388,8 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $start = strtotime($_POST['start']);
         $end = strtotime($_POST['end']);
         $db = M('countmask');
-        $sql = "select  openid as ID,tel,name,phonetime,sharetime,share,views,uniqueviews,vote,joins,number as n
-        from tp_countmask  where phonetime>" . $start . " and phone<" . $end . " and phone != '' order by number desc";
+        $sql = "select  openid ,phone,name,phonetime,sharetime,share,views,uniqueviews,vote,joins,number as n
+        from tp_countmask  where phonetime>" . $start . " and phonetime<" . $end . " and phone != '' order by number desc";
         $list = M()->query($sql);
         $listArr = array();
         foreach($list as $key => $each){
@@ -414,19 +414,33 @@ award.address as addres,award.orderid as orderid,award.username as username from
             $resAwardList = M('countmask_award')->where($condition)->select();
             if($resAwardList){
                 foreach($resAwardList as $award){
-                    $awardInfo['name'] = $award['name'];
-                    $awardInfo['phone'] = $award['phone'];
-                    $awardInfo['province'] = $award['province'];
-                    $awardInfo['city'] = $award['city'];
-                    $awardInfo['address'] = $award['address'];
+                    $tmp['username'] = $award['name'];
+                    $tmp['userphone'] = $award['phone'];
+                    $tmp['province'] = $award['province'];
+                    $tmp['city'] = $award['city'];
+                    $tmp['address'] = $award['address'];
                 }
             }
-            $tmp['awardlist'] = $awardInfo;
-            $tmp['phone'] = $each['phone'];
+
+            //根据openid 获取三次得分情况
+            $numberList = M('countmask_list')->where($condition)->select();
+            foreach($numberList as $numberEach){
+                switch($numberEach['sequence']){
+                    case 1:
+                        $tmp['numberadd1'] = $numberEach['number'];
+                        break;
+                    case 2:
+                        $tmp['numberadd2'] = $numberEach['number'];
+                        break;
+                    case 3:
+                        $tmp['numberadd3'] = $numberEach['number'];
+                        break;
+                }
+            }
 
             $listArr[] = $tmp;
         }
-        $title = array('ID', '电话', '姓名', '参与时间', '首次分享时间', '总分数', '转发数', '浏览数', '点赞数', '扩散数');
+        $title = array();
         $filename = $starta . "~" . $enda . "统计";
         $this->exportexcel($listArr, $title, $filename);
     }
@@ -456,10 +470,20 @@ award.address as addres,award.orderid as orderid,award.username as username from
             ->setCellValue('E1', '来源分组')
             ->setCellValue('F1', '参加游戏时间')
             ->setCellValue('G1', '首次分享时间')
-            ->setCellValue('H1', '浏览数')
-            ->setCellValue('I1', '投票数')
-            ->setCellValue('J1', '我也要参加数')
-            ->setCellValue('K1', '非法数据');
+            ->setCellValue('H1', '总分数')
+            ->setCellValue('I1', '加分一')
+            ->setCellValue('J1', '加分二')
+            ->setCellValue('K1', '加分三')
+            ->setCellValue('L1', 'UV')
+            ->setCellValue('M1', 'PV')
+            ->setCellValue('N1', '分享数')
+            ->setCellValue('O1', '得票数')
+            ->setCellValue('P1', '扩散数')
+            ->setCellValue('Q1', '收货姓名')
+            ->setCellValue('R1', '收货手机')
+            ->setCellValue('S1', '省份')
+            ->setCellValue('T1', '城市')
+            ->setCellValue('U1', '地址');
         //写出内容 UTF-8
         //log :: write( print_r($data,true)  );
         for ($n = 0; $n < count($data); $n++) {
@@ -467,17 +491,28 @@ award.address as addres,award.orderid as orderid,award.username as username from
             $name = $this->ReplaceSpecialChar($name);
             $name = str_replace('=','',$name);
             $objPHPExcel->setActiveSheetIndex(0)
-                ->setCellValue('A' . ($n + 2), $data[$n]['ID'])
-                ->setCellValue('B' . ($n + 2), $data[$n]['tel'])
+                ->setCellValue('A' . ($n + 2), $n+1)
+                ->setCellValue('B' . ($n + 2), $data[$n]['openid'])
                 ->setCellValue('C' . ($n + 2),  $name)
-                ->setCellValue('D' . ($n + 2), $data[$n]['createtime'])
-                ->setCellValue('E' . ($n + 2), $data[$n]['sharetime'])
-                ->setCellValue('F' . ($n + 2), $data[$n]['n'])
-                ->setCellValue('G' . ($n + 2), $data[$n]['share'])
-                ->setCellValue('H' . ($n + 2), $data[$n]['views'])
-                ->setCellValue('I' . ($n + 2), $data[$n]['vote'])
-                ->setCellValue('j' . ($n + 2), $data[$n]['joins'])
-                ->setCellValue('k' . ($n + 2), $data[$n]['illegal']);
+                ->setCellValue('D' . ($n + 2), $data[$n]['phone'])
+                ->setCellValue('E' . ($n + 2), $data[$n]['gid'])
+                ->setCellValue('F' . ($n + 2), $data[$n]['phonetime'])
+                ->setCellValue('G' . ($n + 2), $data[$n]['sharetime'])
+                ->setCellValue('H' . ($n + 2), $data[$n]['number'])
+                ->setCellValue('I' . ($n + 2), $data[$n]['numberadd1'])
+                ->setCellValue('J' . ($n + 2), $data[$n]['numberadd2'])
+                ->setCellValue('K' . ($n + 2), $data[$n]['numberadd3'])
+                ->setCellValue('L' . ($n + 2), $data[$n]['views'])
+                ->setCellValue('M' . ($n + 2), $data[$n]['uniqueviews'])
+                ->setCellValue('N' . ($n + 2), $data[$n]['share'])
+                ->setCellValue('O' . ($n + 2), $data[$n]['vote'])
+                ->setCellValue('P' . ($n + 2), $data[$n]['joins'])
+                ->setCellValue('Q' . ($n + 2), $data[$n]['username'])
+                ->setCellValue('R' . ($n + 2), $data[$n]['userphone'])
+                ->setCellValue('S' . ($n + 2), $data[$n]['province'])
+                ->setCellValue('T' . ($n + 2), $data[$n]['city'])
+                ->setCellValue('U' . ($n + 2), $data[$n]['address']);
+
         }
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
         $objPHPExcel->setActiveSheetIndex(0);
