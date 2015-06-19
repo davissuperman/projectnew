@@ -589,16 +589,21 @@ class CountmaskAction extends SjzAction {
 
         //local open id $userOpenId
 
-
+        //如果 sequence=1 and phone为null 则需要重定向到首页 非法页面
         $infoTO = M('countmask')->where(array('id' => $uid))->find();
+        $sequence = $infoTO['sequence'];
+        if($sequence == 1 && !$infoTO['phone']){
+            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+        }
+
         $toUserOpenId = $infoTO['openid'];
         $userName = $infoTO['name'];
         $number = $infoTO['number'];
         $this->assign('name', $userName);
         $this->assign('number', $number);
-        $sequence = $infoTO['sequence'];
+
         $leftVote = $this->eachVote;
-        if($sequence == 1){
+        if($sequence >= 1){
             //第一次 还差多少票
             $infoList = M('countmask_list')->where(array('openid' => $toUserOpenId,'sequence'=>$sequence))->find();
             $vote = $infoList['vote'];
