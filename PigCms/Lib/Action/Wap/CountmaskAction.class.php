@@ -734,7 +734,6 @@ class CountmaskAction extends SjzAction {
 
     public function rank(){
         $userOpenId= cookie('user_openid');
-        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
 
         //begin 分享出去的URL
         list($ticket,$appId,$gid) = $this->getDiymenSet();
@@ -780,10 +779,10 @@ class CountmaskAction extends SjzAction {
         $this->assign('phonetime',date("Y-m-d H:i",$firstLevelInfo['phonetime']));
         //统计第1050名
         $showSecondLevel = 1;
-        if($count < 1050){
+        if($count < 56){
             $showSecondLevel = 0;
         }else{
-            $secondLevelInfo = M('countmask')->query("select number,share,phonetime from tp_countmask where phone != '' order by number desc, phonetime asc limit 1049,1");
+            $secondLevelInfo = M('countmask')->query("select number,share,phonetime from tp_countmask where phone != '' order by number desc, phonetime asc limit 56,1");
             if($secondLevelInfo){
                 $secondLevelInfo = $secondLevelInfo[0];
             }
@@ -798,7 +797,7 @@ class CountmaskAction extends SjzAction {
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         $number = $info['number'];
         $count = M('countmask')->where("number > $number")->count();
-        $this->assign('count', $count);
+        $this->assign('count', $count+1);
         $this->assign('number', $number);
         $this->assign('share', $info['share']);
 
