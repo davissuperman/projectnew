@@ -768,7 +768,6 @@ class CountmaskAction extends SjzAction {
 
         }else{
             $firstLevelInfo = M('countmask')->query("select number,share,phonetime from tp_countmask where phone != '' order by number desc, phonetime asc limit 49,1");
-            echo count($firstLevelInfo).' aaaaaaaaaaa0';
             if($firstLevelInfo){
                 $firstLevelInfo = $firstLevelInfo[0];
             }
@@ -780,6 +779,19 @@ class CountmaskAction extends SjzAction {
         $this->assign('shares',$firstLevelInfo['share']);
         $this->assign('phonetime',date("Y-m-d H:i",$firstLevelInfo['phonetime']));
         //统计第1050名
+        $showSecondLevel = 1;
+        if($count < 1050){
+            $showSecondLevel = 0;
+        }else{
+            $secondLevelInfo = M('countmask')->query("select number,share,phonetime from tp_countmask where phone != '' order by number desc, phonetime asc limit 1049,1");
+            if($secondLevelInfo){
+                $secondLevelInfo = $secondLevelInfo[0];
+            }
+            $this->assign('numbersecond',$secondLevelInfo['number']);
+            $this->assign('sharessecond',$secondLevelInfo['share']);
+            $this->assign('phonetimesecond',date("Y-m-d H:i",$secondLevelInfo['phonetime']));
+        }
+        $this->assign('secondlevel',$showSecondLevel);
 
 
 
