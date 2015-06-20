@@ -885,14 +885,14 @@ class CommonAction extends Action {
     }
     function Beijingxinshijie($keyword,$data){
         $openId = (string)$data['FromUserName'];
-        $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Beijingxinshijie&a=index";
+        $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Beijingxinshijie&a=index&openid=$openId";
         $text = "<a href='$url'>北京新世界利莹线下活动</a>";
         return array($text, 'text');
     }
 
     function Yangpudarunfa($keyword,$data){
         $openId = (string)$data['FromUserName'];
-        $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Yangpudarunfa&a=index";
+        $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Yangpudarunfa&a=index&openid=$openId";
         $text = "<a href='$url'>上海杨浦大润发线下活动</a>";
         return array($text, 'text');
     }
