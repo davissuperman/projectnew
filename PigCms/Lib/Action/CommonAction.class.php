@@ -883,6 +883,20 @@ class CommonAction extends Action {
         $text = "<a href='$url'>sjz</a>";
         return array($text, 'text');
     }
+    function Beijingxinshijie($keyword,$data){
+        $openId = (string)$data['FromUserName'];
+        $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Beijingxinshijie&a=index";
+        $text = "<a href='$url'>北京新世界利莹线下活动</a>";
+        return array($text, 'text');
+    }
+
+    function Yangpudarunfa($keyword,$data){
+        $openId = (string)$data['FromUserName'];
+        $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Yangpudarunfa&a=index";
+        $text = "<a href='$url'>上海杨浦大润发线下活动</a>";
+        return array($text, 'text');
+    }
+
 
     function checkCode($keyword){
         $keyword = str_replace(" ","",$keyword);
@@ -923,6 +937,12 @@ class CommonAction extends Action {
                 break;
             case '0612' :
                 return $this->product0612($keyword,$data);
+                break;
+            case '0626' :
+                return $this->Yangpudarunfa($keyword,$data);
+                break;
+            case '0627' :
+                return $this->Beijingxinshijie($keyword,$data);
                 break;
             case '222222' :
                 return $this->productsecond($keyword,$data);
