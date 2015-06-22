@@ -130,7 +130,7 @@ position: absolute;top: 1.7rem;right: 0.7rem; cursor:pointer;}
 /*游戏*/
 .game-box{ margin:0.3rem 0.2rem; position:relative; height:8.5rem;}
 .game-box .time-box{float:left;font-size:0.44rem;color:#2250a8;text-shadow: 0 0 6px #fff, -1px -1px #FFF, 1px -1px #fff;font-weight:bold;}
-.game-box .num-box{float:right;font-size:0.44rem;color:#2250a8;text-shadow: 0 0 6px #fff, -1px -1px #FFF, 1px -1px #fff;font-weight:bold;}
+.game-box .num-box{float:right;font-size:0.44rem;color:#2250a8;text-shadow: 0 0 6px #fff, -1px -1px #FFF, 1px -1px #fff;font-weight:bold; display:none;}
 .game-box .face{background:url(../images/g01.png) no-repeat center;background-size:auto 100%;width:100%;height: 5rem;width:5rem; margin:0 auto; position:absolute;top:0; z-index:0;left:50%; margin-left:-2.5rem;}
 .game-box .face-hover{background:url(../images/g02.png) no-repeat center;background-size:auto 100%;width:100%;height: 5rem;width:5rem; margin:0 auto; position:absolute;top:0;z-index:1;left:50%; margin-left:-2.5rem;}
 .game-box .face-hover2{background:url(../images/g08.png) no-repeat center;background-size:auto 100%;width:100%;height:5rem;width:5rem; margin:0 auto; position:absolute;top:0;z-index:2;left:50%; margin-left:-2.5rem;}
@@ -164,12 +164,20 @@ height: 0.5rem;top: -0.2rem;left: 50%;margin-left: 0.2rem;z-index: 6;}
 .share-box .score{ margin:0.1rem 0;}
 .share-box .score span{background:#db5d34;display: inline-block; height:0.7rem; line-height:0.7rem;color:#fff; padding:0 0.5rem; border-radius:5px; font-size:0.5rem;font-weight:bold; margin:0;}
 .share-box .des{color:#2250a8;font-size:0.5rem;font-weight:bold; margin:0.2rem 0 0 0;}
-.share-box .arrow{ margin:0.1rem auto;background:url(../images/img03.png) no-repeat center; height:0.86rem; background-size:auto 100%; position:relative;}
+.share-box .arrow{ margin:0.45rem auto;background:url(../images/img03.png) no-repeat center; height:0.86rem; background-size:auto 100%; position:relative;}
+.share-box .arrow .dot{background:url(../images/new/img04.png) no-repeat bottom center;width: 0.35rem;
+height: 0.8rem; position:absolute; color:#d53400; text-align:center; font-weight:bold; z-index:1; background-size:100% auto;}
+.share-box .arrow .dot.dot0{bottom:0.5rem;left:0.45rem;}
+.share-box .arrow .dot.dot1{bottom:0.5rem;left:0.9rem;}
+.share-box .arrow .dot.dot2{bottom:0.5rem;left:2.3rem;}
+.share-box .arrow .dot.dot3{bottom:0.5rem;left:3.7rem;}
+.share-box .arrow .dot.dot4{bottom:0.5rem;left:5.2rem;}
 .share-box .box{ background:#448aca;color:#e2c492; position:absolute;width:0.8rem;height:1rem; text-align:center;top:0.1rem;}
+.share-box .box.disabled{ background:#878787;color:#acacac;}
 .share-box .box .time{ margin-top:0.05rem;}
 .share-box .box .num{ margin-top:0.2rem;}
-.share-box .box01{right:4rem;}
-.share-box .box02{right:2.5rem;}
+.share-box .box01{right:3.8rem;}
+.share-box .box02{right:2.45rem;}
 .share-box .box03{right:1rem;}
 .share-box .btn01{background:url(../images/btn02.png) no-repeat center; background-size:auto 100%; display:inline-block;height: 0.9rem;width: 3.6rem; cursor:pointer; text-indent:-99999px; overflow:hidden; text-decoration:none;}
 .share-box .btn03{background:url(../images/btn03_01.png) no-repeat center; background-size:auto 100%; display:inline-block;height: 0.8rem;width: 6rem; cursor:pointer; text-indent:-99999px; overflow:hidden; text-decoration:none;}

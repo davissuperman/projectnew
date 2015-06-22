@@ -42,6 +42,15 @@ function startGame(){
 	}
 	//if(!$mm_box.hasClass("gameover")){
 		numbers++;
+		
+		var $face_hover = $("#face-hover"),$face_hover2 = $("#face-hover2");
+		if(numbers > 19){
+			$face_hover2.hide();
+			if(numbers > 30){
+				$face_hover.hide();
+			}
+		}
+		
 		$("#mm-nums").html(numbers);
 		$animation.show();
 		var top = 2+"rem",height = 0.5 + 'rem';
@@ -120,13 +129,7 @@ function countdown ($elem,time){
 		if (time<=0){
 			clearTimeout(st);
 		} else {
-			var $face_hover = $("#face-hover"),$face_hover2 = $("#face-hover2");
-			if(time < 7){
-				$face_hover2.hide();
-				if(time < 4){
-					$face_hover.hide();
-				}
-			}
+			
 			time--;
 			st=setTimeout (arguments.callee, 1000);
 			obj.html(time);
