@@ -779,10 +779,10 @@ class CountmaskAction extends SjzAction {
         $this->assign('phonetime',date("Y-m-d H:i",$firstLevelInfo['phonetime']));
         //统计第1050名
         $showSecondLevel = 1;
-        if($count < 56){
+        if($count < 1050){
             $showSecondLevel = 0;
         }else{
-            $secondLevelInfo = M('countmask')->query("select number,share,phonetime from tp_countmask where phone != '' order by number desc, phonetime asc limit 56,1");
+            $secondLevelInfo = M('countmask')->query("select number,share,phonetime from tp_countmask where phone != '' order by number desc, phonetime asc limit 1049,1");
             if($secondLevelInfo){
                 $secondLevelInfo = $secondLevelInfo[0];
             }
