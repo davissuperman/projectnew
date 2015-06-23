@@ -1,8 +1,8 @@
 <?php
 
 class CountmaskAction extends SjzAction {
-    public $title = '森田药妆数面膜';
-    public $bonusdesc = '森田药妆数面膜';
+    public $title = '正参加森田药妆膜数大师活动，帮他投票吧！';
+    public $bonusdesc = '只要30票， 人人拉得到，比手快不比票多，7500片免费面膜等你来拿！';
     public $eachVote = 1;
     public $imageUrl;
     public $shareImageUrl;
@@ -169,7 +169,7 @@ class CountmaskAction extends SjzAction {
         $this->assign("signature",$signature);
         $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
-        $this->assign('title',$this->title);
+        $this->assign('title',$nickname.$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
@@ -230,7 +230,7 @@ class CountmaskAction extends SjzAction {
         $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
 
-        $this->assign('title',$this->title);
+        $this->assign('title',$info['name'].$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
@@ -239,6 +239,15 @@ class CountmaskAction extends SjzAction {
         $this->display();
     }
     public function rule(){
+        $userOpenId= cookie('user_openid');
+        if(!$userOpenId){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+        }
+
+        //首先判断当前用户是否有玩过第一次
+        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+
         //begin 分享出去的URL
         list($ticket,$appId,$gid) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
@@ -253,7 +262,7 @@ class CountmaskAction extends SjzAction {
         $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
 
-        $this->assign('title',$this->title);
+        $this->assign('title',$info['name'].$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
@@ -276,7 +285,7 @@ class CountmaskAction extends SjzAction {
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
         }
-
+        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         //begin 分享出去的URL
         list($ticket,$appId,$gid) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
@@ -291,13 +300,13 @@ class CountmaskAction extends SjzAction {
         $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
 
-        $this->assign('title',$this->title);
+        $this->assign('title',$info['name'].$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
 
-        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+
         $phone = $info['phone'];
         $currentSequence = $info['sequence'];
         if(!$phone){
@@ -443,7 +452,7 @@ class CountmaskAction extends SjzAction {
         $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
 
-        $this->assign('title',$this->title);
+        $this->assign('title',$info['name'].$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
@@ -601,7 +610,9 @@ class CountmaskAction extends SjzAction {
         $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
 
-        $this->assign('title',$this->title);
+        $infoTO = M('countmask')->where(array('id' => $uid))->find();
+        $this->assign('title',$infoTO['name'].$this->title);
+
         $this->assign('bonusdesc',$this->bonusdesc);
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
@@ -612,7 +623,6 @@ class CountmaskAction extends SjzAction {
         //local open id $userOpenId
 
         //如果 sequence=1 and phone为null 则需要重定向到首页 非法页面
-        $infoTO = M('countmask')->where(array('id' => $uid))->find();
         $sequence = $infoTO['sequence'];
         if($sequence == 1 && !$infoTO['phone']){
             header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
@@ -823,8 +833,8 @@ class CountmaskAction extends SjzAction {
         $this->assign("signature",$signature);
         $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
-
-        $this->assign('title',$this->title);
+        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $this->assign('title',$info['name'].$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
@@ -832,7 +842,7 @@ class CountmaskAction extends SjzAction {
 
         //begin views
         $userOpenId= cookie('user_openid');
-        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+
         if($info){
             M("countmask")->where(array('id' => $info['id']))->setInc('views');
         }
