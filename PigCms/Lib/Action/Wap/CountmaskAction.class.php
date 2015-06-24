@@ -552,32 +552,49 @@ class CountmaskAction extends SjzAction {
                 }
                 break;
             case 2:
+                $firstUsed = 'disabled';
                 //正在争取第二次机会
-                $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
-                if($infoList){
-                    $currentNeedVote = $this->eachVote - $infoList['vote'];
+                $vote = $info['vote'];
+                if($vote >= $this->eachVote * 2){
+                    //查看是否已经提交了分数
+                    $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
+                    if($infoList['number']){
+                        //已经提交分数，无法再次提交
+                        $secondUsed = 'disabled';
+                    }else{
+                        $couldCountMaskAgain = true;
+                    }
                 }else{
-                    $currentNeedVote = $this->eachVote;
-                }
-                if($infoList['vote'] >= $this->eachVote){
-                    $couldCountMaskAgain = true;
+                    //未获得第二次机会
+                    $currentNeedVote = $this->eachVote * 2 - $vote;
                 }
                 break;
             case 3:
                 //正在争取第三次机会
-                $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
-                if($infoList){
-                    $currentNeedVote = $this->eachVote - $infoList['vote'];
+                $firstUsed = 'disabled';
+                $secondUsed = 'disabled';
+                //正在争取第二次机会
+                $vote = $info['vote'];
+                if($vote >= $this->eachVote * 3){
+                    //查看是否已经提交了分数
+                    $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
+                    if($infoList['number']){
+                        //已经提交分数，无法再次提交
+                        $thirdUsed = 'disabled';
+                    }else{
+                        $couldCountMaskAgain = true;
+                    }
                 }else{
-                    $currentNeedVote = $this->eachVote;
-                }
-                if($infoList['vote'] >= $this->eachVote){
-                    $couldCountMaskAgain = true;
+                    //未获得第二次机会
+                    $currentNeedVote = $this->eachVote * 3 - $vote;
                 }
                 break;
             case 4:
                 //三次机会用完，在数一次按钮隐藏
                 $showCountMaskAgain = 0;
+                $firstUsed = 'disabled';
+                $secondUsed = 'disabled';
+                $thirdUsed = 'disabled';
                 break;
             default:
 
