@@ -204,13 +204,18 @@ class CountmaskAction extends SjzAction {
             //判断当前用户 sequence
             $currentSequence = $info['sequence'];
             //同时判断此用户是否有再玩一次的机会
-            $vote = 0;
-            $sequenceList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>$currentSequence))->find();
-            if($sequenceList){
-                $vote = $sequenceList['vote'];
-            }
-            if($currentSequence > 0 && $phone && $vote<$this->eachVote){
+            $vote = $info['vote'];
+            //是否有机会 并且判断是否已经玩过
+
+            if($phone && ( $vote<$this->eachVote || floor($vote/$this->eachVote ) <= $currentSequence)){
                 $firstStart = false;
+                header("location:$this->url/index.php?g=Wap&m=Countmask&a=sharenumber");
+            }
+
+            //判断当前机会是否已经使用过
+            $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence' => $currentSequence))->find();
+            if($infoList && $infoList['number']){
+                //已经玩过
                 header("location:$this->url/index.php?g=Wap&m=Countmask&a=sharenumber");
             }
 
