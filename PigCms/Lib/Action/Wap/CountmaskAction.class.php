@@ -147,7 +147,7 @@ class CountmaskAction extends SjzAction {
             $vote = $info['vote'];
             $phone = $info['phone'];
             $currentSequence = $info['sequence'];
-            if($phone && ( $vote<$this->eachVote || floor($vote/$this->eachVote ) <= $currentSequence)){
+            if($phone && ($currentSequence>=4 ||  $vote<$this->eachVote || floor($vote/$this->eachVote ) <= $currentSequence)){
                 //没有资格继续完
                 $firstStart = false;
             }

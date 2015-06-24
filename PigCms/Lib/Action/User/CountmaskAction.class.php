@@ -388,7 +388,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $start = strtotime($_POST['start']);
         $end = strtotime($_POST['end']);
         $db = M('countmask');
-        $sql = "select  openid ,phone,name,phonetime,sharetime,share,views,uniqueviews,vote,joins,number as n
+        $sql = "select  openid ,phone,name,phonetime,sharetime,share,views,uniqueviews,vote,joins,number
         from tp_countmask  where phonetime>" . $start . " and phonetime<" . $end . " and phone != '' order by number desc";
         $list = M()->query($sql);
         $listArr = array();
@@ -416,7 +416,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 foreach($resAwardList as $award){
                     $tmp['username'] = $award['name'];
                     $tmp['userphone'] = $award['phone'];
-                    $tmp['province'] = $award['province'];
+                    $tmp['userprovince'] = $award['province'];
                     $tmp['city'] = $award['city'];
                     $tmp['address'] = $award['address'];
                 }
@@ -474,8 +474,8 @@ award.address as addres,award.orderid as orderid,award.username as username from
             ->setCellValue('I1', '加分一')
             ->setCellValue('J1', '加分二')
             ->setCellValue('K1', '加分三')
-            ->setCellValue('L1', 'UV')
-            ->setCellValue('M1', 'PV')
+            ->setCellValue('L1', 'PV')
+            ->setCellValue('M1', 'UV')
             ->setCellValue('N1', '分享数')
             ->setCellValue('O1', '得票数')
             ->setCellValue('P1', '扩散数')
@@ -502,14 +502,14 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 ->setCellValue('I' . ($n + 2), $data[$n]['numberadd1'])
                 ->setCellValue('J' . ($n + 2), $data[$n]['numberadd2'])
                 ->setCellValue('K' . ($n + 2), $data[$n]['numberadd3'])
-                ->setCellValue('L' . ($n + 2), $data[$n]['views'])
-                ->setCellValue('M' . ($n + 2), $data[$n]['uniqueviews'])
+                ->setCellValue('L' . ($n + 2), $data[$n]['uniqueviews'])
+                ->setCellValue('M' . ($n + 2), $data[$n]['views'])
                 ->setCellValue('N' . ($n + 2), $data[$n]['share'])
                 ->setCellValue('O' . ($n + 2), $data[$n]['vote'])
                 ->setCellValue('P' . ($n + 2), $data[$n]['joins'])
                 ->setCellValue('Q' . ($n + 2), $data[$n]['username'])
                 ->setCellValue('R' . ($n + 2), $data[$n]['userphone'])
-                ->setCellValue('S' . ($n + 2), $data[$n]['province'])
+                ->setCellValue('S' . ($n + 2), $data[$n]['userprovince'])
                 ->setCellValue('T' . ($n + 2), $data[$n]['city'])
                 ->setCellValue('U' . ($n + 2), $data[$n]['address']);
 
