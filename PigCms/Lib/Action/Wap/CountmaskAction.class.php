@@ -628,6 +628,12 @@ class CountmaskAction extends SjzAction {
         $fansInfo = null;
         $selfUserInfo = array();
         $uid  = $_GET['uid'];
+        $infoTO = M('countmask')->where(array('id' => $uid))->find();
+        if($userOpenId == $infoTO['openid']){
+            //是自己本身打开了自己的主页
+            header($this->url."/index.php?g=Wap&m=Countmask&a=sharenumber");
+        }
+
         $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
         if($userOpenId && $fansInfo){
             $selfUserInfo['headimgurl'] = $fansInfo['headimgurl'];
@@ -691,7 +697,7 @@ class CountmaskAction extends SjzAction {
         $this->assign("shareurl",$this->url."/index.php?g=Wap&m=Countmask&a=sharefriend&uid=".$uid);
         $this->assign('gid', $gid);
 
-        $infoTO = M('countmask')->where(array('id' => $uid))->find();
+
         $this->assign('title',$infoTO['name'].$this->title);
 
         $this->assign('bonusdesc',$this->bonusdesc);
