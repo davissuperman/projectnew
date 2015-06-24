@@ -151,6 +151,14 @@ class CountmaskAction extends SjzAction {
                 //没有资格继续完
                 $firstStart = false;
             }
+            if($firstStart == true){
+                //判断当前机会是否已经使用过
+                $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence' => $currentSequence))->find();
+                if($infoList && $infoList['number']){
+                    //已经玩过
+                    $firstStart = false;
+                }
+            }
 
         }else{
             $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
