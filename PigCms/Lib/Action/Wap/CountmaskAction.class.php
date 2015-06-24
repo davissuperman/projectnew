@@ -387,42 +387,64 @@ class CountmaskAction extends SjzAction {
                 break;
             case 2://第二次满10票后
                 //判断用户是否满足条件
+                $vote = $info['vote'];
+                if($vote < $this->eachVote * 2){
+                    //非法提交 转到首页
+                    header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+                }
                 $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>2))->find();
-                if($infoList && $infoList['vote'] >= $this->eachVote){
-                    M("countmask")->where(array('id' =>$info['id']))->setInc('number', $number);
-
-                    //更新sequence
-                    M("countmask")->where(array('id' =>$info['id']))->setInc('sequence');
-
-                    //表 countmask_list更新每一次机会获取的分数
+                if($infoList && $infoList['number']){
+                    //已经提交分数 无法再次提交
+                    header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+                }
+                M("countmask")->where(array('id' =>$info['id']))->setInc('number', $number);
+                //更新sequence
+                M("countmask")->where(array('id' =>$info['id']))->setInc('sequence');
+                if($infoList){
                     $m = array();
                     $m['number'] = $number;
                     $m['id'] = $infoList['id'];
                     $m['updatetime'] = time();
                     M('countmask_list')->save($m);
                 }else{
-                    //非法提交 转到首页
-                    header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+                    $m = array();
+                    $m['number'] = $number;
+                    $m['openid'] = $userOpenId;
+                    $m['createtime'] = time();
+                    $m['updatetime'] = time();
+                    $m['sequence'] = 2;
+                    M('countmask_list')->add($m);
                 }
                 break;
             case 3://第三次满10票后
                 //判断用户是否满足条件
+                $vote = $info['vote'];
+                if($vote < $this->eachVote * 3){
+                    //非法提交 转到首页
+                    header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+                }
                 $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>3))->find();
-                if($infoList && $infoList['vote'] >= $this->eachVote){
-                    M("countmask")->where(array('id' =>$info['id']))->setInc('number', $number);
-
-                    //更新sequence
-                    M("countmask")->where(array('id' =>$info['id']))->setInc('sequence');
-
-                    //表 countmask_list更新每一次机会获取的分数
+                if($infoList && $infoList['number']){
+                    //已经提交分数 无法再次提交
+                    header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+                }
+                M("countmask")->where(array('id' =>$info['id']))->setInc('number', $number);
+                //更新sequence
+                M("countmask")->where(array('id' =>$info['id']))->setInc('sequence');
+                if($infoList){
                     $m = array();
                     $m['number'] = $number;
                     $m['id'] = $infoList['id'];
                     $m['updatetime'] = time();
                     M('countmask_list')->save($m);
                 }else{
-                    //非法提交 转到首页
-                    header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+                    $m = array();
+                    $m['number'] = $number;
+                    $m['openid'] = $userOpenId;
+                    $m['createtime'] = time();
+                    $m['updatetime'] = time();
+                    $m['sequence'] = 3;
+                    M('countmask_list')->add($m);
                 }
                 break;
             default:
