@@ -484,14 +484,18 @@ class CountmaskAction extends SjzAction {
         switch($sequence){
             case 1:
                 //正在争取第一次机会
-                $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
-                if($infoList){
-                    $currentNeedVote = $this->eachVote - $infoList['vote'];
+                $vote = $info['vote'];
+                if($vote >= $this->eachVote){
+                    //查看是否已经提交了分数
+                    $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
+                    if($infoList['number']){
+                        //已经提交分数，无法再次提交
+                    }else{
+                        $couldCountMaskAgain = true;
+                    }
                 }else{
-                    $currentNeedVote = $this->eachVote;
-                }
-                if($infoList['vote'] >= $this->eachVote){
-                    $couldCountMaskAgain = true;
+                    //未获得第一次机会
+                    $currentNeedVote = $this->eachVote - $vote;
                 }
                 break;
             case 2:
