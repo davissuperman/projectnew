@@ -215,7 +215,7 @@ class CountmaskAction extends SjzAction {
             $vote = $info['vote'];
             //是否有机会 并且判断是否已经玩过
 
-            if($phone && ( $vote<$this->eachVote || floor($vote/$this->eachVote ) <= $currentSequence)){
+            if($phone && ( $vote<$this->eachVote || floor($vote/$this->eachVote ) < $currentSequence)){
                 $firstStart = false;
                 header("location:$this->url/index.php?g=Wap&m=Countmask&a=sharenumber");
             }
