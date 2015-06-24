@@ -688,7 +688,7 @@ class CountmaskAction extends SjzAction {
         $this->assign("timestamp",$timestamp);
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
-        $this->assign("shareurl",$this->getShareUrl());
+        $this->assign("shareurl",$this->url."/index.php?g=Wap&m=Countmask&a=sharefriend&uid=".$uid);
         $this->assign('gid', $gid);
 
         $infoTO = M('countmask')->where(array('id' => $uid))->find();
