@@ -625,13 +625,15 @@ class CountmaskAction extends SjzAction {
 
     public function sharefriend(){
         $userOpenId= cookie('user_openid');
+//        $userOpenId = 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $fansInfo = null;
         $selfUserInfo = array();
         $uid  = $_GET['uid'];
         $infoTO = M('countmask')->where(array('id' => $uid))->find();
         if($userOpenId == $infoTO['openid']){
             //是自己本身打开了自己的主页
-            header($this->url."/index.php?g=Wap&m=Countmask&a=sharenumber");
+            header("Location:$this->url./index.php?g=Wap&m=Countmask&a=sharenumber");
+            exit;
         }
 
         $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
