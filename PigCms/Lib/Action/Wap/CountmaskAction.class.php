@@ -143,10 +143,12 @@ class CountmaskAction extends SjzAction {
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         $firstStart = true;
         if($info){
-                //判断当前用户 sequence 并且 手机已经提交
+                //判断当前用户 sequence 并且 手机已经提交,并且判断用户是否有资格继续玩
+            $vote = $info['vote'];
             $phone = $info['phone'];
             $currentSequence = $info['sequence'];
-            if($currentSequence > 0 && $phone){
+            if($phone && ( $vote<$this->eachVote || floor($vote/$this->eachVote ) <= $currentSequence)){
+                //没有资格继续完
                 $firstStart = false;
             }
 
