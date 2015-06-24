@@ -944,7 +944,7 @@ class CountmaskAction extends SjzAction {
         if($award){
             $this->assign('name',$award['name']);
             $this->assign('phone',$award['phone']);
-            $this->assign('province',$award['phone']);
+            $this->assign('province',$award['province']);
             $this->assign('city',$award['city']);
             $this->assign('address',$award['address']);
         }
