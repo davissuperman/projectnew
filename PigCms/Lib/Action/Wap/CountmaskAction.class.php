@@ -314,6 +314,7 @@ class CountmaskAction extends SjzAction {
         if(!$phone){
             $currentSequence = 0;
         }
+
         switch($currentSequence){
             case 0:
                 $d = array();
@@ -434,6 +435,7 @@ class CountmaskAction extends SjzAction {
     }
     public function sharenumber(){
         $userOpenId= cookie('user_openid');
+//        $userOpenId = 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $phone = $_GET['phone'];
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         if(!$userOpenId){
@@ -480,6 +482,10 @@ class CountmaskAction extends SjzAction {
         $couldCountMaskAgain = false;
         $currentNeedVote = 0;
 
+        $firstUsed = '';
+        $secondUsed = '';
+        $thirdUsed = '';
+
         $showCountMaskAgain = 1;
         switch($sequence){
             case 1:
@@ -490,6 +496,7 @@ class CountmaskAction extends SjzAction {
                     $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
                     if($infoList['number']){
                         //已经提交分数，无法再次提交
+                        $firstUsed = 'disabled';
                     }else{
                         $couldCountMaskAgain = true;
                     }
@@ -533,6 +540,11 @@ class CountmaskAction extends SjzAction {
         if($currentNeedVote < 0){
             $currentNeedVote = 0;
         }
+
+        $this->assign('firstused', $firstUsed);
+        $this->assign('secondused', $secondUsed);
+        $this->assign('thirdused', $thirdUsed);
+
         $this->assign('needvote', $currentNeedVote);
         $this->assign('username', $info['name']);
         $this->assign('totalnumber', $info['number']);
