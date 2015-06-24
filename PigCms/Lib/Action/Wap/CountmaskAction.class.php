@@ -822,6 +822,7 @@ class CountmaskAction extends SjzAction {
     }
 
     public function award(){
+        $userOpenId= cookie('user_openid');
         //begin 分享出去的URL
         list($ticket,$appId,$gid) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
@@ -843,7 +844,7 @@ class CountmaskAction extends SjzAction {
         //end
 
         //begin views
-        $userOpenId= cookie('user_openid');
+
 
         if($info){
             M("countmask")->where(array('id' => $info['id']))->setInc('views');
@@ -995,6 +996,7 @@ class CountmaskAction extends SjzAction {
     * 记录 帮忙投票 次数
     */
     public function saveHelpVote(){
+        $return = 0;
         //帮忙投票 点击次数
         $toOpenId = $_POST['toopenid'];
         $userOpenId = cookie('user_openid');
@@ -1002,7 +1004,17 @@ class CountmaskAction extends SjzAction {
         if(!$voteList){
             $info = M('countmask')->where(array('openid' => $toOpenId))->find();
             M("countmask")->where(array('id' => $info['id']))->setInc('vote');
+
+            //投票
+            $d = array();
+            $d['fromopenid'] = $userOpenId;
+            $d['toopenid'] = $toOpenId;
+            $d['sequence'] = $info['sequence'];
+            $d['createtime'] = time();
+            M('countmask_votelist')->add($d);
+            $return = 1;
         }
+        echo $return;
     }
     /**
      * 获得微信用户信息
