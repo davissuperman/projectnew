@@ -633,7 +633,8 @@ class CountmaskAction extends SjzAction {
         if($userOpenId == $infoTO['openid']){
             //是自己本身打开了自己的主页
             header("Location:$this->url./index.php?g=Wap&m=Countmask&a=sharenumber");
-            exit;
+            echo '<script language="javascript" type="text/javascript">
+       window.location.href="'."$this->url./index.php?g=Wap&m=Countmask&a=sharenumber".'";</script>  ';
         }
 
         $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
