@@ -522,4 +522,53 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
         $objWriter->save('php://output');
     }
+
+    public function datareport(){
+        set_time_limit(0);
+        //每日数据汇总（记录每天活动所有模板所产生的数据总数）
+
+        //记录从6.20 到 7.20号每天产生的模板总数
+        $fromDate = strtotime("2015-06-20 00:00:00");
+        $endDate = strtotime("2015-07-20 00:00:00");
+        $i = 0;
+        $datereport = array();
+        while($i<35){
+            $eachData = array();
+            $add = 24*3600;
+            $eachFrom = $i*$add + $fromDate;
+            $eachEnd = $eachFrom + $add;
+
+            $queryGidCount = "SELECT * from tp_countmask where phone != '' and phonetime >= $eachFrom and phonetime<$eachEnd";
+            $list = M('countmask')->query($queryGidCount);
+
+            if($list){
+                $eachData['date'] = date('Y-m-d',$eachFrom);
+                $eachData['sumtemplate'] = count($list);
+                $pvSum = 0;
+                $uvSum = 0;
+                $shareSum = 0;
+                $voteSum = 0;
+                $joinSum = 0;
+                foreach($list as $each){
+                    $pvSum += $each['views'];
+                    $uvSum += $each['uniqueviews'];
+                    $shareSum += $each['share'];
+                    $voteSum += $each['vote'];
+                    $joinSum += $each['joins'];
+                }
+                $eachData['pvsum'] = $pvSum;
+                $eachData['uvsum'] = $uvSum;
+                $eachData['sharesum'] = $shareSum;
+                $eachData['votesum'] = $voteSum;
+                $eachData['joinsum'] = $joinSum;
+                $datereport[] = $eachData;
+            }
+
+
+            $i++;
+        }
+
+        $this->assign('datareport', $datereport);
+        $this->display();
+    }
 }
