@@ -165,7 +165,7 @@ height: 0.5rem;top: -0.2rem;left: 50%;margin-left: 0.2rem;z-index: 6;}
 .share-box .score span{background:#db5d34;display: inline-block; height:0.7rem; line-height:0.7rem;color:#fff; padding:0 0.5rem; border-radius:5px; font-size:0.5rem;font-weight:bold; margin:0;}
 .share-box .des{color:#2250a8;font-size:0.5rem;font-weight:bold; margin:0.2rem 0 0 0;}
 .share-box .arrow{ margin:0.45rem auto;background:url(../images/img03.png) no-repeat center; height:0.86rem; background-size:auto 100%; position:relative;}
-.share-box .arrow .dot{background:url(../images/new/img04.png) no-repeat bottom center;width: 0.35rem;
+.share-box .arrow .dot{ display:none;background:url(../images/new/img04.png) no-repeat bottom center;width: 0.35rem;
 height: 0.8rem; position:absolute; color:#d53400; text-align:center; font-weight:bold; z-index:1; background-size:100% auto;}
 .share-box .arrow .dot.dot0{bottom:0.5rem;left:0.45rem;}
 .share-box .arrow .dot.dot1{bottom:0.5rem;left:0.9rem;}
