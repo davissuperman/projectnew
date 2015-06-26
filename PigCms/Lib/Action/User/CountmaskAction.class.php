@@ -573,6 +573,11 @@ award.address as addres,award.orderid as orderid,award.username as username from
     public function datareport2(){
         set_time_limit(0);
 
+        //获取所有模板
+        $query = "select gid,title from tp_bonus";
+        $glist = M('bonus')->query($query);
+        $this->assign('glist', $glist);
+
         //每日渠道汇总表
         $m = 0;
         $datereport2 = array();
@@ -590,11 +595,10 @@ award.address as addres,award.orderid as orderid,award.username as username from
             if($list2){
                 foreach($list2 as $each2){
                     $gid = $each2['gid'];
-                    if(!array_key_exists($gid,$gidArr)){
-                        $gidArr['gid'] = $each2['countnumber'];
-                    }
+                    $gidArr[$gid] = $each2['countnumber'];
 
                 }
+                $gidArr['date'] =  date('Y-m-d',$eachFrom2);
                 $datereport2[] = $gidArr;
             }
 
@@ -602,7 +606,6 @@ award.address as addres,award.orderid as orderid,award.username as username from
             $m++;
         }
         $this->assign('datareport', $datereport2);
-        var_dump($datereport2);
         $this->display();
     }
 }

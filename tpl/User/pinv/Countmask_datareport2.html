@@ -21,23 +21,17 @@
                             <tr>
                                 <th class="firstTd">序号</th>
                                 <th class="secondTd">日期</th>
-                                <th class="thirdTd">模板数</th>
-                                <th class="sevenTd">PV</th>
-                                <th class="sevenTd">UV</th>
-                                <th class="sevenTd">转发数</th>
-                                <th class="sevenTd">投票数</th>
-                                <th class="sevenTd">扩散数</th>
+                                <volist name="glist" id="o">
+                                    <th class="sevenTd">{pigcms:$o.title}</th>
+                                </volist>
                             </tr>
-                            <volist name="datareport" id="o">
+                            <volist name="datareport" id="o" key="k">
                                 <tr>
-                                    <td>{pigcms:$i}</td>
+                                    <td>{pigcms:$k}</td>
                                     <td>{pigcms:$o.date}</td>
-                                    <td>{pigcms:$o.sumtemplate}</td>
-                                    <td>{pigcms:$o.pvsum}</td>
-                                    <td>{pigcms:$o.uvsum}</td>
-                                    <td>{pigcms:$o.sharesum}</td>
-                                    <td>{pigcms:$o.votesum}</td>
-                                    <td>{pigcms:$o.joinsum}</td>
+                                    <volist name="glist" id="f">
+                                        <td>{pigcms:$o[$f['gid']]}</td>
+                                    </volist>
                                 </tr>
                             </volist>
                             <td colspan="9" style="text-align:right">{pigcms:$page}</td>
