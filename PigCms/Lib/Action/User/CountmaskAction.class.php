@@ -522,7 +522,90 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
         $objWriter->save('php://output');
     }
+    public function exportDataReport(){
+        set_time_limit(0);
+        //每日数据汇总（记录每天活动所有模板所产生的数据总数）
 
+        //记录从6.20 到 7.20号每天产生的模板总数
+        $fromDate = strtotime("2015-06-20 00:00:00");
+        $endDate = strtotime("2015-07-20 00:00:00");
+        $i = 0;
+        $datereport = array();
+        while($i<35){
+            $eachData = array();
+            $add = 24*3600;
+            $eachFrom = $i*$add + $fromDate;
+            $eachEnd = $eachFrom + $add;
+
+            $queryGidCount = "SELECT * from tp_countmask where phone != '' and phonetime >= $eachFrom and phonetime<$eachEnd";
+            $list = M('countmask')->query($queryGidCount);
+
+            if($list){
+                $eachData['date'] = date('Y-m-d',$eachFrom);
+                $eachData['sumtemplate'] = count($list);
+                $pvSum = 0;
+                $uvSum = 0;
+                $shareSum = 0;
+                $voteSum = 0;
+                $joinSum = 0;
+                foreach($list as $each){
+                    $pvSum += $each['views'];
+                    $uvSum += $each['uniqueviews'];
+                    $shareSum += $each['share'];
+                    $voteSum += $each['vote'];
+                    $joinSum += $each['joins'];
+                }
+                $eachData['pvsum'] = $pvSum;
+                $eachData['uvsum'] = $uvSum;
+                $eachData['sharesum'] = $shareSum;
+                $eachData['votesum'] = $voteSum;
+                $eachData['joinsum'] = $joinSum;
+                $datereport[] = $eachData;
+            }
+            $i++;
+        }
+
+        $filename = "每日数据汇总" . "统计";
+        $this->exportexcelx1($datereport, $filename);
+    }
+    public function exportexcelx1($data = array(), $filename = 'report') {
+        $str = substr(THINK_PATH, 0, -1);
+        require_once $str . '/PigCms/Lib/Action/User/Classes/PHPExcel.php';
+        $objPHPExcel = new PHPExcel();
+        //写出表头
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A1', '序号')
+            ->setCellValue('B1', '日期')
+            ->setCellValue('C1', '模板数')
+            ->setCellValue('D1', 'PV')
+            ->setCellValue('E1', 'UV')
+            ->setCellValue('F1', '转发数')
+            ->setCellValue('G1', '投票数')
+            ->setCellValue('H1', '扩散数')
+            ;
+
+        //写出内容 UTF-8
+
+        for ($n = 0; $n < count($data); $n++) {
+            $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A' . ($n + 2), $n+1)
+                ->setCellValue('B' . ($n + 2), $data[$n]['date'])
+                ->setCellValue('C' . ($n + 2), $data[$n]['sumtemplate'])
+                ->setCellValue('D' . ($n + 2), $data[$n]['pvsum'])
+                ->setCellValue('E' . ($n + 2), $data[$n]['uvsum'])
+                ->setCellValue('F' . ($n + 2), $data[$n]['sharesum'])
+                ->setCellValue('G' . ($n + 2), $data[$n]['votesum'])
+                ->setCellValue('H' . ($n + 2), $data[$n]['joinsum'])
+            ;
+        }
+        $objPHPExcel->getActiveSheet()->setTitle('Simple');
+        $objPHPExcel->setActiveSheetIndex(0);
+        header('Content-Type: application/vnd.ms-excel');
+        header("Content-Disposition: attachment;filename=" ."每日数据汇总". date("Y-m-d h:i") . "xsl");
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        $objWriter->save('php://output');
+    }
     public function datareport(){
         set_time_limit(0);
         //每日数据汇总（记录每天活动所有模板所产生的数据总数）
