@@ -691,4 +691,88 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $this->assign('datareport', $datereport2);
         $this->display();
     }
+
+    //渠道汇总
+    public function exportDataReport2(){
+        set_time_limit(0);
+
+        //每日渠道汇总表
+        $m = 0;
+        $datereport2 = array();
+        $fromDate2 = strtotime("2015-06-20 00:00:00");
+        $endDate2 = strtotime("2015-07-20 00:00:00");
+        while($m<35){
+            $gidArr = array();
+            $add = 24*3600;
+            $eachFrom2 = $m*$add + $fromDate2;
+            $eachEnd2 = $eachFrom2 + $add;
+
+            $queryGidCount = "SELECT gid, count(id)  as countnumber from tp_countmask where phone != '' and phonetime >= $eachFrom2 and phonetime<$eachEnd2  group by gid ";
+            $list2 = M('countmask')->query($queryGidCount);
+
+            if($list2){
+                foreach($list2 as $each2){
+                    $gid = $each2['gid'];
+                    $gidArr[$gid] = $each2['countnumber'];
+
+                }
+                $gidArr['date'] =  date('Y-m-d',$eachFrom2);
+                $datereport2[] = $gidArr;
+            }
+
+
+            $m++;
+        }
+
+        $filename = "每日渠道汇总" . "统计";
+        $this->exportexcelx2($datereport2, $filename);
+    }
+    public function exportexcelx2($data = array(), $filename = 'report') {
+        $str = substr(THINK_PATH, 0, -1);
+        require_once $str . '/PigCms/Lib/Action/User/Classes/PHPExcel.php';
+        $objPHPExcel = new PHPExcel();
+        //写出表头
+        $query = "select gid,title from tp_bonus";
+        $glist = M('bonus')->query($query);
+        $arrayKeyList = array(
+            'A1','B1','C1','D1','E1','F1','G1','H1','I1','J1','K1','L1','M1',
+            'N1','O1','P1','Q1','R1','S1','T1','U1','V1','W1','X1','Y1','Z1',
+            'AA1','AB1','AC1','AD1','AE1','AF1','AG1','AH1','AI1','AJ1','AK1','AL1','AM1',
+            'AN1','AO1','AP1','AQ1','AR1','AS1','AT1','AU1','AV1','AW1','AX1','AY1','AZ1',
+            'BA1','BB1','BC1','BD1','BE1','BF1','BG1','BH1'
+        );
+        $arrayKeyList2 = array(
+            'A','B','C','D','E','F','G','H','I','J','K','L','M',
+            'N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+            'AA','AB','AC','AD','AE','AF','AG','AH','AI','AJ','AK','AL','AM',
+            'AN','AO','AP','AQ','AR','AS','AT','AU','AV','AW','AX','AY','AZ',
+            'BA','BB','BC','BD','BE','BF','BG','BH'
+        );
+        $obj = $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A1', '序号')
+            ->setCellValue('B1', '日期');
+        foreach($glist as $key => $each){
+            $obj = $obj->setCellValue($arrayKeyList[$key+2], $each['title']);
+        }
+
+        //写出内容 UTF-8
+
+        for ($n = 0; $n < count($data); $n++) {
+            $obj2 = $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A' . ($n + 2), $n+1)
+                ->setCellValue('B' . ($n + 2), $data[$n]['date']);
+            $query = "select gid,title from tp_bonus";
+            $glist = M('bonus')->query($query);
+            foreach($glist as $key => $each){
+                $obj2 = $obj2->setCellValue($arrayKeyList2[$key+2] . ($n + 2), $data[$n][$each['gid']]);
+            }
+        }
+        $objPHPExcel->getActiveSheet()->setTitle('Simple');
+        $objPHPExcel->setActiveSheetIndex(0);
+        header('Content-Type: application/vnd.ms-excel');
+        header("Content-Disposition: attachment;filename=" ."每日渠道汇总表". date("Y-m-d h:i") . "xsl");
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        $objWriter->save('php://output');
+    }
 }
