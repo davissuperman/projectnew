@@ -563,12 +563,46 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 $eachData['joinsum'] = $joinSum;
                 $datereport[] = $eachData;
             }
-
-
             $i++;
         }
 
         $this->assign('datareport', $datereport);
+        $this->display();
+    }
+
+    public function datareport2(){
+        set_time_limit(0);
+
+        //每日渠道汇总表
+        $m = 0;
+        $datereport2 = array();
+        $fromDate2 = strtotime("2015-06-20 00:00:00");
+        $endDate2 = strtotime("2015-07-20 00:00:00");
+        while($m<35){
+            $gidArr = array();
+            $add = 24*3600;
+            $eachFrom2 = $m*$add + $fromDate2;
+            $eachEnd2 = $eachFrom2 + $add;
+
+            $queryGidCount = "SELECT gid, count(id)  as countnumber from tp_countmask where phone != '' and phonetime >= $eachFrom2 and phonetime<$eachEnd2  group by gid ";
+            $list2 = M('countmask')->query($queryGidCount);
+
+            if($list2){
+                foreach($list2 as $each2){
+                    $gid = $each2['gid'];
+                    if(!array_key_exists($gid,$gidArr)){
+                        $gidArr['gid'] = $each2['countnumber'];
+                    }
+
+                }
+                $datereport2[] = $gidArr;
+            }
+
+
+            $m++;
+        }
+        $this->assign('datareport', $datereport2);
+        var_dump($datereport2);
         $this->display();
     }
 }
