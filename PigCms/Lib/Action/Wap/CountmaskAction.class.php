@@ -837,7 +837,7 @@ class CountmaskAction extends SjzAction {
 
     public function rank(){
         $userOpenId= cookie('user_openid');
-
+        $userOpenId = 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         //begin 分享出去的URL
         list($ticket,$appId,$gid) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
@@ -862,24 +862,25 @@ class CountmaskAction extends SjzAction {
         $count = M('countmask')->where(array('phone'=>array("neq",'')))->count();
         $firstLevel = 50;
         if($count < 50){
-            $firstLevel = $count;
-            $firstLevelInfo = M('countmask')->query("select number,share,phonetime from tp_countmask where phone != '' order by number asc, phonetime desc limit 1");
-            if($firstLevelInfo){
-                $firstLevelInfo = $firstLevelInfo[0];
-            }
+            $numberfirlevel = 0;
+            $sharefirlevel = 0;
+            $sharetimefirlevel = '';
 
         }else{
             $firstLevelInfo = M('countmask')->query("select number,share,phonetime from tp_countmask where phone != '' order by number desc, phonetime asc limit 49,1");
             if($firstLevelInfo){
                 $firstLevelInfo = $firstLevelInfo[0];
+                $numberfirlevel = $firstLevelInfo['number'];
+                $sharefirlevel = $firstLevelInfo['share'];
+                $sharetimefirlevel = date("Y-m-d H:i",$firstLevelInfo['phonetime']);
             }
         }
 
 
         $this->assign('firstlevel',$firstLevel);
-        $this->assign('numberfirlevel',$firstLevelInfo['number']);
-        $this->assign('shares',$firstLevelInfo['share']);
-        $this->assign('phonetime',date("Y-m-d H:i",$firstLevelInfo['phonetime']));
+        $this->assign('numberfirlevel',$numberfirlevel);
+        $this->assign('shares',$sharefirlevel);
+        $this->assign('phonetime',date("Y-m-d H:i",$sharetimefirlevel));
         //统计第1050名
         $showSecondLevel = 1;
         if($count < 1050){
