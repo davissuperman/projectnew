@@ -548,7 +548,7 @@ class CountmaskAction extends SjzAction {
                     }
                 }else{
                     //未获得第一次机会
-                    $currentNeedVote = $this->eachVote - $vote;
+                    $currentNeedVote = $this->eachVote*3 - $vote;
                 }
                 break;
             case 2:
@@ -566,7 +566,7 @@ class CountmaskAction extends SjzAction {
                     }
                 }else{
                     //未获得第二次机会
-                    $currentNeedVote = $this->eachVote * 2 - $vote;
+                    $currentNeedVote = $this->eachVote * 3 - $vote;
                 }
                 break;
             case 3:
@@ -719,12 +719,12 @@ class CountmaskAction extends SjzAction {
         $this->assign('name', $userName);
         $this->assign('number', $number);
 
-        $leftVote = $this->eachVote;
+        $leftVote = $this->eachVote*3;
         if($sequence >= 1){
             //第一次 还差多少票
-            $infoList = M('countmask_list')->where(array('openid' => $toUserOpenId,'sequence'=>$sequence))->find();
-            $vote = $infoList['vote'];
-            $leftVote = $this->eachVote - $vote;
+//            $infoList = M('countmask_list')->where(array('openid' => $toUserOpenId,'sequence'=>$sequence))->find();
+            $vote = $infoTO['vote'];
+            $leftVote = $this->eachVote*3 - $vote;
         }
         if($leftVote<0){
             $leftVote = 0;
