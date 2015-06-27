@@ -630,12 +630,7 @@ class CountmaskAction extends SjzAction {
         $selfUserInfo = array();
         $uid  = $_GET['uid'];
         $infoTO = M('countmask')->where(array('id' => $uid))->find();
-        if($userOpenId == $infoTO['openid']){
-            //是自己本身打开了自己的主页
-//            header("Location:$this->url./index.php?g=Wap&m=Countmask&a=sharenumber");
-//            echo '<script language="javascript" type="text/javascript">
-//       window.location.href="'."$this->url./index.php?g=Wap&m=Countmask&a=sharenumber".'";</script>  ';
-        }
+
 
         $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
         if($userOpenId && $fansInfo){
@@ -781,6 +776,14 @@ class CountmaskAction extends SjzAction {
 
         //当前UID对应的views自增
         M("countmask")->where(array('id' => $infoTO['id']))->setInc('views');
+
+
+        $selftOpen = 0;
+        if($userOpenId == $infoTO['openid']){
+            //是自己本身打开了自己的主页
+            $selftOpen = 1;
+        }
+        $this->assign('selfopen', $selftOpen);
         $this->display();
     }
 
