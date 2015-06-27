@@ -837,7 +837,7 @@ class CountmaskAction extends SjzAction {
 
     public function rank(){
         $userOpenId= cookie('user_openid');
-        $userOpenId = 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//        $userOpenId = 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         //begin 分享出去的URL
         list($ticket,$appId,$gid) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
@@ -884,24 +884,33 @@ class CountmaskAction extends SjzAction {
         //统计第1050名
         $showSecondLevel = 1;
         if($count < 1050){
-            $showSecondLevel = 0;
+            $numberseclevel = '0';
+            $shareseclevel = 0;
+            $sharetimeseclevel = '';
         }else{
             $secondLevelInfo = M('countmask')->query("select number,share,phonetime from tp_countmask where phone != '' order by number desc, phonetime asc limit 1049,1");
             if($secondLevelInfo){
                 $secondLevelInfo = $secondLevelInfo[0];
+                $numberseclevel = $secondLevelInfo['number'];
+                $shareseclevel = $secondLevelInfo['share'];
+                $sharetimeseclevel = date("Y-m-d H:i",$secondLevelInfo['phonetime']);
             }
-            $this->assign('numbersecond',$secondLevelInfo['number']);
-            $this->assign('sharessecond',$secondLevelInfo['share']);
-            $this->assign('phonetimesecond',date("Y-m-d H:i",$secondLevelInfo['phonetime']));
+
         }
         $this->assign('secondlevel',$showSecondLevel);
 
-
+        $this->assign('numbersecond',$numberseclevel);
+        $this->assign('sharessecond',$shareseclevel);
+        $this->assign('phonetimesecond',$sharetimeseclevel);
 
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         $number = $info['number'];
-        $count = M('countmask')->where("number > $number")->count();
-        $this->assign('count', $count+1);
+        $phoneTime = $info['phonetime'];
+        $shareSelf = $info['share'];
+        $countBigMyNumber = M('countmask')->where("number > $number ")->count();
+        $countEqualMyNumber = M('countmask')->where("number = $number and phonetime < $phoneTime ")->count();
+        $countEqualMyNumberAndMoreShare = M('countmask')->where("number = $number and phonetime = $phoneTime  and share > $shareSelf ")->count();
+        $this->assign('count', $countBigMyNumber+1+$countEqualMyNumber+$countEqualMyNumberAndMoreShare);
         $this->assign('number', $number);
         $this->assign('share', $info['share']);
 
