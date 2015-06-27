@@ -387,16 +387,26 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $enda = $_POST['end'];
         $start = strtotime($_POST['start']);
         $end = strtotime($_POST['end']);
+        if(!$start){
+            $start = strtotime(date('Y-m-d').'00:00:00');
+        }
+        if(!$end){
+            $end = strtotime(date('Y-m-d').'24:00:00');
+        }
         $db = M('countmask');
-        $sql = "select  openid ,phone,name,phonetime,sharetime,share,views,uniqueviews,vote,joins,number
+        $sql = "select gid,  openid ,phone,name,phonetime,sharetime,share,views,uniqueviews,vote,joins,number
         from tp_countmask  where phonetime>" . $start . " and phonetime<" . $end . " and phone != '' order by number desc";
+
         $list = M()->query($sql);
         $listArr = array();
         foreach($list as $key => $each){
-            $awardInfo = array();
             $tmp = $each;
+            $gid = $each['gid'];
+            $gInfo = M("bonus")->where(array('gid'=>$gid))->select();
+            $awardInfo = array();
+            $tmp['gidname'] = $gInfo[0]['title'];
             if($each['sharetime']){
-                $tmp['sharetime'] = date('Y-m-d H:i:s', $tmp['createtime']);
+                $tmp['sharetime'] = date('Y-m-d H:i:s', $tmp['sharetime']);
             }else{
                 $tmp['sharetime'] = "无";
             }
@@ -495,7 +505,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 ->setCellValue('B' . ($n + 2), $data[$n]['openid'])
                 ->setCellValue('C' . ($n + 2),  $name)
                 ->setCellValue('D' . ($n + 2), $data[$n]['phone'])
-                ->setCellValue('E' . ($n + 2), $data[$n]['gid'])
+                ->setCellValue('E' . ($n + 2), $data[$n]['gidname'])
                 ->setCellValue('F' . ($n + 2), $data[$n]['phonetime'])
                 ->setCellValue('G' . ($n + 2), $data[$n]['sharetime'])
                 ->setCellValue('H' . ($n + 2), $data[$n]['number'])
