@@ -20,10 +20,11 @@ class CountmaskAction  extends BonusAction {
 
     public function award() {
         // join tp_bonus_award as award on (info.openid=award.openid ) ,award.province as city, award.address as addres
-        $count = M('bonus_info')->count();
+        $count = M('countmask')->count();
         $page = new Page($count, 25);
-        $list = M('bonus_info')->query("SELECT distinct info.id,info.*, bonus.title  from tp_bonus_info as info
+        $list = M('countmask')->query("SELECT distinct info.id,info.*, bonus.title  from tp_countmask as info
           inner join tp_bonus as bonus on (bonus.gid=info.gid)
+          where info.phone != ''
          order by info.number desc limit $page->firstRow,$page->listRows"); //第二名和你最近的
         $this->assign('page', $page->show());
         $this->assign('token', $this->token);
@@ -37,35 +38,6 @@ class CountmaskAction  extends BonusAction {
                 $tmp['illegal'] = "否";
             }
             $condition['openid'] = $each['openid'];
-            $resAwardList = M('bonus_award')->where($condition)->field('type,telephone')->select();
-            if($resAwardList){
-                $phone = '';
-                $address = '';
-                $city = '';
-                foreach($resAwardList as $award){
-                    if($award['telephone']){
-                        $phone = $award['telephone'];
-                    }
-                    if($award['type'] == 1){
-                        $awardInfo .= '一等奖； ';
-                        $address = $award['address'];
-                        echo $address;
-                        $city = $award['province'];
-                    }else if($award['type'] == 2){
-                        $awardInfo .= '二等奖； ';
-                        $address = $award['address'];
-                        $city = $award['province'];
-                    }else if($award['type'] == 3 && $award['orderid'] != ''){
-                        $awardInfo .= '三等奖； ';
-                    }else if($award['type'] == 4 & $award['orderid'] != ''){
-                        $awardInfo .= '四等奖；';
-                    }
-                }
-            }
-            $tmp['awardlist'] = $awardInfo;
-            $tmp['phone'] = $phone;
-            $tmp['addres'] = $address;
-            $tmp['city'] = $city;
 
             $listArr[] = $tmp;
         }
