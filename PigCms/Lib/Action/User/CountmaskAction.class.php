@@ -742,7 +742,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
         require_once $str . '/PigCms/Lib/Action/User/Classes/PHPExcel.php';
         $objPHPExcel = new PHPExcel();
         //写出表头
-        $query = "select gid,title from tp_bonus";
+        $query = "select gid,title from tp_bonus where type=0";
         $glist = M('bonus')->query($query);
         $arrayKeyList = array(
             'A1','B1','C1','D1','E1','F1','G1','H1','I1','J1','K1','L1','M1',
@@ -771,7 +771,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
             $obj2 = $objPHPExcel->setActiveSheetIndex(0)
                 ->setCellValue('A' . ($n + 2), $n+1)
                 ->setCellValue('B' . ($n + 2), $data[$n]['date']);
-            $query = "select gid,title from tp_bonus";
+            $query = "select gid,title from tp_bonus where type=0";
             $glist = M('bonus')->query($query);
             foreach($glist as $key => $each){
                 $obj2 = $obj2->setCellValue($arrayKeyList2[$key+2] . ($n + 2), $data[$n][$each['gid']]);
