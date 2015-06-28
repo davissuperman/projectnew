@@ -206,6 +206,7 @@ class CountmaskAction extends SjzAction {
 
         //首先判断当前用户是否有玩过第一次
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $gid = $info['gid'];
         $firstStart = true;
         if($info){
             $phone = $info['phone'];
@@ -232,7 +233,7 @@ class CountmaskAction extends SjzAction {
         }
 
         //begin 分享出去的URL
-        list($ticket,$appId,$gid) = $this->getDiymenSet();
+        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
         $timestamp = time();
         $url = $this->get_url();;
@@ -262,9 +263,9 @@ class CountmaskAction extends SjzAction {
 
         //首先判断当前用户是否有玩过第一次
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
-
+        $gid = $info['gid'];
         //begin 分享出去的URL
-        list($ticket,$appId,$gid) = $this->getDiymenSet();
+        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
         $timestamp = time();
         $url = $this->get_url();;
@@ -301,8 +302,9 @@ class CountmaskAction extends SjzAction {
             header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
         }
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $gid = $info['gid'];
         //begin 分享出去的URL
-        list($ticket,$appId,$gid) = $this->getDiymenSet();
+        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
         $timestamp = time();
         $url = $this->get_url();;
@@ -488,8 +490,9 @@ class CountmaskAction extends SjzAction {
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
         }
+        $gid = $info['gid'];
         //begin 分享出去的URL
-        list($ticket,$appId,$gid) = $this->getDiymenSet();
+        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
         $timestamp = time();
         $url = $this->get_url();;
@@ -687,7 +690,7 @@ class CountmaskAction extends SjzAction {
         }
 
         //begin 分享出去的URL
-        list($ticket,$appId,$gid) = $this->getDiymenSet();
+        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
         $timestamp = time();
         $url = $this->get_url();;
@@ -845,7 +848,7 @@ class CountmaskAction extends SjzAction {
         $userOpenId= cookie('user_openid');
 //        $userOpenId = 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         //begin 分享出去的URL
-        list($ticket,$appId,$gid) = $this->getDiymenSet();
+        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
         $timestamp = time();
         $url = $this->get_url();;
@@ -856,7 +859,7 @@ class CountmaskAction extends SjzAction {
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
         $this->assign("shareurl",$this->getShareUrl());
-        $this->assign('gid', $gid);
+        $this->assign('gid', 1);
 
         $this->assign('title',$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
@@ -931,7 +934,7 @@ class CountmaskAction extends SjzAction {
     public function award(){
         $userOpenId= cookie('user_openid');
         //begin 分享出去的URL
-        list($ticket,$appId,$gid) = $this->getDiymenSet();
+        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
         $timestamp = time();
         $url = $this->get_url();;
@@ -942,7 +945,7 @@ class CountmaskAction extends SjzAction {
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
         $this->assign("shareurl",$this->getShareUrl());
-        $this->assign('gid', $gid);
+        $this->assign('gid', 1);
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         $this->assign('title',$info['name'].$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
