@@ -484,7 +484,7 @@ class CountmaskAction extends SjzAction {
 //        $userOpenId = 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $phone = $_GET['phone'];
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
-        if(!$userOpenId || !$info){
+        if(!$userOpenId || !$info || ($info && !$info['phone']) ){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
         }
