@@ -25,6 +25,7 @@
                                    
                                      
                                     <form method="post" action="{pigcms::U('Countmask/export',array('token'=>$token))}">
+                                        <input type="hidden" name="gid" value="{pigcms::$gid}">
                                         <input type="text" name="start" id="start" value="{pigcms:$start}" onClick="WdatePicker()" class="form-control" style="width:112px"/><span>-</span>
                                         <input type="text" name="end" id="end" value="{pigcms:$end}" onClick="WdatePicker()" class="form-control" style="width:112px"/>
                                         <button type="submit" class="btn btn-default" style="width:50px"/>导出</button>

@@ -186,6 +186,7 @@ class CountmaskAction  extends BonusAction {
         }
 //        var_dump($infoList);
         $this->assign('info', $infoList);
+        $this->assign('gid', $gid);
         $this->assign('page', $page->show());
         $this->assign('token', $this->token);
         $this->assign('comefrom', $gidInfo['title']);
@@ -386,6 +387,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
     public function export() {
         $starta = $_POST['start'];
         $enda = $_POST['end'];
+        $gid=$_POST['gid'];
         $start = strtotime($_POST['start']);
         $end = strtotime($_POST['end']);
         if(!$start){
@@ -396,7 +398,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
         }
         $db = M('countmask');
         $sql = "select gid,  openid ,phone,name,phonetime,sharetime,share,views,uniqueviews,vote,joins,number
-        from tp_countmask  where phonetime>" . $start . " and phonetime<" . $end . " and phone != '' order by number desc";
+        from tp_countmask  where gid=$gid and phonetime>" . $start . " and phonetime<" . $end . " and phone != '' order by number desc";
 
         $list = M()->query($sql);
         $listArr = array();
@@ -782,6 +784,145 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $objPHPExcel->setActiveSheetIndex(0);
         header('Content-Type: application/vnd.ms-excel');
         header("Content-Disposition: attachment;filename=" ."每日渠道汇总表". date("Y-m-d h:i") . "xsl");
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        $objWriter->save('php://output');
+    }
+
+    public function exportalldata() {
+        $starta = $_POST['start'];
+        $enda = $_POST['end'];
+        $start = strtotime($_POST['start']);
+        $end = strtotime($_POST['end']);
+        if(!$start){
+            $start = strtotime(date('Y-m-d').'00:00:00');
+        }
+        if(!$end){
+            $end = strtotime(date('Y-m-d').'24:00:00');
+        }
+        $db = M('countmask');
+        $sql = "select gid,  openid ,phone,name,phonetime,sharetime,share,views,uniqueviews,vote,joins,number
+        from tp_countmask  where phonetime>" . $start . " and phonetime<" . $end . " and phone != '' order by number desc";
+
+        $list = M()->query($sql);
+        $listArr = array();
+        foreach($list as $key => $each){
+            $tmp = $each;
+            $gid = $each['gid'];
+            $gInfo = M("bonus")->where(array('gid'=>$gid))->select();
+            $awardInfo = array();
+            $tmp['gidname'] = $gInfo[0]['title'];
+            if($each['sharetime']){
+                $tmp['sharetime'] = date('Y-m-d H:i:s', $tmp['sharetime']);
+            }else{
+                $tmp['sharetime'] = "无";
+            }
+            if($each['phonetime']){
+                $tmp['phonetime'] = date('Y-m-d H:i:s', $tmp['phonetime']);
+            }else{
+                $tmp['phonetime'] = "无";
+            }
+            if($each['views']< $each['vote'] || $each['illegal']){
+                $tmp['illegal'] = "是";
+            }else{
+                $tmp['illegal'] = "否";
+            }
+            $condition['openid'] = $each['openid'];
+            $resAwardList = M('countmask_award')->where($condition)->select();
+            if($resAwardList){
+                foreach($resAwardList as $award){
+                    $tmp['username'] = $award['name'];
+                    $tmp['userphone'] = $award['phone'];
+                    $tmp['userprovince'] = $award['province'];
+                    $tmp['city'] = $award['city'];
+                    $tmp['address'] = $award['address'];
+                }
+            }
+
+            //根据openid 获取三次得分情况
+            $numberList = M('countmask_list')->where($condition)->select();
+            foreach($numberList as $numberEach){
+                switch($numberEach['sequence']){
+                    case 1:
+                        $tmp['numberadd1'] = $numberEach['number'];
+                        break;
+                    case 2:
+                        $tmp['numberadd2'] = $numberEach['number'];
+                        break;
+                    case 3:
+                        $tmp['numberadd3'] = $numberEach['number'];
+                        break;
+                }
+            }
+
+            $listArr[] = $tmp;
+        }
+        $title = array();
+        $filename = $starta . "~" . $enda . "统计";
+        $this->exportexcelalldata($listArr, $title, $filename);
+    }
+
+    public function exportexcelalldata($data = array(), $title = array(), $filename = 'report') {
+        $str = substr(THINK_PATH, 0, -1);
+        require_once $str . '/PigCms/Lib/Action/User/Classes/PHPExcel.php';
+        $objPHPExcel = new PHPExcel();
+        //写出表头
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'ID')
+            ->setCellValue('B1', 'OPENID')
+            ->setCellValue('C1', '微信昵称')
+            ->setCellValue('D1', '联系电话')
+            ->setCellValue('E1', '来源分组')
+            ->setCellValue('F1', '参加游戏时间')
+            ->setCellValue('G1', '首次分享时间')
+            ->setCellValue('H1', '总分数')
+            ->setCellValue('I1', '加分一')
+            ->setCellValue('J1', '加分二')
+            ->setCellValue('K1', '加分三')
+            ->setCellValue('L1', 'PV')
+            ->setCellValue('M1', 'UV')
+            ->setCellValue('N1', '分享数')
+            ->setCellValue('O1', '得票数')
+            ->setCellValue('P1', '扩散数')
+            ->setCellValue('Q1', '收货姓名')
+            ->setCellValue('R1', '收货手机')
+            ->setCellValue('S1', '省份')
+            ->setCellValue('T1', '城市')
+            ->setCellValue('U1', '地址');
+        //写出内容 UTF-8
+        //log :: write( print_r($data,true)  );
+        for ($n = 0; $n < count($data); $n++) {
+            $name = $data[$n]['name'];
+            $name = $this->ReplaceSpecialChar($name);
+            $name = str_replace('=','',$name);
+            $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A' . ($n + 2), $n+1)
+                ->setCellValue('B' . ($n + 2), $data[$n]['openid'])
+                ->setCellValue('C' . ($n + 2),  $name)
+                ->setCellValue('D' . ($n + 2), $data[$n]['phone'])
+                ->setCellValue('E' . ($n + 2), $data[$n]['gidname'])
+                ->setCellValue('F' . ($n + 2), $data[$n]['phonetime'])
+                ->setCellValue('G' . ($n + 2), $data[$n]['sharetime'])
+                ->setCellValue('H' . ($n + 2), $data[$n]['number'])
+                ->setCellValue('I' . ($n + 2), $data[$n]['numberadd1'])
+                ->setCellValue('J' . ($n + 2), $data[$n]['numberadd2'])
+                ->setCellValue('K' . ($n + 2), $data[$n]['numberadd3'])
+                ->setCellValue('L' . ($n + 2), $data[$n]['uniqueviews'])
+                ->setCellValue('M' . ($n + 2), $data[$n]['views'])
+                ->setCellValue('N' . ($n + 2), $data[$n]['share'])
+                ->setCellValue('O' . ($n + 2), $data[$n]['vote'])
+                ->setCellValue('P' . ($n + 2), $data[$n]['joins'])
+                ->setCellValue('Q' . ($n + 2), $data[$n]['username'])
+                ->setCellValue('R' . ($n + 2), $data[$n]['userphone'])
+                ->setCellValue('S' . ($n + 2), $data[$n]['userprovince'])
+                ->setCellValue('T' . ($n + 2), $data[$n]['city'])
+                ->setCellValue('U' . ($n + 2), $data[$n]['address']);
+
+        }
+        $objPHPExcel->getActiveSheet()->setTitle('Simple');
+        $objPHPExcel->setActiveSheetIndex(0);
+        header('Content-Type: application/vnd.ms-excel');
+        header("Content-Disposition: attachment;filename=" . "时时排名".date("Y-m-d h:i") . ".xls");
         header('Cache-Control: max-age=0');
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
         $objWriter->save('php://output');
