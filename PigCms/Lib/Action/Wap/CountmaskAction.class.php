@@ -17,10 +17,11 @@ class CountmaskAction extends SjzAction {
     public function getShareUrl(){
         $userOpenId= cookie('user_openid');
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $gid = $info['gid'];
         if($info){
-            return $this->url."/index.php?g=Wap&m=Countmask&a=sharefriend&uid=".$info['id'];
+            return $this->url."/index.php?g=Wap&m=Countmask&a=sharefriend&uid=".$info['id']."&gid=$gid";
         }else{
-            return $this->url."/index.php?g=Wap&m=Countmask&a=index";
+            return $this->url."/index.php?g=Wap&m=Countmask&a=index&gid=$gid";
         }
     }
     public function getDiymenSet(){
@@ -83,7 +84,7 @@ class CountmaskAction extends SjzAction {
             $gid = 1;
         }
         $userOpenId= cookie('user_openid');
-//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $fansInfo = null;
         $selfUserInfo = array();
         $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
