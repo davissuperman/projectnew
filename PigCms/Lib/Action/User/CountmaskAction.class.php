@@ -19,30 +19,59 @@ class CountmaskAction  extends BonusAction {
     }
 
     public function award() {
-        // join tp_bonus_award as award on (info.openid=award.openid ) ,award.province as city, award.address as addres
-        $count = M('countmask')->count();
+        $db = M('countmask');
+        $where = array('phone'=>array('neq',''));
+        $count = $db->where($where)->count();
         $page = new Page($count, 25);
-        $list = M('countmask')->query("SELECT distinct info.id,info.*, bonus.title  from tp_countmask as info
-          inner join tp_bonus as bonus on (bonus.gid=info.gid)
-          where info.phone != ''
-         order by info.number desc limit $page->firstRow,$page->listRows"); //第二名和你最近的
+        $info = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->order('number desc')->select();
+//根据GID 得到渠道
+        $infoList = array();
+        foreach($info as $each ){
+            $tmp = array();
+            $tmp['name'] = $each['name'];
+            $tmp['views'] = $each['views'];
+            $tmp['uniqueviews'] = $each['uniqueviews'];
+            $cheat = '否';
+            if( $each['views'] < $each['vote'] || $each['illegal']){
+                $cheat = "<font style='color:red'>是</font>";
+            }
+            $tmp['cheat'] = $cheat;
+            $tmp['telephone'] = $each['phone'];
+            $tmp['share'] = $each['share'];
+            $tmp['vote'] = $each['vote'];
+            $tmp['joins'] = $each['joins'];
+            $tmp['openid'] = $each['openid'];
+            $tmp['number'] = $each['number'];
+            $tmp['phonetime'] = $each['phonetime'];
+            $tmp['sharetime'] = $each['sharetime'];
+            $fansInfo = M('customer_service_fans')->where(array('openid' => $each['openid'],'token'=>'rggfsk1394161441'))->find();
+            $whetherSbuscribe = $fansInfo['subscribe'];
+            if($whetherSbuscribe == 1){
+                $tmp['subscribe'] = "是";
+            }else{
+                $tmp['subscribe'] = "否";
+            }
+            $sex = $fansInfo['sex'];
+            if($sex == 1){
+                $tmp['sex'] = "男";
+            }else if($sex == 2){
+                $tmp['sex'] = "女";
+            }else{
+                $tmp['sex'] = "未知";
+            }
+            $tmp['province'] = $fansInfo['province'];
+
+            $gid = $each['gid'];
+            $gidInfo = M('bonus')->where(array('gid' => $gid))->find();
+            $tmp['comefrom'] = $gidInfo['title'];
+            $infoList[] = $tmp;
+        }
+//        var_dump($infoList);
+        $this->assign('info', $infoList);
         $this->assign('page', $page->show());
         $this->assign('token', $this->token);
-        $listArr = array();
-        foreach($list as $each){
-            $awardInfo = '';
-            $tmp = $each;
-            if($each['views']< $each['vote'] || $each['illegal']){
-                $tmp['illegal'] = "<font style='color:red'>是</font>";
-            }else{
-                $tmp['illegal'] = "否";
-            }
-            $condition['openid'] = $each['openid'];
 
-            $listArr[] = $tmp;
-        }
-        $this->assign('info', $listArr);
-        $this->display();
+        $this->display('award');
     }
 
     public function statistics() {
