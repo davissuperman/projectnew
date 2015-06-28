@@ -495,7 +495,14 @@ class CountmaskAction extends SjzAction {
             }
             header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
         }
-        $gid = $info['gid'];
+        if($_GET['gid']){
+           $gid =  $_GET['gid'];
+        }elseif($info){
+            $gid = $info['gid'];
+        }else{
+            $gid=1;
+        }
+
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
