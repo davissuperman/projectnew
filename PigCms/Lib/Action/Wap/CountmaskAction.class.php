@@ -714,9 +714,9 @@ class CountmaskAction extends SjzAction {
 
         //如果 sequence=1 and phone为null 则需要重定向到首页 非法页面
         $sequence = $infoTO['sequence'];
-        if(!$infoTO['phone']){
-            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
-        }
+//        if(!$infoTO['phone']){
+//            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+//        }
 
         $toUserOpenId = $infoTO['openid'];
         $userName = $infoTO['name'];
