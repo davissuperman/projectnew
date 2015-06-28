@@ -858,6 +858,7 @@ class CountmaskAction extends SjzAction {
 
     public function rank(){
         $userOpenId= cookie('user_openid');
+        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
 //        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
@@ -873,7 +874,7 @@ class CountmaskAction extends SjzAction {
         $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', 1);
 
-        $this->assign('title',$this->title);
+        $this->assign('title',$info['name'].$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
