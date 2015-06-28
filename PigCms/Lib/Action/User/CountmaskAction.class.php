@@ -8,7 +8,7 @@ class CountmaskAction  extends BonusAction {
 
     public function index() {
         $db = M('bonus');
-        $where = array('token' => $this->token);
+        $where = array('token' => $this->token,'type'=>0);
         $count = $db->where($where)->count();
         $page = new Page($count, 25);
         $info = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->select();
@@ -667,7 +667,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
         set_time_limit(0);
 
         //获取所有模板
-        $query = "select gid,title from tp_bonus";
+        $query = "select gid,title from tp_bonus where type=0";
         $glist = M('bonus')->query($query);
         $this->assign('glist', $glist);
 
