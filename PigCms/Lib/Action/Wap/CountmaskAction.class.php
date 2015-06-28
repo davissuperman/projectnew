@@ -83,6 +83,7 @@ class CountmaskAction extends SjzAction {
             $gid = 1;
         }
         $userOpenId= cookie('user_openid');
+//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $fansInfo = null;
         $selfUserInfo = array();
         $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
@@ -484,23 +485,19 @@ class CountmaskAction extends SjzAction {
     }
     public function sharenumber(){
         $userOpenId= cookie('user_openid');
-//        $userOpenId = 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        //$userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $phone = $_GET['phone'];
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
-        if(!$userOpenId || !$info || ($info && !$info['phone']) ){
-            //redirect
-            $gid =1;
-            if($info && $info['gid']){
-                $gid =  $info['gid'];
-            }
-            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
-        }
         if($_GET['gid']){
-           $gid =  $_GET['gid'];
+            $gid =  $_GET['gid'];
         }elseif($info){
             $gid = $info['gid'];
         }else{
             $gid=1;
+        }
+        if(!$userOpenId || !$info || ($info && !$info['phone']) ){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
         }
 
         //begin 分享出去的URL
@@ -640,7 +637,7 @@ class CountmaskAction extends SjzAction {
 
     public function sharefriend(){
         $userOpenId= cookie('user_openid');
-//        $userOpenId = 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        //$userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $fansInfo = null;
         $selfUserInfo = array();
         $uid  = $_GET['uid'];
@@ -858,7 +855,7 @@ class CountmaskAction extends SjzAction {
 
     public function rank(){
         $userOpenId= cookie('user_openid');
-//        $userOpenId = 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
