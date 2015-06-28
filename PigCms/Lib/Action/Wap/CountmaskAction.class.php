@@ -495,11 +495,13 @@ class CountmaskAction extends SjzAction {
         }else{
             $gid=1;
         }
-        if(!$userOpenId || !$info || ($info && !$info['phone']) ){
+        if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
         }
-
+        if(!$phone && (!$info || ($info && !$info['phone'])) ){
+            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+        }
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
