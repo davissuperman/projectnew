@@ -630,7 +630,12 @@ class CountmaskAction extends SjzAction {
         $selfUserInfo = array();
         $uid  = $_GET['uid'];
         $infoTO = M('countmask')->where(array('id' => $uid))->find();
+        if( !$infoTO ){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+        }
 
+        $gid = $infoTO['gid'];
 
         $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
         if($userOpenId && $fansInfo){
@@ -709,8 +714,8 @@ class CountmaskAction extends SjzAction {
 
         //如果 sequence=1 and phone为null 则需要重定向到首页 非法页面
         $sequence = $infoTO['sequence'];
-        if($sequence == 1 && !$infoTO['phone']){
-            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+        if(!$infoTO['phone']){
+            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
         }
 
         $toUserOpenId = $infoTO['openid'];
@@ -769,9 +774,9 @@ class CountmaskAction extends SjzAction {
         if($infoLocal){
             //这个用户是否参加过，已经参加
             $this->assign('localuid', $infoLocal['uid']);
-            $this->assign('redirecturl', $this->url."/index.php?g=Wap&m=Countmask&a=sharenumber");
+            $this->assign('redirecturl', $this->url."/index.php?g=Wap&m=Countmask&a=sharenumber&gid=$gid");
         }else{
-            $this->assign('redirecturl', $this->url."/index.php?g=Wap&m=Countmask&a=index");
+            $this->assign('redirecturl', $this->url."/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
         }
 
         //当前UID对应的views自增
@@ -784,6 +789,7 @@ class CountmaskAction extends SjzAction {
             $selftOpen = 1;
         }
         $this->assign('selfopen', $selftOpen);
+        $this->assign('gid',  $gid);
         $this->display();
     }
 
