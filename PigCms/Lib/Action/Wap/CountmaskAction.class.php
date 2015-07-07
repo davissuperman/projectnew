@@ -898,11 +898,15 @@ class CountmaskAction extends SjzAction {
             }
         }
 
-
+        if($sharetimefirlevel*1 < 100){
+            $sharetimefirlevel = '';
+        }else{
+            $sharetimefirlevel = date("Y-m-d H:i",$sharetimefirlevel);
+        }
         $this->assign('firstlevel',$firstLevel);
         $this->assign('numberfirlevel',$numberfirlevel);
         $this->assign('shares',$sharefirlevel);
-        $this->assign('phonetime',date("Y-m-d H:i",$sharetimefirlevel));
+        $this->assign('phonetime',$sharetimefirlevel);
         //统计第1050名
         $showSecondLevel = 1;
         if($count < 1050){
