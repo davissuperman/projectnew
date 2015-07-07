@@ -898,7 +898,8 @@ class CountmaskAction extends SjzAction {
             }
         }
 
-        if($sharetimefirlevel*1 < 100){
+        $year = date("Y",$sharetimefirlevel);
+        if($year*1 <= 1970){
             $sharetimefirlevel = '';
         }else{
             $sharetimefirlevel = date("Y-m-d H:i",$sharetimefirlevel);
