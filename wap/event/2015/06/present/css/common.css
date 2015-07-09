@@ -113,9 +113,9 @@ position: absolute;top: 1.7rem;right: 0.7rem; cursor:pointer;}
 .rule-label{background: #d9552a;height: 0.5rem;line-height: 0.5rem;width: 1.5rem;text-align: center;color: #fff; margin:0.1rem auto;}
 .game-time{color:#145d82; background:#7ecef4; text-align:center;line-height:0.5rem; border-radius:0.1rem;}
 .prize-box{ background:#acd598;color:#145d82; margin:0.1rem 0; position:relative; height:2rem; border-radius:0.1rem;}
-.prize-box .img{background:url(../images/new/img02.png) no-repeat; width:1rem;height:1.4rem;background-size:auto 100%; position:absolute;top:0.1rem;left:0.1rem;}
+.prize-box .img{background:url(../images/new/img08.png) no-repeat; width:1.3rem;height:1.4rem;background-size:auto 100%; position:absolute;top:0.1rem;left:0.1rem;}
 .prize-box .num{ position:absolute;left: 0.1rem;top: 1.5rem;color:#06558b;}
-.prize-box .txt{ position:absolute;left:1.1rem;width:3.8rem;font-size:0.26rem;top:0.1rem; line-height:0.35rem;}
+.prize-box .txt{ position:absolute;left:1.4rem;width:3.5rem;font-size:0.26rem;top:0.1rem; line-height:0.35rem;}
 
 .rule-panel{ background:#fff799; border-radius:0.1rem;color:#000; padding:0.1rem; font-size:0.25rem; line-height:0.35rem; margin-bottom:0.1rem; position:relative; height:2.8rem;}
 .rule-panel .img{background:url(../images/new/img07.png) no-repeat; width:4.2rem;height:2.2rem;background-size:auto 100%; position:absolute;bottom:0rem;left:50%; margin-left:-2.1rem;}
