@@ -23,7 +23,7 @@ class CountmaskAction  extends BonusAction {
         $where = array('phone'=>array('neq',''));
         $count = $db->where($where)->count();
         $page = new Page($count, 25);
-        $info = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->order('number desc')->select();
+        $info = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->order('number desc,phonetime asc')->select();
 //根据GID 得到渠道
         $infoList = array();
         foreach($info as $each ){
@@ -133,12 +133,13 @@ class CountmaskAction  extends BonusAction {
         $where = array('gid' => $gid,'phone'=>array('neq',''));
         $count = $db->where($where)->count();
         $page = new Page($count, 25);
-        $info = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->order('number desc')->select();
+        $info = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->order('number desc, phonetime asc')->select();
 //根据GID 得到渠道
         $gidInfo = M('countmask')->where(array('gid' => $gid))->find();
         $infoList = array();
         foreach($info as $each ){
             $tmp = array();
+            $tmp['id'] = $each['id'];
             $tmp['name'] = $each['name'];
             $tmp['views'] = $each['views'];
             $tmp['uniqueviews'] = $each['uniqueviews'];
