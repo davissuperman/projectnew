@@ -229,7 +229,7 @@ class CountmaskAction  extends BonusAction {
 award.address as addres,award.orderid as orderid,award.username as username from tp_bonus_info as info
              left join tp_bonus_award as award on (award.openid=info.openid)
              left join tp_bonus as bonus on (bonus.gid=info.gid)
-             order by info.number desc limit $start,$end"); //第二名和你最近的
+             order by info.number desc,phonetime asc limit $start,$end"); //第二名和你最近的
         $i = $start+1;
         foreach ($list as $k => $v) {
             $list[$k]['sort'] = $i;
@@ -403,7 +403,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
         }
         $db = M('countmask');
         $sql = "select gid,  openid ,phone,name,phonetime,sharetime,share,views,uniqueviews,vote,joins,number
-        from tp_countmask  where gid=$gid and phonetime>" . $start . " and phonetime<" . $end . " and phone != '' order by number desc";
+        from tp_countmask  where gid=$gid and phonetime>" . $start . " and phonetime<" . $end . " and phone != '' order by number desc,phonetime asc";
 
         $list = M()->query($sql);
         $listArr = array();
@@ -807,7 +807,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
         }
         $db = M('countmask');
         $sql = "select gid,  openid ,phone,name,phonetime,sharetime,share,views,uniqueviews,vote,joins,number
-        from tp_countmask  where phonetime>" . $start . " and phonetime<" . $end . " and phone != '' order by number desc";
+        from tp_countmask  where phonetime>" . $start . " and phonetime<" . $end . " and phone != '' order by number desc,phonetime asc";
 
         $list = M()->query($sql);
         $listArr = array();
