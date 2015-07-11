@@ -883,6 +883,7 @@ class CountmaskAction extends SjzAction {
         //统计第50名
         $count = M('countmask')->where(array('phone'=>array("neq",'')))->count();
         $firstLevel = 50;
+        $year = 0;
         if($count < 50){
             $numberfirlevel = 0;
             $sharefirlevel = 0;
@@ -894,15 +895,13 @@ class CountmaskAction extends SjzAction {
                 $firstLevelInfo = $firstLevelInfo[0];
                 $numberfirlevel = $firstLevelInfo['number'];
                 $sharefirlevel = $firstLevelInfo['share'];
+                $year = date("Y",$firstLevelInfo['phonetime']);
                 $sharetimefirlevel = date("Y-m-d H:i",$firstLevelInfo['phonetime']);
             }
         }
 
-        $year = date("Y",$sharetimefirlevel);
         if($year*1 <= 1970){
             $sharetimefirlevel = '';
-        }else{
-            $sharetimefirlevel = date("Y-m-d H:i",$sharetimefirlevel);
         }
         $this->assign('firstlevel',$firstLevel);
         $this->assign('numberfirlevel',$numberfirlevel);
