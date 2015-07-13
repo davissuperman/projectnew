@@ -3,7 +3,7 @@
 class CountmaskAction extends SjzAction {
     public $title = '正参加森田药妆膜数大师活动，帮他投票吧！';
     public $bonusdesc = '只要30票， 人人拉得到，比手快不比票多，7500片免费面膜等你来拿！';
-    public $eachVote = 2;
+    public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
 
