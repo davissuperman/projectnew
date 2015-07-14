@@ -205,6 +205,7 @@ class CountmaskAction extends SjzAction {
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+            exit();
         }
 
         //首先判断当前用户是否有玩过第一次
@@ -222,6 +223,7 @@ class CountmaskAction extends SjzAction {
             if($phone && ( $vote<$this->eachVote || floor($vote/$this->eachVote ) < $currentSequence)){
                 $firstStart = false;
                 header("location:$this->url/index.php?g=Wap&m=Countmask&a=sharenumber&gid=$gid");
+                exit();
             }
 
             //判断当前机会是否已经使用过
@@ -229,10 +231,12 @@ class CountmaskAction extends SjzAction {
             if($infoList && $infoList['number']){
                 //已经玩过
                 header("location:$this->url/index.php?g=Wap&m=Countmask&a=sharenumber");
+                exit();
             }
 
         }else{
             header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+            exit();
         }
 
         //begin 分享出去的URL
@@ -262,6 +266,7 @@ class CountmaskAction extends SjzAction {
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+            exit();
         }
 
         //首先判断当前用户是否有玩过第一次
