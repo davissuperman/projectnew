@@ -366,11 +366,13 @@ class CountmaskAction extends SjzAction {
                 if($vote < $this->eachVote){
                     //非法提交 转到首页
                     header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+                    return;
                 }
                 $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>1))->find();
                 if($infoList && $infoList['number']){
                     //已经提交分数 无法再次提交
                     header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+                    exit();
                 }
                 M("countmask")->where(array('id' =>$info['id']))->setInc('number', $number);
                 //更新sequence
@@ -397,11 +399,13 @@ class CountmaskAction extends SjzAction {
                 if($vote < $this->eachVote * 2){
                     //非法提交 转到首页
                     header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+                    return;
                 }
                 $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>2))->find();
                 if($infoList && $infoList['number']){
                     //已经提交分数 无法再次提交
                     header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+                    exit;
                 }
                 M("countmask")->where(array('id' =>$info['id']))->setInc('number', $number);
                 //更新sequence
@@ -428,11 +432,13 @@ class CountmaskAction extends SjzAction {
                 if($vote < $this->eachVote * 3){
                     //非法提交 转到首页
                     header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+                    return;
                 }
                 $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>3))->find();
                 if($infoList && $infoList['number']){
                     //已经提交分数 无法再次提交
                     header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+                    return;
                 }
                 M("countmask")->where(array('id' =>$info['id']))->setInc('number', $number);
                 //更新sequence
@@ -500,9 +506,11 @@ class CountmaskAction extends SjzAction {
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+            return;
         }
         if(!$phone && (!$info || ($info && !$info['phone'])) ){
             header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+            return;
         }
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
@@ -649,6 +657,7 @@ class CountmaskAction extends SjzAction {
         if( !$infoTO ){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+            return;
         }
 
         $gid = $infoTO['gid'];
