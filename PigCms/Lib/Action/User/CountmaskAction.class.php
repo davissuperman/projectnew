@@ -27,7 +27,11 @@ class CountmaskAction  extends BonusAction {
 //根据GID 得到渠道
         $infoList = array();
         $n = 1;
-        $p = $_GET['p'] - 1;
+        $p = 0;
+        if( $_GET['p'] ){
+            $p = $_GET['p'] - 1;
+        }
+
         foreach($info as $each ){
             $tmp = array();
             $tmp['id'] = $n+ $p*25;
