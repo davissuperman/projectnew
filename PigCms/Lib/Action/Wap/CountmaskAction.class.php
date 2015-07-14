@@ -303,6 +303,7 @@ class CountmaskAction extends SjzAction {
         if(!$userOpenId || !$number || ($number > 200)){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+            return;
         }
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         $gid = $info['gid'];
