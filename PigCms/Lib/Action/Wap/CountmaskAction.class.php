@@ -905,7 +905,7 @@ class CountmaskAction extends SjzAction {
             $sharetimefirlevel = '';
 
         }else{
-            $firstLevelInfo = M('countmask')->query("select number,share,phonetime from tp_countmask where phone != '' order by number desc, phonetime asc limit 49,1");
+            $firstLevelInfo = M('countmask')->query("select number,share,phonetime from tp_countmask where phone != '' order by number desc,share desc,phonetime asc limit 49,1");
             if($firstLevelInfo){
                 $firstLevelInfo = $firstLevelInfo[0];
                 $numberfirlevel = $firstLevelInfo['number'];
@@ -929,7 +929,7 @@ class CountmaskAction extends SjzAction {
             $shareseclevel = 0;
             $sharetimeseclevel = '';
         }else{
-            $secondLevelInfo = M('countmask')->query("select number,share,phonetime from tp_countmask where phone != '' order by number desc, phonetime asc limit 1049,1");
+            $secondLevelInfo = M('countmask')->query("select number,share,phonetime from tp_countmask where phone != '' order by number desc,share desc,phonetime asc limit 1049,1");
             if($secondLevelInfo){
                 $secondLevelInfo = $secondLevelInfo[0];
                 $numberseclevel = $secondLevelInfo['number'];
