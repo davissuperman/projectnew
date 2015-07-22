@@ -900,7 +900,26 @@ HTML;
 
     public function rank(){
         $userOpenId= cookie('user_openid');
+
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+
+        if($_GET['gid']){
+            $gid =  $_GET['gid'];
+        }elseif($info){
+            $gid = $info['gid'];
+        }else{
+            $gid=1;
+        }
+        if(!$userOpenId){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+            exit;
+        }
+        if(!$info || !$info['number']){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+            exit;
+        }
 //        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
