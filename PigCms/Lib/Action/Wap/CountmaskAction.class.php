@@ -522,7 +522,7 @@ HTML;
         $this->display();
     }
     public function sharenumber(){
-        $this->setEndTime();
+//        $this->setEndTime();
         $userOpenId= cookie('user_openid');
         //$userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $phone = $_GET['phone'];
