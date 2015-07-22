@@ -6,6 +6,7 @@ class CountmaskAction extends SjzAction {
     public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
+    public $endtime="2015-07-21 24:00:00";
 
     public function _initialize() {
         parent :: _initialize();
@@ -72,7 +73,7 @@ class CountmaskAction extends SjzAction {
     }
 
         public function setEndTime(){
-            $endtime = "2015-07-21 24:00:00";
+            $endtime =strtotime( $this->endtime );
             if (time() > $endtime) {//活动是否结束
 
                 echo <<<HTML
@@ -1152,6 +1153,11 @@ HTML;
      * 记录转发次数
      */
     public function saveShareNumberToFriends(){
+        $endtime =strtotime( $this->endtime );
+        if(time() > $endtime ){
+            echo 0;
+            exit;
+        }
         $userOpenId= cookie('user_openid');
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         if($info){
@@ -1174,6 +1180,11 @@ HTML;
     * 记录 我也要参加 次数
     */
     public function saveWantJoin(){
+        $endtime =strtotime( $this->endtime );
+        if(time() > $endtime ){
+            echo 0;
+            exit;
+        }
         $toOpenId = $_POST['toopenid'];
         $info = M('countmask')->where(array('openid' => $toOpenId))->find();
         M("countmask")->where(array('id' => $info['id']))->setInc('joins');
@@ -1185,6 +1196,11 @@ HTML;
     */
     public function saveHelpVote(){
         $return = 0;
+        $endtime =strtotime( $this->endtime );
+        if(time() > $endtime ){
+            echo 0;
+            exit;
+        }
         //帮忙投票 点击次数
         $toOpenId = $_POST['toopenid'];
         $userOpenId = cookie('user_openid');
