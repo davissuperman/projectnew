@@ -71,7 +71,29 @@ class CountmaskAction extends SjzAction {
         }
     }
 
+        public function setEndTime(){
+            $endtime = "2015-07-21 24:00:00";
+            if (time() > $endtime) {//活动是否结束
 
+                echo <<<HTML
+                <center>
+<h1>活动已经结束！</h1>
+<h2>
+登记收货地址信息截止至
+7月26日24：00<br/>
+登记方法：<br/>
+在森田微信服务号上点击
+”查询排名“菜单查看排名，<br/>
+点击“填写/查询领奖信息”
+请认真填写您的收货信息！<br/>
+我们将于8月初开始寄送奖品！
+</h2>
+</center>
+HTML;
+
+                exit();
+            }
+        }
 
         public function index() {
         $agent = $_SERVER['HTTP_USER_AGENT'];
@@ -83,26 +105,7 @@ class CountmaskAction extends SjzAction {
         if(!$gid){
             $gid = 1;
         }
-            $endtime = "2015-07-21 24:00:00";
-            if (time() > $endtime) {//活动是否结束
-
-                echo <<<HTML
-                <center>
-活动已经结束！<br/>
-
-登记收货地址信息截止至
-7月26日24：00
-登记方法：<br/>
-在森田微信服务号上点击
-”查询排名“菜单查看排名，<br/>
-点击“填写/查询领奖信息”
-请认真填写您的收货信息！
-我们将于8月初开始寄送奖品！
-</center>
-HTML;
-
-                exit();
-            }
+        $this->setEndTime();
         $userOpenId= cookie('user_openid');
 //        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $fansInfo = null;
@@ -221,6 +224,7 @@ HTML;
     }
 
     public function game(){
+        $this->setEndTime();
         $userOpenId= cookie('user_openid');
         if(!$userOpenId){
             //redirect
@@ -323,6 +327,7 @@ HTML;
         $this->display();
     }
     public function score(){
+        $this->setEndTime();
         $userOpenId= cookie('user_openid');
         $number = $_GET['number'];
         if(!$userOpenId || !$number || ($number > 200)){
@@ -517,6 +522,7 @@ HTML;
         $this->display();
     }
     public function sharenumber(){
+        $this->setEndTime();
         $userOpenId= cookie('user_openid');
         //$userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $phone = $_GET['phone'];
@@ -673,6 +679,7 @@ HTML;
     }
 
     public function sharefriend(){
+        $this->setEndTime();
         $userOpenId= cookie('user_openid');
         //$userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $fansInfo = null;
@@ -845,7 +852,7 @@ HTML;
 
     //TODO add random str to avoid auto submit
     public function saveVote(){
-
+        $this->setEndTime();
         $return = 0;
         $localUserOpenIdFromCookie= cookie('user_openid');
         $fromOpenIdFromPost = $_POST['fromopenid'];
