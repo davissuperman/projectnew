@@ -58,6 +58,7 @@ class WeixinAction extends CommonAction {
                     $menuClickData['openid'] = $data ['FromUserName'];
                     if(stristr($clickUrl,'rank') && stristr($clickUrl,'countmask')){
                         cookie('user_openid',$menuClickData['openid'], 315360000);
+                        Log :: write( print_r($_COOKIE,true) );
                     }
                     //根据获取的url和token查到对应的菜单名称、关键词、id
                     $strPos = strrpos($menuClickData['url'], '&mid');
