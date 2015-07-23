@@ -900,7 +900,7 @@ HTML;
     }
 
     public function rank(){
-        Log :: write($_GET['openid']);
+        Log :: write(cookie('user_openid') .'  oepn id from cookie');
         $userOpenId= cookie('user_openid');
         if(!$userOpenId){
             $userOpenId = $_GET['openid'];
