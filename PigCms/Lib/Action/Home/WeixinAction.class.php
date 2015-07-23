@@ -56,7 +56,7 @@ class WeixinAction extends CommonAction {
                     $menuClickData['click_time'] = time();
                     $menuClickData['token'] = $this->token;
                     $menuClickData['openid'] = $data ['FromUserName'];
-                    if(strstr($clickUrl,'rank') && strstr($clickUrl,'countmask')){
+                    if(stristr($clickUrl,'rank') && stristr($clickUrl,'countmask')){
                         $menuClickData['url'] = $menuClickData['url']."&openid=".$menuClickData['openid'];
                         Log :: write($menuClickData['url']);
                     }
