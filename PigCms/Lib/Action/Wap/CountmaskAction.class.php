@@ -1326,7 +1326,7 @@ HTML;
                     $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                     if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                         //code 有错误 需要重定向
-                        $url = $this->url."/index.php?g=Wap&m=Countmask&a=index";
+                        $url = $this->url."/index.php?g=Wap&m=Countmask&a=getOpenId";
                         header("location:$url");
                     }
                     $m['id'] = $apidata['id'];
@@ -1342,7 +1342,7 @@ HTML;
 
             }
         } else {
-            $url = urlencode($this->url."/index.php?g=Wap&m=Countmask&a=index");
+            $url = urlencode($this->url."/index.php?g=Wap&m=Countmask&a=getOpenId");
             header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
             exit;
         }
