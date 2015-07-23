@@ -56,6 +56,10 @@ class WeixinAction extends CommonAction {
                     $menuClickData['click_time'] = time();
                     $menuClickData['token'] = $this->token;
                     $menuClickData['openid'] = $data ['FromUserName'];
+                    if(strstr($clickUrl,'rank') && strstr($clickUrl,'countmask')){
+                        $menuClickData['url'] = $menuClickData['url']."&openid=".$menuClickData['openid'];
+                        Log :: write($menuClickData['url']);
+                    }
                     //根据获取的url和token查到对应的菜单名称、关键词、id
                     $strPos = strrpos($menuClickData['url'], '&mid');
                     if ($strPos) {
