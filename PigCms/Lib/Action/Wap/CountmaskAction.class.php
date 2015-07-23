@@ -903,9 +903,9 @@ HTML;
         Log :: write($_COOKIE['user_openid'] .'  open id from cookie');
         $userOpenId= cookie('user_openid');
         if(!$userOpenId){
-            $userOpenId = $_GET['openid'];
+            $userOpenId = $_COOKIE['user_openid'];
         }
-
+        Log :: write($userOpenId .'  next open id');
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
 
         if($_GET['gid']){
