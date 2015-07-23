@@ -922,7 +922,7 @@ HTML;
                         $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                         if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                             //code 有错误 需要重定向
-                            $url = $this->url."/index.php?g=Wap&m=Countmask&a=index&gid=$gid";
+                            $url = $this->url."/index.php?g=Wap&m=Countmask&a=index";
                             header("location:$url");
                         }
                         $m['id'] = $apidata['id'];
