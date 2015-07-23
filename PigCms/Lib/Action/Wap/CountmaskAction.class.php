@@ -906,6 +906,59 @@ HTML;
             $userOpenId = $_COOKIE['user_openid'];
         }
         Log :: write($userOpenId .'  next open id');
+        //获取OPENID 用户没有感知
+        $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
+        if(false){//$userOpenId && $fansInfo
+        }else{
+            $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
+            $code = trim($_GET["code"]);
+            $state = trim($_GET['state']);
+            if ($code && $state == 'sentian') {
+                if(empty($fansInfo)){
+                    $webCreatetime = $apidata['web_createtime'];
+                    $web_access_token = '';
+
+                    if($webCreatetime>(time()-7200) && $userOpenId){
+                        //未过期
+                        $web_access_token = $apidata['web_access_token'];
+                    }else{
+                        //重新获取
+                        $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
+                        if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
+                            //code 有错误 需要重定向
+                            $url = $this->url."/index.php?g=Wap&m=Countmask&a=index";
+                            header("location:$url");
+                        }
+                        $m['id'] = $apidata['id'];
+                        $m['web_access_token'] = $userinfoFromApi['access_token'];
+                        $m['refresh_token'] = $userinfoFromApi['refresh_token'];
+                        $m['web_createtime'] = time();
+                        $m['refresh_token_createtime'] = time();
+                        M('Diymen_set')->save($m);
+                        $web_access_token = $userinfoFromApi['access_token'];
+                        cookie('user_openid', $userinfoFromApi['openid'], 315360000);
+                        $userOpenId = $userinfoFromApi['openid'];
+                    }
+
+                    //根据access_token 拉到用户基本信息
+                    $gUrl = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$web_access_token.'&openid='.$userOpenId.'&lang=zh_CN';
+                    $json = json_decode($this->curlGet($gUrl));
+                    Log :: write( print_r($json,true)  );
+                }
+            } else {
+                $url = urlencode($this->url."/index.php?g=Wap&m=Countmask&a=index");
+                header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
+                exit;
+            }
+        }
+
+
+        //END
+
+
+
+
+
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
 
         if($_GET['gid']){
