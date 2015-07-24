@@ -1039,10 +1039,8 @@ HTML;
         $number = $info['number'];
         $phoneTime = $info['phonetime'];
         $shareSelf = $info['share'];
-        $countBigMyNumber = M('countmask')->where("number > $number ")->count();
-        $countEqualMyNumber = M('countmask')->where("number = $number and phonetime < $phoneTime ")->count();
-        $countEqualMyNumberAndMoreShare = M('countmask')->where("number = $number and phonetime = $phoneTime  and share > $shareSelf ")->count();
-        $this->assign('count', $countBigMyNumber+1+$countEqualMyNumber+$countEqualMyNumberAndMoreShare);
+        $myCount = $this->getOrderByOpenId($userOpenId);
+        $this->assign('count', $myCount);
         $this->assign('number', $number);
         $this->assign('share', $info['share']);
 
@@ -1052,6 +1050,18 @@ HTML;
         }
         // end views
         $this->display();
+    }
+
+    public function getOrderByOpenId($openId=null){
+        $list = M('countmask')->query("select openid, number,share,phonetime from tp_countmask where phone != '' order by number desc,share desc,phonetime asc ");
+
+        $orderList = array();
+        foreach($list as $each){
+            $orderList[] = $each['openid'];
+        }
+
+        $key = array_search($openId, $orderList);
+        return $key*1+1;
     }
 
     public function award(){
