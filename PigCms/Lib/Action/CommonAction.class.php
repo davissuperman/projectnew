@@ -907,6 +907,12 @@ class CommonAction extends Action {
         $text = "<a href='$url'>宿迁大润发</a>";
         return array($text, 'text');
     }
+    function Dinghai($keyword,$data){
+        $openId = (string)$data['FromUserName'];
+        $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Dinghai&a=index&openid=$openId";
+        $text = "<a href='$url'>华之友---定海店</a>";
+        return array($text, 'text');
+    }
     function Beizhengjie($keyword,$data){
         $openId = (string)$data['FromUserName'];
         $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Beizhengjie&a=index&openid=$openId";
@@ -976,6 +982,9 @@ class CommonAction extends Action {
                 break;
             case '0722' :
                 return $this->Suqiandarunfa($keyword,$data);
+                break;
+            case '07311' :
+                return $this->Dinghai($keyword,$data);
                 break;
             case '0724' :
                 return $this->Beizhengjie($keyword,$data);
