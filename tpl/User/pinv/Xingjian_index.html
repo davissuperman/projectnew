@@ -1,0 +1,112 @@
+<?php $nav = "FUNCTION"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="./tpl/User/pinv/common/css/Text_add.css" rel="stylesheet"/>
+<script src="./tpl/User/pinv/common/js/date/WdatePicker.js"></script>
+<script type="text/javascript">
+    $(function() {
+
+        $("#Button1").bind("click", function() {
+            //alert(11111);return false;
+            $(".item:checkbox").prop("checked", true);
+        });
+        $("#Button2").bind("click", function() {
+            //alert(22222);return false;
+            $(".item:checkbox").prop("checked", false);
+        });
+    });
+</script>
+<style>
+    #date-calendar{
+        height:100px;
+    }
+</style>
+<div class="container main">
+    <div class="row">
+        <include file="Doing:left"/>
+        <div class="col-md-10 main">
+            <div class="panel panel-success">
+                <div class="panel-heading cfix">
+                    <h3 class="panel-title pull-left">兴建店</h3>
+                    <span class="small"> </span>
+                    <div class="search-box pull-right">
+
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div>
+
+                        <div id="choose-date">
+
+                            <div id="date-calendar">
+                                <form method="post" action="{pigcms::U('Xingjian/exportstore',array('token'=>$token))}">
+                                     按照排名
+                                    <input type="text" name="start" id="start" value="" class="form-control" style="width:112px"/><span>到</span>
+                                    <input type="text" name="end" id="end" value="" class="form-control" style="width:112px"/>
+                                    <button type="submit" class="btn btn-default" style="width:50px"/>导出</button>
+                                </form>
+                            </div>
+                            <div id="date-calendar">
+                                <form method="post" action="{pigcms::U('Xingjian/exportstorebydate',array('token'=>$token))}">
+                                    按照日期
+                                    <input type="text" name="startdate" id="startdate" value="" onClick="WdatePicker()" class="form-control" style="width:112px"/><span>到</span>
+                                    <input type="text" name="enddate" id="enddate" value="" onClick="WdatePicker()" class="form-control" style="width:112px"/>
+                                    <button type="submit" class="btn btn-default" style="width:50px"/>导出</button>
+                                </form>
+                            </div>
+                        </div>
+                        <form method="post" action="{pigcms::U('Doing/exportcheckbox',array('token'=>$token))}" id="info">
+
+                            <div class="clearfix"></div>
+                            <table class="table table-striped" cellspacing="1">
+                                <tr>
+                                    <th class="firstTd">
+                                        <a id="Button1" style="cursor:pointer">选</a>|
+                                        <a id="Button2"    style="cursor:pointer">反</a>
+                                    </th>
+                                    <th class="firstTd">排名</th>
+                                    <th class="thirdTd">OPENID</th>
+                                    <th class="thirdTd">昵称</th>
+                                    <th class="sevenTd">手机号</th>
+                                    <th class="sevenTd">首次参与时间</th>
+                                    <th class="sevenTd">发奖按钮点击次数</th>
+                                    <th class="sevenTd">是否领奖</th>
+                                </tr>
+
+                                <volist name="info" id="o">
+                                    <tr>
+                                        <?php 
+                                            if(empty($_GET['p'])) {
+                                             $p=1;
+                                            }else{
+                                            $p=$_GET['p'];
+                                            }
+                                            $store=($p-1)*25+$i;
+                                            ?>
+                                        <td><input type="checkbox"  style="margin-right: 10px; margin-left: 21px;" name="item[<?php echo $store ?>]" class="item" value="{pigcms:$o.id}"/></td>
+                                        <td><?php echo $store ?></td>
+                                        <td>{pigcms:$o.openid}</td>
+                                        <td>{pigcms:$o.name}</td>
+                                        <td>{pigcms:$o.phone}</td>
+                                        <td>{pigcms:$o.createtime}</td>
+                                        <td>{pigcms:$o.lingjiangsum}</td>
+                                        <td><if condition="$o.award eq 1"><span style="color:green">是</span><else/><span style="color:red">否</span></if></td>
+                                    </tr>
+                                </volist>
+                                <td colspan="9" style="text-align:right">{pigcms:$page}</td>
+                            </table>
+                            <!--<input type="submit" value="选中导出" class="btn btn-warning" id="edits">-->
+                            <input type="hidden" name="token" value="{pigcms:$_GET['token']}" />
+                        </form>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<include file="Public:footer"/>
