@@ -56,6 +56,7 @@ function initPageFontSize(){
 	var dh = $(document).height();
 
 	$("#body").height(wh);
+	$(".upload-panel").height(dh);
 }
 //模拟alert
 function mnAlert (mes){
