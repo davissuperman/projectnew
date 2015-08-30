@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script src="js/upload/jquery-2.1.0.min.js" type="text/javascript"></script>
+<script src="js/common.js" type="text/javascript"></script>
+<title>携手森田.找回美丽</title>
+</head>
+<body id="body">
+	<div class="logo"></div>
+    
+    <div class="com-box-hover"></div>
+    <div class="com-box"></div>
+    
+    <div class="com-box-con">
+    	<div class="inner-box">
+        	<div class="upload-img">
+            	<img src="images/img01.jpg" alt="" class="tu" id="imageAddr"/>
+                <!--div id="imgArea"></div-->
+                <div id="vvg">
+                    <div id="vvgBox">
+                        <ul id="gameCanvas"></ul>
+                    </div>
+                </div>
+				<input type="hidden" id="imgNums" value="10" />
+                <!--div class="shadown"></div-->
+            </div>
+            
+            
+        </div>
+        <div class="hudie"></div>
+    </div>
+    <div class="btn-box share-btn-box ta-c">
+    	<p class="txt">—还需要<span class="c1">6</span>位好友帮忙—</p>
+        <a href="javascript:;" title="帮忙拼图" class="btn-bg01">
+        	<i class="share-btn03"></i>
+        </a>
+    	<a href="javascript:;" title="邀请好友帮忙" class="btn-bg02" id="btnShare">
+        	<i class="share-btn01"></i>
+       	</a>
+    	<a href="upload2.html" title="我也要参加" class="btn-bg01">
+        	<i class="share-btn02"></i>
+        </a>
+    </div>
+    <div class="bg01"></div>
+    <div class="bg02"></div>
+    
+    <div class="layer-box hide" id="layer-box">
+    	<div class="layer-bg"></div>
+        <div class="layer-con">
+        	<div class="layer-share" id="layer-share">
+            	<div class="ta-r">
+                	<i class="shou"></i>
+                </div>
+                <div class="text">
+                	<p>每人只能拼一块拼图哦，</p>
+                    <p>点击右上角“···”，</p>
+                    <p>发送给你的朋友们，</p>
+                    <p>让他们帮你</p>
+                    <p>完成拼图，找回美丽！</p>
+                    <div class="share-hy"><span class="fl">选择</span><i class="fl"></i>将活动分享<p>给你的好友</p></div>
+                    <div class="share-pyq"><span class="fl">选择</span><i class="fl"></i>将活动分享<p>到你的朋友圈</p></div>
+                </div>
+            	
+            </div>
+        </div>
+    </div>
+    <script src="js/pintu.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(e) {
+            $("#btnShare").click(function(){
+				showLayer($("#layer-share"));
+			});
+        });
+    </script>
+    
+</body>
+</html>
