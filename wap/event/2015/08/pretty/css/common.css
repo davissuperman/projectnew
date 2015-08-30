@@ -100,7 +100,7 @@ input,textarea,select,button{font-size:1em;}
   animation: mycolor 2s ease infinite;*/
 }
 
-.com-box-con{ background:#fff url(../images/bg04.png) repeat; width: 5.04rem;height: 6.3rem;z-index: 3;position: absolute;top: 2.27rem;margin: 0 auto;left: 50%;margin-left: -2.52rem;border-radius:5px;}
+.com-box-con{ background:#fff url(../images/bg04.png) repeat; width: 5.04rem;height: 6.3rem;z-index: 7;position: absolute;top: 2.27rem;margin: 0 auto;left: 50%;margin-left: -2.52rem;border-radius:5px;}
 .com-box-con .inner-box{border: 1px dashed #d39ea0; padding:0.1rem;  height: 6.1rem;overflow: auto;}
 .hudie{ z-index:999; background:url(../images/img01.png) no-repeat; width: 2.56rem;height: 2rem; background-size:auto 100%; position: absolute;right: -0.6rem;bottom: -0.8rem;
 

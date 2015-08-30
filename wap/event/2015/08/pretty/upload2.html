@@ -25,34 +25,7 @@
         	<div class="upload-img hide">
             	<img src="images/img01.jpg" alt="" />
             </div>
-            <div class="upload-panel hide">
-                <div class="lazy_tip" id="lazy_tip"><span>1%</span><br>载入中</div>
-                <div class="lazy_cover"></div>
-                <div class="resource_lazy hide"></div>
-                
-                <div class="pic_edit">
-                	<div class="logo"></div>
-                    <div class="bg01"></div>
-                    <div class="bg02"></div>
-                    <div id="clipArea"></div>
-                    <div class="upload-btns">
-                    	<div style="color:#fff; margin-bottom:20px;">请选择照片，进行剪裁处理后再上传。</div>
-                    	<button id="upload2">选择照片</button>
-                        <button id="clipBtn">确认剪裁</button>
-                    </div>
-                    
-                    <div id="plan" style="display:none">
-                        <canvas id="myCanvas"></canvas>
-                        <!--h2 onClick="Close();" style="cursor:pointer; display:inline-block">关闭</h2-->
-                    </div>
-                </div>
-                <img src="" fileName="" id="hit" style="display:none;z-index: 9">
-    
-                <div id="cover"></div>
-    
-                <input type="file" id="file" style="opacity: 0;position: fixed;bottom: -100px">
             
-            </div>
             
         </div>
         <div class="hudie"></div>
@@ -65,6 +38,34 @@
     <div class="bg01"></div>
     <div class="bg02"></div>
     
+    <div class="upload-panel hide">
+        <div class="lazy_tip" id="lazy_tip"><span>1%</span><br>载入中</div>
+        <div class="lazy_cover"></div>
+        <div class="resource_lazy hide"></div>
+        
+        <div class="pic_edit">
+            <div class="logo"></div>
+            <div class="bg01"></div>
+            <div class="bg02"></div>
+            <div id="clipArea"></div>
+            <div class="upload-btns">
+                <div style="color:#fff; margin-bottom:20px;">请选择照片，进行剪裁处理后再上传。</div>
+                <button id="upload2">选择照片</button>
+                <button id="clipBtn">确认剪裁</button>
+            </div>
+            
+            <div id="plan" style="display:none">
+                <canvas id="myCanvas"></canvas>
+                <!--h2 onClick="Close();" style="cursor:pointer; display:inline-block">关闭</h2-->
+            </div>
+        </div>
+        <img src="" fileName="" id="hit" style="display:none;z-index: 9">
+
+        <div id="cover"></div>
+
+        <input type="file" id="file" style="opacity: 0;position: fixed;bottom: -100px">
+    
+    </div>
     
     <script src="js/upload/sonic.js"></script>
 	<script src="js/upload/comm.js"></script>
