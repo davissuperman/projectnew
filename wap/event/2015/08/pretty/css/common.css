@@ -267,7 +267,6 @@ input,textarea,select,button{font-size:1em;}
   border: none;font-size: 0.4rem;}
 
 #hit {position: fixed;top: 19%;left: 9.375%;background: gainsboro;}
-.pic_edit .logo{width: 85px;height: 60px;}
 
 /*适应小屏*/
 @media screen and (max-height: 450px) {
