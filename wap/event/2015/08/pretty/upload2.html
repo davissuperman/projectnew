@@ -36,7 +36,8 @@
                     <div class="bg02"></div>
                     <div id="clipArea"></div>
                     <div class="upload-btns">
-                    	<button id="upload2">选择图片</button>
+                    	<div style="color:#fff; margin-bottom:20px;">请选择照片，进行剪裁处理后再上传。</div>
+                    	<button id="upload2">选择照片</button>
                         <button id="clipBtn">确认剪裁</button>
                     </div>
                     
@@ -57,6 +58,7 @@
         <div class="hudie"></div>
     </div>
     <div class="btn-box upload-btn-box">
+    	
     	<a href="javascript:;" title="上传照片" class="upload-btn upload-btn01" id="openUploadLayer">上传照片</a>
     	<a href="javascript:;" title="确认上传" class="upload-btn upload-btn02" id="btnComUpload" onClick="submitImageInfo();">确认上传</a>
     </div>
@@ -119,6 +121,7 @@
 		
 		//图片上传
 		function saveImageInfo() {
+			$('.lazy_cover,.lazy_tip').show();
 			var filename = $('#hit').attr('fileName');
 			var img_data = $('#hit').attr('src');
 			if(img_data==""){mnAlert('请先选择照片再上传哦！');return false;}
@@ -185,6 +188,7 @@
 			// 设置src属性，浏览器会自动加载。  
 			// 记住必须先绑定render()事件，才能设置src属性，否则会出同步问题。  
 			image.src = src;	
+			//$('.lazy_cover,.lazy_tip').hide();
 		};  
 		</script>
 
