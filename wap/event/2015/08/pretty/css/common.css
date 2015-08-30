@@ -255,7 +255,7 @@ input,textarea,select,button{font-size:1em;}
 /*上传照片*/
 .upload-panel{background:#89caad;}
 .upload-img img{width:100%; height:100%;}
-.upload-btn-box{ z-index:2;}
+.upload-btn-box{ /*z-index:2;*/}
 .upload-btn01{background:url(../images/upload-btn01.png) no-repeat; background-size:100% auto;display:block; width:100%;height:0.8rem; text-indent:-9999px; overflow:hidden; cursor:pointer;  margin-bottom: 0.1rem;}
 .upload-btn02{background:url(../images/upload-btn02.png) no-repeat; background-size:100% auto;display:block; width:100%;height:0.8rem; text-indent:-9999px; overflow:hidden; cursor:pointer;}
 
