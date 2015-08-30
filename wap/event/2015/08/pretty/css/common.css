@@ -276,10 +276,10 @@ input,textarea,select,button{font-size:1em;}
 .show_labour .show5_btn {width: 62%;}
 #clipBtn, #upload2 {margin-top: 0px;padding: 5px 20px;}
 }
-.lazy_tip{position: absolute;z-index: 1001;font-size: 25px;width:150px;color: #4eaf7a;line-height: 30px;top:0;
+.lazy_tip{position: absolute;z-index: 1000000;font-size: 25px;width:150px;color: #4eaf7a;line-height: 30px;top:0;
   left: 50%;
   margin-left: -75px; text-align:center;color:#000;}
-.lazy_cover {width: 100%;height: 100%;background-color: black;z-index: 1000;color: #4eaf7a;font-size: 25px;opacity: 0.7;position: fixed;top: 0;left: 0;}
+.lazy_cover {width: 100%;height: 100%;background-color: black;z-index: 999999;color: #4eaf7a;font-size: 25px;opacity: 0.7;position: fixed;top: 0;left: 0;}
 #plan{ position:absolute;top:0;left:0; width:100%; clear:both; height:100%;display: none;
 background: rgb(255, 255, 255);
 vertical-align: baseline;
