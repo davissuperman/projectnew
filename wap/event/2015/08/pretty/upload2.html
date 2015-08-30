@@ -181,9 +181,9 @@
 			 var imagedata =  encodeURIComponent(dataurl); 
 				$('#plan').attr('data-src',dataurl); 
 			  //$('#plan').show();
-			  	$(".upload-panel").hide();
-				$(".upload-img").show().find("img").attr("src",dataurl);
+			  	$(".upload-img").show();
 				$(".upload-img01").hide();
+			  	$(".upload-img").find("img").attr("src",dataurl);
 			};  
 			// 设置src属性，浏览器会自动加载。  
 			// 记住必须先绑定render()事件，才能设置src属性，否则会出同步问题。  

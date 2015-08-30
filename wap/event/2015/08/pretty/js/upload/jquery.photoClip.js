@@ -431,6 +431,7 @@ function photoClip(container, option) {
 		$view.css("background-image", "url("+ dataURL +")");
 		clipFinish.call($img[0], dataURL);
 		$('.lazy_cover,.lazy_tip').hide();
+		$(".upload-panel").hide();
 	}
 
 
