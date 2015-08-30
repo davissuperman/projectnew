@@ -83,34 +83,46 @@
 		});
 		var hammer = '';
 		var currentIndex = 0;
-		var body_width = $('body').width();
-		var body_height = $('body').height();
 		
-		$("#clipArea").photoClip({
-			width: body_width * 0.8125,
-			height: body_width * 1.0,
-			file: "#file",
-			view: "#hit",
-			ok: "#clipBtn",
-			loadStart: function () {
-				//console.log("照片读取中");
-				$('.lazy_tip span').text('');
-				$('.lazy_cover,.lazy_tip').show();
-			},
-			loadComplete: function () {
-				//console.log("照片读取完成");
-				$('.lazy_cover,.lazy_tip').hide();
-			},
-			clipFinish: function (dataURL) {
-				$('#hit').attr('src', dataURL);
-				saveImageInfo();
-			}
-		});
 		
-		function submitImageInfo(){
+		function initUploadImg(){
+			$("#clipArea").html("");
+			var body_width = $('body').width();
+			var body_height = $('body').height();
+			$("#clipArea").photoClip({
+				width: body_width * 0.8125,
+				height: body_width * 1.0,
+				file: "#file",
+				view: "#hit",
+				ok: "#clipBtn",
+				loadStart: function () {
+					//console.log("照片读取中");
+					$('.lazy_tip span').text('');
+					$('.lazy_cover,.lazy_tip').show();
+				},
+				loadComplete: function () {
+					//console.log("照片读取完成");
+					$('.lazy_cover,.lazy_tip').hide();
+				},
+				clipFinish: function (dataURL) {
+					$('#hit').attr('src', dataURL);
+					saveImageInfo();
+				}
+			});	
+		}
+		
+		$(document).ready(function(e) {
+            initUploadImg();
+        });
+		
+		/*$(window).resize(function(){
+			initUploadImg();
+		});*/
+		
+		function submitImageInfo(){//图片上传
 			var filename = $('#hit').attr('fileName');
 			var img_data = $('#hit').attr('src');
-			if(img_data==""){mnAlert('请先选择照片再上传哦！');return false;}
+			if(img_data==""){mnAlert('请选择照片后再确认上传哦！');return false;}
 			$.post("后台接口地址", {image: img_data}, function (data) {
 				if (data != '') {
 		//			console.info(data);
@@ -120,7 +132,7 @@
 			});
 		}
 		
-		//图片上传
+		//图片剪裁
 		function saveImageInfo() {
 			$('.lazy_cover,.lazy_tip').show();
 			var filename = $('#hit').attr('fileName');
