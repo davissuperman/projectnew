@@ -68,7 +68,7 @@ class PrettyAction extends SjzAction {
             $d['views'] = 1;
             $d['sequence'] = 0;
             $d['createtime'] = time();
-            M("countmask")->add($d);
+            M("pretty")->add($d);
         }
     }
 
@@ -219,7 +219,7 @@ HTML;
         $this->assign('urlgame',$urlGame);
 
         //view自增
-        M("countmask")->where(array('id' => $info['id']))->setInc('views');
+        M("pretty")->where(array('id' => $info['id']))->setInc('views');
 
         $this->display();
     }
@@ -283,7 +283,7 @@ HTML;
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
-        M("countmask")->where(array('id' => $info['id']))->setInc('views');
+        M("pretty")->where(array('id' => $info['id']))->setInc('views');
         $this->display();
     }
     public function rule(){
@@ -321,7 +321,7 @@ HTML;
         $userOpenId= cookie('user_openid');
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         if($info){
-            M("countmask")->where(array('id' => $info['id']))->setInc('views');
+            M("pretty")->where(array('id' => $info['id']))->setInc('views');
         }
         // end views
 
@@ -363,7 +363,7 @@ HTML;
         $userOpenId= cookie('user_openid');
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         if($info){
-            M("countmask")->where(array('id' => $info['id']))->setInc('views');
+            M("pretty")->where(array('id' => $info['id']))->setInc('views');
         }
         // end views
 
@@ -449,9 +449,9 @@ HTML;
                     header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
                     exit();
                 }
-                M("countmask")->where(array('id' =>$info['id']))->setInc('number', $number);
+                M("pretty")->where(array('id' =>$info['id']))->setInc('number', $number);
                 //更新sequence
-                M("countmask")->where(array('id' =>$info['id']))->setInc('sequence');
+                M("pretty")->where(array('id' =>$info['id']))->setInc('sequence');
                 if($infoList){
                     $m = array();
                     $m['number'] = $number;
@@ -482,9 +482,9 @@ HTML;
                     header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
                     exit;
                 }
-                M("countmask")->where(array('id' =>$info['id']))->setInc('number', $number);
+                M("pretty")->where(array('id' =>$info['id']))->setInc('number', $number);
                 //更新sequence
-                M("countmask")->where(array('id' =>$info['id']))->setInc('sequence');
+                M("pretty")->where(array('id' =>$info['id']))->setInc('sequence');
                 if($infoList){
                     $m = array();
                     $m['number'] = $number;
@@ -515,9 +515,9 @@ HTML;
                     header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
                     return;
                 }
-                M("countmask")->where(array('id' =>$info['id']))->setInc('number', $number);
+                M("pretty")->where(array('id' =>$info['id']))->setInc('number', $number);
                 //更新sequence
-                M("countmask")->where(array('id' =>$info['id']))->setInc('sequence');
+                M("pretty")->where(array('id' =>$info['id']))->setInc('sequence');
                 if($infoList){
                     $m = array();
                     $m['number'] = $number;
@@ -561,7 +561,7 @@ HTML;
 
         //begin views
         if($info){
-            M("countmask")->where(array('id' => $info['id']))->setInc('views');
+            M("pretty")->where(array('id' => $info['id']))->setInc('views');
         }
         // end views
         $this->display();
@@ -716,7 +716,7 @@ HTML;
 
         //begin views
         if($info){
-            M("countmask")->where(array('id' => $info['id']))->setInc('views');
+            M("pretty")->where(array('id' => $info['id']))->setInc('views');
         }
         // end views
 
@@ -860,7 +860,7 @@ HTML;
         if($uniqueViewlist){
             //不需要增加uniqueviews
         }else{
-            M("countmask")->where(array('id' => $infoTO['id']))->setInc('uniqueviews');
+            M("pretty")->where(array('id' => $infoTO['id']))->setInc('uniqueviews');
             $n = array();
             $n['fromopenid'] = $userOpenId;
             $n['toopenid'] = $toUserOpenId;
@@ -882,7 +882,7 @@ HTML;
         }
 
         //当前UID对应的views自增
-        M("countmask")->where(array('id' => $infoTO['id']))->setInc('views');
+        M("pretty")->where(array('id' => $infoTO['id']))->setInc('views');
 
 
         $selftOpen = 0;
@@ -1090,7 +1090,7 @@ HTML;
 
         //begin views
         if($info){
-            M("countmask")->where(array('id' => $info['id']))->setInc('views');
+            M("pretty")->where(array('id' => $info['id']))->setInc('views');
         }
         // end views
         $this->display();
@@ -1134,13 +1134,13 @@ HTML;
 
 
         if($info){
-            M("countmask")->where(array('id' => $info['id']))->setInc('views');
+            M("pretty")->where(array('id' => $info['id']))->setInc('views');
         }
         // end views
 
         $this->assign('selfpage',$this->url."/index.php?g=Wap&m=Countmask&a=sharenumber");
 
-        $award = M('countmask_award')->where(array('openid' => $userOpenId))->find();
+        $award = M('pretty_award')->where(array('openid' => $userOpenId))->find();
         if($award){
             $this->assign('name',$award['name']);
             $this->assign('phone',$award['phone']);
@@ -1160,7 +1160,7 @@ HTML;
             echo 0;
             return;
         }
-        $award = M('countmask_award')->where(array('openid' => $userOpenId))->find();
+        $award = M('pretty_award')->where(array('openid' => $userOpenId))->find();
         $name = $_POST['name'];
         $phone = $_POST['phone'];
         $province = $_POST['province'];
@@ -1175,7 +1175,7 @@ HTML;
             $m['city'] = $city;
             $m['address'] = $address;
             $m['createtime'] = time();
-            M('countmask_award')->add($m);
+            M('pretty_award')->add($m);
             $return = 1;
         }else{
             $m = array();
@@ -1187,7 +1187,7 @@ HTML;
             $m['city'] = $city;
             $m['address'] = $address;
             $m['createtime'] = time();
-            M('countmask_award')->save($m);
+            M('pretty_award')->save($m);
             $return = 1;
         }
 
@@ -1264,9 +1264,9 @@ HTML;
                 $m = array();
                 $m['id'] = $info['id'];
                 $m['sharetime'] = time();
-                M("countmask")->save($m);
+                M("pretty")->save($m);
             }
-            M("countmask")->where(array('id' => $id))->setInc('share');
+            M("pretty")->where(array('id' => $id))->setInc('share');
             echo 1;
         }else{
             echo 0;
@@ -1285,7 +1285,7 @@ HTML;
         }
         $toOpenId = $_POST['toopenid'];
         $info = M('countmask')->where(array('openid' => $toOpenId))->find();
-        M("countmask")->where(array('id' => $info['id']))->setInc('joins');
+        M("pretty")->where(array('id' => $info['id']))->setInc('joins');
 
     }
 
@@ -1305,7 +1305,7 @@ HTML;
         $voteList = M('countmask_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toOpenId))->find();
         if(!$voteList){
             $info = M('countmask')->where(array('openid' => $toOpenId))->find();
-            M("countmask")->where(array('id' => $info['id']))->setInc('vote');
+            M("pretty")->where(array('id' => $info['id']))->setInc('vote');
 
             //投票
             $d = array();
