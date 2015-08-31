@@ -6,7 +6,8 @@ class PrettyAction extends SjzAction {
     public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
-    public $endtime="2015-10-21 24:00:00";
+    public $endtime="2015-10-21 24:00:00"; //活动结束时间
+    public $debug = true; //上线后应该改成false
 
     public function _initialize() {
         parent :: _initialize();
@@ -20,9 +21,9 @@ class PrettyAction extends SjzAction {
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         $gid = $info['gid'];
         if($info){
-            return $this->url."/index.php?g=Wap&m=Countmask&a=sharefriend&uid=".$info['id']."&gid=$gid";
+            return $this->url."/index.php?g=Wap&m=Pretty&a=sharefriend&uid=".$info['id']."&gid=$gid";
         }else{
-            return $this->url."/index.php?g=Wap&m=Countmask&a=index&gid=$gid";
+            return $this->url."/index.php?g=Wap&m=Pretty&a=index&gid=$gid";
         }
     }
     public function getDiymenSet(){
@@ -132,7 +133,7 @@ HTML;
                         $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                         if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                             //code 有错误 需要重定向
-                            $url = $this->url."/index.php?g=Wap&m=Countmask&a=index&gid=$gid";
+                            $url = $this->url."/index.php?g=Wap&m=Pretty&a=index&gid=$gid";
                             header("location:$url");
                         }
                         $m['id'] = $apidata['id'];
@@ -154,7 +155,7 @@ HTML;
                     $selfUserInfo['nickname'] = $json->nickname;
                 }
             } else {
-                $url = urlencode($this->url."/index.php?g=Wap&m=Countmask&a=index");
+                $url = urlencode($this->url."/index.php?g=Wap&m=Pretty&a=index");
                 header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_userinfo&state=sentian#wechat_redirect");
                 exit;
             }
@@ -167,7 +168,7 @@ HTML;
             $imageProfile = $selfUserInfo['headimgurl'];
 
         //首先判断当前用户是否有玩过第一次
-        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $info = M('Pretty')->where(array('openid' => $userOpenId))->find();
 //        $firstStart = true;
 //        if($info){
 //                //判断当前用户 sequence 并且 手机已经提交,并且判断用户是否有资格继续玩
@@ -180,7 +181,7 @@ HTML;
 //            }
 //            if($firstStart == true){
 //                //判断当前机会是否已经使用过
-//                $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence' => $currentSequence))->find();
+//                $infoList = M('Pretty_list')->where(array('openid' => $userOpenId,'sequence' => $currentSequence))->find();
 //                if($infoList && $infoList['number']){
 //                    //已经玩过
 //                    $firstStart = false;
@@ -212,9 +213,9 @@ HTML;
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
 
-        $urlGame = "http://wx.drjou.cc" ."/index.php?g=Wap&m=Countmask&a=game";
+        $urlGame = "http://wx.drjou.cc" ."/index.php?g=Wap&m=Pretty&a=game";
 //        if($firstStart == false){
-//            $urlGame = "http://wx.drjou.cc"."/index.php?g=Wap&m=Countmask&a=sharenumber";
+//            $urlGame = "http://wx.drjou.cc"."/index.php?g=Wap&m=Pretty&a=sharenumber";
 //        }
         $this->assign('urlgame',$urlGame);
 
@@ -229,7 +230,7 @@ HTML;
         $userOpenId= cookie('user_openid');
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
             exit();
         }
 
@@ -247,7 +248,7 @@ HTML;
 //
 //            if($phone && ( $vote<$this->eachVote || floor($vote/$this->eachVote ) < $currentSequence)){
 //                $firstStart = false;
-//                header("location:$this->url/index.php?g=Wap&m=Countmask&a=sharenumber&gid=$gid");
+//                header("location:$this->url/index.php?g=Wap&m=Pretty&a=sharenumber&gid=$gid");
 //                exit();
 //            }
 //
@@ -255,12 +256,12 @@ HTML;
 //            $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence' => $currentSequence))->find();
 //            if($infoList && $infoList['number']){
 //                //已经玩过
-//                header("location:$this->url/index.php?g=Wap&m=Countmask&a=sharenumber");
+//                header("location:$this->url/index.php?g=Wap&m=Pretty&a=sharenumber");
 //                exit();
 //            }
 //
 //        }else{
-//            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+//            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
 //            exit();
 //        }
 
@@ -290,7 +291,7 @@ HTML;
         $userOpenId= cookie('user_openid');
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
             exit();
         }
 
@@ -332,7 +333,7 @@ HTML;
         $userOpenId= cookie('user_openid');
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
             exit();
         }
 
@@ -377,7 +378,7 @@ HTML;
         $number = $_GET['number'];
         if(!$userOpenId || !$number || ($number > 200)){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
             return;
         }
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
@@ -440,13 +441,13 @@ HTML;
                 $vote = $info['vote'];
                 if($vote < $this->eachVote){
                     //非法提交 转到首页
-                    header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+                    header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
                     return;
                 }
                 $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>1))->find();
                 if($infoList && $infoList['number']){
                     //已经提交分数 无法再次提交
-                    header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+                    header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
                     exit();
                 }
                 M("pretty")->where(array('id' =>$info['id']))->setInc('number', $number);
@@ -457,7 +458,7 @@ HTML;
                     $m['number'] = $number;
                     $m['id'] = $infoList['id'];
                     $m['updatetime'] = time();
-                    M('countmask_list')->save($m);
+                    M('pretty_list')->save($m);
                 }else{
                     $m = array();
                     $m['number'] = $number;
@@ -465,7 +466,7 @@ HTML;
                     $m['createtime'] = time();
                     $m['updatetime'] = time();
                     $m['sequence'] = 1;
-                    M('countmask_list')->add($m);
+                    M('pretty_list')->add($m);
                 }
                 break;
             case 2://第二次满10票后
@@ -473,13 +474,13 @@ HTML;
                 $vote = $info['vote'];
                 if($vote < $this->eachVote * 2){
                     //非法提交 转到首页
-                    header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+                    header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
                     return;
                 }
-                $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>2))->find();
+                $infoList = M('pretty_list')->where(array('openid' => $userOpenId,'sequence'=>2))->find();
                 if($infoList && $infoList['number']){
                     //已经提交分数 无法再次提交
-                    header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+                    header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
                     exit;
                 }
                 M("pretty")->where(array('id' =>$info['id']))->setInc('number', $number);
@@ -490,7 +491,7 @@ HTML;
                     $m['number'] = $number;
                     $m['id'] = $infoList['id'];
                     $m['updatetime'] = time();
-                    M('countmask_list')->save($m);
+                    M('pretty_list')->save($m);
                 }else{
                     $m = array();
                     $m['number'] = $number;
@@ -498,7 +499,7 @@ HTML;
                     $m['createtime'] = time();
                     $m['updatetime'] = time();
                     $m['sequence'] = 2;
-                    M('countmask_list')->add($m);
+                    M('pretty_list')->add($m);
                 }
                 break;
             case 3://第三次满10票后
@@ -506,13 +507,13 @@ HTML;
                 $vote = $info['vote'];
                 if($vote < $this->eachVote * 3){
                     //非法提交 转到首页
-                    header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+                    header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
                     return;
                 }
-                $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>3))->find();
+                $infoList = M('pretty_list')->where(array('openid' => $userOpenId,'sequence'=>3))->find();
                 if($infoList && $infoList['number']){
                     //已经提交分数 无法再次提交
-                    header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+                    header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
                     return;
                 }
                 M("pretty")->where(array('id' =>$info['id']))->setInc('number', $number);
@@ -523,7 +524,7 @@ HTML;
                     $m['number'] = $number;
                     $m['id'] = $infoList['id'];
                     $m['updatetime'] = time();
-                    M('countmask_list')->save($m);
+                    M('pretty_list')->save($m);
                 }else{
                     $m = array();
                     $m['number'] = $number;
@@ -531,7 +532,7 @@ HTML;
                     $m['createtime'] = time();
                     $m['updatetime'] = time();
                     $m['sequence'] = 3;
-                    M('countmask_list')->add($m);
+                    M('pretty_list')->add($m);
                 }
                 break;
             default:
@@ -540,7 +541,7 @@ HTML;
 
         $this->assign('number',$number);
 
-        //同时将数据保存到tp_countmask_list
+        //同时将数据保存到tp_pretty_list
         //判断是否存在default的记录
 
 
@@ -571,7 +572,7 @@ HTML;
         $userOpenId= cookie('user_openid');
         //$userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $phone = $_GET['phone'];
-        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $info = M('pretty')->where(array('openid' => $userOpenId))->find();
         if($_GET['gid']){
             $gid =  $_GET['gid'];
         }elseif($info){
@@ -581,11 +582,11 @@ HTML;
         }
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
             return;
         }
         if(!$phone && (!$info || ($info && !$info['phone'])) ){
-            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
             return;
         }
         //begin 分享出去的URL
@@ -616,7 +617,7 @@ HTML;
             $d['phone'] = $phone;
             $d['phonetime'] = time();
             $d['id'] = $info['id'];
-            M('countmask')->save($d);
+            M('pretty')->save($d);
         }
 
        //current sequence
@@ -639,7 +640,7 @@ HTML;
                 $vote = $info['vote'];
                 if($vote >= $this->eachVote){
                     //查看是否已经提交了分数
-                    $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
+                    $infoList = M('pretty_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
                     if($infoList['number']){
                         //已经提交分数，无法再次提交
                         $firstUsed = 'disabled';
@@ -657,7 +658,7 @@ HTML;
                 $vote = $info['vote'];
                 if($vote >= $this->eachVote * 2){
                     //查看是否已经提交了分数
-                    $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
+                    $infoList = M('pretty_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
                     if($infoList['number']){
                         //已经提交分数，无法再次提交
                         $secondUsed = 'disabled';
@@ -677,7 +678,7 @@ HTML;
                 $vote = $info['vote'];
                 if($vote >= $this->eachVote * 3){
                     //查看是否已经提交了分数
-                    $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
+                    $infoList = M('pretty_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
                     if($infoList['number']){
                         //已经提交分数，无法再次提交
                         $thirdUsed = 'disabled';
@@ -712,7 +713,7 @@ HTML;
         $this->assign('username', $info['name']);
         $this->assign('totalnumber', $info['number']);
         $this->assign('couldcountmaskagain', $couldCountMaskAgain);
-        $this->assign('couldcountmaskagainbutton', $showCountMaskAgain);
+        $this->assign('couldprettyagainbutton', $showCountMaskAgain);
 
         //begin views
         if($info){
@@ -730,10 +731,10 @@ HTML;
         $fansInfo = null;
         $selfUserInfo = array();
         $uid  = $_GET['uid'];
-        $infoTO = M('countmask')->where(array('id' => $uid))->find();
+        $infoTO = M('pretty')->where(array('id' => $uid))->find();
         if( !$infoTO ){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
             return;
         }
 
@@ -760,7 +761,7 @@ HTML;
                         $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                         if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                             //code 有错误 需要重定向
-                            $url = $this->url."/index.php?g=Wap&m=Countmask&a=index&gid=$gid";
+                            $url = $this->url."/index.php?g=Wap&m=Pretty&a=index&gid=$gid";
                             header("location:$url");
                         }
                         $m['id'] = $apidata['id'];
@@ -782,7 +783,7 @@ HTML;
                     $selfUserInfo['nickname'] = $json->nickname;
                 }
             } else {
-                $url = urlencode($this->url."/index.php?g=Wap&m=Countmask&a=sharefriend&uid=$uid");
+                $url = urlencode($this->url."/index.php?g=Wap&m=Pretty&a=sharefriend&uid=$uid");
                 header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_userinfo&state=sentian#wechat_redirect");
                 exit;
             }
@@ -799,7 +800,7 @@ HTML;
         $this->assign("timestamp",$timestamp);
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
-        $this->assign("shareurl",$this->url."/index.php?g=Wap&m=Countmask&a=sharefriend&uid=".$uid);
+        $this->assign("shareurl",$this->url."/index.php?g=Wap&m=Pretty&a=sharefriend&uid=".$uid);
         $this->assign('gid', $gid);
 
 
@@ -817,7 +818,7 @@ HTML;
         //如果 sequence=1 and phone为null 则需要重定向到首页 非法页面
         $sequence = $infoTO['sequence'];
 //        if(!$infoTO['phone']){
-//            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+//            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
 //        }
 
         $toUserOpenId = $infoTO['openid'];
@@ -829,7 +830,7 @@ HTML;
         $leftVote = $this->eachVote*3;
         if($sequence >= 1){
             //第一次 还差多少票
-//            $infoList = M('countmask_list')->where(array('openid' => $toUserOpenId,'sequence'=>$sequence))->find();
+//            $infoList = M('pretty_list')->where(array('openid' => $toUserOpenId,'sequence'=>$sequence))->find();
             $vote = $infoTO['vote'];
             $leftVote = $this->eachVote*3 - $vote;
         }
@@ -851,12 +852,12 @@ HTML;
 
         //是否已经投过票
         $hasVotedForThisUid = 1;
-        $voteList = M('countmask_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toUserOpenId))->find();
+        $voteList = M('pretty_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toUserOpenId))->find();
         if($voteList){
             $hasVotedForThisUid = 0;
         }
 
-        $uniqueViewlist = M('countmask_uniqueviewlist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toUserOpenId))->find();
+        $uniqueViewlist = M('pretty_uniqueviewlist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toUserOpenId))->find();
         if($uniqueViewlist){
             //不需要增加uniqueviews
         }else{
@@ -865,20 +866,20 @@ HTML;
             $n['fromopenid'] = $userOpenId;
             $n['toopenid'] = $toUserOpenId;
             $n['createtime'] = time();
-            M('countmask_uniqueviewlist')->add($n);
+            M('pretty_uniqueviewlist')->add($n);
         }
 
         $this->assign('hasvotedforthisuid', $hasVotedForThisUid);
 
 
         //local info
-        $infoLocal = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $infoLocal = M('pretty')->where(array('openid' => $userOpenId))->find();
         if($infoLocal){
             //这个用户是否参加过，已经参加
             $this->assign('localuid', $infoLocal['uid']);
-            $this->assign('redirecturl', $this->url."/index.php?g=Wap&m=Countmask&a=sharenumber&gid=$gid");
+            $this->assign('redirecturl', $this->url."/index.php?g=Wap&m=Pretty&a=sharenumber&gid=$gid");
         }else{
-            $this->assign('redirecturl', $this->url."/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+            $this->assign('redirecturl', $this->url."/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
         }
 
         //当前UID对应的views自增
@@ -908,7 +909,7 @@ HTML;
             exit();
         }
         //检查此 local openid 是否投过票
-        $voteList = M('countmask_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
+        $voteList = M('pretty_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
         if(!$voteList){
             //投票
             $d = array();
@@ -916,13 +917,13 @@ HTML;
             $d['toopenid'] = $toOpenIdFromPost;
             $d['sequence'] = $tousersequence;
             $d['createtime'] = time();
-            M('countmask_votelist')->add($d);
+            M('pretty_votelist')->add($d);
 
-            //更新当前主页人的countmask_list
-            $info = M('countmask')->where(array('openid' => $toOpenIdFromPost))->find();
+            //更新当前主页人的pretty_list
+            $info = M('pretty')->where(array('openid' => $toOpenIdFromPost))->find();
             $sequence = $info['sequence'];
 
-            $c = M('countmask_list')->where(array('openid' => $toOpenIdFromPost,'sequence' => $sequence))->find();
+            $c = M('pretty_list')->where(array('openid' => $toOpenIdFromPost,'sequence' => $sequence))->find();
             //是否存在这次机会
             if(!$c){
                 $tempArr = array();
@@ -932,9 +933,9 @@ HTML;
                 $tempArr['vote'] = 1;
                 $tempArr['createtime'] = time();
                 $tempArr['updatetime'] = time();
-                M('countmask_list')->add($tempArr);
+                M('pretty_list')->add($tempArr);
             }else{
-                M("countmask_list")->where(array('openid' => $toOpenIdFromPost,'sequence' => $sequence))->setInc('vote');
+                M("pretty_list")->where(array('openid' => $toOpenIdFromPost,'sequence' => $sequence))->setInc('vote');
             }
 
             $return = 1;
@@ -966,7 +967,7 @@ HTML;
                     $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                     if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                         //code 有错误 需要重定向
-                        $url = $this->url."/index.php?g=Wap&m=Countmask&a=getOpenId";
+                        $url = $this->url."/index.php?g=Wap&m=Pretty&a=getOpenId";
                         header("location:$url");
                     }
                     $m['id'] = $apidata['id'];
@@ -982,7 +983,7 @@ HTML;
 
                 }
             } else {
-                $url = urlencode($this->url."/index.php?g=Wap&m=Countmask&a=rank");
+                $url = urlencode($this->url."/index.php?g=Wap&m=Pretty&a=rank");
                 header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
                 exit;
             }
@@ -990,7 +991,7 @@ HTML;
         //END
         Log :: write($userOpenId .'  next open id');
 
-        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $info = M('pretty')->where(array('openid' => $userOpenId))->find();
 
         if($_GET['gid']){
             $gid =  $_GET['gid'];
@@ -1001,12 +1002,12 @@ HTML;
         }
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
             exit;
         }
         if(!$info || !$info['number']){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
             exit;
         }
 //        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
@@ -1031,7 +1032,7 @@ HTML;
         //end
 
         //统计第50名
-        $count = M('countmask')->where(array('phone'=>array("neq",'')))->count();
+        $count = M('pretty')->where(array('phone'=>array("neq",'')))->count();
         $firstLevel = 50;
         $year = 0;
         if($count < 50){
@@ -1040,7 +1041,7 @@ HTML;
             $sharetimefirlevel = '';
 
         }else{
-            $firstLevelInfo = M('countmask')->query("select number,share,phonetime from tp_countmask where phone != '' order by number desc,share desc,phonetime asc limit 49,1");
+            $firstLevelInfo = M('pretty')->query("select number,share,phonetime from tp_pretty where phone != '' order by number desc,share desc,phonetime asc limit 49,1");
             if($firstLevelInfo){
                 $firstLevelInfo = $firstLevelInfo[0];
                 $numberfirlevel = $firstLevelInfo['number'];
@@ -1064,7 +1065,7 @@ HTML;
             $shareseclevel = 0;
             $sharetimeseclevel = '';
         }else{
-            $secondLevelInfo = M('countmask')->query("select number,share,phonetime from tp_countmask where phone != '' order by number desc,share desc,phonetime asc limit 1049,1");
+            $secondLevelInfo = M('pretty')->query("select number,share,phonetime from tp_pretty where phone != '' order by number desc,share desc,phonetime asc limit 1049,1");
             if($secondLevelInfo){
                 $secondLevelInfo = $secondLevelInfo[0];
                 $numberseclevel = $secondLevelInfo['number'];
@@ -1079,7 +1080,7 @@ HTML;
         $this->assign('sharessecond',$shareseclevel);
         $this->assign('phonetimesecond',$sharetimeseclevel);
 
-        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $info = M('pretty')->where(array('openid' => $userOpenId))->find();
         $number = $info['number'];
         $phoneTime = $info['phonetime'];
         $shareSelf = $info['share'];
@@ -1097,7 +1098,7 @@ HTML;
     }
 
     public function getOrderByOpenId($openId=null){
-        $list = M('countmask')->query("select openid, number,share,phonetime from tp_countmask where phone != '' order by number desc,share desc,phonetime asc ");
+        $list = M('pretty')->query("select openid, number,share,phonetime from tp_pretty where phone != '' order by number desc,share desc,phonetime asc ");
 
         $orderList = array();
         foreach($list as $each){
@@ -1123,7 +1124,7 @@ HTML;
         $this->assign("signature",$signature);
         $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', 1);
-        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $info = M('pretty')->where(array('openid' => $userOpenId))->find();
         $this->assign('title',$info['name'].$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
         $this->assign("imageUrl",$this->imageUrl);
@@ -1138,7 +1139,7 @@ HTML;
         }
         // end views
 
-        $this->assign('selfpage',$this->url."/index.php?g=Wap&m=Countmask&a=sharenumber");
+        $this->assign('selfpage',$this->url."/index.php?g=Wap&m=Pretty&a=sharenumber");
 
         $award = M('pretty_award')->where(array('openid' => $userOpenId))->find();
         if($award){
@@ -1257,7 +1258,7 @@ HTML;
             exit;
         }
         $userOpenId= cookie('user_openid');
-        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $info = M('pretty')->where(array('openid' => $userOpenId))->find();
         if($info){
             $id = $info['id'];
             if(!$info['sharetime']){
@@ -1284,7 +1285,7 @@ HTML;
             exit;
         }
         $toOpenId = $_POST['toopenid'];
-        $info = M('countmask')->where(array('openid' => $toOpenId))->find();
+        $info = M('pretty')->where(array('openid' => $toOpenId))->find();
         M("pretty")->where(array('id' => $info['id']))->setInc('joins');
 
     }
@@ -1302,9 +1303,9 @@ HTML;
         //帮忙投票 点击次数
         $toOpenId = $_POST['toopenid'];
         $userOpenId = cookie('user_openid');
-        $voteList = M('countmask_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toOpenId))->find();
+        $voteList = M('pretty_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toOpenId))->find();
         if(!$voteList){
-            $info = M('countmask')->where(array('openid' => $toOpenId))->find();
+            $info = M('pretty')->where(array('openid' => $toOpenId))->find();
             M("pretty")->where(array('id' => $info['id']))->setInc('vote');
 
             //投票
@@ -1313,10 +1314,57 @@ HTML;
             $d['toopenid'] = $toOpenId;
             $d['sequence'] = $info['sequence'];
             $d['createtime'] = time();
-            M('countmask_votelist')->add($d);
+            M('pretty_votelist')->add($d);
             $return = 1;
         }
         echo $return;
+    }
+
+    public function auth(){
+        if($this->debug){
+            return;
+        }
+
+
+        //判断是否在微信打开
+        $agent = $_SERVER['HTTP_USER_AGENT'];
+        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
+            echo '此功能只能在微信浏览器中使用';
+            exit;
+        }
+        //获取OPENID
+        $appid = "wx36026301d4b1cb01";
+        $appsecret = "79311ea02ea318af5f228492bf119104";
+
+        $openId = $_COOKIE['openid'];
+        $url = $this->url."/index.php?g=Wap&m=Pretty&a=index";
+        if(!$openId){
+            $code =  $_GET['code'];
+            $state = $_GET['state'];
+            if ($code && $state == 'sentian') {
+                $userinfoFromApi = $this->getUserInfo($code, $appid, $appsecret);
+                if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
+                    //code 有错误 需要重定向
+                    header("location:$url");
+                }
+                $web_access_token = $userinfoFromApi['access_token'];
+                $openId = $userinfoFromApi['openid'];
+                setcookie('openid', $openId, time()+3600*24*100);
+
+            } else {
+                header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $appid . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
+                exit;
+            }
+        }
+
+        if(!$openId){
+            //
+            exit('此功能只能在微信浏览器中使用') ;
+        }
+        $strToTime = strtotime('2015-08-08 24:00:00');
+        if(time() > $strToTime){
+            exit('<center>游戏已经结束！谢谢你的参与</center>');
+        }
     }
     /**
      * 获得微信用户信息
@@ -1410,7 +1458,7 @@ HTML;
                     $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                     if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                         //code 有错误 需要重定向
-                        $url = $this->url."/index.php?g=Wap&m=Countmask&a=getOpenId";
+                        $url = $this->url."/index.php?g=Wap&m=Pretty&a=getOpenId";
                         header("location:$url");
                     }
                     $m['id'] = $apidata['id'];
@@ -1426,7 +1474,7 @@ HTML;
 
             }
         } else {
-            $url = urlencode($this->url."/index.php?g=Wap&m=Countmask&a=getOpenId");
+            $url = urlencode($this->url."/index.php?g=Wap&m=Pretty&a=getOpenId");
             header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
             exit;
         }
