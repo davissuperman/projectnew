@@ -327,6 +327,50 @@ HTML;
 
         $this->display();
     }
+
+    public function share(){
+        $userOpenId= cookie('user_openid');
+        if(!$userOpenId){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Countmask&a=index");
+            exit();
+        }
+
+        //首先判断当前用户是否有玩过第一次
+        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $gid = $info['gid'];
+        //begin 分享出去的URL
+        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
+        $noncestr = "Wm3WZYTPz0wzccnW";
+        $timestamp = time();
+        $url = $this->get_url();;
+        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
+        $signature = sha1($str);
+        $this->assign("appid",$appId);
+        $this->assign("timestamp",$timestamp);
+        $this->assign("nonceStr",$noncestr);
+        $this->assign("signature",$signature);
+        $this->assign("shareurl",$this->getShareUrl());
+        $this->assign('gid', $gid);
+
+        $this->assign('title',$info['name'].$this->title);
+        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign("imageUrl",$this->imageUrl);
+        $this->assign("shareimageurl",$this->shareImageUrl);
+        //end
+
+        //begin views
+        $userOpenId= cookie('user_openid');
+        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        if($info){
+            M("countmask")->where(array('id' => $info['id']))->setInc('views');
+        }
+        // end views
+
+        $this->display();
+    }
+
+
     public function score(){
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
