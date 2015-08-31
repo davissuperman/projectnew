@@ -6,7 +6,7 @@ class PrettyAction extends SjzAction {
     public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
-    public $endtime="2015-07-21 24:00:00";
+    public $endtime="2015-10-21 24:00:00";
 
     public function _initialize() {
         parent :: _initialize();
