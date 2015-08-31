@@ -951,7 +951,11 @@ class CommonAction extends Action {
         return array($text, 'text');
     }
 
-
+    function pretty(){
+        $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Pretty";
+        $text = "<a href='$url'>pretty</a>";
+        return array($text, 'text');
+    }
     function checkCode($keyword){
         $keyword = str_replace(" ","",$keyword);
         $ws = "http://digitcode.yesno.com.cn/CCNOutService/OutDigitCodeService.asmx?wsdl";//webservice服务的地址
@@ -1063,6 +1067,9 @@ class CommonAction extends Action {
                 break;
             case '测试2' :
                 return $this->nianzhong2();
+                break;
+            case 'pretty' :
+                return $this->pretty();
                 break;
             case '主页' :
                 return $this->home();
