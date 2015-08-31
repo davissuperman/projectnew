@@ -168,28 +168,28 @@ HTML;
 
         //首先判断当前用户是否有玩过第一次
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
-        $firstStart = true;
-        if($info){
-                //判断当前用户 sequence 并且 手机已经提交,并且判断用户是否有资格继续玩
-            $vote = $info['vote'];
-            $phone = $info['phone'];
-            $currentSequence = $info['sequence'];
-            if($phone && ($currentSequence>=4 ||  $vote<$this->eachVote || floor($vote/$this->eachVote ) <= $currentSequence)){
-                //没有资格继续完
-                $firstStart = false;
-            }
-            if($firstStart == true){
-                //判断当前机会是否已经使用过
-                $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence' => $currentSequence))->find();
-                if($infoList && $infoList['number']){
-                    //已经玩过
-                    $firstStart = false;
-                }
-            }
-
-        }else{
-            $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
-        }
+//        $firstStart = true;
+//        if($info){
+//                //判断当前用户 sequence 并且 手机已经提交,并且判断用户是否有资格继续玩
+//            $vote = $info['vote'];
+//            $phone = $info['phone'];
+//            $currentSequence = $info['sequence'];
+//            if($phone && ($currentSequence>=4 ||  $vote<$this->eachVote || floor($vote/$this->eachVote ) <= $currentSequence)){
+//                //没有资格继续完
+//                $firstStart = false;
+//            }
+//            if($firstStart == true){
+//                //判断当前机会是否已经使用过
+//                $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence' => $currentSequence))->find();
+//                if($infoList && $infoList['number']){
+//                    //已经玩过
+//                    $firstStart = false;
+//                }
+//            }
+//
+//        }else{
+//            $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
+//        }
 
 
 
@@ -213,9 +213,9 @@ HTML;
         //end
 
         $urlGame = "http://wx.drjou.cc" ."/index.php?g=Wap&m=Countmask&a=game";
-        if($firstStart == false){
-            $urlGame = "http://wx.drjou.cc"."/index.php?g=Wap&m=Countmask&a=sharenumber";
-        }
+//        if($firstStart == false){
+//            $urlGame = "http://wx.drjou.cc"."/index.php?g=Wap&m=Countmask&a=sharenumber";
+//        }
         $this->assign('urlgame',$urlGame);
 
         //view自增
