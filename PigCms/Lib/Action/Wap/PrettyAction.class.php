@@ -98,11 +98,6 @@ HTML;
         }
 
         public function index() {
-        $agent = $_SERVER['HTTP_USER_AGENT'];
-//        if (!strpos($agent, "MicroMessenger") && !isset($_GET['show'])) {
-//            echo '此功能只能在微信浏览器中使用';
-//            exit;
-//        }
         $gid = $_GET['gid'];
         if(!$gid){
             $gid = 1;
