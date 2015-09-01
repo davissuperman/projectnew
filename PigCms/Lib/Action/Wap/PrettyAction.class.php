@@ -223,6 +223,7 @@ HTML;
     public function upload(){
 //        $this->setEndTime();
         $userOpenId= cookie('user_openid');
+//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
@@ -282,6 +283,21 @@ HTML;
         M("pretty")->where(array('id' => $info['id']))->setInc('views');
         $this->display();
     }
+
+    public function saveImage(){
+        $img = $_POST['image'];
+        $savePath = './PUBLIC/imagess/';
+
+        $base64_body = substr(strstr($img,','),1);
+        $userOpenId= cookie('user_openid');
+//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+
+        $data= base64_decode($base64_body );
+        $file = $savePath ."$userOpenId.jpeg";
+
+       echo  file_put_contents($file, $data);
+    }
+
     public function rule(){
         $userOpenId= cookie('user_openid');
         if(!$userOpenId){

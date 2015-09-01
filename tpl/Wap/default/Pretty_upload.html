@@ -246,7 +246,7 @@
         var filename = $('#hit').attr('fileName');
         var img_data = $('#hit').attr('src');
         if(img_data==""){mnAlert('请选择照片后再确认上传哦！');return false;}
-        $.post("后台接口地址", {image: img_data}, function (data) {
+        $.post("{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=saveImage", {image: img_data}, function (data) {
             if (data != '') {
                 //			console.info(data);
                 //data 为返回文件名；
