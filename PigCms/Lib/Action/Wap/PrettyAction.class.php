@@ -104,7 +104,7 @@ HTML;
         }
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
-//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $fansInfo = null;
         $selfUserInfo = array();
         $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
@@ -223,7 +223,7 @@ HTML;
     public function upload(){
 //        $this->setEndTime();
         $userOpenId= cookie('user_openid');
-//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
