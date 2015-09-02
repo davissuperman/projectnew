@@ -300,6 +300,7 @@ HTML;
 
     public function rule(){
         $userOpenId= cookie('user_openid');
+        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
@@ -340,8 +341,11 @@ HTML;
         $this->display();
     }
 
+
+
     public function share(){
         $userOpenId= cookie('user_openid');
+        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
@@ -373,6 +377,7 @@ HTML;
 
         //begin views
         $userOpenId= cookie('user_openid');
+        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         if($info){
             M("pretty")->where(array('id' => $info['id']))->setInc('views');
