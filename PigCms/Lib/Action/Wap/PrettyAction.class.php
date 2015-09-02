@@ -290,7 +290,7 @@ HTML;
 
         $base64_body = substr(strstr($img,','),1);
         $userOpenId= cookie('user_openid');
-//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
 
         $data= base64_decode($base64_body );
         $file = $savePath ."$userOpenId.jpeg";
