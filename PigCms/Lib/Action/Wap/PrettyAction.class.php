@@ -339,8 +339,25 @@ HTML;
             exit();
         }
 
+        //查看UID参数
+        $uid = $_GET['uid'];
+        if(!is_numeric($uid)){
+            //参数有误
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
+            exit();
+        }
+        //判断uid是否存在
+        $mainOpenId = $this->getOpenIdByUid();
+        if(!$mainOpenId){
+            //openid有问题
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
+            exit();
+        }
+
         //首先判断当前用户是否有玩过第一次
-        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $info = M('pretty')->where(array('openid' => $userOpenId))->find();
         $gid = $info['gid'];
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
@@ -365,7 +382,7 @@ HTML;
         //begin views
         $userOpenId= cookie('user_openid');
         $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
-        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $info = M('pretty')->where(array('openid' => $userOpenId))->find();
         if($info){
             M("pretty")->where(array('id' => $info['id']))->setInc('views');
         }
