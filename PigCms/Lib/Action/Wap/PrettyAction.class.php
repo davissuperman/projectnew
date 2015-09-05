@@ -21,7 +21,7 @@ class PrettyAction extends SjzAction {
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         $gid = $info['gid'];
         if($info){
-            return $this->url."/index.php?g=Wap&m=Pretty&a=sharefriend&uid=".$info['id']."&gid=$gid";
+            return $this->url."/index.php?g=Wap&m=Pretty&a=share&uid=".$info['id']."&gid=$gid";
         }else{
             return $this->url."/index.php?g=Wap&m=Pretty&a=index&gid=$gid";
         }
