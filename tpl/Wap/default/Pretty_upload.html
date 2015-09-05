@@ -247,10 +247,13 @@
         var img_data = $('#hit').attr('src');
         if(img_data==""){mnAlert('请选择照片后再确认上传哦！');return false;}
         $.post("{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=saveImage", {image: img_data}, function (data) {
+            alert(data);
             if (data != '') {
                 //			console.info(data);
                 //data 为返回文件名；
                 mnAlert('提交成功');
+                //跳转页面
+                location.href = "./index.php?g=Wap&m=Pretty&a=share";
             }
         });
     }

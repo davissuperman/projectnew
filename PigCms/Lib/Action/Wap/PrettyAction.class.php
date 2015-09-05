@@ -2,7 +2,7 @@
 
 class PrettyAction extends SjzAction {
     public $title = '携手森田.找回美丽';
-    public $bonusdesc = '只要30票， 人人拉得到，比手快不比票多，7500片免费面膜等你来拿！';
+    public $bonusdesc = '携手森田.找回美丽';
     public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
@@ -60,7 +60,7 @@ class PrettyAction extends SjzAction {
 
     public function saveInfo($gid,$openId,$nickname,$imageProfile){
         //首先查看此OPENID 是否存在 无论gid
-        $bonusInfo = M('countmask')->where(array('openid' => $openId))->find();
+        $bonusInfo = M('pretty')->where(array('openid' => $openId))->find();
         if(!$bonusInfo){
             //创建个人主页
             $d['gid'] = $gid;
@@ -68,7 +68,6 @@ class PrettyAction extends SjzAction {
             $d['name'] = $nickname;
             $d['headimgurl'] = $imageProfile;
             $d['views'] = 1;
-            $d['sequence'] = 0;
             $d['createtime'] = time();
             M("pretty")->add($d);
         }
@@ -166,27 +165,14 @@ HTML;
         //首先判断当前用户是否有玩过第一次
         $info = M('Pretty')->where(array('openid' => $userOpenId))->find();
 //        $firstStart = true;
-//        if($info){
-//                //判断当前用户 sequence 并且 手机已经提交,并且判断用户是否有资格继续玩
-//            $vote = $info['vote'];
-//            $phone = $info['phone'];
-//            $currentSequence = $info['sequence'];
-//            if($phone && ($currentSequence>=4 ||  $vote<$this->eachVote || floor($vote/$this->eachVote ) <= $currentSequence)){
-//                //没有资格继续完
-//                $firstStart = false;
-//            }
-//            if($firstStart == true){
-//                //判断当前机会是否已经使用过
-//                $infoList = M('Pretty_list')->where(array('openid' => $userOpenId,'sequence' => $currentSequence))->find();
-//                if($infoList && $infoList['number']){
-//                    //已经玩过
-//                    $firstStart = false;
-//                }
-//            }
-//
-//        }else{
-//            $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
-//        }
+        if($info){
+                //判断当前用户是否玩过
+            $vote = $info['vote'];
+            $phone = $info['phone'];
+
+        }else{
+            $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
+        }
 
 
 
