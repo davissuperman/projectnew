@@ -50,6 +50,7 @@ class PrettyAction extends SjzAction {
                 $fdata['ticket'] = $jsonTicket['ticket'];
                 $ticket = $fdata['ticket'];
                 $fdata['ticket_time'] = time();
+                $fdata['ticket_time'] = time();
                 M('Diymen_set')->save($fdata);
             }
         }
@@ -384,6 +385,10 @@ HTML;
         }
         // end views
 
+
+        $savePath = './PUBLIC/imagess/';
+        $uploadImageSrc= $savePath."$userOpenId.jpeg";
+        $this->assign('uploadimagesrc',$uploadImageSrc);
         $this->display();
     }
 
