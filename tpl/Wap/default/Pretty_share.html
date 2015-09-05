@@ -162,7 +162,7 @@
 </div>
 <div class="btn-box share-btn-box ta-c">
     <p class="txt">—还需要<span class="c1">6</span>位好友帮忙—</p>
-    <a href="javascript:;" title="帮忙拼图" class="btn-bg01">
+    <a href="javascript:;" title="帮忙拼图" class="btn-bg01" id="helpvote">
         <i class="share-btn03"></i>
     </a>
     <a href="javascript:;" title="邀请好友帮忙" class="btn-bg02" id="btnShare">
@@ -200,6 +200,22 @@
     $(document).ready(function(e) {
         $("#btnShare").click(function(){
             showLayer($("#layer-share"));
+        });
+
+        $('#helpvote').click(function(){
+            $.post(
+                    "{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=saveVote",
+                    {uid: "{pigcms::$uid}"},
+                    function (data) {
+                        if (data != '') {
+                            //			console.info(data);
+                            //data 为返回文件名；
+                            mnAlert('提交成功');
+                            //跳转页面
+                        }else{
+                            //图片提交失败
+                        }
+                    });
         });
     });
 </script>

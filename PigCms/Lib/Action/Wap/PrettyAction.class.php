@@ -903,18 +903,24 @@ HTML;
         $this->display();
     }
 
+    //根据UID获取OPENID
+    public function getOpenIdByUid($uid){
+        $openId = M('pretty')->where("uid=$uid")->getField('openid');
+        return $openId;
+    }
+
     //TODO add random str to avoid auto submit
     public function saveVote(){
         $this->setEndTime();
         $return = 0;
-        $localUserOpenIdFromCookie= cookie('user_openid');
-        $fromOpenIdFromPost = $_POST['fromopenid'];
-        $toOpenIdFromPost = $_POST['toopenid'];
-        $tousersequence = $_POST['tousersequence'];
-        if(!$localUserOpenIdFromCookie || ($localUserOpenIdFromCookie != $fromOpenIdFromPost)){
+        $fromOpenIdFromPost= cookie('user_openid');
+        $toUid = $_POST['uid'];
+        if(!$fromOpenIdFromPost){
             //非法投票
             exit();
         }
+
+        $toOpenIdFromPost = $this->getOpenIdByUid($toUid);
         //检查此 local openid 是否投过票
         $voteList = M('pretty_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
         if(!$voteList){
@@ -922,30 +928,14 @@ HTML;
             $d = array();
             $d['fromopenid'] = $fromOpenIdFromPost;
             $d['toopenid'] = $toOpenIdFromPost;
-            $d['sequence'] = $tousersequence;
             $d['createtime'] = time();
             M('pretty_votelist')->add($d);
-
-            //更新当前主页人的pretty_list
-            $info = M('pretty')->where(array('openid' => $toOpenIdFromPost))->find();
-            $sequence = $info['sequence'];
-
-            $c = M('pretty_list')->where(array('openid' => $toOpenIdFromPost,'sequence' => $sequence))->find();
-            //是否存在这次机会
-            if(!$c){
-                $tempArr = array();
-                $tempArr['openid'] = $toOpenIdFromPost;
-                $tempArr['sequence'] = $sequence;
-                $tempArr['number'] = 0;
-                $tempArr['vote'] = 1;
-                $tempArr['createtime'] = time();
-                $tempArr['updatetime'] = time();
-                M('pretty_list')->add($tempArr);
-            }else{
-                M("pretty_list")->where(array('openid' => $toOpenIdFromPost,'sequence' => $sequence))->setInc('vote');
-            }
+            M("pretty")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
 
             $return = 1;
+        }else{
+            //已经投过票
+            $return = 2;
         }
 
         echo $return;
