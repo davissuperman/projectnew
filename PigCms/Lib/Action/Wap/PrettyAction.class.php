@@ -17,13 +17,25 @@ class PrettyAction extends SjzAction {
     }
 
     public function getShareUrl(){
-        $userOpenId= cookie('user_openid');
-        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
-        $gid = $info['gid'];
-        if($info){
-            return $this->url."/index.php?g=Wap&m=Pretty&a=share&uid=".$info['id']."&gid=$gid";
+        $mainId = null;
+        $mainGid = null;
+        //首先判断main uid是否存在
+        $uid = $_GET['uid'];
+        if($uid && is_numeric($uid)){
+            $mainId = $uid;
+            if($_GET['uid'] && is_numeric($_GET['uid'])){
+                $mainGid = $_GET['uid'];
+            }
         }else{
-            return $this->url."/index.php?g=Wap&m=Pretty&a=index&gid=$gid";
+            $userOpenId= cookie('user_openid');
+            $info = M('pretty')->where(array('openid' => $userOpenId))->find();
+            $mainId = $info['openid'];
+            $mainGid = $info['gid'];
+        }
+        if($info){
+            return $this->url."/index.php?g=Wap&m=Pretty&a=share&uid=".$mainId."&gid=$mainGid";
+        }else{
+            return $this->url."/index.php?g=Wap&m=Pretty&a=index&gid=$mainGid";
         }
     }
     public function getDiymenSet(){
@@ -356,9 +368,6 @@ HTML;
             exit();
         }
 
-        //首先判断当前用户是否有玩过第一次
-        $info = M('pretty')->where(array('openid' => $userOpenId))->find();
-        $gid = $info['gid'];
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
