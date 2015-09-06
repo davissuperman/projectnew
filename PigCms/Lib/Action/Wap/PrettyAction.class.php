@@ -351,22 +351,8 @@ HTML;
             exit();
         }
 
-        //查看UID参数
-        $uid = $_GET['uid'];
-        if(!is_numeric($uid)){
-            //参数有误
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
-            exit();
-        }
-        //判断uid是否存在
-        $mainOpenId = $this->getOpenIdByUid();
-        if(!$mainOpenId){
-            //openid有问题
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
-            exit();
-        }
+        $info = M('pretty')->where(array('openid' => $userOpenId))->find();
+        $gid = $info['gid'];
 
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
@@ -389,9 +375,6 @@ HTML;
         //end
 
         //begin views
-        $userOpenId= cookie('user_openid');
-        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
-        $info = M('pretty')->where(array('openid' => $userOpenId))->find();
         if($info){
             M("pretty")->where(array('id' => $info['id']))->setInc('views');
         }
@@ -401,6 +384,18 @@ HTML;
         $savePath = './PUBLIC/imagess/';
         $uploadImageSrc= $savePath."$userOpenId.jpeg";
         $this->assign('uploadimagesrc',$uploadImageSrc);
+
+        //获取当前已经有了多少拼图
+        $imgNums = 16;
+        $vote = $info['vote'];
+        if($vote == 0){
+            //是第一次进入到这个页面，需要有一块拼图
+            M("pretty")->where(array('id' => $info['id']))->setInc('vote');
+            $imgNums = 15;
+        }else{
+            $imgNums = 16 - $vote;
+        }
+        $this->assign('imgnums',$imgNums);
         $this->display();
     }
 
