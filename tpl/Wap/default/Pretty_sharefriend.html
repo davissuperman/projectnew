@@ -162,15 +162,20 @@
 </div>
 <div class="btn-box share-btn-box ta-c">
     <p class="txt">—还需要<span class="c1">{pigcms::$imgnums}</span>位好友帮忙—</p>
-    <!--<a href="javascript:;" title="帮忙拼图" class="btn-bg01" id="helpvote">-->
-        <i class="share-btn03"></i>
-    </a>
+    <if condition="$openid neq $mainopenid">
+        <a href="javascript:;" title="帮忙拼图" class="btn-bg01" id="helpvote">
+            <i class="share-btn03"></i>
+        </a>
+    </if>
     <a href="javascript:;" title="邀请好友帮忙" class="btn-bg02" id="btnShare">
         <i class="share-btn01"></i>
     </a>
-    <!--<a href="{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=index" title="我也要参加" class="btn-bg01">-->
-        <!--<i class="share-btn02"></i>-->
-    <!--</a>-->
+    <if condition="$openid neq $mainopenid">
+        <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=index" title="我也要参加" class="btn-bg01">
+            <i class="share-btn02"></i>
+        </a>
+    </if>
+
 </div>
 <div class="bg01"></div>
 <div class="bg02"></div>

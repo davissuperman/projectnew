@@ -33,7 +33,7 @@ class PrettyAction extends SjzAction {
             $mainGid = $info['gid'];
         }
         if($info){
-            return $this->url."/index.php?g=Wap&m=Pretty&a=share&uid=".$mainId."&gid=$mainGid";
+            return $this->url."/index.php?g=Wap&m=Pretty&a=sharefriend&uid=".$mainId."&gid=$mainGid";
         }else{
             return $this->url."/index.php?g=Wap&m=Pretty&a=index&gid=$mainGid";
         }
@@ -595,28 +595,60 @@ HTML;
         // end views
         $this->display();
     }
-    public function sharenumber(){
-//        $this->setEndTime();
+    public function sharefriend(){
+        //这里是隐性获取OPENID 是朋友圈里面的人打开这个页面
+        //获取OPENID 用户没有感知
         $userOpenId= cookie('user_openid');
-        //$userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
-        $phone = $_GET['phone'];
-        $info = M('pretty')->where(array('openid' => $userOpenId))->find();
-        if($_GET['gid']){
-            $gid =  $_GET['gid'];
-        }elseif($info){
-            $gid = $info['gid'];
-        }else{
-            $gid=1;
-        }
+        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
+            $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
+            $code = trim($_GET["code"]);
+            $state = trim($_GET['state']);
+
+            $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
+            if ($code && $state == 'sentian') {
+                if(empty($fansInfo)){
+                    $webCreatetime = $apidata['web_createtime'];
+                    $web_access_token = '';
+
+                    //重新获取
+                    $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
+                    if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
+                        //code 有错误 需要重定向
+                        $url = $this->url."/index.php?g=Wap&m=Countmask&a=getOpenId";
+                        header("location:$url");
+                    }
+                    $m['id'] = $apidata['id'];
+                    $m['web_access_token'] = $userinfoFromApi['access_token'];
+                    $m['refresh_token'] = $userinfoFromApi['refresh_token'];
+                    $m['web_createtime'] = time();
+                    $m['refresh_token_createtime'] = time();
+                    M('Diymen_set')->save($m);
+                    $web_access_token = $userinfoFromApi['access_token'];
+                    cookie('user_openid', $userinfoFromApi['openid'], 315360000);
+                    $userOpenId = $userinfoFromApi['openid'];
+                    Log :: write($userOpenId.' rank get openid by base');
+
+                }
+            } else {
+                $url = urlencode($this->url."/index.php?g=Wap&m=Pretty&a=shareNumber");
+                header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
+                exit;
+            }
+        }
+
+
+        $uid = $_GET['uid'];
+        if(!is_numeric($uid)){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
-            return;
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
+            exit();
         }
-        if(!$phone && (!$info || ($info && !$info['phone'])) ){
-            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
-            return;
-        }
+
+        $info = M('pretty')->where(array('uid' => $uid))->find();
+        $gid = $info['gid'];
+        $MainOpenId = $info['openid'];
+
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
@@ -637,292 +669,33 @@ HTML;
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
 
-        if($info['phone']){
-            //已经提交过手机号
-        }else{
-            $uid = $info['id'];
-            $d = array();
-            $d['phone'] = $phone;
-            $d['phonetime'] = time();
-            $d['id'] = $info['id'];
-            M('pretty')->save($d);
-        }
-
-       //current sequence
-        $sequence = $info['sequence'];
-        // $sequence = 1 : 还没有进行过投票
-        // $sequence = 2 : 已经用过一次
-        // $sequence = 3 : 已经用过二次
-        // $sequence = 4 : 已经用过三次
-        $couldCountMaskAgain = false;
-        $currentNeedVote = 0;
-
-        $firstUsed = '';
-        $secondUsed = '';
-        $thirdUsed = '';
-
-        $showCountMaskAgain = 1;
-        switch($sequence){
-            case 1:
-                //正在争取第一次机会
-                $vote = $info['vote'];
-                if($vote >= $this->eachVote){
-                    //查看是否已经提交了分数
-                    $infoList = M('pretty_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
-                    if($infoList['number']){
-                        //已经提交分数，无法再次提交
-                        $firstUsed = 'disabled';
-                    }else{
-                        $couldCountMaskAgain = true;
-                    }
-                }else{
-                    //未获得第一次机会
-                    $currentNeedVote = $this->eachVote*3 - $vote;
-                }
-                break;
-            case 2:
-                $firstUsed = 'disabled';
-                //正在争取第二次机会
-                $vote = $info['vote'];
-                if($vote >= $this->eachVote * 2){
-                    //查看是否已经提交了分数
-                    $infoList = M('pretty_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
-                    if($infoList['number']){
-                        //已经提交分数，无法再次提交
-                        $secondUsed = 'disabled';
-                    }else{
-                        $couldCountMaskAgain = true;
-                    }
-                }else{
-                    //未获得第二次机会
-                    $currentNeedVote = $this->eachVote * 3 - $vote;
-                }
-                break;
-            case 3:
-                //正在争取第三次机会
-                $firstUsed = 'disabled';
-                $secondUsed = 'disabled';
-                //正在争取第二次机会
-                $vote = $info['vote'];
-                if($vote >= $this->eachVote * 3){
-                    //查看是否已经提交了分数
-                    $infoList = M('pretty_list')->where(array('openid' => $userOpenId,'sequence'=>$sequence))->find();
-                    if($infoList['number']){
-                        //已经提交分数，无法再次提交
-                        $thirdUsed = 'disabled';
-                    }else{
-                        $couldCountMaskAgain = true;
-                    }
-                }else{
-                    //未获得第二次机会
-                    $currentNeedVote = $this->eachVote * 3 - $vote;
-                }
-                break;
-            case 4:
-                //三次机会用完，在数一次按钮隐藏
-                $showCountMaskAgain = 0;
-                $firstUsed = 'disabled';
-                $secondUsed = 'disabled';
-                $thirdUsed = 'disabled';
-                break;
-            default:
-
-        }
-
-        if($currentNeedVote < 0){
-            $currentNeedVote = 0;
-        }
-
-        $this->assign('firstused', $firstUsed);
-        $this->assign('secondused', $secondUsed);
-        $this->assign('thirdused', $thirdUsed);
-
-        $this->assign('needvote', $currentNeedVote);
-        $this->assign('username', $info['name']);
-        $this->assign('totalnumber', $info['number']);
-        $this->assign('couldcountmaskagain', $couldCountMaskAgain);
-        $this->assign('couldprettyagainbutton', $showCountMaskAgain);
-
         //begin views
         if($info){
             M("pretty")->where(array('id' => $info['id']))->setInc('views');
         }
         // end views
 
+
+        $savePath = './PUBLIC/imagess/';
+        $uploadImageSrc= $savePath."$MainOpenId.jpeg";
+        $this->assign('uploadimagesrc',$uploadImageSrc);
+
+        //获取当前已经有了多少拼图
+        $imgNums = 16;
+        $vote = $info['vote'];
+        if($vote == 0){
+            //是第一次进入到这个页面，需要有一块拼图
+            M("pretty")->where(array('id' => $info['id']))->setInc('vote');
+            $imgNums = 15;
+        }else{
+            $imgNums = 16 - $vote;
+        }
+        $this->assign('imgnums',$imgNums);
+        $this->assign('openid',$userOpenId);
+        $this->assign('mainopenid',$MainOpenId);
         $this->display();
     }
 
-    public function sharefriend(){
-        $this->setEndTime();
-        $userOpenId= cookie('user_openid');
-        //$userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
-        $fansInfo = null;
-        $selfUserInfo = array();
-        $uid  = $_GET['uid'];
-        $infoTO = M('pretty')->where(array('id' => $uid))->find();
-        if( !$infoTO ){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
-            return;
-        }
-
-        $gid = $infoTO['gid'];
-
-        $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
-        if($userOpenId && $fansInfo){
-            $selfUserInfo['headimgurl'] = $fansInfo['headimgurl'];
-            $selfUserInfo['nickname'] = $fansInfo['nickname'];
-        }else{
-            $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
-            $code = trim($_GET["code"]);
-            $state = trim($_GET['state']);
-            if ($code && $state == 'sentian') {
-                if(empty($fansInfo)){
-                    $webCreatetime = $apidata['web_createtime'];
-                    $web_access_token = '';
-
-                    if($webCreatetime>(time()-7200) && $userOpenId){
-                        //未过期
-                        $web_access_token = $apidata['web_access_token'];
-                    }else{
-                        //重新获取
-                        $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
-                        if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
-                            //code 有错误 需要重定向
-                            $url = $this->url."/index.php?g=Wap&m=Pretty&a=index&gid=$gid";
-                            header("location:$url");
-                        }
-                        $m['id'] = $apidata['id'];
-                        $m['web_access_token'] = $userinfoFromApi['access_token'];
-                        $m['refresh_token'] = $userinfoFromApi['refresh_token'];
-                        $m['web_createtime'] = time();
-                        $m['refresh_token_createtime'] = time();
-                        M('Diymen_set')->save($m);
-                        $web_access_token = $userinfoFromApi['access_token'];
-                        cookie('user_openid', $userinfoFromApi['openid'], 315360000);
-                        $userOpenId = $userinfoFromApi['openid'];
-                    }
-
-                    //根据access_token 拉到用户基本信息
-                    $gUrl = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$web_access_token.'&openid='.$userOpenId.'&lang=zh_CN';
-                    $json = json_decode($this->curlGet($gUrl));
-                    $this->saveUserInfo($json);
-                    $selfUserInfo['headimgurl'] = $json->headimgurl;
-                    $selfUserInfo['nickname'] = $json->nickname;
-                }
-            } else {
-                $url = urlencode($this->url."/index.php?g=Wap&m=Pretty&a=sharefriend&uid=$uid");
-                header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_userinfo&state=sentian#wechat_redirect");
-                exit;
-            }
-        }
-
-        //begin 分享出去的URL
-        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
-        $noncestr = "Wm3WZYTPz0wzccnW";
-        $timestamp = time();
-        $url = $this->get_url();;
-        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
-        $signature = sha1($str);
-        $this->assign("appid",$appId);
-        $this->assign("timestamp",$timestamp);
-        $this->assign("nonceStr",$noncestr);
-        $this->assign("signature",$signature);
-        $this->assign("shareurl",$this->url."/index.php?g=Wap&m=Pretty&a=sharefriend&uid=".$uid);
-        $this->assign('gid', $gid);
-
-
-        $this->assign('title',$infoTO['name'].$this->title);
-
-        $this->assign('bonusdesc',$this->bonusdesc);
-        $this->assign("imageUrl",$this->imageUrl);
-        $this->assign("shareimageurl",$this->shareImageUrl);
-        //end
-
-
-
-        //local open id $userOpenId
-
-        //如果 sequence=1 and phone为null 则需要重定向到首页 非法页面
-        $sequence = $infoTO['sequence'];
-//        if(!$infoTO['phone']){
-//            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
-//        }
-
-        $toUserOpenId = $infoTO['openid'];
-        $userName = $infoTO['name'];
-        $number = $infoTO['number'];
-        $this->assign('name', $userName);
-        $this->assign('number', $number);
-
-        $leftVote = $this->eachVote*3;
-        if($sequence >= 1){
-            //第一次 还差多少票
-//            $infoList = M('pretty_list')->where(array('openid' => $toUserOpenId,'sequence'=>$sequence))->find();
-            $vote = $infoTO['vote'];
-            $leftVote = $this->eachVote*3 - $vote;
-        }
-        if($leftVote<0){
-            $leftVote = 0;
-        }
-        $this->assign('leftvote', $leftVote);
-        $this->assign('fromopenid', $userOpenId);
-        $this->assign('toopenid', $toUserOpenId);
-        $this->assign('sequence', $sequence);
-
-        //是否显示 帮忙投票
-        $showVoteButton = 1;
-        if($userOpenId == $toUserOpenId || $sequence >=4 ){
-            $showVoteButton = 0;
-        }
-        $this->assign('showvotebutton', $showVoteButton);
-        //end
-
-        //是否已经投过票
-        $hasVotedForThisUid = 1;
-        $voteList = M('pretty_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toUserOpenId))->find();
-        if($voteList){
-            $hasVotedForThisUid = 0;
-        }
-
-        $uniqueViewlist = M('pretty_uniqueviewlist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toUserOpenId))->find();
-        if($uniqueViewlist){
-            //不需要增加uniqueviews
-        }else{
-            M("pretty")->where(array('id' => $infoTO['id']))->setInc('uniqueviews');
-            $n = array();
-            $n['fromopenid'] = $userOpenId;
-            $n['toopenid'] = $toUserOpenId;
-            $n['createtime'] = time();
-            M('pretty_uniqueviewlist')->add($n);
-        }
-
-        $this->assign('hasvotedforthisuid', $hasVotedForThisUid);
-
-
-        //local info
-        $infoLocal = M('pretty')->where(array('openid' => $userOpenId))->find();
-        if($infoLocal){
-            //这个用户是否参加过，已经参加
-            $this->assign('localuid', $infoLocal['uid']);
-            $this->assign('redirecturl', $this->url."/index.php?g=Wap&m=Pretty&a=sharenumber&gid=$gid");
-        }else{
-            $this->assign('redirecturl', $this->url."/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
-        }
-
-        //当前UID对应的views自增
-        M("pretty")->where(array('id' => $infoTO['id']))->setInc('views');
-
-
-        $selftOpen = 0;
-        if($userOpenId == $infoTO['openid']){
-            //是自己本身打开了自己的主页
-            $selftOpen = 1;
-        }
-        $this->assign('selfopen', $selftOpen);
-        $this->assign('gid',  $gid);
-        $this->display();
-    }
 
     //根据UID获取OPENID
     public function getOpenIdByUid($uid){
