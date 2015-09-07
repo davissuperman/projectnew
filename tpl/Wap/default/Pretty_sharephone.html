@@ -158,7 +158,7 @@
             <p>作为查询排名和领奖的凭证</p>
             <input type="tel" maxlength="11" placeholder="在此输入您的手机号码" class="input-text" name="phoneinpage" id="phoneinpage"/>
         </div>
-        <a href="javascript:;" title="确认提交" class="btn-bg01">
+        <a href="javascript:;" title="确认提交" class="btn-bg01" id="submitphone">
             <i class="phone-btn01"></i>
         </a>
 </div>
@@ -168,24 +168,28 @@
 
 <script type="text/javascript">
     $(document).ready(function(e) {
-        var phoneinpage = $("#phoneinpage").val();
-        //判断手机号
-        if(phoneinpage == ''){
-            mnAlert("请输入您的手机号码！");
-            return false;
-        }else if(phoneinpage.length != 11){
-            mnAlert("请输入正确的手机号码！");
-            return false;
-        }
-        $.post(
-                "{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=savePhoneInPage",
-                {phoneinpage: phoneinpage},
-                function (data) {
-                    if (data != '') {
-                        mnAlert('提交成功');
-                    }else{
-                    }
-                });
+        $("#submitphone").click(function(){
+            var phoneinpage = $("#phoneinpage").val();
+            //判断手机号
+            if(phoneinpage == ''){
+                mnAlert("请输入您的手机号码！");
+                return false;
+            }else if(phoneinpage.length != 11){
+                mnAlert("请输入正确的手机号码！");
+                return false;
+            }
+            $.post(
+                    "{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=savePhoneInPage",
+                    {phoneinpage: phoneinpage},
+                    function (data) {
+                        if (data != '') {
+                            mnAlert('提交成功');
+                        }else{
+                        }
+                    });
+        });
+
+
     });
 </script>
 
