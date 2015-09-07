@@ -746,6 +746,7 @@ HTML;
         $savePath = './PUBLIC/imagess/';
         $uploadImageSrc= $savePath."$userOpenId.jpeg";
         $this->assign('uploadimagesrc',$uploadImageSrc);
+        $this->assign('phone',$info['phone']);
 
         $this->display();
     }
