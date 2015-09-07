@@ -818,6 +818,7 @@ HTML;
         $info = M('pretty')->where(array('openid' => $userOpenId))->find();
         $vote = $info['vote'];
 
+        $vote = 16;
         $this->assign("vote",$vote);
         $this->display();
     }

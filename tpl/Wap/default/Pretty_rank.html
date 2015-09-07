@@ -138,21 +138,62 @@
 </head>
 <body id="body">
 <div class="logo"></div>
+<if condition="$vote gt 0 and $vote lt 16 ">
+    <div class="not-finished">
+        <p>您尚未完成拼图，</p>
+        <p>请再接再厉！</p>
+        <p style="margin-top:0.5rem;">
+            <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=index" title="去拼图" class="btn-bg02">
+                <i class="btn-pintu"></i>
+            </a>
+        </p>
+    </div>
+    <div class="btn-box phone-btn-box">
+    </div>
+<else/>
 
-<div class="not-finished">
-    <p>您尚未完成拼图，</p>
-    <p>请再接再厉！</p>
-    <p style="margin-top:0.5rem;">
-        <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=index" title="去拼图" class="btn-bg02">
-            <i class="btn-pintu"></i>
+    <div class="com-box-hover"></div>
+    <div class="com-box"></div>
+
+    <div class="com-box-con">
+        <div class="inner-box ranking-box">
+            <div class="box01">
+                <h2>您是第XXXX位</h2>
+                <p>完成游戏的活动参与者</p>
+            </div>
+            <div class="box02">
+                <p> 一等奖：森田药妆面膜5盒</p>
+                <p>（市场价值249元）</p>
+                <p>活动排名最后两位数字</p>
+                <p>为“18”即中奖。</p>
+                <p>二等奖：森田药妆面膜1盒</p>
+                <p>（市场价值49元）</p>
+                <p>活动排名最后一位数字</p>
+                <p>为“1”或“8”即中奖。</p>
+            </div>
+
+            <div class="box03">
+                <p>没中奖也不要灰心，</p>
+                <p>第一轮拼图游戏结束后，</p>
+                <p>主办方将会挑选18名参赛者</p>
+                <p>参加第二轮青春大使的评选活动，</p>
+                <p>敬请持续关注我们的后续活动！</p>
+            </div>
+
+        </div>
+        <div class="hudie"></div>
+    </div>
+    <div class="btn-box ranking-btn-box">
+
+        <a href="form.html" title="填写获奖信息" class="btn-bg02">
+            <i class="btn-form"></i>
         </a>
-    </p>
-</div>
-<div class="btn-box phone-btn-box">
+
+    </div>
 
 
+</if>
 
-</div>
 <div class="bg01"></div>
 <div class="bg02"></div>
 
