@@ -86,12 +86,12 @@ input,textarea,select,button{font-size:1em;}
 .layerBtn{ border:0; border-top:1px solid #d6d6dc; width:100%; height:0.9rem; line-height:0.9rem; background:none; font-size:0.4rem;}
 
 /*logo*/
-.logo{ background:url(../images/logo2.png) no-repeat right top;width: 1.7rem;height: 1.2rem;background-size: auto 100%;position: absolute;right: 0.1rem;top: 0.15rem; z-index:1;}
+.logo{ background:url(../images/logo2.png) no-repeat right top;width: 1.7rem;height: 1rem;background-size: auto 100%;position: absolute;right: 0.1rem;top: 0.1rem; z-index:1;}
 
 /*box*/
-.com-box{ background:url(../images/bg05.png) no-repeat;width: 6rem;height: 7.5rem; background-size:auto 100%; z-index:2; position: absolute;top:1.7rem; left:50%; margin-left:-3rem;
+.com-box{ background:url(../images/bg05.png) no-repeat;width: 5.6rem;height: 7rem; background-size:auto 100%; z-index:2; position: absolute;top:1.3rem; left:50%; margin-left:-2.8rem;
 }
-.com-box-hover{background:url(../images/bg06.png) no-repeat;width: 6rem;height: 7.5rem; background-size:auto 100%; z-index:1; position: absolute;top:1.7rem; left:50%; margin-left:-3rem;
+.com-box-hover{background:url(../images/bg06.png) no-repeat;width: 5.6rem;height: 7rem; background-size:auto 100%; z-index:1; position: absolute;top:1.3rem; left:50%; margin-left:-2.8rem;
 
 /* -moz-animation: mycolor 2s ease infinite;
   -webkit-animation: mycolor 2s ease infinite;
@@ -100,9 +100,9 @@ input,textarea,select,button{font-size:1em;}
   animation: mycolor 2s ease infinite;*/
 }
 
-.com-box-con{ background:#fff url(../images/bg04.png) repeat; width: 5.04rem;height: 6.3rem;z-index: 7;position: absolute;top: 2.27rem;margin: 0 auto;left: 50%;margin-left: -2.52rem;border-radius:5px;}
-.com-box-con .inner-box{border: 1px dashed #d39ea0; padding:0.1rem;  height: 6.1rem;overflow: auto;}
-.hudie{ z-index:999; background:url(../images/img01.png) no-repeat; width: 2.56rem;height: 2rem; background-size:auto 100%; position: absolute;right: -0.6rem;bottom: -0.8rem;
+.com-box-con{ background:#fff url(../images/bg04.png) repeat; width:4.8rem;height: 6.05rem;z-index: 7;position: absolute;top: 1.82rem;margin: 0 auto;left: 50%;margin-left: -2.4rem;border-radius:5px;}
+.com-box-con .inner-box{border: 1px dashed #d39ea0; padding:0.1rem;  height: 5.8rem;overflow: auto;}
+.hudie{ z-index:999; background:url(../images/img01.png) no-repeat; width: 2rem;height:1.4rem; background-size:auto 100%; position: absolute;right: -0.6rem;bottom: -0.4rem;
 
 -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
@@ -120,8 +120,8 @@ input,textarea,select,button{font-size:1em;}
 
 /*首页*/
 .index-img01{ background:url(../images/img02.png) no-repeat; background-size:100% auto;width: 4rem;height:4rem;margin: 0.25rem auto;}
-.index-time{ color:#666; font-weight:bold; font-size:0.35rem; margin-top:1rem;}
-.btn-box{width: 4rem;height:2rem;margin: 0.2rem auto; position: absolute; top:9.8rem;left:50%; margin-left:-2rem; z-index:5;}
+.index-time{ color:#666; font-weight:bold; font-size:0.35rem; margin-top:0.9rem;}
+.btn-box{width: 4rem;height:2rem;margin: 0.2rem auto; position: relative; top:8.6rem;left:50%; margin-left:-2rem; z-index:5;}
 .index-btn-box{background:url(../images/index-btn.png) no-repeat; background-size:100% auto;}
 .index-btn{ display:block; width:100%;height:0.73rem; text-indent:-9999px; overflow:hidden; cursor:pointer;}
 .index-btn02{ margin-top:0.1rem;}
@@ -135,8 +135,8 @@ input,textarea,select,button{font-size:1em;}
 .rule-btn{background:url(../images/rule-btn.png) no-repeat; background-size:100% auto;display:block; width:100%;height:0.8rem; text-indent:-9999px; overflow:hidden; cursor:pointer;}
 
 /*phone*/
-.phone-btn-box{height: auto;top:9.3rem;width:100%;left:0;margin:0;}
-.form-box{ background:#ef8775;box-shadow: 3px 4px 0px #1d2088; width:5.5rem; border-radius:5px; padding:0.2rem 0.1rem; margin:0.2rem auto;color:#fff;font-size:0.35rem; line-height:0.5rem;text-shadow:#1d2088 0 1px 0}
+.phone-btn-box{height: auto;top:8.6rem;width:100%;left:0;margin:0;}
+.form-box{ background:#ef8775;box-shadow: 3px 4px 0px #1d2088; width:5.5rem; border-radius:5px; padding:0.1rem; margin:0.2rem auto;color:#fff;font-size:0.3rem; line-height:0.45rem;text-shadow:#1d2088 0 1px 0}
 .phone-btn01{background:url(../images/phone-btn01.png) no-repeat center; display:inline-block; background-size:100% auto; height:100%;width:60%;}
 .btn-back{background:url(../images/btn-back.png) no-repeat center; display:inline-block; background-size:100% auto; height:100%;width:30%;}
 .btn-pintu{background:url(../images/btn-pintu.png) no-repeat center; display:inline-block; background-size:100% auto; height:100%;width:30%;}
@@ -149,21 +149,21 @@ input,textarea,select,button{font-size:1em;}
 .ranking-box .box02{color:#e4007f; padding:0.2rem 0; margin:0 auto; width:90%;border-bottom:1px dashed #d8aabe;}
 .ranking-box .box03{color:#00479d;padding:0.2rem 0; margin:0 auto;}
 .btn-form{background:url(../images/btn-form.png) no-repeat center; display:inline-block; background-size:100% auto; height:100%;width:70%;}
-.ranking-btn-box{height: auto;top:9.8rem;width:100%;left:0;margin:0;}
+.ranking-btn-box{height: auto;top:8.8rem;width:100%;left:0;margin:0;}
 
 /*form*/
 .input-text{ height:0.6rem;border: none;  background:#fff; width:90%;padding:0 0.1rem; border-radius:5px;color:#ef8775;}
-.form-panel{ position:relative; z-index:9; width:300px; margin:0 auto; padding-top:1.5rem;}
-.form-panel .label{ margin:10px 0;color:#1c1f87; font-size:14px; float: left;}
+.form-panel{ position:relative; z-index:9; width:300px; margin:0 auto; padding-top:1rem;}
+.form-panel .label{ margin:10px 0 5px 0;color:#1c1f87; font-size:14px; float: left;}
 .form-panel .controls{ position:relative; float: left;}
-.input-form{ background:#cce198; border:1px solid #82515a; border-radius:5px; height:35px; width:290px;box-shadow: 2px 2px 0px #1d2088; max-width:300px; font-size:14px; float:left;}
+.input-form{ background:#cce198; border:1px solid #82515a; border-radius:5px; height:30px; width:290px;box-shadow: 2px 2px 0px #1d2088; max-width:300px; font-size:14px; float:left;}
 .text-area{background:#cce198; border:1px solid #82515a; border-radius:5px; width:90%; padding:10px;box-shadow: 2px 2px 0px #1d2088; resize:none;}
 .form-panel select{ max-width:320px; height:39px;}
 .form-panel .btn-bg02{ width:200px; height:40px;}
 .form-panel .btn-bg02 .phone-btn01{ vertical-align:top;}
 
 /*share*/
-.share-btn-box{height: auto;top:9.5rem;width:100%;left:0;margin:0;}
+.share-btn-box{height: auto;top:8.5rem;width:100%;left:0;margin:0;}
 .share-btn-box .txt{color:#1d2088;font-size:0.4rem; margin-bottom:0.1rem;}
 .share-btn01{ background:url(../images/share-btn01.png) no-repeat center; display:inline-block; background-size:100% auto; height:100%;width:60%;}
 .share-btn02{ background:url(../images/share-btn02.png) no-repeat center; display:inline-block; background-size:100% auto; height:100%;width:60%;}
@@ -253,15 +253,15 @@ input,textarea,select,button{font-size:1em;}
 
 
 /*上传照片*/
-.upload-panel{background:#89caad; position:relative; z-index:10; width:100%;}
+.upload-panel{background:#89caad; position: absolute; z-index:10; width:100%;top:0;left:0;}
 .upload-img img{width:100%; height:100%;}
 .upload-btn-box{ /*z-index:2;*/}
 .upload-btn01{background:url(../images/upload-btn01.png) no-repeat; background-size:100% auto;display:block; width:100%;height:0.8rem; text-indent:-9999px; overflow:hidden; cursor:pointer;  margin-bottom: 0.1rem;}
 .upload-btn02{background:url(../images/upload-btn02.png) no-repeat; background-size:100% auto;display:block; width:100%;height:0.8rem; text-indent:-9999px; overflow:hidden; cursor:pointer;}
 
 .pic_edit {position: absolute;top: 0;left:0%;width: 100%;height: 100%;z-index: 99999;background:#89caad;}
-#clipArea {margin: 0 auto;height:6rem; margin-top:1.6rem; z-index:2;}
-.upload-btns{position:absolute;top: 8.2rem;left:0; text-align:center; width:100%; z-index:2;}
+#clipArea {margin: 0 auto;height:6rem; margin-top:1.3rem; z-index:2;}
+.upload-btns{position:absolute;top:7.7rem;left:0; text-align:center; width:100%; z-index:2;}
 #clipBtn{background-color:#ef8775;color: #fff;height: 0.8rem;border-radius: 5px;width:2.5rem;font-size: 0.4rem; border: none;}
 #upload2{background-color:#ef8775;color: #fff;height: 0.8rem;border-radius: 5px;width:2.5rem;
   border: none;font-size: 0.4rem;}
@@ -294,8 +294,8 @@ padding-top: 25%;}
 
 
 /*layer*/
-.layer-box{ position:fixed;width:100%;height:100%; z-index:9;}
-.layer-bg{ background:#000; opacity:0.8; position:absolute;width:100%; height:100%; z-index:0;}
+.layer-box{ position:fixed;width:100%;height:100%; z-index:9;left:0;top:0;}
+.layer-bg{ background:#000; opacity:0.8; position:absolute;width:100%; height:100%; z-index:0;left:0;top:0;}
 .layer-con{ color:#fff; position:relative; padding:0.2rem;}
 .layer-share .shou{ background:url(../images/shou.png) no-repeat; background-size:100% auto; display:inline-block; width:1rem; height:2rem;}
 .layer-share .text{font-size:0.4rem; padding-left:0.5rem;}
