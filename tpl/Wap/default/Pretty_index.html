@@ -153,8 +153,11 @@
         <div class="hudie"></div>
     </div>
     <div class="btn-box index-btn-box">
-        <if condition="$vote gt 0">
+        <if condition="$vote gt 0 and $vote lt 16 ">
             <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=share" title="参加活动" class="index-btn index-btn01">参加活动</a>
+        <elseif condition="$vote egt  16" />
+            <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=sharephone" title="参加活动" class="index-btn index-btn01">参加活动</a>
+
             <else/>
             <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=upload" title="参加活动" class="index-btn index-btn01">参加活动</a>
         </if>
