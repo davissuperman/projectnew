@@ -806,7 +806,48 @@ HTML;
 
         echo $return;
     }
+    public function saveFormInfo(){
+        $this->setEndTime();
+        $return = 0;
+        $userOpenId= cookie('user_openid');
+        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
 
+        if(!$userOpenId){
+            //非法投票
+            exit();
+        }
+        $username = $_POST['username'];
+        $telphone = $_POST['telphone'];
+        $province = $_POST['province'];
+        $city = $_POST['city'];
+        $county = $_POST['county'];
+        $address = $_POST['address'];
+        $award = M('pretty_award')->where(array('openid' => $userOpenId))->find();
+        if(!$award){
+            $m = array();
+            $m['openid'] = $userOpenId;
+            $m['name'] = $username;
+            $m['phone'] =$telphone;
+            $m['province'] =$province;
+            $m['city'] =$city;
+            $m['county'] =$county;
+            $m['address'] =$address;
+            $m['createtime'] = time();
+            M('pretty_award')->add($m);
+        }else{
+                $m = array();
+                $m['id'] = $award['id'];
+                $m['name'] = $username;
+                $m['phone'] =$telphone;
+                $m['province'] =$province;
+                $m['city'] =$city;
+                $m['county'] =$county;
+                $m['address'] =$address;
+                $m['updatetime'] = time();
+                M('pretty_award')->save($m);
+                $return = 1;
+        }
+    }
     public function rank(){
         $userOpenId= cookie('user_openid');
         $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
