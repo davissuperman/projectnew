@@ -808,155 +808,17 @@ HTML;
     }
 
     public function rank(){
-        Log :: write($_COOKIE['user_openid'] .'  open id from cookie');
         $userOpenId= cookie('user_openid');
-        if(!$userOpenId){
-            $userOpenId = $_COOKIE['user_openid'];
-        }
-
-        //获取OPENID 用户没有感知
-        if(!$userOpenId){
-            $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
-            $code = trim($_GET["code"]);
-            $state = trim($_GET['state']);
-
-            $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
-            if ($code && $state == 'sentian') {
-                if(empty($fansInfo)){
-                    $webCreatetime = $apidata['web_createtime'];
-                    $web_access_token = '';
-
-                    //重新获取
-                    $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
-                    if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
-                        //code 有错误 需要重定向
-                        $url = $this->url."/index.php?g=Wap&m=Pretty&a=getOpenId";
-                        header("location:$url");
-                    }
-                    $m['id'] = $apidata['id'];
-                    $m['web_access_token'] = $userinfoFromApi['access_token'];
-                    $m['refresh_token'] = $userinfoFromApi['refresh_token'];
-                    $m['web_createtime'] = time();
-                    $m['refresh_token_createtime'] = time();
-                    M('Diymen_set')->save($m);
-                    $web_access_token = $userinfoFromApi['access_token'];
-                    cookie('user_openid', $userinfoFromApi['openid'], 315360000);
-                    $userOpenId = $userinfoFromApi['openid'];
-                    Log :: write($userOpenId.' rank get openid by base');
-
-                }
-            } else {
-                $url = urlencode($this->url."/index.php?g=Wap&m=Pretty&a=rank");
-                header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
-                exit;
-            }
-        }
-        //END
-        Log :: write($userOpenId .'  next open id');
-
-        $info = M('pretty')->where(array('openid' => $userOpenId))->find();
-
-        if($_GET['gid']){
-            $gid =  $_GET['gid'];
-        }elseif($info){
-            $gid = $info['gid'];
-        }else{
-            $gid=1;
-        }
+        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
-            exit;
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
+            exit();
         }
-        if(!$info || !$info['number']){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
-            exit;
-        }
-//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
-        //begin 分享出去的URL
-        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
-        $noncestr = "Wm3WZYTPz0wzccnW";
-        $timestamp = time();
-        $url = $this->get_url();;
-        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
-        $signature = sha1($str);
-        $this->assign("appid",$appId);
-        $this->assign("timestamp",$timestamp);
-        $this->assign("nonceStr",$noncestr);
-        $this->assign("signature",$signature);
-        $this->assign("shareurl",$this->getShareUrl());
-        $this->assign('gid', 1);
-
-        $this->assign('title',$info['name'].$this->title);
-        $this->assign('bonusdesc',$this->bonusdesc);
-        $this->assign("imageUrl",$this->imageUrl);
-        $this->assign("shareimageurl",$this->shareImageUrl);
-        //end
-
-        //统计第50名
-        $count = M('pretty')->where(array('phone'=>array("neq",'')))->count();
-        $firstLevel = 50;
-        $year = 0;
-        if($count < 50){
-            $numberfirlevel = 0;
-            $sharefirlevel = 0;
-            $sharetimefirlevel = '';
-
-        }else{
-            $firstLevelInfo = M('pretty')->query("select number,share,phonetime from tp_pretty where phone != '' order by number desc,share desc,phonetime asc limit 49,1");
-            if($firstLevelInfo){
-                $firstLevelInfo = $firstLevelInfo[0];
-                $numberfirlevel = $firstLevelInfo['number'];
-                $sharefirlevel = $firstLevelInfo['share'];
-                $year = date("Y",$firstLevelInfo['phonetime']);
-                $sharetimefirlevel = date("Y-m-d H:i",$firstLevelInfo['phonetime']);
-            }
-        }
-
-        if($year*1 <= 1970){
-            $sharetimefirlevel = '';
-        }
-        $this->assign('firstlevel',$firstLevel);
-        $this->assign('numberfirlevel',$numberfirlevel);
-        $this->assign('shares',$sharefirlevel);
-        $this->assign('phonetime',$sharetimefirlevel);
-        //统计第1050名
-        $showSecondLevel = 1;
-        if($count < 1050){
-            $numberseclevel = '0';
-            $shareseclevel = 0;
-            $sharetimeseclevel = '';
-        }else{
-            $secondLevelInfo = M('pretty')->query("select number,share,phonetime from tp_pretty where phone != '' order by number desc,share desc,phonetime asc limit 1049,1");
-            if($secondLevelInfo){
-                $secondLevelInfo = $secondLevelInfo[0];
-                $numberseclevel = $secondLevelInfo['number'];
-                $shareseclevel = $secondLevelInfo['share'];
-                $sharetimeseclevel = date("Y-m-d H:i",$secondLevelInfo['phonetime']);
-            }
-
-        }
-        $this->assign('secondlevel',$showSecondLevel);
-
-        $this->assign('numbersecond',$numberseclevel);
-        $this->assign('sharessecond',$shareseclevel);
-        $this->assign('phonetimesecond',$sharetimeseclevel);
-
         $info = M('pretty')->where(array('openid' => $userOpenId))->find();
-        $number = $info['number'];
-        $phoneTime = $info['phonetime'];
-        $shareSelf = $info['share'];
-        $myCount = $this->getOrderByOpenId($userOpenId);
-        $this->assign('count', $myCount);
-        $this->assign('number', $number);
-        $this->assign('share', $info['share']);
+        $vote = $info['vote'];
 
-        //begin views
-        if($info){
-            M("pretty")->where(array('id' => $info['id']))->setInc('views');
-        }
-        // end views
+        $this->assign("vote",$vote);
         $this->display();
     }
 
