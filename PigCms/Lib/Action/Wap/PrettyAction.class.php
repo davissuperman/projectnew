@@ -176,7 +176,7 @@ HTML;
 
         //首先判断当前用户是否有玩过第一次
         $info = M('Pretty')->where(array('openid' => $userOpenId))->find();
-            $vote = $info['vote']
+        $vote = $info['vote'];
 //        $firstStart = true;
         if($vote>=1){
                 //判断当前用户是否玩过
