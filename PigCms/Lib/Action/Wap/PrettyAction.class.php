@@ -880,9 +880,18 @@ HTML;
 
 
         $vote = $info['vote'];
+        $selfPhoneTime = $info['phonetime'];
+        //查询此用户的排名
+        $sql = "select count(id) as c from tp_pretty where phonetime < $selfPhoneTime  and phone != ''";
+
+        $c = M('pretty')->query("$sql");
+        $c =$c[0];
+        $selfOrder = 1*$c['c'] + 1;
+
 
         $vote = 16;
         $this->assign("vote",$vote);
+        $this->assign("selforder",$selfOrder);
         $this->display();
     }
 
