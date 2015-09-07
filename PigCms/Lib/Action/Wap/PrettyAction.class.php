@@ -182,7 +182,9 @@ HTML;
                 //判断当前用户是否玩过
             $vote = $info['vote'];
             $phone = $info['phone'];
-
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=share");
+            exit;
         }else{
             $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
         }
