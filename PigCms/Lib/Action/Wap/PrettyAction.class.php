@@ -758,12 +758,12 @@ HTML;
     public function savePhoneInPage(){
         $phone = $_POST['phoneinpage'];
         $fromOpenIdFromPost= cookie('user_openid');
-        $fromOpenIdFromPost= 'oP9fCt_qa9wsV7VIkLIK2rMH9f4s';
+        $fromOpenIdFromPost= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$fromOpenIdFromPost){
             //非法投票
             exit();
         }
-        $id = M('pretty')->where("openid=$fromOpenIdFromPost")->getField('id');
+        $id = M('pretty')->where("openid='$fromOpenIdFromPost'")->getField('id');
         $m = array();
         $m['phone'] = $phone;
         $m['id'] =$id;
