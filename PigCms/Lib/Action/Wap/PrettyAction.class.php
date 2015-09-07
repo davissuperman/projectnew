@@ -183,8 +183,8 @@ HTML;
             $vote = $info['vote'];
             $phone = $info['phone'];
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Pretty&a=share");
-            exit;
+//            header("location:$this->url/index.php?g=Wap&m=Pretty&a=share");
+//            exit;
         }else{
             $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
         }
@@ -213,7 +213,7 @@ HTML;
 
         //view自增
         M("pretty")->where(array('id' => $info['id']))->setInc('views');
-
+        $this->assign("vote",$vote);
         $this->display();
     }
 
