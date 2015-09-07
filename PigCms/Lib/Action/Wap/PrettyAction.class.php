@@ -696,7 +696,51 @@ HTML;
         $this->display();
     }
 
+    public function sharePhone(){
+        $userOpenId= cookie('user_openid');
+        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        if(!$userOpenId){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
+            exit();
+        }
 
+        $info = M('pretty')->where(array('openid' => $userOpenId))->find();
+        $gid = $info['gid'];
+
+        //begin 分享出去的URL
+        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
+        $noncestr = "Wm3WZYTPz0wzccnW";
+        $timestamp = time();
+        $url = $this->get_url();;
+        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
+        $signature = sha1($str);
+        $this->assign("appid",$appId);
+        $this->assign("timestamp",$timestamp);
+        $this->assign("nonceStr",$noncestr);
+        $this->assign("signature",$signature);
+        $this->assign("shareurl",$this->getShareUrl());
+        $this->assign('gid', $gid);
+
+        $this->assign('title',$info['name'].$this->title);
+        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign("imageUrl",$this->imageUrl);
+        $this->assign("shareimageurl",$this->shareImageUrl);
+        //end
+
+        //begin views
+        if($info){
+            M("pretty")->where(array('id' => $info['id']))->setInc('views');
+        }
+        // end views
+
+
+        $savePath = './PUBLIC/imagess/';
+        $uploadImageSrc= $savePath."$userOpenId.jpeg";
+        $this->assign('uploadimagesrc',$uploadImageSrc);
+
+        $this->display();
+    }
     //根据UID获取OPENID
     public function getOpenIdByUid($uid){
         $openId = M('pretty')->where("id=$uid")->getField('openid');
