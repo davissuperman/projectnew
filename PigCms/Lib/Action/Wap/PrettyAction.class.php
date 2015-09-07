@@ -208,11 +208,6 @@ HTML;
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
 
-        $urlGame = "http://wx.drjou.cc" ."/index.php?g=Wap&m=Pretty&a=game";
-//        if($firstStart == false){
-//            $urlGame = "http://wx.drjou.cc"."/index.php?g=Wap&m=Pretty&a=sharenumber";
-//        }
-        $this->assign('urlgame',$urlGame);
 
         //view自增
         M("pretty")->where(array('id' => $info['id']))->setInc('views');
