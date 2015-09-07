@@ -734,6 +734,14 @@ HTML;
         }
         // end views
 
+        $vote = $info['vote'];
+        if($vote >= 16){
+            //成功，继续提交手机号
+        }else{
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
+            exit();
+        }
 
         $savePath = './PUBLIC/imagess/';
         $uploadImageSrc= $savePath."$userOpenId.jpeg";
@@ -745,6 +753,24 @@ HTML;
     public function getOpenIdByUid($uid){
         $openId = M('pretty')->where("id=$uid")->getField('openid');
         return $openId;
+    }
+
+    public function savePhoneInPage(){
+        $phone = $_POST['phoneinpage'];
+        $fromOpenIdFromPost= cookie('user_openid');
+        $fromOpenIdFromPost= 'oP9fCt_qa9wsV7VIkLIK2rMH9f4s';
+        if(!$fromOpenIdFromPost){
+            //非法投票
+            exit();
+        }
+        $id = M('pretty')->where("openid=$fromOpenIdFromPost")->getField('id');
+        $m = array();
+        $m['phone'] = $phone;
+        $m['id'] =$id;
+        $m['phonetime'] = time();
+        M('pretty')->save($m);
+        echo 1;
+
     }
 
     //TODO add random str to avoid auto submit
