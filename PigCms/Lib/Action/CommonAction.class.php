@@ -944,6 +944,21 @@ class CommonAction extends Action {
         return array($text, 'text');
     }
 
+    function Mumayi($keyword,$data){
+        $openId = (string)$data['FromUserName'];
+        $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Mumayi&a=index&openid=$openId";
+        $text = "<a href='$url'>木蚂蚁杭州下沙店</a>";
+        return array($text, 'text');
+    }
+
+    function Diweisi($keyword,$data){
+        $openId = (string)$data['FromUserName'];
+        $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Diweisi&a=index&openid=$openId";
+        $text = "<a href='$url'>陕西缔威斯小寨军区合作社</a>";
+        return array($text, 'text');
+    }
+
+
     function Yangpudarunfa($keyword,$data){
         $openId = (string)$data['FromUserName'];
         $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Yangpudarunfa&a=index&openid=$openId";
@@ -1028,6 +1043,12 @@ class CommonAction extends Action {
                 break;
             case '0724' :
                 return $this->Beizhengjie($keyword,$data);
+                break;
+            case '0917' :
+                return $this->Mumayi($keyword,$data);
+                break;
+            case '0919' :
+                return $this->Diweisi($keyword,$data);
                 break;
             case '银座' :
                 return $this->Yinzuo($keyword,$data);
