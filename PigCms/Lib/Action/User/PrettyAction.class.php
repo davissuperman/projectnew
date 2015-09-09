@@ -401,6 +401,8 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $gid=$_POST['gid'];
         $start = strtotime($_POST['start']);
         $end = strtotime($_POST['end']);
+
+        $award = $_POST['award'];
         if(!$start){
             $start = strtotime(date('Y-m-d').'00:00:00');
         }
@@ -408,12 +410,22 @@ award.address as addres,award.orderid as orderid,award.username as username from
             $end = strtotime(date('Y-m-d').'24:00:00');
         }
         $db = M('pretty');
-        $sql = "select gid,  openid ,phone,name,phonetime,sharetime,share,views,uniqueviews,vote,joins,number
+        $sql = "select gid,  openid ,phone,name,phonetime,sharetime,share,views,uniqueviews,vote,joins,number, id
         from tp_pretty  where gid=$gid and phonetime>" . $start . " and phonetime<" . $end . " and phone != '' order by  phonetime asc,sharetime asc";
 
         $list = M()->query($sql);
         $listArr = array();
+        if($award){
+            $pL = $this->getAwardList();
+        }
         foreach($list as $key => $each){
+            if($award){
+                //需要导出中奖的
+                $uid = $each['id'];
+                if(!in_array($uid,$pL)){
+                    continue;
+                }
+            }
             $tmp = $each;
             $gid = $each['gid'];
             $gInfo = M("bonus")->where(array('gid'=>$gid))->select();
@@ -938,12 +950,13 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $arr = array();
         foreach($phoneList as $each){
             $id = $each['id'];
+            $uid = $each['uid'];
             if(strrchr((string)"$id","18") == "18"){
-                $arr[] = $id;
+                $arr[] = $uid;
             }elseif(strrchr((string)"$id","1") == '1'){
-                $arr[] = $id;
+                $arr[] = $uid;
             }elseif(strrchr((string)"$id","8") == '8'){
-                $arr[] = $id;
+                $arr[] = $uid;
             }
 
         }
