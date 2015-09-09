@@ -764,6 +764,13 @@ HTML;
             //非法投票
             exit();
         }
+        //查看当前提交了手机号数码
+        $countNum = M('pretty')->where("phone != ''")->count('id');
+        if($countNum >= 10000){
+            echo 2;
+            return;
+            exit();
+        }
         $id = M('pretty')->where("openid='$fromOpenIdFromPost'")->getField('id');
         $m = array();
         $m['phone'] = $phone;

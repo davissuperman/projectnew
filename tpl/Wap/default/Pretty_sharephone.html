@@ -183,7 +183,12 @@
                     {phoneinpage: phoneinpage},
                     function (data) {
                         if (data != '') {
-                            mnAlert('提交成功');
+                            if($data == 2){
+                                mnAlert('参与人数已经达到限额，已截止！谢谢参与！');
+                            } else{
+                                mnAlert('提交成功');
+                            }
+
                         }else{
                         }
                     });
