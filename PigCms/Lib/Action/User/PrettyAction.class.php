@@ -938,4 +938,59 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
         $objWriter->save('php://output');
     }
+
+    public function test(){
+        $var = 1018;
+        echo strrchr("1018","18");
+        echo "<br/>";
+        echo strrchr("1018","8");
+//        echo strrchr("1019","8");
+
+
+    }
+
+    public function getAwardList(){
+        //参加者的活动排名末位数字为“18”、“1”、“8”，则为幸运者，获得森田药妆官方提供的面膜礼盒大奖。
+        $phoneList = M('pretty_phonelist')->select();
+        $arr = array();
+        foreach($phoneList as $each){
+            $id = $each['id'];
+            if(strrchr((string)"$id","18") == "18"){
+                $arr[] = $id;
+            }elseif(strrchr((string)"$id","1") == '1'){
+                $arr[] = $id;
+            }elseif(strrchr((string)"$id","8") == '8'){
+                $arr[] = $id;
+            }
+
+        }
+        return $arr;
+        echo count($arr);
+        foreach($arr as $e){
+            file_put_contents("list.txt", "$e".PHP_EOL, FILE_APPEND);
+        }
+    }
+
+    public function generate(){
+        for($i=0;$i<=5000;$i++){
+            $phone = rand(13000000000,18999999999);
+            $uid = rand(2,10000);
+            $arr1['id'] = array('eq',$uid);
+            $arr2['phone'] = array('eq',$phone);
+            $arr = array($arr1,$arr2,'and');
+//            $phoneList = M('pretty_phonelist')->where( $arr)->find();
+            $phoneList = M('pretty_phonelist')->query( "select * from tp_pretty_phonelist where phone = $phone or uid = $uid") ;
+            if(!$phoneList){
+                $n = array();
+                $t = time();
+                $n['uid'] = $uid;
+                $n['phone'] = $phone;
+                $n['createtime'] = $t;
+
+                echo "$uid  $phone<br/>";
+                M('pretty_phonelist')->add($n);
+            }
+        }
+
+    }
 }
