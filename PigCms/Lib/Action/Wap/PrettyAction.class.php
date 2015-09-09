@@ -8,6 +8,7 @@ class PrettyAction extends SjzAction {
     public $shareImageUrl;
     public $endtime="2015-10-21 24:00:00"; //活动结束时间
     public $debug = true; //上线后应该改成false
+    public $defalutGid = 22;
 
     public function _initialize() {
         parent :: _initialize();
@@ -112,7 +113,7 @@ HTML;
         public function index() {
         $gid = $_GET['gid'];
         if(!$gid){
-            $gid = 1;
+            $gid = $this->defalutGid;
         }
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
@@ -179,12 +180,6 @@ HTML;
         $vote = $info['vote'];
 //        $firstStart = true;
         if($vote>=1){
-                //判断当前用户是否玩过
-            $vote = $info['vote'];
-            $phone = $info['phone'];
-            //redirect
-//            header("location:$this->url/index.php?g=Wap&m=Pretty&a=share");
-//            exit;
         }else{
             $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
         }
