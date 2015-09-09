@@ -139,7 +139,7 @@ class PrettyAction  extends BonusAction {
 
     public function slist() {
         $gid = $_GET['gid'];
-        $db = M('countmask');
+        $db = M('pretty');
         $where = array('gid' => $gid,'phone'=>array('neq',''));
         $count = $db->where($where)->count();
         $page = new Page($count, 25);
