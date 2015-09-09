@@ -223,35 +223,8 @@ HTML;
         }
 
         //首先判断当前用户是否有玩过第一次
-        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $info = M('pretty')->where(array('openid' => $userOpenId))->find();
         $gid = $info['gid'];
-//        $firstStart = true;
-//        if($info){
-//            $phone = $info['phone'];
-//            //判断当前用户 sequence
-//            $currentSequence = $info['sequence'];
-//            //同时判断此用户是否有再玩一次的机会
-//            $vote = $info['vote'];
-//            //是否有机会 并且判断是否已经玩过
-//
-//            if($phone && ( $vote<$this->eachVote || floor($vote/$this->eachVote ) < $currentSequence)){
-//                $firstStart = false;
-//                header("location:$this->url/index.php?g=Wap&m=Pretty&a=sharenumber&gid=$gid");
-//                exit();
-//            }
-//
-//            //判断当前机会是否已经使用过
-//            $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence' => $currentSequence))->find();
-//            if($infoList && $infoList['number']){
-//                //已经玩过
-//                header("location:$this->url/index.php?g=Wap&m=Pretty&a=sharenumber");
-//                exit();
-//            }
-//
-//        }else{
-//            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
-//            exit();
-//        }
 
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
@@ -272,6 +245,7 @@ HTML;
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
+
         M("pretty")->where(array('id' => $info['id']))->setInc('views');
         $this->display();
     }
@@ -300,7 +274,7 @@ HTML;
         }
 
         //首先判断当前用户是否有玩过第一次
-        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $info = M('pretty')->where(array('openid' => $userOpenId))->find();
         $gid = $info['gid'];
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
