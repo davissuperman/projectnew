@@ -407,9 +407,9 @@ award.address as addres,award.orderid as orderid,award.username as username from
         if(!$end){
             $end = strtotime(date('Y-m-d').'24:00:00');
         }
-        $db = M('countmask');
+        $db = M('pretty');
         $sql = "select gid,  openid ,phone,name,phonetime,sharetime,share,views,uniqueviews,vote,joins,number
-        from tp_countmask  where gid=$gid and phonetime>" . $start . " and phonetime<" . $end . " and phone != '' order by number desc,share desc,phonetime asc";
+        from tp_pretty  where gid=$gid and phonetime>" . $start . " and phonetime<" . $end . " and phone != '' order by  phonetime asc,sharetime asc";
 
         $list = M()->query($sql);
         $listArr = array();
@@ -435,7 +435,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 $tmp['illegal'] = "否";
             }
             $condition['openid'] = $each['openid'];
-            $resAwardList = M('countmask_award')->where($condition)->select();
+            $resAwardList = M('pretty_award')->where($condition)->select();
             if($resAwardList){
                 foreach($resAwardList as $award){
                     $tmp['username'] = $award['name'];
@@ -445,23 +445,6 @@ award.address as addres,award.orderid as orderid,award.username as username from
                     $tmp['address'] = $award['address'];
                 }
             }
-
-            //根据openid 获取三次得分情况
-            $numberList = M('countmask_list')->where($condition)->select();
-            foreach($numberList as $numberEach){
-                switch($numberEach['sequence']){
-                    case 1:
-                        $tmp['numberadd1'] = $numberEach['number'];
-                        break;
-                    case 2:
-                        $tmp['numberadd2'] = $numberEach['number'];
-                        break;
-                    case 3:
-                        $tmp['numberadd3'] = $numberEach['number'];
-                        break;
-                }
-            }
-
             $listArr[] = $tmp;
         }
         $title = array();
