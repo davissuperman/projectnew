@@ -772,12 +772,31 @@ HTML;
             exit();
         }
         $id = M('pretty')->where("openid='$fromOpenIdFromPost'")->getField('id');
-        $m = array();
-        $m['phone'] = $phone;
-        $m['id'] =$id;
-        $m['phonetime'] = time();
-        M('pretty')->save($m);
-        echo 1;
+        //判断此用户是否已经提交了手机号
+        $phoneList = M('pretty_phonelist')->where(array('uid' => $id))->find();
+        if($phoneList){
+            //已经存在，不需要保存
+        }else{
+            //更新表 pretty
+            $m = array();
+            $t = time();
+            $m['phone'] = $phone;
+            $m['id'] =$id;
+            $m['phonetime'] = $t;
+            M('pretty')->save($m);
+
+            //插入表 pretty_phonelist
+            $n = array();
+            $n['uid'] = $id;
+            $n['phone'] = $phone;
+            $n['createtime'] = $t;
+            M('pretty_phonelist')->add($n);
+            echo 1;
+        }
+
+
+
+
 
     }
 
