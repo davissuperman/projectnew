@@ -502,9 +502,11 @@ award.address as addres,award.orderid as orderid,award.username as username from
             ->setCellValue('R1', '收货手机')
             ->setCellValue('S1', '省份')
             ->setCellValue('T1', '城市')
-            ->setCellValue('U1', '地址');
+            ->setCellValue('U1', '地址')
+            ->setCellValue('V1', '头像');
         //写出内容 UTF-8
         //log :: write( print_r($data,true)  );
+        $imageUrl = "http://wx.drjou.cc/PUBLIC/imagess/";
         for ($n = 0; $n < count($data); $n++) {
             $name = $data[$n]['name'];
             $name = $this->ReplaceSpecialChar($name);
@@ -530,7 +532,8 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 ->setCellValue('R' . ($n + 2), $data[$n]['userphone'])
                 ->setCellValue('S' . ($n + 2), $data[$n]['userprovince'])
                 ->setCellValue('T' . ($n + 2), $data[$n]['city'])
-                ->setCellValue('U' . ($n + 2), $data[$n]['address']);
+                ->setCellValue('U' . ($n + 2), $data[$n]['address'])
+                ->setCellValue('V' . ($n + 2), $imageUrl.$data[$n]['openid'].".jpeg");
 
         }
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
