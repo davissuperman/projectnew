@@ -9,6 +9,7 @@ class PrettyAction extends SjzAction {
     public $endtime="2015-10-21 24:00:00"; //活动结束时间
     public $debug = true; //上线后应该改成false
     public $defalutGid = 22;
+    public $prettyCount = 16;
 
     public function _initialize() {
         parent :: _initialize();
@@ -353,14 +354,14 @@ HTML;
         $this->assign('uploadimagesrc',$uploadImageSrc);
 
         //获取当前已经有了多少拼图
-        $imgNums = 16;
+        $imgNums = (int)$this->prettyCount;
         $vote = $info['vote'];
         if($vote == 0){
             //是第一次进入到这个页面，需要有一块拼图
             M("pretty")->where(array('id' => $info['id']))->setInc('vote');
-            $imgNums = 15;
+            $imgNums = (int)$this->prettyCount - 1;
         }else{
-            $imgNums = 16 - $vote;
+            $imgNums = (int)$this->prettyCount - $vote;
         }
         $this->assign('imgnums',$imgNums);
         $this->assign('needimgnums',$vote);
