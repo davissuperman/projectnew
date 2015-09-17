@@ -117,7 +117,7 @@ HTML;
         }
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
-        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        //$userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $fansInfo = null;
         $selfUserInfo = array();
         $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
@@ -215,7 +215,7 @@ HTML;
     public function upload(){
 //        $this->setEndTime();
         $userOpenId= cookie('user_openid');
-        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
@@ -256,7 +256,7 @@ HTML;
 
         $base64_body = substr(strstr($img,','),1);
         $userOpenId= cookie('user_openid');
-        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
 
         $data= base64_decode($base64_body );
         $file = $savePath ."$userOpenId.jpeg";
@@ -266,7 +266,7 @@ HTML;
 
     public function rule(){
         $userOpenId= cookie('user_openid');
-        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
@@ -311,7 +311,7 @@ HTML;
 
     public function share(){
         $userOpenId= cookie('user_openid');
-        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
@@ -567,7 +567,7 @@ HTML;
         //这里是隐性获取OPENID 是朋友圈里面的人打开这个页面
         //获取OPENID 用户没有感知
         $userOpenId= cookie('user_openid');
-        $userOpenId='oP9fCt_qa9wsV7VIkLIK2rMH9f4s';
+//        $userOpenId='oP9fCt_qa9wsV7VIkLIK2rMH9f4s';
         if(!$userOpenId){
             $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
             $code = trim($_GET["code"]);
@@ -667,7 +667,7 @@ HTML;
 
     public function sharePhone(){
         $userOpenId= cookie('user_openid');
-        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
@@ -728,7 +728,7 @@ HTML;
     public function savePhoneInPage(){
         $phone = $_POST['phoneinpage'];
         $fromOpenIdFromPost= cookie('user_openid');
-        $fromOpenIdFromPost= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//        $fromOpenIdFromPost= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$fromOpenIdFromPost){
             //非法投票
             exit();
@@ -774,7 +774,7 @@ HTML;
         $this->setEndTime();
         $return = 0;
         $fromOpenIdFromPost= cookie('user_openid');
-        $fromOpenIdFromPost= 'oP9fCt_qa9wsV7VIkLIK2rMH9f4s';
+//        $fromOpenIdFromPost= 'oP9fCt_qa9wsV7VIkLIK2rMH9f4s';
         $toUid = $_POST['uid'];
         if(!$fromOpenIdFromPost){
             //非法投票
@@ -805,7 +805,7 @@ HTML;
         $this->setEndTime();
         $return = 0;
         $userOpenId= cookie('user_openid');
-        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
 
         if(!$userOpenId){
             //非法投票
@@ -845,7 +845,7 @@ HTML;
     }
     public function rank(){
         $userOpenId= cookie('user_openid');
-        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
@@ -892,7 +892,7 @@ HTML;
 
     public function form(){
         $userOpenId= cookie('user_openid');
-        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
