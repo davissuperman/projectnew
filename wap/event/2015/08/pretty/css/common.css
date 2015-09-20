@@ -114,6 +114,30 @@ input,textarea,select,button{font-size:1em;}
   animation: wave 5s ease infinite;
 }
 
+.hudie1{ z-index:999; background:url(../images/hd.png) no-repeat; width: 1rem;height:1rem; background-size:auto 100%; position: absolute;right: 1rem;bottom: -0.4rem;
+
+-webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+
+  -webkit-transform-origin: center bottom;
+  -ms-transform-origin: center bottom;
+  transform-origin: center bottom;
+  -webkit-animation: wave 4s ease infinite;
+  animation: wave 4s ease infinite;
+}
+
+.hudie2{ z-index:999; background:url(../images/hd.png) no-repeat; width: 1.4rem;height:1.4rem; background-size:auto 100%; position: absolute;right: -0.3rem;bottom: -0.2rem;
+
+-webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+
+  -webkit-transform-origin: center bottom;
+  -ms-transform-origin: center bottom;
+  transform-origin: center bottom;
+  -webkit-animation: wave 5s ease infinite;
+  animation: wave 5s ease infinite;
+}
+
 .btn-bg01{ background:url(../images/btn-bg01.png) no-repeat; background-size:100% auto;width:5rem;height:2rem; display:inline-block;width: 4rem;height: 0.8rem;display: block; text-align: center; margin:0 auto; overflow:hidden; margin-bottom:0.1rem;}
 .btn-bg01 span,.btn-bg02 span{ text-indent:-9999px;}
 .btn-bg02{ background:url(../images/btn-bg02.png) no-repeat; background-size:100% auto;width:5rem;height:2rem; display:inline-block;width: 4rem;height: 0.8rem;display: block; text-align: center; margin:0 auto;overflow:hidden; margin-bottom:0.1rem;}
