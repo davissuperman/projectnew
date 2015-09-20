@@ -314,7 +314,7 @@ function makeGame(url) {
         mask.id = 'mask';
         mask.style.width = imgWidth + 'px';
         mask.style.height = imgHeight + 'px';
-		mask.setAttribute("class","shadown");
+		//mask.setAttribute("class","shadown");
 		//$("#mask").addClass("shadown");
 		//mask.style.background = 'url(' + url + ')';
 		//mask.style.backgroundRepeat = 'no-repeat';
