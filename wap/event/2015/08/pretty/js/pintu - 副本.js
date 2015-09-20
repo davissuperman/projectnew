@@ -62,7 +62,6 @@ function makeGame(url) {
             if (i < 4) {//0,1,2,3 第一排
                 top = 0;
                 left = i * myw;
-				//li.style.display = 'none';
             } else if (i >= 4 && i < 8) {// 4,5,6,7 第二排
                 top = myh;
                 left = (i - 4) * myw;
@@ -74,15 +73,7 @@ function makeGame(url) {
                 left = (i - 12) * myw;
             }
             // 记录还未打乱次序的初始ID对应的每个id的正确位置，用于比较拼图是否完成
-			var $imgNums = $("#imgNums");
-			var imgNums = $imgNums.val();
-			if(imgNums == 15){
-				//imgNums = 14;
-			}
-			if(i >= imgNums){
-			 posArray.push([i, left, top]);
-			}
-           
+            posArray.push([i, left, top]);
             // 赋值背景backgroundPosition 与 位置
             li.style.backgroundPosition = -left + 'px' + ' ' + (-top) + 'px';
             // 赋值ID为i, 用于检查拼图的位置
@@ -171,23 +162,10 @@ function makeGame(url) {
 	
     // 随机排列
     function rank() {
-		//console.dir(["imgArray",imgArray]);
-		var imgArr = [];
-		var $imgNums = $("#imgNums");
-		var imgNums = $imgNums.val();
-		if(imgNums == 15){
-			//imgNums = 14;
-		}
-		for(var i =0 ; i < imgArray.length; i++){
-			if(i >= imgNums){
-				imgArr.push(imgArray[i]);
-				}
-			}
-        while (imgArr.length > 0) {
-			
+        while (imgArray.length > 0) {
             // 在数组的长度中获取随机值下标
             // 随机获取ID
-            var ranLi = imgArr.splice(random(0, imgArr.length), 1);
+            var ranLi = imgArray.splice(random(0, imgArray.length), 1);
             // 随机获取位置,并从原数组移除，返回移除项组成的数组
             var ranCss = posArray.splice(random(0, posArray.length), 1);
             // 赋值随机位置
@@ -268,7 +246,7 @@ function makeGame(url) {
             // 通过拼图检查，并已经执行了拼图成功后的效果，避免成功动画也执行拼图成功，产生循环
             if (!!check() && !effectEnd) {
                 successTimer && clearTimeout(successTimer);
-                //successTimer = setTimeout(sucessEffect, 800);
+                successTimer = setTimeout(sucessEffect, 800);
             }
         }
     }
@@ -322,16 +300,15 @@ function makeGame(url) {
 		//background: url(http://localhost/projectnew2/wap/event/2015/08/pretty/images/img01.jpg) no-repeat;
         //setOpacity(mask, 80);
         var playBtn = document.createElement('div');
-        playBtn.id = 'button';
+        //playBtn.id = 'button';
         playBtn.onclick = function () {
-            //canvas.removeChild(mask);
+            canvas.removeChild(mask);
             vvgBox.removeChild(playBtn);
             // 打乱排序
             rank();
         };
         canvas.appendChild(mask);
         vvgBox.appendChild(playBtn);
-		$("#button").click();
     }
 
     // 下一张图按钮

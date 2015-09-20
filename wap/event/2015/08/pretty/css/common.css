@@ -172,7 +172,7 @@ input,textarea,select,button{font-size:1em;}
   position: relative;
   height: 100%;
   width: 100%;}
-.shadown{ background:#999 url(../images/img07.png) no-repeat right bottom; background-size:100% auto; height:100%; position:absolute;left:0;top:0; width:100%; opacity:0.7;}
+.shadown{ background: url(../images/img07.png) no-repeat right bottom; background-size:100% auto; height:100%; position:absolute;left:0;top:0; width:100%; opacity:1;}
 .upload-img .tu{ position:absolute;left:0;top:0;}
 
 /*拼图*/

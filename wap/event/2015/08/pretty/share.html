@@ -29,7 +29,7 @@
                         <ul id="gameCanvas"></ul>
                     </div>
                 </div>
-				<input type="hidden" id="imgNums" value="10" />
+				<input type="hidden" id="imgNums" value="5" />
                 <!--div class="shadown"></div-->
             </div>
             
@@ -39,7 +39,7 @@
     </div>
     <div class="btn-box share-btn-box ta-c">
     	<p class="txt">—还需要<span class="c1">6</span>位好友帮忙—</p>
-        <a href="javascript:;" title="帮忙拼图" class="btn-bg01">
+        <a href="javascript:;" title="帮忙拼图" class="btn-bg01" onClick="helpPintu();">
         	<i class="share-btn03"></i>
         </a>
     	<a href="javascript:;" title="邀请好友帮忙" class="btn-bg02" id="btnShare">
@@ -79,6 +79,9 @@
 				showLayer($("#layer-share"));
 			});
         });
+		function helpPintu(){
+			window.location.reload();
+		}
     </script>
     
 </body>
