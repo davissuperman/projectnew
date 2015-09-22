@@ -197,7 +197,7 @@ input,textarea,select,button{font-size:1em;}
   height: 100%;
   width: 100%;}
 .shadown{ background: url(../images/img07.png) no-repeat right bottom; background-size:100% auto; height:100%; position:absolute;left:0;top:0; width:100%; opacity:1;}
-.upload-img .tu{ position:absolute;left:0;top:0;}
+.upload-img .tu{ position:absolute;left:0;top:0; }
 
 /*拼图*/
 /*#imgArea{width:300px;height:300px;position:relative;}
@@ -227,15 +227,90 @@ input,textarea,select,button{font-size:1em;}
 	padding: 0;
 	margin: 0 auto;
 }
-#gameCanvas li.shadown0{ background:url(../images/m01.png) no-repeat !important; background-size:100% auto !important;  width: 1rem !important;height: 1.5rem !important;}
-#gameCanvas li.shadown1{ background:url(../images/m02.png) no-repeat !important; background-size:100% auto !important;  width: 1.09rem !important;height: 1.5rem !important;left:0.83rem !important;}
-#gameCanvas li.shadown2{ background:url(../images/m03.png) no-repeat !important; background-size:100% auto !important;width: 0.95rem !important;
-  height: 1.4rem !important;
-  left: 1.65rem !important;}
- 
-#gameCanvas li.shadown3{ background:url(../images/m04.png) no-repeat !important; background-size:100% auto !important;width: 0.95rem !important;
-  height: 1.4rem !important;
-  left: 2.65rem !important;}
+#gameCanvas li.shadown0{ background:url(../images/m01.png) no-repeat; background-size:100% auto; width: 1.41rem;
+  height: 1.7rem;left:0;top:0;}
+#gameCanvas li.shadown1{ background:url(../images/m02.png) no-repeat; background-size:100% auto;  width: 1.35rem;
+  height: 1.9rem;
+  left: 1.12rem;top:0;}
+#gameCanvas li.shadown2{ background:url(../images/m03.png) no-repeat; background-size:100% auto;width: 1.6rem;
+  height: 1.7rem;
+  left: 2.15rem;top:0;}
+#gameCanvas li.shadown3{ background:url(../images/m04.png) no-repeat; background-size:100% auto;width: 1.23rem;
+  height: 1.75rem;
+  left: 3.45rem;top:0;
+  }
+#gameCanvas li.shadown4{ background:url(../images/m05.png) no-repeat; background-size:100% auto;width: 1.25rem;
+  height: 2.05rem;left:0;top:1.21rem;
+}
+
+#gameCanvas li.shadown5{ background:url(../images/m06.png) no-repeat; background-size:100% auto;width: 1.4rem;
+  height: 2.05rem;
+  left: 0;
+  top: 2.85rem;
+}
+
+#gameCanvas li.shadown6{ background:url(../images/m07.png) no-repeat; background-size:100% auto;  width: 1.25rem;
+  height: 2.05rem;
+  left: 0;
+  top: 4.13rem;
+}
+
+
+#gameCanvas li.shadown7{ background:url(../images/m08.png) no-repeat; background-size:100% auto;  width: 1.55rem;
+  height: 2.05rem;
+  left: 1rem;
+  top: 4.34rem;
+}
+
+#gameCanvas li.shadown8{ background:url(../images/m09.png) no-repeat; background-size:100% auto;  width: 1.25rem;
+  height: 2.05rem;
+  left: 2.3rem;
+  top: 4.2rem;
+}
+
+#gameCanvas li.shadown9{ background:url(../images/m10.png) no-repeat; background-size:100% auto;width: 1.32rem;
+  height: 2.05rem;
+  left: 3.3rem;
+  top: 4.35rem;
+}
+
+#gameCanvas li.shadown10{ background:url(../images/m11.png) no-repeat; background-size:100% auto;  width: 1.3rem;
+  height: 2.5rem;
+  left: 3.4rem;
+  top: 2.65rem;
+}
+
+#gameCanvas li.shadown11{ background:url(../images/m12.png) no-repeat; background-size:100% auto;width: 1.4rem;
+  height: 2.5rem;
+  left: 3.3rem;
+  top: 1.36rem;
+}
+
+#gameCanvas li.shadown12{ background:url(../images/m13.png) no-repeat; background-size:100% auto;width: 1.35rem;
+  height: 2.5rem;
+  left: 2.26rem;
+  top: 1.2rem;
+}
+
+#gameCanvas li.shadown13{ background:url(../images/m14.png) no-repeat; background-size:100% auto;width: 1.56rem;
+  height: 2.55rem;
+  left: 0.98rem;
+  top: 1.4rem;
+}
+
+#gameCanvas li.shadown14{ background:url(../images/m15.png) no-repeat; background-size:100% auto;  width: 1.3rem;
+  height: 2.55rem;
+  left: 1.12rem;
+  top: 2.7rem;
+}
+
+#gameCanvas li.shadown15{ background:url(../images/m16.png) no-repeat; background-size:100% auto;  width: 1.3rem;
+  width: 1.6rem;
+  height: 2.55rem;
+  left: 2.13rem;
+  top: 2.87rem;
+}
+
 
 #gameCanvas li {
 	position: absolute;

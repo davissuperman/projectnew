@@ -54,24 +54,25 @@ function makeGame(url) {
         //循环生成方块状态的小图，以背景的形式展现，生成16格,并添加到数组
         for (var i = 0; i < 16; i++) {
             var li = document.createElement('li');
-            li.style.width = myw + 'px';
-            li.style.height = myh + 'px';
-            li.style.backgroundImage = 'url(' + url + ')';
-			li.style.backgroundSize = imgWidth+"px " + imgHeight+'px';
+           // li.style.width = myw + 'px';
+           // li.style.height = myh + 'px';
+            //li.style.backgroundImage = 'url(' + url + ')';
+			//li.style.backgroundSize = imgWidth+"px " + imgHeight+'px';
+			li.setAttribute("class","shadown"+i);
             // 计算坐标
             if (i < 4) {//0,1,2,3 第一排
-                top = 0;
-                left = i * myw;
+               // top = 0;
+                //left = i * myw;
 				//li.style.display = 'none';
             } else if (i >= 4 && i < 8) {// 4,5,6,7 第二排
-                top = myh;
-                left = (i - 4) * myw;
+               // top = myh;
+               // left = (i - 4) * myw;
             } else if (i >= 8 && i < 12) {// 8,9,10,11 第三排
-                top = 2 * myh;
-                left = (i - 8) * myw;
+                //top = 2 * myh;
+                //left = (i - 8) * myw;
             } else if (i >= 12) { // 12，13，14，15 第四排
-                top = 3 * myh;
-                left = (i - 12) * myw;
+                //top = 3 * myh;
+               // left = (i - 12) * myw;
             }
             // 记录还未打乱次序的初始ID对应的每个id的正确位置，用于比较拼图是否完成
 			var $imgNums = $("#imgNums");
@@ -84,7 +85,7 @@ function makeGame(url) {
 			}
            
             // 赋值背景backgroundPosition 与 位置
-            li.style.backgroundPosition = -left + 'px' + ' ' + (-top) + 'px';
+            //li.style.backgroundPosition = -left + 'px' + ' ' + (-top) + 'px';
             // 赋值ID为i, 用于检查拼图的位置
             li.id = i;
             // 对象是否在移动
@@ -95,6 +96,7 @@ function makeGame(url) {
             li.style.top = top + 'px';
 			if(imgNums > 0 && i < imgNums){
 				li.style.zIndex = '99999';
+				li.style.display = 'none';
 			}
 			/*
             // 事件绑定
@@ -331,7 +333,7 @@ function makeGame(url) {
         };
         canvas.appendChild(mask);
         vvgBox.appendChild(playBtn);
-		$("#button").click();
+		//$("#button").click();
     }
 
     // 下一张图按钮
