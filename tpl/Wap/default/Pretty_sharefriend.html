@@ -152,7 +152,7 @@
                     <ul id="gameCanvas"></ul>
                 </div>
             </div>
-            <input type="hidden" id="imgNums" value="{pigcms::$leftimgnums}" />
+            <input type="hidden" id="imgNums" value="{pigcms::$needimgnums}" />
             <!--div class="shadown"></div-->
         </div>
 
@@ -164,9 +164,16 @@
 <div class="btn-box share-btn-box ta-c">
     <p class="txt">—还需要<span class="c1">{pigcms::$imgnums}</span>位好友帮忙—</p>
     <if condition="$openid neq $mainopenid">
-        <a href="javascript:;" title="帮忙拼图" class="btn-bg01" id="helpvote">
-            <i class="share-btn03"></i>
-        </a>
+        <if condition="$votetothisuid neq 0">
+            <a href="javascript:;" title="帮忙拼图" class="btn-bg01" id="helpvote">
+                <i class="share-btn03"></i>
+            </a>
+        <else/>
+            <a href="javascript:;" title="帮忙拼图" class="btn-bg01 clicked" id="helpvote">
+                <i class="share-btn03"></i>
+            </a>
+        </if>
+
     </if>
     <a href="javascript:;" title="邀请好友帮忙" class="btn-bg02" id="btnShare">
         <i class="share-btn01"></i>
@@ -219,7 +226,7 @@
                     {uid: "{pigcms::$uid}"},
                     function (data) {
 						$helpvote.removeClass("clicked");
-                        //alert(data);
+                        alert(data);
                         if (data != '') {
                             //			console.info(data);
                             //data 为返回文件名；
