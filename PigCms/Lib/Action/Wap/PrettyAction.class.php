@@ -659,9 +659,16 @@ HTML;
         $this->assign('needimgnums',$vote);
         $this->assign('openid',$userOpenId);
         $this->assign('mainopenid',$MainOpenId);
-        Log::write($MainOpenId ." self   ".$userOpenId);
 
         $this->assign('uid',$uid);
+
+        //判断当前用户是否已经投过票
+        $voteList = M('pretty_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$MainOpenId  ))->find();
+        $voteThisUid = 0;
+        if($voteList){
+            $voteThisUid = 1;
+        }
+        $this->assign('votetothisuid',$voteThisUid);
         $this->display();
     }
 
