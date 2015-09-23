@@ -611,6 +611,11 @@ HTML;
         }
 
         $info = M('pretty')->where(array('id' => $uid))->find();
+        if(!$info){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
+            exit();
+        }
         $gid = $info['gid'];
         $MainOpenId = $info['openid'];
 
