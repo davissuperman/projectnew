@@ -822,7 +822,7 @@ HTML;
         $toOpenIdFromPost = $this->getOpenIdByUid($toUid);
         //检查此 local openid 是否投过票
         $voteList = M('pretty_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
-        if(!$voteList){
+        if(true){//!$voteList
             //投票
             $d = array();
             $d['fromopenid'] = $fromOpenIdFromPost;
