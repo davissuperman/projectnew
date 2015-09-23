@@ -646,16 +646,16 @@ HTML;
         $this->assign('uploadimagesrc',$uploadImageSrc);
 
         //获取当前已经有了多少拼图
-        $imgNums = 16;
+        $imgNums = (int)$this->prettyCount;
         $vote = $info['vote'];
         if($vote == 0){
             //是第一次进入到这个页面，需要有一块拼图
             M("pretty")->where(array('id' => $info['id']))->setInc('vote');
-            $imgNums = 15;
+            $imgNums = (int)$this->prettyCount - 1;
         }else{
-            $imgNums = 16 - $vote;
+            $imgNums = (int)$this->prettyCount - $vote;
         }
-        $this->assign('imgnums',$imgNums);
+        $this->assign('imgnums',(int)$this->prettyCount - $imgNums);
         $this->assign('openid',$userOpenId);
         $this->assign('mainopenid',$MainOpenId);
         $this->assign('uid',$uid);
