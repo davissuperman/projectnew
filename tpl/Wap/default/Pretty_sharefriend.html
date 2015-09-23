@@ -164,7 +164,7 @@
 <div class="btn-box share-btn-box ta-c">
     <p class="txt">—还需要<span class="c1">{pigcms::$imgnums}</span>位好友帮忙—</p>
     <if condition="$openid neq $mainopenid">
-        <if condition="$votetothisuid neq 0">
+        <if condition="$votetothisuid eq 0">
             <a href="javascript:;" title="帮忙拼图1" class="btn-bg01" id="helpvote">
                 <i class="share-btn03"></i>
             </a>

@@ -564,7 +564,7 @@ HTML;
         //这里是隐性获取OPENID 是朋友圈里面的人打开这个页面
         //获取OPENID 用户没有感知
         $userOpenId= cookie('user_openid');
-        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
             $code = trim($_GET["code"]);
@@ -673,7 +673,7 @@ HTML;
         if($voteList){
             $voteThisUid = 1;
         }
-        
+
         $this->assign('votetothisuid',$voteThisUid);
         $this->display();
     }
