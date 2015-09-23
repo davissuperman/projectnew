@@ -359,6 +359,12 @@ HTML;
         }else{
             $imgNums = (int)$this->prettyCount - $vote;
         }
+        if($vote == $this->prettyCount){
+            //跳转到sharephone
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=sharephone");
+            exit();
+        }
         $this->assign('imgnums',$imgNums);
         $this->assign('needimgnums',$vote);
         $this->display();
@@ -665,6 +671,12 @@ HTML;
         }else{
             $imgNums = (int)$this->prettyCount - $vote;
         }
+        if($vote == $this->prettyCount && $userOpenId==$MainOpenId){
+            //跳转到sharephone
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=sharephone");
+            exit();
+        }
         $this->assign('imgnums',$imgNums);
         $this->assign('needimgnums',$vote);
         $this->assign('openid',$userOpenId);
@@ -911,7 +923,7 @@ HTML;
 
     public function form(){
         $userOpenId= cookie('user_openid');
-//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+       // $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
@@ -961,6 +973,7 @@ HTML;
 
     public function award(){
         $userOpenId= cookie('user_openid');
+       // $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
