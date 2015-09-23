@@ -365,6 +365,9 @@ HTML;
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=sharephone");
             exit();
         }
+        if($imgNums < 0 ){
+            $imgNums = 0;
+        }
         $this->assign('imgnums',$imgNums);
         $this->assign('needimgnums',$vote);
         $this->display();
@@ -676,6 +679,9 @@ HTML;
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=sharephone");
             exit();
+        }
+        if($imgNums < 0 ){
+            $imgNums = 0;
         }
         $this->assign('imgnums',$imgNums);
         $this->assign('needimgnums',$vote);
