@@ -34,11 +34,7 @@ class PrettyAction extends SjzAction {
             $mainId = $info['openid'];
             $mainGid = $info['gid'];
         }
-        if($info){
-            return $this->url."/index.php?g=Wap&m=Pretty&a=sharefriend&uid=".$mainId."&gid=$mainGid";
-        }else{
-            return $this->url."/index.php?g=Wap&m=Pretty&a=index&gid=$mainGid";
-        }
+        return $this->url."/index.php?g=Wap&m=Pretty&a=sharefriend&uid=".$mainId."&gid=$mainGid";
     }
     public function getDiymenSet(){
         $gid = 1;
