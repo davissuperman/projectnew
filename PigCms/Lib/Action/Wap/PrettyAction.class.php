@@ -31,7 +31,7 @@ class PrettyAction extends SjzAction {
         }else{
             $userOpenId= cookie('user_openid');
             $info = M('pretty')->where(array('openid' => $userOpenId))->find();
-            $mainId = $info['openid'];
+            $mainId = $info['id'];
             $mainGid = $info['gid'];
         }
         return $this->url."/index.php?g=Wap&m=Pretty&a=sharefriend&uid=".$mainId."&gid=$mainGid";
