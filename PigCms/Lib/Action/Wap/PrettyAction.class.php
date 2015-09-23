@@ -655,7 +655,8 @@ HTML;
         }else{
             $imgNums = (int)$this->prettyCount - $vote;
         }
-        $this->assign('imgnums',(int)$this->prettyCount - $imgNums);
+        $this->assign('imgnums',$imgNums);
+        $this->assign('needimgnums',$vote);
         $this->assign('openid',$userOpenId);
         $this->assign('mainopenid',$MainOpenId);
         $this->assign('uid',$uid);
