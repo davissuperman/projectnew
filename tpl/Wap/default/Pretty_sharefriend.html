@@ -227,12 +227,11 @@
                     {uid: "{pigcms::$uid}"},
                     function (data) {
 						$helpvote.removeClass("clicked");
-                        alert(data);
                         if (data != '') {
                             //			console.info(data);
                             //data 为返回文件名；
                             mnAlert('提交成功');
-                            //跳转页面
+                            window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=sharefriend&uid={pigcms::$uid}&gid={pigcms::$gid}';
                         }else{
                             //图片提交失败
                         }

@@ -616,7 +616,11 @@ HTML;
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
             exit();
         }
-        $gid = $info['gid'];
+        $gid = $_GET['gid'];
+        if(!$gid && isset($info['gid']) && $info['gid'] ){
+            $gid = $info['gid'];
+        }
+
         $MainOpenId = $info['openid'];
 
         //begin 分享出去的URL
@@ -666,6 +670,7 @@ HTML;
         $this->assign('mainopenid',$MainOpenId);
 
         $this->assign('uid',$uid);
+        $this->assign('gid',$gid);
 
         //判断当前用户是否已经投过票
         $voteList = M('pretty_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$MainOpenId  ))->find();
