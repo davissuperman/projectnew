@@ -359,7 +359,7 @@ HTML;
         }else{
             $imgNums = (int)$this->prettyCount - $vote;
         }
-        if($vote == $this->prettyCount){
+        if($vote >= $this->prettyCount){
             //跳转到sharephone
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=sharephone");
@@ -671,7 +671,7 @@ HTML;
         }else{
             $imgNums = (int)$this->prettyCount - $vote;
         }
-        if($vote == $this->prettyCount && $userOpenId==$MainOpenId){
+        if($vote >= $this->prettyCount && $userOpenId==$MainOpenId){
             //跳转到sharephone
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=sharephone");
@@ -735,7 +735,7 @@ HTML;
         // end views
 
         $vote = $info['vote'];
-        if($vote >= 16){
+        if($vote >= $this->prettyCount){
             //成功，继续提交手机号
         }else{
             //redirect
@@ -915,7 +915,7 @@ HTML;
         $selfOrder = 1*$c['c'] + 1;
 
 
-        $vote = 16;
+        $vote = $this->prettyCount;
         $this->assign("vote",$vote);
         $this->assign("selforder",$selfOrder);
         $this->display();
