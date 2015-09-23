@@ -659,6 +659,8 @@ HTML;
         $this->assign('needimgnums',$vote);
         $this->assign('openid',$userOpenId);
         $this->assign('mainopenid',$MainOpenId);
+        Log::write($MainOpenId ." self   ".$userOpenId);
+
         $this->assign('uid',$uid);
         $this->display();
     }
