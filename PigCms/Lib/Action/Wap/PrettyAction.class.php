@@ -565,6 +565,15 @@ HTML;
         //获取OPENID 用户没有感知
         $userOpenId= cookie('user_openid');
 //        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        $uid = $_GET['uid'];
+        if(!is_numeric($uid)){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
+            exit();
+        }
+        $gid = $_GET['gid'];
+
+
         if(!$userOpenId){
             $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
             $code = trim($_GET["code"]);
@@ -580,7 +589,7 @@ HTML;
                     $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                     if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                         //code 有错误 需要重定向
-                        $url = $this->url."/index.php?g=Wap&m=Countmask&a=getOpenId";
+                        $url = $this->url."/index.php?g=Wap&m=Pretty&a=index";
                         header("location:$url");
                     }
                     $m['id'] = $apidata['id'];
@@ -596,18 +605,10 @@ HTML;
 
                 }
             } else {
-                $url = urlencode($this->url."/index.php?g=Wap&m=Pretty&a=sharefriend");
+                $url = urlencode($this->url."/index.php?g=Wap&m=Pretty&a=sharefriend&uid=$uid&gid=$gid");
                 header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
                 exit;
             }
-        }
-
-
-        $uid = $_GET['uid'];
-        if(!is_numeric($uid)){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
-            exit();
         }
 
         $info = M('pretty')->where(array('id' => $uid))->find();
@@ -616,7 +617,7 @@ HTML;
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
             exit();
         }
-        $gid = $_GET['gid'];
+
         if(!$gid && isset($info['gid']) && $info['gid'] ){
             $gid = $info['gid'];
         }
