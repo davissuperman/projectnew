@@ -704,7 +704,7 @@ HTML;
 
     public function sharePhone(){
         $userOpenId= cookie('user_openid');
-//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+  //      $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
@@ -781,6 +781,7 @@ HTML;
         //判断此用户是否已经提交了手机号
         $phoneList = M('pretty_phonelist')->where(array('uid' => $id))->find();
         if($phoneList){
+            echo 3;
             //已经存在，不需要保存
         }else{
             //更新表 pretty

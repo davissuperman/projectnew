@@ -183,11 +183,12 @@
                     "{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=savePhoneInPage",
                     {phoneinpage: phoneinpage},
                     function (data) {
-                        alert(data + ' aaa');
                         if (data != '') {
                             if($data == 2){
                                 mnAlert('参与人数已经达到限额，已截止！谢谢参与！');
-                            } else{
+                            } if($data == 3){
+                                mnAlert('手机号已经存在！');
+                            }else{
                                 mnAlert('提交成功');
                             }
 
