@@ -183,6 +183,7 @@
                     "{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=savePhoneInPage",
                     {phoneinpage: phoneinpage},
                     function (data) {
+                        alert(data + ' aaa');
                         if (data != '') {
                             if($data == 2){
                                 mnAlert('参与人数已经达到限额，已截止！谢谢参与！');
