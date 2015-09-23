@@ -218,6 +218,7 @@
         $('#helpvote').click(function(){
 			var $helpvote = $('#helpvote');
 			if($helpvote.hasClass("clicked")){
+                mnAlert('已帮过！');
 				return false;
 			}
 			$helpvote.addClass("clicked");
