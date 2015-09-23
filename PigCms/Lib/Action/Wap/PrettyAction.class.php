@@ -632,7 +632,12 @@ HTML;
         }
 
         $MainOpenId = $info['openid'];
-
+        if($userOpenId == $MainOpenId){
+            //自己访问自己的主页 跳转到share页面
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=share");
+            exit();
+        }
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
