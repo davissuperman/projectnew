@@ -596,7 +596,7 @@ HTML;
 
                 }
             } else {
-                $url = urlencode($this->url."/index.php?g=Wap&m=Pretty&a=shareNumber");
+                $url = urlencode($this->url."/index.php?g=Wap&m=Pretty&a=sharefriend");
                 header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
                 exit;
             }
@@ -982,7 +982,7 @@ HTML;
         }
         // end views
 
-        $this->assign('selfpage',$this->url."/index.php?g=Wap&m=Pretty&a=sharenumber");
+        $this->assign('selfpage',$this->url."/index.php?g=Wap&m=Pretty&a=sharefriend");
 
         $award = M('pretty_award')->where(array('openid' => $userOpenId))->find();
         if($award){
