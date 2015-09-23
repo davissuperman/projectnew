@@ -564,7 +564,7 @@ HTML;
         //这里是隐性获取OPENID 是朋友圈里面的人打开这个页面
         //获取OPENID 用户没有感知
         $userOpenId= cookie('user_openid');
-//        $userOpenId='oP9fCt_qa9wsV7VIkLIK2rMH9f4s';
+//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
             $code = trim($_GET["code"]);
@@ -610,7 +610,7 @@ HTML;
             exit();
         }
 
-        $info = M('pretty')->where(array('uid' => $uid))->find();
+        $info = M('pretty')->where(array('id' => $uid))->find();
         $gid = $info['gid'];
         $MainOpenId = $info['openid'];
 
@@ -774,7 +774,7 @@ HTML;
         $this->setEndTime();
         $return = 0;
         $fromOpenIdFromPost= cookie('user_openid');
-//        $fromOpenIdFromPost= 'oP9fCt_qa9wsV7VIkLIK2rMH9f4s';
+//        $fromOpenIdFromPost= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $toUid = $_POST['uid'];
         if(!$fromOpenIdFromPost){
             //非法投票
