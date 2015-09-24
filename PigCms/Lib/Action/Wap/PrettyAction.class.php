@@ -478,6 +478,13 @@ HTML;
         //获取当前已经有了多少拼图
         $imgNums = (int)$this->prettyCount;
         $vote = $info['vote'];
+        if($vote >= 16){
+            //已经满足16票，其他人点击此主页 跳转到首页
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
+            exit();
+        }
+
         if($vote == 0){
             //是第一次进入到这个页面，需要有一块拼图
             M("pretty")->where(array('id' => $info['id']))->setInc('vote');
