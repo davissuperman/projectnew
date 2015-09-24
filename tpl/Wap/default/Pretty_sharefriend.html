@@ -179,9 +179,16 @@
         <i class="share-btn01"></i>
     </a>
     <if condition="$openid neq $mainopenid">
-        <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=index" title="我也要参加" class="btn-bg01">
-            <i class="share-btn02"></i>
-        </a>
+        <if condition="$cookiejoin eq 0">
+            <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=index" title="我也要参加" class="btn-bg01">
+                <i class="share-btn02"></i>
+            </a>
+        <else/>
+            <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=share" title="我也要参加" class="btn-bg01">
+                <i class="share-btn02"></i>
+            </a>
+        </if>
+
     </if>
 
 </div>
