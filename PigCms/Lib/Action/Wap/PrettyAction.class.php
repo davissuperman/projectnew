@@ -374,201 +374,7 @@ HTML;
     }
 
 
-    public function score(){
-        $this->setEndTime();
-        $userOpenId= cookie('user_openid');
-        $number = $_GET['number'];
-        if(!$userOpenId || !$number || ($number > 200)){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
-            return;
-        }
-        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
-        $gid = $info['gid'];
-        //begin 分享出去的URL
-        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
-        $noncestr = "Wm3WZYTPz0wzccnW";
-        $timestamp = time();
-        $url = $this->get_url();;
-        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
-        $signature = sha1($str);
-        $this->assign("appid",$appId);
-        $this->assign("timestamp",$timestamp);
-        $this->assign("nonceStr",$noncestr);
-        $this->assign("signature",$signature);
-        $this->assign("shareurl",$this->getShareUrl());
-        $this->assign('gid', $gid);
 
-        $this->assign('title',$info['name'].$this->title);
-        $this->assign('bonusdesc',$this->bonusdesc);
-        $this->assign("imageUrl",$this->imageUrl);
-        $this->assign("shareimageurl",$this->shareImageUrl);
-        //end
-
-
-        $phone = $info['phone'];
-        $currentSequence = $info['sequence'];
-        if(!$phone){
-            $currentSequence = 0;
-        }
-
-        switch($currentSequence){
-            case 0:
-                $d = array();
-                $d['sequence'] = 1;
-                $d['number'] = $number;
-                $d['id'] = $info['id'];
-                M('countmask')->save($d);
-
-                $list = M('countmask_list')->where(array('openid' => $userOpenId,'sequence' => 0))->find();
-                if(!$list){
-                    $l = array();
-                    $l['openid'] = $userOpenId;
-                    $l['number'] = $number;
-                    $l['sequence'] = 0;// default
-                    $l['createtime'] = time();
-                    $l['vote'] = 0;//default
-                    M('countmask_list')->add($l);
-                }else{
-                    //更新
-                    $l = array();
-                    $l['id'] = $list['id'];
-                    $l['number'] = $number;
-                    $l['sequence'] = 0;
-                    M('countmask_list')->save($l);
-                }
-                break;
-            case 1://第一次满10票后
-                //判断用户是否满足条件
-                $vote = $info['vote'];
-                if($vote < $this->eachVote){
-                    //非法提交 转到首页
-                    header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
-                    return;
-                }
-                $infoList = M('countmask_list')->where(array('openid' => $userOpenId,'sequence'=>1))->find();
-                if($infoList && $infoList['number']){
-                    //已经提交分数 无法再次提交
-                    header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
-                    exit();
-                }
-                M("pretty")->where(array('id' =>$info['id']))->setInc('number', $number);
-                //更新sequence
-                M("pretty")->where(array('id' =>$info['id']))->setInc('sequence');
-                if($infoList){
-                    $m = array();
-                    $m['number'] = $number;
-                    $m['id'] = $infoList['id'];
-                    $m['updatetime'] = time();
-                    M('pretty_list')->save($m);
-                }else{
-                    $m = array();
-                    $m['number'] = $number;
-                    $m['openid'] = $userOpenId;
-                    $m['createtime'] = time();
-                    $m['updatetime'] = time();
-                    $m['sequence'] = 1;
-                    M('pretty_list')->add($m);
-                }
-                break;
-            case 2://第二次满10票后
-                //判断用户是否满足条件
-                $vote = $info['vote'];
-                if($vote < $this->eachVote * 2){
-                    //非法提交 转到首页
-                    header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
-                    return;
-                }
-                $infoList = M('pretty_list')->where(array('openid' => $userOpenId,'sequence'=>2))->find();
-                if($infoList && $infoList['number']){
-                    //已经提交分数 无法再次提交
-                    header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
-                    exit;
-                }
-                M("pretty")->where(array('id' =>$info['id']))->setInc('number', $number);
-                //更新sequence
-                M("pretty")->where(array('id' =>$info['id']))->setInc('sequence');
-                if($infoList){
-                    $m = array();
-                    $m['number'] = $number;
-                    $m['id'] = $infoList['id'];
-                    $m['updatetime'] = time();
-                    M('pretty_list')->save($m);
-                }else{
-                    $m = array();
-                    $m['number'] = $number;
-                    $m['openid'] = $userOpenId;
-                    $m['createtime'] = time();
-                    $m['updatetime'] = time();
-                    $m['sequence'] = 2;
-                    M('pretty_list')->add($m);
-                }
-                break;
-            case 3://第三次满10票后
-                //判断用户是否满足条件
-                $vote = $info['vote'];
-                if($vote < $this->eachVote * 3){
-                    //非法提交 转到首页
-                    header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
-                    return;
-                }
-                $infoList = M('pretty_list')->where(array('openid' => $userOpenId,'sequence'=>3))->find();
-                if($infoList && $infoList['number']){
-                    //已经提交分数 无法再次提交
-                    header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
-                    return;
-                }
-                M("pretty")->where(array('id' =>$info['id']))->setInc('number', $number);
-                //更新sequence
-                M("pretty")->where(array('id' =>$info['id']))->setInc('sequence');
-                if($infoList){
-                    $m = array();
-                    $m['number'] = $number;
-                    $m['id'] = $infoList['id'];
-                    $m['updatetime'] = time();
-                    M('pretty_list')->save($m);
-                }else{
-                    $m = array();
-                    $m['number'] = $number;
-                    $m['openid'] = $userOpenId;
-                    $m['createtime'] = time();
-                    $m['updatetime'] = time();
-                    $m['sequence'] = 3;
-                    M('pretty_list')->add($m);
-                }
-                break;
-            default:
-                //没有机会再次增加分数
-        }
-
-        $this->assign('number',$number);
-
-        //同时将数据保存到tp_pretty_list
-        //判断是否存在default的记录
-
-
-        $phone = false;
-        if($info['phone']){
-            $phone = $info['phone'];
-        }
-        $this->assign('phone', $phone);
-        if($currentSequence == 0){
-            $oportunityleft = 3;
-        }else{
-            $oportunityleft = 3-$currentSequence;
-        }
-        if($oportunityleft<0){
-            $oportunityleft = 0;
-        }
-        $this->assign('oportunityleft', $oportunityleft);
-
-        //begin views
-        if($info){
-            M("pretty")->where(array('id' => $info['id']))->setInc('views');
-        }
-        // end views
-        $this->display();
-    }
     public function sharefriend(){
         //这里是隐性获取OPENID 是朋友圈里面的人打开这个页面
         //获取OPENID 用户没有感知
@@ -935,7 +741,7 @@ HTML;
 
     public function form(){
         $userOpenId= cookie('user_openid');
-       // $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        //$userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
@@ -985,7 +791,7 @@ HTML;
 
     public function award(){
         $userOpenId= cookie('user_openid');
-       // $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        //$userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
