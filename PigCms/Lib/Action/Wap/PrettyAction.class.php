@@ -509,6 +509,14 @@ HTML;
 //            $voteThisUid = 1;
 //        }
 
+        //判断COOKIE用户是否参加过活动
+        //如果参见过活动，直接跳转到互动页面，否则是首页
+        $cookieId = M('pretty')->where("openid='$userOpenId'")->getField('id');
+        $cookieJoin = 0;
+        if($cookieId){
+            $cookieJoin = 1;
+        }
+        $this->assign('cookiejoin',$cookieJoin);
         $this->assign('votetothisuid',$voteThisUid);
         $this->display();
     }
