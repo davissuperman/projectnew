@@ -369,6 +369,9 @@ HTML;
             $imgNums = 0;
         }
         $this->assign('imgnums',$imgNums);
+        if($vote == 0){
+            $vote = 1;
+        }
         $this->assign('needimgnums',$vote);
         $this->display();
     }
