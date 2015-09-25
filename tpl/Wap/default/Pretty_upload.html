@@ -144,10 +144,15 @@
 
 <div class="com-box-con">
     <div class="inner-box">
-        <div class="upload-img01"></div>
-        <div class="upload-img hide">
-            <img src="{pigcms::RES}/pretty/images/img01.jpg" alt="" />
-        </div>
+        <if condition="$uploadimage eq 0">
+            <div class="upload-img01"></div>
+        <else/>
+            <div class="upload-img">
+                <img src="{pigcms::$uploadimagesrc}" alt="" />
+            </div>
+        </if>
+
+
 
 
     </div>
@@ -158,7 +163,12 @@
 	
     <a href="javascript:;" title="确认上传" class="upload-btn upload-btn02" id="btnComUpload" onClick="submitImageInfo();">确认上传</a>
     <!--<a href="javascript:;" title="上传照片" class="upload-btn upload-btn01" id="openUploadLayer">上传照片</a>-->
-    <a href="javascript:;" title="换一张" class="btn-bg02 btn-ziti" id="openUploadLayer">换一张</a>
+    <if condition="$uploadimage eq 0">
+        <a href="javascript:;" title="上传图片" class="btn-bg02 btn-ziti" id="openUploadLayer">上传图片</a>
+    <else/>
+        <a href="javascript:;" title="换一张" class="btn-bg02 btn-ziti" id="openUploadLayer">换一张</a>
+    </if>
+
     
 </div>
 <div class="bg01"></div>

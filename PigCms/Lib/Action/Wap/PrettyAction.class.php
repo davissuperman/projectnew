@@ -244,6 +244,15 @@ HTML;
         //end
 
         M("pretty")->where(array('id' => $info['id']))->setInc('views');
+        //判断用户是否上传过图片
+        $savePath = './PUBLIC/imagess/';
+        $uploadImageSrc = $savePath ."$userOpenId.jpeg";
+        $uploadImage = 0;
+        if(file_exists($uploadImageSrc)){
+            $uploadImage = 1;
+        }
+        $this->assign("uploadimage",$uploadImage);
+        $this->assign('uploadimagesrc',$uploadImageSrc);
         $this->display();
     }
 
