@@ -429,7 +429,7 @@ gment:nth-of-type(4){-webkit-transform:rotate(54deg);-ms-transform:rotate(54deg)
 .award-box .btn-submit{ background:url(../images/btn09.png) no-repeat center bottom; display:inline-block;width: 3.5rem;height: 1rem; text-indent:-9999px; overflow:hidden; cursor:pointer;background-size: 100% auto;}
 .award-box .des .num{ border-bottom:1px solid #145d82;}
 
-.btn-ziti{text-shadow: #1d2088 0 1px 0;color:#fff; line-height:0.7rem; text-decoration:none; font-size:0.4rem; font-weight:bold;}
+.btn-ziti{text-shadow: #1d2088 0 1px 0;color:#f9e5c2; line-height:0.7rem; text-decoration:none; font-size:0.4rem; font-weight:bold;}
 
 
 
