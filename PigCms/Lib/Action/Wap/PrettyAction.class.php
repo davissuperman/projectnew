@@ -371,8 +371,8 @@ HTML;
         if($vote >= $this->prettyCount){
             //跳转到sharephone
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Pretty&a=sharephone");
-            exit();
+//            header("location:$this->url/index.php?g=Wap&m=Pretty&a=sharephone");
+//            exit();
         }
         if($imgNums < 0 ){
             $imgNums = 0;
