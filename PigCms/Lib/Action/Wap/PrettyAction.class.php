@@ -741,6 +741,11 @@ HTML;
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
             exit();
         }
+        if($info && !$info['phone']){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
+            exit();
+        }
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
