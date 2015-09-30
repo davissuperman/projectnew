@@ -19,13 +19,17 @@ class PrettyAction extends SjzAction {
 
         $ip=get_client_ip();
         $userOpenId= cookie('user_openid');
-        //$userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if($userOpenId){
             $uid = $this->getUidByOpenid($userOpenId);
-            $n = array();
-            $n['uid'] = $uid;
-            $n['ip'] = $ip;
-            M('pretty_iplist')->add($n);
+            //判断此IP是否访问过
+            $id = M('pretty_iplist')->where("ip='$ip'")->getField('id');
+            if(!$id){
+                $n = array();
+                $n['uid'] = $uid;
+                $n['ip'] = $ip;
+                M('pretty_iplist')->add($n);
+            }
         }
     }
 
