@@ -182,7 +182,11 @@ class PrettyAction  extends BonusAction {
                 $tmp['sex'] = "未知";
             }
             $tmp['province'] = $fansInfo['province'];
+            $savePath = './PUBLIC/imagess/';
+            $openid = $each['openid'];
 
+            $uploadImageSrc= $savePath."$openid.jpeg";
+            $tmp['imgsrc'] = $uploadImageSrc;
 //            //根据openid获取收获地址
 //            $awardInfo = M("countmask_award")->where(array("openid" => $each['openid']))->find();
 //            if($info){
