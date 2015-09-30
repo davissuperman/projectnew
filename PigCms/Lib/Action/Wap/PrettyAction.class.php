@@ -16,6 +16,17 @@ class PrettyAction extends SjzAction {
         $this->url= C('site_url');
         $this->imageUrl = "http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/present/images/logo1.jpg';
         $this->shareImageUrl = "http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/present/images/logo1.jpg';
+
+        $ip=get_client_ip();
+        $userOpenId= cookie('user_openid');
+        //$userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        if($userOpenId){
+            $uid = $this->getUidByOpenid($userOpenId);
+            $n = array();
+            $n['uid'] = $uid;
+            $n['ip'] = $ip;
+            M('pretty_iplist')->add($n);
+        }
     }
 
     public function getShareUrl(){
@@ -646,7 +657,10 @@ HTML;
         $openId = M('pretty')->where("id=$uid")->getField('openid');
         return $openId;
     }
-
+    public function getUidByOpenid($openid){
+        $uid = M('pretty')->where("openid='$openid'")->getField('id');
+        return $uid;
+    }
     public function savePhoneInPage(){
         $phone = $_POST['phoneinpage'];
         $fromOpenIdFromPost= cookie('user_openid');
