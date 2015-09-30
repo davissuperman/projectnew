@@ -163,11 +163,14 @@
     <div class="hudie2"></div>
 </div>
 <div class="btn-box upload-btn-box">
+
+
+    <!--<a href="javascript:;" title="上传照片" class="upload-btn upload-btn01" id="openUploadLayer">上传照片</a>-->
     <if condition="$uploadimage eq 0">
-        <a href="javascript:;" title="上传照片" class="upload-btn upload-btn01" id="openUploadLayer">上传照片</a>
+        <a href="javascript:;" title="上传图片" class="btn-bg02 btn-ziti" id="openUploadLayer">上传图片</a>
+        <a href="javascript:;" title="确认上传" class="upload-btn upload-btn02" id="btnComUpload" style="display: none" onClick="submitImageInfo();">确认上传</a>
     <else/>
-        <a href="javascript:;" title="确认上传" class="upload-btn upload-btn02" id="btnComUpload" onClick="submitImageInfo();">确认上传</a>
-        <!--<a href="javascript:;" title="换一张" class="btn-change" id="openUploadLayer">换一张</a>-->
+        <a href="javascript:;" title="换一张" class="btn-bg02 btn-ziti" id="openUploadLayer">换一张</a>
     </if>
 
     
@@ -338,6 +341,9 @@
             $(".upload-img").show();
             $(".upload-img01").hide();
             $(".upload-img").find("img").attr("src",dataurl);
+            $("#openUploadLayer").hide();
+            $("#btnComUpload").show();
+
         };
         // 设置src属性，浏览器会自动加载。
         // 记住必须先绑定render()事件，才能设置src属性，否则会出同步问题。
