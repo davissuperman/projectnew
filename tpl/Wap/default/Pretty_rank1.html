@@ -7,7 +7,7 @@
 <meta name="keywords" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>携手森田.找回美丽</title>
-    <link href="{pigcms::RES}/pretty/css/common.css?v=2015092502" rel="stylesheet" type="text/css" />
+    <link href="{pigcms::RES}/pretty/css/common.css?v=2015092501" rel="stylesheet" type="text/css" />
     <script src="{pigcms::RES}/pretty/js/zepto.min.js" type="text/javascript"></script>
     <script src="{pigcms::RES}/pretty/js/common.js" type="text/javascript"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
@@ -82,7 +82,7 @@
                     url: "{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=saveShareNumberToFriends",
                     type:'GET',
                     complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
-                    error: function() { mnAlert('系统繁忙 请稍后再试');},
+                    error: function() {},
                     success: function(data) {
                         if(data == 1){
                             mnAlert("分享成功！");
@@ -111,7 +111,7 @@
                     url: "{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=saveShareNumberToFriends",
                     type:'GET',
                     complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
-                    error: function() { mnAlert('系统繁忙 请稍后再试');},
+                    error: function() { },
                     success: function(data) {
                         if(data == 1){
                             mnAlert("分享成功！");
@@ -139,103 +139,28 @@
 <body id="body">
 <div class="logo"></div>
 
-<div class="com-box-hover"></div>
-<div class="com-box"></div>
-
-<div class="com-box-con">
-    <div class="inner-box">
-        <div class="upload-img">
-            <img src="{pigcms::$uploadimagesrc}" alt="" class="tu" id="imageAddr"/>
-            <!--div id="imgArea"></div-->
-            <div id="vvg">
-                <div id="vvgBox">
-                    <ul id="gameCanvas"></ul>
-                </div>
-            </div>
-            <input type="hidden" id="imgNums" value="{pigcms::$needimgnums}" />
-            <!--div class="shadown"></div-->
-        </div>
-
-
-    </div>
-    <div class="hudie1"></div>
-    <div class="hudie2"></div>
+<div class="not-finished">
+    <p>您尚未完成拼图，</p>
+    <p>请再接再厉！</p>
+    <p style="margin-top:0.5rem;">
+        <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=share" title="去拼图" class="btn-bg02">
+            <i class="btn-pintu"></i>
+        </a>
+    </p>
 </div>
-<div class="btn-box share-btn-box ta-c">
-    <p class="txt">—还需要<span class="c1">{pigcms::$imgnums}</span>位好友帮忙—</p>
-    <!--<a href="javascript:;" title="帮忙拼图" class="btn-bg01" id="helpvote">-->
-        <!--<i class="share-btn03"></i>-->
-    <!--</a>-->
-    <a href="javascript:;" title="邀请好友帮忙" class="btn-bg02" id="btnShare">
-        <i class="share-btn01"></i>
-    </a>
-    <!--a href="http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=210588191&idx=1&sn=b92ed86b0e48cd73707477f2200d835e&scene=1&srcid=09242PtEGocqLViEACaoNz7Z#rd" title="查询排名"  >
-       <button><i  >查询排名</i></button>
-    </a-->
-    <if condition="$imgnums gt  0">
-        <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=rank1" title="查询排名" class="btn-query">
-            查询排名
-        </a>
-    <else/>
-        <a href="http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=210588191&idx=1&sn=b92ed86b0e48cd73707477f2200d835e&scene=1&srcid=09242PtEGocqLViEACaoNz7Z#rd" title="查询排名" class="btn-query">
-            查询排名
-        </a>
-    </if>
+<div class="btn-box phone-btn-box">
+
+
 
 </div>
 <div class="bg01"></div>
 <div class="bg02"></div>
 
-<div class="layer-box hide" id="layer-box">
-    <div class="layer-bg"></div>
-    <div class="layer-con">
-        <div class="layer-share" id="layer-share">
-            <div class="ta-r">
-                <i class="shou"></i>
-            </div>
-            <div class="text">
-                <p>每人只能拼一块拼图哦，</p>
-                <p>点击右上角“···”，</p>
-                <p>发送给你的朋友们，</p>
-                <p>让他们帮你</p>
-                <p>完成拼图，找回美丽！</p>
-                <div class="share-hy"><span class="fl">选择</span><i class="fl"></i>将活动分享<p>给你的好友</p></div>
-                <div class="share-pyq"><span class="fl">选择</span><i class="fl"></i>将活动分享<p>到你的朋友圈</p></div>
-            </div>
 
-        </div>
-    </div>
-</div>
-<script src="{pigcms::RES}/pretty/js/pintu.js?v=20150922" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function(e) {
-        $("#btnShare").click(function(){
-            showLayer($("#layer-share"));
-        });
 
-        $('#helpvote').click(function(){
-			var $helpvote = $('#helpvote');
-			if($helpvote.hasClass("clicked")){
-				return false;
-			}
-			$helpvote.addClass("clicked");
-            $.post(
-                    "{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=saveVote",
-                    {uid: "{pigcms::$uid}"},
-                    function (data) {
-						$helpvote.removeClass("clicked");
-                        if (data != '') {
-                            //			console.info(data);
-                            //data 为返回文件名；
-                            mnAlert('提交成功');
-                            //跳转页面
-                        }else{
-                            //图片提交失败
-                        }
-                    });
-        });
     });
 </script>
-
 </body>
 </html>
