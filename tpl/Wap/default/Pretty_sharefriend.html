@@ -162,22 +162,29 @@
     <div class="hudie2"></div>
 </div>
 <div class="btn-box share-btn-box ta-c">
-    <p class="txt">—还需要<span class="c1">{pigcms::$imgnums}</span>位好友帮忙—</p>
+    <if condition="$imgnums neq 0">
+        <p class="txt">—还需要<span class="c1">{pigcms::$imgnums}</span>位好友帮忙—</p>
+    </if>
+
     <if condition="$openid neq $mainopenid">
-        <if condition="$votetothisuid eq 0">
+        <if condition="$votetothisuid eq 0 and $imgnums neq 0">
             <a href="javascript:;" title="帮忙拼图1" class="btn-bg01" id="helpvote">
                 <i class="share-btn03"></i>
             </a>
-        <else/>
-            <a href="javascript:;" title="帮忙拼图2" class="btn-bg01 clicked" id="helpvote">
+        <elseif condition="$votetothisuid eq 1 and $imgnums neq 0"/>
+            <a href="javascript:;" title="帮忙拼图2" class="btn-bg01 clicked" id="helpvote" >
                 <i class="share-btn03"></i>
             </a>
         </if>
 
     </if>
-    <a href="javascript:;" title="邀请好友帮忙" class="btn-bg02" id="btnShare">
-        <i class="share-btn01"></i>
-    </a>
+
+    <if condition="$imgnums neq 0">
+        <a href="javascript:;" title="邀请好友帮忙" class="btn-bg02" id="btnShare">
+            <i class="share-btn01"></i>
+        </a>
+    </if>
+
     <if condition="$openid neq $mainopenid">
         <if condition="$cookiejoin eq 0">
             <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=index" title="我也要参加" class="btn-bg01">

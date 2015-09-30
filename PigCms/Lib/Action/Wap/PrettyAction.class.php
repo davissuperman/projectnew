@@ -492,9 +492,9 @@ HTML;
         $vote = $info['vote'];
         if($vote >= 16 && $userOpenId != $MainOpenId ){
             //已经满足16票，其他人点击此主页 跳转到首页
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
-            exit();
+            //当前主页已经为16票， 去掉投票按钮。 只显示查询排名
+//            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
+//            exit();
         }
 
         if($vote == 0){
