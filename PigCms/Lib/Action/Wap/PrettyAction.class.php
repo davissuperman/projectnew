@@ -22,13 +22,15 @@ class PrettyAction extends SjzAction {
 //        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if($userOpenId){
             $uid = $this->getUidByOpenid($userOpenId);
-            //判断此IP是否访问过
-            $id = M('pretty_iplist')->where("ip='$ip'")->getField('id');
-            if(!$id){
-                $n = array();
-                $n['uid'] = $uid;
-                $n['ip'] = $ip;
-                M('pretty_iplist')->add($n);
+            if($uid){
+                //判断此IP是否访问过
+                $id = M('pretty_iplist')->where("ip='$ip'")->getField('id');
+                if(!$id){
+                    $n = array();
+                    $n['uid'] = $uid;
+                    $n['ip'] = $ip;
+                    M('pretty_iplist')->add($n);
+                }
             }
         }
     }
