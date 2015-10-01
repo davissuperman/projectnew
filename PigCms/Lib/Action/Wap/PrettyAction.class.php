@@ -394,6 +394,11 @@ HTML;
         }
 
         $info = M('pretty')->where(array('openid' => $userOpenId))->find();
+        if(!$info){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
+            exit();
+        }
         $gid = $info['gid'];
 
         //begin 分享出去的URL
