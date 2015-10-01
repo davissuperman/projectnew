@@ -812,7 +812,7 @@ HTML;
 
         if($info && !$info['phone']){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=share&gid=$gid");
             exit();
         }
         //begin 分享出去的URL
