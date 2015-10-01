@@ -258,7 +258,7 @@
             dataType:'json',
             timeout : 60000,
             success:function(data){
-
+                mnAlert('您的收货信息已提交<br/> 在对获奖数据核实后X月X号起开始邮寄奖品，<br/>敬请期待！');
             },
             error : function(XMLHttpRequest, textStatus, errorThrown) {
                 mnAlert("提交失败，网络繁忙！");
