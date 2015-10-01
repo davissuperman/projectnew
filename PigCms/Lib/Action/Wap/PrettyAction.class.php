@@ -803,6 +803,16 @@ HTML;
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
             exit();
         }
+        //是否上传图片
+        $savePath = './PUBLIC/imagess/';
+        $uploadImageSrc = $savePath ."$userOpenId.jpeg";
+        $uploadImage = 0;
+        if(!file_exists($uploadImageSrc)){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
+            exit();
+        }
+
         //如果没有满足16票 跳转到再接再厉
         if($info['vote'] <$this->prettyCount){
             //redirect
