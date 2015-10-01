@@ -803,6 +803,13 @@ HTML;
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
             exit();
         }
+        //如果没有满足16票 跳转到再接再厉
+        if($info['vote'] <$this->prettyCount){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=rank1&gid=$gid");
+            exit();
+        }
+
         if($info && !$info['phone']){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
