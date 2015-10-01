@@ -263,7 +263,8 @@ HTML;
         M("pretty")->where(array('id' => $info['id']))->setInc('views');
         //判断用户是否上传过图片
         $savePath = './PUBLIC/imagess/';
-        $uploadImageSrc = $savePath ."$userOpenId.jpeg";
+        $t = $info['uploadimagetime'];
+        $uploadImageSrc = $savePath ."$userOpenId"."_$t".".jpeg";
         $uploadImage = 0;
         if(file_exists($uploadImageSrc)){
             $uploadImage = 1;
@@ -423,7 +424,8 @@ HTML;
 
 
         $savePath = './PUBLIC/imagess/';
-        $uploadImageSrc= $savePath."$userOpenId.jpeg";
+        $t = $info['uploadimagetime'];
+        $uploadImageSrc= $savePath."$userOpenId"."_$t".".jpeg";
         $this->assign('uploadimagesrc',$uploadImageSrc);
 
         //获取当前已经有了多少拼图
@@ -552,7 +554,8 @@ HTML;
 
 
         $savePath = './PUBLIC/imagess/';
-        $uploadImageSrc= $savePath."$MainOpenId.jpeg";
+        $t = $info['uploadimagetime'];
+        $uploadImageSrc= $savePath."$MainOpenId"."_$t".".jpeg";
         $this->assign('uploadimagesrc',$uploadImageSrc);
 
         //获取当前已经有了多少拼图
@@ -663,7 +666,8 @@ HTML;
         }
 
         $savePath = './PUBLIC/imagess/';
-        $uploadImageSrc= $savePath."$userOpenId.jpeg";
+        $t = $info['uploadimagetime'];
+        $uploadImageSrc= $savePath."$userOpenId"."_$t".".jpeg";
         $this->assign('uploadimagesrc',$uploadImageSrc);
         $this->assign('phone',$info['phone']);
 
@@ -815,7 +819,8 @@ HTML;
         }
         //是否上传图片
         $savePath = './PUBLIC/imagess/';
-        $uploadImageSrc = $savePath ."$userOpenId.jpeg";
+        $t = $info['uploadimagetime'];
+        $uploadImageSrc = $savePath ."$userOpenId"."_$t".".jpeg";
         $uploadImage = 0;
         if(!file_exists($uploadImageSrc)){
             //redirect

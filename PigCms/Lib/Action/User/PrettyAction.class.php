@@ -184,8 +184,8 @@ class PrettyAction  extends BonusAction {
             $tmp['province'] = $fansInfo['province'];
             $savePath = './PUBLIC/imagess/';
             $openid = $each['openid'];
-
-            $uploadImageSrc= $savePath."$openid.jpeg";
+            $t = $each['uploadimagetime'];
+            $uploadImageSrc= $savePath."$openid"."_$t".".jpeg";
             if(file_exists($uploadImageSrc)){
                 $tmp['imgsrc'] = $uploadImageSrc;
             }else{
