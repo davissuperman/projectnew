@@ -282,17 +282,18 @@ HTML;
 //        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
 
         $data= base64_decode($base64_body );
-        $file = $savePath ."$userOpenId.jpeg";
+
 
         //保存uploadimagetime
         $uid = $this->getUidByOpenid($userOpenId);
+        $t = time();
         if($uid){
             $n = array();
             $n['id'] = $uid;
-            $n['uploadimagetime'] = time();;
+            $n['uploadimagetime'] = time();
             M("pretty")->save($n);
         }
-
+        $file = $savePath ."$userOpenId"."_$t".".jpeg";
        echo  file_put_contents($file, $data);
     }
 
