@@ -140,7 +140,7 @@ class PrettyAction  extends BonusAction {
     public function slist() {
         $gid = $_GET['gid'];
         $db = M('pretty');
-        $where = array('gid' => $gid,'phone'=>array('neq',''));
+        $where = array('gid' => $gid);//,'phone'=>array('neq','')
         $count = $db->where($where)->count();
         $page = new Page($count, 25);
         $info = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->order('  phonetime asc')->select();
@@ -186,7 +186,12 @@ class PrettyAction  extends BonusAction {
             $openid = $each['openid'];
 
             $uploadImageSrc= $savePath."$openid.jpeg";
-            $tmp['imgsrc'] = $uploadImageSrc;
+            if(file_exists($uploadImageSrc)){
+                $tmp['imgsrc'] = $uploadImageSrc;
+            }else{
+                $tmp['imgsrc'] = 1;
+            }
+
 //            //根据openid获取收获地址
 //            $awardInfo = M("countmask_award")->where(array("openid" => $each['openid']))->find();
 //            if($info){

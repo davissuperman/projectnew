@@ -884,9 +884,29 @@ HTML;
 
 
         $vote = $info['vote'];
+        $gid = $info['gid'];
+        if($vote < $this->prettyCount){
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index&gid=$gid");
+            exit();
+        }
+        if(!$info['phone']){
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=share&gid=$gid");
+            exit();
+        }
 
-        $vote = 16;
         $this->assign("vote",$vote);
+        $award = M('pretty_award')->where(array('openid' => $userOpenId))->find();
+        $name = '';
+        $phone = '';
+        $address = '';
+        if($award){
+            $name = $award['name'];
+            $phone = $award['phone'];
+            $address = $award['address'];
+        }
+        $this->assign("name",$name);
+        $this->assign("address",$address);
+        $this->assign("phone",$phone);
         $this->display();
     }
 

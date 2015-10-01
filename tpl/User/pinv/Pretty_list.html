@@ -77,7 +77,15 @@
                                     <!--<th class="sevenTd">{pigcms:$o.awardusercity}</th>-->
                                     <!--<th class="sevenTd">{pigcms:$o.awarduseraddress}</th>-->
                                     <th class="sevenTd">{pigcms:$o.cheat}</th>
-                                    <th class="sevenTd" style="cursor:pointer"><img title="点击查看大图" src="{pigcms:$o.imgsrc}" width="50" height="50" class="imgopenid" /> </th>
+                                    <th class="sevenTd" style="cursor:pointer">
+
+                                        <if condition="$o.imgsrc eq  '1' ">
+                                            图片为空
+                                        <else/>
+                                            <img title="点击查看大图" src="{pigcms:$o.imgsrc}" width="50" height="50" class="imgopenid" />
+
+                                        </if>
+                                    </th>
                                     </tr>
                                 </volist>
                                 <td colspan="10" style="text-align:right">{pigcms:$page}</td>
