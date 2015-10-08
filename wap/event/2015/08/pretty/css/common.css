@@ -433,5 +433,5 @@ padding-top: 25%;}
 .btn-ziti{text-shadow: #1d2088 0 1px 0;color:#f9e5c2; line-height:0.7rem; text-decoration:none; font-size:0.4rem; font-weight:bold;}
 
 
-.loaing-tips{width:1.6rem;font-weight: normal;font-size: 0.2rem;position: fixed;background: #000;border-radius: 5px; text-align: center;color: #fff;bottom: 2rem;left: 50%;margin-left: -1rem; z-index:99999; padding:0.1rem 0.2rem; display:none;}
+.loaing-tips{width:2rem;font-weight: normal;position: fixed;background: #000;border-radius: 5px; text-align: center;color: #fff;bottom: 2rem;left: 50%;margin-left: -1.2rem; z-index:99999; padding:0.1rem 0.2rem; display:none;}
 
