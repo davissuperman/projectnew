@@ -68,6 +68,8 @@
     
     </div>
     
+    <div class="loaing-tips">图片上传中...</div>
+    
     <script src="js/upload/sonic.js"></script>
 	<script src="js/upload/comm.js"></script>
     <script src="js/upload/hammer.js"></script>
@@ -121,10 +123,13 @@
 		});*/
 		
 		function submitImageInfo(){//图片上传
+			
 			var filename = $('#hit').attr('fileName');
 			var img_data = $('#hit').attr('src');
 			if(img_data==""){mnAlert('请选择照片后再确认上传哦！');return false;}
+			$(".loaing-tips").show();
 			$.post("后台接口地址", {image: img_data}, function (data) {
+				$(".loaing-tips").hide();
 				if (data != '') {
 		//			console.info(data);
 					//data 为返回文件名；
