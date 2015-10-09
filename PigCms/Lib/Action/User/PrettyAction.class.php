@@ -164,6 +164,7 @@ class PrettyAction  extends BonusAction {
             $tmp['joins'] = $each['joins'];
             $tmp['openid'] = $each['openid'];
             $tmp['number'] = $each['number'];
+            $tmp['createtime'] = $each['createtime'];
             $tmp['phonetime'] = $each['phonetime'];
             $tmp['sharetime'] = $each['sharetime'];
             $fansInfo = M('customer_service_fans')->where(array('openid' => $each['openid'],'token'=>'rggfsk1394161441'))->find();
@@ -420,9 +421,10 @@ award.address as addres,award.orderid as orderid,award.username as username from
         }
         $db = M('pretty');
         $sql = "select gid,  openid ,phone,name,phonetime,sharetime,share,views,uniqueviews,vote,joins,number, id
-        from tp_pretty  where gid=$gid and phonetime>" . $start . " and phonetime<" . $end . " and phone != '' order by  phonetime asc,sharetime asc";
+        from tp_pretty  where gid=$gid order by  phonetime asc,sharetime asc";
 
         $list = M()->query($sql);
+        Log ::  write( count($list));
         $listArr = array();
         if($award){
             $pL = $this->getAwardList();
@@ -498,21 +500,18 @@ award.address as addres,award.orderid as orderid,award.username as username from
             ->setCellValue('E1', '来源分组')
             ->setCellValue('F1', '参加游戏时间')
             ->setCellValue('G1', '首次分享时间')
-            ->setCellValue('H1', '总分数')
-            ->setCellValue('I1', '加分一')
-            ->setCellValue('J1', '加分二')
-            ->setCellValue('K1', '加分三')
-            ->setCellValue('L1', 'PV')
-            ->setCellValue('M1', 'UV')
-            ->setCellValue('N1', '分享数')
-            ->setCellValue('O1', '得票数')
-            ->setCellValue('P1', '扩散数')
-            ->setCellValue('Q1', '收货姓名')
-            ->setCellValue('R1', '收货手机')
-            ->setCellValue('S1', '省份')
-            ->setCellValue('T1', '城市')
-            ->setCellValue('U1', '地址')
-            ->setCellValue('V1', '头像');
+            ->setCellValue('H1', 'PV')
+            ->setCellValue('I1', 'UV')
+            ->setCellValue('J1', '分享数')
+            ->setCellValue('K1', '得票数')
+            ->setCellValue('L1', '扩散数')
+            ->setCellValue('M1', '收货姓名')
+            ->setCellValue('N1', '收货手机')
+            ->setCellValue('O1', '省份')
+            ->setCellValue('P1', '城市')
+            ->setCellValue('Q1', '地址')
+            ->setCellValue('R1', '头像')
+            ;
         //写出内容 UTF-8
         //log :: write( print_r($data,true)  );
         $imageUrl = "http://wx.drjou.cc/PUBLIC/imagess/";
@@ -528,21 +527,18 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 ->setCellValue('E' . ($n + 2), $data[$n]['gidname'])
                 ->setCellValue('F' . ($n + 2), $data[$n]['phonetime'])
                 ->setCellValue('G' . ($n + 2), $data[$n]['sharetime'])
-                ->setCellValue('H' . ($n + 2), $data[$n]['number'])
-                ->setCellValue('I' . ($n + 2), $data[$n]['numberadd1'])
-                ->setCellValue('J' . ($n + 2), $data[$n]['numberadd2'])
-                ->setCellValue('K' . ($n + 2), $data[$n]['numberadd3'])
-                ->setCellValue('L' . ($n + 2), $data[$n]['uniqueviews'])
-                ->setCellValue('M' . ($n + 2), $data[$n]['views'])
-                ->setCellValue('N' . ($n + 2), $data[$n]['share'])
-                ->setCellValue('O' . ($n + 2), $data[$n]['vote'])
-                ->setCellValue('P' . ($n + 2), $data[$n]['joins'])
-                ->setCellValue('Q' . ($n + 2), $data[$n]['username'])
-                ->setCellValue('R' . ($n + 2), $data[$n]['userphone'])
-                ->setCellValue('S' . ($n + 2), $data[$n]['userprovince'])
-                ->setCellValue('T' . ($n + 2), $data[$n]['city'])
-                ->setCellValue('U' . ($n + 2), $data[$n]['address'])
-                ->setCellValue('V' . ($n + 2), $imageUrl.$data[$n]['openid'].".jpeg");
+                ->setCellValue('H' . ($n + 2), $data[$n]['views'])
+                ->setCellValue('I' . ($n + 2), $data[$n]['uniqueviews'])
+                ->setCellValue('J' . ($n + 2), $data[$n]['share'])
+                ->setCellValue('K' . ($n + 2), $data[$n]['vote'])
+                ->setCellValue('L' . ($n + 2), $data[$n]['joins'])
+                ->setCellValue('M' . ($n + 2), $data[$n]['username'])
+                ->setCellValue('N' . ($n + 2), $data[$n]['userphone'])
+                ->setCellValue('O' . ($n + 2), $data[$n]['userprovince'])
+                ->setCellValue('P' . ($n + 2), $data[$n]['address'])
+                ->setCellValue('Q' . ($n + 2), $data[$n]['address'])
+                ->setCellValue('R' . ($n + 2), $imageUrl.$data[$n]['openid'].".jpeg")
+                ->setCellValue('S' . ($n + 2), $data[$n]['userprovince']);
 
         }
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
