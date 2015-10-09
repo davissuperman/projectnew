@@ -156,9 +156,10 @@ input,textarea,select,button{font-size:1em;}
 
 /*规则*/
 .rule-con{ background:url(../images/bg07.png) repeat; padding:0.1rem; border-radius:5px; color:#fff;}
-.rule-con dt{ text-align:center; margin:0.1rem 0;}
+.rule-con dt{ text-align:center; margin:0.1rem 0;color:#fcf465;font-weight:bold; font-size:0.4rem;}
+.rule-con .step{color:#fcf465; font-weight:bold;}
 .rule-con dt img{ height:0.35rem;}
-.rule-con h5{color:#fff45c;margin:0.15rem 0; font-size:0.32rem; font-weight:normal;}
+.rule-con h5{color:#fff45c;margin:0.15rem 0; font-size:0.3rem; font-weight:bold;}
 /*.upload-img01{background:url(../images/img06.png) no-repeat; background-size:100% auto;width: 4rem;height:4rem;margin: 0.5rem auto;}*/
 .upload-img01{background:url(../images/new/img01.png) no-repeat; background-size:100% auto;height:4rem;margin: 0.2rem auto;}
 .rule-btn{background:url(../images/rule-btn.png) no-repeat; background-size:100% auto;display:block; width:100%;height:0.8rem; text-indent:-9999px; overflow:hidden; cursor:pointer;}
