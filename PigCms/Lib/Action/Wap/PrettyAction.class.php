@@ -219,10 +219,17 @@ HTML;
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
 
-
+            $savePath = './PUBLIC/imagess/';
+            $t = $info['uploadimagetime'];
+            $uploadImageSrc = $savePath ."$userOpenId"."_$t".".jpeg";
+            $uploadImage = 0;
+            if(file_exists($uploadImageSrc)){
+                $uploadImage = 1;
+            }
         //view自增
         M("pretty")->where(array('id' => $info['id']))->setInc('views');
         $this->assign("vote",$vote);
+        $this->assign("uploadimage",$uploadImage);
         $this->display();
     }
 
