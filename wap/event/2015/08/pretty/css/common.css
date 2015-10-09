@@ -82,7 +82,8 @@ input,textarea,select,button{font-size:1em;}
 /*弹出层*/
 .layerBox{ position:fixed; width:100%; height:100%; background:rgba(0,0,0,0.2); top:0; left:0; z-index:10000;}
 .layerBg{ background:#fff; width:5.8rem; margin:0 auto; margin-top:20%; text-align:center; border-radius:5px;}
-.layerMsg{padding:0.7rem 0;font-size:0.35rem;}
+.layerMsg{padding:0.3rem 0;}
+.layerMsg p{ margin-top:0.2rem;}
 .layerBtn{ border:0; border-top:1px solid #d6d6dc; width:100%; height:0.9rem; line-height:0.9rem; background:none; font-size:0.4rem;}
 
 /*logo*/
@@ -144,8 +145,10 @@ input,textarea,select,button{font-size:1em;}
   height: 0.7rem;display: block; text-align: center; margin:0 auto;overflow:hidden; margin-bottom:0.1rem;}
 
 /*首页*/
-.index-img01{ background:url(../images/img02.png) no-repeat; background-size:100% auto;width: 3.5rem;height:3.5rem;margin: 0.25rem auto;}
-.index-time{ color:#666; font-weight:bold; font-size:0.35rem; margin-top:0.6rem;}
+.index-text{color:#231815; text-align:center; font-weight:bold; display:none;}
+/*.index-img01{ background:url(../images/img02.png) no-repeat; background-size:100% auto;width: 3.5rem;height:3.5rem;margin: 0.25rem auto;}*/
+.index-img01{ background:url(../images/new/index01.png) no-repeat; background-size:100% auto;height:4rem;margin: 0.1rem auto;}
+.index-time{ color:#666; font-weight: bold;}
 .btn-box{width: 3.6rem;height:2rem;margin: 0.2rem auto; position: relative; top:7.4rem;left:50%; margin-left:-1.8rem; z-index:5;}
 .index-btn-box{background:url(../images/index-btn.png) no-repeat; background-size:100% auto;}
 .index-btn{ display:block; width:100%;height:0.73rem; text-indent:-9999px; overflow:hidden; cursor:pointer;}
@@ -153,10 +156,12 @@ input,textarea,select,button{font-size:1em;}
 
 /*规则*/
 .rule-con{ background:url(../images/bg07.png) repeat; padding:0.1rem; border-radius:5px; color:#fff;}
-.rule-con dt{ text-align:center; margin:0.1rem 0;}
+.rule-con dt{ text-align:center; margin:0.1rem 0;color:#fcf465;font-weight:bold; font-size:0.4rem;}
+.rule-con .step{color:#fcf465; font-weight:bold;}
 .rule-con dt img{ height:0.35rem;}
-.rule-con h5{color:#fff45c;margin:0.15rem 0; font-size:0.32rem; font-weight:normal;}
-.upload-img01{background:url(../images/img06.png) no-repeat; background-size:100% auto;width: 4rem;height:4rem;margin: 0.5rem auto;}
+.rule-con h5{color:#fff45c;margin:0.15rem 0; font-size:0.3rem; font-weight:bold;}
+/*.upload-img01{background:url(../images/img06.png) no-repeat; background-size:100% auto;width: 4rem;height:4rem;margin: 0.5rem auto;}*/
+.upload-img01{background:url(../images/new/img01.png) no-repeat; background-size:100% auto;height:4rem;margin: 0.2rem auto;}
 .rule-btn{background:url(../images/rule-btn.png) no-repeat; background-size:100% auto;display:block; width:100%;height:0.8rem; text-indent:-9999px; overflow:hidden; cursor:pointer;}
 
 /*phone*/

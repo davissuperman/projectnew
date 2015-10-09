@@ -62,7 +62,7 @@ function initPageFontSize(){
 function mnAlert (mes){
 	var htmlStr = "<div class=\"layerBox\">";
 		htmlStr += "<div class=\"layerBg\">";
-		htmlStr += "<p class=\"layerMsg\">"+mes+"</p>";
+		htmlStr += "<div class=\"layerMsg\">"+mes+"</div>";
 		htmlStr += "<button class=\"layerBtn\" onClick=\"javascript:$(this).closest('.layerBox').remove();\">我知道了</button>";
 		htmlStr += "</div></div>";
 	$("body").append(htmlStr);
