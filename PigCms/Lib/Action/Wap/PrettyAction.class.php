@@ -464,6 +464,19 @@ HTML;
             $vote = 1;
         }
         $this->assign('needimgnums',$vote);
+
+        $uniqueViewlist = M('pretty_uniqueviewlist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$userOpenId))->find();
+        if($uniqueViewlist){
+            //不需要增加uniqueviews
+        }else{
+            M("pretty")->where(array('id' => $info['id']))->setInc('uniqueviews');
+            $n = array();
+            $n['fromopenid'] = $userOpenId;
+            $n['toopenid'] = $userOpenId;
+            $n['createtime'] = time();
+            M('pretty_uniqueviewlist')->add($n);
+        }
+
         $this->display();
     }
 
@@ -542,6 +555,17 @@ HTML;
         }
         $this->assign('uploadimagesrc',$uploadImageSrc);
 
+        $uniqueViewlist = M('pretty_uniqueviewlist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$MainOpenId))->find();
+        if($uniqueViewlist){
+            //不需要增加uniqueviews
+        }else{
+            M("pretty")->where(array('id' => $info['id']))->setInc('uniqueviews');
+            $n = array();
+            $n['fromopenid'] = $userOpenId;
+            $n['toopenid'] = $MainOpenId;
+            $n['createtime'] = time();
+            M('pretty_uniqueviewlist')->add($n);
+        }
 
         if($userOpenId == $MainOpenId){
             //自己访问自己的主页 跳转到share页面
