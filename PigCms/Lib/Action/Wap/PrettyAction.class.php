@@ -530,8 +530,19 @@ HTML;
         if(!$gid && isset($info['gid']) && $info['gid'] ){
             $gid = $info['gid'];
         }
-
         $MainOpenId = $info['openid'];
+        //图片是否存在
+        $savePath = './PUBLIC/imagess/';
+        $t = $info['uploadimagetime'];
+        $uploadImageSrc= $savePath."$MainOpenId"."_$t".".jpeg";
+        if(!file_exists($uploadImageSrc)){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
+            exit();
+        }
+        $this->assign('uploadimagesrc',$uploadImageSrc);
+
+
         if($userOpenId == $MainOpenId){
             //自己访问自己的主页 跳转到share页面
             //redirect
@@ -565,10 +576,7 @@ HTML;
         // end views
 
 
-        $savePath = './PUBLIC/imagess/';
-        $t = $info['uploadimagetime'];
-        $uploadImageSrc= $savePath."$MainOpenId"."_$t".".jpeg";
-        $this->assign('uploadimagesrc',$uploadImageSrc);
+
 
         //获取当前已经有了多少拼图
         $imgNums = (int)$this->prettyCount;
