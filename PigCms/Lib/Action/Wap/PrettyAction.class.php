@@ -465,7 +465,16 @@ HTML;
         }
         $this->assign('needimgnums',$vote);
 
-        $uniqueViewlist = M('pretty_uniqueviewlist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$userOpenId))->find();
+        //当天是否访问过
+        $today = time();
+        $start = mktime(0,0,0,date("m",$today),date("d",$today),date("Y",$today));
+        $end = mktime(23,59,59,date("m",$today),date("d",$today),date("Y",$today));
+        $start = date("Y-m-d H:i:s",$start );
+        $end = date("Y-m-d H:i:s",$end );
+//        $uniqueViewlist = M('pretty_uniqueviewlist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$userOpenId))->find();
+        $uniqueViewSql = "SELECT * from pretty_uniqueviewlist where   createtime >= $start and createtime<$end and fromopenid='$userOpenId' and toopenid='$userOpenId'";
+        $uniqueViewlist = M('pretty_uniqueviewlist')->query($uniqueViewSql);
+
         if($uniqueViewlist){
             //不需要增加uniqueviews
         }else{
@@ -473,7 +482,6 @@ HTML;
             $n = array();
             $n['fromopenid'] = $userOpenId;
             $n['toopenid'] = $userOpenId;
-            $n['createtime'] = time();
             M('pretty_uniqueviewlist')->add($n);
         }
 
@@ -555,7 +563,14 @@ HTML;
         }
         $this->assign('uploadimagesrc',$uploadImageSrc);
 
-        $uniqueViewlist = M('pretty_uniqueviewlist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$MainOpenId))->find();
+        //当天是否访问过
+        $today = time();
+        $start = mktime(0,0,0,date("m",$today),date("d",$today),date("Y",$today));
+        $end = mktime(23,59,59,date("m",$today),date("d",$today),date("Y",$today));
+        $start = date("Y-m-d H:i:s",$start );
+        $end = date("Y-m-d H:i:s",$end );
+        $uniqueViewSql = "SELECT * from pretty_uniqueviewlist where   createtime >= $start and createtime<$end and fromopenid='$userOpenId' and toopenid='$MainOpenId'";
+        $uniqueViewlist = M('pretty_uniqueviewlist')->query($uniqueViewSql);
         if($uniqueViewlist){
             //不需要增加uniqueviews
         }else{
@@ -563,7 +578,6 @@ HTML;
             $n = array();
             $n['fromopenid'] = $userOpenId;
             $n['toopenid'] = $MainOpenId;
-            $n['createtime'] = time();
             M('pretty_uniqueviewlist')->add($n);
         }
 
