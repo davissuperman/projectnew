@@ -2,7 +2,7 @@
 
 class PrettyAction extends SjzAction {
     public $title = '携手森田.找回美丽';
-    public $bonusdesc = '携手森田.找回美丽';
+    public $bonusdesc = '12500片面膜，20%中奖概率！不拼投票不设难度，只要你的排名末位数字有幸运的“1”或“8”！';
     public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
