@@ -227,7 +227,7 @@ HTML;
                 $uploadImage = 1;
             }
         //view自增
-        M("pretty")->where(array('id' => $info['id']))->setInc('views');
+        $this->setIncViews($info['id']);
         $this->assign("vote",$vote);
         $this->assign("uploadimage",$uploadImage);
         $this->display();
@@ -267,7 +267,7 @@ HTML;
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
 
-        M("pretty")->where(array('id' => $info['id']))->setInc('views');
+        $this->setIncViews($info['id']);
         //判断用户是否上传过图片
         $savePath = './PUBLIC/imagess/';
         $t = $info['uploadimagetime'];
@@ -341,7 +341,7 @@ HTML;
         $userOpenId= cookie('user_openid');
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         if($info){
-            M("pretty")->where(array('id' => $info['id']))->setInc('views');
+            $this->setIncViews($info['id']);
         }
         // end views
 
@@ -385,7 +385,7 @@ HTML;
         $userOpenId= cookie('user_openid');
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         if($info){
-            M("pretty")->where(array('id' => $info['id']))->setInc('views');
+            $this->setIncViews($info['id']);
         }
         // end views
 
@@ -430,7 +430,7 @@ HTML;
 
         //begin views
         if($info){
-            M("pretty")->where(array('id' => $info['id']))->setInc('views');
+            $this->setIncViews($info['id']);
         }
         // end views
 
@@ -595,7 +595,7 @@ HTML;
 
         //begin views
         if($info){
-            M("pretty")->where(array('id' => $info['id']))->setInc('views');
+            $this->setIncViews($info['id']);
         }
         // end views
 
@@ -696,7 +696,7 @@ HTML;
 
         //begin views
         if($info){
-            M("pretty")->where(array('id' => $info['id']))->setInc('views');
+            $this->setIncViews($info['id']);
         }
         // end views
 
@@ -1018,7 +1018,7 @@ HTML;
 
 
         if($info){
-            M("pretty")->where(array('id' => $info['id']))->setInc('views');
+            $this->setIncViews($info['id']);
         }
         // end views
 
@@ -1035,6 +1035,13 @@ HTML;
 
 
         $this->display();
+    }
+
+    public function setIncViews($id){
+        M("pretty")->where(array('id' => $id))->setInc('views');
+        $m = array();
+        $m['uid'] = $id;
+        M('pretty_viewlist')->add($m);
     }
 
     public function  saveAward(){
