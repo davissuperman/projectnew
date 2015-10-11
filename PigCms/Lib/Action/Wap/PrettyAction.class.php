@@ -196,6 +196,7 @@ HTML;
         if($vote>=1){
         }else{
             $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
+            $info = M('Pretty')->where(array('openid' => $userOpenId))->find();
         }
 
 
