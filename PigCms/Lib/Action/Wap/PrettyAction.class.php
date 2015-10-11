@@ -394,7 +394,7 @@ HTML;
     }
     public function share(){
         $userOpenId= cookie('user_openid');
-        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
