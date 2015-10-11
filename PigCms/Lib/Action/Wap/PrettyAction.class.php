@@ -394,7 +394,7 @@ HTML;
     }
     public function share(){
         $userOpenId= cookie('user_openid');
-//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
@@ -473,7 +473,7 @@ HTML;
         $start = date("Y-m-d H:i:s",$start );
         $end = date("Y-m-d H:i:s",$end );
 //        $uniqueViewlist = M('pretty_uniqueviewlist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$userOpenId))->find();
-        $uniqueViewSql = "SELECT * from pretty_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$userOpenId'";
+        $uniqueViewSql = "SELECT * from tp_pretty_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$userOpenId'";
         $uniqueViewlist = M('pretty_uniqueviewlist')->query($uniqueViewSql);
 
         if($uniqueViewlist){
