@@ -408,7 +408,15 @@ HTML;
             exit();
         }
         $gid = $info['gid'];
-
+        //图片是否存在
+        $savePath = './PUBLIC/imagess/';
+        $t = $info['uploadimagetime'];
+        $uploadImageSrc= $savePath."$userOpenId"."_$t".".jpeg";
+        if(!file_exists($uploadImageSrc)){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Pretty&a=index");
+            exit();
+        }
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
