@@ -420,7 +420,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
             $end = strtotime(date('Y-m-d').'24:00:00');
         }
         $db = M('pretty');
-        $sql = "select *        from tp_pretty  where gid=$gid order by  phonetime asc,sharetime asc";
+        $sql = "select *        from tp_pretty   order by  phonetime asc,sharetime asc";//where gid=$gid
 
         $list = M()->query($sql);
         Log ::  write( count($list));
