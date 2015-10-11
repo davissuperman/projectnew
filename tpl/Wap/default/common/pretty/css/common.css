@@ -379,8 +379,13 @@ input,textarea,select,button{font-size:1em;}
 .upload-btn02{background:url(../images/upload-btn02.png) no-repeat; background-size:100% auto;display:block; width:100%;height:0.8rem; text-indent:-9999px; overflow:hidden; cursor:pointer;}
 
 .pic_edit {position: absolute;top: 0;left:0%;width: 100%;height: 100%;z-index: 99999;background:#89caad;}
-#clipArea {margin: 0 auto;height:6rem; margin-top:1.3rem; z-index:2;}
-.upload-btns{position:absolute;top:7.7rem;left:0; text-align:center; width:100%; z-index:2;}
+.pic_edit .logo{top:-5px;}
+#clipArea {margin: 0 auto;height:6rem; margin-top:0.8rem; z-index:2;}
+.upload-btns{position: fixed;
+  bottom: 0.2rem;
+  left: 0;
+  text-align: center;
+  width: 100%;z-index:3;}
 #clipBtn{background-color:#ef8775;color: #fff;height: 0.8rem;border-radius: 5px;width:2.5rem;font-size: 0.4rem; border: none;}
 #upload2{background-color:#ef8775;color: #fff;height: 0.8rem;border-radius: 5px;width:2.5rem;
   border: none;font-size: 0.4rem;}
