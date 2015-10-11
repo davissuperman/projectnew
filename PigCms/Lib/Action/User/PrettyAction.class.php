@@ -562,8 +562,8 @@ award.address as addres,award.orderid as orderid,award.username as username from
         //每日数据汇总（记录每天活动所有模板所产生的数据总数）
 
         //记录从6.20 到 7.20号每天产生的模板总数
-        $fromDate = strtotime("2015-06-20 00:00:00");
-        $endDate = strtotime("2015-07-20 00:00:00");
+        $fromDate = strtotime("2015-10-01 00:00:00");
+        $endDate = strtotime("2015-12-10 00:00:00");
         $i = 0;
         $datereport = array();
         while($i<35){
@@ -572,8 +572,8 @@ award.address as addres,award.orderid as orderid,award.username as username from
             $eachFrom = $i*$add + $fromDate;
             $eachEnd = $eachFrom + $add;
 
-            $queryGidCount = "SELECT * from tp_countmask where phone != '' and phonetime >= $eachFrom and phonetime<$eachEnd";
-            $list = M('countmask')->query($queryGidCount);
+            $queryGidCount = "SELECT * from tp_pretty where   createtime >= $eachFrom and createtime<$eachEnd";
+            $list = M('pretty')->query($queryGidCount);
 
             if($list){
                 $eachData['date'] = date('Y-m-d',$eachFrom);
@@ -646,8 +646,8 @@ award.address as addres,award.orderid as orderid,award.username as username from
         //每日数据汇总（记录每天活动所有模板所产生的数据总数）
 
         //记录从6.20 到 7.20号每天产生的模板总数
-        $fromDate = strtotime("2015-06-20 00:00:00");
-        $endDate = strtotime("2015-07-20 00:00:00");
+        $fromDate = strtotime("2015-10-01 00:00:00");
+        $endDate = strtotime("2015-11-10 00:00:00");
         $i = 0;
         $datereport = array();
         while($i<35){
@@ -656,8 +656,8 @@ award.address as addres,award.orderid as orderid,award.username as username from
             $eachFrom = $i*$add + $fromDate;
             $eachEnd = $eachFrom + $add;
 
-            $queryGidCount = "SELECT * from tp_countmask where phone != '' and phonetime >= $eachFrom and phonetime<$eachEnd";
-            $list = M('countmask')->query($queryGidCount);
+            $queryGidCount = "SELECT * from tp_pretty where   createtime >= $eachFrom and createtime<$eachEnd";
+            $list = M('pretty')->query($queryGidCount);
 
             if($list){
                 $eachData['date'] = date('Y-m-d',$eachFrom);
@@ -692,23 +692,23 @@ award.address as addres,award.orderid as orderid,award.username as username from
         set_time_limit(0);
 
         //获取所有模板
-        $query = "select gid,title from tp_bonus where type=0";
+        $query = "select gid,title from tp_bonus where type=2";
         $glist = M('bonus')->query($query);
         $this->assign('glist', $glist);
 
         //每日渠道汇总表
         $m = 0;
         $datereport2 = array();
-        $fromDate2 = strtotime("2015-06-20 00:00:00");
-        $endDate2 = strtotime("2015-07-20 00:00:00");
+        $fromDate2 = strtotime("2015-10-01 00:00:00");
+        $endDate2 = strtotime("2015-11-20 00:00:00");
         while($m<35){
             $gidArr = array();
             $add = 24*3600;
             $eachFrom2 = $m*$add + $fromDate2;
             $eachEnd2 = $eachFrom2 + $add;
 
-            $queryGidCount = "SELECT gid, count(id)  as countnumber from tp_countmask where phone != '' and phonetime >= $eachFrom2 and phonetime<$eachEnd2  group by gid ";
-            $list2 = M('countmask')->query($queryGidCount);
+            $queryGidCount = "SELECT gid, count(id)  as countnumber from tp_pretty where  createtime >= $eachFrom2 and createtime<$eachEnd2  group by gid ";
+            $list2 = M('pretty')->query($queryGidCount);
 
             if($list2){
                 foreach($list2 as $each2){
@@ -734,16 +734,16 @@ award.address as addres,award.orderid as orderid,award.username as username from
         //每日渠道汇总表
         $m = 0;
         $datereport2 = array();
-        $fromDate2 = strtotime("2015-06-20 00:00:00");
-        $endDate2 = strtotime("2015-07-20 00:00:00");
+        $fromDate2 = strtotime("2015-10-01 00:00:00");
+        $endDate2 = strtotime("2015-12-10 00:00:00");
         while($m<35){
             $gidArr = array();
             $add = 24*3600;
             $eachFrom2 = $m*$add + $fromDate2;
             $eachEnd2 = $eachFrom2 + $add;
 
-            $queryGidCount = "SELECT gid, count(id)  as countnumber from tp_countmask where phone != '' and phonetime >= $eachFrom2 and phonetime<$eachEnd2  group by gid ";
-            $list2 = M('countmask')->query($queryGidCount);
+            $queryGidCount = "SELECT gid, count(id)  as countnumber from tp_pretty where createtime >= $eachFrom2 and createtime<$eachEnd2  group by gid ";
+            $list2 = M('pretty')->query($queryGidCount);
 
             if($list2){
                 foreach($list2 as $each2){
@@ -758,7 +758,6 @@ award.address as addres,award.orderid as orderid,award.username as username from
 
             $m++;
         }
-
         $filename = "每日渠道汇总" . "统计";
         $this->exportexcelx2($datereport2, $filename);
     }
@@ -767,7 +766,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
         require_once $str . '/PigCms/Lib/Action/User/Classes/PHPExcel.php';
         $objPHPExcel = new PHPExcel();
         //写出表头
-        $query = "select gid,title from tp_bonus where type=0";
+        $query = "select gid,title from tp_bonus where type=2";
         $glist = M('bonus')->query($query);
         $arrayKeyList = array(
             'A1','B1','C1','D1','E1','F1','G1','H1','I1','J1','K1','L1','M1',
@@ -796,7 +795,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
             $obj2 = $objPHPExcel->setActiveSheetIndex(0)
                 ->setCellValue('A' . ($n + 2), $n+1)
                 ->setCellValue('B' . ($n + 2), $data[$n]['date']);
-            $query = "select gid,title from tp_bonus where type=0";
+            $query = "select gid,title from tp_bonus where type=2";
             $glist = M('bonus')->query($query);
             foreach($glist as $key => $each){
                 $obj2 = $obj2->setCellValue($arrayKeyList2[$key+2] . ($n + 2), $data[$n][$each['gid']]);
