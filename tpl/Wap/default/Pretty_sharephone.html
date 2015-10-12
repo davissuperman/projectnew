@@ -176,9 +176,6 @@
             if(phoneinpage == ''){
                 mnAlert("请输入您的手机号码！");
                 return false;
-            }else if(phoneinpage.length != 11){
-                mnAlert("请输入正确的手机号码！");
-                return false;
             }
             $.post(
                     "{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=savePhoneInPage",
