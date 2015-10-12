@@ -163,7 +163,9 @@
     <div class="hudie2"></div>
 </div>
 <div class="btn-box upload-btn-box">
-
+	<div style="color:#fff; margin-bottom:10px;">
+        <p>“如无法成功上传照片，建议更换手机再次尝试”</p>
+    </div>
 
     <!--<a href="javascript:;" title="上传照片" class="upload-btn upload-btn01" id="openUploadLayer">上传照片</a>-->
     <if condition="$uploadimage eq 0">
@@ -189,7 +191,10 @@
         <div class="bg02"></div>
         <div id="clipArea"></div>
         <div class="upload-btns">
-            <div style="color:#fff; margin-bottom:10px;">选择照片，剪裁处理后再上传。</div>
+            <div style="color:#fff; margin-bottom:10px;">
+            	<p style="display:none;">选择照片，剪裁处理后再上传。</p>
+                <p>“如无法成功上传照片，建议更换手机再次尝试”</p>
+           	</div>
             <button id="upload2">选择照片</button>
             <button id="clipBtn">确认剪裁</button>
         </div>
