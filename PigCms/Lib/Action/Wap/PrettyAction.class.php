@@ -662,9 +662,9 @@ HTML;
         //判断当前用户是否已经投过票
         $voteList = M('pretty_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$MainOpenId  ))->find();
         $voteThisUid = 0;
-//        if($voteList){
-//            $voteThisUid = 1;
-//        }
+        if($voteList){
+            $voteThisUid = 1;
+        }
 
         //判断COOKIE用户是否参加过活动
         //如果参见过活动，直接跳转到互动页面，否则是首页
@@ -809,7 +809,7 @@ HTML;
         $toOpenIdFromPost = $this->getOpenIdByUid($toUid);
         //检查此 local openid 是否投过票
         $voteList = M('pretty_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
-        if(true){//!$voteList
+        if(!$voteList){//
             //投票
             $d = array();
             $d['fromopenid'] = $fromOpenIdFromPost;
