@@ -930,13 +930,18 @@ HTML;
 
         $vote = $info['vote'];
         $selfPhoneTime = $info['phonetime'];
+        $p = $info['phone'];
+        $pValue = M('pretty_phonelist')->where(array('phone' => $p))->getField('id');
+
         //查询此用户的排名
         $sql = "select count(id) as c from tp_pretty where phonetime < $selfPhoneTime  and phone != ''";
 
         $c = M('pretty')->query("$sql");
         $c =$c[0];
         $selfOrder = 1*$c['c'] + 1;
-
+        if($pValue && $selfOrder != $pValue ){
+            $selfOrder = $pValue;
+        }
 
         $vote = $this->prettyCount;
         $this->assign("vote",$vote);
