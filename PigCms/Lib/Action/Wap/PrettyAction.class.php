@@ -758,12 +758,12 @@ HTML;
             exit();
         }
         //查看当前提交了手机号数码
-        $countNum = M('pretty')->where("phone != ''")->count('id');
-        if($countNum >= 10000){
-            echo 2;
-            return;
-            exit();
-        }
+//        $countNum = M('pretty')->where("phone != ''")->count('id');
+//        if($countNum >= 10000){
+//            echo 2;
+//            return;
+//            exit();
+//        }
         $id = M('pretty')->where("openid='$fromOpenIdFromPost'")->getField('id');
         //判断此用户是否已经提交了手机号
         $phoneList = M('pretty_phonelist')->where(array('uid' => $id))->find();
