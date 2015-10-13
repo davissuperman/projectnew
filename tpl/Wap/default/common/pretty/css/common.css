@@ -147,7 +147,7 @@ input,textarea,select,button{font-size:1em;}
 /*首页*/
 .index-text{color:#231815; text-align:center; font-weight:bold; display:none;}
 /*.index-img01{ background:url(../images/img02.png) no-repeat; background-size:100% auto;width: 3.5rem;height:3.5rem;margin: 0.25rem auto;}*/
-.index-img01{ background:url(../images/new/index01.png) no-repeat; background-size:100% auto;height:4rem;margin: 0.1rem auto;}
+.index-img01{ background:url(../images/new/index02.png) no-repeat; background-size:100% auto;height:4rem;margin: 0.1rem auto;}
 .index-time{ color:#666; font-weight: bold;}
 .btn-box{width: 3.6rem;height:2rem;margin: 0.2rem auto; position: relative; top:7.4rem;left:50%; margin-left:-1.8rem; z-index:5;}
 .index-btn-box{background:url(../images/index-btn.png) no-repeat; background-size:100% auto;}
