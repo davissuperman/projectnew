@@ -637,7 +637,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 ->setCellValue('S' . ($n + 2), $data[$n]['address'])
                 ->setCellValue('T' . ($n + 2), $data[$n]['orderid'])
                 ->setCellValue('U' . ($n + 2), $data[$n]['level'] )
-                ->setCellValue('V' . ($n + 2), $data[$n]['openid']."_".$data[$n]['uploadimagetime'].".jpeg")
+                ->setCellValue('V' . ($n + 2), $imageUrl.$data[$n]['openid']."_".$data[$n]['uploadimagetime'].".jpeg")
                 ;
 
         }
