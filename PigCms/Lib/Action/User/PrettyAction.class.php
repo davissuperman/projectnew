@@ -405,6 +405,13 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $objWriter->save('php://output');
     }
 
+    public function getUserInfo($id){
+        $r = M('pretty')->where("id=$id")->find();
+        if(!$r){
+            return null;
+        }
+        return $r;
+    }
     public function export() {
         $starta = $_POST['start'];
         $enda = $_POST['end'];
@@ -419,68 +426,142 @@ award.address as addres,award.orderid as orderid,award.username as username from
         if(!$end){
             $end = strtotime(date('Y-m-d').'24:00:00');
         }
-        $db = M('pretty');
-        $sql = "select *        from tp_pretty   order by id asc limit 100";//where gid=$gid
 
-        $list = M()->query($sql);
+
+
         $listArr = array();
         $pL =array();
         if($awardFromPost){
-            $pL = $this->getAwardList();
-        }
-        foreach($list as $key => $each){
+            $phoneList = M('pretty_phonelist')->select();
+            $arr = array();
+            foreach($phoneList as $key =>$eachValue){
+//                if($key >= 5){
+//                    break;
+//                }
+                $id = $eachValue['id'];
+                $uid = $eachValue['uid'];
+                $level = null;
+                if(strrchr((string)"$id","18") == "18"){
+                    $level = 1;
+                }elseif(strrchr((string)"$id","1") == '1'){
+                    $level = 2;
+                }elseif(strrchr((string)"$id","8") == '8'){
+                    $level = 2;
+                }
+                $userInfo = $this->getUserInfo($uid);
+                $tmp = null;
+                $each = $userInfo;
+                $tmp = $each;
+                $gid = $each['gid'];
+                $gInfo = M("bonus")->where(array('gid'=>$gid))->select();
+                $awardInfo = array();
+                $tmp['gidname'] = $gInfo[0]['title'];
+                if($each['createtime']){
+                    $tmp['createtime'] = date('Y-m-d H:i:s', $tmp['createtime']);
+                }else{
+                    $tmp['createtime'] = "无";
+                }
+                if($each['sharetime']){
+                    $tmp['sharetime'] = date('Y-m-d H:i:s', $tmp['sharetime']);
+                }else{
+                    $tmp['sharetime'] = "无";
+                }
+                if($each['phonetime']){
+                    $tmp['phonetime'] = date('Y-m-d H:i:s', $tmp['phonetime']);
+                }else{
+                    $tmp['phonetime'] = "无";
+                }
+                if($each['views']< $each['vote'] || $each['illegal']){
+                    $tmp['illegal'] = "是";
+                }else{
+                    $tmp['illegal'] = "否";
+                }
+                $condition['openid'] = $each['openid'];
+                $resAwardList = M('pretty_award')->where($condition)->select();
+                $tmp['username'] = null;
+                $tmp['userphone'] = null;
+                $tmp['userprovince'] = null;
+                $tmp['city'] = null;
+                $tmp['address'] = null;
+                if($resAwardList){
+                    foreach($resAwardList as $award){
+                        $tmp['username'] = $award['name'];
+                        $tmp['userphone'] = $award['phone'];
+                        $tmp['userprovince'] = $award['province'];
+                        $tmp['city'] = $award['city'];
+                        $tmp['address'] = $award['address'];
+                    }
+                }
+                $tmp['orderid'] = $id;
+                $tmp['level'] = $level;
+                $listArr[] = $tmp;
+            }
+        }else{
+            //全部的数据
+            $db = M('pretty');
+            $sql = "select *        from tp_pretty   order by id asc ";//where gid=$gid limit 100
+            $list = M()->query($sql);
+            foreach($list as $key => $each){
+                $tmp = null;
+                $tmp = $each;
+                $gid = $each['gid'];
+                $gInfo = M("bonus")->where(array('gid'=>$gid))->select();
+                $awardInfo = array();
+                $tmp['gidname'] = $gInfo[0]['title'];
+                if($each['createtime']){
+                    $tmp['createtime'] = date('Y-m-d H:i:s', $tmp['createtime']);
+                }else{
+                    $tmp['createtime'] = "无";
+                }
+                if($each['sharetime']){
+                    $tmp['sharetime'] = date('Y-m-d H:i:s', $tmp['sharetime']);
+                }else{
+                    $tmp['sharetime'] = "无";
+                }
+                if($each['phonetime']){
+                    $tmp['phonetime'] = date('Y-m-d H:i:s', $tmp['phonetime']);
+                }else{
+                    $tmp['phonetime'] = "无";
+                }
+                if($each['views']< $each['vote'] || $each['illegal']){
+                    $tmp['illegal'] = "是";
+                }else{
+                    $tmp['illegal'] = "否";
+                }
+                $condition['openid'] = $each['openid'];
+                $resAwardList = M('pretty_award')->where($condition)->select();
+                $tmp['username'] = null;
+                $tmp['userphone'] = null;
+                $tmp['userprovince'] = null;
+                $tmp['city'] = null;
+                $tmp['address'] = null;
+                if($resAwardList){
+                    foreach($resAwardList as $award){
+                        $tmp['username'] = $award['name'];
+                        $tmp['userphone'] = $award['phone'];
+                        $tmp['userprovince'] = $award['province'];
+                        $tmp['city'] = $award['city'];
+                        $tmp['address'] = $award['address'];
+                    }
+                }
+                $phone = $each['phone'];
+                $orderId = null;
+                $orderId = M('pretty_phonelist')->where("phone='$phone'")->getField('id');
+                $tmp['orderid'] = $orderId;
 
-            if($awardFromPost){
-                //需要导出中奖的
-                $uid = $each['id'];
-                if(!in_array($uid,$pL)){
-                    continue;
+                $level = null;
+                if(strrchr((string)"$orderId","18") == "18"){
+                    $level = 1;
+                }elseif(strrchr((string)"$orderId","1") == '1'){
+                    $level = 2;
+                }elseif(strrchr((string)"$orderId","8") == '8'){
+                    $level = 2;
                 }
+                $tmp['level'] = $level;
+                $listArr[] = $tmp;
             }
-            $tmp = null;
-            $tmp = $each;
-            $gid = $each['gid'];
-            $gInfo = M("bonus")->where(array('gid'=>$gid))->select();
-            $awardInfo = array();
-            $tmp['gidname'] = $gInfo[0]['title'];
-            if($each['createtime']){
-                $tmp['createtime'] = date('Y-m-d H:i:s', $tmp['createtime']);
-            }else{
-                $tmp['createtime'] = "无";
-            }
-            if($each['sharetime']){
-                $tmp['sharetime'] = date('Y-m-d H:i:s', $tmp['sharetime']);
-            }else{
-                $tmp['sharetime'] = "无";
-            }
-            if($each['phonetime']){
-                $tmp['phonetime'] = date('Y-m-d H:i:s', $tmp['phonetime']);
-            }else{
-                $tmp['phonetime'] = "无";
-            }
-            if($each['views']< $each['vote'] || $each['illegal']){
-                $tmp['illegal'] = "是";
-            }else{
-                $tmp['illegal'] = "否";
-            }
-            $condition['openid'] = $each['openid'];
-            $resAwardList = M('pretty_award')->where($condition)->select();
-            $tmp['username'] = null;
-            $tmp['userphone'] = null;
-            $tmp['userprovince'] = null;
-            $tmp['city'] = null;
-            $tmp['address'] = null;
-            if($resAwardList){
-                foreach($resAwardList as $award){
-                    $tmp['username'] = $award['name'];
-                    $tmp['userphone'] = $award['phone'];
-                    $tmp['userprovince'] = $award['province'];
-                    $tmp['city'] = $award['city'];
-                    $tmp['address'] = $award['address'];
-                }
-            }
-            $listArr[] = $tmp;
         }
+
         $title = array();
         $filename = $starta . "~" . $enda . "统计";
         $this->exportexcel($listArr, $title, $filename);
@@ -523,7 +604,9 @@ award.address as addres,award.orderid as orderid,award.username as username from
             ->setCellValue('Q1', '省份')
             ->setCellValue('R1', '城市')
             ->setCellValue('S1', '地址')
-            ->setCellValue('T1', '头像')
+            ->setCellValue('T1', '排名')
+            ->setCellValue('U1', '奖项')
+            ->setCellValue('V1', '头像')
             ;
         //写出内容 UTF-8
         //log :: write( print_r($data,true)  );
@@ -552,7 +635,9 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 ->setCellValue('Q' . ($n + 2), $data[$n]['userprovince'])
                 ->setCellValue('R' . ($n + 2), $data[$n]['city'])
                 ->setCellValue('S' . ($n + 2), $data[$n]['address'])
-                ->setCellValue('T' . ($n + 2), $imageUrl.$data[$n]['openid']."_".$data[$n]['uploadimagetime'].".jpeg")
+                ->setCellValue('T' . ($n + 2), $data[$n]['orderid'])
+                ->setCellValue('U' . ($n + 2), $data[$n]['level'] )
+                ->setCellValue('V' . ($n + 2), $data[$n]['openid']."_".$data[$n]['uploadimagetime'].".jpeg")
                 ;
 
         }
@@ -983,10 +1068,6 @@ award.address as addres,award.orderid as orderid,award.username as username from
 
         }
         return $arr;
-        echo count($arr);
-        foreach($arr as $e){
-            file_put_contents("list.txt", "$e".PHP_EOL, FILE_APPEND);
-        }
     }
 
     public function generate(){
