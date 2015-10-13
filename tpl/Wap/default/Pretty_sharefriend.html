@@ -191,7 +191,7 @@
                 <i class="share-btn02"></i>
             </a>
         <else/>
-            <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=share" title="我也要参加" class="btn-bg01">
+            <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=share" title="我也要参加" class="btn-bg01" id="iwantjoin">
                 <i class="share-btn02"></i>
             </a>
         </if>
@@ -227,6 +227,14 @@
     $(document).ready(function(e) {
         $("#btnShare").click(function(){
             showLayer($("#layer-share"));
+        });
+
+        $("#iwantjoin").click(function(){
+            $.post(
+                    "{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=saveWantJoin",
+                    {uid: "{pigcms::$uid}"},
+                    function (data) {
+                    });
         });
 
         $('#helpvote').click(function(){

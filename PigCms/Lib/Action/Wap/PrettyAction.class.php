@@ -1197,15 +1197,8 @@ HTML;
     * 记录 我也要参加 次数
     */
     public function saveWantJoin(){
-        $endtime =strtotime( $this->endtime );
-        if(time() > $endtime ){
-            echo 0;
-            exit;
-        }
-        $toOpenId = $_POST['toopenid'];
-        $info = M('pretty')->where(array('openid' => $toOpenId))->find();
-        M("pretty")->where(array('id' => $info['id']))->setInc('joins');
-
+        $uid = $_POST['uid'];
+        M("pretty")->where(array('id' => $uid ))->setInc('joins');
     }
 
     /*
