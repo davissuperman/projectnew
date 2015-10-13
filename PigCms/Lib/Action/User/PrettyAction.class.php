@@ -499,7 +499,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
         }else{
             //全部的数据
             $db = M('pretty');
-            $sql = "select *        from tp_pretty   order by id asc ";//where gid=$gid limit 100
+            $sql = "select *  from tp_pretty where createtime>=$start and createtime<$end order by  createtime asc ";//where gid=$gid limit 100
             $list = M()->query($sql);
             foreach($list as $key => $each){
                 $tmp = null;
