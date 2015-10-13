@@ -411,8 +411,8 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $gid=$_POST['gid'];
         $start = strtotime($_POST['start']);
         $end = strtotime($_POST['end']);
-
-        $award = $_POST['award'];
+        $awardFromPost = null;
+        $awardFromPost = $_POST['award'];
         if(!$start){
             $start = strtotime(date('Y-m-d').'00:00:00');
         }
@@ -420,22 +420,24 @@ award.address as addres,award.orderid as orderid,award.username as username from
             $end = strtotime(date('Y-m-d').'24:00:00');
         }
         $db = M('pretty');
-        $sql = "select *        from tp_pretty   order by  phonetime asc,sharetime asc";//where gid=$gid
+        $sql = "select *        from tp_pretty   order by id asc limit 100";//where gid=$gid
 
         $list = M()->query($sql);
-        Log ::  write( count($list));
         $listArr = array();
-        if($award){
+        $pL =array();
+        if($awardFromPost){
             $pL = $this->getAwardList();
         }
         foreach($list as $key => $each){
-            if($award){
+
+            if($awardFromPost){
                 //需要导出中奖的
                 $uid = $each['id'];
                 if(!in_array($uid,$pL)){
                     continue;
                 }
             }
+            $tmp = null;
             $tmp = $each;
             $gid = $each['gid'];
             $gInfo = M("bonus")->where(array('gid'=>$gid))->select();
@@ -463,6 +465,11 @@ award.address as addres,award.orderid as orderid,award.username as username from
             }
             $condition['openid'] = $each['openid'];
             $resAwardList = M('pretty_award')->where($condition)->select();
+            $tmp['username'] = null;
+            $tmp['userphone'] = null;
+            $tmp['userprovince'] = null;
+            $tmp['city'] = null;
+            $tmp['address'] = null;
             if($resAwardList){
                 foreach($resAwardList as $award){
                     $tmp['username'] = $award['name'];
