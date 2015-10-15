@@ -546,7 +546,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 }
                 $phone = $each['phone'];
                 $orderId = null;
-                $orderId = M('pretty_phonelist')->where("phone='$phone'")->getField('id');
+                $orderId = M('pretty_phonelist')->where(array('phone' => $phone) )->getField('id');
                 $tmp['orderid'] = $orderId;
 
                 $level = null;
@@ -1078,7 +1078,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
             $arr2['phone'] = array('eq',$phone);
             $arr = array($arr1,$arr2,'and');
 //            $phoneList = M('pretty_phonelist')->where( $arr)->find();
-            $phoneList = M('pretty_phonelist')->query( "select * from tp_pretty_phonelist where phone = $phone or uid = $uid") ;
+            $phoneList = M('pretty_phonelist')->query( "select * from tp_pretty_phonelist where phone = '$phone' or uid = $uid") ;
             if(!$phoneList){
                 $n = array();
                 $t = time();
