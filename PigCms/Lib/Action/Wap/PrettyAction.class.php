@@ -672,8 +672,7 @@ HTML;
 
     public function vote(){
         $userOpenId= cookie('user_openid');
-//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
-
+        M("pretty_polldata")->where(array('id' => 1))->setInc('pv');
         if(!$userOpenId){
             $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
             $code = trim($_GET["code"]);
@@ -733,7 +732,7 @@ HTML;
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
 
-        $list = M('pretty_poll')->query( "select * from tp_pretty_poll order by vote desc") ;
+        $list = M('pretty_poll')->query( "select * from tp_pretty_poll order by id asc") ;
         $slist = array();
         $savePath = './PUBLIC/imagess/';
         foreach($list as $each){
@@ -1313,23 +1312,7 @@ HTML;
 
     }
     public function saveSharePoll(){
-        $endtime =strtotime( $this->endtime );
-        $userOpenId= cookie('user_openid');
-        $info = M('pretty')->where(array('openid' => $userOpenId))->find();
-        if($info){
-            $id = $info['id'];
-            if(!$info['sharetime']){
-                $m = array();
-                $m['id'] = $info['id'];
-                $m['sharetime'] = time();
-                M("pretty")->save($m);
-            }
-            M("pretty")->where(array('id' => $id))->setInc('share');
-            echo 1;
-        }else{
-            echo 0;
-        }
-
+        M("pretty_polldata")->where(array('id' => 1))->setInc('sharenumber');
     }
     /*
     * 记录 我也要参加 次数

@@ -108,7 +108,7 @@
             },
             success: function (res) {
                 $.ajax({
-                    url: "{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=saveShareNumberToFriends",
+                    url: "{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=saveSharePoll",
                     type:'GET',
                     complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
                     error: function() { mnAlert('系统繁忙 请稍后再试');},
