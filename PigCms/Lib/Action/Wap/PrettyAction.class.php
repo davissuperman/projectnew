@@ -906,8 +906,8 @@ HTML;
         $today = time();
         $start = mktime(0,0,0,date("m",$today),date("d",$today),date("Y",$today));
         $end = mktime(23,59,59,date("m",$today),date("d",$today),date("Y",$today));
-        $start = date("Y-m-d H:i:s",$start );
-        $end = date("Y-m-d H:i:s",$end );
+//        $start = date("Y-m-d H:i:s",$start );
+//        $end = date("Y-m-d H:i:s",$end );
 
         $sql = "SELECT id from tp_pretty_polllist where   createtime >= '$start' and createtime<'$end' and fromopenid='$fromOpenIdFromPost'";
         $voteList = M('pretty_polllist')->query($sql);
