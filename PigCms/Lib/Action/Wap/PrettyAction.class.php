@@ -672,7 +672,7 @@ HTML;
 
     public function vote(){
         $userOpenId= cookie('user_openid');
-
+//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
 
         if(!$userOpenId){
             $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
@@ -720,8 +720,8 @@ HTML;
             $info = M('pretty')->where(array('id' => $id))->find();
             $tmp['name'] = $info['name'];
 
-            $openid = $each['openid'];
-            $t = $each['uploadimagetime'];
+            $openid = $info['openid'];
+            $t = $info['uploadimagetime'];
             $uploadImageSrc= $savePath."$openid"."_$t".".jpeg";
             $tmp['imgsrc'] = $uploadImageSrc;
 
