@@ -711,7 +711,7 @@ HTML;
             }
         }
 
-        $list = M('pretty_poll')->query( "select * from tp_pretty_poll order by vote") ;
+        $list = M('pretty_poll')->query( "select * from tp_pretty_poll order by vote desc") ;
         $slist = array();
         $savePath = './PUBLIC/imagess/';
         foreach($list as $each){
