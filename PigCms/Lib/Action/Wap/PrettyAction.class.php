@@ -678,6 +678,72 @@ HTML;
         $this->display();
     }
 
+    public function vote(){
+        $userOpenId= cookie('user_openid');
+//        $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+
+
+        if(!$userOpenId){
+            $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
+            $code = trim($_GET["code"]);
+            $state = trim($_GET['state']);
+
+            $fansInfo = M('customer_service_fans')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
+            if ($code && $state == 'sentian') {
+                if(empty($fansInfo)){
+                    $webCreatetime = $apidata['web_createtime'];
+                    $web_access_token = '';
+
+                    //重新获取
+                    $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
+                    if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
+                        //code 有错误 需要重定向
+                        $url = $this->url."/index.php?g=Wap&m=Pretty&a=index";
+                        header("location:$url");
+                    }
+                    $m['id'] = $apidata['id'];
+                    $m['web_access_token'] = $userinfoFromApi['access_token'];
+                    $m['refresh_token'] = $userinfoFromApi['refresh_token'];
+                    $m['web_createtime'] = time();
+                    $m['refresh_token_createtime'] = time();
+                    M('Diymen_set')->save($m);
+                    $web_access_token = $userinfoFromApi['access_token'];
+                    cookie('user_openid', $userinfoFromApi['openid'], 315360000);
+                    $userOpenId = $userinfoFromApi['openid'];
+                    Log :: write($userOpenId.' rank get openid by base');
+
+                }
+            } else {
+                $url = urlencode($this->url."/index.php?g=Wap&m=Pretty&a=vote");
+                header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
+                exit;
+            }
+        }
+
+        $list = M('pretty_poll')->query( "select * from tp_pretty_poll order by vote") ;
+        $slist = array();
+        $savePath = './PUBLIC/imagess/';
+        foreach($list as $each){
+            $tmp = array();
+            $id = $each['uid'];
+            $info = M('pretty')->where(array('id' => $id))->find();
+            $tmp['name'] = $info['name'];
+
+            $openid = $each['openid'];
+            $t = $each['uploadimagetime'];
+            $uploadImageSrc= $savePath."$openid"."_$t".".jpeg";
+            $tmp['imgsrc'] = $uploadImageSrc;
+
+            $tmp['vote'] = $each['vote'];
+
+            $tmp['id'] = $each['id'];
+            $tmp['uid'] = $each['uid'];
+            $slist[] = $tmp;
+
+        }
+        $this->assign('info', $slist);
+        $this->display();
+    }
     public function sharePhone(){
         $userOpenId= cookie('user_openid');
   //      $userOpenId='oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
@@ -818,6 +884,54 @@ HTML;
             M('pretty_votelist')->add($d);
             M("pretty")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
 
+            $return = 1;
+        }else{
+            //已经投过票
+            $return = 2;
+        }
+
+        echo $return;
+    }
+    public function savePoll(){
+        $this->setEndTime();
+        $return = 0;
+        $fromOpenIdFromPost= cookie('user_openid');
+//        $fromOpenIdFromPost= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        $toId = $_POST['id'];
+        if(!$toId){
+            exit();
+        }
+        //根据ID取得UID
+        $uid = M('pretty_poll')->where("id=$toId")->getField('uid');
+        if(!$uid){
+            exit();
+        }
+        $userInfo = M('pretty')->where("id=$uid")->find();
+        if(!$userInfo){
+            //非法投票
+            exit();
+        }
+
+        $toOpenIdFromPost = $userInfo['openid'];
+        //检查此 local openid 是否投过票
+        //当天是否访问过
+        $today = time();
+        $start = mktime(0,0,0,date("m",$today),date("d",$today),date("Y",$today));
+        $end = mktime(23,59,59,date("m",$today),date("d",$today),date("Y",$today));
+        $start = date("Y-m-d H:i:s",$start );
+        $end = date("Y-m-d H:i:s",$end );
+
+        $sql = "SELECT id from tp_pretty_polllist where   createtime >= '$start' and createtime<'$end' and fromopenid='$fromOpenIdFromPost'";
+        $voteList = M('pretty_polllist')->query($sql);
+//        $voteList = M('pretty_polllist')->where(array('fromopenid' => $fromOpenIdFromPost, ))->find();//'toopenid'=>$toOpenIdFromPost
+        if(!$voteList){//
+            //投票
+            $d = array();
+            $d['fromopenid'] = $fromOpenIdFromPost;
+            $d['toopenid'] = $toOpenIdFromPost;
+            $d['createtime'] = time();
+            M('pretty_polllist')->add($d);
+            M("pretty_poll")->where(array('id' => $toId))->setInc('vote');
             $return = 1;
         }else{
             //已经投过票
