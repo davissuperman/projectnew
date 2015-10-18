@@ -711,6 +711,28 @@ HTML;
             }
         }
 
+
+        //begin 分享出去的URL
+        $gid = 22;
+        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
+        $noncestr = "Wm3WZYTPz0wzccnW";
+        $timestamp = time();
+        $url = $this->get_url();;
+        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
+        $signature = sha1($str);
+        $this->assign("appid",$appId);
+        $this->assign("timestamp",$timestamp);
+        $this->assign("nonceStr",$noncestr);
+        $this->assign("signature",$signature);
+        $this->assign("shareurl",$this->getShareUrl());
+        $this->assign('gid', $gid);
+
+        $this->assign('title',$this->title);
+        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign("imageUrl",$this->imageUrl);
+        $this->assign("shareimageurl",$this->shareImageUrl);
+        //end
+
         $list = M('pretty_poll')->query( "select * from tp_pretty_poll order by vote desc") ;
         $slist = array();
         $savePath = './PUBLIC/imagess/';
@@ -1290,7 +1312,25 @@ HTML;
         }
 
     }
+    public function saveSharePoll(){
+        $endtime =strtotime( $this->endtime );
+        $userOpenId= cookie('user_openid');
+        $info = M('pretty')->where(array('openid' => $userOpenId))->find();
+        if($info){
+            $id = $info['id'];
+            if(!$info['sharetime']){
+                $m = array();
+                $m['id'] = $info['id'];
+                $m['sharetime'] = time();
+                M("pretty")->save($m);
+            }
+            M("pretty")->where(array('id' => $id))->setInc('share');
+            echo 1;
+        }else{
+            echo 0;
+        }
 
+    }
     /*
     * 记录 我也要参加 次数
     */

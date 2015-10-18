@@ -214,7 +214,52 @@ class PrettyAction  extends BonusAction {
 
         $this->display('list');
     }
+    public function getUidByOpenid($openid){
+        $uid = M('pretty')->where("openid='$openid'")->getField('id');
+        return $uid;
+    }
+    public function addPoll() {
+        if($_POST){
+            $openid = $_POST['openid'];
+            $uid = $this->getUidByOpenid($openid);
 
+            //判断UID是否存在
+            $id = M('pretty_poll')->where("uid='$uid'")->getField('id');
+            if(!$id){
+                $arr = array();
+                $arr['uid'] = $uid;
+                M('pretty_poll')->add($arr);
+            }
+        }
+        $db = M('pretty_poll');
+        $count = $db->count();
+        $page = new Page($count, 25);
+        $info = $db->limit($page->firstRow . ',' . $page->listRows)->select();
+        $this->assign('info', $info);
+        $this->assign('page', $page->show());
+        $this->assign('token', $this->token);
+        $slist = array();
+        $savePath = './PUBLIC/imagess/';
+        foreach($info as $each ){
+            $uid= $each['uid'];
+            $info = M('pretty')->where(array('id' => $uid))->find();
+
+            $info['poll'] = $each['vote'];
+            $openid = $info['openid'];
+            $t = $info['uploadimagetime'];
+            $uploadImageSrc= $savePath."$openid"."_$t".".jpeg";
+            $info['imgsrc'] = $uploadImageSrc;
+            $info['pollid'] = $each['id'];
+            $slist[] = $info;
+        }
+        $this->assign('slist', $slist);
+        $this->display();
+    }
+    public function deletePoll(){
+        $id = $_POST['id'];
+        M('pretty_poll')->where("id = $id")->delete();
+        echo 1;
+    }
     public function ulist() {
         $db = M('doing_list');
         $where = array('gid' => $_GET['gid']);

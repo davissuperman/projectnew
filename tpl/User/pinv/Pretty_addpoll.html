@@ -1,0 +1,121 @@
+<?php $nav = "FUNCTION"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="./tpl/User/pinv/common/css/Text_add.css" rel="stylesheet"/>
+<script src="./tpl/User/pinv/common/js/date/WdatePicker.js"></script>
+
+<div class="container main">
+    <div class="row">
+        <include file="Doing:left"/>
+
+        <div class="col-md-10 main">
+            <div class="panel panel-success">
+                <div class="panel-heading cfix">
+                    <h3 class="panel-title pull-left">添加</h3>
+                    <span class="small"> </span>
+                    <div class="search-box pull-right">
+
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div>
+                    
+                            <div id="choose-date">
+                                <form method="post" action="{pigcms::U('Pretty/addPoll',array('token'=>$token))}">
+                                  输入用户OPENID  <input type="text"  name="openid" style="width:412px" >
+                                <!--<input type="checkbox" style="margin-top:10px" name="award"><span>中奖名单</span>-->
+                                    <button type="submit" class="btn btn-default" style="width:50px"/>添加</button>
+                                </form>
+                                <div id="date-calendar">
+                                    <form method="post" action="{pigcms::U('Pretty/export',array('token'=>$token))}">
+                                        <input type="hidden" name="gid" value="{pigcms::$gid}">
+                                        <!--<input type="text" name="start" id="start" value="{pigcms:$start}" onClick="WdatePicker()" class="form-control" style="width:112px"/><span>-</span>-->
+                                        <!--<input type="text" name="end" id="end" value="{pigcms:$end}" onClick="WdatePicker()" class="form-control" style="width:112px"/>-->
+
+                                        <!--<input type="checkbox" style="margin-top:10px" name="award"><span>中奖名单</span>-->
+                                        <!--<button type="submit" class="btn btn-default" style="width:50px"/>导出</button>-->
+                                    </form>
+                                </div>
+
+                            </div>
+                            <table class="table table-striped" cellspacing="1">
+                                <tr>
+                                    <!--<th class="firstTd">ID</th>-->
+                                    <th class="firstTd">用户ID</th>
+                                    <th class="thirdTd">微信昵称</th>
+                                    <th class="sevenTd">手机号码 </th>
+                                    <!--<th class="sevenTd">参与游戏时间 </th>-->
+                                    <!--<th class="sevenTd">首次分享时间 </th>-->
+                                    <th class="sevenTd">投票数</th>
+                                    <th class="sevenTd">上传的图片</th>
+                                    <th class="sevenTd">删除</th>
+                                </tr>
+                                <volist name="slist" id="o">
+                                    <tr>
+                                        <td width="5%">{pigcms:$o.id}</td>
+                                        <td width="5%">{pigcms:$o.openid}</td>
+                                        <td>{pigcms:$o.phone}</td>
+                                        <!--<td>{pigcms:$comefrom}</td>-->
+                                        <!--<td>{pigcms:$o.subscribe}</td>-->
+                                        <!--<td>{pigcms:$o.sex}</td>-->
+                                        <!--<td>{pigcms:$o.province}</td>-->
+                                        <!--<td><if condition="$o.createtime gt 0">{pigcms:$o.createtime|date="Y-m-d H:i",###}<else/>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;:&#45;&#45; </if></td>-->
+                                        <!--<td><if condition="$o.sharetime gt 0">{pigcms:$o.sharetime|date="Y-m-d H:i",###}<else/>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; &#45;&#45;:&#45;&#45; </if></td>-->
+                                    <td>{pigcms:$o.poll}</td>
+                                    <!--<th class="sevenTd">{pigcms:$o.awardusername}</th>-->
+                                    <!--<th class="sevenTd">{pigcms:$o.awarduserphone}</th>-->
+                                    <!--<th class="sevenTd">{pigcms:$o.awarduserprovince}</th>-->
+                                    <!--<th class="sevenTd">{pigcms:$o.awardusercity}</th>-->
+                                    <!--<th class="sevenTd">{pigcms:$o.awarduseraddress}</th>-->
+                                    <!--<th class="sevenTd">{pigcms:$o.cheat}</th>-->
+                                    <th class="sevenTd" style="cursor:pointer">
+
+                                        <if condition="$o.imgsrc eq  '1' ">
+                                            图片为空
+                                        <else/>
+                                            <img title="点击查看大图" src="{pigcms:$o.imgsrc}" width="50" height="50" class="imgopenid" />
+
+                                        </if>
+                                    </th>
+                                        <th>
+                                            <a href="javascript:;" title="删除" onclick="deleteuser({pigcms:$o.pollid})" >删除
+                                            </a>
+                                        </th>
+                                    </tr>
+                                </volist>
+                                <td colspan="10" style="text-align:right">{pigcms:$page}</td>
+                            </table>
+                           
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>   
+
+</div>
+<include file="Public:footer"/>
+<script type="text/javascript">
+            $(document).ready(function(e) {
+
+
+            });
+    function deleteuser(id){
+        alert(id);
+        $.post(
+                "{pigcms::$siteurl}/index.php?g=User&m=Pretty&a=deletePoll",
+                {id: id},
+                function (data) {
+                            alert('成功删除');
+                            window.location.href = '{pigcms::$siteurl}/index.php?g=User&m=Pretty&a=addPoll&token=rggfsk1394161441';
+
+
+
+                });
+
+
+    }
+</script>
