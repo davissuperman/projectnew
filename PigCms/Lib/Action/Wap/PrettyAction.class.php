@@ -6,7 +6,7 @@ class PrettyAction extends SjzAction {
     public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
-    public $endtime="2015-10-21 24:00:00"; //活动结束时间
+    public $endtime="2015-10-20 23:59:59"; //活动结束时间
     public $debug = true; //上线后应该改成false
     public $defalutGid = 22;
     public $prettyCount = 16;
@@ -32,6 +32,7 @@ class PrettyAction extends SjzAction {
                 }
             }
         }
+        $this->setEndTime();
     }
 
     public function getShareUrl(){
@@ -106,16 +107,6 @@ class PrettyAction extends SjzAction {
                 echo <<<HTML
                 <center>
 <h1>活动已经结束！</h1>
-<h2>
-登记收货地址信息截止至
-7月26日24：00<br/>
-登记方法：<br/>
-在森田微信服务号上点击
-”查询排名“菜单查看排名，<br/>
-点击“填写/查询领奖信息”
-请认真填写您的收货信息！<br/>
-我们将于8月初开始寄送奖品！
-</h2>
 </center>
 HTML;
 
