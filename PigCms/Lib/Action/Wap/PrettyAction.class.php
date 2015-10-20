@@ -32,7 +32,6 @@ class PrettyAction extends SjzAction {
                 }
             }
         }
-        $this->setEndTime();
     }
 
     public function getShareUrl(){
@@ -224,7 +223,7 @@ HTML;
     }
 
     public function upload(){
-//        $this->setEndTime();
+        $this->setEndTime();
         $userOpenId= cookie('user_openid');
         if(!$userOpenId){
             //redirect
@@ -294,6 +293,7 @@ HTML;
     }
 
     public function rule(){
+        $this->setEndTime();
         $userOpenId= cookie('user_openid');
         if(!$userOpenId){
             //redirect
@@ -337,6 +337,7 @@ HTML;
 
 
     public function rank1(){
+        $this->setEndTime();
         $userOpenId= cookie('user_openid');
         if(!$userOpenId){
             //redirect
@@ -378,6 +379,7 @@ HTML;
         $this->display();
     }
     public function share(){
+        $this->setEndTime();
         $userOpenId= cookie('user_openid');
         if(!$userOpenId){
             //redirect
@@ -484,6 +486,7 @@ HTML;
 
 
     public function sharefriend(){
+        $this->setEndTime();
         //这里是隐性获取OPENID 是朋友圈里面的人打开这个页面
         //获取OPENID 用户没有感知
         $userOpenId= cookie('user_openid');
@@ -748,6 +751,7 @@ HTML;
         $this->display();
     }
     public function sharePhone(){
+        $this->setEndTime();
         $userOpenId= cookie('user_openid');
         if(!$userOpenId){
             //redirect
@@ -818,6 +822,7 @@ HTML;
         return $uid;
     }
     public function savePhoneInPage(){
+        $this->setEndTime();
         $phone = $_POST['phoneinpage'];
         $fromOpenIdFromPost= cookie('user_openid');
         if(!$fromOpenIdFromPost){
@@ -893,7 +898,6 @@ HTML;
         echo $return;
     }
     public function savePoll(){
-        $this->setEndTime();
         $return = 0;
         $fromOpenIdFromPost= cookie('user_openid');
 //        $fromOpenIdFromPost= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
@@ -1062,6 +1066,7 @@ HTML;
     }
 
     public function form(){
+        $this->setEndTime();
         $userOpenId= cookie('user_openid');
         if(!$userOpenId){
             //redirect
@@ -1280,6 +1285,7 @@ HTML;
      * 记录转发次数
      */
     public function saveShareNumberToFriends(){
+        $this->setEndTime();
         $endtime =strtotime( $this->endtime );
         if(time() > $endtime ){
             echo 0;
@@ -1317,6 +1323,7 @@ HTML;
     * 记录 帮忙投票 次数
     */
     public function saveHelpVote(){
+        $this->setEndTime();
         $return = 0;
         $endtime =strtotime( $this->endtime );
         if(time() > $endtime ){
