@@ -718,7 +718,7 @@ HTML;
         $this->assign("timestamp",$timestamp);
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
-        $this->assign("shareurl",$this->getShareUrl());
+        $this->assign("shareurl",$this->url."/index.php?g=Wap&m=Pretty&a=vote");
         $this->assign('gid', $gid);
 
         $this->assign('title','“携手森田.找回美丽”第二阶段票选活动');
