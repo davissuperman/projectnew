@@ -945,7 +945,6 @@ HTML;
         echo $return;
     }
     public function saveFormInfo(){
-        $this->setEndTime();
         $return = 0;
         $userOpenId= cookie('user_openid');
 
@@ -1066,7 +1065,7 @@ HTML;
     }
 
     public function form(){
-        $this->setEndTime();
+//        $this->setEndTime();
         $userOpenId= cookie('user_openid');
         if(!$userOpenId){
             //redirect
