@@ -666,6 +666,7 @@ HTML;
 
     public function vote(){
         $userOpenId= cookie('user_openid');
+//        $userOpenId= 'oP9fCt-JvXkTShBQIin7jtYF0i6U';
         M("pretty_polldata")->where(array('id' => 1))->setInc('pv');
         if(!$userOpenId){
             $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
@@ -720,8 +721,8 @@ HTML;
         $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
 
-        $this->assign('title',$this->title);
-        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign('title','“携手森田.找回美丽”第二阶段票选活动');
+        $this->assign('bonusdesc','朋友们快来帮我投票吧！');
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
