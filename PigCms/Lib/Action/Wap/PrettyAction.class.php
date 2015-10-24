@@ -1066,7 +1066,7 @@ HTML;
     }
 
     public function form(){
-//        $this->setEndTime();
+        $this->setEndTime();
         $userOpenId= cookie('user_openid');
         if(!$userOpenId){
             //redirect
