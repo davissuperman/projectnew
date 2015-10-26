@@ -98,7 +98,19 @@ class PrettyAction extends SjzAction {
             M("pretty")->add($d);
         }
     }
+    public function setEndTime2(){
+        $endtime =strtotime( "2015-10-27 23:59:59" );
+        if (time() > $endtime) {//活动是否结束
 
+            echo <<<HTML
+                <center>
+<h1>活动已经结束！</h1>
+</center>
+HTML;
+
+            exit();
+        }
+    }
         public function setEndTime(){
             $endtime =strtotime( $this->endtime );
             if (time() > $endtime) {//活动是否结束
@@ -665,6 +677,7 @@ HTML;
     }
 
     public function vote(){
+        $this->setEndTime2();
         $userOpenId= cookie('user_openid');
         M("pretty_polldata")->where(array('id' => 1))->setInc('pv');
         if(!$userOpenId){
@@ -898,6 +911,7 @@ HTML;
         echo $return;
     }
     public function savePoll(){
+        $this->setEndTime2();
         $return = 0;
         $fromOpenIdFromPost= cookie('user_openid');
 //        $fromOpenIdFromPost= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
@@ -945,6 +959,7 @@ HTML;
         echo $return;
     }
     public function saveFormInfo(){
+        $this->setEndTime2();
         $return = 0;
         $userOpenId= cookie('user_openid');
 
