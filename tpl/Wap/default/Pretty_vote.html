@@ -136,12 +136,33 @@
     });
 </script>
 </head>
-<body id="body">
+<body id="body" style="background-color:#ffffff;">
 <div class="logo"></div>
-<table class="table table-striped" cellspacing="1">
+<div style="padding-top: 10px;">
+    <center>关注
+        <a href="http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=400050778&idx=1&sn=6f6a614fd93e3d207a303c03bb16d616&scene=0#rd">森田药妆</a>
+       <br/> 官方微信，活动月月不停！
+    </center>
+</div>
+<div style="padding :20px 20px 20px 20px;">
+    <center>
+        <h3>“携手森田找回美丽”</h3>
+    </center>
+    <div>
+        ——幸运参赛者第二轮票选活动<br/>
+        活动时间：2015年10月23日——27日。<br/>
+        活动规则：根据得票数量确定活动排名，每个微信好友每天限投一票。<br/>
+        奖项设定：<br/>
+        一等奖 排名前两名  奖森田面膜20盒<br/>
+        二等奖排名第三至第五名   奖森田面膜10盒<br/>
+        其余入围者，奖森田面膜2盒(违规刷票或其他任何作弊方式参与，均取消参赛资格)
+    </div>
+</div>
+<table class="table table-striped" cellspacing="1" style="padding:20px 20px 20px 20px">
     <volist name="info" id="o">
         <tr>
             <!--<th class="firstTd">ID</th>-->
+            <th class="firstTd">{pigcms:$o.id}</th>
             <th class="firstTd">{pigcms:$o.name}</th>
             <th class="thirdTd"><img src="{pigcms:$o.imgsrc}" width="100" height="100" /></th>
             <th class="sevenTd"> 投票数:{pigcms:$o.vote}</th>

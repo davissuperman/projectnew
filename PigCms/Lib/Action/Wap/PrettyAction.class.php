@@ -679,6 +679,7 @@ HTML;
     public function vote(){
         $this->setEndTime2();
         $userOpenId= cookie('user_openid');
+//        $userOpenId= 'oP9fCt-JvXkTShBQIin7jtYF0i6U';
         M("pretty_polldata")->where(array('id' => 1))->setInc('pv');
         if(!$userOpenId){
             $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
@@ -730,11 +731,11 @@ HTML;
         $this->assign("timestamp",$timestamp);
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
-        $this->assign("shareurl",$this->getShareUrl());
+        $this->assign("shareurl",$this->url."/index.php?g=Wap&m=Pretty&a=vote");
         $this->assign('gid', $gid);
 
-        $this->assign('title',$this->title);
-        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign('title','“携手森田.找回美丽”第二阶段票选活动');
+        $this->assign('bonusdesc','朋友们快来帮我投票吧！');
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
@@ -1080,7 +1081,7 @@ HTML;
     }
 
     public function form(){
-//        $this->setEndTime();
+        $this->setEndTime();
         $userOpenId= cookie('user_openid');
         if(!$userOpenId){
             //redirect
