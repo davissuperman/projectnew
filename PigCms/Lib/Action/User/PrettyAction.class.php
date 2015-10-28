@@ -611,6 +611,61 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $filename = $starta . "~" . $enda . "统计";
         $this->exportexcel($listArr, $title, $filename);
     }
+    public function secondexport() {
+        $listArr = array();
+        $pL =array();
+            //全部的数据
+            $db = M('pretty_poll');
+            $sql = "SELECT p.vote as poll, t.* FROM `tp_pretty_poll` as p left join tp_pretty as t on (t.id=p.uid) order by p.vote desc";//where gid=$gid limit 100
+            $list = M()->query($sql);
+            foreach($list as $key => $each){
+                $tmp = null;
+                $tmp = $each;
+                $listArr[] = $tmp;
+            }
+
+        $title = array();
+        $filename =   "统计";
+        $this->secondexportexcel($listArr, $title, $filename);
+    }
+    public function secondexportexcel($data = array(), $title = array(), $filename = 'report') {
+        $str = substr(THINK_PATH, 0, -1);
+        require_once $str . '/PigCms/Lib/Action/User/Classes/PHPExcel.php';
+        $objPHPExcel = new PHPExcel();
+        //写出表头
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A1', 'ID')
+            ->setCellValue('B1', 'OPENID')
+            ->setCellValue('C1', '微信昵称')
+            ->setCellValue('D1', '手机号')
+            ->setCellValue('E1', '投票数')
+            ->setCellValue('F1', '头像')
+        ;
+        //写出内容 UTF-8
+        //log :: write( print_r($data,true)  );
+        $imageUrl = "http://wx.drjou.cc/PUBLIC/imagess/";
+        for ($n = 0; $n < count($data); $n++) {
+            $name = $data[$n]['name'];
+            $name = $this->ReplaceSpecialChar($name);
+            $name = str_replace('=','',$name);
+            $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A' . ($n + 2), $n+1)
+                ->setCellValue('B' . ($n + 2), $data[$n]['openid'])
+                ->setCellValue('C' . ($n + 2),  $name)
+                ->setCellValue('D' . ($n + 2),  $data[$n]['phone'])
+                ->setCellValue('E' . ($n + 2),$data[$n]['poll'])
+                ->setCellValue('F' . ($n + 2), $imageUrl.$data[$n]['openid']."_".$data[$n]['uploadimagetime'].".jpeg")
+            ;
+
+        }
+        $objPHPExcel->getActiveSheet()->setTitle('Simple');
+        $objPHPExcel->setActiveSheetIndex(0);
+        header('Content-Type: application/vnd.ms-excel');
+        header("Content-Disposition: attachment;filename=" . date("Y-m-d h:i") . ".xls");
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        $objWriter->save('php://output');
+    }
     function ReplaceSpecialChar($C_char){//过滤特殊字符
         $C_char=HTMLSpecialChars($C_char); //将特殊字元转成 HTML 格式
         $C_char=str_replace(",","",$C_char); //替换英文逗号,
