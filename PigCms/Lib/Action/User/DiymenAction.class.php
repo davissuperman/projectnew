@@ -205,9 +205,8 @@ class DiymenAction extends UserAction {
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $tmpInfo = curl_exec($ch);
-
-
-        if (curl_errno($ch)) {
+        $array = json_decode($tmpInfo,true);
+        if (curl_errno($ch) || $array['errcode'] != 0) {
             return false;
         } else {
 
