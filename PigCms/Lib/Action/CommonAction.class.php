@@ -889,6 +889,10 @@ class CommonAction extends Action {
         $text = "<a href='$url'>北京新世界利莹线下活动</a>";
         return array($text, 'text');
     }
+    function checkWrongCode($keyword,$data){
+        $text = "请输入16位防伪码";
+        return array($text, 'text');
+    }
     function Yinzuo($keyword,$data){
         $openId = (string)$data['FromUserName'];
         $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Yinzuo&a=index&openid=$openId";
@@ -1150,6 +1154,10 @@ class CommonAction extends Action {
             case '微房产': $Estate = M('Estate')->where(array('token' => $this->token))->find();
                 return array(array(array($Estate['title'], str_replace('&nbsp;', '', strip_tags(htmlspecialchars_decode($Estate['estate_desc']))), $Estate['cover'], C('site_url') . '/index.php?g=Wap&m=Estate&a=index&&token=' . $this->token . '&wecha_id=' . $this->data['FromUserName'] . '&hid=' . $Estate['id'] . '&sgssz=mp.weixin.qq.com')), 'news');
                 break;
+            case is_numeric( str_replace(" ","",$keyword)  )&&((strlen(str_replace(" ","",$keyword)) < 16) || (strlen(str_replace(" ","",$keyword)) > 16) ):
+                //验证防伪码
+                return $this->checkWrongCode($keyword);
+                break;
             case is_numeric( str_replace(" ","",$keyword)  ) && (strlen(str_replace(" ","",$keyword)) == 16):
                 //验证防伪码
                 return $this->checkCode($keyword);
@@ -1160,7 +1168,7 @@ class CommonAction extends Action {
                 if ($check ['diynum'] != 1) {
                     return array(C('connectout'), 'text');
                 } else {
-                    file_put_contents('d:/8.txt', var_export($keyword, TRUE));    
+                    //file_put_contents('d:/8.txt', var_export($keyword, TRUE));
                     return $this->keyword($keyword,$data);
                 }
         }
