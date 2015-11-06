@@ -14,36 +14,34 @@
 <title>森田药妆81周年</title>
 </head>
 <body id="body">
-    <div class="game-box">
-    	<div class="game-img game-img01"></div>
+    <div class="game-box" id="game-box">
+    	<div class="game-img game-img04"></div>
+    	<div class="game-img game-img03"></div>
         <div class="game-img game-img02"></div>
-        <div class="game-img game-img03"></div>
-        <div class="game-img game-img04"></div>
+    	<div class="game-img game-img01"></div>
+    	<div class="game-img game-img19"></div>
+        <div class="game-img game-img17"></div>
+        <div class="game-img game-img24"></div>
+        <div class="game-img game-img25"></div>
+        <div class="game-img game-img07"></div>
+        <div class="game-img game-img18"></div>
         <div class="game-img game-img05"></div>
         <div class="game-img game-img06"></div>
-        <div class="game-img game-img07"></div>
-        <div class="game-img game-img08"></div>
         <div class="game-img game-img09"></div>
+        <div class="game-img game-img08"></div>
+        <div class="game-img game-img14"></div>
         <div class="game-img game-img10"></div>
         <div class="game-img game-img11"></div>
         <div class="game-img game-img12"></div>
         <div class="game-img game-img13"></div>
-        <div class="game-img game-img14"></div>
         <div class="game-img game-img15"></div>
         <div class="game-img game-img16"></div>
-        <div class="game-img game-img17"></div>
-        <div class="game-img game-img18"></div>
-        <div class="game-img game-img19"></div>
         <div class="game-img game-img20"></div>
         <div class="game-img game-img21"></div>
         <div class="game-img game-img22"></div>
         <div class="game-img game-img23"></div>
-        <div class="game-img game-img24"></div>
-        <div class="game-img game-img25"></div>
-        
-        <div class="game-img game-img26"></div>
     </div>
-    <div class="need-people">还差<strong id="piao-number1">25</strong>位好友帮忙</div>
+    <div class="need-people">还差<strong id="piao-number">0</strong>位好友帮忙</div>
     <div class="game-btns">
     	<p><a href="javascript:;" title="点我为蛋糕上色" class="game-btn game-btn01">点我为蛋糕上色</a></p>
       	<p><a href="javascript:;" title="邀请好友帮忙" class="game-btn game-btn02" id="btnShare">邀请好友帮忙</a></p>
@@ -80,7 +78,7 @@
     	$(document).ready(function(e) {
             $("#btnShare").click(function(){
 				showLayer($("#layer-share"));
-				$("#piao-number2").html($("#piao-number1").html());
+				$("#piao-number2").html($("#piao-number").html());
 			});
         });
 		

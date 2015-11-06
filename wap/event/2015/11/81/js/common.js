@@ -3,8 +3,25 @@ $(document).ready(function(e) {
 	initPageFontSize();
 	closeLayer();
 	//hideHoverBox();
+	doImageToColor();
 });
 
+function doImageToColor(){
+	var $game_box = $("#game-box");	
+	var $piao_number = $("#piao-number");
+	var piao_number = $piao_number.html();
+	var has_number = 0;
+	if(piao_number != ""){
+		has_number = 25 - parseFloat(piao_number);
+	}
+	
+	$game_box.children(".game-img").each(function(index){
+		var $curImg = $(this);
+		if(index < has_number){
+			$curImg.show();
+		}
+	});
+}
 
 function hideHoverBox(){
 	if($(".com-box-hover").css("display") != 'none'){
