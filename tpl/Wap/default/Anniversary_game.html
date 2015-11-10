@@ -107,7 +107,7 @@
             },
             success: function (res) {
                 $.ajax({
-                    url: "{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=saveShareNumberToFriends",
+                    url: "{pigcms::$siteurl}/index.php?g=Wap&m=Pretty&a=saveShareNumberToFriends",
                     type:'GET',
                     complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
                     error: function() { },
@@ -136,16 +136,76 @@
 </script>
 </head>
 <body id="body">
-<div class="img-box">
-    <p><img src="{pigcms::RES}/anniversary/images/img_01.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/anniversary/images/img_02.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/anniversary/images/img_03.png" style="width:90%;"/></p>
-
-    <div class="index-btns">
-        <p><a href="{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=game" title="参加活动" class="index-btn index-btn01">参加活动</a></p>
-        <p><a href="{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=rule" title="活动详情" class="index-btn index-btn02">活动详情</a></p>
-    </div>
-
+<div class="game-box" id="game-box">
+    <div class="game-img game-img04"></div>
+    <div class="game-img game-img03"></div>
+    <div class="game-img game-img02"></div>
+    <div class="game-img game-img01"></div>
+    <div class="game-img game-img19"></div>
+    <div class="game-img game-img17"></div>
+    <div class="game-img game-img24"></div>
+    <div class="game-img game-img25"></div>
+    <div class="game-img game-img07"></div>
+    <div class="game-img game-img18"></div>
+    <div class="game-img game-img05"></div>
+    <div class="game-img game-img06"></div>
+    <div class="game-img game-img09"></div>
+    <div class="game-img game-img08"></div>
+    <div class="game-img game-img14"></div>
+    <div class="game-img game-img10"></div>
+    <div class="game-img game-img11"></div>
+    <div class="game-img game-img12"></div>
+    <div class="game-img game-img13"></div>
+    <div class="game-img game-img15"></div>
+    <div class="game-img game-img16"></div>
+    <div class="game-img game-img20"></div>
+    <div class="game-img game-img21"></div>
+    <div class="game-img game-img22"></div>
+    <div class="game-img game-img23"></div>
 </div>
+<div class="need-people">还差<strong id="piao-number">25</strong>位好友帮忙</div>
+<div class="game-btns">
+    <p><a href="javascript:;" title="点我为蛋糕上色" class="game-btn game-btn01">点我为蛋糕上色</a></p>
+    <p><a href="javascript:;" title="邀请好友帮忙" class="game-btn game-btn02" id="btnShare">邀请好友帮忙</a></p>
+    <p><a href="{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=rank" title="查询排名" class="game-btn game-btn03">查询排名</a></p>
+</div>
+
+<div class="game-btns">
+    <p><a href="javascript:;" title="点我为蛋糕上色" class="game-btn game-btn01">点我为蛋糕上色</a></p>
+    <p><a href="index.html" title="我也要参加" class="game-btn game-btn04">我也要参加</a></p>
+    <p><a href="{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=rule" title="活动详情" class="game-btn game-btn05">活动详情</a></p>
+</div>
+
+
+<div class="layer-box hide" id="layer-box">
+    <div class="layer-bg"></div>
+    <div class="layer-con">
+        <div class="layer-share" id="layer-share">
+            <div class="ta-r">
+                <i class="shou"></i>
+            </div>
+            <div class="text">
+                <p>点击右上角</p>
+                <p>分享给3个群或好友</p>
+                <p>才能开启投票按钮</p>
+                <div>还差<strong id="piao-number2"></strong>票</div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function(e) {
+        $("#btnShare").click(function(){
+            showLayer($("#layer-share"));
+            $("#piao-number2").html($("#piao-number").html());
+        });
+    });
+
+</script>
+
+
 </body>
 </html>
