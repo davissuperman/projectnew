@@ -969,7 +969,11 @@ class CommonAction extends Action {
         $text = "<a href='$url'>上海杨浦大润发线下活动</a>";
         return array($text, 'text');
     }
-
+    function anni(){
+        $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Anniversary";
+        $text = "<a href='$url'>81周年</a>";
+        return array($text, 'text');
+    }
     function pretty(){
         $url =  "http://wx.drjou.cc/index.php?g=Wap&m=Pretty";
         $text = "<a href='$url'>pretty</a>";
@@ -1095,6 +1099,9 @@ class CommonAction extends Action {
                 break;
             case 'pretty' :
                 return $this->pretty();
+                break;
+            case 'anni' :
+                return $this->anni();
                 break;
             case '主页' :
                 return $this->home();

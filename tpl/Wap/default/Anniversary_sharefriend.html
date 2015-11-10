@@ -164,16 +164,18 @@
     <div class="game-img game-img22"></div>
     <div class="game-img game-img23"></div>
 </div>
-<div class="need-people">还差<strong id="piao-number">25</strong>位好友帮忙</div>
+<div class="need-people">还差<strong id="piao-number">{pigcms::$imgnums}</strong>位好友帮忙</div>
 <div class="game-btns">
-    <p><a href="javascript:;" title="点我为蛋糕上色" class="game-btn game-btn01">点我为蛋糕上色</a></p>
-    <p><a href="javascript:;" title="邀请好友帮忙" class="game-btn game-btn02" id="btnShare">邀请好友帮忙</a></p>
-    <p><a href="{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=rank" title="查询排名" class="game-btn game-btn03">查询排名</a></p>
-</div>
-
-<div class="game-btns">
-    <p><a href="javascript:;" title="点我为蛋糕上色" class="game-btn game-btn01">点我为蛋糕上色</a></p>
-    <p><a href="index.html" title="我也要参加" class="game-btn game-btn04">我也要参加</a></p>
+    <if condition="$sharenumberindatabase egt  3">
+        <if condition="$havevoted eq  1">
+            <p><a href="javascript:;" title="点我为蛋糕上色" class="game-btn game-btn01" id="helpvote">点我为蛋糕上色</a></p>
+        <else/>
+            <p><a href="javascript:;" title="点我为蛋糕上色" class="game-btn game-btn01 clicked" id="helpvote">点我为蛋糕上色</a></p>
+        </if>
+    <else/>
+        <p><a href="javascript:;" title="点我为蛋糕上色" class="game-btn game-btn01 clicked">点我为蛋糕上色</a></p>
+    </if>
+    <p><a href="{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=index" title="我也要参加" class="game-btn game-btn04">我也要参加</a></p>
     <p><a href="{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=rule" title="活动详情" class="game-btn game-btn05">活动详情</a></p>
 </div>
 
@@ -202,6 +204,29 @@
         $("#btnShare").click(function(){
             showLayer($("#layer-share"));
             $("#piao-number2").html($("#piao-number").html());
+        });
+
+        $('#helpvote').click(function(){
+            var $helpvote = $('#helpvote');
+            if($helpvote.hasClass("clicked")){
+                mnAlert('已帮过！');
+                return false;
+            }
+            $helpvote.addClass("clicked");
+            $.post(
+                    "{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=saveVote2",
+                    {uid: "{pigcms::$uid}"},
+                    function (data) {
+                        $helpvote.removeClass("clicked");
+                        if (data != '') {
+                            //			console.info(data);
+                            //data 为返回文件名；
+                            mnAlert('提交成功');
+                            window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=sharefriend&uid={pigcms::$uid}&gid={pigcms::$gid}';
+                        }else{
+                            //图片提交失败
+                        }
+                    });
         });
     });
 
