@@ -137,70 +137,46 @@
 </script>
 </head>
 <body id="body">
-<div class="logo"></div>
-
-<div class="com-box-hover"></div>
-<div class="com-box"></div>
-
-<div class="com-box-con">
-    <div class="inner-box">
-        <div class="upload-img">
-            <img src="{pigcms::$uploadimagesrc}" alt="" class="tu" id="imageAddr"/>
-            <!--div id="imgArea"></div-->
-            <div id="vvg">
-                <div id="vvgBox">
-                    <ul id="gameCanvas"></ul>
-                </div>
-            </div>
-            <input type="hidden" id="imgNums" value="{pigcms::$needimgnums}" />
-            <!--div class="shadown"></div-->
-        </div>
-
-
-    </div>
-    <div class="hudie1"></div>
-    <div class="hudie2"></div>
+<div class="game-box" id="game-box">
+    <div class="game-img game-img04"></div>
+    <div class="game-img game-img03"></div>
+    <div class="game-img game-img02"></div>
+    <div class="game-img game-img01"></div>
+    <div class="game-img game-img19"></div>
+    <div class="game-img game-img17"></div>
+    <div class="game-img game-img24"></div>
+    <div class="game-img game-img25"></div>
+    <div class="game-img game-img07"></div>
+    <div class="game-img game-img18"></div>
+    <div class="game-img game-img05"></div>
+    <div class="game-img game-img06"></div>
+    <div class="game-img game-img09"></div>
+    <div class="game-img game-img08"></div>
+    <div class="game-img game-img14"></div>
+    <div class="game-img game-img10"></div>
+    <div class="game-img game-img11"></div>
+    <div class="game-img game-img12"></div>
+    <div class="game-img game-img13"></div>
+    <div class="game-img game-img15"></div>
+    <div class="game-img game-img16"></div>
+    <div class="game-img game-img20"></div>
+    <div class="game-img game-img21"></div>
+    <div class="game-img game-img22"></div>
+    <div class="game-img game-img23"></div>
 </div>
-<div class="btn-box share-btn-box ta-c">
-    <if condition="$imgnums neq 0">
-        <p class="txt">—还需要<span class="c1">{pigcms::$imgnums}</span>位好友帮忙—</p>
-    </if>
-
-    <if condition="$openid neq $mainopenid">
-        <if condition="$votetothisuid eq 0 and $imgnums neq 0">
-            <a href="javascript:;" title="帮忙拼图1" class="btn-bg01" id="helpvote">
-                <i class="share-btn03"></i>
-            </a>
-        <elseif condition="$votetothisuid eq 1 and $imgnums neq 0"/>
-            <a href="javascript:;" title="帮忙拼图2" class="btn-bg01 clicked" id="helpvote" >
-                <i class="share-btn03"></i>
-            </a>
-        </if>
-
-    </if>
-
-    <if condition="$imgnums neq 0">
-        <a href="javascript:;" title="邀请好友帮忙" class="btn-bg02" id="btnShare">
-            <i class="share-btn01"></i>
-        </a>
-    </if>
-
-    <if condition="$openid neq $mainopenid">
-        <if condition="$cookiejoin eq 0">
-            <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=index" title="我也要参加" class="btn-bg01">
-                <i class="share-btn02"></i>
-            </a>
-        <else/>
-            <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=share" title="我也要参加" class="btn-bg01" id="iwantjoin">
-                <i class="share-btn02"></i>
-            </a>
-        </if>
-
-    </if>
-
+<div class="need-people">还差<strong id="piao-number">25</strong>位好友帮忙</div>
+<div class="game-btns">
+    <p><a href="javascript:;" title="点我为蛋糕上色" class="game-btn game-btn01">点我为蛋糕上色</a></p>
+    <p><a href="javascript:;" title="邀请好友帮忙" class="game-btn game-btn02" id="btnShare">邀请好友帮忙</a></p>
+    <p><a href="{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=rank" title="查询排名" class="game-btn game-btn03">查询排名</a></p>
 </div>
-<div class="bg01"></div>
-<div class="bg02"></div>
+
+<div class="game-btns">
+    <p><a href="javascript:;" title="点我为蛋糕上色" class="game-btn game-btn01">点我为蛋糕上色</a></p>
+    <p><a href="index.html" title="我也要参加" class="game-btn game-btn04">我也要参加</a></p>
+    <p><a href="{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=rule" title="活动详情" class="game-btn game-btn05">活动详情</a></p>
+</div>
+
 
 <div class="layer-box hide" id="layer-box">
     <div class="layer-bg"></div>
@@ -210,56 +186,25 @@
                 <i class="shou"></i>
             </div>
             <div class="text">
-                <p>每人只能拼一块拼图哦，</p>
-                <p>点击右上角“···”，</p>
-                <p>发送给你的朋友们，</p>
-                <p>让他们帮你</p>
-                <p>完成拼图，找回美丽！</p>
-                <div class="share-hy"><span class="fl">选择</span><i class="fl"></i>将活动分享<p>给你的好友</p></div>
-                <div class="share-pyq"><span class="fl">选择</span><i class="fl"></i>将活动分享<p>到你的朋友圈</p></div>
+                <p>点击右上角</p>
+                <p>分享给3个群或好友</p>
+                <p>才能开启投票按钮</p>
+                <div>还差<strong id="piao-number2"></strong>票</div>
             </div>
 
         </div>
     </div>
 </div>
-<script src="{pigcms::RES}/anniversary/js/pintu.js?v=20150922" type="text/javascript"></script>
+
+
 <script type="text/javascript">
     $(document).ready(function(e) {
         $("#btnShare").click(function(){
             showLayer($("#layer-share"));
-        });
-
-        $("#iwantjoin").click(function(){
-            $.post(
-                    "{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=saveWantJoin",
-                    {uid: "{pigcms::$uid}"},
-                    function (data) {
-                    });
-        });
-
-        $('#helpvote').click(function(){
-			var $helpvote = $('#helpvote');
-			if($helpvote.hasClass("clicked")){
-                mnAlert('已帮过！');
-				return false;
-			}
-			$helpvote.addClass("clicked");
-            $.post(
-                    "{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=saveVote",
-                    {uid: "{pigcms::$uid}"},
-                    function (data) {
-						$helpvote.removeClass("clicked");
-                        if (data != '') {
-                            //			console.info(data);
-                            //data 为返回文件名；
-                            mnAlert('提交成功');
-                            window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=sharefriend&uid={pigcms::$uid}&gid={pigcms::$gid}';
-                        }else{
-                            //图片提交失败
-                        }
-                    });
+            $("#piao-number2").html($("#piao-number").html());
         });
     });
+
 </script>
 
 </body>
