@@ -1100,7 +1100,7 @@ class CommonAction extends Action {
             case 'pretty' :
                 return $this->pretty();
                 break;
-            case '81' :
+            case 'anni' :
                 return $this->anni();
                 break;
             case '主页' :
