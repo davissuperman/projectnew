@@ -1,12 +1,12 @@
 <?php
 
 class AnniversaryAction extends SjzAction {
-    public $title = '携手森田.找回美丽';
+    public $title = '森田药妆81周年';
     public $bonusdesc = '12500片面膜，20%中奖概率！不拼投票不设难度，只要你的排名末位数字有幸运的“1”或“8”！';
     public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
-    public $endtime="2015-10-20 23:59:59"; //活动结束时间
+    public $endtime="2015-12-20 23:59:59"; //活动结束时间
     public $debug = true; //上线后应该改成false
     public $defalutGid = 22;
     public $anniversaryCount = 16;
@@ -99,7 +99,7 @@ class AnniversaryAction extends SjzAction {
         }
     }
     public function setEndTime2(){
-        $endtime =strtotime( "2015-10-27 23:59:59" );
+        $endtime =strtotime( "2015-12-27 23:59:59" );
         if (time() > $endtime) {//活动是否结束
 
             echo <<<HTML
