@@ -9,7 +9,7 @@ class AnniversaryAction extends SjzAction {
     public $endtime="2015-12-20 23:59:59"; //活动结束时间
     public $debug = true; //上线后应该改成false
     public $defalutGid = 22;
-    public $anniversaryCount = 16;
+    public $anniversaryCount = 25;
 
     public function _initialize() {
         parent :: _initialize();
@@ -396,6 +396,7 @@ HTML;
     public function share(){
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
+//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index");
@@ -410,14 +411,14 @@ HTML;
         }
         $gid = $info['gid'];
         //图片是否存在
-        $savePath = './PUBLIC/imagess/';
-        $t = $info['uploadimagetime'];
-        $uploadImageSrc= $savePath."$userOpenId"."_$t".".jpeg";
-        if(!file_exists($uploadImageSrc)){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index");
-            exit();
-        }
+//        $savePath = './PUBLIC/imagess/';
+//        $t = $info['uploadimagetime'];
+//        $uploadImageSrc= $savePath."$userOpenId"."_$t".".jpeg";
+//        if(!file_exists($uploadImageSrc)){
+//            //redirect
+//            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index");
+//            exit();
+//        }
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
@@ -453,13 +454,8 @@ HTML;
         //获取当前已经有了多少拼图
         $imgNums = (int)$this->anniversaryCount;
         $vote = $info['vote'];
-        if($vote == 0){
-            //是第一次进入到这个页面，需要有一块拼图
-            M("anniversary")->where(array('id' => $info['id']))->setInc('vote');
-            $imgNums = (int)$this->anniversaryCount - 1;
-        }else{
-            $imgNums = (int)$this->anniversaryCount - $vote;
-        }
+        $share = $info['share'];
+        $imgNums = (int)$this->anniversaryCount - $vote;
         if($vote >= $this->anniversaryCount && !$info['phone']){
 //            跳转到sharephone
 //            redirect
@@ -484,9 +480,10 @@ HTML;
 //        $uniqueViewlist = M('anniversary_uniqueviewlist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$userOpenId))->find();
         $uniqueViewSql = "SELECT * from tp_anniversary_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$userOpenId'";
         $uniqueViewlist = M('anniversary_uniqueviewlist')->query($uniqueViewSql);
-
+        $haveVoted = 1;
         if($uniqueViewlist){
             //不需要增加uniqueviews
+            $haveVoted = 0;
         }else{
             M("anniversary")->where(array('id' => $info['id']))->setInc('uniqueviews');
             $n = array();
@@ -494,7 +491,8 @@ HTML;
             $n['toopenid'] = $userOpenId;
             M('anniversary_uniqueviewlist')->add($n);
         }
-
+        $this->assign('sharenumberindatabase',$share);
+        $this->assign('havevoted',$haveVoted);
         $this->display();
     }
 
@@ -505,6 +503,7 @@ HTML;
         //这里是隐性获取OPENID 是朋友圈里面的人打开这个页面
         //获取OPENID 用户没有感知
         $userOpenId= cookie('user_openid');
+//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $uid = $_GET['uid'];
         if(!is_numeric($uid)){
             //redirect
@@ -562,16 +561,17 @@ HTML;
             $gid = $info['gid'];
         }
         $MainOpenId = $info['openid'];
+        $share = $info['share'];
         //图片是否存在
-        $savePath = './PUBLIC/imagess/';
-        $t = $info['uploadimagetime'];
-        $uploadImageSrc= $savePath."$MainOpenId"."_$t".".jpeg";
-        if(!file_exists($uploadImageSrc)){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index");
-            exit();
-        }
-        $this->assign('uploadimagesrc',$uploadImageSrc);
+//        $savePath = './PUBLIC/imagess/';
+//        $t = $info['uploadimagetime'];
+//        $uploadImageSrc= $savePath."$MainOpenId"."_$t".".jpeg";
+//        if(!file_exists($uploadImageSrc)){
+//            //redirect
+//            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index");
+//            exit();
+//        }
+//        $this->assign('uploadimagesrc',$uploadImageSrc);
 
         //当天是否访问过
         $today = time();
@@ -581,7 +581,9 @@ HTML;
         $end = date("Y-m-d H:i:s",$end );
         $uniqueViewSql = "SELECT * from tp_anniversary_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$MainOpenId'";
         $uniqueViewlist = M('anniversary_uniqueviewlist')->query($uniqueViewSql);
+        $haveVoted = 1;
         if($uniqueViewlist){
+            $haveVoted = 0;
             //不需要增加uniqueviews
         }else{
             M("anniversary")->where(array('id' => $info['id']))->setInc('uniqueviews');
@@ -629,20 +631,14 @@ HTML;
         //获取当前已经有了多少拼图
         $imgNums = (int)$this->anniversaryCount;
         $vote = $info['vote'];
-        if($vote >= 16 && $userOpenId != $MainOpenId ){
+        if($vote >= $this->anniversaryCount && $userOpenId != $MainOpenId ){
             //已经满足16票，其他人点击此主页 跳转到首页
             //当前主页已经为16票， 去掉投票按钮。 只显示查询排名
 //            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index&gid=$gid");
 //            exit();
         }
 
-        if($vote == 0){
-            //是第一次进入到这个页面，需要有一块拼图
-            M("anniversary")->where(array('id' => $info['id']))->setInc('vote');
-            $imgNums = (int)$this->anniversaryCount - 1;
-        }else{
-            $imgNums = (int)$this->anniversaryCount - $vote;
-        }
+        $imgNums = (int)$this->anniversaryCount - $vote;
         if($vote >= $this->anniversaryCount && $userOpenId==$MainOpenId){
             //跳转到sharephone
             //redirect
@@ -674,8 +670,11 @@ HTML;
         if($cookieId){
             $cookieJoin = 1;
         }
+
+        $this->assign('sharenumberindatabase',$share);
         $this->assign('cookiejoin',$cookieJoin);
         $this->assign('votetothisuid',$voteThisUid);
+        $this->assign('havevoted',$haveVoted);
         $this->display();
     }
 
@@ -882,12 +881,11 @@ HTML;
 
 
     }
-
-    //TODO add random str to avoid auto submit
-    public function saveVote(){
+    public function saveVote2(){
         $this->setEndTime();
         $return = 0;
         $fromOpenIdFromPost= cookie('user_openid');
+//        $fromOpenIdFromPost = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         $toUid = $_POST['uid'];
         if(!$fromOpenIdFromPost){
             //非法投票
@@ -895,6 +893,32 @@ HTML;
         }
 
         $toOpenIdFromPost = $this->getOpenIdByUid($toUid);
+        //检查此 local openid 是否投过票
+        $voteList = M('anniversary_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
+        if(!$voteList){//
+            //投票
+            $d = array();
+            $d['fromopenid'] = $fromOpenIdFromPost;
+            $d['toopenid'] = $toOpenIdFromPost;
+            $d['createtime'] = time();
+            M('anniversary_votelist')->add($d);
+            M("anniversary")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
+
+            $return = 1;
+        }else{
+            //已经投过票
+            $return = 2;
+        }
+
+        echo $return;
+    }
+    //TODO add random str to avoid auto submit
+    public function saveVote(){
+        $this->setEndTime();
+        $return = 0;
+        $fromOpenIdFromPost= cookie('user_openid');
+//        $fromOpenIdFromPost = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+        $toOpenIdFromPost = $fromOpenIdFromPost;
         //检查此 local openid 是否投过票
         $voteList = M('anniversary_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
         if(!$voteList){//
