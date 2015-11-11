@@ -774,6 +774,7 @@ HTML;
     public function sharePhone(){
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
+//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index");
@@ -783,7 +784,7 @@ HTML;
         $info = M('anniversary')->where(array('openid' => $userOpenId))->find();
         $gid = $info['gid'];
         $vote = $info['vote'];
-        if($vote >= 16 && isset($info['phone']) && $info['phone']){
+        if($vote >= $this->anniversaryCount && isset($info['phone']) && $info['phone']){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Anniversary&a=share");
 //            header("location:http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=210588191&idx=1&sn=b92ed86b0e48cd73707477f2200d835e&scene=1&srcid=09242PtEGocqLViEACaoNz7Z#rd");
