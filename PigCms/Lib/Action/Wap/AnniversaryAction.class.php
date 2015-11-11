@@ -999,7 +999,7 @@ HTML;
         $this->setEndTime2();
         $return = 0;
         $userOpenId= cookie('user_openid');
-
+     //   $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //非法投票
             exit();
@@ -1120,6 +1120,7 @@ HTML;
     public function form(){
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
+//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index");
