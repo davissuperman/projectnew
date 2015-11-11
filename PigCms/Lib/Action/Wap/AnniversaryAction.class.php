@@ -467,7 +467,7 @@ HTML;
         }
         $this->assign('imgnums',$imgNums);
         if($vote == 0){
-            $vote = 1;
+            $vote = 0;
         }
         $this->assign('needimgnums',$vote);
 
@@ -477,8 +477,8 @@ HTML;
         $end = mktime(23,59,59,date("m",$today),date("d",$today),date("Y",$today));
         $start = date("Y-m-d H:i:s",$start );
         $end = date("Y-m-d H:i:s",$end );
-//        $uniqueViewlist = M('anniversary_uniqueviewlist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$userOpenId))->find();
-        $uniqueViewSql = "SELECT * from tp_anniversary_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$userOpenId'";
+//        $uniqueViewSql = "SELECT * from tp_anniversary_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$userOpenId'";
+        $uniqueViewSql = "SELECT * from tp_anniversary_uniqueviewlist where  fromopenid='$userOpenId' and toopenid='$userOpenId'";
         $uniqueViewlist = M('anniversary_uniqueviewlist')->query($uniqueViewSql);
         $haveVoted = 1;
         if($uniqueViewlist){
@@ -674,6 +674,11 @@ HTML;
         $this->assign('sharenumberindatabase',$share);
         $this->assign('cookiejoin',$cookieJoin);
         $this->assign('votetothisuid',$voteThisUid);
+
+        //多次投票
+        $haveVoted = 0;
+        //end
+
         $this->assign('havevoted',$haveVoted);
         $this->display();
     }
@@ -895,6 +900,9 @@ HTML;
         $toOpenIdFromPost = $this->getOpenIdByUid($toUid);
         //检查此 local openid 是否投过票
         $voteList = M('anniversary_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
+        //多次投票
+        M("anniversary")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
+        /*
         if(!$voteList){//
             //投票
             $d = array();
@@ -909,7 +917,7 @@ HTML;
             //已经投过票
             $return = 2;
         }
-
+*/
         echo $return;
     }
     //TODO add random str to avoid auto submit
