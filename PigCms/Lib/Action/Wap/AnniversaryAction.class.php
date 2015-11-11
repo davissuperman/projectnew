@@ -396,7 +396,7 @@ HTML;
     public function share(){
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
-//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+       // $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index");
@@ -1038,6 +1038,7 @@ HTML;
     }
     public function rank(){
         $userOpenId= cookie('user_openid');
+//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index");
@@ -1052,15 +1053,15 @@ HTML;
             exit();
         }
         //是否上传图片
-        $savePath = './PUBLIC/imagess/';
-        $t = $info['uploadimagetime'];
-        $uploadImageSrc = $savePath ."$userOpenId"."_$t".".jpeg";
-        $uploadImage = 0;
-        if(!file_exists($uploadImageSrc)){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index&gid=$gid");
-            exit();
-        }
+//        $savePath = './PUBLIC/imagess/';
+//        $t = $info['uploadimagetime'];
+//        $uploadImageSrc = $savePath ."$userOpenId"."_$t".".jpeg";
+//        $uploadImage = 0;
+//        if(!file_exists($uploadImageSrc)){
+//            //redirect
+//            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index&gid=$gid");
+//            exit();
+//        }
 
         //如果没有满足16票 跳转到再接再厉
         if($info['vote'] <$this->anniversaryCount){
