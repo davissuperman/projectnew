@@ -119,3 +119,58 @@ function goBack(){
 		window.history.back();
 	});
 }
+
+var Pop=function(){
+    var oBg=document.createElement('div');
+    var oDiv=document.createElement('div');
+    oBg.className='pop-bg';
+    oDiv.className="pop-box";
+    var createDiv = function(text,btn,fn){
+        var text = text || '';
+            var windowObj = window.parent || window;
+            var htmlChild =windowObj.document.getElementsByTagName('html')[0];
+            var html = '<div class="head">消息</div>';
+            if(fn){
+            	html += '<div class="pop-text confirms-text"><div class="text">'+text+'</div>'+btn+'</div>';
+            }else{
+            	html += '<div class="pop-text alerts-text"><div class="text">'+text+'</div>'+btn+'</div>';;
+            }
+            
+            oDiv.innerHTML= html;
+            htmlChild.appendChild(oBg);
+            htmlChild.appendChild(oDiv);
+            var oDivW = oDiv.offsetWidth/2;
+            var oDivH = oDiv.offsetHeight/2;
+            var windowH = (htmlChild.offsetHeight || window.outerHeight)/3;
+            //var windowH = htmlChild.offsetHeight/3 === 0 ?400 : htmlChild.offsetHeight/3;
+            var windowW = htmlChild.offsetWidth/2;
+
+            //oDiv.style.left = windowW - oDivW+'px';
+           // oDiv.style.top = windowH - oDivH+'px';  
+            //console.log(oDiv.childNodes[1].childNodes[0]);
+            oDiv.childNodes[1].childNodes[1].childNodes[0].onclick=function(){
+                htmlChild.removeChild(oBg);
+                htmlChild.removeChild(oDiv);
+                if(fn){fn();}
+            };
+            if(fn){
+                oDiv.childNodes[1].childNodes[1].childNodes[1].onclick=function(){
+                    htmlChild.removeChild(oBg);
+                    htmlChild.removeChild(oDiv);
+                };
+            }
+    };
+
+    var obj = {
+        alerts:function(text){
+            var btn ='<div class="btn-box clrfix"><a href="javascript:void(0)" id="confirms" class="btn btn-info btn-sm">确认</a></div>';
+            createDiv(text,btn);
+        },
+        confirms:function(text,fn){
+            var btn ='<div class="btn-box clrfix"><a href="javascript:void(0)" id="confirms" class="btn btn-info btn-sm">确认</a><a href="javascript:void(0)" id="cancel" class="btn btn-default btn-sm ml-10">取消</a></div>';
+            createDiv(text,btn,fn);
+        }
+    };
+    return obj;
+}();
+

@@ -90,58 +90,62 @@
 			
 			
 			if(username == ""){
-				mnAlert("收货人姓名不能为空");
+				Pop.alerts("收货人姓名不能为空");
 				return false;
 			}
 			
 			if(telphone == ""){
-				mnAlert("联系电话不能为空");
+				Pop.alerts("联系电话不能为空");
 				return false;
 			}
 			
 			if(province == "" || province == "请选择"){
-				mnAlert("省份不能为空");
+				Pop.alerts("省份不能为空");
 				return false;
 			}
 			
 			if(city == "" || city == "请选择"){
-				mnAlert("城市不能为空");
+				Pop.alerts("城市不能为空");
 				return false;
 			}
 			
 			if((county == "请选择" || county == "") && $county.css("display") != 'none' ){
-				mnAlert("县/区不能为空");
+				Pop.alerts("县/区不能为空");
 				return false;
 			}
 			
 			if(address == ""){
-				mnAlert("详细地址不能为空");
+				Pop.alerts("详细地址不能为空");
 				return false;
 			}
-			
-			var data = {
-				"username" : username,
-				"telphone" : telphone,
-				"province" : province,
-				"city" : city,
-				"county" : county,
-				"address" : address
-			};
-			
-			$.ajax({
-				type:'get',
-				url: '' ,//接口地址
-				data:data,
-				dataType:'json',	
-				timeout : 60000,	
-				success:function(data){
-					
-				},
-				error : function(XMLHttpRequest, textStatus, errorThrown) {
-					mnAlert("提交失败，网络繁忙！");
-					return false;
-				}
+
+			Pop.confirms("请您确认您所填写的地址为正确收货地址，确认提交后将无法更改地址。",function(){
+				var data = {
+					"username" : username,
+					"telphone" : telphone,
+					"province" : province,
+					"city" : city,
+					"county" : county,
+					"address" : address
+				};
+				
+				$.ajax({
+					type:'get',
+					url: '' ,//接口地址
+					data:data,
+					dataType:'json',	
+					timeout : 60000,	
+					success:function(data){
+						
+					},
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
+						mnAlert("提交失败，网络繁忙！");
+						return false;
+					}
+				});	
 			});
+			
+			
 			
 		}
     </script>

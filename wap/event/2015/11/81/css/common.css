@@ -78,12 +78,12 @@ input,textarea,select,button{font-size:1em;}
 	-webkit-transition-timing-function: ease-in-out;
 	cursor: pointer;
 	text-decoration: none;height:35px; line-height:35px;
-	background-color: #999;
+	background-color: #666;
 	color: #fff;
-	box-shadow: 0px 0px 0px 1px #666 inset, 0px 0px 0px 2px #666 inset, 0px 3px 0px 0px #666, 0px 0px 0px 0px #666, 0px 0px 0px 0px ;
-	-webkit-box-shadow: 0px 0px 0px 1px #666 inset, 0px 0px 0px 2px #666 inset, 0px 3px 0px 0px #666, 0px 0px 0px 0px #666, 0px 0px 0px 0px ;
-	-moz-box-shadow: 0px 0px 0px 1px #666 inset, 0px 0px 0px 2px #666 inset, 0px 3px 0px 0px #666, 0px 0px 0px 0px #666, 0px 0px 0px 0px ;
-	-ie-box-shadow: 0px 0px 0px 1px #666 inset, 0px 0px 0px 2px #666 inset, 0px 3px 0px 0px #666, 0px 0px 0px 0px #666, 0px 0px 0px 0px ;}
+	box-shadow: 0px 0px 0px 1px #999 inset, 0px 0px 0px 2px #999 inset, 0px 3px 0px 0px #999, 0px 0px 0px 0px #999, 0px 0px 0px 0px ;
+	-webkit-box-shadow: 0px 0px 0px 1px #999 inset, 0px 0px 0px 2px #999 inset, 0px 3px 0px 0px #999, 0px 0px 0px 0px #999, 0px 0px 0px 0px ;
+	-moz-box-shadow: 0px 0px 0px 1px #999 inset, 0px 0px 0px 2px #999 inset, 0px 3px 0px 0px #999, 0px 0px 0px 0px #999, 0px 0px 0px 0px ;
+	-ie-box-shadow: 0px 0px 0px 1px #999 inset, 0px 0px 0px 2px #999 inset, 0px 3px 0px 0px #999, 0px 0px 0px 0px #999, 0px 0px 0px 0px ;}
 
 .btn-game-gray {width: 174px;}
 
@@ -246,7 +246,11 @@ input,textarea,select,button{font-size:1em;}
   
 
 
-.game-btns{margin:0.2rem 0; text-align:center;}
+.game-btns{margin:0; text-align:center;position: fixed;
+  width: 200px;
+  left: 50%;
+  margin-left: -100px;
+  bottom: 10px;}
 .game-btns p{ margin-top:10px;}
 .game-btns .game-btn{ display:inline-block; text-align:center; text-indent:-9999px; overflow:hidden; vertical-align:top;}
 .game-btns .game-btn01{ height:39px; width:198px; background:url(../images/img_08.png) no-repeat; background-size:auto 100%;}
@@ -258,7 +262,7 @@ input,textarea,select,button{font-size:1em;}
 /*success-box*/
 .success-box{background:url(../images/img_14.png) no-repeat center;height:7.4rem; background-size:auto 100%;position:relative;}
 .success-text{ background:#7cc7ff;color:#fff; width:5.8rem; margin:0 auto; border-radius:0.1rem; padding:0.1rem;font-size:0.2rem;-moz-box-shadow:4px 4px 6px #dcc16d;-webkit-box-shadow:4px 4px 6px #dcc16d;box-shadow:4px 4px 6px #dcc16d;}
-.success-text dt{float:left;}
+.success-text dt{float:left;  margin-top: 4px;}
 .success-text dd{float:left; margin-left:5px;}
 .success-text .text{width:3.5rem;}
 .success-text dd strong{color:#ff188a; font-size:0.3rem;}
@@ -295,7 +299,7 @@ input,textarea,select,button{font-size:1em;}
 .layer-share .shou{ background:url(../images/img_11.png) no-repeat right top;width: 1rem;height: 1.5rem;display:inline-block; background-size:auto 100%;}
 .layer-share .text{ font-size:0.35rem; padding-left:1rem; line-height:0.5rem; font-weight:bold;}
 .layer-share .text div{ margin-top:0.5rem;}
-.layer-share .text div strong{font-size:0.6rem; margin:0 0.2rem;}
+.layer-share .text strong{font-size:0.6rem; margin:0 0.2rem;color:#f00;}
 
 
 /*弹出层*/
@@ -329,3 +333,32 @@ input,textarea,select,button{font-size:1em;}
 
 .loaing-tips{width:2rem;font-weight: normal;position: fixed;background: #000;border-radius: 0.5rem; text-align: center;color: #fff;bottom: 2rem;left: 50%;margin-left: -1.2rem; z-index:99999; padding:0.1rem 0.2rem; display:none;}
 
+
+
+/***********************弹出窗口样式**************************/
+.pop-bg{height: 100%;width: 100%;background: #000;position: fixed;top: 0;left: 0;opacity: 0.5;z-index:99998;}
+.pop-box .head{text-align: left;padding: 0 8px;background:#7cc7ff;height: 35px;line-height:38px;color: #fff;border: none;font-size: 18px;font-weight: bold;}
+.pop-box{background: #fff;position: fixed;border: 1px solid #bbc9d4;border-top:none;z-index:99999;  border-radius: 5px;width: 260px;  overflow: hidden;top:20%;left:50%;margin-left:-130px;}
+.pop-box .text{padding: 10px;text-align: left;font-size:14px;overflow: auto;line-height:22px;color:#08c;}
+.pop-box .btn-box{padding:10px;margin: 0;}
+.pop-box .btn{display: inline-block;-webkit-border-radius: 25px;-moz-border-radius: 25px;-ie-border-radius: 25px;
+	border-radius: 25px;padding: 0 10px;text-shadow: rgba(0,0,0,.5) 0px -1px 0px;
+	font-size: 16px;font-weight: bold;
+	-webkit-transition-property: background-color;
+	-webkit-transition-duration: .15s;
+	-webkit-transition-timing-function: ease-in-out;
+	cursor: pointer;
+	text-decoration: none;height:30px; line-height:30px;color: #fff;
+	text-align:center;}
+
+.pop-box .btn-info{background-color: #ff1d51;
+	box-shadow: 0px 0px 0px 1px #FFBDBE inset, 0px 0px 0px 2px #FFBDBE inset, 0px 3px 0px 0px #FFBDBE, 0px 0px 0px 0px #FFBDBE, 0px 0px 0px 0px ;
+	-webkit-box-shadow: 0px 0px 0px 1px #FFBDBE inset, 0px 0px 0px 2px #FFBDBE inset, 0px 3px 0px 0px #FFBDBE, 0px 0px 0px 0px #FFBDBE, 0px 0px 0px 0px ;
+	-moz-box-shadow: 0px 0px 0px 1px #FFBDBE inset, 0px 0px 0px 2px #FFBDBE inset, 0px 3px 0px 0px #FFBDBE, 0px 0px 0px 0px #FFBDBE, 0px 0px 0px 0px ;
+	-ie-box-shadow: 0px 0px 0px 1px #FFBDBE inset, 0px 0px 0px 2px #FFBDBE inset, 0px 3px 0px 0px #FFBDBE, 0px 0px 0px 0px #FFBDBE, 0px 0px 0px 0px ;width:60px;float:right;}
+.pop-box .btn-default{background-color: #666;
+	color: #fff;
+	box-shadow: 0px 0px 0px 1px #999 inset, 0px 0px 0px 2px #999 inset, 0px 3px 0px 0px #999, 0px 0px 0px 0px #999, 0px 0px 0px 0px ;
+	-webkit-box-shadow: 0px 0px 0px 1px #999 inset, 0px 0px 0px 2px #999 inset, 0px 3px 0px 0px #999, 0px 0px 0px 0px #999, 0px 0px 0px 0px ;
+	-moz-box-shadow: 0px 0px 0px 1px #999 inset, 0px 0px 0px 2px #999 inset, 0px 3px 0px 0px #999, 0px 0px 0px 0px #999, 0px 0px 0px 0px ;
+	-ie-box-shadow: 0px 0px 0px 1px #999 inset, 0px 0px 0px 2px #999 inset, 0px 3px 0px 0px #999, 0px 0px 0px 0px #999, 0px 0px 0px 0px ;width:60px;float:left;margin-left:0;}
