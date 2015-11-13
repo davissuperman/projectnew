@@ -478,19 +478,13 @@ HTML;
         $start = date("Y-m-d H:i:s",$start );
         $end = date("Y-m-d H:i:s",$end );
 //        $uniqueViewSql = "SELECT * from tp_anniversary_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$userOpenId'";
-        $uniqueViewSql = "SELECT * from tp_anniversary_uniqueviewlist where  fromopenid='$userOpenId' and toopenid='$userOpenId'";
-        $uniqueViewlist = M('anniversary_uniqueviewlist')->query($uniqueViewSql);
+        $uniqueViewSql = "SELECT * from tp_anniversary_votelist where  fromopenid='$userOpenId' and toopenid='$userOpenId'";
+        $uniqueViewlist = M('anniversary_votelist')->query($uniqueViewSql);
         $haveVoted = 1;
         if($uniqueViewlist){
-            //不需要增加uniqueviews
             $haveVoted = 0;
-        }else{
-            M("anniversary")->where(array('id' => $info['id']))->setInc('uniqueviews');
-            $n = array();
-            $n['fromopenid'] = $userOpenId;
-            $n['toopenid'] = $userOpenId;
-            M('anniversary_uniqueviewlist')->add($n);
         }
+
         $this->assign('sharenumberindatabase',$share);
         $this->assign('havevoted',$haveVoted);
         $share = $info['share'];
