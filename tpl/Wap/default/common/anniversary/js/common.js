@@ -4,6 +4,10 @@ $(document).ready(function(e) {
 	closeLayer();
 	//hideHoverBox();
 	doImageToColor();
+	$(".btn-game-gray").click(function(){
+		showLayer($("#layer-share"));
+		$("#piao-number2").html($("#piao-number").html());
+	});
 });
 
 function doImageToColor(){
