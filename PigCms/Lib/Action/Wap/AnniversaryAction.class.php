@@ -1108,21 +1108,12 @@ HTML;
         $vote = $info['vote'];
         $selfPhoneTime = $info['phonetime'];
         $p = $info['phone'];
-        $pValue = M('anniversary_phonelist')->where(array('phone' => $p))->getField('id');
 
         //查询此用户的排名
-        $sql = "select count(id) as c from tp_anniversary where phonetime < $selfPhoneTime  and phone != ''";
-
-        $c = M('anniversary')->query("$sql");
-        $c =$c[0];
-        $selfOrder = 1*$c['c'] + 1;
-        if($pValue && $selfOrder != $pValue ){
-            $selfOrder = $pValue;
-        }
-
+        $pValue = M('anniversary_phonelist')->where(array('phone' => $p))->getField('id');
         $vote = $this->anniversaryCount;
         $this->assign("vote",$vote);
-        $this->assign("selforder",$selfOrder);
+        $this->assign("selforder",$pValue);
         $this->display();
     }
 
