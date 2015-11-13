@@ -826,11 +826,8 @@ HTML;
             exit();
         }
 
-        $savePath = './PUBLIC/imagess/';
-        $t = $info['uploadimagetime'];
-        $uploadImageSrc= $savePath."$userOpenId"."_$t".".jpeg";
-        $this->assign('uploadimagesrc',$uploadImageSrc);
         $this->assign('phone',$info['phone']);
+        $this->assign('uid',$info['id']);
 
         $this->display();
     }
@@ -1038,30 +1035,42 @@ HTML;
     }
     public function rank(){
         $userOpenId= cookie('user_openid');
-//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        //        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index");
             exit();
         }
         $info = M('anniversary')->where(array('openid' => $userOpenId))->find();
+        if(IS_POST){
+            //用户提交了信息，等待排名页面
+            if(!$info || $info['vote'] < $this->anniversaryCount){
+                exit;
+            }
 
+            $uid = $_POST['uid'];
+            $phoneList = M('anniversary_phonelist')->where(array('uid' => $uid))->find();
+            //更新表 anniversary
+            $m = array();
+            $t = time();
+            $m['phone'] = 1;
+            $m['id'] =$uid;
+            $m['phonetime'] = $t;
+            M('anniversary')->save($m);
+
+            //插入表 anniversary_phonelist
+            $n = array();
+            $n['uid'] = $uid;
+            $n['phone'] = 1;
+            $n['createtime'] = $t;
+            M('anniversary_phonelist')->add($n);
+        }
         $gid = $info['gid'];
         if(!$info){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index&gid=$gid");
             exit();
         }
-        //是否上传图片
-//        $savePath = './PUBLIC/imagess/';
-//        $t = $info['uploadimagetime'];
-//        $uploadImageSrc = $savePath ."$userOpenId"."_$t".".jpeg";
-//        $uploadImage = 0;
-//        if(!file_exists($uploadImageSrc)){
-//            //redirect
-//            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index&gid=$gid");
-//            exit();
-//        }
 
         //如果没有满足16票 跳转到再接再厉
         if($info['vote'] <$this->anniversaryCount){
