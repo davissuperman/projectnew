@@ -1,207 +1,172 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="description" content="">
-<meta name="author" content="">
-<meta name="keywords" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>携手森田.找回美丽</title>
-    <link href="{pigcms::RES}/pretty/css/common.css?v=2015111101" rel="stylesheet" type="text/css" />
-    <script src="{pigcms::RES}/pretty/js/zepto.min.js" type="text/javascript"></script>
-    <script src="{pigcms::RES}/pretty/js/common.js" type="text/javascript"></script>
-<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
-<script>
-    wx.config({
-        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-        appId: '{pigcms::$appid}', // 必填，公众号的唯一标识
-        timestamp:  '{pigcms::$timestamp}', // 必填，生成签名的时间戳
-        nonceStr: '{pigcms::$nonceStr}', // 必填，生成签名的随机串
-        signature: '{pigcms::$signature}',// 必填，签名，见附录1
-        jsApiList: ['checkJsApi',
-            'onMenuShareTimeline',
-            'onMenuShareAppMessage',
-            'onMenuShareQQ',
-            'onMenuShareWeibo',
-            'hideMenuItems',
-            'showMenuItems',
-            'hideAllNonBaseMenuItem',
-            'showAllNonBaseMenuItem',
-            'translateVoice',
-            'startRecord',
-            'stopRecord',
-            'onRecordEnd',
-            'playVoice',
-            'pauseVoice',
-            'stopVoice',
-            'uploadVoice',
-            'downloadVoice',
-            'chooseImage',
-            'previewImage',
-            'uploadImage',
-            'downloadImage',
-            'getNetworkType',
-            'openLocation',
-            'getLocation',
-            'hideOptionMenu',
-            'showOptionMenu',
-            'closeWindow',
-            'scanQRCode',
-            'chooseWXPay',
-            'openProductSpecificView',
-            'addCard',
-            'chooseCard',
-            'openCard'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-    });
-    wx.ready(function () {
-        // 1 判断当前版本是否支持指定 JS 接口，支持批量判断
-        wx.checkJsApi({
-            jsApiList: [
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>森田药妆81周年</title>
+    <link href="{pigcms::RES}/anniversary/css/common.css?v=2015111101" rel="stylesheet" type="text/css" />
+    <script src="{pigcms::RES}/anniversary/js/zepto.min.js" type="text/javascript"></script>
+    <script src="{pigcms::RES}/anniversary/js/common.js" type="text/javascript"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+    <script>
+        wx.config({
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: '{pigcms::$appid}', // 必填，公众号的唯一标识
+            timestamp:  '{pigcms::$timestamp}', // 必填，生成签名的时间戳
+            nonceStr: '{pigcms::$nonceStr}', // 必填，生成签名的随机串
+            signature: '{pigcms::$signature}',// 必填，签名，见附录1
+            jsApiList: ['checkJsApi',
                 'onMenuShareTimeline',
-                'getNetworkType',
+                'onMenuShareAppMessage',
+                'onMenuShareQQ',
+                'onMenuShareWeibo',
                 'hideMenuItems',
-                'previewImage'
-            ],
-            success: function (res) {
-                //alert(JSON.stringify(res));
-            }
+                'showMenuItems',
+                'hideAllNonBaseMenuItem',
+                'showAllNonBaseMenuItem',
+                'translateVoice',
+                'startRecord',
+                'stopRecord',
+                'onRecordEnd',
+                'playVoice',
+                'pauseVoice',
+                'stopVoice',
+                'uploadVoice',
+                'downloadVoice',
+                'chooseImage',
+                'previewImage',
+                'uploadImage',
+                'downloadImage',
+                'getNetworkType',
+                'openLocation',
+                'getLocation',
+                'hideOptionMenu',
+                'showOptionMenu',
+                'closeWindow',
+                'scanQRCode',
+                'chooseWXPay',
+                'openProductSpecificView',
+                'addCard',
+                'chooseCard',
+                'openCard'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
         });
+        wx.ready(function () {
+            // 1 判断当前版本是否支持指定 JS 接口，支持批量判断
+            wx.checkJsApi({
+                jsApiList: [
+                    'onMenuShareTimeline',
+                    'getNetworkType',
+                    'hideMenuItems',
+                    'previewImage'
+                ],
+                success: function (res) {
+                    //alert(JSON.stringify(res));
+                }
+            });
 
-        // 2. 分享接口
-
-        // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
-        wx.onMenuShareTimeline({
-            title: '{pigcms::$title}',
-            link: "{pigcms::$shareurl}",
-            imgUrl: "{pigcms::$shareimageurl}",
-            trigger: function (res) {
-                //alert('用户点击分享到朋友圈');
-            },
-            success: function (res) {
-                $.ajax({
-                    url: "{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=saveShareNumberToFriends",
-                    type:'GET',
-                    complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
-                    error: function() { mnAlert('系统繁忙 请稍后再试');},
-                    success: function(data) {
-                        if(data == 1){
-                            mnAlert("分享成功！");
-                        }
-                    }
-                });
-            },
-            cancel: function (res) {
-                //alert('已取消');
-            },
-            fail: function (res) {
-                //alert(JSON.stringify(res));
-            }
-        });
-
-        wx.onMenuShareAppMessage({
-            title: '{pigcms::$title}',
-            desc:  '{pigcms::$bonusdesc}',
-            link: '{pigcms::$shareurl}',
-            imgUrl: '{pigcms::$shareimageurl}',
-            trigger: function (res) {
-                //alert('用户点击发送给朋友');
-            },
-            success: function (res) {
-                $.ajax({
-                    url: "{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=saveShareNumberToFriends",
-                    type:'GET',
-                    complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
-                    error: function() { mnAlert('系统繁忙 请稍后再试');},
-                    success: function(data) {
-                        if(data == 1){
-                            mnAlert("分享成功！");
-                        }
-                    }
-                });
-            },
-            cancel: function (res) {
-                //alert('已取消');
-            },
-            fail: function (res) {
-                //alert(JSON.stringify(res));
-            }
-        });
-
-    });
-    wx.error(function (res) {
-       // alert(res.errMsg);
-    });
-
-    $(function(){
-    });
-</script>
-</head>
-<body id="body">
-<div class="logo"></div>
-
-<div class="com-box-hover"></div>
-<div class="com-box"></div>
-
-<div class="com-box-con">
-    <div class="inner-box">
-        <div class="upload-img">
-            <img src="{pigcms::$uploadimagesrc}" alt="" class="tu" id="imageAddr"/>
-        </div>
-
-
-    </div>
-    <div class="hudie1"></div>
-    <div class="hudie2"></div>
-</div>
-<div class="btn-box phone-btn-box">
-        <div class="form-box ta-c">
-            <p>请登记您的手机号码</p>
-			<p>作为排名查询及领奖凭证</p>
-            <p>一个号码仅一次登记有效</p>
-            <input type="tel" maxlength="11" value="{pigcms::$phone}" placeholder="在此输入您的手机号码" class="input-text" name="phoneinpage" id="phoneinpage"/>
-        </div>
-        <a href="javascript:;" title="确认提交" class="btn-bg01" id="submitphone">
-            <i class="phone-btn01"></i>
-        </a>
-</div>
-<div class="bg01"></div>
-<div class="bg02"></div>
-
-
-<script type="text/javascript">
-    $(document).ready(function(e) {
-        $("#submitphone").click(function(){
-            var phoneinpage = $("#phoneinpage").val();
-            //判断手机号
-            if(phoneinpage == ''){
-                mnAlert("请输入您的手机号码！");
-                return false;
-            }
-            $.post(
-                    "{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=savePhoneInPage",
-                    {phoneinpage: phoneinpage},
-                    function (data) {
-                        if (data != '') {
-                            if(data == 2){
-                                mnAlert('参与人数已经达到限额，已截止！谢谢参与！');
-                            } if(data == 3){
-                                mnAlert('手机号已经存在！');
-                                window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=share';
-                            }else{
-                                mnAlert('提交成功');
-                                window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=share';
+            // 2. 分享接口
+            // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
+            wx.onMenuShareTimeline({
+                title: '{pigcms::$title}',
+                link: "{pigcms::$shareurl}",
+                imgUrl: "{pigcms::$shareimageurl}",
+                trigger: function (res) {
+                    //alert('用户点击分享到朋友圈');
+                },
+                success: function (res) {
+                    $.ajax({
+                        url: "{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=saveShareNumberToFriends",
+                        type:'GET',
+                        complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
+                        error: function() {},
+                        success: function(data) {
+                            if(data == 1){
+                                mnAlert("分享成功！");
                             }
-
-                        }else{
-                            mnAlert('提交成功');
-                            window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=share';
                         }
                     });
+                },
+                cancel: function (res) {
+                    //alert('已取消');
+                },
+                fail: function (res) {
+                    //alert(JSON.stringify(res));
+                }
+            });
+
+            wx.onMenuShareAppMessage({
+                title: '{pigcms::$title}',
+                desc:  '{pigcms::$bonusdesc}',
+                link: '{pigcms::$shareurl}',
+                imgUrl: '{pigcms::$shareimageurl}',
+                trigger: function (res) {
+                    //alert('用户点击发送给朋友');
+                },
+                success: function (res) {
+                    $.ajax({
+                        url: "{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=saveShareNumberToFriends",
+                        type:'GET',
+                        complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
+                        error: function() { },
+                        success: function(data) {
+                            if(data == 1){
+                                mnAlert("分享成功！");
+                            }
+                        }
+                    });
+                },
+                cancel: function (res) {
+                    //alert('已取消');
+                },
+                fail: function (res) {
+                    //alert(JSON.stringify(res));
+                }
+            });
+
+        });
+        wx.error(function (res) {
+            // alert(res.errMsg);
         });
 
-
-    });
-</script>
+        $(function(){
+        });
+    </script>
+</head>
+<body id="body">
+<div class="success-box"> </div>
+<ul class="success-text">
+    <li>恭喜！请点击“确认提交”获得活动排名并参与评奖</li>
+    <li>
+        <dl class="clrfix">
+            <dt>特等奖</dt>
+            <dd class="text">排名<strong>第1934名</strong></dd>
+            <dd>奖面膜<strong>50盒</strong></dd>
+        </dl>
+    </li>
+    <li>
+        <dl class="clrfix">
+            <dt>一等奖</dt>
+            <dd class="text">排名末两位数字为<strong>“81”</strong></dd>
+            <dd>奖面膜<strong>5盒</strong></dd>
+        </dl>
+    </li>
+    <li>
+        <dl class="clrfix">
+            <dt>二等奖</dt>
+            <dd class="text">排名末位数字为<strong>“1”</strong>或<strong>“8”</strong></dd>
+            <dd>奖面膜<strong>1盒</strong></dd>
+        </dl>
+    </li>
+    <li class="ta-r" style="font-size:0.15rem;">（奖项排名规定及相关活动规则以“活动详情”为准）</li>
+</ul>
+<div class="success-btns">
+    <p><a href="javascript:;" title="确认提交" class="success-btn success-btn01">确认提交</a></p>
+    <p><a href="{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=index" title="我要参加" class="success-btn success-btn02">我要参加</a></p>
+    <p><a href="{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=rank" title="查询排名" class="success-btn success-btn03">查询排名</a></p>
+</div>
 
 </body>
 </html>
