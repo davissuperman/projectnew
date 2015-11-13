@@ -494,6 +494,12 @@ HTML;
             $leftShare = 0;
         }
         $this->assign('leftshare',$leftShare);
+
+        $phoneExist = 0;
+        if($info['phone']){
+            $phoneExist = 1;
+        }
+        $this->assign('phonexist',$phoneExist);
         $this->display();
     }
 

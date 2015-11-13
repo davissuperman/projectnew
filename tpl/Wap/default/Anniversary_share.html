@@ -169,17 +169,25 @@
 <div class="need-people">还差<strong id="piao-number">{pigcms::$imgnums}</strong>位好友帮忙</div>
 <div class="game-btns">
 
-    <if condition="$sharenumberindatabase egt  3">
+    <if condition="$sharenumberindatabase egt  3 and $phonexist eq  0">
         <if condition="$havevoted eq 0">
             <p><a href="javascript:;" title="点我为蛋糕上色" class="  btn-gray btn-game-gray" >点我为蛋糕上色</a></p>
         <else/>
             <p><a href="javascript:;" title="点我为蛋糕上色" class="game-btn game-btn01 " id="helpvote">点我为蛋糕上色</a></p>
         </if>
-    <else/>
+    <elseif condition="$phonexist eq  0"/>
         <p><a href="javascript:;" title="点我为蛋糕上色" class="btn-gray btn-game-gray" >点我为蛋糕上色</a></p>
     </if>
-    <p><a href="javascript:;" title="邀请好友帮忙" class="game-btn game-btn02" id="btnShare">邀请好友帮忙</a></p>
-    <!--<p><a href="{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=rank" title="查询排名" class="game-btn game-btn03">查询排名</a></p>-->
+
+
+    <if condition="$phonexist eq  1">
+        <a href="http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=210588191&idx=1&sn=b92ed86b0e48cd73707477f2200d835e&scene=1&srcid=09242PtEGocqLViEACaoNz7Z#rd" title="查询排名" class="btn-query">
+            查询排名
+        </a>
+    <else/>
+        <p><a href="javascript:;" title="邀请好友帮忙" class="game-btn game-btn02" id="btnShare">邀请好友帮忙</a></p>
+        <p><a href="{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=rank" title="查询排名" class="game-btn game-btn03">查询排名</a></p>
+    </if>
 </div>
 
 <!--<div class="game-btns">-->
