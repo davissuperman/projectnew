@@ -493,6 +493,13 @@ HTML;
         }
         $this->assign('sharenumberindatabase',$share);
         $this->assign('havevoted',$haveVoted);
+        $share = $info['share'];
+        if($share <= 3){
+            $leftShare = 3 - $share;
+        }else{
+            $leftShare = 0;
+        }
+        $this->assign('leftshare',$leftShare);
         $this->display();
     }
 
