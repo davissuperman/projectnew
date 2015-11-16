@@ -265,8 +265,8 @@
 					html += '<p>主办方将于12月11日之前为您邮寄奖品</p>';
 					html += '<p>敬请期待！</p>';
 					Pop.alerts(html);
-					//mnAlert(html);
-				},
+                    window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=success';
+                },
 				error : function(XMLHttpRequest, textStatus, errorThrown) {
 					Pop.alerts("提交失败，网络繁忙！");
 					return false;
