@@ -833,7 +833,12 @@ HTML;
             exit();
         }
 
+        $phoneExist = 0;
+        if($info['phone']){
+            $phoneExist = 1;
+        }
         $this->assign('phone',$info['phone']);
+        $this->assign('phoneexist',$phoneExist);
         $this->assign('uid',$info['id']);
 
         $this->display();
