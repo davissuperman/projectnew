@@ -1120,8 +1120,9 @@ HTML;
         $selfPhoneTime = $info['phonetime'];
         $p = $info['phone'];
 
+        $uid = $info['id'];
         //查询此用户的排名
-        $pValue = M('anniversary_phonelist')->where(array('phone' => $p))->getField('id');
+        $pValue = M('anniversary_phonelist')->where(array('uid' => $uid))->getField('id');
         $vote = $this->anniversaryCount;
         $this->assign("vote",$vote);
         $this->assign("selforder",$pValue);
