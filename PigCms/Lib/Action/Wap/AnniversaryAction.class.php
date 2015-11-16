@@ -1,7 +1,7 @@
 <?php
 
 class AnniversaryAction extends SjzAction {
-    public $title = '森田药妆81周年';
+    public $title = '森田匠心,一膜相承';
     public $bonusdesc = '12500片面膜，20%中奖概率！不拼投票不设难度，只要你的排名末位数字有幸运的“1”或“8”！';
     public $eachVote = 10;
     public $imageUrl;
