@@ -232,6 +232,7 @@ HTML;
         $this->setIncViews($info['id']);
         $this->assign("vote",$vote);
         $this->assign("uploadimage",$uploadImage);
+        $this->assign("gid",$gid);
         $this->display();
     }
 
@@ -280,6 +281,7 @@ HTML;
         }
         $this->assign("uploadimage",$uploadImage);
         $this->assign('uploadimagesrc',$uploadImageSrc);
+        $this->assign("gid",$gid);
         $this->display();
     }
 
@@ -346,7 +348,7 @@ HTML;
             $this->setIncViews($info['id']);
         }
         // end views
-
+        $this->assign("gid",$gid);
         $this->display();
     }
 
@@ -394,7 +396,7 @@ HTML;
             $this->setIncViews($info['id']);
         }
         // end views
-
+        $this->assign("gid",$gid);
         $this->display();
     }
     public function share(){
@@ -508,6 +510,7 @@ HTML;
             $phoneExist = 1;
         }
         $this->assign('phonexist',$phoneExist);
+        $this->assign("gid",$gid);
         $this->display();
     }
 
@@ -698,6 +701,7 @@ HTML;
         //end
 
         $this->assign('havevoted',$haveVoted);
+        $this->assign("gid",$gid);
         $this->display();
     }
 
@@ -791,6 +795,7 @@ HTML;
 
         }
         $this->assign('info', $slist);
+        $this->assign("gid",$gid);
         $this->display();
     }
     public function sharePhone(){
@@ -858,7 +863,7 @@ HTML;
         $this->assign('phone',$info['phone']);
         $this->assign('phoneexist',$phoneExist);
         $this->assign('uid',$info['id']);
-
+        $this->assign("gid",$gid);
         $this->display();
     }
     //根据UID获取OPENID
@@ -1148,6 +1153,7 @@ HTML;
         $vote = $this->anniversaryCount;
         $this->assign("vote",$vote);
         $this->assign("selforder",$pValue);
+        $this->assign("gid",$gid);
         $this->display();
     }
 
@@ -1211,6 +1217,7 @@ HTML;
         $this->assign("name",$name);
         $this->assign("address",$address);
         $this->assign("phone",$phone);
+        $this->assign("gid",$gid);
         $this->display();
     }
 
