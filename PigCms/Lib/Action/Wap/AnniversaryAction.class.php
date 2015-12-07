@@ -178,7 +178,7 @@ HTML;
                     $selfUserInfo['nickname'] = $json->nickname;
                 }
             } else {
-                $url = urlencode($this->url."/index.php?g=Wap&m=Anniversary&a=index");
+                $url = urlencode($this->url."/index.php?g=Wap&m=Anniversary&a=index&gid=$gid");
                 header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_userinfo&state=sentian#wechat_redirect");
                 exit;
             }
@@ -283,28 +283,28 @@ HTML;
         $this->display();
     }
 
-    public function saveImage(){
-        $img = $_POST['image'];
-        $savePath = './PUBLIC/imagess/';
-
-        $base64_body = substr(strstr($img,','),1);
-        $userOpenId= cookie('user_openid');
-
-        $data= base64_decode($base64_body );
-
-
-        //保存uploadimagetime
-        $uid = $this->getUidByOpenid($userOpenId);
-        $t = time();
-        if($uid){
-            $n = array();
-            $n['id'] = $uid;
-            $n['uploadimagetime'] = time();
-            M("anniversary")->save($n);
-        }
-        $file = $savePath ."$userOpenId"."_$t".".jpeg";
-       echo  file_put_contents($file, $data);
-    }
+//    public function saveImage(){
+//        $img = $_POST['image'];
+//        $savePath = './PUBLIC/imagess/';
+//
+//        $base64_body = substr(strstr($img,','),1);
+//        $userOpenId= cookie('user_openid');
+//
+//        $data= base64_decode($base64_body );
+//
+//
+//        //保存uploadimagetime
+//        $uid = $this->getUidByOpenid($userOpenId);
+//        $t = time();
+//        if($uid){
+//            $n = array();
+//            $n['id'] = $uid;
+//            $n['uploadimagetime'] = time();
+//            M("anniversary")->save($n);
+//        }
+//        $file = $savePath ."$userOpenId"."_$t".".jpeg";
+//       echo  file_put_contents($file, $data);
+//    }
 
     public function rule(){
         $this->setEndTime();
@@ -354,9 +354,13 @@ HTML;
     public function rank1(){
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
+        $gid = $_GET['gid'];
+        if(!$gid){
+            $gid = $this->defalutGid;
+        }
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index&gid=$gid");
             exit();
         }
 
@@ -397,16 +401,20 @@ HTML;
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
        // $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        $gid = $_GET['gid'];
+        if(!$gid){
+            $gid = $this->defalutGid;
+        }
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index&gid=$gid");
             exit();
         }
 
         $info = M('anniversary')->where(array('openid' => $userOpenId))->find();
         if(!$info){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index&gid=$gid");
             exit();
         }
         $gid = $info['gid'];
@@ -459,7 +467,7 @@ HTML;
         if($vote >= $this->anniversaryCount && !$info['phone']){
 //            跳转到sharephone
 //            redirect
-            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=sharephone");
+            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=sharephone&gid=$gid");
             exit();
         }
         if($imgNums < 0 ){
@@ -511,13 +519,16 @@ HTML;
         //获取OPENID 用户没有感知
         $userOpenId= cookie('user_openid');
 //        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        $gid = $_GET['gid'];
+        if(!$gid){
+            $gid = $this->defalutGid;
+        }
         $uid = $_GET['uid'];
         if(!is_numeric($uid)){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index&gid=$gid");
             exit();
         }
-        $gid = $_GET['gid'];
 
 
         if(!$userOpenId){
@@ -535,7 +546,7 @@ HTML;
                     $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                     if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                         //code 有错误 需要重定向
-                        $url = $this->url."/index.php?g=Wap&m=Anniversary&a=index";
+                        $url = $this->url."/index.php?g=Wap&m=Anniversary&a=index&gid=$gid";
                         header("location:$url");
                     }
                     $m['id'] = $apidata['id'];
@@ -560,7 +571,7 @@ HTML;
         $info = M('anniversary')->where(array('id' => $uid))->find();
         if(!$info){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index&gid=$gid");
             exit();
         }
 
@@ -603,7 +614,7 @@ HTML;
         if($userOpenId == $MainOpenId){
             //自己访问自己的主页 跳转到share页面
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=share");
+            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=share&gid=$gid");
             exit();
         }
         //begin 分享出去的URL
@@ -649,7 +660,7 @@ HTML;
         if($vote >= $this->anniversaryCount && $userOpenId==$MainOpenId){
             //跳转到sharephone
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=sharephone");
+            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=sharephone&gid=$gid");
             exit();
         }
         if($imgNums < 0 ){
@@ -693,6 +704,10 @@ HTML;
     public function vote(){
         $this->setEndTime2();
         $userOpenId= cookie('user_openid');
+        $gid = $_GET['gid'];
+        if(!$gid){
+            $gid = $this->defalutGid;
+        }
 //        $userOpenId= 'oP9fCt-JvXkTShBQIin7jtYF0i6U';
         M("anniversary_polldata")->where(array('id' => 1))->setInc('pv');
         if(!$userOpenId){
@@ -710,7 +725,7 @@ HTML;
                     $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                     if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                         //code 有错误 需要重定向
-                        $url = $this->url."/index.php?g=Wap&m=Anniversary&a=index";
+                        $url = $this->url."/index.php?g=Wap&m=Anniversary&a=index&gid=$gid";
                         header("location:$url");
                     }
                     $m['id'] = $apidata['id'];
@@ -726,7 +741,7 @@ HTML;
 
                 }
             } else {
-                $url = urlencode($this->url."/index.php?g=Wap&m=Anniversary&a=vote");
+                $url = urlencode($this->url."/index.php?g=Wap&m=Anniversary&a=vote&gid=$gid");
                 header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
                 exit;
             }
@@ -782,9 +797,13 @@ HTML;
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
 //        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        $gid = $_GET['gid'];
+        if(!$gid){
+            $gid = $this->defalutGid;
+        }
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index&gid=$gid");
             exit();
         }
 
@@ -828,7 +847,7 @@ HTML;
             //成功，继续提交手机号
         }else{
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index&gid=$gid");
             exit();
         }
 
@@ -1076,7 +1095,10 @@ HTML;
             $n['createtime'] = $t;
             M('anniversary_phonelist')->add($n);
         }
-        $gid = $info['gid'];
+        $gid = $_GET['gid'];
+        if(!$gid){
+            $gid = $this->defalutGid;
+        }
         if(!$info){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index&gid=$gid");
@@ -1133,9 +1155,13 @@ HTML;
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
 //        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        $gid = $_GET['gid'];
+        if(!$gid){
+            $gid = $this->defalutGid;
+        }
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Anniversary&a=index&gid=$gid");
             exit();
         }
         $info = M('anniversary')->where(array('openid' => $userOpenId))->find();
@@ -1201,6 +1227,10 @@ HTML;
     }
 
     public function award(){
+        $gid = $_GET['gid'];
+        if(!$gid){
+            $gid = $this->defalutGid;
+        }
         $userOpenId= cookie('user_openid');
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
@@ -1230,7 +1260,7 @@ HTML;
         }
         // end views
 
-        $this->assign('selfpage',$this->url."/index.php?g=Wap&m=Anniversary&a=sharefriend");
+        $this->assign('selfpage',$this->url."/index.php?g=Wap&m=Anniversary&a=sharefriend&gid=$gid");
 
         $award = M('anniversary_award')->where(array('openid' => $userOpenId))->find();
         if($award){
