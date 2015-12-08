@@ -402,7 +402,7 @@ HTML;
     public function share(){
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
-       // $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        //$userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $gid = $_GET['gid'];
         if(!$gid){
             $gid = $this->defalutGid;
@@ -490,11 +490,10 @@ HTML;
 //        $uniqueViewSql = "SELECT * from tp_anniversary_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$userOpenId'";
         $uniqueViewSql = "SELECT * from tp_anniversary_votelist where  fromopenid='$userOpenId' and toopenid='$userOpenId'";
         $uniqueViewlist = M('anniversary_votelist')->query($uniqueViewSql);
-        $haveVoted = 1;
+        $haveVoted = 0;
         if($uniqueViewlist){
-            $haveVoted = 0;
+            $haveVoted = 1;
         }
-
         $this->assign('sharenumberindatabase',$share);
         $this->assign('havevoted',$haveVoted);
         if($share <= 3){
