@@ -166,14 +166,22 @@
 </div>
     <div class="need-people">还差<strong id="piao-number">{pigcms::$imgnums}</strong>位好友帮忙</div>
 <div class="game-btns">
-    <if condition="$sharenumberindatabase egt  3  and $imgnums gt 0">
+    <!--<if condition="$sharenumberindatabase egt  3  and $imgnums gt 0">-->
+        <!--<if condition="$havevoted eq  1">-->
+            <!--<p><a href="javascript:;" title="点我为蛋糕上色" class="gbtn-gray btn-game-gray"  >点我为蛋糕上色</a></p>-->
+        <!--<else/>-->
+            <!--<p><a href="javascript:;" title="点我为蛋糕上色" class="game-btn game-btn01" id="helpvote">点我为蛋糕上色</a></p>-->
+        <!--</if>-->
+    <!--<elseif condition="  $imgnums gt 0"/>-->
+        <!--<p><a href="javascript:;" title="点我为蛋糕上色" class="gbtn-gray btn-game-gray">点我为蛋糕上色</a></p>-->
+    <!--</if>-->
+
+    <if condition="  $imgnums gt 0"/>
         <if condition="$havevoted eq  1">
             <p><a href="javascript:;" title="点我为蛋糕上色" class="gbtn-gray btn-game-gray"  >点我为蛋糕上色</a></p>
-        <else/>
+            <else/>
             <p><a href="javascript:;" title="点我为蛋糕上色" class="game-btn game-btn01" id="helpvote">点我为蛋糕上色</a></p>
         </if>
-    <elseif condition="  $imgnums gt 0"/>
-        <p><a href="javascript:;" title="点我为蛋糕上色" class="gbtn-gray btn-game-gray">点我为蛋糕上色</a></p>
     </if>
     <p><a href="{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=index" title="我也要参加" class="game-btn game-btn04">我也要参加</a></p>
     <p><a href="{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=rule" title="活动详情" class="game-btn game-btn05">活动详情</a></p>

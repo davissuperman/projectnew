@@ -497,7 +497,6 @@ HTML;
 
         $this->assign('sharenumberindatabase',$share);
         $this->assign('havevoted',$haveVoted);
-        $share = $info['share'];
         if($share <= 3){
             $leftShare = 3 - $share;
         }else{
