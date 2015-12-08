@@ -1207,15 +1207,27 @@ HTML;
         $name = '';
         $phone = '';
         $address = '';
+        $city = '';
+        $country = '';
+        $province = '';
+        $a = 0;
         if($award){
             $name = $award['name'];
             $phone = $award['phone'];
             $address = $award['address'];
+            $city =  $award['city'];
+            $country = $award['county'];
+            $province = $award['province'];
+            $a = 1;
         }
         $this->assign("name",$name);
         $this->assign("address",$address);
         $this->assign("phone",$phone);
+        $this->assign("city",$city);
+        $this->assign("country",$country);
+        $this->assign("province",$province);
         $this->assign("gid",$gid);
+        $this->assign("whetheraward",$a);
         $this->display();
     }
 
