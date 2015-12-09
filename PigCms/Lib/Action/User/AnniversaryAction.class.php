@@ -838,8 +838,8 @@ award.address as addres,award.orderid as orderid,award.username as username from
         //每日数据汇总（记录每天活动所有模板所产生的数据总数）
 
         //记录从6.20 到 7.20号每天产生的模板总数
-        $fromDate = strtotime("2015-10-01 00:00:00");
-        $endDate = strtotime("2015-11-10 00:00:00");
+        $fromDate = strtotime("2015-12-09 00:00:00");
+        $endDate = strtotime("2016-01-10 00:00:00");
         $i = 0;
         $datereport = array();
         while($i<35){
@@ -884,15 +884,15 @@ award.address as addres,award.orderid as orderid,award.username as username from
         set_time_limit(0);
 
         //获取所有模板
-        $query = "select gid,title from tp_bonus where type=2";
+        $query = "select gid,title from tp_bonus where type=3";
         $glist = M('bonus')->query($query);
         $this->assign('glist', $glist);
 
         //每日渠道汇总表
         $m = 0;
         $datereport2 = array();
-        $fromDate2 = strtotime("2015-10-01 00:00:00");
-        $endDate2 = strtotime("2015-11-20 00:00:00");
+        $fromDate2 = strtotime("2015-12-09 00:00:00");
+        $endDate2 = strtotime("2016-01-20 00:00:00");
         while($m<35){
             $gidArr = array();
             $add = 24*3600;
