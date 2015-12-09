@@ -40,6 +40,10 @@ input,textarea,select,button{font-size:1em;}
 .mb-20{ margin-bottom:20px;}
 .mb-30{ margin-bottom:30px;}
 
+/*color*/
+.c1{color:#f60;}
+.c2{color:#08c;}
+
 /*padding*/
 .pt-10{ padding-top:10px;}
 .pt-20{ padding-top:20px;}
@@ -97,7 +101,7 @@ input,textarea,select,button{font-size:1em;}
 /*rule*/
 .rule-con{ background:url(../images/img_05.png) no-repeat center; height:8.8rem; background-size:auto 100%; position:relative;top:0.2rem; margin-bottom:0.4rem;}
 .rule-con ul{ height:5.3rem;width:4rem; position:absolute;top:2.2rem;left:50%; margin-left:-2rem;overflow: auto;}
-.rule-con ul li{ border-bottom:1px solid #be9271;line-height: 0.4rem;}
+.rule-con ul li{ /*border-bottom:1px solid #be9271;*/line-height: 0.4rem;}
 
 /*game*/
 .game-box{ background:url(../images/img_07.png) no-repeat center;height:6.4rem; background-size:auto 100%;position:relative;}
