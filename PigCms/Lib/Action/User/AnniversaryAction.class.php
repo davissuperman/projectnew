@@ -591,7 +591,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 }
                 $phone = $each['phone'];
                 $orderId = null;
-                $orderId = M('anniversary_phonelist')->where(array('phone' => $phone) )->getField('id');
+                $orderId = M('anniversary_phonelist')->where(array('uid' => $each['id']) )->getField('id');
                 $tmp['orderid'] = $orderId;
 
                 $level = null;
