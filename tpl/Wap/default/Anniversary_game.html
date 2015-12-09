@@ -191,7 +191,7 @@
 <div class="game-btns">
     <p><a href="javascript:;" title="点我为蛋糕上色" class="game-btn game-btn01">点我为蛋糕上色</a></p>
     <p><a href="javascript:;" title="点我为蛋糕上色" class="btn-gray btn-game-gray">点我为蛋糕上色</a></p>
-    <p><a href="javascript:;" title="邀请好友帮忙" class="game-btn game-btn02" id="btnShare">邀请好友帮忙</a></p>
+    <p><a href="javascript:;" title="邀请好友帮忙" class="game-btn game-btn02" id="btnShare" >邀请好友帮忙</a></p>
     <p><a href="{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=rank" title="查询排名" class="game-btn game-btn03">查询排名</a></p>
 </div>
 
@@ -230,7 +230,11 @@
             $("#piao-number2").html($("#piao-number").html());
         });
     });
-
+	
+	function showShareLayer(){
+		 showLayer($("#layer-share"));
+         $("#piao-number2").html($("#piao-number").html());
+	}
 </script>
 
 
