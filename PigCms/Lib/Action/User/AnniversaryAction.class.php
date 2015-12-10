@@ -493,6 +493,9 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 }elseif(strrchr((string)"$id","8") == '8'){
                     $level = 2;
                 }
+                if(!$level){
+                    continue;
+                }
                 $userInfo = $this->getUserInfo($uid);
                 $tmp = null;
                 $each = $userInfo;
