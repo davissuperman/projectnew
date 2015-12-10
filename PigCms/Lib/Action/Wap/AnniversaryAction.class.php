@@ -1099,7 +1099,7 @@ HTML;
             M('anniversary_phonelist')->add($n);
             $url = 'http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=210588191&idx=1&sn=b92ed86b0e48cd73707477f2200d835e&scene=1&srcid=09242PtEGocqLViEACaoNz7Z#rd';
             //redirect
-            header("$url");
+            header("location:$url");
             exit();
         }
         $gid = $_GET['gid'];
