@@ -369,3 +369,9 @@ input,textarea,select,button{font-size:1em;}
 	-webkit-box-shadow: 0px 0px 0px 1px #999 inset, 0px 0px 0px 2px #999 inset, 0px 3px 0px 0px #999, 0px 0px 0px 0px #999, 0px 0px 0px 0px ;
 	-moz-box-shadow: 0px 0px 0px 1px #999 inset, 0px 0px 0px 2px #999 inset, 0px 3px 0px 0px #999, 0px 0px 0px 0px #999, 0px 0px 0px 0px ;
 	-ie-box-shadow: 0px 0px 0px 1px #999 inset, 0px 0px 0px 2px #999 inset, 0px 3px 0px 0px #999, 0px 0px 0px 0px #999, 0px 0px 0px 0px ;width:60px;float:left;margin-left:0;}
+	
+	
+.share-hy{ margin-top:0.5rem; margin-bottom:0.4rem;}
+.share-hy i{ background:url(../images/share-hy.png) no-repeat;background-size:100% auto; display:inline-block; width:1rem; height:1rem; margin:0 0.2rem;}
+.share-pyq i{ background:url(../images/share-pyq.png) no-repeat;background-size:100% auto; display:inline-block; width:1rem; height:1rem; margin:0 0.2rem;}
+.share-hy span,.share-pyq span{ margin-top:0.25rem;}
