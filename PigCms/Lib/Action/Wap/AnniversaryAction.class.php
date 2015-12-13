@@ -602,7 +602,6 @@ HTML;
         $uniqueViewlist = M('anniversary_uniqueviewlist')->query($uniqueViewSql);
         $haveVoted = 1;
         if($uniqueViewlist){
-            $haveVoted = 0;
             //不需要增加uniqueviews
         }else{
             M("anniversary")->where(array('id' => $info['id']))->setInc('uniqueviews');
@@ -612,6 +611,11 @@ HTML;
             M('anniversary_uniqueviewlist')->add($n);
         }
 
+        $voteListSql = "SELECT * from tp_anniversary_votelist where fromopenid='$userOpenId' and toopenid='$MainOpenId'";
+        $voteView = M('anniversary_votelist')->query($voteListSql);
+        if($voteView){
+            $haveVoted = 0;
+        }
         if($userOpenId == $MainOpenId){
             //自己访问自己的主页 跳转到share页面
             //redirect
@@ -933,7 +937,6 @@ HTML;
         $voteList = M('anniversary_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
         //多次投票
         M("anniversary")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
-        /*
         if(!$voteList){//
             //投票
             $d = array();
@@ -948,7 +951,6 @@ HTML;
             //已经投过票
             $return = 2;
         }
-*/
         echo $return;
     }
     //TODO add random str to avoid auto submit
