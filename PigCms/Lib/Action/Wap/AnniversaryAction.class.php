@@ -698,9 +698,6 @@ HTML;
         $this->assign('cookiejoin',$cookieJoin);
         $this->assign('votetothisuid',$voteThisUid);
 
-        //多次投票
-        $haveVoted = 0;
-        //end
 
         $this->assign('havevoted',$haveVoted);
         $this->assign("gid",$gid);
