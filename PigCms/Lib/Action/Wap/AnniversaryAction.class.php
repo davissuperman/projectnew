@@ -1092,12 +1092,14 @@ HTML;
             M('anniversary')->save($m);
 
             //插入表 anniversary_phonelist
-            $n = array();
-            $n['uid'] = $uid;
-            $n['phone'] = 1;
-            $n['createtime'] = $t;
-            M('anniversary_phonelist')->add($n);
-
+            $phoneList = M('anniversary_phonelist')->where(array('uid' => $uid))->find();
+            if(!$phoneList){
+                $n = array();
+                $n['uid'] = $uid;
+                $n['phone'] = 1;
+                $n['createtime'] = $t;
+                M('anniversary_phonelist')->add($n);
+            }
         }
         $r = 0;
         if($_GET['r'] && $_GET['r'] == 1){
