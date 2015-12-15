@@ -477,7 +477,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $listArr = array();
         $pL =array();
         if($awardFromPost){
-            $phoneList = M('anniversary_phonelist')->select();
+            $phoneList = M('anniversary_phonelist')->query("SELECT * FROM `tp_anniversary_phonelist` group by uid");
             $arr = array();
             foreach($phoneList as $key =>$eachValue){
 //                if($key >= 5){
