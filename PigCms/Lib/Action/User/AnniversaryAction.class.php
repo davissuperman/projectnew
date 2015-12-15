@@ -477,7 +477,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $listArr = array();
         $pL =array();
         if($awardFromPost){
-            $phoneList = M('anniversary_phonelist')->query("SELECT * FROM `tp_anniversary_phonelist` group by uid");
+            $phoneList = M('anniversary_phonelist')->query("SELECT * FROM `tp_anniversary_phonelist` group by uid order by id");
             $arr = array();
             foreach($phoneList as $key =>$eachValue){
 //                if($key >= 5){
@@ -542,6 +542,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 }
                 $tmp['orderid'] = $id;
                 $tmp['level'] = $level;
+                $tmp['uid'] = $each['uid'];;
                 $listArr[] = $tmp;
             }
         }else{
@@ -709,7 +710,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
             ->setCellValue('S1', '地址')
             ->setCellValue('T1', '排名')
             ->setCellValue('U1', '奖项')
-            ->setCellValue('V1', '头像')
+            ->setCellValue('V1', 'UID')
             ;
         //写出内容 UTF-8
         //log :: write( print_r($data,true)  );
@@ -740,7 +741,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 ->setCellValue('S' . ($n + 2), $data[$n]['address'])
                 ->setCellValue('T' . ($n + 2), $data[$n]['orderid'])
                 ->setCellValue('U' . ($n + 2), $data[$n]['level'] )
-                ->setCellValue('V' . ($n + 2), $imageUrl.$data[$n]['openid']."_".$data[$n]['uploadimagetime'].".jpeg")
+                ->setCellValue('V' . ($n + 2), $data[$n]['uid'] )
                 ;
 
         }
