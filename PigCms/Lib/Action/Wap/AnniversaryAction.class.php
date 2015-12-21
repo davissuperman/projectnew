@@ -1165,7 +1165,7 @@ HTML;
     }
 
     public function form(){
-        $this->setEndTime();
+        $this->setEndTime2();
         $userOpenId= cookie('user_openid');
 //        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $gid = $_GET['gid'];
