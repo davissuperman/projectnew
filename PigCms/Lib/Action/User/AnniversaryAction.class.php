@@ -486,7 +486,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 $id = $eachValue['id'];
                 $uid = $eachValue['uid'];
                 $level = null;
-                if(strrchr((string)"$id","18") == "18"){
+                if(strrchr((string)"$id","81") == "81"){
                     $level = 1;
                 }elseif(strrchr((string)"$id","1") == '1'){
                     $level = 2;
