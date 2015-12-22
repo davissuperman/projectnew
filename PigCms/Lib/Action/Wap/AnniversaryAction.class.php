@@ -99,7 +99,7 @@ class AnniversaryAction extends SjzAction {
         }
     }
     public function setEndTime2(){
-        $endtime =strtotime( "2015-12-27 23:59:59" );
+        $endtime =strtotime( "2015-12-21 23:59:59" );
         if (time() > $endtime) {//活动是否结束
 
             echo <<<HTML
