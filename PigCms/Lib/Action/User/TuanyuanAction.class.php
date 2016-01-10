@@ -9,7 +9,7 @@ class TuanyuanAction  extends BonusAction {
     public function index() {
         //2 - Tuanyuan
         $db = M('bonus');
-        $where = array('token' => $this->token,'type'=>3);
+        $where = array('token' => $this->token,'type'=>4);
         $count = $db->where($where)->count();
         $page = new Page($count, 25);
         $info = $db->where($where)->limit($page->firstRow . ',' . $page->listRows)->select();
@@ -111,7 +111,7 @@ class TuanyuanAction  extends BonusAction {
             $data['token'] = $_POST['token'];
             $data['title'] = $_POST['title'];
             $data['desc'] = $_POST['desc'];
-            $data['type'] = 3;
+            $data['type'] = 4;
             $data['img'] = $_POST['img'];
             $data['start'] = strtotime($_POST['start']);
             $data['end'] = strtotime($_POST['end']);
@@ -890,7 +890,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
         set_time_limit(0);
 
         //获取所有模板
-        $query = "select gid,title from tp_bonus where type=3";
+        $query = "select gid,title from tp_bonus where type=4";
         $glist = M('bonus')->query($query);
         $this->assign('glist', $glist);
 
