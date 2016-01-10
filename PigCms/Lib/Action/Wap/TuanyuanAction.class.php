@@ -1,7 +1,7 @@
 <?php
 
 class TuanyuanAction extends SjzAction {
-    public $title = '庆森田药妆81周年';
+    public $title = '森田相伴，最美团圆之旅';
     public $bonusdesc = '10000片免费面膜邀您共庆森田药妆81周年！森田药妆，Since1934，来自台湾的面膜专家。';
     public $eachVote = 10;
     public $imageUrl;

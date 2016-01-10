@@ -1,0 +1,114 @@
+<?php $nav = "FUNCTION"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="./tpl/User/pinv/common/css/Text_add.css" rel="stylesheet"/>
+<script src="./tpl/User/pinv/common/js/date/WdatePicker.js"></script>
+<div class="container main">
+    <div class="row">
+        <div class="col-md-10 main">
+            <div class="panel panel-success">
+                <div class="panel-heading cfix">
+                    <h3 class="panel-title pull-left">81周年</h3>
+                    <span class="small"> </span>
+                    <div class="search-box pull-right">
+
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div id="date-calendar">
+                        <form method="post" action="{pigcms::U('Tuanyuan/exportDataReport',array('token'=>$token))}">
+                            全部数据
+                            <button type="submit" class="btn btn-default" style="width:50px"/>导出</button>
+                        </form>
+                    </div>
+                    <div>
+                        <div>每日数据汇总（记录每天活动所有模板所产生的数据总数）</div>
+                        <form method="post" action="" id="info">
+
+                            <div class="clearfix"></div>
+                            <table class="table table-striped" cellspacing="1">
+                                <tr>
+                                    <th class="firstTd">序号</th>
+                                    <th class="secondTd">日期</th>
+                                    <th class="thirdTd">模板数</th>
+                                    <th class="sevenTd">PV</th>
+                                    <th class="sevenTd">UV</th>
+                                    <th class="sevenTd">转发数</th>
+                                    <th class="sevenTd">投票数</th>
+                                    <th class="sevenTd">扩散数</th>
+                                </tr>
+                                <volist name="datareport" id="o">
+                                    <tr>
+                                        <td>{pigcms:$i}</td>
+                                        <td>{pigcms:$o.date}</td>
+                                        <td>{pigcms:$o.sumtemplate}</td>
+                                        <td>{pigcms:$o.pvsum}</td>
+                                        <td>{pigcms:$o.uvsum}</td>
+                                        <td>{pigcms:$o.sharesum}</td>
+                                        <td>{pigcms:$o.votesum}</td>
+                                        <td>{pigcms:$o.joinsum}</td>
+                                    </tr>
+                                </volist>
+                                <td colspan="9" style="text-align:right">{pigcms:$page}</td>
+                            </table>
+                            <input type="hidden" name="token" value="{pigcms:$_GET['token']}" /></form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<script>
+    $(document).ready(function(){
+        $(".copyclass").click(function(event){
+            event.preventDefault();
+            copyToClipboard(this.href);
+        });
+    });
+    function copyToClipboard(txt) {
+        if (window.clipboardData)
+        {
+            window.clipboardData.clearData();
+            window.clipboardData.setData("Text", txt);
+            alert("网址复制成功!快用Ctrl+V粘贴到QQ，MSN中发送给好友吧！")
+        }
+        else if (navigator.userAgent.indexOf("Opera") != -1)
+        {
+            window.location = txt;
+            alert("网址复制成功!快用Ctrl+V粘贴到QQ，MSN中发送给好友吧！")
+        }
+        else if (window.netscape)
+        {
+            try {
+                netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+            }
+            catch (e)
+            {
+                alert("被浏览器拒绝！\n请在浏览器地址栏输入'about:config'并回车\n然后将'signed.applets.codebase_principal_support'设置为'true'");
+            }
+            var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
+            if (!clip)
+                return;
+            var trans = Components.classes['@mozilla.org/widget/transferable;1'].createInstance(Components.interfaces.nsITransferable);
+            if (!trans)
+                return;
+            trans.addDataFlavor('text/unicode');
+            var str = new Object();
+            var len = new Object();
+            var str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+            var copytext = txt;
+            str.data = copytext;
+            trans.setTransferData("text/unicode", str, copytext.length * 2);
+            var clipid = Components.interfaces.nsIClipboard;
+            if (!clip)
+                return false;
+            clip.setData(trans, null, clipid.kGlobalClipboard);
+            alert("网址复制成功!快用Ctrl+V粘贴到QQ，MSN中发送给好友吧！")
+        }
+    }
+</script>
+<include file="Public:footer"/>
