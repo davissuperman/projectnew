@@ -6,7 +6,7 @@ class TuanyuanAction extends SjzAction {
     public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
-    public $endtime="2015-12-20 23:59:59"; //活动结束时间
+    public $endtime="2016-12-20 23:59:59"; //活动结束时间
     public $debug = true; //上线后应该改成false
     public $defalutGid = 29;
     public $tuanyuanCount = 25;
