@@ -262,7 +262,7 @@ input,textarea,select,button{font-size:1em;}
 
 /*form*/
 .input-text{ height:0.6rem;border: none;  background:#fff; width:90%;padding:0 0.1rem; border-radius:5px;color:#ef8775;}
-.form-panel{ position: absolute; width:300px;top:1rem;left:50%; margin-left:-150px;}
+.form-panel{ position: absolute; width:300px;top:0.5rem;left:50%; margin-left:-150px;}
 .form-panel .label{ margin:10px 0 5px 0;color:#fff; font-size:12px; float: left;}
 .form-panel .controls{ position:relative; float: left;}
 .input-form{ background:#fff; border:1px solid #ccc; border-radius:5px; height:30px; width:290px;max-width:300px; font-size:12px; float:left; color:#333;}
