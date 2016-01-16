@@ -15,16 +15,17 @@ function doImageToColor(){
 	var $piao_number = $("#piao-number");
 	var piao_number = $piao_number.html();
 	var has_number = 0;
-	if(piao_number != ""){
-		has_number = 25 - parseFloat(piao_number);
-	}
-	
-	$game_box.children(".game-img").each(function(index){
+	if(piao_number){
+		has_number = 24 - parseFloat(piao_number);
+		$game_box.children(".game-item").each(function(index){
 		var $curImg = $(this);
 		if(index < has_number){
 			$curImg.show();
 		}
 	});
+	}else{
+		$game_box.children().show();
+	}
 }
 
 function hideHoverBox(){
