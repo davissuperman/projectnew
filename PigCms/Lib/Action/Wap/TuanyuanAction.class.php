@@ -41,8 +41,8 @@ class TuanyuanAction extends SjzAction {
         $uid = $_GET['uid'];
         if($uid && is_numeric($uid)){
             $mainId = $uid;
-            if($_GET['uid'] && is_numeric($_GET['uid'])){
-                $mainGid = $_GET['uid'];
+            if($_GET['gid'] && is_numeric($_GET['gid'])){
+                $mainGid = $_GET['gid'];
             }
         }else{
             $userOpenId= cookie('user_openid');
