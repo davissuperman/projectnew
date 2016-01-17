@@ -14,7 +14,7 @@ class TuanyuanAction extends SjzAction {
     public function _initialize() {
         parent :: _initialize();
         $this->url= C('site_url');
-        $this->imageUrl = "http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/tuanyuan/images/logo1.jpg';
+        $this->imageUrl = "http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/tuanyuan/images/share.png';
         $this->shareImageUrl = "http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/tuanyuan/images/logo1.jpg';
 
         $ip=get_client_ip();
