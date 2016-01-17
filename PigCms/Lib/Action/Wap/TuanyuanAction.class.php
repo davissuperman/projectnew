@@ -9,7 +9,7 @@ class TuanyuanAction extends SjzAction {
     public $endtime="2016-12-20 23:59:59"; //活动结束时间
     public $debug = true; //上线后应该改成false
     public $defalutGid = 32;
-    public $tuanyuanCount = 25;
+    public $tuanyuanCount = 24;
 
     public function _initialize() {
         parent :: _initialize();
@@ -1163,8 +1163,8 @@ HTML;
         $uid = $info['id'];
         //查询此用户的排名
         $pValue = M('tuanyuan_phonelist')->where(array('uid' => $uid))->getField('id');
-        $vote = $this->tuanyuanCount;
         $this->assign("vote",$vote);
+        $this->assign("totalvote", $this->tuanyuanCount);
         $this->assign("selforder",$pValue);
         $this->assign("gid",$gid);
         $this->display();
