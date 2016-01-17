@@ -1073,7 +1073,7 @@ HTML;
     }
     public function rank(){
         $userOpenId= cookie('user_openid');
-        //        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+                $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Tuanyuan&a=index");
@@ -1173,7 +1173,7 @@ HTML;
     public function form(){
         $this->setEndTime2();
         $userOpenId= cookie('user_openid');
-        $userOpenId= 'oP9fCt_8XNH7wF0ERFC2VukVAZXo';
+//        $userOpenId= 'oP9fCt_8XNH7wF0ERFC2VukVAZXo';
         $gid = $_GET['gid'];
         if(!$gid){
             $gid = $this->defalutGid;
