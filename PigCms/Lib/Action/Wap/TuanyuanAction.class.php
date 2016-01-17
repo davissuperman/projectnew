@@ -125,6 +125,27 @@ HTML;
             }
         }
 
+    public function saveUniqueView($info,$userOpenId,$MainOpenId){
+        //当天是否访问过
+        $today = time();
+        $start = mktime(0,0,0,date("m",$today),date("d",$today),date("Y",$today));
+        $end = mktime(23,59,59,date("m",$today),date("d",$today),date("Y",$today));
+        $start = date("Y-m-d H:i:s",$start );
+        $end = date("Y-m-d H:i:s",$end );
+        $uniqueViewSql = "SELECT * from tp_tuanyuan_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$MainOpenId'";
+        $uniqueViewlist = M('tuanyuan_uniqueviewlist')->query($uniqueViewSql);
+        $haveVoted = 1;
+        if($uniqueViewlist){
+            //不需要增加uniqueviews
+        }else{
+            M("tuanyuan")->where(array('id' => $info['id']))->setInc('uniqueviews');
+            $n = array();
+            $n['fromopenid'] = $userOpenId;
+            $n['toopenid'] = $MainOpenId;
+            M('tuanyuan_uniqueviewlist')->add($n);
+        }
+    }
+
         public function index() {
         $gid = $_GET['gid'];
         if(!$gid){
@@ -201,6 +222,11 @@ HTML;
         }
 
 
+        //当天是否访问过
+       $this->saveUniqueView($info,$userOpenId,$userOpenId);
+        //end unique view
+
+
 
         //begin 分享出去的URL
         list($ticket,$appId,$testgid) = $this->getDiymenSet();
@@ -221,17 +247,9 @@ HTML;
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
 
-            $savePath = './PUBLIC/imagess/';
-            $t = $info['uploadimagetime'];
-            $uploadImageSrc = $savePath ."$userOpenId"."_$t".".jpeg";
-            $uploadImage = 0;
-            if(file_exists($uploadImageSrc)){
-                $uploadImage = 1;
-            }
         //view自增
         $this->setIncViews($info['id']);
         $this->assign("vote",$vote);
-        $this->assign("uploadimage",$uploadImage);
         $this->assign("gid",$gid);
         $this->display();
     }
@@ -420,15 +438,6 @@ HTML;
             exit();
         }
         $gid = $info['gid'];
-        //图片是否存在
-//        $savePath = './PUBLIC/imagess/';
-//        $t = $info['uploadimagetime'];
-//        $uploadImageSrc= $savePath."$userOpenId"."_$t".".jpeg";
-//        if(!file_exists($uploadImageSrc)){
-//            //redirect
-//            header("location:$this->url/index.php?g=Wap&m=Tuanyuan&a=index");
-//            exit();
-//        }
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
@@ -482,12 +491,9 @@ HTML;
         $this->assign('needimgnums',$vote);
 
         //当天是否访问过
-        $today = time();
-        $start = mktime(0,0,0,date("m",$today),date("d",$today),date("Y",$today));
-        $end = mktime(23,59,59,date("m",$today),date("d",$today),date("Y",$today));
-        $start = date("Y-m-d H:i:s",$start );
-        $end = date("Y-m-d H:i:s",$end );
-//        $uniqueViewSql = "SELECT * from tp_tuanyuan_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$userOpenId'";
+        $this->saveUniqueView($info,$userOpenId,$userOpenId);
+        //end unique view
+
         $uniqueViewSql = "SELECT * from tp_tuanyuan_votelist where  fromopenid='$userOpenId' and toopenid='$userOpenId'";
         $uniqueViewlist = M('tuanyuan_votelist')->query($uniqueViewSql);
         $haveVoted = 0;
