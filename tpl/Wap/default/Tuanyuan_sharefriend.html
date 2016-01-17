@@ -79,7 +79,7 @@
             },
             success: function (res) {
                 $.ajax({
-                    url: "{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=saveShareNumberToFriends",
+                    url: "{pigcms::$siteurl}/index.php?g=Wap&m=Tuanyuan&a=saveShareNumberToFriends",
                     type:'GET',
                     complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
                     error: function() { mnAlert('系统繁忙 请稍后再试');},
@@ -108,7 +108,7 @@
             },
             success: function (res) {
                 $.ajax({
-                    url: "{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=saveShareNumberToFriends",
+                    url: "{pigcms::$siteurl}/index.php?g=Wap&m=Tuanyuan&a=saveShareNumberToFriends",
                     type:'GET',
                     complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
                     error: function() { mnAlert('系统繁忙 请稍后再试');},
@@ -193,16 +193,16 @@
             </a>
             <else/>
             <div class="btn-out btn-share">
-                <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=index" title="邀请好友助力" >
+                <!--<a href="{pigcms::$siteurl}/index.php?g=Wap&m=Tuanyuan&a=index" title="邀请好友助力" >-->
                 邀请好友助力
-                </a>
+                <!--</a>-->
             </div>
         </if>
     </li>
     <li>
         <div class="btn-out">
             <p>
-                <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=index" title="我也要参加"  >
+                <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Tuanyuan&a=index" title="我也要参加"  >
                     我也要参加
                 </a>
             </p>
@@ -212,7 +212,34 @@
 
 </ul>
 
+<div class="layer-box hide" id="layer-box">
+    <div class="layer-bg"></div>
+    <div class="layer-con">
+        <div class="layer-share" id="layer-share">
+            <div class="ta-r">
+                <i class="shou"></i>
+            </div>
+            <div class="text">
+                <p>每人只能助力一次哦！</p>
+                <p>点击右上角"..."</p>
+                <p>找他们帮忙</p>
+                <p>一起助您早日与家人团圆吧！</p>
+            </div>
 
+            <div class="share-hy">
+                <span>选择<i></i>将活动分享给你的好友</span>
+            </div>
+            <div class="share-pyq">
+                <span>选择<i></i>将活动分享到你的朋友圈</span>
+            </div>
+
+            <div class="layer-btn">
+                <span class="btn-close"></span>
+            </div>
+
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
     $(document).ready(function(e) {
         $(".btn-share").click(function(){
@@ -227,7 +254,7 @@
             }
             $helpvote.addClass("clicked");
             $.post(
-                    "{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=saveVote2",
+                    "{pigcms::$siteurl}/index.php?g=Wap&m=Tuanyuan&a=saveVote2",
                     {uid: "{pigcms::$uid}"},
                     function (data) {
                         $helpvote.removeClass("clicked");
@@ -235,7 +262,7 @@
                             //			console.info(data);
                             //data 为返回文件名；
                             mnAlert('提交成功');
-                            window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Anniversary&a=sharefriend&uid={pigcms::$uid}&gid={pigcms::$gid}';
+                            window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Tuanyuan&a=sharefriend&uid={pigcms::$uid}&gid={pigcms::$gid}';
                         }else{
                             //图片提交失败
                         }
