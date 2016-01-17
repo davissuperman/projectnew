@@ -99,7 +99,7 @@ class TuanyuanAction extends SjzAction {
         }
     }
     public function setEndTime2(){
-        $endtime =strtotime( "2015-12-21 23:59:59" );
+        $endtime =strtotime( "2016-12-21 23:59:59" );
         if (time() > $endtime) {//活动是否结束
 
             echo <<<HTML
@@ -1167,7 +1167,7 @@ HTML;
     public function form(){
         $this->setEndTime2();
         $userOpenId= cookie('user_openid');
-//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        $userOpenId= 'oP9fCt_8XNH7wF0ERFC2VukVAZXo';
         $gid = $_GET['gid'];
         if(!$gid){
             $gid = $this->defalutGid;
