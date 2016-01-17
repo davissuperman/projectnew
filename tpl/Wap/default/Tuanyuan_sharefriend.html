@@ -203,7 +203,7 @@
     <li>
         <div class="btn-out">
             <p>
-                <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Tuanyuan&a=index" title="我也要参加"  >
+                <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Tuanyuan&a=index" title="我也要参加" id="iwantjoin" >
                     我也要参加
                 </a>
             </p>
@@ -246,6 +246,17 @@
         $(".btn-share").click(function(){
             showLayer($("#layer-share"));
         });
+
+        $("#iwantjoin").click(function(){
+            $.post(
+                    "{pigcms::$siteurl}/index.php?g=Wap&m=Tuanyuan&a=saveWantJoin",
+                    {uid: "{pigcms::$uid}"},
+                    function (data) {
+                    });
+        });
+
+
+
 
         $('#helpvote').click(function(){
             var $helpvote = $('#helpvote');
