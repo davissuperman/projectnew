@@ -138,15 +138,41 @@
 </head>
 <body id="body">
 <div class="logo"></div>
+
+<div class="img-box">
+    <p><img src="{pigcms::RES}/tuanyuan/images/img07.png" width="100%" /></p>
+    <p><img src="{pigcms::RES}/tuanyuan/images/img08.png" width="100%" /></p>
+</div>
+
 <if condition="$vote gt 0 and $vote lt 25 ">
-    <div class="ranking-box2">
+    <!--div class="ranking-box2">
         <p>您还未完成活动任务</p>
         <p>请点击确认继续游戏</p>
     </div>
 
     <div class="ranking-btns">
         <p><a href="{pigcms::$siteurl}/index.php?g=Wap&m=Tuanyuan&a=share" title="点击确认" class="ranking-btn ranking-btn02">点击确认</a></p>
+    </div-->
+    
+    
+    <div class="rule-box">
+        <div class="rule-top"></div>
+        <div class="rule-center">
+            <div class="ranking-notice" style="text-align:center; font-size:0.3rem;line-height: 0.5rem;">
+                <p>您还未完成活动任务</p>
+                <p>请点击确认继续游戏</p>
+            </div>
+            
+        </div>
+        <div class="rule-bottom"></div>
+        <ul class="control-box" style="margin-top:0.3rem;">
+            <li>
+                <p><a href="{pigcms::$siteurl}/index.php?g=Wap&m=Tuanyuan&a=share" title="确认继续" class="btn-out">确认继续</a></p>
+            </li>
+    
+        </ul>
     </div>
+    
 <else/>
 
     <div class="ranking-box">
