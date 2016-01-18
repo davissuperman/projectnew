@@ -1107,12 +1107,12 @@ HTML;
             }
         }
         $r = 0;
-//        if($_GET['r'] && $_GET['r'] == 1){
-//            $url = 'http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=210588191&idx=1&sn=b92ed86b0e48cd73707477f2200d835e&scene=1&srcid=09242PtEGocqLViEACaoNz7Z#rd';
-//            //redirect
-//            header("location:$url");
-//            exit();
-//        }
+        if($_GET['r'] && $_GET['r'] == 1){
+            $url = $this->url."/index.php?g=Wap&m=Tuanyuan&a=success";
+            //redirect
+            header("location:$url");
+            exit();
+        }
         $gid = $_GET['gid'];
         if(!$gid){
             $gid = $this->defalutGid;
@@ -1169,6 +1169,60 @@ HTML;
         $this->assign("gid",$gid);
         $this->display();
     }
+
+
+
+    public function success(){
+        $userOpenId= cookie('user_openid');
+//            $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        if(!$userOpenId){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Tuanyuan&a=index");
+            exit();
+        }
+        $info = M('tuanyuan')->where(array('openid' => $userOpenId))->find();
+        $gid = $_GET['gid'];
+        if(!$gid){
+            $gid = $this->defalutGid;
+        }
+        if(!$info){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Tuanyuan&a=index&gid=$gid");
+            exit();
+        }
+
+        //如果没有满足16票 跳转到再接再厉
+        if($info['vote'] <$this->tuanyuanCount){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Tuanyuan&a=rank1&gid=$gid");
+            exit();
+        }
+        //begin 分享出去的URL
+        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
+        $noncestr = "Wm3WZYTPz0wzccnW";
+        $timestamp = time();
+        $url = $this->get_url();;
+        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
+        $signature = sha1($str);
+        $this->assign("appid",$appId);
+        $this->assign("timestamp",$timestamp);
+        $this->assign("nonceStr",$noncestr);
+        $this->assign("signature",$signature);
+        $this->assign("shareurl",$this->getShareUrl());
+        $this->assign('gid', $gid);
+
+        $this->assign('title',$info['name'].$this->title);
+        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign("imageUrl",$this->imageUrl);
+        $this->assign("shareimageurl",$this->shareImageUrl);
+        //end
+
+        $this->assign("gid",$gid);
+        $this->display();
+    }
+
+
+
 
     public function form(){
         $this->setEndTime2();
