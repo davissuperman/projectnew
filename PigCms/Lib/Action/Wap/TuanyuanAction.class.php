@@ -582,6 +582,14 @@ HTML;
             exit();
         }
 
+        //25
+        if($info['vote'] >= $this->tuanyuanCount){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Tuanyuan&a=index&gid=$gid");
+            exit();
+        }
+
+
         if(!$gid && isset($info['gid']) && $info['gid'] ){
             $gid = $info['gid'];
         }
