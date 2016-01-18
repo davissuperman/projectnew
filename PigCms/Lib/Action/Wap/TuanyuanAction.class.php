@@ -582,12 +582,6 @@ HTML;
             exit();
         }
 
-        //25
-        if($info['vote'] >= $this->tuanyuanCount){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Tuanyuan&a=index&gid=$gid");
-            exit();
-        }
 
 
         if(!$gid && isset($info['gid']) && $info['gid'] ){
@@ -636,6 +630,14 @@ HTML;
             header("location:$this->url/index.php?g=Wap&m=Tuanyuan&a=share&gid=$gid");
             exit();
         }
+
+        //25
+        if($info['vote'] >= $this->tuanyuanCount){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Tuanyuan&a=index&gid=$gid");
+            exit();
+        }
+
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
