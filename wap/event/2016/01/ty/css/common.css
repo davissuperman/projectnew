@@ -181,15 +181,23 @@ input,textarea,select,button{font-size:1em;}
   top: 0.5rem;
   left: 3.27rem;}
 
-.control-box{text-align:center; }
-.control-box li{ margin-bottom:0.3rem;}
+.game-box .game-item25{background: url(../images/g25.png) no-repeat center top; background-size:100% auto;     height: 1.72rem;
+  width: 1.6rem;
+  top: 0rem;
+  left: 3.86rem;}
+
+.control-box{text-align:center; position: fixed;
+  bottom: 0;
+  left: 50%;
+  margin-left: -2.25rem;}
+.control-box li{ margin-bottom:0.15rem;}
 .control-box .need-people{ background:#fffce0;display:inline-block; width:4.5rem; -moz-border-radius: 0.2rem;-webkit-border-radius: 0.2rem;-o-border-radius: 0.2rem;-ms-border-radius: 0.2rem; border-radius: 0.2rem;font-size:0.3rem; text-align:center;}
 .control-box .need-people strong{ font-size:0.4rem; color:#f60;}
 
 /*btn*/
-.btn-inner{color:#f5da10; border:2px solid #f5da10; width:4.5rem; display:inline-block; -moz-border-radius: 0.1rem;-webkit-border-radius: 0.1rem;-o-border-radius: 0.1rem;-ms-border-radius: 0.1rem; border-radius: 0.1rem;text-align:center; cursor:pointer;font-size:0.45rem; font-weight:bold; margin:0; padding:0.1rem 0;text-decoration:none;}
+.btn-inner{color:#f5da10; border:2px solid #f5da10; width:4.5rem; display:inline-block; -moz-border-radius: 0.1rem;-webkit-border-radius: 0.1rem;-o-border-radius: 0.1rem;-ms-border-radius: 0.1rem; border-radius: 0.1rem;text-align:center; cursor:pointer;font-size:0.45rem; font-weight:bold; margin:0; padding:0.05rem 0;text-decoration:none;}
 
-.btn-out{color:#bf161a;border:2px solid #f5da10;background:#f5da10; width:4.5rem; display:inline-block; -moz-border-radius: 0.1rem;-webkit-border-radius: 0.1rem;-o-border-radius: 0.1rem;-ms-border-radius: 0.1rem; border-radius: 0.1rem;text-align:center; cursor:pointer;font-size:0.45rem; font-weight:bold; margin:0; padding:0.1rem 0; text-decoration:none;}
+.btn-out{color:#bf161a;border:2px solid #f5da10;background:#f5da10; width:4.5rem; display:inline-block; -moz-border-radius: 0.1rem;-webkit-border-radius: 0.1rem;-o-border-radius: 0.1rem;-ms-border-radius: 0.1rem; border-radius: 0.1rem;text-align:center; cursor:pointer;font-size:0.45rem; font-weight:bold; margin:0; padding:0.05rem 0; text-decoration:none;}
 
 
 /*分享*/
@@ -242,7 +250,9 @@ input,textarea,select,button{font-size:1em;}
   display: inline-block;
   margin-top: -0.5rem;}
 
-
+.rule-box .control-box{position: relative;
+  left: 0;
+  margin: 0.3rem 0 0 0 !important;}
 
 /*layer*/
 .layer-box{ position:fixed;width:100%;height:100%; z-index:99999;left:0;top:0;}
