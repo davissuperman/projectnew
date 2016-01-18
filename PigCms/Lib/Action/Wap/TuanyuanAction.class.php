@@ -9,7 +9,7 @@ class TuanyuanAction extends SjzAction {
     public $endtime="2016-12-20 23:59:59"; //活动结束时间
     public $debug = true; //上线后应该改成false
     public $defalutGid = 32;
-    public $tuanyuanCount = 24;
+    public $tuanyuanCount = 25;
 
     public function _initialize() {
         parent :: _initialize();
