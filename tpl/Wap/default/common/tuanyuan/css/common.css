@@ -43,6 +43,7 @@ input,textarea,select,button{font-size:1em;}
 /*color*/
 .c1{color:#f5da10;}
 .c2{color:#08c;}
+.c3{color:#f60;}
 
 /*padding*/
 .pt-10{ padding-top:10px;}
@@ -74,16 +75,16 @@ input,textarea,select,button{font-size:1em;}
 .img-box img{ width:100%;height:auto; border:none; margin:0; padding:0; vertical-align:top;}
 
 
-.prize-box{ background:#fcd694; padding:0.1rem; margin:0 0.15rem 0.2rem 0.15rem; border-radius:0.2rem;z-index: 1;position: relative;}
+.prize-box{ background:#fcd694; padding:0.1rem; margin:0 0.15rem 0.2rem 0.15rem; border-radius:0.2rem;z-index: 1;position: relative; font-size:0.2rem;}
 .prize-box ul li{ margin-bottom:0.1rem; color:#c1191c;}
 .prize-box ul dt{ background:#f1300f;color:#fff;float:left; padding:0 0.1rem; border-radius:0.1rem; margin-right:0.1rem;}
 
 /*首页*/
-.prize-box-index{ margin-top:-0.4rem;}
-.index-btns{ text-align:center; margin-top:0.2rem;}
+.prize-box-index{ margin-top:-0.6rem;}
+.index-btns{ text-align:center; margin-top:-0.1rem;}
 .index-btns .index-btn{ text-indent:-9999px; overflow:hidden; display: inline-block; cursor:pointer;}
-.index-btns .index-btn01{height: 0.8rem;width: 2.2rem;background:url(../images/btn01.png) no-repeat;background-size:auto 100%; margin:0 0.3rem 0 0;}
-.index-btns .index-btn02{height: 0.8rem;width: 2.2rem;background:url(../images/btn02.png) no-repeat;background-size:auto 100%;}
+.index-btns .index-btn01{height: 0.7rem;width: 1.9rem;background:url(../images/btn01.png) no-repeat;background-size:auto 100%; margin:0 0.3rem 0 0;}
+.index-btns .index-btn02{height: 0.7rem;width: 1.9rem;background:url(../images/btn02.png) no-repeat;background-size:auto 100%;}
 
 /*游戏*/
 .game-box{ height:4rem;position:absolute; top:3rem;left:0;width:100%;}
@@ -272,14 +273,14 @@ input,textarea,select,button{font-size:1em;}
 
 /*form*/
 .input-text{ height:0.6rem;border: none;  background:#fff; width:90%;padding:0 0.1rem; border-radius:5px;color:#ef8775;}
-.form-panel{ position: absolute; width:300px;top:0.5rem;left:50%; margin-left:-150px;}
+.form-panel{ position: absolute; width:300px;top:0.2rem;left:50%; margin-left:-150px;}
 .form-panel .label{ margin:10px 0 5px 0;color:#fff; font-size:12px; float: left;}
 .form-panel .controls{ position:relative; float: left;}
 .input-form{ background:#fff; border:1px solid #ccc; border-radius:5px; height:30px; width:290px;max-width:300px; font-size:12px; float:left; color:#333;}
 .text-area{background:#7cc7ff; border:1px solid #8f164c; border-radius:5px; width:290px;box-shadow: 2px 2px 0px #c873a0; max-width:300px; font-size:14px; float:left; resize:none;}
-.form-panel select{ max-width:320px; height:39px;}
+.form-panel select{ max-width:320px; height:34px;}
 
-.form-btns{margin:0.2rem 0; text-align:center; margin-top:0.5rem;}
+.form-btns{margin:0.2rem 0; text-align:center; margin-top:0.3rem;}
 
 
 
@@ -292,7 +293,7 @@ input,textarea,select,button{font-size:1em;}
 /***********************弹出窗口样式**************************/
 .pop-bg{height: 100%;width: 100%;background: #000;position: fixed;top: 0;left: 0;opacity: 0.5;z-index:99998;}
 .pop-box .head{text-align: left;padding: 0 8px;background:#7cc7ff;height: 35px;line-height:38px;color: #fff;border: none;font-size: 18px;font-weight: bold;}
-.pop-box{background: #fff;position: fixed;border: 1px solid #bbc9d4;border-top:none;z-index:99999;  border-radius: 5px;width: 260px;  overflow: hidden;top:20%;left:50%;margin-left:-130px;}
+.pop-box{background: #fff;position: fixed;border: 1px solid #bbc9d4;border-top:none;z-index:99999;  border-radius: 5px;width: 300px;  overflow: hidden;top:20%;left:50%;margin-left:-150px;}
 .pop-box .text{padding: 10px;text-align: left;font-size:14px;overflow: auto;line-height:22px;color:#08c;}
 .pop-box .btn-box{padding:10px;margin: 0;}
 .pop-box .btn{display: inline-block;-webkit-border-radius: 25px;-moz-border-radius: 25px;-ie-border-radius: 25px;
