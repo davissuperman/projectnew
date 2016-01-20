@@ -1088,12 +1088,11 @@ HTML;
         $info = M('tuanyuan')->where(array('openid' => $userOpenId))->find();
         if(IS_POST){
             //用户提交了信息，等待排名页面
-            if(!$info || $info['vote'] < $this->tuanyuanCount){
+            if(!$info || $info['vote'] < $this->tuanyuanCount || ($info['phone']==1) ){
                 exit;
             }
 
             $uid = $_POST['uid'];
-            $phoneList = M('tuanyuan_phonelist')->where(array('uid' => $uid))->find();
             //更新表 tuanyuan
             $m = array();
             $t = time();
