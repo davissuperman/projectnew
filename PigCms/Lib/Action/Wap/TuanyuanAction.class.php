@@ -465,10 +465,6 @@ HTML;
         // end views
 
 
-        $savePath = './PUBLIC/imagess/';
-        $t = $info['uploadimagetime'];
-        $uploadImageSrc= $savePath."$userOpenId"."_$t".".jpeg";
-        $this->assign('uploadimagesrc',$uploadImageSrc);
 
         //获取当前已经有了多少拼图
         $imgNums = (int)$this->tuanyuanCount;
@@ -1083,7 +1079,7 @@ HTML;
     }
     public function rank(){
         $userOpenId= cookie('user_openid');
-//            $userOpenId= 'oP9fCt_8XNH7wF0ERFC2VukVAZXo';
+//            $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Tuanyuan&a=index");
@@ -1115,6 +1111,7 @@ HTML;
                 $n['createtime'] = $t;
                 M('tuanyuan_phonelist')->add($n);
             }
+            return;
         }
         $r = 0;
         if($_GET['r'] && $_GET['r'] == 1){
