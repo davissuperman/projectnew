@@ -714,7 +714,7 @@ HTML;
         $this->assign('cookiejoin',$cookieJoin);
         $this->assign('votetothisuid',$voteThisUid);
 
-        $haveVoted = 1;
+//        $haveVoted = 1;//如果多次投票 开启这里
         $this->assign('havevoted',$haveVoted);
         $this->assign("gid",$gid);
         $this->display();
