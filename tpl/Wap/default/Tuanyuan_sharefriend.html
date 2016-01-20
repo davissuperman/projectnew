@@ -273,7 +273,7 @@
                             //			console.info(data);
                             //data 为返回文件名；
                             mnAlert('提交成功');
-                            window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Tuanyuan&a=sharefriend&uid={pigcms::$uid}&gid={pigcms::$gid}';
+                            setInterval ("showTime()", 2000);
                         }else{
                             //图片提交失败
                         }
@@ -281,6 +281,10 @@
         });
     });
 
+    function showTime()
+    {
+        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Tuanyuan&a=sharefriend&uid={pigcms::$uid}&gid={pigcms::$gid}';
+    }
 </script>
 
 </body>
