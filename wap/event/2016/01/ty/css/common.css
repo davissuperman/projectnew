@@ -243,7 +243,7 @@ input,textarea,select,button{font-size:1em;}
 
 .rule-center{background:url(../images/img15.png) repeat-y center top;background-size: 100% auto;
   margin: 0 0.2rem; color: #fff;padding: 0 0.2rem;}
-.rule-center > ul{height:5rem;overflow:auto;}
+.rule-center > ul{height:5.35rem;overflow:auto;}
 .rule-center > ul > li{ margin-bottom:0.1rem;}
 .rule-center > ul > li > dl > dt{color:#f5da10;}
 .rule-bottom{background:url(../images/img16.png) no-repeat center bottom;background-size: 100% auto;height:0.6rem;margin: 0 0.2rem;}
