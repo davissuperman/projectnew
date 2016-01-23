@@ -199,13 +199,13 @@ input,textarea,select,button{font-size:1em;}
   left: 50%;
   margin-left: -2.25rem;*/}
 .control-box li{ margin-bottom:0.12rem;}
-.control-box .need-people{ background:#fffce0;display:inline-block; width:4.5rem; -moz-border-radius: 0.2rem;-webkit-border-radius: 0.2rem;-o-border-radius: 0.2rem;-ms-border-radius: 0.2rem; border-radius: 0.2rem;font-size:0.25rem; text-align:center; padding:0.02rem 0;}
+.control-box .need-people{ background:#fffce0;display:inline-block; width:4.5rem; -moz-border-radius: 0.2rem;-webkit-border-radius: 0.2rem;-o-border-radius: 0.2rem;-ms-border-radius: 0.2rem; border-radius: 0.2rem;font-size:0.25rem; text-align:center; padding:0.08rem 0;}
 .control-box .need-people strong{ font-size:0.25rem; color:#f60;}
 
 /*btn*/
-.btn-inner{color:#f5da10; border:2px solid #f5da10; width:4.5rem; display:inline-block; -moz-border-radius: 0.1rem;-webkit-border-radius: 0.1rem;-o-border-radius: 0.1rem;-ms-border-radius: 0.1rem; border-radius: 0.1rem;text-align:center; cursor:pointer;font-size:0.25rem; font-weight:bold; margin:0; padding:0.02rem 0;text-decoration:none;}
+.btn-inner{color:#f5da10; border:2px solid #f5da10; width:4.5rem; display:inline-block; -moz-border-radius: 0.1rem;-webkit-border-radius: 0.1rem;-o-border-radius: 0.1rem;-ms-border-radius: 0.1rem; border-radius: 0.1rem;text-align:center; cursor:pointer;font-size:0.25rem; font-weight:bold; margin:0; padding:0.08rem 0;text-decoration:none;}
 
-.btn-out{color:#bf161a;border:2px solid #f5da10;background:#f5da10; width:4.5rem; display:inline-block; -moz-border-radius: 0.1rem;-webkit-border-radius: 0.1rem;-o-border-radius: 0.1rem;-ms-border-radius: 0.1rem; border-radius: 0.1rem;text-align:center; cursor:pointer;font-size:0.25rem; font-weight:bold; margin:0; padding:0.02rem 0; text-decoration:none;}
+.btn-out{color:#bf161a;border:2px solid #f5da10;background:#f5da10; width:4.5rem; display:inline-block; -moz-border-radius: 0.1rem;-webkit-border-radius: 0.1rem;-o-border-radius: 0.1rem;-ms-border-radius: 0.1rem; border-radius: 0.1rem;text-align:center; cursor:pointer;font-size:0.25rem; font-weight:bold; margin:0; padding:0.08rem 0; text-decoration:none;}
 
 
 /*分享*/
