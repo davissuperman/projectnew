@@ -72,7 +72,7 @@ input,textarea,select,button{font-size:1em;}
 
 /*img-box*/
 .img-box{ text-align:center;}
-.img-box img{ width:80%;height:auto; border:none; margin:0; padding:0; vertical-align:top;}
+.img-box img{ width:95%;height:auto; border:none; margin:0; padding:0; vertical-align:top;}
 
 
 .prize-box{ background:#fcd694; padding:0.05rem; margin:0 0.15rem 0.1rem 0.15rem; border-radius:0.1rem;z-index: 1;position: relative; font-size:0.2rem;}
@@ -89,7 +89,7 @@ input,textarea,select,button{font-size:1em;}
   width: 1.62rem;background:url(../images/btn02.png) no-repeat;background-size:auto 100%;}
 
 /*游戏*/
-.game-box{ height:3.2rem;position:absolute; top:2.5rem;left:0;width:100%;}
+.game-box{ height:3.2rem;position:absolute; top:3rem;left:0;width:100%;}
 .game-box .game-item{ position:absolute; display:none;}
 .game-box .game-item01{background: url(../images/g01.png) no-repeat center top; background-size:100% auto;height: 0.5rem;width: 0.45rem;top: 2.14rem;
   left: 1.58rem;}
