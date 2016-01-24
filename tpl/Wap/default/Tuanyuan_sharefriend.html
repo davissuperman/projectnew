@@ -272,7 +272,12 @@
                         if (data != '') {
                             //			console.info(data);
                             //data 为返回文件名；
-                            mnAlert('提交成功');
+                            if(data == 1){
+                                mnAlert('提交成功');
+                            }else{
+                                mnAlert('已帮过！');
+                            }
+
                             setInterval ("showTime()", 2000);
                         }else{
                             //图片提交失败
