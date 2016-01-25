@@ -288,7 +288,10 @@
 
     function showTime()
     {
-        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Tuanyuan&a=index&gid={pigcms::$gid}';
+        //多次投票开始
+        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Tuanyuan&a=sharefriend&uid={pigcms:$uid}&gid={pigcms::$gid}';
+        //多次投票结束
+       // window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Tuanyuan&a=index&gid={pigcms::$gid}';
     }
 </script>
 

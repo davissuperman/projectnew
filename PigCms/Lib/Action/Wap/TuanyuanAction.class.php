@@ -710,7 +710,12 @@ HTML;
         $this->assign('cookiejoin',$cookieJoin);
         $this->assign('votetothisuid',$voteThisUid);
 
-//        $haveVoted = 1;//如果多次投票 开启这里
+
+        //多次投票开始
+        $haveVoted = 1;//如果多次投票 开启这里
+        //多次投票结束
+
+
         $this->assign('havevoted',$haveVoted);
         $this->assign("gid",$gid);
         $this->display();
@@ -945,7 +950,7 @@ HTML;
         //检查此 local openid 是否投过票
         $voteList = M('tuanyuan_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
         //多次投票
-        if(!$voteList){//
+        if(!$voteList){
             //投票
             $d = array();
             $d['fromopenid'] = $fromOpenIdFromPost;
@@ -959,6 +964,12 @@ HTML;
             //已经投过票
             $return = 2;
         }
+
+        //多次投票开始
+        M("tuanyuan")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
+        $return = 1;
+        //多次投票结束
+
         echo $return;
     }
     //TODO add random str to avoid auto submit
