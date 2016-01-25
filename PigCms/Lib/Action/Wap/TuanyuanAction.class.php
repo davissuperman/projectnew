@@ -957,8 +957,9 @@ HTML;
             $d['toopenid'] = $toOpenIdFromPost;
             $d['createtime'] = time();
             M('tuanyuan_votelist')->add($d);
-            M("tuanyuan")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
-
+            //多次投票开始
+//            M("tuanyuan")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
+            //多次投票结束
             $return = 1;
         }else{
             //已经投过票
