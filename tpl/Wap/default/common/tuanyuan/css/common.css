@@ -326,3 +326,9 @@ input,textarea,select,button{font-size:1em;}
 	-ie-box-shadow: 0px 0px 0px 1px #999 inset, 0px 0px 0px 2px #999 inset, 0px 3px 0px 0px #999, 0px 0px 0px 0px #999, 0px 0px 0px 0px ;width:60px;float:left;margin-left:0;}
 	
 	
+/*ranking*/
+.ranking-panel{ position:relative;}
+.ranking-panel .ranking-number strong{ background:url(../images/img17.png) no-repeat; background-size: auto 100%; display:inline-block;width: 1.8rem;
+  height: 0.8rem; line-height:0.8rem;text-align:center; font-size:0.5rem; font-weight:bold;}
+  
+.ranking-panel .monkey{ background:url(../images/img18.png) no-repeat; background-size: auto 100%; display:inline-block;width: 1.2rem;height: 1.4rem; position:absolute; left:0.2rem;top:0.2rem;}
