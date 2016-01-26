@@ -2,7 +2,7 @@
 
 class TuanyuanAction extends SjzAction {
     public $title = '森田相伴，最美团圆之旅';
-    public $bonusdesc = '10000片免费面膜大奖伴您最美团圆之旅！20%超高中奖率，回家的路上快来试试手气吧！';
+    public $bonusdesc = '10000片免费面膜大奖伴您最美团圆之旅！回家的路上快来试试手气吧！';
     public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
