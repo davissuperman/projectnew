@@ -712,7 +712,7 @@ HTML;
 
 
         //多次投票开始
-        $haveVoted = 1;//如果多次投票 开启这里
+       // $haveVoted = 1;//如果多次投票 开启这里
         //多次投票结束
 
 
@@ -958,7 +958,7 @@ HTML;
             $d['createtime'] = time();
             M('tuanyuan_votelist')->add($d);
             //多次投票开始
-//            M("tuanyuan")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
+            M("tuanyuan")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
             //多次投票结束
             $return = 1;
         }else{
@@ -967,8 +967,8 @@ HTML;
         }
 
         //多次投票开始
-        M("tuanyuan")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
-        $return = 1;
+//        M("tuanyuan")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
+//        $return = 1;
         //多次投票结束
 
         echo $return;
