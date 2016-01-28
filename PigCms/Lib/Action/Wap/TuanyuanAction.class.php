@@ -958,7 +958,11 @@ HTML;
             $d['createtime'] = time();
             M('tuanyuan_votelist')->add($d);
             //多次投票开始
-            M("tuanyuan")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
+            //获取当前用户的投票数
+            $realVote = M('tuanyuan')->where(array('openid' => $toOpenIdFromPost))->getField('vote');
+            if($realVote < 25 ){
+                M("tuanyuan")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
+            }
             //多次投票结束
             $return = 1;
         }else{
@@ -989,8 +993,12 @@ HTML;
             $d['toopenid'] = $toOpenIdFromPost;
             $d['createtime'] = time();
             M('tuanyuan_votelist')->add($d);
-            M("tuanyuan")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
 
+            //获取当前用户的投票数
+            $realVote = M('tuanyuan')->where(array('openid' => $toOpenIdFromPost))->getField('vote');
+            if($realVote < 25 ){
+                M("tuanyuan")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
+            }
             $return = 1;
         }else{
             //已经投过票
