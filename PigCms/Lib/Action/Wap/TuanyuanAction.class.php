@@ -6,7 +6,7 @@ class TuanyuanAction extends SjzAction {
     public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
-    public $endtime="2016-12-20 23:59:59"; //活动结束时间
+    public $endtime="2016-2-1 23:59:59"; //活动结束时间
     public $debug = true; //上线后应该改成false
     public $defalutGid = 32;
     public $tuanyuanCount = 25;
@@ -99,7 +99,7 @@ class TuanyuanAction extends SjzAction {
         }
     }
     public function setEndTime2(){
-        $endtime =strtotime( "2016-12-21 23:59:59" );
+        $endtime =strtotime( "2016-2-2 23:59:59" );
         if (time() > $endtime) {//活动是否结束
 
             echo <<<HTML
