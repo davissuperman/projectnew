@@ -755,6 +755,104 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
         $objWriter->save('php://output');
     }
+
+
+    public function exportUser(){
+        set_time_limit(0);
+        echo 'aaa';
+        $queryGidCount = "SELECT f.* FROM `tp_customer_service_fans` as f WHERE f.subscribe=1 limit 100";
+        $list = M('customer_service_fans')->query($queryGidCount);
+        $i = 0;
+        foreach($list as $each){
+            $openId = $each['openid'];
+            $nickname = $each['nickname'];
+            $sex = $each['sex'];
+            if($sex == 1){
+                $sex = '男';
+            }elseif($sex == 2){
+                $sex = '女';
+            }else{
+                $sex = '未知';
+            }
+            $headimgurl = $each['headimgurl'];
+
+            //在表all_user 中是否存在
+            $userInfo = M('all_user')->where(array('openid' => $openId))->find();
+            if(!$userInfo){
+                //首先在tuanyau中
+                $username = null;
+                $phone = null;
+                $province = null;
+                $city = null;
+                $address = null;
+                $info = M('tuanyuan_award')->where(array('openid' => $openId))->find();
+                if($info){
+                    $username = $info['name'];
+                    $phone = $info['phone'];
+                    $province = $info['province'];
+                    $city = $info['city'];
+                    $address = $info['address'];
+                }else{
+                    $info = M('anniversary_award')->where(array('openid' => $openId))->find();
+                    if($info){
+                        $username = $info['name'];
+                        $phone = $info['phone'];
+                        $province = $info['province'];
+                        $city = $info['city'];
+                        $address = $info['address'];
+                    }else{
+                        $info = M('countmask_award')->where(array('openid' => $openId))->find();
+                        if($info){
+                            $username = $info['name'];
+                            $phone = $info['phone'];
+                            $province = $info['province'];
+                            $city = $info['city'];
+                            $address = $info['address'];
+                        }else{
+                            $info = M('bonus_award')->where(array('openid' => $openId))->find();
+                            if($info){
+                                $username = $info['name'];
+                                $phone = $info['phone'];
+                                $province = $info['province'];
+                                $city = $info['city'];
+                                $address = $info['address'];
+                            }else{
+                                $info = M('pretty_award')->where(array('openid' => $openId))->find();
+                                if($info){
+                                    $username = $info['name'];
+                                    $phone = $info['phone'];
+                                    $province = $info['province'];
+                                    $city = $info['city'];
+                                    $address = $info['address'];
+                                }
+                            }
+                        }
+                    }
+                }
+
+                $all_user = array();
+                $all_user['openid'] = $openId;
+                $all_user['nickname'] = $nickname;
+                $all_user['sex'] = $sex;
+                $all_user['username'] = $username;
+                $all_user['phone'] = $phone;
+                $all_user['province'] = $province;
+                $all_user['city'] = $city;
+                $all_user['address'] = $address;
+                M('all_user')->add($all_user);
+
+
+            }
+
+
+
+        }
+//        $i++;
+//
+//        $filename = "每日数据汇总" . "统计";
+//        $this->exportexcelx1($datereport, $filename);
+    }
+
     public function exportDataReport(){
         set_time_limit(0);
         //每日数据汇总（记录每天活动所有模板所产生的数据总数）
