@@ -760,7 +760,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
     public function exportUser(){
         set_time_limit(0);
         echo 'aaa';
-        $queryGidCount = "SELECT f.* FROM `tp_customer_service_fans` as f WHERE f.subscribe=1 limit 100";
+        $queryGidCount = "SELECT f.* FROM `tp_customer_service_fans` as f WHERE f.subscribe=1";
         $list = M('customer_service_fans')->query($queryGidCount);
         $i = 0;
         foreach($list as $each){
