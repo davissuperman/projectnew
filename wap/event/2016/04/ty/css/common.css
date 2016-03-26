@@ -338,3 +338,6 @@ input,textarea,select,button{font-size:1em;}
 .success-btns li{ float:left; width:50%;}
 .success-btns li .btn-out,
 .success-btns li .btn-inner{ width:2.8rem;}
+
+.time-remaining{text-align:center; font-size:0.3rem; padding:0.2rem 0; position:absolute;top:0;left:0; width:100%;}
+.time-remaining span{ color:#f60;}

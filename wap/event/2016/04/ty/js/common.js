@@ -8,6 +8,8 @@ $(document).ready(function(e) {
 		showLayer($("#layer-share"));
 		$("#piao-number2").html($("#piao-number").html());
 	});
+	var cd = new countdown ($("#time-remaining"),5);
+	cd.doTiming();
 });
 
 function doImageToColor(){
@@ -54,7 +56,7 @@ function countdown ($elem,time){
 			st=setTimeout (arguments.callee, 1000);
 			obj.html(time);
 			if(time == 0){
-				gameover();
+				//gameover();
 			}
 		}
 	}
