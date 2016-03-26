@@ -300,6 +300,51 @@ HTML;
 //       echo  file_put_contents($file, $data);
 //    }
 
+    public function game1(){
+        $this->setEndTime();
+        $userOpenId= cookie('user_openid');
+      //  $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+        if(!$userOpenId){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Allinone&a=index");
+            exit();
+        }
+
+        //首先判断当前用户是否有玩过第一次
+        $info = M('allinone')->where(array('openid' => $userOpenId))->find();
+        $gid = $info['gid'];
+        //begin 分享出去的URL
+        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
+        $noncestr = "Wm3WZYTPz0wzccnW";
+        $timestamp = time();
+        $url = $this->get_url();;
+        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
+        $signature = sha1($str);
+        $this->assign("appid",$appId);
+        $this->assign("timestamp",$timestamp);
+        $this->assign("nonceStr",$noncestr);
+        $this->assign("signature",$signature);
+        $this->assign("shareurl",$this->getShareUrl());
+        $this->assign('gid', $gid);
+
+        $this->assign('title',$info['name'].$this->title);
+        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign("imageUrl",$this->imageUrl);
+        $this->assign("shareimageurl",$this->shareImageUrl);
+        //end
+
+        //begin views
+        $userOpenId= cookie('user_openid');
+        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        if($info){
+            $this->setIncViews($info['id']);
+        }
+        // end views
+        $this->assign("gid",$gid);
+        $this->display();
+    }
+
+
     public function rule(){
         $this->setEndTime();
         $userOpenId= cookie('user_openid');

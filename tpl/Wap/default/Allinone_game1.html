@@ -86,7 +86,6 @@
                     success: function(data) {
                         if(data == 1){
                             mnAlert("分享成功！");
-                            window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Allinone&a=share&gid={pigcms::$gid}';
                         }
                     }
                 });
@@ -116,7 +115,6 @@
                     success: function(data) {
                         if(data == 1){
                             mnAlert("分享成功！");
-                            window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Allinone&a=share&gid={pigcms::$gid}';
                         }
                     }
                 });
@@ -138,57 +136,64 @@
     });
 </script>
 </head>
+
 <body id="body">
-<div class="time-remaining">距助力成功还有<span id="time-remaining">5</span>秒</div>
-<div class="img-box" id="time-page1">
-    <p><img src="{pigcms::RES}/allinone/images/new/img07.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/allinone/images/new/img08.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/allinone/images/new/img09.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/allinone/images/new/img10.png" width="100%" /></p>
+<div class="img-box">
+    <p><img src="{pigcms::RES}/allinone/images/new/img01.png" width="100%" /></p>
+    <p><img src="{pigcms::RES}/allinone/images/new/img02.png" width="100%" /></p>
+    <p><img src="{pigcms::RES}/allinone/images/new/img03.png" style="width:100%;"/></p>
 </div>
-<div class="img-box" id="time-page2" style="display:none;">
-    <p><img src="{pigcms::RES}/allinone/images/new/img11.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/allinone/images/new/img12.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/allinone/images/new/img13.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/allinone/images/new/img14.png" width="100%" /></p>
+
+<ul class="control-box">
+    <li style="margin-top:0.6rem;">
+        <div class="need-people">还需<strong id="piao-number">20</strong>位好友助力</div>
+    </li>
+
+    <li style="margin-top:0.6rem;">
+        <div class="btn-out btn-share">邀请好友助力</div>
+    </li>
+
+</ul>
+
+
+
+
+<div class="layer-box hide" id="layer-box">
+    <div class="layer-bg"></div>
+    <div class="layer-con">
+        <div class="layer-share" id="layer-share">
+            <div class="ta-r">
+                <i class="shou"></i>
+            </div>
+
+
+            <div class="share-hy">
+                <span>选择<i></i>将活动分享给你的好友</span>
+            </div>
+            <div class="share-pyq">
+                <span>选择<i></i>将活动分享到你的朋友圈</span>
+            </div>
+
+            <div class="layer-btn">
+                <span class="btn-close"></span>
+            </div>
+
+        </div>
+    </div>
 </div>
-<div class="img-box" id="time-page3" style="display:none;">
-    <p><img src="{pigcms::RES}/allinone/images/new/img15.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/allinone/images/new/img16.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/allinone/images/new/img17.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/allinone/images/new/img18.png" width="100%" /></p>
-</div>
+
 
 <script type="text/javascript">
-    function countdown ($elem,time){
-        var obj = $elem;
-        this.doTiming = function (){
-            var st;
-            if (time<=0){
-                mnAlert('恭喜您助力成功！点击“邀请好友助力”完成您的新品面膜体验愿望吧！');
-                window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Allinone&a=game1&gid={pigcms::$gid}';
+    $(document).ready(function(e) {
+        $(".btn-share").click(function(){
+            showLayer($("#layer-share"));
+        });
+    });
 
-                clearTimeout(st);
-
-            } else {
-
-                time--;
-                st=setTimeout (arguments.callee, 1000);
-                obj.html(time);
-                if(time == 2){
-                    $("#time-page1").hide();
-                    $("#time-page2").show();
-                    $("#time-page3").hide();
-                }else if(time == 0){
-                    //gameover();
-                    $("#time-page1").hide();
-                    $("#time-page2").hide();
-                    $("#time-page3").show();
-                }
-            }
-        }
-    }
 </script>
 
+
 </body>
+
+
 </html>

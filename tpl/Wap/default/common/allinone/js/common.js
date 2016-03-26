@@ -44,30 +44,7 @@ function playAudio(){
  	audio.play();
 }
 
-function countdown ($elem,time){
-	var obj = $elem;
-	this.doTiming = function (){
-		var st;
-		if (time<=0){
-			clearTimeout(st);
-		} else {
-			
-			time--;
-			st=setTimeout (arguments.callee, 1000);
-			obj.html(time);
-			if(time == 2){
-				$("#time-page1").hide();
-				$("#time-page2").show();
-				$("#time-page3").hide();
-			}else if(time == 0){
-				//gameover();
-				$("#time-page1").hide();
-				$("#time-page2").hide();
-				$("#time-page3").show();
-			}
-		}
-	}
-}
+
 
 function urlPara (v){
 	var url = window.location.search;
