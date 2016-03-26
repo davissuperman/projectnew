@@ -448,11 +448,6 @@ HTML;
         // end views
 
 
-        $savePath = './PUBLIC/imagess/';
-        $t = $info['uploadimagetime'];
-        $uploadImageSrc= $savePath."$userOpenId"."_$t".".jpeg";
-        $this->assign('uploadimagesrc',$uploadImageSrc);
-
         //获取当前已经有了多少拼图
         $imgNums = (int)$this->allinoneCount;
         $vote = $info['vote'];

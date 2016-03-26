@@ -86,6 +86,7 @@
                     success: function(data) {
                         if(data == 1){
                             mnAlert("分享成功！");
+                            window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Allinone&a=share&gid={pigcms::$gid}';
                         }
                     }
                 });
@@ -115,6 +116,7 @@
                     success: function(data) {
                         if(data == 1){
                             mnAlert("分享成功！");
+                            window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Allinone&a=share&gid={pigcms::$gid}';
                         }
                     }
                 });
@@ -136,100 +138,61 @@
     });
 </script>
 </head>
-
-<body id="body" style="background: #d8eaf2;">
+<body id="body">
 <div class="img-box">
-    <p><img src="{pigcms::RES}/allinone/images/new/img04.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/allinone/images/new/img05.png" width="100%" /></p>
+    <p><img src="{pigcms::RES}/allinone/images/new/img01.png" width="100%" /></p>
+    <p><img src="{pigcms::RES}/allinone/images/new/img02.png" width="100%" /></p>
+    <p><img src="{pigcms::RES}/allinone/images/new/img03.png" style="width:100%;"/></p>
 </div>
-<div class="rule-box">
-    <div class="rule-top"></div>
-    <div class="rule-center">
-        <div class="rule-title">
-            <div class="title"></div>
-            <div class="line"></div>
+
+<ul class="control-box">
+    <li style="margin-top:0.6rem;">
+        <div class="need-people">还需<strong id="piao-number">0</strong>位好友助力</div>
+    </li>
+
+    <li style="margin-top:0.6rem;">
+        <div class="btn-out btn-share">邀请好友助力</div>
+    </li>
+
+</ul>
+
+
+
+
+<div class="layer-box hide" id="layer-box">
+    <div class="layer-bg"></div>
+    <div class="layer-con">
+        <div class="layer-share" id="layer-share">
+            <div class="ta-r">
+                <i class="shou"></i>
+            </div>
+
+
+            <div class="share-hy">
+                <span>选择<i></i>将活动分享给你的好友</span>
+            </div>
+            <div class="share-pyq">
+                <span>选择<i></i>将活动分享到你的朋友圈</span>
+            </div>
+
+            <div class="layer-btn">
+                <span class="btn-close"></span>
+            </div>
+
         </div>
-        <ul>
-            <li>
-                <dl>
-                    <dt>活动时间：</dt>
-                    <dd>2016年4月XX日——2016年4月XX日24点</dd>
-                </dl>
-            </li>
-            <li>
-                <dl>
-                    <dt>参与方式：</dt>
-                    <dd><span class="c1">Step1：</span>参加活动；</dd>
-                    <dd><span class="c1">Step2：</span>欣赏新品广告后自动完成助力，获得20位好友助力，获得提交成绩资格；</dd>
-                    <dd><span class="c1">Step3：</span>提交成绩，根据提交时间先后顺序获得活动排名；</dd>
-                    <dd><span class="c1">Step4：</span>根据活动排名的最末位数字确定中奖资格，</dd>
-                </dl>
-                <dl>
-                    <dt>奖项设置如下：</dt>
-                    <dd>
-                        <div class="prize-box">
-                            <ul>
-                                <li>
-                                    <dl class="clrfix">
-                                        <dt>特等奖</dt>
-                                        <dd>排名第2016名 <span class="fr">奖面膜50盒</span></dd>
-                                    </dl>
-                                </li>
-                                <li>
-                                    <dl class="clrfix">
-                                        <dt>一等奖</dt>
-                                        <dd>排名末两位数字为“16”<span class="fr">奖面膜5盒</span></dd>
-                                    </dl>
-                                </li>
-                                <li>
-                                    <dl class="clrfix">
-                                        <dt>二等奖</dt>
-                                        <dd>排名末位数字为“1”或“6”<span class="fr">奖面膜1盒</span></dd>
-                                    </dl>
-                                </li>
-                            </ul>
-                        </div>
-                    </dd>
-
-                    <dd class="c1">奖项排名规定及相关活动规则以”活动详情”为准</dd>
-                </dl>
-            </li>
-            <li>
-                <dl>
-                    <dt>备注：</dt>
-                    <dd><span class="c1">1、</span>广告新品产品图片仅供参考，以收到实物为准！</dd>
-                    <dd><span class="c1">2、</span>每盒含面膜4-5片，随机发放，以收到实物为准！</dd>
-                    <dd><span class="c1">3、</span>本次活动限前10000名提交成绩者获得评奖资格，排名在10000名以后者失去评比资格。</dd>
-                    <dd><span class="c1">Step5：</span>填写收货地址。请于2016年02月02日24点前填写领奖信息，逾期未填写视为自动放弃中奖资格；请确保领奖信息中收货信息准确无误，因收货信息不准确造成奖品未能送达，主办方概不负责。</dd>
-                </dl>
-                <dl>
-                    <dt>备注：</dt>
-                    <dd>1、本次活动每个微信ID仅限参加一次；领奖信息中联系电话每个电话号码仅限登记一次，重复登记则仅保留最早登记该号码的活动参与者资格，其他参与者视为无效数据，不予发奖。</dd>
-                    <dd>2、所登记电话号码作为成绩查询及领奖信息的对应依据，如活动参加者在活动查询时提供的电话号码不符或活动数据中无该号码，主办方有权不予受理并取消评奖资格。</dd>
-                    <dd><span class="c1">Step6：</span>主办方将于2016年02月04日确认最终中奖名单，并于02月22日后发奖（春节期间快递因素）。请密切关注森田药妆官方微信获取相关信息。</dd>
-
-                    <dd>
-                        <div class="prize-box">
-                            特别公告：主办方对任何数据及参与方式异常，存在企图违规参与活动，对活动的公平公正形成干扰的违规参与者，主办方有权单方面取消其活动成绩及活动参与资格。活动进行当中，如发生大批量违规参与情况，对主办方系统及服务器形成干扰，严重危及活动公正公平开展，则主办方有权终止活动。特此公告！所有参加活动者，视为已知悉并接受本公告！
-                        </div>
-
-                    </dd>
-
-                </dl>
-            </li>
-
-        </ul>
-
-
-
-    </div>
-    <div class="rule-bottom"></div>
-    <div class="ta-c rule-btn">
-        <a href="javascript:window.history.go(-1);" title="返回" class="btn-back btn-out">确认返回</a>
     </div>
 </div>
+
+
+<script type="text/javascript">
+    $(document).ready(function(e) {
+        $(".btn-share").click(function(){
+            showLayer($("#layer-share"));
+        });
+    });
+
+</script>
+
 
 </body>
-
-
 </html>
