@@ -1188,39 +1188,6 @@ HTML;
             exit();
         }
         $info = M('allinone')->where(array('openid' => $userOpenId))->find();
-        if(IS_POST){
-            //用户提交了信息，等待排名页面
-            if(!$info || $info['vote'] < $this->allinoneCount){
-                exit;
-            }
-
-            $uid = $_POST['uid'];
-            $phoneList = M('allinone_phonelist')->where(array('uid' => $uid))->find();
-            //更新表 allinone
-            $m = array();
-            $t = time();
-            $m['phone'] = 1;
-            $m['id'] =$uid;
-            $m['phonetime'] = $t;
-            M('allinone')->save($m);
-
-            //插入表 allinone_phonelist
-            $phoneList = M('allinone_phonelist')->where(array('uid' => $uid))->find();
-            if(!$phoneList){
-                $n = array();
-                $n['uid'] = $uid;
-                $n['phone'] = 1;
-                $n['createtime'] = $t;
-                M('allinone_phonelist')->add($n);
-            }
-        }
-        $r = 0;
-        if($_GET['r'] && $_GET['r'] == 1){
-            $url = 'http://mp.weixin.qq.com/s?__biz=MzA4Mjk5OTYxNQ==&mid=210588191&idx=1&sn=b92ed86b0e48cd73707477f2200d835e&scene=1&srcid=09242PtEGocqLViEACaoNz7Z#rd';
-            //redirect
-            header("location:$url");
-            exit();
-        }
         $gid = $_GET['gid'];
         if(!$gid){
             $gid = $this->defalutGid;

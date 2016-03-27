@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>森田面膜81周年庆</title>
+    <link href="{pigcms::RES}/allinone/css/common.css?v=2016012601" rel="stylesheet" type="text/css" />
+    <script src="{pigcms::RES}/allinone/js/zepto.min.js" type="text/javascript"></script>
+    <script src="{pigcms::RES}/allinone/js/common.js" type="text/javascript"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+<script>
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: '{pigcms::$appid}', // 必填，公众号的唯一标识
+        timestamp:  '{pigcms::$timestamp}', // 必填，生成签名的时间戳
+        nonceStr: '{pigcms::$nonceStr}', // 必填，生成签名的随机串
+        signature: '{pigcms::$signature}',// 必填，签名，见附录1
+        jsApiList: ['checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onRecordEnd',
+            'playVoice',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+    wx.ready(function () {
+        // 1 判断当前版本是否支持指定 JS 接口，支持批量判断
+        wx.checkJsApi({
+            jsApiList: [
+                'onMenuShareTimeline',
+                'getNetworkType',
+                'hideMenuItems',
+                'previewImage'
+            ],
+            success: function (res) {
+                //alert(JSON.stringify(res));
+            }
+        });
+
+        // 2. 分享接口
+
+        // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
+        wx.onMenuShareTimeline({
+            title: '{pigcms::$title}',
+            link: "{pigcms::$shareurl}",
+            imgUrl: "{pigcms::$shareimageurl}",
+            trigger: function (res) {
+                //alert('用户点击分享到朋友圈');
+            },
+            success: function (res) {
+                $.ajax({
+                    url: "{pigcms::$siteurl}/index.php?g=Wap&m=allinone&a=saveShareNumberToFriends",
+                    type:'GET',
+                    complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
+                    error: function() {},
+                    success: function(data) {
+                        if(data == 1){
+                            mnAlert("分享成功！");
+                        }
+                    }
+                });
+            },
+            cancel: function (res) {
+                //alert('已取消');
+            },
+            fail: function (res) {
+                //alert(JSON.stringify(res));
+            }
+        });
+
+        wx.onMenuShareAppMessage({
+            title: '{pigcms::$title}',
+            desc:  '{pigcms::$bonusdesc}',
+            link: '{pigcms::$shareurl}',
+            imgUrl: '{pigcms::$shareimageurl}',
+            trigger: function (res) {
+                //alert('用户点击发送给朋友');
+            },
+            success: function (res) {
+                $.ajax({
+                    url: "{pigcms::$siteurl}/index.php?g=Wap&m=allinone&a=saveShareNumberToFriends",
+                    type:'GET',
+                    complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
+                    error: function() { },
+                    success: function(data) {
+                        if(data == 1){
+                            mnAlert("分享成功！");
+                        }
+                    }
+                });
+            },
+            cancel: function (res) {
+                //alert('已取消');
+            },
+            fail: function (res) {
+                //alert(JSON.stringify(res));
+            }
+        });
+
+    });
+    wx.error(function (res) {
+       // alert(res.errMsg);
+    });
+
+    $(function(){
+    });
+</script>
+</head>
+<body id="body">
+    <div class="rule-box" style="display:none;">
+        <div class="rule-top"></div>
+        <div class="rule-center">
+            <div class="ranking-notice" style="text-align:center; font-size:0.3rem;line-height: 0.5rem;">
+                <p>您还未完成活动任务</p>
+                <p>请点击确认继续游戏</p>
+            </div>
+
+        </div>
+        <div class="rule-bottom"></div>
+        <ul class="control-box" style="margin-top:0.3rem;">
+            <li>
+                <p><a href="{pigcms::$siteurl}/index.php?g=Wap&m=Allinone&a=share&gid={pigcms::$gid}" title="点击确认" class="btn-out">确认继续</a></p>
+            </li>
+
+        </ul>
+    </div>
+</body>
+</html>
