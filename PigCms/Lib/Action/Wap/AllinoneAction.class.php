@@ -359,7 +359,6 @@ HTML;
             exit();
         }
 
-        //首先判断当前用户是否有玩过第一次
         $info = M('allinone')->where(array('openid' => $userOpenId))->find();
         $gid = $info['gid'];
         //begin views
@@ -369,6 +368,10 @@ HTML;
 
         $getPost = null;
         if(isset($_GET['post'])  && $_GET['post'] == 1   ){
+            //是否满足20票
+            if($info['vote'] < $this->allinoneCount){
+                exit;
+            }
             //更新phone
             //更新表 allinone
             $id = $info['id'];
