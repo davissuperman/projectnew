@@ -581,6 +581,13 @@ HTML;
             header("location:$this->url/index.php?g=Wap&m=Allinone&a=sharephone&gid=$gid");
             exit();
         }
+        if($vote >= $this->allinoneCount && $info['phone']){
+//            跳转到sharephone
+//            redirect
+            header("location:$this->url/index.php?g=Wap&m=Allinone&a=success&gid=$gid");
+            exit();
+        }
+
         if($imgNums < 0 ){
             $imgNums = 0;
         }
