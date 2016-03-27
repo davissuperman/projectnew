@@ -530,6 +530,9 @@ HTML;
         $haveVoted = 0;
         if($uniqueViewlist){
             $haveVoted = 1;
+            //自己已经给自己投过票，但是未满20票 跳转到分享引导页
+            header("location:$this->url/index.php?g=Wap&m=Allinone&a=game1&gid=$gid");
+            exit();
         }
         $this->assign('sharenumberindatabase',$share);
         $this->assign('havevoted',$haveVoted);
