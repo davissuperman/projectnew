@@ -349,6 +349,75 @@ HTML;
         $this->display();
     }
 
+    public function success(){
+        $this->setEndTime();
+        $userOpenId= cookie('user_openid');
+        //  $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+        if(!$userOpenId){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Allinone&a=index");
+            exit();
+        }
+
+        //首先判断当前用户是否有玩过第一次
+        $info = M('allinone')->where(array('openid' => $userOpenId))->find();
+        $gid = $info['gid'];
+        //begin views
+        if($info){
+            $this->setIncViews($info['id']);
+        }
+
+        $getPost = null;
+        if(isset($_GET['post'])  && $_GET['post'] == 1   ){
+            //更新phone
+            //更新表 allinone
+            $id = $info['id'];
+            if($info['phone'] != 1){
+                $m = array();
+                $t = time();
+                $m['phone'] = 1;
+                $m['id'] = $id;
+                $m['phonetime'] = $t;
+                M('allinone')->save($m);
+            }
+
+            //插入表 allinone_phonelist
+            $phoneList = M('allinone_phonelist')->where(array('uid' => $id))->find();
+            if(!$phoneList){
+                $n = array();
+                $n['uid'] = $id;
+                $n['phone'] = 1;
+                $n['createtime'] = time();
+                M('allinone_phonelist')->add($n);
+            }
+        }
+
+
+        //begin 分享出去的URL
+        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
+        $noncestr = "Wm3WZYTPz0wzccnW";
+        $timestamp = time();
+        $url = $this->get_url();;
+        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
+        $signature = sha1($str);
+        $this->assign("appid",$appId);
+        $this->assign("timestamp",$timestamp);
+        $this->assign("nonceStr",$noncestr);
+        $this->assign("signature",$signature);
+        $this->assign("shareurl",$this->getShareUrl());
+        $this->assign('gid', $gid);
+
+        $this->assign('title',$info['name'].$this->title);
+        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign("imageUrl",$this->imageUrl);
+        $this->assign("shareimageurl",$this->shareImageUrl);
+        //end
+
+
+
+
+        $this->display();
+    }
 
     public function rule(){
         $this->setEndTime();
