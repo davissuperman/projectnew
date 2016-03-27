@@ -9,7 +9,7 @@ class AllinoneAction extends SjzAction {
     public $endtime="2016-04-20 23:59:59"; //活动结束时间
     public $debug = true; //上线后应该改成false
     public $defalutGid = 29;
-    public $allinoneCount = 25;
+    public $allinoneCount = 20;
 
     public function _initialize() {
         parent :: _initialize();
@@ -334,13 +334,18 @@ HTML;
         //end
 
         //begin views
-        $userOpenId= cookie('user_openid');
-        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         if($info){
             $this->setIncViews($info['id']);
         }
+
+        $vote = $info['vote'];
+        $leftVote = $this->allinoneCount  - $vote;
+        if($leftVote<=0){
+            $leftVote = 0;
+        }
         // end views
         $this->assign("gid",$gid);
+        $this->assign("leftvote",$leftVote);
         $this->display();
     }
 
@@ -541,6 +546,8 @@ HTML;
         }
         $this->assign('phonexist',$phoneExist);
         $this->assign("gid",$gid);
+        $this->assign("uid",$info['id']);
+        $this->assign("mainopenid",$userOpenId);
         $this->display();
     }
 
