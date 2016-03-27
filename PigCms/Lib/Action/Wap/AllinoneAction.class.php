@@ -642,18 +642,18 @@ HTML;
             $n['toopenid'] = $MainOpenId;
             M('allinone_uniqueviewlist')->add($n);
         }
-
-        $voteListSql = "SELECT * from tp_allinone_votelist where fromopenid='$userOpenId' and toopenid='$MainOpenId'";
-        $voteView = M('allinone_votelist')->query($voteListSql);
-        if($voteView){
-            $haveVoted = 0;
-        }
         if($userOpenId == $MainOpenId){
             //自己访问自己的主页 跳转到share页面
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Allinone&a=share&gid=$gid");
             exit();
         }
+        $voteListSql = "SELECT * from tp_allinone_votelist where fromopenid='$userOpenId' and toopenid='$MainOpenId'";
+        $voteView = M('allinone_votelist')->query($voteListSql);
+        if($voteView){
+            $haveVoted = 0;
+        }
+
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
@@ -1435,6 +1435,34 @@ HTML;
 
 
     /*
+     * 助力成功
+     */
+    public function saveZhuli(){
+        $endtime =strtotime( $this->endtime );
+        if(time() > $endtime ){
+            echo 0;
+            exit;
+        }
+        $userOpenId= cookie('user_openid');
+        $info = M('allinone')->where(array('openid' => $userOpenId))->find();
+        if($info){
+            $id = $info['id'];
+            if(!$info['sharetime']){
+                $m = array();
+                $m['id'] = $info['id'];
+                $m['sharetime'] = time();
+                M("allinone")->save($m);
+            }
+            M("allinone")->where(array('id' => $id))->setInc('share');
+            echo 1;
+        }else{
+            echo 0;
+        }
+
+    }
+
+
+    /*
      * 记录转发次数
      */
     public function saveShareNumberToFriends(){
@@ -1485,10 +1513,11 @@ HTML;
         }
         //帮忙投票 点击次数
         $toOpenId = $_POST['toopenid'];
+        $uid = $_POST['uid'];
         $userOpenId = cookie('user_openid');
         $voteList = M('allinone_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toOpenId))->find();
         if(!$voteList){
-            $info = M('allinone')->where(array('openid' => $toOpenId))->find();
+            $info = M('allinone')->where(array('id' => $uid))->find();
             M("allinone")->where(array('id' => $info['id']))->setInc('vote');
 
             //投票

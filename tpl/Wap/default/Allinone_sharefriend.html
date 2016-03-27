@@ -163,8 +163,21 @@
         this.doTiming = function (){
             var st;
             if (time<=0){
-                mnAlert('恭喜您助力成功！点击“邀请好友助力”完成您的新品面膜体验愿望吧！');
-                window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Allinone&a=game1&gid={pigcms::$gid}';
+
+                $.post(
+                        "{pigcms::$siteurl}/index.php?g=Wap&m=Allinone&a=saveHelpVote",
+                        {uid: "{pigcms::$uid}",toopenid:"{pigcms::$mainopenid}"},
+                        function (data) {
+                            if (data == 1) {
+                                //			console.info(data);
+                                //data 为返回文件名；
+                                mnAlert('恭喜您助力成功！点击“邀请好友助力”完成您的新品面膜体验愿望吧！');
+                                window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Allinone&a=game1&gid={pigcms::$gid}';
+                            }else{
+                                //图片提交失败
+                            }
+                        });
+
 
                 clearTimeout(st);
 
