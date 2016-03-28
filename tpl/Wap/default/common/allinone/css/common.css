@@ -339,7 +339,7 @@ input,textarea,select,button{font-size:1em;}
 .success-btns li .btn-out,
 .success-btns li .btn-inner{ width:2.8rem;}
 
-.time-remaining{text-align:center; font-size:0.3rem; padding:0.2rem 0; position:absolute;top:0;left:0; width:100%;}
+.time-remaining{text-align:center; font-size:0.3rem; padding:0.2rem 0; position:fixed;top:0;left:0; width:100%;}
 .time-remaining span{ color:#f60;}
 
 #time-page1 .need-people,
@@ -347,7 +347,7 @@ input,textarea,select,button{font-size:1em;}
 #time-page3 .need-people{
   width: 100%;
   text-align: center;
-  font-size: 0.3rem; position:absolute; bottom:0;}
+  font-size: 0.3rem; position:fixed; bottom:0;}
   
 #time-page1 .need-people strong,
 #time-page2 .need-people strong,
