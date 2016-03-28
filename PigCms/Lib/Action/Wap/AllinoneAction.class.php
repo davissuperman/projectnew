@@ -571,10 +571,9 @@ HTML;
 
 
         //获取当前已经有了多少拼图
-        $imgNums = (int)$this->allinoneCount;
         $vote = $info['vote'];
         $share = $info['share'];
-        $imgNums = (int)$this->allinoneCount - $vote;
+        $imgNums = $this->allinoneCount - $vote;
         if($vote >= $this->allinoneCount && !$info['phone']){
 //            跳转到sharephone
 //            redirect
