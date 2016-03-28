@@ -610,13 +610,13 @@ HTML;
 
         //多次投票开启
         if($uniqueViewlist){
-            $haveVoted = 1;
+           // $haveVoted = 1;
             //自己已经给自己投过票，但是未满20票 跳转到分享引导页
             //header("location:$this->url/index.php?g=Wap&m=Allinone&a=game1&gid=$gid");
            // exit();
         }
         //多次投票结束
-        
+
         $this->assign('sharenumberindatabase',$share);
         $this->assign('havevoted',$haveVoted);
         if($share <= 3){
@@ -1575,7 +1575,11 @@ HTML;
         $uid = $_POST['uid'];
         $userOpenId = cookie('user_openid');
         $voteList = M('allinone_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toOpenId))->find();
-        if(!$voteList){
+
+        //多次投票开启
+//        if(!$voteList){
+        if(true){
+        //多次投票结束
             $info = M('allinone')->where(array('id' => $uid))->find();
             M("allinone")->where(array('id' => $info['id']))->setInc('vote');
 
