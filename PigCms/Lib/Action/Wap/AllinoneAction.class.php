@@ -571,9 +571,10 @@ HTML;
 
 
         //获取当前已经有了多少拼图
+        $imgNums = (int)$this->allinoneCount;
         $vote = $info['vote'];
         $share = $info['share'];
-        $imgNums = $this->allinoneCount - $vote;
+        $imgNums = (int)$this->allinoneCount - $vote;
         if($vote >= $this->allinoneCount && !$info['phone']){
 //            跳转到sharephone
 //            redirect
@@ -606,12 +607,16 @@ HTML;
         $uniqueViewSql = "SELECT * from tp_allinone_votelist where  fromopenid='$userOpenId' and toopenid='$userOpenId'";
         $uniqueViewlist = M('allinone_votelist')->query($uniqueViewSql);
         $haveVoted = 0;
+
+        //多次投票开启
         if($uniqueViewlist){
             $haveVoted = 1;
             //自己已经给自己投过票，但是未满20票 跳转到分享引导页
-            header("location:$this->url/index.php?g=Wap&m=Allinone&a=game1&gid=$gid");
-            exit();
+            //header("location:$this->url/index.php?g=Wap&m=Allinone&a=game1&gid=$gid");
+           // exit();
         }
+        //多次投票结束
+        
         $this->assign('sharenumberindatabase',$share);
         $this->assign('havevoted',$haveVoted);
         if($share <= 3){
@@ -1570,10 +1575,7 @@ HTML;
         $uid = $_POST['uid'];
         $userOpenId = cookie('user_openid');
         $voteList = M('allinone_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toOpenId))->find();
-        //多次投票开启
-//        if(!$voteList){
-        if(true){
-        //多次投票结束
+        if(!$voteList){
             $info = M('allinone')->where(array('id' => $uid))->find();
             M("allinone")->where(array('id' => $info['id']))->setInc('vote');
 
