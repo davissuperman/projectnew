@@ -1570,7 +1570,10 @@ HTML;
         $uid = $_POST['uid'];
         $userOpenId = cookie('user_openid');
         $voteList = M('allinone_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toOpenId))->find();
-        if(!$voteList){
+        //多次投票开启
+//        if(!$voteList){
+        if(true){
+        //多次投票结束
             $info = M('allinone')->where(array('id' => $uid))->find();
             M("allinone")->where(array('id' => $info['id']))->setInc('vote');
 
