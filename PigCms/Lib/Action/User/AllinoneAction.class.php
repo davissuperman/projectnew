@@ -889,15 +889,15 @@ award.address as addres,award.orderid as orderid,award.username as username from
         set_time_limit(0);
 
         //获取所有模板
-        $query = "select gid,title from tp_bonus where type=3";
+        $query = "select cid as gid,cname as title from tp_npic_twocode where channel_type=4 order by cid asc";
         $glist = M('bonus')->query($query);
         $this->assign('glist', $glist);
 
         //每日渠道汇总表
         $m = 0;
         $datereport2 = array();
-        $fromDate2 = strtotime("2015-12-09 00:00:00");
-        $endDate2 = strtotime("2016-01-20 00:00:00");
+        $fromDate2 = strtotime("2016-03-29 00:00:00");
+        $endDate2 = strtotime("2016-04-30 00:00:00");
         while($m<35){
             $gidArr = array();
             $add = 24*3600;

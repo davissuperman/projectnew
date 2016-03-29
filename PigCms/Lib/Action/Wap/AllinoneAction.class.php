@@ -8,7 +8,7 @@ class AllinoneAction extends SjzAction {
     public $shareImageUrl;
     public $endtime="2016-04-20 23:59:59"; //活动结束时间
     public $debug = true; //上线后应该改成false
-    public $defalutGid = 29;
+    public $defalutGid = 98;
     public $allinoneCount = 20;
 
     public function _initialize() {
