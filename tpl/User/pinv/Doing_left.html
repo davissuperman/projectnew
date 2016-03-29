@@ -5,8 +5,13 @@
 </style>
 <div class="col-md-2 sidebar">
 <nav id="sidebar-nav">
-	<ul class="nav nav-pills nav-stacked">
-		<li><a href="{pigcms::U('Module/promoteList',array('token'=>$token))}"><span class="glyphicon glyphicon-chevron-left"></span> 返回</a></li>
+        <ul class="nav nav-pills nav-stacked">
+                <li><a href="{pigcms::U('Module/promoteList',array('token'=>$token))}"><span class="glyphicon glyphicon-chevron-left"></span> 返回</a></li>
+
+                <li ><a href="{pigcms::U('Allinone/index',array('token'=>$token))}">Allinone新品</a></li>
+        </ul>
+        <button onclick="$('#oldevent').toggle()">老的活动 - 点击显示</button>
+	<ul id="oldevent" class="nav nav-pills nav-stacked" style="display: none">
 		<li><a href="{pigcms::U('Doing/index',array('token'=>$token))}">流程B运营</a></li>
 		<li><a href="{pigcms::U('Bonus/index',array('token'=>$token))}">年终奖</a></li>
 		<li ><a href="{pigcms::U('Greeting/index',array('token'=>$token))}">新年贺卡</a></li>
@@ -37,7 +42,11 @@
         <li ><a href="{pigcms::U('Mumayi/index',array('token'=>$token))}">木蚂蚁杭州下沙店</a></li>
         <li ><a href="{pigcms::U('Diweisi/index',array('token'=>$token))}">陕西缔威斯小寨军区合作社</a></li>
             <li ><a href="{pigcms::U('Anniversary/index',array('token'=>$token))}">81周年</a></li>
+            <li><a href="{pigcms::U('Module/promoteList',array('token'=>$token))}"><span class="glyphicon glyphicon-chevron-left"></span> 返回</a></li>
             <li ><a href="{pigcms::U('Tuanyuan/index',array('token'=>$token))}">大富翁团圆之旅</a></li>
-	</ul>
+
+    </ul>
+
+
 </nav>
 </div>
