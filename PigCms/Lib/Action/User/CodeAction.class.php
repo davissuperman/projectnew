@@ -1020,7 +1020,9 @@ class CodeAction extends UserAction {
                 foreach ($rr as $kkkk => $vvvv) {
                     //print_r($vvvv);exit;
                     $cccid = $vvvv['cid'];
-                    $value = C('site_url') . '/index.php?g=Wap&m=O&a=index&t=code&id=' . $cccid;
+//                    $value = C('site_url') . '/index.php?g=Wap&m=O&a=index&t=code&id=' . $cccid;
+                    $cUrl = str_replace('&amp;','&',$vvvv['curl']);
+                    $value = $cUrl  . '&id=' . $cccid;
                     $filename = './PUBLIC/imagess/' . $_SESSION['token'] . '/code/' . $vvvv['cid'] . '.jpg';
                     $errorCorrectionLevel = "L";
                     $matrixPointSize = "4";
