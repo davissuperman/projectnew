@@ -14,7 +14,15 @@ class AllinoneAction  extends BonusAction {
         $count = $db->where($where)->count();
         $page = new Page($count, 25);
         $info = $db->order('cid asc')->where($where)->limit($page->firstRow . ',' . $page->listRows)->select();
-        $this->assign('info', $info);
+        $list = array();
+        foreach($info as $each){
+            $tmp = array();
+            $tmp = $each;
+            $cUrl = str_replace('&amp;','&',$each['curl']);
+            $tmp['copy_url'] = $cUrl.'&gid=' . $each['cid'];
+            $list[] = $tmp;
+        }
+        $this->assign('info', $list);
         $this->assign('page', $page->show());
         $this->assign('token', $this->token);
         $this->display();
