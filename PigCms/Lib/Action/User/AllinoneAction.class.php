@@ -14,7 +14,15 @@ class AllinoneAction  extends BonusAction {
         $count = $db->where($where)->count();
         $page = new Page($count, 25);
         $info = $db->order('cid asc')->where($where)->limit($page->firstRow . ',' . $page->listRows)->select();
-        $this->assign('info', $info);
+        $list = array();
+        foreach($info as $each){
+            $tmp = array();
+            $tmp = $each;
+            $cUrl = str_replace('&amp;','&',$each['curl']);
+            $tmp['copy_url'] = $cUrl.'&gid=' . $each['cid'];
+            $list[] = $tmp;
+        }
+        $this->assign('info', $list);
         $this->assign('page', $page->show());
         $this->assign('token', $this->token);
         $this->display();
@@ -843,8 +851,8 @@ award.address as addres,award.orderid as orderid,award.username as username from
         //每日数据汇总（记录每天活动所有模板所产生的数据总数）
 
         //记录从6.20 到 7.20号每天产生的模板总数
-        $fromDate = strtotime("2015-12-09 00:00:00");
-        $endDate = strtotime("2016-01-10 00:00:00");
+        $fromDate = strtotime("2016-03-29 00:00:00");
+        $endDate = strtotime("2016-04-30 00:00:00");
         $i = 0;
         $datereport = array();
         while($i<35){
@@ -889,15 +897,15 @@ award.address as addres,award.orderid as orderid,award.username as username from
         set_time_limit(0);
 
         //获取所有模板
-        $query = "select gid,title from tp_bonus where type=3";
+        $query = "select cid as gid,cname as title from tp_npic_twocode where channel_type=4 order by cid asc";
         $glist = M('bonus')->query($query);
         $this->assign('glist', $glist);
 
         //每日渠道汇总表
         $m = 0;
         $datereport2 = array();
-        $fromDate2 = strtotime("2015-12-09 00:00:00");
-        $endDate2 = strtotime("2016-01-20 00:00:00");
+        $fromDate2 = strtotime("2016-03-29 00:00:00");
+        $endDate2 = strtotime("2016-04-30 00:00:00");
         while($m<35){
             $gidArr = array();
             $add = 24*3600;

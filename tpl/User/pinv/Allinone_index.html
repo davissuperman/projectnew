@@ -19,7 +19,7 @@
                         <div id="choose-date">
 
                             <div class="add-button pull-right">
-                                <a href="{pigcms::U('Allinone/addPoll',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span> 添加投票</a>
+                                <!--<a href="{pigcms::U('Allinone/addPoll',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span> 添加投票</a>-->
                                 <!--<a href="{pigcms::U('Bonus/statistics',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span>按钮统计</a>-->
                                 <a href="{pigcms::U('Allinone/datareport2',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span>每日渠道汇总表</a>
                                 <a href="{pigcms::U('Allinone/datareport',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span>每日数据汇总表</a>
@@ -34,19 +34,19 @@
                                 <tr>
                                     <th class="firstTd">序号</th>
                                     <th class="secondTd">标题</th>
-                                    <th class="thirdTd">前N名领奖</th>
-                                    <th class="sevenTd">开始时间</th>
-                                    <th class="sevenTd">结束时间</th>
+                                    <!--<th class="thirdTd">前N名领奖</th>-->
+                                    <!--<th class="sevenTd">开始时间</th>-->
+                                    <th class="sevenTd">链接</th>
                                     <th class="sevenTd">游戏|查询</th>
-                                    <th class="sevenTd" ><center>操作</center></th>
+                                    <!--<th class="sevenTd" ><center>操作</center></th>-->
                                 </tr>
                                 <volist name="info" id="o">
                                     <tr>
                                         <td>{pigcms:$i}</td>
                                         <td>{pigcms:$o.cname}</td>
-                                        <td><if condition="$o.top eq 0"><span style="color:green">没开启</span><else/><span style="color:red">前{pigcms:$o.top}直接领奖</span></if></td>
-                                        <td>{pigcms:$o.start|date="Y-m-d H:i",###}</td>
-                                        <td>{pigcms:$o.end|date="Y-m-d H:i",###}</td>
+                                        <!--<td><if condition="$o.top eq 0"><span style="color:green">没开启</span><else/><span style="color:red">前{pigcms:$o.top}直接领奖</span></if></td>-->
+                                        <!--<td>{pigcms:$o.start|date="Y-m-d H:i",###}</td>-->
+                                        <td>{pigcms:$o.copy_url}</td>
                                         <td>
                                             <a href="{pigcms::U('Allinone/slist',array('token'=>$token,'gid'=>$o[cid] ))}"   class="hover-tooltip-edit"><span class="glyphicon glyphicon-user"></span>模版列表</a>
                                             <!-- <a href="{pigcms::U('Doing/ulist',array('token'=>$token,'gid'=>$o[gid] ))}"   class="hover-tooltip-edit"><span class="glyphicon glyphicon-user"></span>申请领奖用户</a>-->
