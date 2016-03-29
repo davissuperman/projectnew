@@ -1022,7 +1022,7 @@ class CodeAction extends UserAction {
                     $cccid = $vvvv['cid'];
 //                    $value = C('site_url') . '/index.php?g=Wap&m=O&a=index&t=code&id=' . $cccid;
                     $cUrl = str_replace('&amp;','&',$vvvv['curl']);
-                    $value = $cUrl  . '&id=' . $cccid;
+                    $value = $cUrl  . '&gid=' . $cccid;
                     $filename = './PUBLIC/imagess/' . $_SESSION['token'] . '/code/' . $vvvv['cid'] . '.jpg';
                     $errorCorrectionLevel = "L";
                     $matrixPointSize = "4";
