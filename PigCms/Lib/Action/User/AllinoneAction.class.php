@@ -843,8 +843,8 @@ award.address as addres,award.orderid as orderid,award.username as username from
         //每日数据汇总（记录每天活动所有模板所产生的数据总数）
 
         //记录从6.20 到 7.20号每天产生的模板总数
-        $fromDate = strtotime("2015-12-09 00:00:00");
-        $endDate = strtotime("2016-01-10 00:00:00");
+        $fromDate = strtotime("2016-03-29 00:00:00");
+        $endDate = strtotime("2016-04-30 00:00:00");
         $i = 0;
         $datereport = array();
         while($i<35){
