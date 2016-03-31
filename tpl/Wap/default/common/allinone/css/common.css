@@ -339,16 +339,18 @@ input,textarea,select,button{font-size:1em;}
 .success-btns li .btn-out,
 .success-btns li .btn-inner{ width:2.8rem;}
 
-.time-remaining{text-align:center; font-size:0.3rem; padding:0.2rem 0; position:fixed;top:0;left:0; width:100%;}
-.time-remaining span{ color:#f60;}
+.time-remaining{text-align:center; font-size:0.5rem; padding:0.2rem 0; position:fixed;top:0;left:0; width:100%;font-weight: bold;
+  color: #db012c;}
+.time-remaining span{ color:#f60;font-size: 0.7rem;font-weight: bold;}
 
 #time-page1 .need-people,
 #time-page2 .need-people,
 #time-page3 .need-people{
   width: 100%;
   text-align: center;
-  font-size: 0.3rem; position:fixed; bottom:0;}
+  font-size: 0.5rem; position:fixed; bottom:0.1rem;font-weight: bold;
+  color: #db012c;}
   
 #time-page1 .need-people strong,
 #time-page2 .need-people strong,
-#time-page3 .need-people strong{color:#f60;font-weight:bold;}
+#time-page3 .need-people strong{color:#f60;font-weight:bold;font-size: 0.7rem;}
