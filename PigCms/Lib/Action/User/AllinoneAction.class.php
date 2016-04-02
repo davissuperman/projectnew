@@ -481,7 +481,9 @@ award.address as addres,award.orderid as orderid,award.username as username from
             $end = strtotime(date('Y-m-d').'24:00:00');
         }
 
-
+        $gInfo = M("npic_twocode")->where(array('cid'=>$gid))->select();
+        $awardInfo = array();
+        $gidName = $gInfo[0]['cname'];
 
         $listArr = array();
         $pL =array();
@@ -495,7 +497,9 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 $id = $eachValue['id'];
                 $uid = $eachValue['uid'];
                 $level = null;
-                if(strrchr((string)"$id","81") == "81"){
+                if((int)$id == 2016){
+                    $level = '特等奖';
+                }elseif(strrchr((string)"$id","16") == "16"){
                     $level = 1;
                 }elseif(strrchr((string)"$id","1") == '1'){
                     $level = 2;
@@ -509,10 +513,12 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 $tmp = null;
                 $each = $userInfo;
                 $tmp = $each;
-                $gid = $each['gid'];
-                $gInfo = M("bonus")->where(array('gid'=>$gid))->select();
+                $userGid = $each['gid'];
+                if( $userGid != $gid){
+                    continue;
+                }
                 $awardInfo = array();
-                $tmp['gidname'] = $gInfo[0]['title'];
+                $tmp['gidname'] = $gidName;
                 if($each['createtime']){
                     $tmp['createtime'] = date('Y-m-d H:i:s', $tmp['createtime']);
                 }else{
@@ -557,15 +563,13 @@ award.address as addres,award.orderid as orderid,award.username as username from
         }else{
             //全部的数据
             $db = M('allinone');
-            $sql = "select *  from tp_allinone where createtime>=$start and createtime<$end order by  createtime asc ";//where gid=$gid limit 100
+            $sql = "select *  from tp_allinone where createtime>=$start and createtime<$end and  gid=$gid order by  createtime asc ";//where gid=$gid limit 100
             $list = M()->query($sql);
+          //  $count = count($list);
             foreach($list as $key => $each){
                 $tmp = null;
                 $tmp = $each;
-                $gid = $each['gid'];
-                $gInfo = M("bonus")->where(array('gid'=>$gid))->select();
-                $awardInfo = array();
-                $tmp['gidname'] = $gInfo[0]['title'];
+                $tmp['gidname'] = $gidName;
                 if($each['createtime']){
                     $tmp['createtime'] = date('Y-m-d H:i:s', $tmp['createtime']);
                 }else{
@@ -608,7 +612,9 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 $tmp['orderid'] = $orderId;
 
                 $level = null;
-                if(strrchr((string)"$orderId","18") == "18"){
+                if((int)$orderId == 2016){
+                    $level = '特等奖';
+                }elseif(strrchr((string)"$orderId","18") == "18"){
                     $level = 1;
                 }elseif(strrchr((string)"$orderId","1") == '1'){
                     $level = 2;
