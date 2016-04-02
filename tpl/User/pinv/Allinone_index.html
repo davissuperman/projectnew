@@ -19,14 +19,23 @@
                         <div id="choose-date">
 
                             <div class="add-button pull-right">
-                                <!--<a href="{pigcms::U('Allinone/addPoll',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span> 添加投票</a>-->
-                                <!--<a href="{pigcms::U('Bonus/statistics',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span>按钮统计</a>-->
                                 <a href="{pigcms::U('Allinone/datareport2',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span>每日渠道汇总表</a>
                                 <a href="{pigcms::U('Allinone/datareport',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span>每日数据汇总表</a>
-                                <!--<a href="{pigcms::U('Allinone/award',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span>现在排名</a>-->
-                                <!--<a href="{pigcms::U('Allinone/add',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span> 添加年龄段</a>-->
                             </div>
                         </div>
+
+                        <div class="add-button pull-right">
+
+                            <form method="post" action="{pigcms::U('Allinone/datareportall',array('token'=>$token))}">
+                                <input type="text" name="start" id="start" value="{pigcms:$start}" onClick="WdatePicker()" class="form-control" style="width:112px"/><span>-</span>
+                                <input type="text" name="end" id="end" value="{pigcms:$end}" onClick="WdatePicker()" class="form-control" style="width:112px"/>
+
+                                <input type="checkbox" style="margin-top:10px" name="award"><span>中奖名单</span>
+                                <br/>
+                                <button type="submit" class="btn btn-default" style="width:250px"/>导出所有渠道</button>
+                            </form>
+                        </div>
+
                         <form method="post" action="" id="info">
 
                             <div class="clearfix"></div>

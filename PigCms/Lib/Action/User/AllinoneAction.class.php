@@ -466,6 +466,173 @@ award.address as addres,award.orderid as orderid,award.username as username from
         }
         return $r;
     }
+
+
+    public function datareportall() {
+        $starta = $_POST['start'];
+        $enda = $_POST['end'];
+        $start = strtotime($_POST['start']);
+        $end = strtotime($_POST['end']);
+        $awardFromPost = null;
+        $awardFromPost = $_POST['award'];
+        if(!$start){
+            $start = strtotime(date('Y-m-d').'00:00:00');
+        }
+        if(!$end){
+            $end = strtotime(date('Y-m-d').'24:00:00');
+        }
+
+
+        $listArr = array();
+        $pL =array();
+        if($awardFromPost){
+            $phoneList = M('allinone_phonelist')->query("SELECT * FROM `tp_allinone_phonelist` group by uid order by id");
+            $arr = array();
+            foreach($phoneList as $key =>$eachValue){
+//                if($key >= 5){
+//                    break;
+//                }
+                $id = $eachValue['id'];
+                $uid = $eachValue['uid'];
+                $level = null;
+                if((int)$id == 2016){
+                    $level = '特等奖';
+                }elseif(strrchr((string)"$id","16") == "16"){
+                    $level = 1;
+                }elseif(strrchr((string)"$id","1") == '1'){
+                    $level = 2;
+                }elseif(strrchr((string)"$id","8") == '8'){
+                    $level = 2;
+                }
+                if(!$level){
+                    continue;
+                }
+                $userInfo = $this->getUserInfo($uid);
+                $tmp = null;
+                $each = $userInfo;
+                $tmp = $each;
+                $userGid = $each['gid'];
+
+                $awardInfo = array();
+                $gInfo = M("npic_twocode")->where(array('cid'=>$each['gid']))->select();
+                $awardInfo = array();
+                $gidName = $gInfo[0]['cname'];
+                $tmp['gidname'] = $gidName;
+                if($each['createtime']){
+                    $tmp['createtime'] = date('Y-m-d H:i:s', $tmp['createtime']);
+                }else{
+                    $tmp['createtime'] = "无";
+                }
+                if($each['sharetime']){
+                    $tmp['sharetime'] = date('Y-m-d H:i:s', $tmp['sharetime']);
+                }else{
+                    $tmp['sharetime'] = "无";
+                }
+                if($each['phonetime']){
+                    $tmp['phonetime'] = date('Y-m-d H:i:s', $tmp['phonetime']);
+                }else{
+                    $tmp['phonetime'] = "无";
+                }
+                if($each['views']< $each['vote'] || $each['illegal']){
+                    $tmp['illegal'] = "是";
+                }else{
+                    $tmp['illegal'] = "否";
+                }
+                $condition['openid'] = $each['openid'];
+                $resAwardList = M('allinone_award')->where($condition)->select();
+                $tmp['username'] = null;
+                $tmp['userphone'] = null;
+                $tmp['userprovince'] = null;
+                $tmp['city'] = null;
+                $tmp['address'] = null;
+                if($resAwardList){
+                    foreach($resAwardList as $award){
+                        $tmp['username'] = $award['name'];
+                        $tmp['userphone'] = $award['phone'];
+                        $tmp['userprovince'] = $award['province'];
+                        $tmp['city'] = $award['city'];
+                        $tmp['address'] = $award['address'];
+                    }
+                }
+                $tmp['orderid'] = $id;
+                $tmp['level'] = $level;
+                $tmp['uid'] = $each['uid'];;
+                $listArr[] = $tmp;
+            }
+        }else{
+            //全部的数据
+            $db = M('allinone');
+            $sql = "select *  from tp_allinone where createtime>=$start and createtime<$end order by  createtime asc ";//where gid=$gid limit 100
+            $list = M()->query($sql);
+            //  $count = count($list);
+            foreach($list as $key => $each){
+                $tmp = null;
+                $tmp = $each;
+                $gInfo = M("npic_twocode")->where(array('cid'=>$each['gid']))->select();
+                $awardInfo = array();
+                $gidName = $gInfo[0]['cname'];
+                $tmp['gidname'] = $gidName;
+                if($each['createtime']){
+                    $tmp['createtime'] = date('Y-m-d H:i:s', $tmp['createtime']);
+                }else{
+                    $tmp['createtime'] = "无";
+                }
+                if($each['sharetime']){
+                    $tmp['sharetime'] = date('Y-m-d H:i:s', $tmp['sharetime']);
+                }else{
+                    $tmp['sharetime'] = "无";
+                }
+                if($each['phonetime']){
+                    $tmp['phonetime'] = date('Y-m-d H:i:s', $tmp['phonetime']);
+                }else{
+                    $tmp['phonetime'] = "无";
+                }
+                if($each['views']< $each['vote'] || $each['illegal']){
+                    $tmp['illegal'] = "是";
+                }else{
+                    $tmp['illegal'] = "否";
+                }
+                $condition['openid'] = $each['openid'];
+                $resAwardList = M('allinone_award')->where($condition)->select();
+                $tmp['username'] = null;
+                $tmp['userphone'] = null;
+                $tmp['userprovince'] = null;
+                $tmp['city'] = null;
+                $tmp['address'] = null;
+                if($resAwardList){
+                    foreach($resAwardList as $award){
+                        $tmp['username'] = $award['name'];
+                        $tmp['userphone'] = $award['phone'];
+                        $tmp['userprovince'] = $award['province'];
+                        $tmp['city'] = $award['city'];
+                        $tmp['address'] = $award['address'];
+                    }
+                }
+                $phone = $each['phone'];
+                $orderId = null;
+                $orderId = M('allinone_phonelist')->where(array('uid' => $each['id']) )->getField('id');
+                $tmp['orderid'] = $orderId;
+
+                $level = null;
+                if((int)$orderId == 2016){
+                    $level = '特等奖';
+                }elseif(strrchr((string)"$orderId","18") == "18"){
+                    $level = 1;
+                }elseif(strrchr((string)"$orderId","1") == '1'){
+                    $level = 2;
+                }elseif(strrchr((string)"$orderId","8") == '8'){
+                    $level = 2;
+                }
+                $tmp['level'] = $level;
+                $listArr[] = $tmp;
+            }
+        }
+
+        $title = array();
+        $filename = $starta . "~" . $enda . "统计";
+        $this->exportexcel($listArr, $title, $filename);
+    }
+
     public function export() {
         $starta = $_POST['start'];
         $enda = $_POST['end'];
@@ -707,7 +874,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
             ->setCellValue('A1', 'ID')
             ->setCellValue('B1', 'OPENID')
             ->setCellValue('C1', '微信昵称')
-            ->setCellValue('D1', '联系电话')
+            ->setCellValue('D1', '是否提交成绩')
             ->setCellValue('E1', '来源分组')
             ->setCellValue('F1', '参加游戏时间')
             ->setCellValue('G1', '首次分享时间')
