@@ -106,7 +106,7 @@ class ChatAction extends UserAction {
     /* 会员列表 */
 
     public function member() {
-//        ini_set("memory_limit","2256M");
+        ini_set("memory_limit","1024M");
         $member_user = M('member_user');
         $tel = $_REQUEST['tel'];
         $token = $_REQUEST['token'];
