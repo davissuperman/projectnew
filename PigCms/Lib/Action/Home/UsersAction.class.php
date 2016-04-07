@@ -56,7 +56,7 @@ class UsersAction extends BaseAction{
 			
 			
 		}else{
-			$this->error('帐号密码错误',U('Index/login'));
+			$this->error('帐号密码错误',U('User/Index/index'));
 		}
 	}
 	public function checkreg(){
