@@ -7,7 +7,7 @@
 <meta name="keywords" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>庆新品上市，赢面膜大奖！ 一“布”呵护All IN ONE！</title>
-    <link href="{pigcms::RES}/allinone/css/common.css?v=20160402" rel="stylesheet" type="text/css" />
+    <link href="{pigcms::RES}/allinone/css/common.css?v=20160406" rel="stylesheet" type="text/css" />
     <script src="{pigcms::RES}/allinone/js/zepto.min.js" type="text/javascript"></script>
     <script src="{pigcms::RES}/allinone/js/common.js" type="text/javascript"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
@@ -175,10 +175,14 @@
                                 //			console.info(data);
                                 //data 为返回文件名；
                                 mnAlert('恭喜您助力成功！点击“邀请好友助力”完成您的新品面膜体验愿望吧！');
-                                setTimeout('delayer()',3000);
+                                setTimeout(function(){
+									delayer();
+								},3000);
                             }else{
                                 mnAlert('恭喜您助力成功！点击“邀请好友助力”完成您的新品面膜体验愿望吧！');
-                                setTimeout('delayer()',3000);
+                                setTimeout(function(){
+									delayer();
+								},3000);
                             }
                         });
 
@@ -205,7 +209,7 @@
     }
 
     function delayer(){
-        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Allinone&a=index&gid={pigcms::$gid}'
+        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Allinone&a=index&gid={pigcms::$gid}';
     }
 </script>
 

@@ -8,7 +8,7 @@ $(document).ready(function(e) {
 		showLayer($("#layer-share"));
 		$("#piao-number2").html($("#piao-number").html());
 	});
-	var cd = new countdown ($("#time-remaining"),5);
+	var cd = new countdown ($("#time-remaining"),6);
 	cd.doTiming();
 });
 

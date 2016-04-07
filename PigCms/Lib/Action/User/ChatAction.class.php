@@ -106,6 +106,7 @@ class ChatAction extends UserAction {
     /* 会员列表 */
 
     public function member() {
+        ini_set("memory_limit","1024M");
         $member_user = M('member_user');
         $tel = $_REQUEST['tel'];
         $token = $_REQUEST['token'];
@@ -221,7 +222,8 @@ class ChatAction extends UserAction {
         $this->assign('page', $page);
         $this->assign('list', $list);
         $idArr = array();
-        $listAll = $member_user->query($sqlAll);
+//        $listAll = $member_user->query($sqlAll);
+        $listAll = $list1;
         foreach($listAll as $eachItem){
             $idArr[] = $eachItem['uid'] ;
         }

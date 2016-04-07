@@ -75,8 +75,8 @@ input,textarea,select,button{font-size:1em;}
 .img-box img{ width:100%;height:auto; border:none; margin:0; padding:0; vertical-align:top;}
 
 
-.prize-box{ background:#eaedea; padding:0.15rem; margin:0 0.15rem; border-radius:0.1rem;z-index: 1;position: relative;border:1px dashed #004d7a;font-size:0.2rem;}
-.prize-box ul li{ margin-bottom:0.04rem; color:#78b8d0;}
+.prize-box{ background:#eaedea; padding:0.15rem; margin:0 0.15rem; border-radius:0.1rem;z-index: 1;position: relative;border:1px dashed #004d7a;}
+.prize-box ul li{ margin-bottom:0.04rem; color:#08c;font-size: 0.3rem;}
 .prize-box ul dt{ background:#f1300f;color:#fff;float:left; padding:0 0.1rem; border-radius:0.1rem; margin-right:0.1rem;}
 
 .rangking-title{ background:#9fd8eb;color:#fff; position:absolute; font-size:0.3rem; width:1.6rem; text-align:center; border-radius:0.2rem; left:50%; margin-left:-0.8rem; height:0.4rem; line-height:0.4rem;top: -0.2rem;}
@@ -253,7 +253,7 @@ input,textarea,select,button{font-size:1em;}
 .rule-center .c1{color:#f1300f;}
 
 .rule-center .prize-box{ margin:0.1rem 0; background:#fffbd4; border:none;}
-.rule-center .prize-box ul li{color:#333;}
+.rule-center .prize-box ul li{color:#333;font-size:0.2rem;}
 
 .rule-box .rule-title{ text-align:center;}
 .rule-box .rule-title .title{}
@@ -336,7 +336,7 @@ input,textarea,select,button{font-size:1em;}
   
 .ranking-panel .monkey{ background:url(../images/img18.png) no-repeat; background-size: auto 100%; display:inline-block;width: 1.2rem;height: 1.4rem; position:absolute; left:0.2rem;top:0.2rem;}
 
-.success-btns{ margin:0.15rem 0 0.15rem 0;}
+.success-btns{ margin:0.25rem 0 0.25rem 0;}
 .success-btns li{ float:left; width:50%;}
 .success-btns li .btn-out,
 .success-btns li .btn-inner{ width:2.8rem;}

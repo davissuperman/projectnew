@@ -2,7 +2,7 @@
 
 class AllinoneAction extends SjzAction {
     public $title = '庆新品上市，赢面膜大奖！ 一“布”呵护All IN ONE！';
-    public $bonusdesc = '5000片新品免费体验，开来参加吧！森田药妆®[玻尿酸复合精华面膜]震撼上市！“微乳面膜，一“布”呵护—All IN ONE!”';
+    public $bonusdesc = '5000片新品免费体验，快来参加吧！森田药妆®[玻尿酸复合精华面膜]震撼上市！“微乳面膜，一“布”呵护—All IN ONE!”';
     public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
