@@ -189,21 +189,24 @@ HTML;
 
 
 
-            $nickname = $selfUserInfo['nickname'];
-            $imageProfile = $selfUserInfo['headimgurl'];
+        $nickname = $selfUserInfo['nickname'];
+        $imageProfile = $selfUserInfo['headimgurl'];
 
         //首先判断当前用户是否有玩过第一次
         $info = M('Allinone')->where(array('openid' => $userOpenId))->find();
-        $vote = $info['vote'];
-//        $firstStart = true;
-        if($vote>=1){
+        $vote = null;
+        $lastInsertId = null;
+        if($info){
             $lastInsertId = $info['id'];
+            $vote = $info['vote'];
+        }
+
+        if($vote>=1){
+
         }else{
             $lastInsertId = $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
 //            $info = M('Allinone')->where(array('openid' => $userOpenId))->find();
         }
-
-
 
         //begin 分享出去的URL
         list($ticket,$appId,$testgid) = $this->getDiymenSet();
