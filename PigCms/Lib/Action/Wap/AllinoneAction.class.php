@@ -196,16 +196,20 @@ HTML;
         $info = M('Allinone')->where(array('openid' => $userOpenId))->find();
         $vote = null;
         $lastInsertId = null;
+        $views = null;
         if($info){
             $lastInsertId = $info['id'];
             $vote = $info['vote'];
+            $views = $info['views'];
         }
 
         if($vote>=1){
 
         }else{
-            $lastInsertId = $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
-//            $info = M('Allinone')->where(array('openid' => $userOpenId))->find();
+            if($views == 0){
+                //此用户不存在
+                $lastInsertId = $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
+            }
         }
 
         //begin 分享出去的URL
