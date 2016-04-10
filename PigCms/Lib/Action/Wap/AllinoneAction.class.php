@@ -85,6 +85,10 @@ class AllinoneAction extends SjzAction {
     }
 
     public function saveInfo($gid,$openId,$nickname,$imageProfile){
+        if($gid < 98 || $gid > 120){
+            Log :: write( $openId."  ".$nickname." $gid 不存在" ,'ERR','','test.log');
+            return null;
+        }
         //首先查看此OPENID 是否存在 无论gid
         $bonusInfo = M('allinone')->where(array('openid' => $openId))->find();
         $lastInsertId = null;
