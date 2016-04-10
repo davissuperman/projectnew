@@ -87,6 +87,7 @@ class AllinoneAction extends SjzAction {
     public function saveInfo($gid,$openId,$nickname,$imageProfile){
         //首先查看此OPENID 是否存在 无论gid
         $bonusInfo = M('allinone')->where(array('openid' => $openId))->find();
+        $lastInsertId = null;
         if(!$bonusInfo){
             //创建个人主页
             $d['gid'] = $gid;
@@ -95,8 +96,9 @@ class AllinoneAction extends SjzAction {
             $d['headimgurl'] = $imageProfile;
             $d['views'] = 1;
             $d['createtime'] = time();
-            M("allinone")->add($d);
+            $lastInsertId = M("allinone")->add($d);
         }
+        return $lastInsertId;
     }
     public function setEndTime2(){
         $endtime =strtotime( "2016-12-21 23:59:59" );
@@ -195,9 +197,10 @@ HTML;
         $vote = $info['vote'];
 //        $firstStart = true;
         if($vote>=1){
+            $lastInsertId = $info['id'];
         }else{
-            $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
-            $info = M('Allinone')->where(array('openid' => $userOpenId))->find();
+            $lastInsertId = $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
+//            $info = M('Allinone')->where(array('openid' => $userOpenId))->find();
         }
 
 
@@ -222,7 +225,10 @@ HTML;
         //end
 
         //view自增
-        $this->setIncViews($info['id']);
+        if($lastInsertId){
+            $this->setIncViews($lastInsertId);
+        }
+
         $this->assign("vote",$vote);
         $this->assign("gid",$gid);
         $this->display();
