@@ -148,9 +148,9 @@ HTML;
                     $webCreatetime = $apidata['web_createtime'];
                     $web_access_token = '';
 
-                    if($webCreatetime>(time()-7200) && $userOpenId){
+                    if(false){//$webCreatetime>(time()-7200) && $userOpenId
                         //未过期
-                        $web_access_token = $apidata['web_access_token'];
+                        //$web_access_token = $apidata['web_access_token'];
                     }else{
                         //重新获取
                         $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
@@ -159,12 +159,12 @@ HTML;
                             $url = $this->url."/index.php?g=Wap&m=Allinone&a=index&gid=$gid";
                             header("location:$url");
                         }
-                        $m['id'] = $apidata['id'];
-                        $m['web_access_token'] = $userinfoFromApi['access_token'];
-                        $m['refresh_token'] = $userinfoFromApi['refresh_token'];
-                        $m['web_createtime'] = time();
-                        $m['refresh_token_createtime'] = time();
-                        M('Diymen_set')->save($m);
+//                        $m['id'] = $apidata['id'];
+//                        $m['web_access_token'] = $userinfoFromApi['access_token'];
+//                        $m['refresh_token'] = $userinfoFromApi['refresh_token'];
+//                        $m['web_createtime'] = time();
+//                        $m['refresh_token_createtime'] = time();
+//                        M('Diymen_set')->save($m);
                         $web_access_token = $userinfoFromApi['access_token'];
                         cookie('user_openid', $userinfoFromApi['openid'], 315360000);
                         $userOpenId = $userinfoFromApi['openid'];
@@ -684,7 +684,6 @@ HTML;
                     $web_access_token = $userinfoFromApi['access_token'];
                     cookie('user_openid', $userinfoFromApi['openid'], 315360000);
                     $userOpenId = $userinfoFromApi['openid'];
-                    Log :: write($userOpenId.' rank get openid by base');
 
                 }
             } else {
@@ -864,7 +863,6 @@ HTML;
                     $web_access_token = $userinfoFromApi['access_token'];
                     cookie('user_openid', $userinfoFromApi['openid'], 315360000);
                     $userOpenId = $userinfoFromApi['openid'];
-                    Log :: write($userOpenId.' rank get openid by base');
 
                 }
             } else {
@@ -1745,7 +1743,6 @@ HTML;
                     $web_access_token = $userinfoFromApi['access_token'];
                     cookie('user_openid', $userinfoFromApi['openid'], 315360000);
                     $userOpenId = $userinfoFromApi['openid'];
-                    Log :: write($userOpenId.' base  sssssssssssssss');
 
             }
         } else {
