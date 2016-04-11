@@ -495,14 +495,17 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 $id = $eachValue['id'];
                 $uid = $eachValue['uid'];
                 $level = null;
-                if((int)$id == 2016){
-                    $level = '特等奖';
-                }elseif(strrchr((string)"$id","16") == "16"){
-                    $level = 1;
-                }elseif(strrchr((string)"$id","1") == '1'){
-                    $level = 2;
-                }elseif(strrchr((string)"$id","8") == '8'){
-                    $level = 2;
+//                if((int)$id == 2016){
+//                    $level = '特等奖';
+//                }elseif(strrchr((string)"$id","16") == "16"){
+//                    $level = 1;
+//                }elseif(strrchr((string)"$id","1") == '1'){
+//                    $level = 2;
+//                }elseif(strrchr((string)"$id","8") == '8'){
+//                    $level = 2;
+//                }
+                if(strrchr((string)"$id","1") == '1'){
+                    $level = '已中奖';
                 }
                 if(!$level){
                     continue;
@@ -614,14 +617,17 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 $tmp['orderid'] = $orderId;
 
                 $level = null;
-                if((int)$orderId == 2016){
-                    $level = '特等奖';
-                }elseif(strrchr((string)"$orderId","18") == "18"){
-                    $level = 1;
-                }elseif(strrchr((string)"$orderId","1") == '1'){
-                    $level = 2;
-                }elseif(strrchr((string)"$orderId","8") == '8'){
-                    $level = 2;
+//                if((int)$orderId == 2016){
+//                    $level = '特等奖';
+//                }elseif(strrchr((string)"$orderId","18") == "18"){
+//                    $level = 1;
+//                }elseif(strrchr((string)"$orderId","1") == '1'){
+//                    $level = 2;
+//                }elseif(strrchr((string)"$orderId","8") == '8'){
+//                    $level = 2;
+//                }
+                if(strrchr((string)"$orderId","1") == '1'){
+                    $level = '已中奖';
                 }
                 $tmp['level'] = $level;
                 $listArr[] = $tmp;
@@ -664,14 +670,17 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 $id = $eachValue['id'];
                 $uid = $eachValue['uid'];
                 $level = null;
-                if((int)$id == 2016){
-                    $level = '特等奖';
-                }elseif(strrchr((string)"$id","16") == "16"){
-                    $level = 1;
-                }elseif(strrchr((string)"$id","1") == '1'){
-                    $level = 2;
-                }elseif(strrchr((string)"$id","8") == '8'){
-                    $level = 2;
+//                if((int)$id == 2016){
+//                    $level = '特等奖';
+//                }elseif(strrchr((string)"$id","16") == "16"){
+//                    $level = 1;
+//                }elseif(strrchr((string)"$id","1") == '1'){
+//                    $level = 2;
+//                }elseif(strrchr((string)"$id","8") == '8'){
+//                    $level = 2;
+//                }
+                if(strrchr((string)"$id","1") == '1'){
+                    $level = '已中奖';
                 }
                 if(!$level){
                     continue;
@@ -779,14 +788,17 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 $tmp['orderid'] = $orderId;
 
                 $level = null;
-                if((int)$orderId == 2016){
-                    $level = '特等奖';
-                }elseif(strrchr((string)"$orderId","18") == "18"){
-                    $level = 1;
-                }elseif(strrchr((string)"$orderId","1") == '1'){
-                    $level = 2;
-                }elseif(strrchr((string)"$orderId","8") == '8'){
-                    $level = 2;
+//                if((int)$orderId == 2016){
+//                    $level = '特等奖';
+//                }elseif(strrchr((string)"$orderId","18") == "18"){
+//                    $level = 1;
+//                }elseif(strrchr((string)"$orderId","1") == '1'){
+//                    $level = 2;
+//                }elseif(strrchr((string)"$orderId","8") == '8'){
+//                    $level = 2;
+//                }
+                if(strrchr((string)"$orderId","1") == '1'){
+                    $level = '已中奖';
                 }
                 $tmp['level'] = $level;
                 $listArr[] = $tmp;
