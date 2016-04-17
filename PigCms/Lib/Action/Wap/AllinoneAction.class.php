@@ -105,7 +105,7 @@ class AllinoneAction extends SjzAction {
         return $lastInsertId;
     }
     public function setEndTime2(){
-        $endtime =strtotime( "2016-04-21 23:59:59" );
+        $endtime =strtotime( "2016-04-18 23:59:59" );
         if (time() > $endtime) {//活动是否结束
 
             echo <<<HTML
