@@ -486,7 +486,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $listArr = array();
         $pL =array();
         if($awardFromPost){
-            $phoneList = M('allinone_phonelist')->query("SELECT * FROM `tp_allinone_phonelist` group by uid order by id");
+            $phoneList = M('allinone_phonelist')->query("SELECT * FROM `tp_allinone_phonelist`  order by id");
             $arr = array();
             foreach($phoneList as $key =>$eachValue){
 //                if($key >= 5){
