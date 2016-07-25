@@ -979,7 +979,10 @@ class CommonAction extends Action {
         $text = "<a href='$url'>pretty</a>";
         return array($text, 'text');
     }
-    function checkCode($keyword){
+    function checkCode($keyword,$data){
+
+        $openId = (string)$data['FromUserName'];
+
         $keyword = str_replace(" ","",$keyword);
         $ws = "http://digitcode.yesno.com.cn/CCNOutService/OutDigitCodeService.asmx?wsdl";//webservice服务的地址
         $client = new SoapClient ($ws);
@@ -990,6 +993,14 @@ class CommonAction extends Action {
         $param['language'] = 1;
         $param['channel'] = 'X';
         $result=$client->Get_CodeIsTrueByChannel($param);
+
+        //记录数据
+        $d['openid'] = $openId;
+        $d['code'] = $keyword;
+        $d['status'] = (string)$result->systemState;
+        $d['des'] = (string)$result->reply;
+        M("secode")->add($d);
+
         return array((string)$result->reply, 'text');
     }
     function functionlist($keyword,$data=null) {
@@ -1167,7 +1178,7 @@ class CommonAction extends Action {
                 break;
             case is_numeric( str_replace(" ","",$keyword)  ) && (strlen(str_replace(" ","",$keyword)) == 16):
                 //验证防伪码
-                return $this->checkCode($keyword);
+                return $this->checkCode($keyword,$data);
                 break;
             default :
 
