@@ -994,6 +994,15 @@ class CommonAction extends Action {
         $param['channel'] = 'X';
         $result=$client->Get_CodeIsTrueByChannel($param);
 
+        $replyStatus = (string)$result->systemState;
+        if($replyStatus*1 == 2){
+            //判断这个用户是否是重新查询的
+           // $list = M('secode')->where(array('code' => $keyword))->find();
+            $list = M('secode')->Distinct(true)->field('openid')->where(array('code' => $keyword))->select();
+            if(count($list) == 1 && $list[0]['openid'] == $openId){
+                return array("您已成功查询，是真品", 'text');
+            }
+        }
         //记录数据
         $d['openid'] = $openId;
         $d['code'] = $keyword;
