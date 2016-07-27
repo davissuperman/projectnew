@@ -1340,13 +1340,9 @@ award.address as addres,award.orderid as orderid,award.username as username from
     }
 
     public function test(){
-        $var = 1018;
-        echo strrchr("1018","18");
-        echo "<br/>";
-        echo strrchr("1018","8");
-//        echo strrchr("1019","8");
-
-
+        $keyword = '1234567890123456';
+        $list = M('secode')->Distinct(true)->field('openid')->where(array('code' => $keyword))->select();
+        print_r($list);
     }
 
     public function getAwardList(){
@@ -1390,4 +1386,5 @@ award.address as addres,award.orderid as orderid,award.username as username from
         }
 
     }
+
 }
