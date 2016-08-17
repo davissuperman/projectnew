@@ -58,7 +58,7 @@ class SecodeAction extends Action {
             if(!$ip){
                 $ip = 'unknown';
             }
-            $eachLine = $each['code'].$this->tab. $each['nickname'].$this->tab. $each['createtime'].$this->tab.$each['province'].$this->tab.$ip."\n";
+            $eachLine = $each['code'].$this->tab. $each['openid'].$this->tab. $each['createtime'].$this->tab.$each['province'].$this->tab.$ip."\n";
             file_put_contents($localfile,$eachLine,FILE_APPEND);
         }
 
