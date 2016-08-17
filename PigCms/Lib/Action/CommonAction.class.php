@@ -1008,6 +1008,7 @@ class CommonAction extends Action {
         $d['code'] = $keyword;
         $d['status'] = (string)$result->systemState;
         $d['des'] = (string)$result->reply;
+        $d['ip'] = (string)get_client_ip();
         M("secode")->add($d);
 
         return array((string)$result->reply, 'text');
