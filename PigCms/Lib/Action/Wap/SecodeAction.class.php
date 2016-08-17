@@ -1,5 +1,5 @@
 <?php
-require"/Lib/Core/Ftp.class.php";
+require realpath (__ROOT__)."/Lib/Core/Ftp.class.php";
 class SecodeAction extends Action {
     public $fileDate;
     public function _initialize() {
@@ -55,7 +55,6 @@ class SecodeAction extends Action {
 
     }
         public function index() {
-
             $this->generateFile();
             $this->generateHyFile();
 
