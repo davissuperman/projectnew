@@ -37,7 +37,7 @@ class SecodeAction extends Action {
         $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d")-1,date("Y")));
         $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d")-1,date("Y")));
         $list = M('Secode')->query(
-            "SELECT secode.*,fans.nickname from tp_secode as secode
+            "SELECT secode.*,fans.nickname,fans.province from tp_secode as secode
               left join tp_customer_service_fans as fans on (fans.openid=secode.openid)
               where secode.createtime >= '$start' and secode.createtime<='$end' and secode.status=1
                order by createtime desc");
@@ -58,7 +58,7 @@ class SecodeAction extends Action {
             if(!$ip){
                 $ip = 'unknown';
             }
-            $eachLine = $each['code'].$this->tab. $each['nickname'].$this->tab. $each['createtime'].$this->tab.$ip."\n";
+            $eachLine = $each['code'].$this->tab. $each['nickname'].$this->tab. $each['createtime'].$this->tab.$each['province'].$this->tab.$ip."\n";
             file_put_contents($localfile,$eachLine,FILE_APPEND);
         }
 
@@ -91,7 +91,6 @@ class SecodeAction extends Action {
                 if( $ftp->put($remotefile,$localfile))
                 {
                     echo "FWCX_ success ";
-                    //上传文件成功!
                 }
 
                 $localfile2 = DATA_PATH.'HY_'.$fileData.'.txt';
@@ -99,7 +98,6 @@ class SecodeAction extends Action {
                 if( $ftp->put($remotefile2,$localfile2))
                 {
                     echo "HY_ success ";
-                    //上传文件成功!
                 }
 //                //其它功能
 //                $ftp->rmdir($dirname);//删除目录
