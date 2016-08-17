@@ -1,11 +1,34 @@
 <?php
 require"/Lib/Core/Ftp.class.php";
 class SecodeAction extends Action {
-
+    public $fileDate;
     public function _initialize() {
+        $this->fileDate = date("Ymd",strtotime("-1 day"));
+    }
+    public function generateHyFile(){
+        //获取当天的数据
+        $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d")-1,date("Y")));
+        $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d")-1,date("Y")));
+        $list = M('customer_service_fans')->query("SELECT * from tp_customer_service_fans order by subscribe_time");
+        $listArr = array();
+        $fileData = $this->fileDate;
+        $localfile = DATA_PATH.'HY_'.$fileData.'.txt';
+        $firstLine = "微信ID,昵称,性别,国家,省份,城市\n";
+        file_put_contents($localfile,$firstLine);
+        foreach($list as $key => $each){
+            $sex = $each['sex'];
+            if($sex == 1){
+                $sex='男';
+            }else if($sex == 2){
+                $sex='女';
+            }else{
+                $sex='未知';
+            }
+            $eachLine = $each['openid'].",". $each['nickname'].",".$sex.",". $each['country'].",". $each['province'].",". $each['city']."\n";
+            file_put_contents($localfile,$eachLine,FILE_APPEND);
+        }
 
     }
-
 
     public function generateFile(){
         //获取当天的数据
@@ -15,7 +38,7 @@ class SecodeAction extends Action {
             "SELECT * from tp_secode where createtime >= '$start' and createtime<='$end' and status=1
                order by createtime desc");
         $listArr = array();
-        $fileData = date("Ymd");
+        $fileData = $this->fileDate;
         $localfile = DATA_PATH.'FWCX_'.$fileData.'.txt';
         $firstLine = "防伪码,微信ID,查询日期,查询IP\n";
         file_put_contents($localfile,$firstLine);
@@ -32,7 +55,9 @@ class SecodeAction extends Action {
 
     }
         public function index() {
+
             $this->generateFile();
+            $this->generateHyFile();
 
             $ftp = new Ftp();//实例化对象
             $data['server'] = '116.236.205.203';//服务器地址(IP or domain)
@@ -52,12 +77,20 @@ class SecodeAction extends Action {
 //                    $ftp->mkdir($remotedir);
 //                }
 
-                $fileData = date("Ymd");
+                $fileData = $this->fileDate;
                 $localfile = DATA_PATH.'FWCX_'.$fileData.'.txt';
-                $remotefile =  "/crm/UAT/$fileData.txt";
+                $remotefile =  "/crm/UAT/FWCX_$fileData.txt";
                 if( $ftp->put($remotefile,$localfile))
                 {
-                    echo " good ";
+                    echo "FWCX_ success ";
+                    //上传文件成功!
+                }
+
+                $localfile2 = DATA_PATH.'HY_'.$fileData.'.txt';
+                $remotefile2 =  "/crm/UAT/HY_$fileData.txt";
+                if( $ftp->put($remotefile2,$localfile2))
+                {
+                    echo "HY_ success ";
                     //上传文件成功!
                 }
 //                //其它功能
