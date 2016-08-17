@@ -9,8 +9,8 @@ class SecodeAction extends Action {
 
     public function generateFile(){
         //获取当天的数据
-        $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d"),date("Y")));
-        $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d"),date("Y")));
+        $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d")-1,date("Y")));
+        $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d")-1,date("Y")));
         $list = M('Secode')->query(
             "SELECT * from tp_secode where createtime >= '$start' and createtime<='$end' and status=1
                order by createtime desc");
