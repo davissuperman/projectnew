@@ -26,7 +26,7 @@ class SecodeAction extends Action {
             }else{
                 $sex='未知';
             }
-            $eachLine = $each['openid'].$this->tab. $each['nickname'].$this->tab.$sex.$this->tab. $each['country'].$this->tab. $each['province'].$this->tab. $each['city'].PHP_EOL;
+            $eachLine = $each['openid'].$this->tab. $each['nickname'].$this->tab.$sex.$this->tab. $each['country'].$this->tab. $each['province'].$this->tab. $each['city']."\r\n";
             file_put_contents($localfile,$eachLine,FILE_APPEND);
         }
 
@@ -58,7 +58,7 @@ class SecodeAction extends Action {
             if(!$ip){
                 $ip = 'unknown';
             }
-            $eachLine = $each['code'].$this->tab. $each['openid'].$this->tab. $each['createtime'].$this->tab.$each['province'].$this->tab.$ip.PHP_EOL;
+            $eachLine = $each['code'].$this->tab. $each['openid'].$this->tab. $each['createtime'].$this->tab.$each['province'].$this->tab.$ip."\r\n";
             file_put_contents($localfile,$eachLine,FILE_APPEND);
         }
 
