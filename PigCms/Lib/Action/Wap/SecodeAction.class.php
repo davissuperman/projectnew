@@ -26,7 +26,7 @@ class SecodeAction extends Action {
             }else{
                 $sex='未知';
             }
-            $eachLine = $each['openid'].$this->tab. $each['nickname'].$this->tab.$sex.$this->tab. $each['country'].$this->tab. $each['province'].$this->tab. $each['city']."\r\n";
+            $eachLine = $each['openid'].$this->tab. $each['nickname'].$this->tab.$sex.$this->tab. $each['country'].$this->tab. $each['province'].$this->tab. $each['city'].$this->tab.$this->tab."\r\n";
             file_put_contents($localfile,$eachLine,FILE_APPEND);
         }
 
