@@ -28,6 +28,7 @@ class SecodeAction extends Action {
             }
 //            $eachLine = $each['openid'].$this->tab. $each['nickname'].$this->tab.$sex.$this->tab. $each['country'].$this->tab. $each['province'].$this->tab. $each['city'].$this->tab.$this->tab."\r\n";
             $eachLine = $each['openid'].$this->tab. $each['nickname'].$this->tab.$sex.$this->tab. $each['province'].$this->tab.$this->tab."\r\n";
+            iconv("UTF-8","ANSI",$eachLine) ;
             file_put_contents($localfile,$eachLine,FILE_APPEND);
         }
 
