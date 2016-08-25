@@ -28,7 +28,7 @@ class SecodeAction extends Action {
             }
 //            $eachLine = $each['openid'].$this->tab. $each['nickname'].$this->tab.$sex.$this->tab. $each['country'].$this->tab. $each['province'].$this->tab. $each['city'].$this->tab.$this->tab."\r\n";
             $eachLine = $each['openid'].$this->tab. $each['nickname'].$this->tab.$sex.$this->tab. $each['province'].$this->tab.$this->tab."\r\n";
-            $eachLine = iconv("UTF-8","windows-1252",$eachLine) ;
+            $eachLine = iconv("UTF-8", "GBK", $eachLine);
 //            mb_convert_encoding($eachLine,"windows-1252","UTF-8") ;
             file_put_contents($localfile,$eachLine,FILE_APPEND);
         }
@@ -62,6 +62,7 @@ class SecodeAction extends Action {
                 $ip = 'unknown';
             }
             $eachLine = $each['code'].$this->tab. $each['openid'].$this->tab. $each['createtime'].$this->tab.$each['province'].$this->tab.$ip."\r\n";
+            $eachLine = iconv("UTF-8", "GBK", $eachLine);
             file_put_contents($localfile,$eachLine,FILE_APPEND);
         }
 
