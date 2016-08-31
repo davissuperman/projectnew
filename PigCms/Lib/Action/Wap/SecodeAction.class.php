@@ -20,7 +20,7 @@ class SecodeAction extends Action {
 //        $firstLine = "微信ID,昵称,性别,国家,省份,城市\n";
 //        file_put_contents($localfile,$firstLine);
         foreach($list as $key => $each){
-            $filePrefix = floor($key/10000);
+            $filePrefix = floor($key/5000);
             $localfile = DATA_PATH.'HY_'.$fileData."_$filePrefix".'.txt';
             $sex = $each['sex'];
             if($sex == 1){
@@ -55,7 +55,7 @@ class SecodeAction extends Action {
 //        $firstLine = "防伪码,微信ID,查询日期,查询IP\n";
 //        file_put_contents($localfile,$firstLine);
         foreach($list as $key => $each){
-            $filePrefix = floor($key/10000);
+            $filePrefix = floor($key/5000);
             $localfile = DATA_PATH.'FWCX_'.$fileData."_$filePrefix".'.txt';
             $tmp = array();
             $tmp['code'] = $each['code'];
