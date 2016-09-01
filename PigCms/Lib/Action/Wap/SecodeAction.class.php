@@ -30,7 +30,11 @@ class SecodeAction extends Action {
             }else{
                 $sex='未知';
             }
-            $eachLine = $each['openid'].$this->tab. $each['nickname'].$this->tab.$sex.$this->tab. $each['country'].$this->tab. $each['province'].$this->tab. $each['city'].$this->tab.$this->tab."\r\n";
+            $nickname = $each['nickname'];
+            $nickname=str_replace("\n","",$nickname);
+            $nickname=str_replace("\r","",$nickname);
+            $nickname=str_replace("\r\n","",$nickname);
+            $eachLine = $each['openid'].$this->tab. $nickname.$this->tab.$sex.$this->tab. $each['country'].$this->tab. $each['province'].$this->tab. $each['city'].$this->tab.$this->tab."\r\n";
 //            $eachLine = $each['openid'].$this->tab. $each['nickname'].$this->tab.$sex.$this->tab. $each['province'].$this->tab.$this->tab."\r\n";
             $eachLine = iconv("UTF-8", "GBK", $eachLine);
 //            mb_convert_encoding($eachLine,"windows-1252","UTF-8") ;
