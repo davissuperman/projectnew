@@ -1,8 +1,8 @@
 <?php
 
 class XiezhuangAction extends SjzAction {
-    public $title = '庆新品上市，赢面膜大奖！ 一“布”呵护All IN ONE！';
-    public $bonusdesc = '5000片新品免费体验，快来参加吧！森田药妆®[玻尿酸复合精华面膜]震撼上市！“微乳面膜，一“布”呵护—All IN ONE!”';
+    public $title = '赢新品试用大奖！轻轻一“拭”,开启便捷卸妆体验';
+    public $bonusdesc = '肌肤保养从卸妆开始，森田药妆®[玻尿酸卸妆棉]新品上市！';
     public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
