@@ -596,16 +596,22 @@ HTML;
         $share = $info['share'];
         $imgNums = (int)$this->xiezhuangCount - $vote;
         if($vote >= $this->xiezhuangCount && !$info['phone']){
+            //这里有错误，需要报错，不应该达到票数 但是没有名词
 //            跳转到sharephone
 //            redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=sharephone&gid=$gid");
-            exit();
+//            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=sharephone&gid=$gid");
+//            exit();
         }
         if($vote >= $this->xiezhuangCount && $info['phone']){
-//            跳转到sharephone
-//            redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=success&gid=$gid");
-            exit();
+            //form 信息是否已经提交
+            $award = M('xiezhuang_award')->where(array('openid' => $userOpenId))->find();
+            if($award){
+                //已经提交
+            }else{
+                header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=sharephone&gid=$gid");
+                exit();
+            }
+
         }
 
         if($imgNums < 0 ){
