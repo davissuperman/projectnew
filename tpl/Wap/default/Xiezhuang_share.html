@@ -168,7 +168,7 @@
         $('#helpvote').click(function(){
             var $helpvote = $('#helpvote');
             if($helpvote.hasClass("clicked")){
-                mnAlert('已帮过！');
+                Pop.alerts('已帮过！');
                 return false;
             }
             $helpvote.addClass("clicked");
@@ -183,6 +183,8 @@
                                 setTimeout(function(){
                                     window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Xiezhuang&a=share2&gid={pigcms::$gid}';
                                 },5000);
+                            }else if(data == 2){
+                                Pop.alerts('已投过');
                             }
 
                         }else{
