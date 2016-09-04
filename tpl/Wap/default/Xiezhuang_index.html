@@ -6,10 +6,10 @@
 <meta name="author" content="">
 <meta name="keywords" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>庆新品上市，赢面膜大奖！ 一“布”呵护All IN ONE！</title>
-    <link href="{pigcms::RES}/allinone/css/common.css?v=20160406" rel="stylesheet" type="text/css" />
-    <script src="{pigcms::RES}/allinone/js/zepto.min.js" type="text/javascript"></script>
-    <script src="{pigcms::RES}/allinone/js/common.js" type="text/javascript"></script>
+    <title>赢新品试用大奖！轻轻一“拭”,开启便捷卸妆体验</title>
+    <link href="{pigcms::RES}/xiezhuang/css/common.css?v=20160903" rel="stylesheet" type="text/css" />
+    <script src="{pigcms::RES}/xiezhuang/js/zepto.min.js" type="text/javascript"></script>
+    <script src="{pigcms::RES}/xiezhuang/js/common.js" type="text/javascript"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
 <script>
     wx.config({
@@ -78,7 +78,7 @@
             },
             success: function (res) {
                 $.ajax({
-                    url: "{pigcms::$siteurl}/index.php?g=Wap&m=Allinone&a=saveShareNumberToFriends",
+                    url: "{pigcms::$siteurl}/index.php?g=Wap&m=Xiezhuang&a=saveShareNumberToFriends",
                     type:'GET',
                     complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
                     error: function() {},
@@ -107,7 +107,7 @@
             },
             success: function (res) {
                 $.ajax({
-                    url: "{pigcms::$siteurl}/index.php?g=Wap&m=Allinone&a=saveShareNumberToFriends",
+                    url: "{pigcms::$siteurl}/index.php?g=Wap&m=Xiezhuang&a=saveShareNumberToFriends",
                     type:'GET',
                     complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
                     error: function() { },
@@ -137,28 +137,32 @@
 </head>
 <body id="body">
 <div class="img-box">
-    <p><img src="{pigcms::RES}/allinone/images/new/img01.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/allinone/images/new/img02.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/allinone/images/new/img03.png" style="width:100%;"/></p>
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/p1.png" width="100%" /></p>
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/p2.png" width="100%" /></p>
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/p3.png" style="width:100%;"/></p>
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/p4.png" width="100%" /></p>
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/p5.png" width="100%" /></p>
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/p6.png" style="width:100%;"/></p>
 </div>
 
 <div class="prize-box prize-box-index">
-    <p style="color:#f1300f;font-weight:bold;font-size: 0.35rem;margin-bottom:0.1rem;">只需20票，抢新品免费试用大奖！</p>
     <ul>
         <li>
             <dl class="clrfix">
                 <dt>新品体验奖</dt>
-                <dd>1000名<span class="fr">奖新品面膜1盒</span></dd>
+                <dd>1000名<span class="fr"></span></dd>
             </dl>
         </li>
     </ul>
-   
-    <p>活动时间：2016年04月12日—2016年04月16日24点</p>
-    <p>评比规则：集齐20位好友助力，提交成绩，获取提交排名，排名末位数字为“1”，即中奖（限排名前10000名者获取评奖资格）。具体要求请见活动规则。</p>
+    <p style="color:#ef75a9;font-weight:bold;margin-bottom:0.1rem;">奖森田新品卸妆棉1包，二款随机发放</p>
+
+
+    <p>活动时间：2016年09月XX日——2016年09月XX日24点</p>
+    <p>评比规则：参加活动获取排名,排名末位数字为“1”或“6”即为中奖(限排名前5000名者获取评奖资格), 具体请见活动详情。</p>
 </div>
 <div class="index-btns">
-    <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Allinone&a=share&gid={pigcms::$gid}" title="我要参加" class="index-btn index-btn01">我要参加</a>
-    <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Allinone&a=rule&gid={pigcms::$gid}" title="活动规则" class="index-btn index-btn02">活动规则</a>
+    <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Xiezhuang&a=share&gid={pigcms::$gid}" title="我要参加" class="index-btn index-btn01">我要参加</a>
+    <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Xiezhuang&a=rule&gid={pigcms::$gid}" title="活动规则" class="index-btn index-btn02">活动规则</a>
 </div>
 </body>
 </html>
