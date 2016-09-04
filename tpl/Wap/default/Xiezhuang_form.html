@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>赢新品试用大奖！轻轻一“拭”,开启便捷卸妆体验</title>
+    <link href="{pigcms::RES}/xiezhuang/css/common.css?v=20160903" rel="stylesheet" type="text/css" />
+    <script src="{pigcms::RES}/xiezhuang/js/zepto.min.js" type="text/javascript"></script>
+    <script src="{pigcms::RES}/xiezhuang/js/common.js" type="text/javascript"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+<script>
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: '{pigcms::$appid}', // 必填，公众号的唯一标识
+        timestamp:  '{pigcms::$timestamp}', // 必填，生成签名的时间戳
+        nonceStr: '{pigcms::$nonceStr}', // 必填，生成签名的随机串
+        signature: '{pigcms::$signature}',// 必填，签名，见附录1
+        jsApiList: ['checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onRecordEnd',
+            'playVoice',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+    wx.ready(function () {
+        // 1 判断当前版本是否支持指定 JS 接口，支持批量判断
+        wx.checkJsApi({
+            jsApiList: [
+                'onMenuShareTimeline',
+                'getNetworkType',
+                'hideMenuItems',
+                'previewImage'
+            ],
+            success: function (res) {
+                //alert(JSON.stringify(res));
+            }
+        });
+
+        // 2. 分享接口
+        // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
+        wx.onMenuShareTimeline({
+            title: '{pigcms::$title}',
+            link: "{pigcms::$shareurl}",
+            imgUrl: "{pigcms::$shareimageurl}",
+            trigger: function (res) {
+                //alert('用户点击分享到朋友圈');
+            },
+            success: function (res) {
+                $.ajax({
+                    url: "{pigcms::$siteurl}/index.php?g=Wap&m=Xiezhuang&a=saveShareNumberToFriends",
+                    type:'GET',
+                    complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
+                    error: function() {},
+                    success: function(data) {
+                        if(data == 1){
+                            mnAlert("分享成功！");
+                        }
+                    }
+                });
+            },
+            cancel: function (res) {
+                //alert('已取消');
+            },
+            fail: function (res) {
+                //alert(JSON.stringify(res));
+            }
+        });
+
+        wx.onMenuShareAppMessage({
+            title: '{pigcms::$title}',
+            desc:  '{pigcms::$bonusdesc}',
+            link: '{pigcms::$shareurl}',
+            imgUrl: '{pigcms::$shareimageurl}',
+            trigger: function (res) {
+                //alert('用户点击发送给朋友');
+            },
+            success: function (res) {
+                $.ajax({
+                    url: "{pigcms::$siteurl}/index.php?g=Wap&m=Xiezhuang&a=saveShareNumberToFriends",
+                    type:'GET',
+                    complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
+                    error: function() { },
+                    success: function(data) {
+                        if(data == 1){
+                            mnAlert("分享成功！");
+                        }
+                    }
+                });
+            },
+            cancel: function (res) {
+                //alert('已取消');
+            },
+            fail: function (res) {
+                //alert(JSON.stringify(res));
+            }
+        });
+
+    });
+    wx.error(function (res) {
+       // alert(res.errMsg);
+    });
+
+    $(function(){
+    });
+</script>
+</head>
+<body id="body">
+<div class="img-box">
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/r1.jpg" width="100%" /></p>
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/r2.jpg" width="100%" /></p>
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/r3.jpg" width="100%" /></p>
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/r4.jpg" width="100%" /></p>
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/r5.jpg" width="100%" /></p>
+</div>
+<div class="form-panel">
+    <ul>
+        <li class="clrfix">
+            <div class="label">收货人姓名：</div>
+            <div class="controls">
+                <input type="text" class="input-form"  placeholder="请输入收货人姓名" id="username" name="username"/>
+            </div>
+        </li>
+        <li class="clrfix">
+            <div class="label">联系电话：</div>
+            <div class="controls">
+                <input class="input-form" type="tel" placeholder="请输入您的联系电话"  id="telphone" name="telphone"/>
+            </div>
+        </li>
+        <li class="clrfix">
+            <div class="label">省份：</div>
+            <div class="controls">
+                <select class="input-form" id="province" name="province">
+
+                </select>
+            </div>
+        </li>
+        <li class="clrfix">
+            <div class="label">城市：</div>
+            <div class="controls">
+                <select class="input-form" id="city" name="city">
+
+                </select>
+            </div>
+        </li>
+        <li class="clrfix">
+            <div class="label">区/县：</div>
+            <div class="controls">
+                <select class="input-form" id="county" name="county">
+                </select>
+            </div>
+        </li>
+        <li class="clrfix">
+            <div class="label">详细地址：</div>
+            <div class="controls">
+                <input type="text" class="input-form" placeholder="请输入详细地址" id="address" name="address"/>
+            </div>
+        </li>
+    </ul>
+    <div class="form-btns">
+        <p>
+            <a href="javascript:;" class="btn-out" onClick="saveUserInfo();" style="width:286px;">确认提交</a>
+        </p>
+    </div>
+</div>
+
+<script src="js/data/area.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function(e) {
+        initArea($("#province"),$("#city"),$("#county"));
+    });
+
+    function saveUserInfo(){
+        var $username = $("#username");
+        var $telphone = $("#telphone");
+        var $province = $("#province");
+        var $city = $("#city");
+        var $county = $("#county");
+        var $address = $("#address");
+
+        var username = $username.val();
+        var telphone = $telphone.val();
+        var province = $province.val();
+        var city = $city.val();
+        var county = $county.val();
+        var address = $address.val();
+
+
+        if(username == ""){
+            Pop.alerts("收货人姓名不能为空");
+            return false;
+        }
+
+        if(telphone == ""){
+            Pop.alerts("联系电话不能为空");
+            return false;
+        }
+
+        if(province == "" || province == "请选择"){
+            Pop.alerts("省份不能为空");
+            return false;
+        }
+
+        if(city == "" || city == "请选择"){
+            Pop.alerts("城市不能为空");
+            return false;
+        }
+
+        if((county == "请选择" || county == "") && $county.css("display") != 'none' ){
+            Pop.alerts("县/区不能为空");
+            return false;
+        }
+
+        if(address == ""){
+            Pop.alerts("详细地址不能为空");
+            return false;
+        }
+
+        Pop.confirms('请您确认您所填写的地址为正确收货地址，确认提交后将无法更改地址。<span class="c3">由于快递受春节影响，将于2月18日起发奖。</span>',function(){
+            var data = {
+                "username" : username,
+                "telphone" : telphone,
+                "province" : province,
+                "city" : city,
+                "county" : county,
+                "address" : address
+            };
+
+            $.ajax({
+                type:'get',
+                url: '' ,//接口地址
+                data:data,
+                dataType:'json',
+                timeout : 60000,
+                success:function(data){
+
+                },
+                error : function(XMLHttpRequest, textStatus, errorThrown) {
+                    Pop.alerts("提交失败，网络繁忙！");
+                    return false;
+                }
+            });
+        });
+
+
+
+    }
+</script>
+
+</body>
+</html>

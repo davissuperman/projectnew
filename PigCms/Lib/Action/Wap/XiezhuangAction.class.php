@@ -9,7 +9,7 @@ class XiezhuangAction extends SjzAction {
     public $endtime="2016-12-17 23:59:59"; //活动结束时间
     public $debug = true; //上线后应该改成false
     public $defalutGid = 98;
-    public $xiezhuangCount = 20;
+    public $xiezhuangCount = 2;
 
     public function _initialize() {
         parent :: _initialize();
@@ -1131,9 +1131,18 @@ HTML;
         }
 
         $phoneExist = 0;
+        $paiming = null;
         if($info['phone']){
+            //排名已经获取，根据UID获取排名
             $phoneExist = 1;
+            $paimingArray = M('xiezhuang_phonelist')->where(array('uid' => $info['id']))->find();
+            $paiming = $paimingArray['id'];
+        }else{
+            //跳转
+            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=share&gid=$gid");
+            exit();
         }
+        $this->assign('paiming',$paiming);
         $this->assign('phone',$info['phone']);
         $this->assign('phoneexist',$phoneExist);
         $this->assign('uid',$info['id']);
@@ -1217,8 +1226,19 @@ HTML;
             $d['createtime'] = time();
             M('xiezhuang_votelist')->add($d);
             M("xiezhuang")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
-
             $return = 1;
+            //是否已经有20票
+            $info = M('xiezhuang')->where(array('id' => $toUid))->find();
+            if($info['vote'] >= $this->xiezhuangCount  && !$info['phone']){
+                $p = array();
+                $p['uid'] =  $info['id'];
+                $p['phone'] =  1;
+                $paiming = M('xiezhuang_phonelist')->add($p);
+                $i = array();
+                $i['id'] = $info['id'];
+                $i['phone'] = 1;
+                M('xiezhuang')->save($i);
+            }
         }else{
             //已经投过票
             $return = 2;
@@ -1242,7 +1262,17 @@ HTML;
             $d['createtime'] = time();
             M('xiezhuang_votelist')->add($d);
             M("xiezhuang")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
-
+            $info = M('xiezhuang')->where(array('openid' => $fromOpenIdFromPost))->find();
+            if($info['vote'] >= $this->xiezhuangCount  && !$info['phone']){
+                $p = array();
+                $p['uid'] =  $info['id'];
+                $p['phone'] =  1;
+                $paiming = M('xiezhuang_phonelist')->add($p);
+                $i = array();
+                $i['id'] = $info['id'];
+                $i['phone'] = 1;
+                M('xiezhuang')->save($i);
+            }
             $return = 1;
         }else{
             //已经投过票
