@@ -533,7 +533,7 @@ HTML;
     public function share(){
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
-        //$userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $gid = $_GET['gid'];
         if(!$gid){
             $gid = $this->defalutGid;
@@ -629,7 +629,7 @@ HTML;
         if($uniqueViewlist){
             $haveVoted = 1;
             //自己已经给自己投过票，但是未满20票 跳转到分享引导页
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=game1&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=share2&gid=$gid");
             exit();
         }
         //多次投票结束
@@ -654,7 +654,129 @@ HTML;
         $this->display();
     }
 
+    public function share2(){
+        $this->setEndTime();
+        $userOpenId= cookie('user_openid');
+//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        $gid = $_GET['gid'];
+        if(!$gid){
+            $gid = $this->defalutGid;
+        }
+        if(!$userOpenId){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid");
+            exit();
+        }
 
+        $info = M('xiezhuang')->where(array('openid' => $userOpenId))->find();
+        if(!$info){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid");
+            exit();
+        }
+        $gid = $info['gid'];
+        //图片是否存在
+//        $savePath = './PUBLIC/imagess/';
+//        $t = $info['uploadimagetime'];
+//        $uploadImageSrc= $savePath."$userOpenId"."_$t".".jpeg";
+//        if(!file_exists($uploadImageSrc)){
+//            //redirect
+//            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index");
+//            exit();
+//        }
+        //begin 分享出去的URL
+        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
+        $noncestr = "Wm3WZYTPz0wzccnW";
+        $timestamp = time();
+        $url = $this->get_url();;
+        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
+        $signature = sha1($str);
+        $this->assign("appid",$appId);
+        $this->assign("timestamp",$timestamp);
+        $this->assign("nonceStr",$noncestr);
+        $this->assign("signature",$signature);
+        $this->assign("shareurl",$this->getShareUrl());
+        $this->assign('gid', $gid);
+
+        $this->assign('title',$info['name'].$this->title);
+        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign("imageUrl",$this->imageUrl);
+        $this->assign("shareimageurl",$this->shareImageUrl);
+        //end
+
+        //begin views
+        if($info){
+            $this->setIncViews($info['id']);
+        }
+        // end views
+
+
+        //获取当前已经有了多少拼图
+        $imgNums = (int)$this->xiezhuangCount;
+        $vote = $info['vote'];
+        $share = $info['share'];
+        $imgNums = (int)$this->xiezhuangCount - $vote;
+        if($vote >= $this->xiezhuangCount && !$info['phone']){
+//            跳转到sharephone
+//            redirect
+            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=sharephone&gid=$gid");
+            exit();
+        }
+        if($vote >= $this->xiezhuangCount && $info['phone']){
+//            跳转到sharephone
+//            redirect
+            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=success&gid=$gid");
+            exit();
+        }
+
+        if($imgNums < 0 ){
+            $imgNums = 0;
+        }
+        $this->assign('imgnums',$imgNums);
+        if($vote == 0){
+            $vote = 0;
+        }
+        $this->assign('needimgnums',$vote);
+
+        //当天是否访问过
+        $today = time();
+        $start = mktime(0,0,0,date("m",$today),date("d",$today),date("Y",$today));
+        $end = mktime(23,59,59,date("m",$today),date("d",$today),date("Y",$today));
+        $start = date("Y-m-d H:i:s",$start );
+        $end = date("Y-m-d H:i:s",$end );
+//        $uniqueViewSql = "SELECT * from tp_xiezhuang_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$userOpenId'";
+        $uniqueViewSql = "SELECT * from tp_xiezhuang_votelist where  fromopenid='$userOpenId' and toopenid='$userOpenId'";
+        $uniqueViewlist = M('xiezhuang_votelist')->query($uniqueViewSql);
+        $haveVoted = 0;
+
+        //多次投票开启
+        if($uniqueViewlist){
+            $haveVoted = 1;
+            //自己已经给自己投过票，但是未满20票 跳转到分享引导页
+//            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=game1&gid=$gid");
+//            exit();
+        }
+        //多次投票结束
+
+        $this->assign('sharenumberindatabase',$share);
+        $this->assign('havevoted',$haveVoted);
+        if($share <= 3){
+            $leftShare = 3 - $share;
+        }else{
+            $leftShare = 0;
+        }
+        $this->assign('leftshare',$leftShare);
+
+        $phoneExist = 0;
+        if($info['phone']){
+            $phoneExist = 1;
+        }
+        $this->assign('phonexist',$phoneExist);
+        $this->assign("gid",$gid);
+        $this->assign("uid",$info['id']);
+        $this->assign("mainopenid",$userOpenId);
+        $this->display();
+    }
 
     public function sharefriend(){
         $this->setEndTime();
