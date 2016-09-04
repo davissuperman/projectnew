@@ -579,7 +579,10 @@ HTML;
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
-
+        $m = array();
+        $m['id'] = $info['id'];
+        $m['click'] = 1;
+        M('xiezhuang')->save($m);
         //begin views
         if($info){
             $this->setIncViews($info['id']);
