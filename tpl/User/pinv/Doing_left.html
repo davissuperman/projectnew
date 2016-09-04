@@ -1,52 +1,8 @@
-<style>
-.nav-stacked  a:active {
-    color: #0000FF
-}
-</style>
 <div class="col-md-2 sidebar">
 <nav id="sidebar-nav">
-        <ul class="nav nav-pills nav-stacked">
-                <li><a href="{pigcms::U('Module/promoteList',array('token'=>$token))}"><span class="glyphicon glyphicon-chevron-left"></span> 返回</a></li>
-
-                <li ><a href="{pigcms::U('Allinone/index',array('token'=>$token))}">Allinone新品</a></li>
-        </ul>
-        <button onclick="$('#oldevent').toggle()">老的活动 - 点击显示</button>
-	<ul id="oldevent" class="nav nav-pills nav-stacked" style="display: none">
-		<li><a href="{pigcms::U('Doing/index',array('token'=>$token))}">流程B运营</a></li>
-		<li><a href="{pigcms::U('Bonus/index',array('token'=>$token))}">年终奖</a></li>
-		<li ><a href="{pigcms::U('Greeting/index',array('token'=>$token))}">新年贺卡</a></li>
-		<li ><a href="{pigcms::U('Womensday/index',array('token'=>$token))}">38女人节特别奉献</a></li>
-        <li ><a href="{pigcms::U('Hangzhou/index',array('token'=>$token))}">杭州线下活动</a></li>
-        <li ><a href="{pigcms::U('Yucai/index',array('token'=>$token))}">杭州线下活动 - 育才</a></li>
-        <li ><a href="{pigcms::U('Taiyuan/index',array('token'=>$token))}">太原线下活动</a></li>
-        <li ><a href="{pigcms::U('Shijiazhuang/index',array('token'=>$token))}">石家庄线下活动</a></li>
-        <li ><a href="{pigcms::U('Ningbo/index',array('token'=>$token))}">宁波线下活动</a></li>
-        <li ><a href="{pigcms::U('Nanchang/index',array('token'=>$token))}">南昌天虹百货京东店线下活动</a></li>
-        <li ><a href="{pigcms::U('Meibohui/index',array('token'=>$token))}">上海新国际博览中心线下活动</a></li>
-        <li ><a href="{pigcms::U('Damo/index',array('token'=>$token))}">桂林惠之林线下活动</a></li>
-        <li ><a href="{pigcms::U('Hongtongcheng/index',array('token'=>$token))}">贵阳市鸿通城购物中心线下活动</a></li>
-        <li ><a href="{pigcms::U('Huaite/index',array('token'=>$token))}">石家庄怀特广场5.29-5.31线下活动</a></li>
-        <li ><a href="{pigcms::U('Productsecond/index',array('token'=>$token))}">最新的活动</a></li>
-        <li ><a href="{pigcms::U('Countmask/index',array('token'=>$token))}">数面膜</a></li>
-        <li ><a href="{pigcms::U('Yangpudarunfa/index',array('token'=>$token))}">上海杨浦大润发</a></li>
-        <li ><a href="{pigcms::U('Beijingxinshijie/index',array('token'=>$token))}">北京新世界利莹</a></li>
-        <li ><a href="{pigcms::U('Yinzuo/index',array('token'=>$token))}">济南泉城广场山东银座</a></li>
-        <li ><a href="{pigcms::U('Suqiandarunfa/index',array('token'=>$token))}">宿迁大润发</a></li>
-        <li ><a href="{pigcms::U('Beizhengjie/index',array('token'=>$token))}">玉溪市澄江县北正街雅韵化妆品店</a></li>
-        <li ><a href="{pigcms::U('Dinghai/index',array('token'=>$token))}">华之友---定海店</a></li>
-        <li ><a href="{pigcms::U('Shenjiamen/index',array('token'=>$token))}">沈家门店</a></li>
-        <li ><a href="{pigcms::U('Xingjian/index',array('token'=>$token))}">兴建店</a></li>
-        <li ><a href="{pigcms::U('Kaihong/index',array('token'=>$token))}">凯虹广场城市超市</a></li>
-        <li ><a href="{pigcms::U('Kunshanqianjin/index',array('token'=>$token))}">昆山前进大润发</a></li>
-        <li ><a href="{pigcms::U('Pretty/index',array('token'=>$token))}">拼图</a></li>
-        <li ><a href="{pigcms::U('Mumayi/index',array('token'=>$token))}">木蚂蚁杭州下沙店</a></li>
-        <li ><a href="{pigcms::U('Diweisi/index',array('token'=>$token))}">陕西缔威斯小寨军区合作社</a></li>
-            <li ><a href="{pigcms::U('Anniversary/index',array('token'=>$token))}">81周年</a></li>
-            <li><a href="{pigcms::U('Module/promoteList',array('token'=>$token))}"><span class="glyphicon glyphicon-chevron-left"></span> 返回</a></li>
-            <li ><a href="{pigcms::U('Tuanyuan/index',array('token'=>$token))}">大富翁团圆之旅</a></li>
-
-    </ul>
-
-
+	<ul class="nav nav-pills nav-stacked">
+		<li><a href="{pigcms::U('Module/promoteList',array('token'=>$token))}"><span class="glyphicon glyphicon-chevron-left"></span> 返回</a></li>
+		<li <?php if($side == "INDEX") echo 'class="active"'; ?>><a href="{pigcms::U('Doing/index',array('token'=>$token))}">流程B运营</a></li>
+	</ul>
 </nav>
 </div>

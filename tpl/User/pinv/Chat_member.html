@@ -19,11 +19,7 @@
 
         //批量导出
         $('#djdc').click(function() {
-            var fromNumber = $("#fromnumber").val();
-            var toNumber = $("#tonumber").val();
-            window.open("{pigcms::U('Chat/memberdc',array('token'=>$token))}"+"&from="+fromNumber+"&to="+toNumber);
-//            $('#info').attr("action", "{pigcms::U('Chat/memberdc',array('token'=>$token))}");
-//            $("#info").submit();
+            $('#info').attr("action", "{pigcms::U('Chat/memberdc',array('token'=>$token))}");
 
         })
 
@@ -58,7 +54,7 @@
                 </div>
                 <div class="panel-body">
                      
-                    <form   method="post" action="{pigcms::U('Chat/member')}"  id="info">
+                    <form   method="post" action="{pigcms::U('Chat/member')}" >
                         <input type="hidden" name="token" value='{pigcms::$token}'>
                         <div id="condition">
                             搜索：<select   name="tel">
@@ -108,18 +104,14 @@
                             </select>
                             <input  type="submit" value="检索" >
                         </div>
-                        <div>
-                            From : <input type="text" name="fromnumber" value="" id="fromnumber"  style="width:100px">
-                            To : <input type="text" name="tonumber" value="" id="tonumber" style="width:100px">
-                        </div>
                     </form>
                     <div id="choose-date">
                         <div id="date-calendar">
                             <input type="button" value="导入数据" id='tc' class="btn btn-success" style="float:left;margin-left:12px" >
                             <input type="button" value="批量导出" id='djdc'  class="btn btn-success" style="float:left;margin-left:12px" >
-
                             <input type="button" value="分组" id='djdc'  class="btn btn-success" style="float:left;margin-left:12px" >
-
+                            
+                            
                             <form method="post"  action="{pigcms::U('Chat/memberxiazai',array('token'=>$token))}">
                                <input type="submit" class="btn btn-link" value='导入模板下载'/>
                             </form>
@@ -174,7 +166,6 @@
                             </td>
                             </TR>
                         </volist>
-                        <input type="hidden" name="idlistall" value="{pigcms:$idlistall}"/>
                     </TABLE>
                 </div>
                 <div class="panel-footer" style="text-align:right"> 
