@@ -886,6 +886,17 @@ HTML;
         $voteView = M('xiezhuang_votelist')->query($voteListSql);
         if($voteView){
             $haveVoted = 0;
+            $infoLocal = M('xiezhuang')->where(array('openid' => $userOpenId))->find();
+            if($infoLocal){
+                if($infoLocal['click'] == 1){
+                    header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=share&gid=$gid");
+                    exit();
+                }else{
+                    header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid");
+                    exit();
+                }
+            }
+
         }
 
         //begin 分享出去的URL
