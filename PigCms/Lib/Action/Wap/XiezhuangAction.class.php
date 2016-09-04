@@ -607,6 +607,8 @@ HTML;
             $award = M('xiezhuang_award')->where(array('openid' => $userOpenId))->find();
             if($award){
                 //已经提交
+                header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=sharephone&gid=$gid");
+                exit();
             }else{
                 header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=sharephone&gid=$gid");
                 exit();
@@ -728,8 +730,8 @@ HTML;
         if($vote >= $this->xiezhuangCount && !$info['phone']){
 //            跳转到sharephone
 //            redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=sharephone&gid=$gid");
-            exit();
+//            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=sharephone&gid=$gid");
+//            exit();
         }
         if($vote >= $this->xiezhuangCount && $info['phone']){
 //            跳转到sharephone
