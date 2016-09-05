@@ -203,7 +203,7 @@ input,textarea,select,button{font-size:1em;}
   text-align: center;
   padding: 0.15rem 0;}
 .control-box .need-people strong{ font-size:0.5rem; color:#ef75a9;}
-.control-box-game{position:absolute;top:7.7rem;left:50%;margin-left:-2.3rem;}
+.control-box-game{position:absolute;top:7.7rem;left:50%;margin-left:-2.3rem;    z-index: 99;}
 
 /*btn*/
 .btn-inner{color:#ef75a9; border:2px solid #ef75a9; width:4.5rem; display:inline-block; -moz-border-radius: 1rem;-webkit-border-radius: 1rem;-o-border-radius: 1rem;-ms-border-radius: 1rem; border-radius: 1rem;text-align:center; cursor:pointer;font-size: 0.35rem; margin:0; padding: 0;text-decoration:none;height: 0.65rem;
@@ -362,4 +362,62 @@ input,textarea,select,button{font-size:1em;}
 
 
 /*share*/
-.share-panel{ background:url(../images/p/s1.png) no-repeat center;height:3rem; background-size:auto 100%;top: 5.8rem;position: absolute;width: 100%;}
+.share-panel{ background:url(../images/p/s1.png) no-repeat center;height:3rem; background-size:auto 100%;top: 5.8rem;position: absolute;width: 100%;    z-index: 98;}
+
+/*game*/
+.game-notice{background: url(../images/p/g11.png) no-repeat 0.25rem;
+    height: 0.465rem;
+    background-size: auto 100%;
+    top: 0.35rem;
+    position: absolute;
+    width: 100%; z-index:1;}
+	
+.game-people{background: url(../images/p/g12.png) no-repeat center;
+    height: 7.3rem;
+    background-size: auto 100%;
+    top: 0.25rem;
+    position: absolute;
+    width: 100%; z-index:0;}
+	
+.game-people2{background: url(../images/p/g12.png) no-repeat center; background-size: auto 80%;top: -0.4rem;}
+	
+.game-tips{ position: absolute;
+    left: 0;
+    width: 100%;
+    top: 1.8rem;
+    height: 3.6rem;    font-size: 0.2rem; z-index:2;}
+.game-tips .game-tip p{}
+.game-tips .game-tip{ position:absolute; padding:0.2rem; line-height:0.25rem; text-align:center;}
+.game-tips .game-tip1{ background:url(../images/p/tip1.png) no-repeat;color:#577eb1;top:0;left:0.3rem; background-size:auto 100%;height:0.8rem;width:2rem;}
+.game-tips .game-tip2{background:url(../images/p/tip2.png) no-repeat;color:#fff;top:0.2rem;right:0.2rem; background-size:auto 100%;height:0.7rem;width:1.6rem;}
+.game-tips .game-tip3{background:url(../images/p/tip3.png) no-repeat;color: #486a00;
+    top: 2.65rem;
+    left: 0.8rem;
+    background-size: auto 100%;
+    height: 0.5rem;
+    width: 1.3rem;}
+.game-tips .game-tip4{background:url(../images/p/tip4.png) no-repeat;    color: #fff;
+    top: 2.65rem;
+    right: 0.35rem;
+    background-size: auto 100%;
+    height: 0.45rem;
+    width: 1.5rem;}
+	
+.game-tips2 .game-tip3{top:1.8rem;}
+.game-tips2 .game-tip4{top:1.7rem;}
+	
+.game-notice2{background: url(../images/p/g13.png) no-repeat center;
+    height: 2.1rem;
+    background-size: auto 100%;
+    top: 6.35rem;
+    position: absolute;
+    width: 100%;
+    z-index: 3;}
+
+.game-notice3{background: url(../images/p/g14.png) no-repeat center;
+    height: 2.9rem;
+    background-size: auto 100%;
+    top: 5.6rem;
+    position: absolute;
+    width: 100%;
+    z-index: 3;}
