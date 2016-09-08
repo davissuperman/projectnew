@@ -7,7 +7,7 @@
 <meta name="keywords" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>赢新品试用大奖！轻轻一“拭”,开启便捷卸妆体验</title>
-    <link href="{pigcms::RES}/xiezhuang/css/common.css?v=20160903" rel="stylesheet" type="text/css" />
+    <link href="{pigcms::RES}/xiezhuang/css/common.css?v=201609061036" rel="stylesheet" type="text/css" />
     <script src="{pigcms::RES}/xiezhuang/js/zepto.min.js" type="text/javascript"></script>
     <script src="{pigcms::RES}/xiezhuang/js/common.js" type="text/javascript"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
@@ -138,14 +138,36 @@
 
 <body id="body">
 <div class="img-box">
-    <p><img src="{pigcms::RES}/xiezhuang/images/p/g1.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/xiezhuang/images/p/g2.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/xiezhuang/images/p/g3.png" style="width:100%;"/></p>
-    <p><img src="{pigcms::RES}/xiezhuang/images/p/g4.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/xiezhuang/images/p/g5.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/xiezhuang/images/p/g6.png" style="width:100%;"/></p>
-    <p><img src="{pigcms::RES}/xiezhuang/images/p/g7.png" style="width:100%;"/></p>
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/r1.jpg" width="100%" /></p>
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/r2.jpg" width="100%" /></p>
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/r3.jpg" style="width:100%;"/></p>
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/r4.jpg" width="100%" /></p>
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/r5.jpg" width="100%" /></p>
 </div>
+
+<div class="game-notice"></div>
+<div class="game-people"></div>
+<ul class="game-tips" id="game-tips">
+    <li class="game-tip game-tip1">
+        <p>造成肌肤干燥缺水</p>
+        <p>肌肤缺乏弹性</p>
+        <p>影响保养品吸收</p>
+    </li>
+    <li class="game-tip game-tip2">
+        <p>影响妆效</p>
+        <p>肌肤暗哑</p>
+        <p>容易松弛</p>
+    </li>
+    <li class="game-tip game-tip3">
+        <p>容易堵塞毛孔</p>
+        <p>容易色素沉淀</p>
+    </li>
+    <li class="game-tip game-tip4">
+        <p>容易闷痘</p>
+        <p>妆容残留不净</p>
+    </li>
+</ul>
+<div class="game-notice2"></div>
 
 <ul class="control-box control-box-game">
     <li>
@@ -156,6 +178,43 @@
     </li>
 
 </ul>
+
+<script type="text/javascript">
+	$(document).ready(function(e) {
+		$(".btn-share").click(function(){
+			$("#share-panel").removeClass("hide");
+		});
+		showHideTextByNums();
+	});
+	
+	function showHideTextByNums(){
+		var $piaoNumber = $("#piao-number");
+		var piaoNumber = $piaoNumber.html();
+		var $gameTips = $("#game-tips");
+		var has_number = 20 - parseFloat(piaoNumber);
+		$gameTips.find("p").each(function(index){
+			var $curImg = $(this);
+			if(index * 2 + 1 < has_number){
+				$curImg.hide();
+			}
+		});
+		$gameTips.children("li").each(function(){
+			var $li = $(this);
+			var len = $li.find("p").length;
+			var num = 0;
+			$li.find("p").each(function(i, element) {
+				var $p = $(this);
+				if($p.css("display") == 'none'){
+					num++;
+				}
+			});
+			if(num == len){
+				$li.hide();
+			}
+		});
+	}
+	
+</script>
 
 <script type="text/javascript">
     $(document).ready(function(e) {

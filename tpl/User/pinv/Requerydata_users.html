@@ -94,8 +94,7 @@
     function editGroup(box, openid, gid) {
         box.style.display = 'none';
         var addSel = "<div id='cgdiv'><select class='form-control' name='gid' style='float:left;width:105px;margin-right:5px;' id='changeS'>";
-                addSel += "<foreach name="
-        groups" item="gname" key="gk"><option value='{pigcms:$gk}'>{pigcms:$gname}</option></foreach>";
+                addSel += "<foreach name="groups" item="gname" key="gk"><option value='{pigcms:$gk}'>{pigcms:$gname}</option></foreach>";
                 addSel += "</select>";
         addSel += "<input type='submit' onclick='changeGid(\"" + openid + "\"," + gid + ")' class='btn btn-primary' style='width:50px;float:left;margin-right:0px;' value='确定'/> <input type='reset' value='返回' class='btn btn-default' onclick=quitEGid('" + openid + "'," + gid + ")></div>";
         box.parentNode.innerHTML = addSel;

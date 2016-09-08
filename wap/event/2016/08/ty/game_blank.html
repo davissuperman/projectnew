@@ -15,16 +15,17 @@
 </head>
 <body id="body">
 	<div class="img-box">
-        <p><img src="images/p/r1.jpg" width="100%" /></p>
-        <p><img src="images/p/r2.jpg" width="100%" /></p>
-        <p><img src="images/p/r3.jpg" style="width:100%;"/></p>
-        <p><img src="images/p/r4.jpg" width="100%" /></p>
-        <p><img src="images/p/r5.jpg" width="100%" /></p>
+        <p><img src="images/p/g1.png" width="100%" /></p>
+        <p><img src="images/p/g2.png" width="100%" /></p>
+        <p><img src="images/p/g3.png" style="width:100%;"/></p>
+        <p><img src="images/p/g4.png" width="100%" /></p>
+        <p><img src="images/p/g5.png" width="100%" /></p>
+        <p><img src="images/p/g6.png" style="width:100%;"/></p>
+        <p><img src="images/p/g7.png" style="width:100%;"/></p>
     </div>
-    
     <div class="game-notice"></div>
     <div class="game-people"></div>
-    <ul class="game-tips" id="game-tips">
+    <ul class="game-tips">
     	<li class="game-tip game-tip1">
         	<p>造成肌肤干燥缺水</p>
             <p>肌肤缺乏弹性</p>
@@ -45,7 +46,6 @@
         </li>
     </ul>
     <div class="game-notice2"></div>
-    
     <ul class="control-box control-box-game">
     	<li>
         	<div class="need-people">还需投票<strong id="piao-number">2</strong>张</div>
@@ -56,42 +56,7 @@
        
      </ul>
     
-	<script type="text/javascript">
-    	$(document).ready(function(e) {
-            $(".btn-share").click(function(){
-				$("#share-panel").removeClass("hide");
-			});
-			showHideTextByNums();
-        });
-		
-		function showHideTextByNums(){
-			var $piaoNumber = $("#piao-number");
-			var piaoNumber = $piaoNumber.html();
-			var $gameTips = $("#game-tips");
-			var has_number = 20 - parseFloat(piaoNumber);
-			$gameTips.find("p").each(function(index){
-				var $curImg = $(this);
-				if(index * 2 + 1 < has_number){
-					$curImg.hide();
-				}
-			});
-			$gameTips.children("li").each(function(){
-				var $li = $(this);
-				var len = $li.find("p").length;
-				var num = 0;
-				$li.find("p").each(function(i, element) {
-                    var $p = $(this);
-					if($p.css("display") == 'none'){
-						num++;
-					}
-                });
-				if(num == len){
-					$li.hide();
-				}
-			});
-		}
-		
-    </script>
+
     
 </body>
 </html>
