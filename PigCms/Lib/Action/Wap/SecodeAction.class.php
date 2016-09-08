@@ -13,7 +13,7 @@ class SecodeAction extends Action {
         //获取当天的数据
         $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d")-1,date("Y")));
         $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d")-1,date("Y")));
-        $list = M('customer_service_fans')->query("SELECT * from tp_customer_service_fans order by subscribe_time limit 30000");
+        $list = M('customer_service_fans')->query("SELECT * from tp_customer_service_fans WHERE subscribe=1 order by subscribe_time limit 300000");
         $listArr = array();
         $fileData = $this->fileDate;
         $localfile = DATA_PATH.'HY_'.$fileData.'.txt';
@@ -80,6 +80,17 @@ class SecodeAction extends Action {
 
     }
         public function index() {
+            $fileData = $this->fileDate;
+            //delete old file
+            $fList = scandir(DATA_PATH);
+            foreach($fList as $eachFileNeedDelete){
+                if($eachFileNeedDelete != '.' && $eachFileNeedDelete != '..'){
+                    $needDeleteReal = DATA_PATH.$eachFileNeedDelete;
+                    echo $needDeleteReal." <br/>";
+                    unlink($needDeleteReal);
+                }
+            }
+            //end delete
             $this->generateFile();
             $this->generateHyFile();
             $ftp = new Ftp();//实例化对象
@@ -100,7 +111,7 @@ class SecodeAction extends Action {
 //                    $ftp->mkdir($remotedir);
 //                }
 
-                $fileData = $this->fileDate;
+
                 for($i=0;$i<=$this->codeList;$i++){
                     $localfile = DATA_PATH.'FWCX_'.$fileData."_$i".'.txt';
                     $remotefile =  "/crm/UAT/FWCX_$fileData"."_$i".'.txt';
