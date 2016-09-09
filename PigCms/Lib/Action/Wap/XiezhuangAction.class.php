@@ -8,7 +8,7 @@ class XiezhuangAction extends SjzAction {
     public $shareImageUrl;
     public $endtime="2016-12-17 23:59:59"; //活动结束时间
     public $debug = true; //上线后应该改成false
-    public $defalutGid = 98;
+    public $defalutGid = 110;
     public $xiezhuangCount = 4;
 
     public function _initialize() {
