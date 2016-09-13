@@ -141,7 +141,7 @@ HTML;
 //        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         $fansInfo = null;
         $selfUserInfo = array();
-        $fansInfo = M('customer_service_fans')->field('openid,nickname','headimgurl')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
+        $fansInfo = M('customer_service_fans')->field('openid,nickname,headimgurl')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
         if($userOpenId && $fansInfo){
             $selfUserInfo['headimgurl'] = $fansInfo['headimgurl'];
             $selfUserInfo['nickname'] = $fansInfo['nickname'];
@@ -812,7 +812,7 @@ HTML;
             $code = trim($_GET["code"]);
             $state = trim($_GET['state']);
 
-            $fansInfo = M('customer_service_fans')->field('openid,nickname','headimgurl')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
+            $fansInfo = M('customer_service_fans')->field('openid,nickname,headimgurl')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
             if ($code && $state == 'sentian') {
                 if(empty($fansInfo)){
                     $webCreatetime = $apidata['web_createtime'];
@@ -1002,7 +1002,7 @@ HTML;
             $code = trim($_GET["code"]);
             $state = trim($_GET['state']);
 
-            $fansInfo = M('customer_service_fans')->field('openid,nickname','headimgurl')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
+            $fansInfo = M('customer_service_fans')->field('openid,nickname,headimgurl')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
             if ($code && $state == 'sentian') {
                 if(empty($fansInfo)){
                     $webCreatetime = $apidata['web_createtime'];
@@ -1635,7 +1635,7 @@ HTML;
     public function saveUserInfo($json){
         $token = "rggfsk1394161441";
         $fanModel = M('customer_service_fans'); //向粉丝表中添加此用户信息
-        $ffind = $fanModel->field('openid,nickname','headimgurl')->where(array('openid' => $json->openid, 'token' => $token))->find();
+        $ffind = $fanModel->field('openid,nickname,headimgurl')->where(array('openid' => $json->openid, 'token' => $token))->find();
 
         if ($ffind) {
             //$this->subscribe(1); //如果粉丝表中有此用户则重新关注
