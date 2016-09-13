@@ -85,7 +85,7 @@ class XiezhuangAction extends SjzAction {
     }
 
     public function saveInfo($gid,$openId,$nickname,$imageProfile){
-        if($gid < 98 || $gid > 120){
+        if($gid < 110 || $gid > 120){
             Log :: write( $openId."  ".$nickname." $gid 不存在" ,'ERR','','test.log');
             return null;
         }
