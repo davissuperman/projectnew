@@ -1089,7 +1089,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
         //每日渠道汇总表
         $m = 0;
         $datereport2 = array();
-        $fromDate2 = strtotime("2016-09-10 00:00:00");
+        $fromDate2 = strtotime("2016-09-09 00:00:00");
         $endDate2 = strtotime("2016-11-30 00:00:00");
         while($m<35){
             $gidArr = array();
@@ -1185,7 +1185,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
             $obj2 = $objPHPExcel->setActiveSheetIndex(0)
                 ->setCellValue('A' . ($n + 2), $n+1)
                 ->setCellValue('B' . ($n + 2), $data[$n]['date']);
-            $query = "select gid,title from tp_bonus where type=2";
+            $query = "select cid as gid,cname as title from tp_npic_twocode where channel_type=5 order by cid asc";
             $glist = M('bonus')->query($query);
             foreach($glist as $key => $each){
                 $obj2 = $obj2->setCellValue($arrayKeyList2[$key+2] . ($n + 2), $data[$n][$each['gid']]);
