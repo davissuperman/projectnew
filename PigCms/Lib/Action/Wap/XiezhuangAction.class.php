@@ -1241,6 +1241,7 @@ HTML;
                 $p = array();
                 $p['uid'] =  $info['id'];
                 $p['phone'] =  1;
+                $p['createtime'] =  time();
                 $paiming = M('xiezhuang_phonelist')->add($p);
                 $i = array();
                 $i['id'] = $info['id'];

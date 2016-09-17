@@ -504,7 +504,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
 //                }elseif(strrchr((string)"$id","8") == '8'){
 //                    $level = 2;
 //                }
-                if(strrchr((string)"$id","1") == '1'){
+                if(strrchr((string)"$id","1") == '1' || strrchr((string)"$id","1") == '6'){
                     $level = '已中奖';
                 }
                 if(!$level){
@@ -626,7 +626,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
 //                }elseif(strrchr((string)"$orderId","8") == '8'){
 //                    $level = 2;
 //                }
-                if(strrchr((string)"$orderId","1") == '1'){
+                if(strrchr((string)"$orderId","1") == '1' || strrchr((string)"$orderId","1") == '6'){
                     $level = '已中奖';
                 }
                 $tmp['level'] = $level;
