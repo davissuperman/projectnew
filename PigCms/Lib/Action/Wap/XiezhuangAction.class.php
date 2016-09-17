@@ -1440,6 +1440,7 @@ HTML;
         $vote = $this->xiezhuangCount;
         $this->assign("vote",$vote);
         $this->assign("selforder",$pValue);
+        $this->assign("paiming",$pValue);
         $this->assign("gid",$gid);
         $this->display();
     }
