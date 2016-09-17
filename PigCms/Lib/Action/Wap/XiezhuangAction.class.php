@@ -1225,8 +1225,8 @@ HTML;
         //检查此 local openid 是否投过票
         $voteList = M('xiezhuang_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
         //多次投票
-        M("xiezhuang")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
-        if(!$voteList){//
+        if(!$voteList){
+            M("xiezhuang")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
             //投票
             $d = array();
             $d['fromopenid'] = $fromOpenIdFromPost;
