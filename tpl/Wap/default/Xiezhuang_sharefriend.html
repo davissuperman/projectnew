@@ -235,7 +235,6 @@
                     "{pigcms::$siteurl}/index.php?g=Wap&m=Xiezhuang&a=saveVote2",
                     {uid: "{pigcms::$uid}"},
                     function (data) {
-                        $helpvote.removeClass("clicked");
                         if (data != '') {
                             if(data == 1){
                                 Pop.alerts('恭喜您投票成功！点击“邀请好友助力”完成您的新品卸妆棉体验愿望吧！');
