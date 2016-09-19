@@ -734,10 +734,17 @@ HTML;
 //            exit();
         }
         if($vote >= $this->xiezhuangCount && $info['phone']){
-//            跳转到sharephone
-//            redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=success&gid=$gid");
-            exit();
+            //form 信息是否已经提交
+            $award = M('xiezhuang_award')->where(array('openid' => $userOpenId))->find();
+            if($award){
+                //已经提交
+                header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=sharephone&gid=$gid");
+                exit();
+            }else{
+                header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=sharephone&gid=$gid");
+                exit();
+            }
+
         }
 
         if($imgNums < 0 ){
