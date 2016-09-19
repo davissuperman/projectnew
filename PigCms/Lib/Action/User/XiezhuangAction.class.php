@@ -494,6 +494,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
 //                }
                 $id = $eachValue['id'];
                 $uid = $eachValue['uid'];
+                $timePhoneCreate = $eachValue['createtime'];
                 $level = null;
 //                if((int)$id == 2016){
 //                    $level = '特等奖';
@@ -560,6 +561,12 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 $tmp['orderid'] = $id;
                 $tmp['level'] = $level;
                 $tmp['uid'] = $each['uid'];;
+                if($timePhoneCreate){
+                    $tmp['phonecreatetime'] = date("Y-m-d H:i:s",$timePhoneCreate);
+                }else{
+                    $tmp['phonecreatetime'] = 0;
+                }
+
                 $listArr[] = $tmp;
             }
         }else{
@@ -629,7 +636,14 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 if(strrchr((string)"$orderId","1") == '1' || strrchr((string)"$orderId","1") == '6'){
                     $level = '已中奖';
                 }
+                $timePhoneCreate = $orderId = M('xiezhuang_phonelist')->where(array('uid' => $each['id']) )->getField('createtime');
                 $tmp['level'] = $level;
+                if($timePhoneCreate){
+                    $tmp['phonecreatetime'] = date("Y-m-d H:i:s",$timePhoneCreate);
+                }else{
+                    $tmp['phonecreatetime'] = 0;
+                }
+
                 $listArr[] = $tmp;
             }
         }
@@ -905,6 +919,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
             ->setCellValue('T1', '排名')
             ->setCellValue('U1', '奖项')
             ->setCellValue('V1', 'UID')
+            ->setCellValue('W1', '获取20票时间')
             ;
         //写出内容 UTF-8
         //log :: write( print_r($data,true)  );
@@ -936,6 +951,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 ->setCellValue('T' . ($n + 2), $data[$n]['orderid'])
                 ->setCellValue('U' . ($n + 2), $data[$n]['level'] )
                 ->setCellValue('V' . ($n + 2), $data[$n]['uid'] )
+                ->setCellValue('W' . ($n + 2), $data[$n]['phonecreatetime'] )
                 ;
 
         }
