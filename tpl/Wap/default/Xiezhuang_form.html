@@ -312,7 +312,9 @@
                     html += '<p>主办方将于2016年10月15日之前为您邮寄奖品</p>';
                     html += '<p>敬请期待！</p>';
                     Pop.alerts(html);
-                 //   window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Allinone&a=success&gid={pigcms::$gid}';
+                    setTimeout(function(){
+                        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Xiezhuang&a=form&gid={pigcms::$gid}';
+                    },1000);
                 },
                 error : function(XMLHttpRequest, textStatus, errorThrown) {
                     Pop.alerts("提交失败，网络繁忙！");
