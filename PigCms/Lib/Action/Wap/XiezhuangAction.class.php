@@ -1244,15 +1244,19 @@ HTML;
             //是否已经有20票
             $info = M('xiezhuang')->where(array('id' => $toUid))->find();
             if($info['vote'] >= $this->xiezhuangCount  && !$info['phone']){
-                $p = array();
-                $p['uid'] =  $info['id'];
-                $p['phone'] =  1;
-                $p['createtime'] =  time();
-                $paiming = M('xiezhuang_phonelist')->add($p);
-                $i = array();
-                $i['id'] = $info['id'];
-                $i['phone'] = 1;
-                M('xiezhuang')->save($i);
+                $pUid = $info['id'];
+                $phoneList = M('xiezhuang_phonelist')->where(array('uid' => $pUid))->find();
+                if(!$phoneList){
+                    $p = array();
+                    $p['uid'] =  $info['id'];
+                    $p['phone'] =  1;
+                    $p['createtime'] =  time();
+                    $paiming = M('xiezhuang_phonelist')->add($p);
+                    $i = array();
+                    $i['id'] = $info['id'];
+                    $i['phone'] = 1;
+                    M('xiezhuang')->save($i);
+                }
             }
         }else{
             //已经投过票
@@ -1279,15 +1283,19 @@ HTML;
             M("xiezhuang")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
             $info = M('xiezhuang')->where(array('openid' => $fromOpenIdFromPost))->find();
             if($info['vote'] >= $this->xiezhuangCount  && !$info['phone']){
-                $p = array();
-                $p['uid'] =  $info['id'];
-                $p['phone'] =  1;
-                $p['createtime'] =  time();
-                $paiming = M('xiezhuang_phonelist')->add($p);
-                $i = array();
-                $i['id'] = $info['id'];
-                $i['phone'] = 1;
-                M('xiezhuang')->save($i);
+                $pUid = $info['id'];
+                $phoneList = M('xiezhuang_phonelist')->where(array('uid' => $pUid))->find();
+                if(!$phoneList){
+                    $p = array();
+                    $p['uid'] =  $info['id'];
+                    $p['phone'] =  1;
+                    $p['createtime'] =  time();
+                    $paiming = M('xiezhuang_phonelist')->add($p);
+                    $i = array();
+                    $i['id'] = $info['id'];
+                    $i['phone'] = 1;
+                    M('xiezhuang')->save($i);
+                }
             }
             $return = 1;
         }else{
