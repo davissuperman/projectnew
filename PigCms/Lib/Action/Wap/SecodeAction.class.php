@@ -37,6 +37,9 @@ class SecodeAction extends Action {
             $eachLine = $each['openid'].$this->tab. $nickname.$this->tab.$sex.$this->tab. $each['country'].$this->tab. $each['province'].$this->tab. $each['city'].$this->tab.$this->tab."\r\n";
 //            $eachLine = $each['openid'].$this->tab. $each['nickname'].$this->tab.$sex.$this->tab. $each['province'].$this->tab.$this->tab."\r\n";
             $eachLine = iconv("UTF-8", "GBK", $eachLine);
+            if(!$eachLine){
+                $eachLine = $each['openid'].$this->tab. " ".$this->tab.$sex.$this->tab. $each['country'].$this->tab. $each['province'].$this->tab. $each['city'].$this->tab.$this->tab."\r\n";
+            }
 //            mb_convert_encoding($eachLine,"windows-1252","UTF-8") ;
             file_put_contents($localfile,$eachLine,FILE_APPEND);
             $this->usrList = $filePrefix;
