@@ -9,13 +9,13 @@ class MotianlunAction extends SjzAction {
     public $endtime="2017-01-30 23:59:59"; //活动结束时间
     public $debug = true; //上线后应该改成false
     public $defalutGid = 110;
-    public $xiezhuangCount = 20;
+    public $motianlunCount = 20;
 
     public function _initialize() {
         parent :: _initialize();
         $this->url= C('site_url');
-        $this->imageUrl = "http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/xiezhuang/images/logo1.jpg';
-        $this->shareImageUrl = "http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/xiezhuang/images/logo1.jpg';
+        $this->imageUrl = "http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/motianlun/images/logo1.jpg';
+        $this->shareImageUrl = "http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/motianlun/images/logo1.jpg';
 
         $ip=get_client_ip();
         $userOpenId= cookie('user_openid');
@@ -23,12 +23,12 @@ class MotianlunAction extends SjzAction {
             $uid = $this->getUidByOpenid($userOpenId);
             if($uid){
                 //判断此IP是否访问过
-                $id = M('xiezhuang_iplist')->where("ip='$ip'")->getField('id');
+                $id = M('motianlun_iplist')->where("ip='$ip'")->getField('id');
                 if(!$id){
                     $n = array();
                     $n['uid'] = $uid;
                     $n['ip'] = $ip;
-                    M('xiezhuang_iplist')->add($n);
+                    M('motianlun_iplist')->add($n);
                 }
             }
         }
@@ -46,11 +46,11 @@ class MotianlunAction extends SjzAction {
             }
         }else{
             $userOpenId= cookie('user_openid');
-            $info = M('xiezhuang')->where(array('openid' => $userOpenId))->find();
+            $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
             $mainId = $info['id'];
             $mainGid = $info['gid'];
         }
-        return $this->url."/index.php?g=Wap&m=Xiezhuang&a=sharefriend&uid=".$mainId."&gid=$mainGid";
+        return $this->url."/index.php?g=Wap&m=Motianlun&a=sharefriend&uid=".$mainId."&gid=$mainGid";
     }
     public function getDiymenSet(){
         $gid = 1;
@@ -90,7 +90,7 @@ class MotianlunAction extends SjzAction {
             return null;
         }
         //首先查看此OPENID 是否存在 无论gid
-        $bonusInfo = M('xiezhuang')->where(array('openid' => $openId))->find();
+        $bonusInfo = M('motianlun')->where(array('openid' => $openId))->find();
         $lastInsertId = null;
         if(!$bonusInfo){
             //创建个人主页
@@ -100,7 +100,7 @@ class MotianlunAction extends SjzAction {
             $d['headimgurl'] = $imageProfile;
             $d['views'] = 1;
             $d['createtime'] = time();
-            $lastInsertId = M("xiezhuang")->add($d);
+            $lastInsertId = M("motianlun")->add($d);
         }
         return $lastInsertId;
     }
@@ -162,7 +162,7 @@ HTML;
                         $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                         if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                             //code 有错误 需要重定向
-                            $url = $this->url."/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid";
+                            $url = $this->url."/index.php?g=Wap&m=Motianlun&a=index&gid=$gid";
                             header("location:$url");
                         }
 //                        $m['id'] = $apidata['id'];
@@ -184,7 +184,7 @@ HTML;
                     $selfUserInfo['nickname'] = $json->nickname;
                 }
             } else {
-                $url = urlencode($this->url."/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid");
+                $url = urlencode($this->url."/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
                 header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_userinfo&state=sentian#wechat_redirect");
                 exit;
             }
@@ -197,7 +197,7 @@ HTML;
         $imageProfile = $selfUserInfo['headimgurl'];
 
         //首先判断当前用户是否有玩过第一次
-        $info = M('Xiezhuang')->where(array('openid' => $userOpenId))->find();
+        $info = M('Motianlun')->where(array('openid' => $userOpenId))->find();
         $vote = null;
         $lastInsertId = null;
         $views = null;
@@ -251,12 +251,12 @@ HTML;
 //        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
             exit();
         }
 
         //首先判断当前用户是否有玩过第一次
-        $info = M('xiezhuang')->where(array('openid' => $userOpenId))->find();
+        $info = M('Motianlun')->where(array('openid' => $userOpenId))->find();
         $gid = $info['gid'];
 
         //begin 分享出去的URL
@@ -311,7 +311,7 @@ HTML;
 //            $n = array();
 //            $n['id'] = $uid;
 //            $n['uploadimagetime'] = time();
-//            M("xiezhuang")->save($n);
+//            M("Motianlun")->save($n);
 //        }
 //        $file = $savePath ."$userOpenId"."_$t".".jpeg";
 //       echo  file_put_contents($file, $data);
@@ -323,12 +323,12 @@ HTML;
       //  $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
             exit();
         }
 
         //首先判断当前用户是否有玩过第一次
-        $info = M('xiezhuang')->where(array('openid' => $userOpenId))->find();
+        $info = M('Motianlun')->where(array('openid' => $userOpenId))->find();
         $gid = $info['gid'];
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
@@ -356,7 +356,7 @@ HTML;
         }
 
         $vote = $info['vote'];
-        $leftVote = $this->xiezhuangCount  - $vote;
+        $leftVote = $this->motianlunCount  - $vote;
         if($leftVote<=0){
             $leftVote = 0;
         }
@@ -372,11 +372,11 @@ HTML;
         //  $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
             exit();
         }
 
-        $info = M('xiezhuang')->where(array('openid' => $userOpenId))->find();
+        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
         $gid = $info['gid'];
         //begin views
         if($info){
@@ -386,11 +386,11 @@ HTML;
         $getPost = null;
         if(isset($_GET['post'])  && $_GET['post'] == 1   ){
             //是否满足20票
-            if($info['vote'] < $this->xiezhuangCount){
+            if($info['vote'] < $this->motianlunCount){
                 exit;
             }
             //更新phone
-            //更新表 xiezhuang
+            //更新表 motianlun
             $id = $info['id'];
             if($info['phone'] != 1){
                 $m = array();
@@ -398,17 +398,17 @@ HTML;
                 $m['phone'] = 1;
                 $m['id'] = $id;
                 $m['phonetime'] = $t;
-                M('xiezhuang')->save($m);
+                M('motianlun')->save($m);
             }
 
-            //插入表 xiezhuang_phonelist
-            $phoneList = M('xiezhuang_phonelist')->where(array('uid' => $id))->find();
+            //插入表 motianlun_phonelist
+            $phoneList = M('motianlun_phonelist')->where(array('uid' => $id))->find();
             if(!$phoneList){
                 $n = array();
                 $n['uid'] = $id;
                 $n['phone'] = 1;
                 $n['createtime'] = time();
-                M('xiezhuang_phonelist')->add($n);
+                M('motianlun_phonelist')->add($n);
             }
         }
 
@@ -445,12 +445,12 @@ HTML;
 //        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
             exit();
         }
 
         //首先判断当前用户是否有玩过第一次
-        $info = M('xiezhuang')->where(array('openid' => $userOpenId))->find();
+        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
         $gid = $info['gid'];
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
@@ -493,12 +493,12 @@ HTML;
         }
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
             exit();
         }
 
         //首先判断当前用户是否有玩过第一次
-        $info = M('xiezhuang')->where(array('openid' => $userOpenId))->find();
+        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
         $gid = $info['gid'];
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
@@ -540,14 +540,14 @@ HTML;
         }
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
             exit();
         }
 
-        $info = M('xiezhuang')->where(array('openid' => $userOpenId))->find();
+        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
         if(!$info){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
             exit();
         }
         $gid = $info['gid'];
@@ -557,7 +557,7 @@ HTML;
 //        $uploadImageSrc= $savePath."$userOpenId"."_$t".".jpeg";
 //        if(!file_exists($uploadImageSrc)){
 //            //redirect
-//            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index");
+//            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
 //            exit();
 //        }
         //begin 分享出去的URL
@@ -582,7 +582,7 @@ HTML;
         $m = array();
         $m['id'] = $info['id'];
         $m['click'] = 1;
-        M('xiezhuang')->save($m);
+        M('motianlun')->save($m);
         //begin views
         if($info){
             $this->setIncViews($info['id']);
@@ -591,26 +591,26 @@ HTML;
 
 
         //获取当前已经有了多少拼图
-        $imgNums = (int)$this->xiezhuangCount;
+        $imgNums = (int)$this->motianlunCount;
         $vote = $info['vote'];
         $share = $info['share'];
-        $imgNums = (int)$this->xiezhuangCount - $vote;
-        if($vote >= $this->xiezhuangCount && !$info['phone']){
+        $imgNums = (int)$this->motianlunCount - $vote;
+        if($vote >= $this->motianlunCount && !$info['phone']){
             //这里有错误，需要报错，不应该达到票数 但是没有名词
 //            跳转到sharephone
 //            redirect
-//            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=sharephone&gid=$gid");
+//            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=sharephone&gid=$gid");
 //            exit();
         }
-        if($vote >= $this->xiezhuangCount && $info['phone']){
+        if($vote >= $this->motianlunCount && $info['phone']){
             //form 信息是否已经提交
-            $award = M('xiezhuang_award')->where(array('openid' => $userOpenId))->find();
+            $award = M('motianlun_award')->where(array('openid' => $userOpenId))->find();
             if($award){
                 //已经提交
-                header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=sharephone&gid=$gid");
+                header("location:$this->url/index.php?g=Wap&m=Motianlun&a=sharephone&gid=$gid");
                 exit();
             }else{
-                header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=sharephone&gid=$gid");
+                header("location:$this->url/index.php?g=Wap&m=Motianlun&a=sharephone&gid=$gid");
                 exit();
             }
 
@@ -631,16 +631,16 @@ HTML;
         $end = mktime(23,59,59,date("m",$today),date("d",$today),date("Y",$today));
         $start = date("Y-m-d H:i:s",$start );
         $end = date("Y-m-d H:i:s",$end );
-//        $uniqueViewSql = "SELECT * from tp_xiezhuang_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$userOpenId'";
-        $uniqueViewSql = "SELECT * from tp_xiezhuang_votelist where  fromopenid='$userOpenId' and toopenid='$userOpenId'";
-        $uniqueViewlist = M('xiezhuang_votelist')->query($uniqueViewSql);
+//        $uniqueViewSql = "SELECT * from tp_motianlun_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$userOpenId'";
+        $uniqueViewSql = "SELECT * from tp_motianlun_votelist where  fromopenid='$userOpenId' and toopenid='$userOpenId'";
+        $uniqueViewlist = M('motianlun_votelist')->query($uniqueViewSql);
         $haveVoted = 0;
 
         //多次投票开启
         if($uniqueViewlist){
             $haveVoted = 1;
             //自己已经给自己投过票，但是未满20票 跳转到分享引导页
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=share2&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share2&gid=$gid");
             exit();
         }
         //多次投票结束
@@ -675,14 +675,14 @@ HTML;
         }
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
             exit();
         }
 
-        $info = M('xiezhuang')->where(array('openid' => $userOpenId))->find();
+        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
         if(!$info){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
             exit();
         }
         $gid = $info['gid'];
@@ -692,7 +692,7 @@ HTML;
 //        $uploadImageSrc= $savePath."$userOpenId"."_$t".".jpeg";
 //        if(!file_exists($uploadImageSrc)){
 //            //redirect
-//            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index");
+//            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
 //            exit();
 //        }
         //begin 分享出去的URL
@@ -723,25 +723,25 @@ HTML;
 
 
         //获取当前已经有了多少拼图
-        $imgNums = (int)$this->xiezhuangCount;
+        $imgNums = (int)$this->motianlunCount;
         $vote = $info['vote'];
         $share = $info['share'];
-        $imgNums = (int)$this->xiezhuangCount - $vote;
-        if($vote >= $this->xiezhuangCount && !$info['phone']){
+        $imgNums = (int)$this->motianlunCount - $vote;
+        if($vote >= $this->motianlunCount && !$info['phone']){
 //            跳转到sharephone
 //            redirect
-//            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=sharephone&gid=$gid");
+//            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=sharephone&gid=$gid");
 //            exit();
         }
-        if($vote >= $this->xiezhuangCount && $info['phone']){
+        if($vote >= $this->motianlunCount && $info['phone']){
             //form 信息是否已经提交
-            $award = M('xiezhuang_award')->where(array('openid' => $userOpenId))->find();
+            $award = M('motianlun_award')->where(array('openid' => $userOpenId))->find();
             if($award){
                 //已经提交
-                header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=sharephone&gid=$gid");
+                header("location:$this->url/index.php?g=Wap&m=Motianlun&a=sharephone&gid=$gid");
                 exit();
             }else{
-                header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=sharephone&gid=$gid");
+                header("location:$this->url/index.php?g=Wap&m=Motianlun&a=sharephone&gid=$gid");
                 exit();
             }
 
@@ -762,16 +762,16 @@ HTML;
         $end = mktime(23,59,59,date("m",$today),date("d",$today),date("Y",$today));
         $start = date("Y-m-d H:i:s",$start );
         $end = date("Y-m-d H:i:s",$end );
-//        $uniqueViewSql = "SELECT * from tp_xiezhuang_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$userOpenId'";
-        $uniqueViewSql = "SELECT * from tp_xiezhuang_votelist where  fromopenid='$userOpenId' and toopenid='$userOpenId'";
-        $uniqueViewlist = M('xiezhuang_votelist')->query($uniqueViewSql);
+//        $uniqueViewSql = "SELECT * from tp_motianlun_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$userOpenId'";
+        $uniqueViewSql = "SELECT * from tp_motianlun_votelist where  fromopenid='$userOpenId' and toopenid='$userOpenId'";
+        $uniqueViewlist = M('motianlun_votelist')->query($uniqueViewSql);
         $haveVoted = 0;
 
         //多次投票开启
         if($uniqueViewlist){
             $haveVoted = 1;
             //自己已经给自己投过票，但是未满20票 跳转到分享引导页
-//            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=game1&gid=$gid");
+//            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=game1&gid=$gid");
 //            exit();
         }
         //多次投票结束
@@ -809,7 +809,7 @@ HTML;
         $uid = $_GET['uid'];
         if(!is_numeric($uid)){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
             exit();
         }
 
@@ -829,7 +829,7 @@ HTML;
                     $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                     if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                         //code 有错误 需要重定向
-                        $url = $this->url."/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid";
+                        $url = $this->url."/index.php?g=Wap&m=Motianlun&a=index&gid=$gid";
                         header("location:$url");
                     }
                     $m['id'] = $apidata['id'];
@@ -844,16 +844,16 @@ HTML;
 
                 }
             } else {
-                $url = urlencode($this->url."/index.php?g=Wap&m=Xiezhuang&a=sharefriend&uid=$uid&gid=$gid");
+                $url = urlencode($this->url."/index.php?g=Wap&m=Motianlun&a=sharefriend&uid=$uid&gid=$gid");
                 header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
                 exit;
             }
         }
 
-        $info = M('xiezhuang')->where(array('id' => $uid))->find();
+        $info = M('motianlun')->where(array('id' => $uid))->find();
         if(!$info){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
             exit();
         }
 
@@ -868,7 +868,7 @@ HTML;
 //        $uploadImageSrc= $savePath."$MainOpenId"."_$t".".jpeg";
 //        if(!file_exists($uploadImageSrc)){
 //            //redirect
-//            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index");
+//            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
 //            exit();
 //        }
 //        $this->assign('uploadimagesrc',$uploadImageSrc);
@@ -879,35 +879,35 @@ HTML;
         $end = mktime(23,59,59,date("m",$today),date("d",$today),date("Y",$today));
         $start = date("Y-m-d H:i:s",$start );
         $end = date("Y-m-d H:i:s",$end );
-        $uniqueViewSql = "SELECT * from tp_xiezhuang_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$MainOpenId'";
-        $uniqueViewlist = M('xiezhuang_uniqueviewlist')->query($uniqueViewSql);
+        $uniqueViewSql = "SELECT * from tp_motianlun_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$MainOpenId'";
+        $uniqueViewlist = M('motianlun_uniqueviewlist')->query($uniqueViewSql);
         $haveVoted = 1;
         if($uniqueViewlist){
             //不需要增加uniqueviews
         }else{
-            M("xiezhuang")->where(array('id' => $info['id']))->setInc('uniqueviews');
+            M("motianlun")->where(array('id' => $info['id']))->setInc('uniqueviews');
             $n = array();
             $n['fromopenid'] = $userOpenId;
             $n['toopenid'] = $MainOpenId;
-            M('xiezhuang_uniqueviewlist')->add($n);
+            M('motianlun_uniqueviewlist')->add($n);
         }
         if($userOpenId == $MainOpenId){
             //自己访问自己的主页 跳转到share页面
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=share&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&gid=$gid");
             exit();
         }
-        $voteListSql = "SELECT * from tp_xiezhuang_votelist where fromopenid='$userOpenId' and toopenid='$MainOpenId'";
-        $voteView = M('xiezhuang_votelist')->query($voteListSql);
+        $voteListSql = "SELECT * from tp_motianlun_votelist where fromopenid='$userOpenId' and toopenid='$MainOpenId'";
+        $voteView = M('motianlun_votelist')->query($voteListSql);
         if($voteView){
             $haveVoted = 0;
-            $infoLocal = M('xiezhuang')->where(array('openid' => $userOpenId))->find();
+            $infoLocal = M('motianlun')->where(array('openid' => $userOpenId))->find();
             if($infoLocal){
                 if($infoLocal['click'] == 1){
-                    header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=share&gid=$gid");
+                    header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&gid=$gid");
                     exit();
                 }else{
-                    header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid");
+                    header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
                     exit();
                 }
             }
@@ -944,19 +944,19 @@ HTML;
 
 
         //获取当前已经有了多少拼图
-        $imgNums = (int)$this->xiezhuangCount;
+        $imgNums = (int)$this->motianlunCount;
         $vote = $info['vote'];
-        if($vote >= $this->xiezhuangCount && $userOpenId != $MainOpenId ){
+        if($vote >= $this->motianlunCount && $userOpenId != $MainOpenId ){
             //当前主页已经为20票， 跳转首页
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
             exit();
         }
 
-        $imgNums = (int)$this->xiezhuangCount - $vote;
-        if($vote >= $this->xiezhuangCount && $userOpenId==$MainOpenId){
+        $imgNums = (int)$this->motianlunCount - $vote;
+        if($vote >= $this->motianlunCount && $userOpenId==$MainOpenId){
             //跳转到sharephone
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=sharephone&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=sharephone&gid=$gid");
             exit();
         }
         if($imgNums < 0 ){
@@ -971,7 +971,7 @@ HTML;
         $this->assign('gid',$gid);
 
         //判断当前用户是否已经投过票
-        $voteList = M('xiezhuang_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$MainOpenId  ))->find();
+        $voteList = M('motianlun_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$MainOpenId  ))->find();
         $voteThisUid = 0;
         if($voteList){
             $voteThisUid = 1;
@@ -979,7 +979,7 @@ HTML;
 
         //判断COOKIE用户是否参加过活动
         //如果参见过活动，直接跳转到互动页面，否则是首页
-        $cookieId = M('xiezhuang')->where("openid='$userOpenId'")->getField('id');
+        $cookieId = M('motianlun')->where("openid='$userOpenId'")->getField('id');
         $cookieJoin = 0;
         if($cookieId){
             $cookieJoin = 1;
@@ -1003,7 +1003,7 @@ HTML;
             $gid = $this->defalutGid;
         }
 //        $userOpenId= 'oP9fCt-JvXkTShBQIin7jtYF0i6U';
-        M("xiezhuang_polldata")->where(array('id' => 1))->setInc('pv');
+        M("motianlun_polldata")->where(array('id' => 1))->setInc('pv');
         if(!$userOpenId){
             $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
             $code = trim($_GET["code"]);
@@ -1019,7 +1019,7 @@ HTML;
                     $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                     if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                         //code 有错误 需要重定向
-                        $url = $this->url."/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid";
+                        $url = $this->url."/index.php?g=Wap&m=Motianlun&a=index&gid=$gid";
                         header("location:$url");
                     }
                     $m['id'] = $apidata['id'];
@@ -1034,7 +1034,7 @@ HTML;
 
                 }
             } else {
-                $url = urlencode($this->url."/index.php?g=Wap&m=Xiezhuang&a=vote&gid=$gid");
+                $url = urlencode($this->url."/index.php?g=Wap&m=Motianlun&a=vote&gid=$gid");
                 header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
                 exit;
             }
@@ -1053,7 +1053,7 @@ HTML;
         $this->assign("timestamp",$timestamp);
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
-        $this->assign("shareurl",$this->url."/index.php?g=Wap&m=Xiezhuang&a=vote");
+        $this->assign("shareurl",$this->url."/index.php?g=Wap&m=Motianlun&a=vote");
         $this->assign('gid', $gid);
 
         $this->assign('title','“携手森田.找回美丽”第二阶段票选活动');
@@ -1062,13 +1062,13 @@ HTML;
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
 
-        $list = M('xiezhuang_poll')->query( "select * from tp_xiezhuang_poll order by id asc") ;
+        $list = M('motianlun_poll')->query( "select * from tp_motianlun_poll order by id asc") ;
         $slist = array();
         $savePath = './PUBLIC/imagess/';
         foreach($list as $each){
             $tmp = array();
             $id = $each['uid'];
-            $info = M('xiezhuang')->where(array('id' => $id))->find();
+            $info = M('motianlun')->where(array('id' => $id))->find();
             $tmp['name'] = $info['name'];
 
             $openid = $info['openid'];
@@ -1097,16 +1097,16 @@ HTML;
         }
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
             exit();
         }
 
-        $info = M('xiezhuang')->where(array('openid' => $userOpenId))->find();
+        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
         $gid = $info['gid'];
         $vote = $info['vote'];
-//        if($vote >= $this->xiezhuangCount && isset($info['phone']) && $info['phone']){
+//        if($vote >= $this->motianlunCount && isset($info['phone']) && $info['phone']){
 //            //redirect
-//            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=share");
+//            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share");
 //            exit();
 //        }
 
@@ -1137,11 +1137,11 @@ HTML;
         // end views
 
         $vote = $info['vote'];
-        if($vote >= $this->xiezhuangCount){
+        if($vote >= $this->motianlunCount){
             //成功，继续提交手机号
         }else{
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
             exit();
         }
 
@@ -1150,11 +1150,11 @@ HTML;
         if($info['phone']){
             //排名已经获取，根据UID获取排名
             $phoneExist = 1;
-            $paimingArray = M('xiezhuang_phonelist')->where(array('uid' => $info['id']))->find();
+            $paimingArray = M('motianlun_phonelist')->where(array('uid' => $info['id']))->find();
             $paiming = $paimingArray['id'];
         }else{
             //跳转
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=share&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&gid=$gid");
             exit();
         }
         $this->assign('paiming',$paiming);
@@ -1166,11 +1166,11 @@ HTML;
     }
     //根据UID获取OPENID
     public function getOpenIdByUid($uid){
-        $openId = M('xiezhuang')->where("id=$uid")->getField('openid');
+        $openId = M('motianlun')->where("id=$uid")->getField('openid');
         return $openId;
     }
     public function getUidByOpenid($openid){
-        $uid = M('xiezhuang')->where("openid='$openid'")->getField('id');
+        $uid = M('motianlun')->where("openid='$openid'")->getField('id');
         return $uid;
     }
     public function savePhoneInPage(){
@@ -1182,33 +1182,33 @@ HTML;
             exit();
         }
         //查看当前提交了手机号数码
-//        $countNum = M('xiezhuang')->where("phone != ''")->count('id');
+//        $countNum = M('motianlun')->where("phone != ''")->count('id');
 //        if($countNum >= 10000){
 //            echo 2;
 //            return;
 //            exit();
 //        }
-        $id = M('xiezhuang')->where("openid='$fromOpenIdFromPost'")->getField('id');
+        $id = M('motianlun')->where("openid='$fromOpenIdFromPost'")->getField('id');
         //判断此用户是否已经提交了手机号
-        $phoneList = M('xiezhuang_phonelist')->where(array('uid' => $id))->find();
+        $phoneList = M('motianlun_phonelist')->where(array('uid' => $id))->find();
         if($phoneList){
             echo 3;
             //已经存在，不需要保存
         }else{
-            //更新表 xiezhuang
+            //更新表 motianlun
             $m = array();
             $t = time();
             $m['phone'] = $phone;
             $m['id'] =$id;
             $m['phonetime'] = $t;
-            M('xiezhuang')->save($m);
+            M('motianlun')->save($m);
 
-            //插入表 xiezhuang_phonelist
+            //插入表 motianlun_phonelist
             $n = array();
             $n['uid'] = $id;
             $n['phone'] = $phone;
             $n['createtime'] = $t;
-            M('xiezhuang_phonelist')->add($n);
+            M('motianlun_phonelist')->add($n);
             echo 1;
         }
 
@@ -1230,7 +1230,7 @@ HTML;
 
         $toOpenIdFromPost = $this->getOpenIdByUid($toUid);
         //检查此 local openid 是否投过票
-        $voteList = M('xiezhuang_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
+        $voteList = M('motianlun_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
         //多次投票
         if(!$voteList){
             //投票
@@ -1238,24 +1238,24 @@ HTML;
             $d['fromopenid'] = $fromOpenIdFromPost;
             $d['toopenid'] = $toOpenIdFromPost;
             $d['createtime'] = time();
-            M('xiezhuang_votelist')->add($d);
-            M("xiezhuang")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
+            M('motianlun_votelist')->add($d);
+            M("motianlun")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
             $return = 1;
             //是否已经有20票
-            $info = M('xiezhuang')->where(array('id' => $toUid))->find();
-            if($info['vote'] >= $this->xiezhuangCount  && !$info['phone']){
+            $info = M('motianlun')->where(array('id' => $toUid))->find();
+            if($info['vote'] >= $this->motianlunCount  && !$info['phone']){
                 $pUid = $info['id'];
-                $phoneList = M('xiezhuang_phonelist')->where(array('uid' => $pUid))->find();
+                $phoneList = M('motianlun_phonelist')->where(array('uid' => $pUid))->find();
                 if(!$phoneList){
                     $p = array();
                     $p['uid'] =  $info['id'];
                     $p['phone'] =  1;
                     $p['createtime'] =  time();
-                    $paiming = M('xiezhuang_phonelist')->add($p);
+                    $paiming = M('motianlun_phonelist')->add($p);
                     $i = array();
                     $i['id'] = $info['id'];
                     $i['phone'] = 1;
-                    M('xiezhuang')->save($i);
+                    M('motianlun')->save($i);
                 }
             }
         }else{
@@ -1272,29 +1272,29 @@ HTML;
 //        $fromOpenIdFromPost = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         $toOpenIdFromPost = $fromOpenIdFromPost;
         //检查此 local openid 是否投过票
-        $voteList = M('xiezhuang_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
+        $voteList = M('motianlun_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
         if(!$voteList){//
             //投票
             $d = array();
             $d['fromopenid'] = $fromOpenIdFromPost;
             $d['toopenid'] = $toOpenIdFromPost;
             $d['createtime'] = time();
-            M('xiezhuang_votelist')->add($d);
-            M("xiezhuang")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
-            $info = M('xiezhuang')->where(array('openid' => $fromOpenIdFromPost))->find();
-            if($info['vote'] >= $this->xiezhuangCount  && !$info['phone']){
+            M('motianlun_votelist')->add($d);
+            M("motianlun")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
+            $info = M('motianlun')->where(array('openid' => $fromOpenIdFromPost))->find();
+            if($info['vote'] >= $this->motianlunCount  && !$info['phone']){
                 $pUid = $info['id'];
-                $phoneList = M('xiezhuang_phonelist')->where(array('uid' => $pUid))->find();
+                $phoneList = M('motianlun_phonelist')->where(array('uid' => $pUid))->find();
                 if(!$phoneList){
                     $p = array();
                     $p['uid'] =  $info['id'];
                     $p['phone'] =  1;
                     $p['createtime'] =  time();
-                    $paiming = M('xiezhuang_phonelist')->add($p);
+                    $paiming = M('motianlun_phonelist')->add($p);
                     $i = array();
                     $i['id'] = $info['id'];
                     $i['phone'] = 1;
-                    M('xiezhuang')->save($i);
+                    M('motianlun')->save($i);
                 }
             }
             $return = 1;
@@ -1315,11 +1315,11 @@ HTML;
             exit();
         }
         //根据ID取得UID
-        $uid = M('xiezhuang_poll')->where("id=$toId")->getField('uid');
+        $uid = M('motianlun_poll')->where("id=$toId")->getField('uid');
         if(!$uid){
             exit();
         }
-        $userInfo = M('xiezhuang')->where("id=$uid")->find();
+        $userInfo = M('motianlun')->where("id=$uid")->find();
         if(!$userInfo){
             //非法投票
             exit();
@@ -1334,17 +1334,17 @@ HTML;
 //        $start = date("Y-m-d H:i:s",$start );
 //        $end = date("Y-m-d H:i:s",$end );
 
-        $sql = "SELECT id from tp_xiezhuang_polllist where   createtime >= '$start' and createtime<'$end' and fromopenid='$fromOpenIdFromPost'";
-        $voteList = M('xiezhuang_polllist')->query($sql);
-//        $voteList = M('xiezhuang_polllist')->where(array('fromopenid' => $fromOpenIdFromPost, ))->find();//'toopenid'=>$toOpenIdFromPost
+        $sql = "SELECT id from tp_motianlun_polllist where   createtime >= '$start' and createtime<'$end' and fromopenid='$fromOpenIdFromPost'";
+        $voteList = M('motianlun_polllist')->query($sql);
+//        $voteList = M('motianlun_polllist')->where(array('fromopenid' => $fromOpenIdFromPost, ))->find();//'toopenid'=>$toOpenIdFromPost
         if(!$voteList){//
             //投票
             $d = array();
             $d['fromopenid'] = $fromOpenIdFromPost;
             $d['toopenid'] = $toOpenIdFromPost;
             $d['createtime'] = time();
-            M('xiezhuang_polllist')->add($d);
-            M("xiezhuang_poll")->where(array('id' => $toId))->setInc('vote');
+            M('motianlun_polllist')->add($d);
+            M("motianlun_poll")->where(array('id' => $toId))->setInc('vote');
             $return = 1;
         }else{
             //已经投过票
@@ -1368,7 +1368,7 @@ HTML;
         $city = $_POST['city'];
         $county = $_POST['county'];
         $address = $_POST['address'];
-        $award = M('xiezhuang_award')->where(array('openid' => $userOpenId))->find();
+        $award = M('motianlun_award')->where(array('openid' => $userOpenId))->find();
         if(!$award){
             $m = array();
             $m['openid'] = $userOpenId;
@@ -1379,7 +1379,7 @@ HTML;
             $m['county'] =$county;
             $m['address'] =$address;
             $m['createtime'] = time();
-            M('xiezhuang_award')->add($m);
+            M('motianlun_award')->add($m);
         }else{
                 $m = array();
                 $m['id'] = $award['id'];
@@ -1390,7 +1390,7 @@ HTML;
                 $m['county'] =$county;
                 $m['address'] =$address;
                 $m['updatetime'] = time();
-                M('xiezhuang_award')->save($m);
+                M('motianlun_award')->save($m);
                 $return = 1;
         }
     }
@@ -1399,30 +1399,30 @@ HTML;
         //        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
             exit();
         }
-        $info = M('xiezhuang')->where(array('openid' => $userOpenId))->find();
+        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
         $gid = $_GET['gid'];
         if(!$gid){
             $gid = $this->defalutGid;
         }
         if(!$info){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
             exit();
         }
 
         //如果没有满足16票 跳转到再接再厉
-        if($info['vote'] <$this->xiezhuangCount){
+        if($info['vote'] <$this->motianlunCount){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=rank1&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=rank1&gid=$gid");
             exit();
         }
 
         if($info && !$info['phone']){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=share&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&gid=$gid");
             exit();
         }
         //begin 分享出去的URL
@@ -1452,8 +1452,8 @@ HTML;
 
         $uid = $info['id'];
         //查询此用户的排名
-        $pValue = M('xiezhuang_phonelist')->where(array('uid' => $uid))->getField('id');
-        $vote = $this->xiezhuangCount;
+        $pValue = M('motianlun_phonelist')->where(array('uid' => $uid))->getField('id');
+        $vote = $this->motianlunCount;
         $this->assign("vote",$vote);
         $this->assign("selforder",$pValue);
         $this->assign("paiming",$pValue);
@@ -1471,10 +1471,10 @@ HTML;
         }
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
             exit();
         }
-        $info = M('xiezhuang')->where(array('openid' => $userOpenId))->find();
+        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
         $gid = $info['gid'];
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
@@ -1499,17 +1499,17 @@ HTML;
 
         $vote = $info['vote'];
         $gid = $info['gid'];
-        if($vote < $this->xiezhuangCount){
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=index&gid=$gid");
+        if($vote < $this->motianlunCount){
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
             exit();
         }
         if(!$info['phone']){
-            header("location:$this->url/index.php?g=Wap&m=Xiezhuang&a=share&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&gid=$gid");
             exit();
         }
 
         $this->assign("vote",$vote);
-        $award = M('xiezhuang_award')->where(array('openid' => $userOpenId))->find();
+        $award = M('motianlun_award')->where(array('openid' => $userOpenId))->find();
         $name = '';
         $phone = '';
         $address = '';
@@ -1538,7 +1538,7 @@ HTML;
     }
 
     public function getOrderByOpenId($openId=null){
-        $list = M('xiezhuang')->query("select openid, number,share,phonetime from tp_xiezhuang where phone != '' order by number desc,share desc,phonetime asc ");
+        $list = M('motianlun')->query("select openid, number,share,phonetime from tp_motianlun where phone != '' order by number desc,share desc,phonetime asc ");
 
         $orderList = array();
         foreach($list as $each){
@@ -1568,7 +1568,7 @@ HTML;
         $this->assign("signature",$signature);
         $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', 1);
-        $info = M('xiezhuang')->where(array('openid' => $userOpenId))->find();
+        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
         $this->assign('title',$info['name'].$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
         $this->assign("imageUrl",$this->imageUrl);
@@ -1583,9 +1583,9 @@ HTML;
         }
         // end views
 
-        $this->assign('selfpage',$this->url."/index.php?g=Wap&m=Xiezhuang&a=sharefriend&gid=$gid");
+        $this->assign('selfpage',$this->url."/index.php?g=Wap&m=Motianlun&a=sharefriend&gid=$gid");
 
-        $award = M('xiezhuang_award')->where(array('openid' => $userOpenId))->find();
+        $award = M('motianlun_award')->where(array('openid' => $userOpenId))->find();
         if($award){
             $this->assign('name',$award['name']);
             $this->assign('phone',$award['phone']);
@@ -1599,10 +1599,10 @@ HTML;
     }
 
     public function setIncViews($id){
-        M("xiezhuang")->where(array('id' => $id))->setInc('views');
+        M("motianlun")->where(array('id' => $id))->setInc('views');
         $m = array();
         $m['uid'] = $id;
-        M('xiezhuang_viewlist')->add($m);
+        M('motianlun_viewlist')->add($m);
     }
 
     public function  saveAward(){
@@ -1612,7 +1612,7 @@ HTML;
             echo 0;
             return;
         }
-        $award = M('xiezhuang_award')->where(array('openid' => $userOpenId))->find();
+        $award = M('motianlun_award')->where(array('openid' => $userOpenId))->find();
         $name = $_POST['name'];
         $phone = $_POST['phone'];
         $province = $_POST['province'];
@@ -1627,7 +1627,7 @@ HTML;
             $m['city'] = $city;
             $m['address'] = $address;
             $m['createtime'] = time();
-            M('xiezhuang_award')->add($m);
+            M('motianlun_award')->add($m);
             $return = 1;
         }else{
             $m = array();
@@ -1639,7 +1639,7 @@ HTML;
             $m['city'] = $city;
             $m['address'] = $address;
             $m['createtime'] = time();
-            M('xiezhuang_award')->save($m);
+            M('motianlun_award')->save($m);
             $return = 1;
         }
 
@@ -1709,16 +1709,16 @@ HTML;
             exit;
         }
         $userOpenId= cookie('user_openid');
-        $info = M('xiezhuang')->where(array('openid' => $userOpenId))->find();
+        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
         if($info){
             $id = $info['id'];
             if(!$info['sharetime']){
                 $m = array();
                 $m['id'] = $info['id'];
                 $m['sharetime'] = time();
-                M("xiezhuang")->save($m);
+                M("motianlun")->save($m);
             }
-            M("xiezhuang")->where(array('id' => $id))->setInc('share');
+            M("motianlun")->where(array('id' => $id))->setInc('share');
             echo 1;
         }else{
             echo 0;
@@ -1738,16 +1738,16 @@ HTML;
             exit;
         }
         $userOpenId= cookie('user_openid');
-        $info = M('xiezhuang')->where(array('openid' => $userOpenId))->find();
+        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
         if($info){
             $id = $info['id'];
             if(!$info['sharetime']){
                 $m = array();
                 $m['id'] = $info['id'];
                 $m['sharetime'] = time();
-                M("xiezhuang")->save($m);
+                M("motianlun")->save($m);
             }
-            M("xiezhuang")->where(array('id' => $id))->setInc('share');
+            M("motianlun")->where(array('id' => $id))->setInc('share');
             echo 1;
         }else{
             echo 0;
@@ -1755,14 +1755,14 @@ HTML;
 
     }
     public function saveSharePoll(){
-        M("xiezhuang_polldata")->where(array('id' => 1))->setInc('sharenumber');
+        M("motianlun_polldata")->where(array('id' => 1))->setInc('sharenumber');
     }
     /*
     * 记录 我也要参加 次数
     */
     public function saveWantJoin(){
         $uid = $_POST['uid'];
-        M("xiezhuang")->where(array('id' => $uid ))->setInc('joins');
+        M("motianlun")->where(array('id' => $uid ))->setInc('joins');
     }
 
     /*
@@ -1780,14 +1780,14 @@ HTML;
         $toOpenId = $_POST['toopenid'];
         $uid = $_POST['uid'];
         $userOpenId = cookie('user_openid');
-        $voteList = M('xiezhuang_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toOpenId))->find();
+        $voteList = M('motianlun_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toOpenId))->find();
 
         //多次投票开启
         if(!$voteList){
 //        if(true){
         //多次投票结束
-            $info = M('xiezhuang')->where(array('id' => $uid))->find();
-            M("xiezhuang")->where(array('id' => $info['id']))->setInc('vote');
+            $info = M('motianlun')->where(array('id' => $uid))->find();
+            M("motianlun")->where(array('id' => $info['id']))->setInc('vote');
 
             //投票
             $d = array();
@@ -1795,7 +1795,7 @@ HTML;
             $d['toopenid'] = $toOpenId;
             $d['sequence'] = $info['sequence'];
             $d['createtime'] = time();
-            M('xiezhuang_votelist')->add($d);
+            M('motianlun_votelist')->add($d);
             $return = 1;
         }
         echo $return;
@@ -1818,7 +1818,7 @@ HTML;
         $appsecret = "79311ea02ea318af5f228492bf119104";
 
         $openId = $_COOKIE['openid'];
-        $url = $this->url."/index.php?g=Wap&m=Xiezhuang&a=index";
+        $url = $this->url."/index.php?g=Wap&m=Motianlun&a=index";
         if(!$openId){
             $code =  $_GET['code'];
             $state = $_GET['state'];
@@ -1939,7 +1939,7 @@ HTML;
                     $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                     if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                         //code 有错误 需要重定向
-                        $url = $this->url."/index.php?g=Wap&m=Xiezhuang&a=getOpenId";
+                        $url = $this->url."/index.php?g=Wap&m=Motianlun&a=getOpenId";
                         header("location:$url");
                     }
                     $m['id'] = $apidata['id'];
@@ -1954,7 +1954,7 @@ HTML;
 
             }
         } else {
-            $url = urlencode($this->url."/index.php?g=Wap&m=Xiezhuang&a=getOpenId");
+            $url = urlencode($this->url."/index.php?g=Wap&m=Motianlun&a=getOpenId");
             header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
             exit;
         }
