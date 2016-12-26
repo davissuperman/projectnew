@@ -138,7 +138,7 @@ HTML;
         }
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
-//        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         $fansInfo = null;
         $selfUserInfo = array();
         $fansInfo = M('customer_service_fans')->field('openid,nickname,headimgurl')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
@@ -533,7 +533,7 @@ HTML;
     public function share(){
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
-//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $gid = $_GET['gid'];
         if(!$gid){
             $gid = $this->defalutGid;
@@ -1265,6 +1265,132 @@ HTML;
             $return = 2;
         }
         echo $return;
+    }
+
+    public function test(){
+        $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
+        echo $teDengJiangCount;
+    }
+
+    public function saveDraw(){
+        $this->setEndTime();
+        $return = 0;
+        $paiming = null;
+        $prize = null;
+        $returnMessage = null;
+        $fromOpenIdFromPost= cookie('user_openid');
+        $fromOpenIdFromPost = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+        $info = M('motianlun')->where(array('openid' => $fromOpenIdFromPost))->find();
+        if(!$info){
+            exit;
+        }
+        //查看当前的用户的名次
+        $number = $info['number'];
+
+        //用户是否已经获得奖
+        $prize = $info['prize'];
+
+        //查看抽奖次数
+        $drawCount = $info['draw'];
+        $voteCount = $info['vote'];
+
+        //还未抽奖
+        if(!$prize){
+            if(!$drawCount){
+                //第一次抽
+                $p = array();
+                $p['uid'] =  $info['id'];
+                $p['position'] =  1;
+                $paiming = M('motianlun_drawlist')->add($p);
+
+
+
+                $prize = $this->whetherDraw($paiming);
+                if($prize == 1){
+                    //查看已经有多少人获取了特等奖 最多10个
+                    $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
+                    if($teDengJiangCount<=9){
+                        M('motianlun_jiang')->where('id=1')->setInc('tedengjiang');
+                        $returnMessage = "你已中特等奖";
+                    }else{
+                        $prize = 3;//本应获得特等奖 但是 奖没了
+                    }
+
+                }elseif($prize == 2){
+                    $yiDengJiangCount =  M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
+                    if($yiDengJiangCount <= 999){
+                        M('motianlun_jiang')->where('id=1')->setInc('yidengjiang');
+                        $returnMessage = "你已中一等奖";
+                    }else{
+                        $prize = 4;//本应获得一等奖 但是 奖没了
+                    }
+                }else {
+                    $returnMessage = "请继续还有一次机会";
+                }
+                $i = array();
+                $i['id'] = $info['id'];
+                $i['rank1'] = $paiming;
+                $i['prize'] = $prize;
+                $i['draw'] = 1;
+                M('motianlun')->save($i);
+            }elseif($drawCount == 1){
+                //第二次抽奖
+                $p = array();
+                $p['uid'] =  $info['id'];
+                $p['position'] =  1;
+                $paiming = M('motianlun_drawlist')->add($p);
+
+                $prize = $this->whetherDraw($paiming);
+
+
+                if($prize == 1){
+                    $returnMessage = "你已中特等奖";
+                    $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
+                    if($teDengJiangCount<=9){
+                        M('motianlun_jiang')->where('id=1')->setInc('tedengjiang');
+                        $returnMessage = "你已中特等奖";
+                        $i = array();
+                        $i['id'] = $info['id'];
+                        $i['rank2'] = $paiming;
+                        $i['prize'] = $prize;
+                        $i['draw'] = 2;
+                        M('motianlun')->save($i);
+                    }
+
+                }elseif($prize == 2){
+                    $returnMessage = "你已中一等奖";
+                    $yiDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
+                    if($yiDengJiangCount <= 999){
+                        M('motianlun_jiang')->where('id=1')->setInc('yidengjiang');
+                        $returnMessage = "你已中一等奖";
+                        $i = array();
+                        $i['id'] = $info['id'];
+                        $i['rank1'] = $paiming;
+                        $i['prize'] = $prize;
+                        $i['draw'] = 2;
+                        M('motianlun')->save($i);
+                    }
+                }else {
+                    $returnMessage = "你没有机会了";
+                }
+            }else if($drawCount == 2){
+                //第三次抽奖
+
+            }
+
+        }
+
+        echo $prize;
+    }
+
+    function whetherDraw($paiming){
+        $return = null;
+        if(strrchr((string)"$paiming","66") == "66"){
+            $return = 1;
+        }if(strrchr((string)"$paiming","7") == "7"){
+            $return = 2;
+        }
+        return $return;
     }
     //TODO add random str to avoid auto submit
     public function saveVote(){
