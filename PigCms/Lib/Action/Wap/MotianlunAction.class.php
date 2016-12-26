@@ -138,7 +138,7 @@ HTML;
         }
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
-        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+//        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         $fansInfo = null;
         $selfUserInfo = array();
         $fansInfo = M('customer_service_fans')->field('openid,nickname,headimgurl')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
@@ -206,9 +206,11 @@ HTML;
             $vote = $info['vote'];
             $views = $info['views'];
         }
+        //如果VOTE未满5票 调到分享引导页P3
 
-        if($vote>=1){
-
+        if($vote<5){
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&shareclick=1");
+            exit();
         }else{
             if($views == 0){
                 //此用户不存在
@@ -242,6 +244,19 @@ HTML;
 
         $this->assign("vote",$vote);
         $this->assign("gid",$gid);
+
+        //当前用户是否获得奖项
+        $prize = $info['prize'];
+        if($prize == 1){//特等奖
+
+        }elseif($prize == 2){//一等奖
+
+        }else{//暂时未中奖
+            $draw = $info['draw'];
+            //第几次抽奖
+        }
+
+
         $this->display();
     }
 
@@ -663,6 +678,11 @@ HTML;
         $this->assign("gid",$gid);
         $this->assign("uid",$info['id']);
         $this->assign("mainopenid",$userOpenId);
+        $shareDivShow = 0;
+        if(isset($_GET['shareclick']) && $_GET['shareclick'] == 1){
+            $shareDivShow = 1;
+        }
+        $this->assign("sharedivshow",$shareDivShow);
         $this->display();
     }
 
