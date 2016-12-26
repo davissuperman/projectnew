@@ -218,13 +218,30 @@
     });
     function clickVote(){
         $("#btn-vote").bind('click',function(){
-            Pop.alerts("恭喜您投票成功！距抽奖还差X票,赶快点击“邀请好友助力”好运来!");
-            $("#confirms").bind('click',function(){
-                goPage();
-            });
-            setTimeout(function(){
-                goPage();
-            },5000);
+            $.post(
+                    "{pigcms::$siteurl}/index.php?g=Wap&m=Motianlun&a=saveVote",
+                    {uid: "{pigcms::$uid}"},
+                    function (data) {
+                        if (data != '') {
+                            if(data == 1){
+                                Pop.alerts("恭喜您投票成功！距抽奖还差X票,赶快点击“邀请好友助力”好运来!");
+                                $("#confirms").bind('click',function(){
+                                    goPage();
+                                });
+                                setTimeout(function(){
+                                    goPage();
+                                },5000);
+                            }else if(data == 2){
+                                Pop.alerts('已投过');
+                            }
+
+                        }else{
+
+                        }
+                    });
+
+
+
         });
     }
 
