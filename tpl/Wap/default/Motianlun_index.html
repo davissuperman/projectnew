@@ -249,10 +249,9 @@
                     function (data) {
                         var dataObj=eval("("+data+")");//转换为json对象
                         var returnCode = dataObj[0];
-                        var leftVote = dataObj[0];
-                        return;
+                        var leftVote = dataObj[1];
                         if (returnCode != '') {
-                            if(returnCode == 1){
+                            if(returnCode == '1'){
                                 Pop.alerts("恭喜您投票成功！距抽奖还差"+leftVote+"票,赶快点击“邀请好友助力”好运来!");
                                 $("#confirms").bind('click',function(){
                                     goPage();
