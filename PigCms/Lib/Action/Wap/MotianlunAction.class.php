@@ -10,6 +10,7 @@ class MotianlunAction extends SjzAction {
     public $debug = true; //上线后应该改成false
     public $defalutGid = 110;
     public $motianlunCount = 20;
+    public $teDengJiangCount = 10;
 
     public function _initialize() {
         parent :: _initialize();
@@ -208,15 +209,7 @@ HTML;
         }
         //如果VOTE未满5票 调到分享引导页P3
 
-        if($vote<5){
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&shareclick=1");
-            exit();
-        }else{
-            if($views == 0){
-                //此用户不存在
-                $lastInsertId = $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
-            }
-        }
+        $this->haveFinishThreeOrHavePrizeOrVoteSmallThanFive($info,false,true);
 
         //begin 分享出去的URL
         list($ticket,$appId,$testgid) = $this->getDiymenSet();
@@ -260,126 +253,6 @@ HTML;
         $this->display();
     }
 
-    public function game(){
-        $this->setEndTime();
-        $userOpenId= cookie('user_openid');
-//        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
-        if(!$userOpenId){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
-            exit();
-        }
-
-        //首先判断当前用户是否有玩过第一次
-        $info = M('Motianlun')->where(array('openid' => $userOpenId))->find();
-        $gid = $info['gid'];
-
-        //begin 分享出去的URL
-        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
-        $noncestr = "Wm3WZYTPz0wzccnW";
-        $timestamp = time();
-        $url = $this->get_url();;
-        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
-        $signature = sha1($str);
-        $this->assign("appid",$appId);
-        $this->assign("timestamp",$timestamp);
-        $this->assign("nonceStr",$noncestr);
-        $this->assign("signature",$signature);
-        $this->assign("shareurl",$this->getShareUrl());
-        $this->assign('gid', $gid);
-
-        $this->assign('title',$info['name'].$this->title);
-        $this->assign('bonusdesc',$this->bonusdesc);
-        $this->assign("imageUrl",$this->imageUrl);
-        $this->assign("shareimageurl",$this->shareImageUrl);
-        //end
-
-        $this->setIncViews($info['id']);
-        //判断用户是否上传过图片
-        $savePath = './PUBLIC/imagess/';
-        $t = $info['uploadimagetime'];
-        $uploadImageSrc = $savePath ."$userOpenId"."_$t".".jpeg";
-        $uploadImage = 0;
-        if(file_exists($uploadImageSrc)){
-            $uploadImage = 1;
-        }
-        $this->assign("uploadimage",$uploadImage);
-        $this->assign('uploadimagesrc',$uploadImageSrc);
-        $this->assign("gid",$gid);
-        $this->display();
-    }
-
-//    public function saveImage(){
-//        $img = $_POST['image'];
-//        $savePath = './PUBLIC/imagess/';
-//
-//        $base64_body = substr(strstr($img,','),1);
-//        $userOpenId= cookie('user_openid');
-//
-//        $data= base64_decode($base64_body );
-//
-//
-//        //保存uploadimagetime
-//        $uid = $this->getUidByOpenid($userOpenId);
-//        $t = time();
-//        if($uid){
-//            $n = array();
-//            $n['id'] = $uid;
-//            $n['uploadimagetime'] = time();
-//            M("Motianlun")->save($n);
-//        }
-//        $file = $savePath ."$userOpenId"."_$t".".jpeg";
-//       echo  file_put_contents($file, $data);
-//    }
-
-    public function game1(){
-        $this->setEndTime();
-        $userOpenId= cookie('user_openid');
-      //  $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
-        if(!$userOpenId){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
-            exit();
-        }
-
-        //首先判断当前用户是否有玩过第一次
-        $info = M('Motianlun')->where(array('openid' => $userOpenId))->find();
-        $gid = $info['gid'];
-        //begin 分享出去的URL
-        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
-        $noncestr = "Wm3WZYTPz0wzccnW";
-        $timestamp = time();
-        $url = $this->get_url();;
-        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
-        $signature = sha1($str);
-        $this->assign("appid",$appId);
-        $this->assign("timestamp",$timestamp);
-        $this->assign("nonceStr",$noncestr);
-        $this->assign("signature",$signature);
-        $this->assign("shareurl",$this->getShareUrl());
-        $this->assign('gid', $gid);
-
-        $this->assign('title',$info['name'].$this->title);
-        $this->assign('bonusdesc',$this->bonusdesc);
-        $this->assign("imageUrl",$this->imageUrl);
-        $this->assign("shareimageurl",$this->shareImageUrl);
-        //end
-
-        //begin views
-        if($info){
-            $this->setIncViews($info['id']);
-        }
-
-        $vote = $info['vote'];
-        $leftVote = $this->motianlunCount  - $vote;
-        if($leftVote<=0){
-            $leftVote = 0;
-        }
-        // end views
-        $this->assign("gid",$gid);
-        $this->assign("leftvote",$leftVote);
-        $this->display();
-    }
 
     public function success(){
         $this->setEndTime();
@@ -545,6 +418,32 @@ HTML;
         $this->assign("gid",$gid);
         $this->display();
     }
+
+    public function haveFinishThreeOrHavePrizeOrVoteSmallThanFive($info,$shareSelf = false,$indexSelf=false){
+        if(!$info && !$indexSelf){
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
+            exit();
+        }
+        $vote = $info['vote'];
+        if($vote<5 && !$shareSelf){
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&shareclick=1");
+            exit();
+        }
+        $prize = $info['prize'];
+        $draw = $info['draw'];
+        if($prize == 1 || $prize == 2){//特等奖 or 一等奖
+            //redirect
+            $url = "http://mp.weixin.qq.com/s/Cqw5hmJtxCrgvyUaVZNEyw";
+            header("location:$url");
+            exit();
+        }else{
+            if($draw == 3){
+                $url = "http://mp.weixin.qq.com/s/o4Vu9MOSe2dYaUgxV77Dew";
+                header("location:$url");
+                exit();
+            }
+        }
+    }
     public function share(){
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
@@ -566,15 +465,6 @@ HTML;
             exit();
         }
         $gid = $info['gid'];
-        //图片是否存在
-//        $savePath = './PUBLIC/imagess/';
-//        $t = $info['uploadimagetime'];
-//        $uploadImageSrc= $savePath."$userOpenId"."_$t".".jpeg";
-//        if(!file_exists($uploadImageSrc)){
-//            //redirect
-//            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
-//            exit();
-//        }
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
@@ -594,51 +484,14 @@ HTML;
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
-        $m = array();
-        $m['id'] = $info['id'];
-        $m['click'] = 1;
-        M('motianlun')->save($m);
-        //begin views
         if($info){
             $this->setIncViews($info['id']);
         }
         // end views
-
-
-        //获取当前已经有了多少拼图
-        $imgNums = (int)$this->motianlunCount;
         $vote = $info['vote'];
         $share = $info['share'];
-        $imgNums = (int)$this->motianlunCount - $vote;
-        if($vote >= $this->motianlunCount && !$info['phone']){
-            //这里有错误，需要报错，不应该达到票数 但是没有名词
-//            跳转到sharephone
-//            redirect
-//            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=sharephone&gid=$gid");
-//            exit();
-        }
-        if($vote >= $this->motianlunCount && $info['phone']){
-            //form 信息是否已经提交
-            $award = M('motianlun_award')->where(array('openid' => $userOpenId))->find();
-            if($award){
-                //已经提交
-                header("location:$this->url/index.php?g=Wap&m=Motianlun&a=sharephone&gid=$gid");
-                exit();
-            }else{
-                header("location:$this->url/index.php?g=Wap&m=Motianlun&a=sharephone&gid=$gid");
-                exit();
-            }
-
-        }
-
-        if($imgNums < 0 ){
-            $imgNums = 0;
-        }
-        $this->assign('imgnums',$imgNums);
-        if($vote == 0){
-            $vote = 0;
-        }
-        $this->assign('needimgnums',$vote);
+        $prize = $info['prize'];
+        $this->haveFinishThreeOrHavePrizeOrVoteSmallThanFive($info,true);
 
         //当天是否访问过
         $today = time();
@@ -683,6 +536,7 @@ HTML;
             $shareDivShow = 1;
         }
         $this->assign("sharedivshow",$shareDivShow);
+        $this->assign("teDengJiangCount",$this->teDengJiangCount);
         $this->display();
     }
 
