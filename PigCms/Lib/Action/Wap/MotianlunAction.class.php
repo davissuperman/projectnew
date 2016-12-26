@@ -492,7 +492,8 @@ HTML;
                     header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&shareclick=1");
                     exit();
                 }else{
-                    // TODO
+                    header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share");
+                    exit();
                 }
             }else{
                 return;
