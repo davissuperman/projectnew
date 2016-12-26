@@ -93,10 +93,10 @@ class MotianlunAction extends SjzAction {
     }
 
     public function saveInfo($gid,$openId,$nickname,$imageProfile){
-        if($gid < 110 || $gid > 120){
-            Log :: write( $openId."  ".$nickname." $gid 不存在" ,'ERR','','test.log');
-            return null;
-        }
+//        if($gid < 110 || $gid > 120){
+//            Log :: write( $openId."  ".$nickname." $gid 不存在" ,'ERR','','test.log');
+//            return null;
+//        }
         //首先查看此OPENID 是否存在 无论gid
         $bonusInfo = M('motianlun')->where(array('openid' => $openId))->find();
         $lastInsertId = null;
@@ -213,6 +213,10 @@ HTML;
             $lastInsertId = $info['id'];
             $vote = $info['vote'];
             $views = $info['views'];
+        }else{
+            //此用户不存在
+            $lastInsertId = $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
+            $info = M('Motianlun')->where(array('openid' => $userOpenId))->find();
         }
         //如果VOTE未满5票 调到分享引导页P3
         $this->haveFinishThreeOrHavePrizeOrVoteSmallThanFive($info,false,true);
