@@ -895,8 +895,8 @@ HTML;
         if($userOpenId == $MainOpenId){
             //自己访问自己的主页 跳转到share页面
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&gid=$gid");
-            exit();
+//            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&gid=$gid");
+//            exit();
         }
         $voteListSql = "SELECT * from tp_motianlun_votelist where fromopenid='$userOpenId' and toopenid='$MainOpenId'";
         $voteView = M('motianlun_votelist')->query($voteListSql);
@@ -905,11 +905,11 @@ HTML;
             $infoLocal = M('motianlun')->where(array('openid' => $userOpenId))->find();
             if($infoLocal){
                 if($infoLocal['click'] == 1){
-                    header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&gid=$gid");
+//                    header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&gid=$gid");
                     exit();
                 }else{
-                    header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
-                    exit();
+//                    header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
+//                    exit();
                 }
             }
 
@@ -949,7 +949,7 @@ HTML;
         $vote = $info['vote'];
         if($vote >= $this->motianlunCount && $userOpenId != $MainOpenId ){
             //当前主页已经为20票， 跳转首页
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
+//            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
             exit();
         }
 
@@ -957,7 +957,7 @@ HTML;
         if($vote >= $this->motianlunCount && $userOpenId==$MainOpenId){
             //跳转到sharephone
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=sharephone&gid=$gid");
+//            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=sharephone&gid=$gid");
             exit();
         }
         if($imgNums < 0 ){
@@ -1233,7 +1233,8 @@ HTML;
         //检查此 local openid 是否投过票
         $voteList = M('motianlun_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
         //多次投票
-        if(!$voteList){
+//        if(!$voteList){
+        if(true){
             //投票
             $d = array();
             $d['fromopenid'] = $fromOpenIdFromPost;
