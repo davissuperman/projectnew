@@ -149,7 +149,7 @@
 </div>
 
 <div class="prize-box prize-box-index">
-    <p>特等奖: <span>10</span>名 奖森田面膜20盒</p>
+    <p>特等奖: <span>{pigcms::$teDengJiangCount}</span>名 奖森田面膜20盒</p>
     <p>一等奖:<span>1000</span>名 奖森田面膜或眼膜一盒,随即发放</p>
     <p class="rule">评比规则:您共有三次抽奖机会,集齐5票抽奖一次, 具体请见活动详情.面膜或眼膜每盒含4-5片,随机发放,以收到的实物为准 !</p>
 </div>
@@ -161,8 +161,8 @@
     <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Motianlun&a=rule" title="活动规则" class="btn-rule">活动规则</a>
 </div>
 <ul class="need-vote-panel">
-    <li>还差<span id="need-ticket">0</span>票即可抽奖</li>
-    <li>您还有<span id="need-times">2</span>次抽奖机会</li>
+    <li>还差<span id="need-ticket">{pigcms::$leftVote}</span>票即可抽奖</li>
+    <li>您还有<span id="need-times">{pigcms::$leftDraw}</span>次抽奖机会</li>
 </ul>
 
 
@@ -170,7 +170,7 @@
 <div class="common-people"></div>
 <dl class="common-step">
     <dt>奖池剩余</dt>
-    <dd>森田奖品特等奖<strong>X</strong>份，一等奖<strong>XXX</strong>份（由于可能存在数据延时问题，所以奖池剩余数据仅供参考，特此告知！）</dd>
+    <dd>森田奖品特等奖<strong>{pigcms::$leftTeDengJiang}</strong>份，一等奖<strong>{pigcms::$leftYiDengJiang}</strong>份（由于可能存在数据延时问题，所以奖池剩余数据仅供参考，特此告知！）</dd>
 </dl>
 
 
@@ -247,16 +247,20 @@
                     "{pigcms::$siteurl}/index.php?g=Wap&m=Motianlun&a=saveVote",
                     {uid: "{pigcms::$uid}"},
                     function (data) {
-                        if (data != '') {
-                            if(data == 1){
-                                Pop.alerts("恭喜您投票成功！距抽奖还差X票,赶快点击“邀请好友助力”好运来!");
+                        var dataObj=eval("("+data+")");//转换为json对象
+                        var returnCode = dataObj[0];
+                        var leftVote = dataObj[0];
+                        return;
+                        if (returnCode != '') {
+                            if(returnCode == 1){
+                                Pop.alerts("恭喜您投票成功！距抽奖还差"+leftVote+"票,赶快点击“邀请好友助力”好运来!");
                                 $("#confirms").bind('click',function(){
                                     goPage();
                                 });
                                 setTimeout(function(){
                                     goPage();
                                 },5000);
-                            }else if(data == 2){
+                            }else if(returnCode == 2){
                                 Pop.alerts('已投过');
                             }
 

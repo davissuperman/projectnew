@@ -9,8 +9,15 @@ class MotianlunAction extends SjzAction {
     public $endtime="2017-01-30 23:59:59"; //活动结束时间
     public $debug = true; //上线后应该改成false
     public $defalutGid = 110;
-    public $motianlunCount = 20;
+
+
+
+    //motianlun
+    public $motianlunCount = 15;
     public $teDengJiangCount = 10;
+    public $yiDengJiangCount = 1000;
+    public $eachChouJiangVote = 5;
+    public $totalChouJiangVote = 15;
 
     public function _initialize() {
         parent :: _initialize();
@@ -208,7 +215,6 @@ HTML;
             $views = $info['views'];
         }
         //如果VOTE未满5票 调到分享引导页P3
-
         $this->haveFinishThreeOrHavePrizeOrVoteSmallThanFive($info,false,true);
 
         //begin 分享出去的URL
@@ -238,22 +244,51 @@ HTML;
         $this->assign("vote",$vote);
         $this->assign("gid",$gid);
 
-        //当前用户是否获得奖项
-        $prize = $info['prize'];
-        if($prize == 1){//特等奖
+        $this->assign("teDengJiangCount",$this->teDengJiangCount);
 
-        }elseif($prize == 2){//一等奖
+        $draw = $info['draw'];
+        $leftVote = 0;
+        $leftDraw = 3 - $draw;
 
-        }else{//暂时未中奖
-            $draw = $info['draw'];
-            //第几次抽奖
+        $leftVote = $this->getLeftVote($draw,$vote);
+        if($leftVote < 0 ){
+            $leftVote = 0;
         }
+        if($leftDraw < 0 ){
+            $leftDraw = 0;
+        }
+        $this->assign("leftVote",$leftVote);
+        $this->assign("leftDraw",$leftDraw);
 
-
+        $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
+        $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
+        if($leftTeDengJiang < 0 ){
+            $leftTeDengJiang = 0;
+        }
+        $leftYiDengJiang = $this->yiDengJiangCount - $teDengJiangCount;
+        if($leftYiDengJiang < 0 ){
+            $leftYiDengJiang = 0;
+        }
+        $this->assign("leftTeDengJiang",$leftTeDengJiang);
+        $this->assign("leftYiDengJiang",$leftYiDengJiang);
         $this->display();
     }
 
+    public function getLeftVote($draw,$vote){
+        $leftVote = 0;
+        if($draw == 0){
+            //还未抽过奖
+            $leftVote = $this->eachChouJiangVote - $vote;
 
+        }elseif($draw == 1){
+            //已经抽过一次奖了
+            $leftVote = $this->eachChouJiangVote*2 - $vote;
+        }elseif($draw == 2){
+            //已经抽过二次奖了
+            $leftVote = $this->eachChouJiangVote*3 - $vote;
+        }
+        return $leftVote;
+    }
     public function success(){
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
@@ -420,13 +455,10 @@ HTML;
     }
 
     public function haveFinishThreeOrHavePrizeOrVoteSmallThanFive($info,$shareSelf = false,$indexSelf=false){
+        $vote = $info['vote'];
+
         if(!$info && !$indexSelf){
             header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
-            exit();
-        }
-        $vote = $info['vote'];
-        if($vote<5 && !$shareSelf){
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&shareclick=1");
             exit();
         }
         $prize = $info['prize'];
@@ -443,6 +475,30 @@ HTML;
                 exit();
             }
         }
+
+        if($indexSelf){
+            //首先查看是否为自己投过票
+            $userOpenId= cookie('user_openid');
+           // $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+            $voteListSql = "SELECT id from tp_motianlun_votelist where fromopenid='$userOpenId' and toopenid='$userOpenId'";
+            $voteView = M('motianlun_votelist')->query($voteListSql);
+            if($voteView){
+                //已经为自己投过票
+                if($vote<5 ){
+                    header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&shareclick=1");
+                    exit();
+                }else{
+                    // TODO
+                }
+            }else{
+                return;
+            }
+        }
+        if($vote<5 && !$shareSelf){
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&shareclick=1");
+            exit();
+        }
+
     }
     public function share(){
         $this->setEndTime();
@@ -505,14 +561,6 @@ HTML;
         $uniqueViewlist = M('motianlun_votelist')->query($uniqueViewSql);
         $haveVoted = 0;
 
-        //多次投票开启
-        if($uniqueViewlist){
-            $haveVoted = 1;
-            //自己已经给自己投过票，但是未满20票 跳转到分享引导页
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share2&gid=$gid");
-            exit();
-        }
-        //多次投票结束
 
         $this->assign('sharenumberindatabase',$share);
         $this->assign('havevoted',$haveVoted);
@@ -537,6 +585,33 @@ HTML;
         }
         $this->assign("sharedivshow",$shareDivShow);
         $this->assign("teDengJiangCount",$this->teDengJiangCount);
+
+        $draw = $info['draw'];
+        $leftVote = 0;
+        $leftDraw = 3 - $draw;
+
+        $leftVote = $this->getLeftVote($draw,$vote);
+        if($leftVote < 0 ){
+            $leftVote = 0;
+        }
+        if($leftDraw < 0 ){
+            $leftDraw = 0;
+        }
+        $this->assign("leftVote",$leftVote);
+        $this->assign("leftDraw",$leftDraw);
+
+        $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
+        $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
+        if($leftTeDengJiang < 0 ){
+            $leftTeDengJiang = 0;
+        }
+        $leftYiDengJiang = $this->yiDengJiangCount - $teDengJiangCount;
+        if($leftYiDengJiang < 0 ){
+            $leftYiDengJiang = 0;
+        }
+        $this->assign("leftTeDengJiang",$leftTeDengJiang);
+        $this->assign("leftYiDengJiang",$leftYiDengJiang);
+
         $this->display();
     }
 
@@ -1153,7 +1228,7 @@ HTML;
         $prize = null;
         $returnMessage = null;
         $fromOpenIdFromPost= cookie('user_openid');
-        $fromOpenIdFromPost = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+     //   $fromOpenIdFromPost = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         $info = M('motianlun')->where(array('openid' => $fromOpenIdFromPost))->find();
         if(!$info){
             exit;
@@ -1270,8 +1345,9 @@ HTML;
     public function saveVote(){
         $this->setEndTime();
         $return = 0;
+        $leftVote = 0;
         $fromOpenIdFromPost= cookie('user_openid');
-//        $fromOpenIdFromPost = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+     //   $fromOpenIdFromPost = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         $toOpenIdFromPost = $fromOpenIdFromPost;
         //检查此 local openid 是否投过票
         $voteList = M('motianlun_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
@@ -1284,28 +1360,17 @@ HTML;
             M('motianlun_votelist')->add($d);
             M("motianlun")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
             $info = M('motianlun')->where(array('openid' => $fromOpenIdFromPost))->find();
-            if($info['vote'] >= $this->motianlunCount  && !$info['phone']){
-                $pUid = $info['id'];
-                $phoneList = M('motianlun_phonelist')->where(array('uid' => $pUid))->find();
-                if(!$phoneList){
-                    $p = array();
-                    $p['uid'] =  $info['id'];
-                    $p['phone'] =  1;
-                    $p['createtime'] =  time();
-                    $paiming = M('motianlun_phonelist')->add($p);
-                    $i = array();
-                    $i['id'] = $info['id'];
-                    $i['phone'] = 1;
-                    M('motianlun')->save($i);
-                }
+            if(!$info){
+                exit;
             }
+            $leftVote = $this->getLeftVote($info['draw'],$info['vote']);
             $return = 1;
         }else{
             //已经投过票
             $return = 2;
         }
-
-        echo $return;
+        $arrTmp = array($return,$leftVote);
+        echo json_encode($arrTmp);
     }
     public function savePoll(){
         $this->setEndTime2();

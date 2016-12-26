@@ -152,14 +152,14 @@
     <p>一等奖:<span>1000</span>名 奖森田面膜或眼膜一盒,随即发放</p>
 </div>
 <div class="btns-box btns-box-share">
-    <div class="need-vote">还差<span>2</span>票</div>
+    <div class="need-vote">还差<span>{pigcms::$leftVote}</span>票</div>
     <a href="javascript:;" title="邀请好友助力" class="btn-out btn-share">邀请好友助力
         <div class="share-notice" id="share-notice"></div>
     </a>
 </div>
 <ul class="need-vote-panel">
-    <li>还差<span id="need-ticket">2</span>票即可抽奖</li>
-    <li>您还有<span id="need-times">3</span>次抽奖机会</li>
+    <li>还差<span id="need-ticket">{pigcms::$leftVote}</span>票即可抽奖</li>
+    <li>您还有<span id="need-times">{pigcms::$leftDraw}</span>次抽奖机会</li>
 </ul>
 
 
@@ -167,7 +167,7 @@
 <div class="common-people"></div>
 <dl class="common-step">
     <dt>奖池剩余</dt>
-    <dd>森田奖品特等奖<strong>X</strong>份，一等奖<strong>XXX</strong>份（由于可能存在数据延时问题，所以奖池剩余数据仅供参考，特此告知！）</dd>
+    <dd>森田奖品特等奖<strong>{pigcms::$leftTeDengJiang}</strong>份，一等奖<strong>{pigcms::$leftYiDengJiang}</strong>份（由于可能存在数据延时问题，所以奖池剩余数据仅供参考，特此告知！）</dd>
 </dl>
 
 
