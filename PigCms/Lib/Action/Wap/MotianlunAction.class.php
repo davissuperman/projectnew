@@ -138,7 +138,7 @@ HTML;
         }
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
-        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+//        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         $fansInfo = null;
         $selfUserInfo = array();
         $fansInfo = M('customer_service_fans')->field('openid,nickname,headimgurl')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
