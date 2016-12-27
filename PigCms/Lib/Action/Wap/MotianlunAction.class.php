@@ -852,7 +852,7 @@ HTML;
 
         //还未抽奖
         if(!$prize){
-            if(!$drawCount){
+            if(!$drawCount && $voteCount>=5){
                 //第一次抽
                 $p = array();
                 $p['uid'] =  $info['id'];
@@ -898,7 +898,7 @@ HTML;
                 $i['prize'] = $prize;
                 $i['draw'] = 1;
                 M('motianlun')->save($i);
-            }elseif($drawCount == 1){
+            }elseif($drawCount == 1 &&  $voteCount>=10){
                 //第二次抽奖
                 $p = array();
                 $p['uid'] =  $info['id'];
@@ -940,7 +940,7 @@ HTML;
                 $i['prize'] = $prize;
                 $i['draw'] = 2;
                 M('motianlun')->save($i);
-            }else if($drawCount == 2){
+            }else if($drawCount == 2  && $voteCount>= 15){
                 //第三次抽奖
                 $i['id'] = $info['id'];
                 $i['draw'] = 3;
