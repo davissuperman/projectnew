@@ -616,6 +616,7 @@ HTML;
         }
         $this->assign("leftTeDengJiang",$leftTeDengJiang);
         $this->assign("leftYiDengJiang",$leftYiDengJiang);
+        $this->assign("draw",$draw);
 
         $this->display();
     }
