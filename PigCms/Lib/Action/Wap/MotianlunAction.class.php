@@ -870,6 +870,7 @@ HTML;
                         $returnMessage = "恭喜抽中特等奖！";
                     }else{
                         $prize = 3;//本应获得特等奖 但是 奖没了
+                        $returnMessage = "未中奖";
                     }
 
                 }elseif($prize == 2){
@@ -879,6 +880,7 @@ HTML;
                         $returnMessage = "恭喜抽中一等奖！";
                     }else{
                         $prize = 4;//本应获得一等奖 但是 奖没了
+                        $returnMessage = "未中奖";
                     }
                 }else {
                     $returnMessage = "未中奖";
@@ -903,8 +905,6 @@ HTML;
                 $p['position'] =  1;
                 $paiming = M('motianlun_drawlist')->add($p);
                 $prize = $this->whetherDraw($paiming);
-
-
                 if($prize == 1){
                     $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
                     if($teDengJiangCount<=9){
@@ -912,6 +912,7 @@ HTML;
                         $returnMessage = "恭喜抽中特等奖！";
                     }else{
                         $prize = 3;//本应获得特等奖 但是 奖没了
+                        $returnMessage = "未中奖";
                     }
 
                 }elseif($prize == 2){
@@ -921,6 +922,7 @@ HTML;
                         $returnMessage = "恭喜抽中一等奖！";
                     }else{
                         $prize = 4;//本应获得一等奖 但是 奖没了
+                        $returnMessage = "未中奖";
                     }
                 }else {
                     $returnMessage = "未中奖";
@@ -948,7 +950,7 @@ HTML;
             }
         }
 
-        echo $returnMessage;
+        echo json_encode(array($returnMessage,$prize,$drawCount+1)) ;
     }
 
     function whetherDraw($paiming){
