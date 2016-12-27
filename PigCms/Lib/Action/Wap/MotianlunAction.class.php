@@ -292,6 +292,9 @@ HTML;
             //已经抽过二次奖了
             $leftVote = $this->eachChouJiangVote*3 - $vote;
         }
+        if($leftVote < 0 ){
+            $leftVote = 0;
+        }
         return $leftVote;
     }
     public function success(){
