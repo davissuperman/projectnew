@@ -886,7 +886,7 @@ HTML;
                     $returnMessage = "未中奖<br/>";
                     $yiDengJiangCount =  M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
                     $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
-                    $leftDraw = $this->totalDrawCount - $drawCount;
+                    $leftDraw = $this->totalDrawCount - $drawCount - 1;
                     if($leftDraw < 0 ){
                         $leftDraw = 0;
                     }
@@ -928,7 +928,7 @@ HTML;
                     $returnMessage = "未中奖<br/>";
                     $yiDengJiangCount =  M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
                     $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
-                    $leftDraw = $this->totalDrawCount - $drawCount;
+                    $leftDraw = $this->totalDrawCount - $drawCount - 1;
                     if($leftDraw < 0 ){
                         $leftDraw = 0;
                     }
