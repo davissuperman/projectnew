@@ -219,9 +219,7 @@
                         var returnCode = data;
                         if (returnCode != '') {
                             if(returnCode == '1'){
-                                setTimeout(function(){
-                                    goPage();
-                                },2000);
+                                goPage();
                             }else if(returnCode == '2'){
                                 Pop.alerts('已投过');
                             }
