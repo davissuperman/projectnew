@@ -844,20 +844,6 @@ HTML;
         }
         $voteListSql = "SELECT * from tp_motianlun_votelist where fromopenid='$userOpenId' and toopenid='$MainOpenId'";
         $voteView = M('motianlun_votelist')->query($voteListSql);
-        if($voteView){
-            $haveVoted = 0;
-            $infoLocal = M('motianlun')->where(array('openid' => $userOpenId))->find();
-            if($infoLocal){
-                if($infoLocal['click'] == 1){
-//                    header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&gid=$gid");
-                    exit();
-                }else{
-//                    header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
-//                    exit();
-                }
-            }
-
-        }
 
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
@@ -885,30 +871,6 @@ HTML;
         }
         // end views
 
-
-
-
-        //获取当前已经有了多少拼图
-        $imgNums = (int)$this->motianlunCount;
-        $vote = $info['vote'];
-        if($vote >= $this->motianlunCount && $userOpenId != $MainOpenId ){
-            //当前主页已经为20票， 跳转首页
-//            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
-            exit();
-        }
-
-        $imgNums = (int)$this->motianlunCount - $vote;
-        if($vote >= $this->motianlunCount && $userOpenId==$MainOpenId){
-            //跳转到sharephone
-            //redirect
-//            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=sharephone&gid=$gid");
-            exit();
-        }
-        if($imgNums < 0 ){
-            $imgNums = 0;
-        }
-        $this->assign('imgnums',$imgNums);
-        $this->assign('needimgnums',$vote);
         $this->assign('openid',$userOpenId);
         $this->assign('mainopenid',$MainOpenId);
 
@@ -922,21 +884,46 @@ HTML;
             $voteThisUid = 1;
         }
 
-        //判断COOKIE用户是否参加过活动
-        //如果参见过活动，直接跳转到互动页面，否则是首页
-        $cookieId = M('motianlun')->where("openid='$userOpenId'")->getField('id');
-        $cookieJoin = 0;
-        if($cookieId){
-            $cookieJoin = 1;
-        }
-
         $this->assign('sharenumberindatabase',$share);
-        $this->assign('cookiejoin',$cookieJoin);
         $this->assign('votetothisuid',$voteThisUid);
 
 
         $this->assign('havevoted',$haveVoted);
         $this->assign("gid",$gid);
+
+
+
+        //motianlun
+        $vote = $info['vote'];
+        $this->assign("teDengJiangCount",$this->teDengJiangCount);
+        $this->assign("yiDengJiangCount",$this->yiDengJiangCountDengJiangCount);
+
+        $draw = $info['draw'];
+        $leftVote = 0;
+        $leftDraw = 3 - $draw;
+
+        $leftVote = $this->getLeftVote($draw,$vote);
+        if($leftVote < 0 ){
+            $leftVote = 0;
+        }
+        if($leftDraw < 0 ){
+            $leftDraw = 0;
+        }
+        $this->assign("leftVote",$leftVote);
+        $this->assign("leftDraw",$leftDraw);
+
+        $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
+        $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
+        if($leftTeDengJiang < 0 ){
+            $leftTeDengJiang = 0;
+        }
+        $leftYiDengJiang = $this->yiDengJiangCount - $teDengJiangCount;
+        if($leftYiDengJiang < 0 ){
+            $leftYiDengJiang = 0;
+        }
+        $this->assign("leftTeDengJiang",$leftTeDengJiang);
+        $this->assign("leftYiDengJiang",$leftYiDengJiang);
+
         $this->display();
     }
 
