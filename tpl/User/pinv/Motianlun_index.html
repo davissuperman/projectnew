@@ -19,14 +19,14 @@
                         <div id="choose-date">
 
                             <div class="add-button pull-right">
-                                <a href="{pigcms::U('Xiezhuang/datareport2',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span>每日渠道汇总表</a>
-                                <a href="{pigcms::U('Xiezhuang/datareport',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span>每日数据汇总表</a>
+                                <a href="{pigcms::U('Motianlun/datareport2',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span>每日渠道汇总表</a>
+                                <a href="{pigcms::U('Motianlun/datareport',array('token'=>$token))}" class="btn btn-success"><span class="glyphicon glyphicon-picture"></span>每日数据汇总表</a>
                             </div>
                         </div>
 
                         <div class="add-button pull-right">
 
-                            <form method="post" action="{pigcms::U('Xiezhuang/datareportall',array('token'=>$token))}">
+                            <form method="post" action="{pigcms::U('Motianlun/datareportall',array('token'=>$token))}">
                                 <input type="text" name="start" id="start" value="{pigcms:$start}" onClick="WdatePicker()" class="form-control" style="width:112px"/><span>-</span>
                                 <input type="text" name="end" id="end" value="{pigcms:$end}" onClick="WdatePicker()" class="form-control" style="width:112px"/>
 
@@ -57,7 +57,7 @@
                                         <!--<td>{pigcms:$o.start|date="Y-m-d H:i",###}</td>-->
                                         <td>{pigcms:$o.copy_url}</td>
                                         <td>
-                                            <a href="{pigcms::U('Xiezhuang/slist',array('token'=>$token,'gid'=>$o[cid] ))}"   class="hover-tooltip-edit"><span class="glyphicon glyphicon-user"></span>模版列表</a>
+                                            <a href="{pigcms::U('Motianlun/slist',array('token'=>$token,'gid'=>$o[cid] ))}"   class="hover-tooltip-edit"><span class="glyphicon glyphicon-user"></span>模版列表</a>
                                             <!-- <a href="{pigcms::U('Doing/ulist',array('token'=>$token,'gid'=>$o[gid] ))}"   class="hover-tooltip-edit"><span class="glyphicon glyphicon-user"></span>申请领奖用户</a>-->
                                         </td>
                                     </tr>
