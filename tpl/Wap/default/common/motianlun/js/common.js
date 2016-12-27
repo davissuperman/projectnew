@@ -39,7 +39,8 @@ function changeWheelStatus(){
 	var need_ticket = $need_ticket.html();
 	var need_times = $need_times.html();
 	var needNums = need_times * 5 - (5-need_ticket);
-	if(needNums < 15){
+	//if(needNums < 15){
+	if(need_ticket == 0){
 		$wheel_box.removeClass("opacity-gray");
 		changeLuckDrawStatus(needNums);
 		changeBallStatus(needNums);

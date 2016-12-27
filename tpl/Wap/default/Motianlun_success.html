@@ -9,10 +9,10 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <title>森田新年福利大派送，幸运摩天轮转起来!</title>
-    <link href="{pigcms::RES}/motianlun/css/animate.css?v=201612271501" rel="stylesheet" type="text/css" />
-    <link href="{pigcms::RES}/motianlun/css/common.css?v=201612271501" rel="stylesheet" type="text/css" />
+    <link href="{pigcms::RES}/motianlun/css/animate.css?v=201612271500" rel="stylesheet" type="text/css" />
+    <link href="{pigcms::RES}/motianlun/css/common.css?v=201612271500" rel="stylesheet" type="text/css" />
     <script src="{pigcms::RES}/motianlun/js/zepto.min.js" type="text/javascript"></script>
-    <script src="{pigcms::RES}/motianlun/js/common.js?v=201612271501" type="text/javascript"></script>
+    <script src="{pigcms::RES}/motianlun/js/common.js" type="text/javascript"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
 <script>
     wx.config({
@@ -138,105 +138,27 @@
     });
 </script>
 </head>
-<body id="body">
+<body id="body" style="background:#000;">
 <div class="img-box">
-    <p><img src="{pigcms::RES}/motianlun/images/a/b1.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/motianlun/images/a/b2.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/motianlun/images/a/b3.png" style="width:100%;"/></p>
-    <p><img src="{pigcms::RES}/motianlun/images/a/b4.png" width="100%" /></p>
-    <p><img src="{pigcms::RES}/motianlun/images/a/b5.png" width="100%" /></p>
+    <p><img src="{pigcms::RES}/motianlun/images/a/a1.png" width="100%" /></p>
+    <p><img src="{pigcms::RES}/motianlun/images/a/a2.png" width="100%" /></p>
+    <p><img src="{pigcms::RES}/motianlun/images/a/a3.png" width="100%"/></p>
+    <p><img src="{pigcms::RES}/motianlun/images/a/a4.png" width="100%" /></p>
+    <p><img src="{pigcms::RES}/motianlun/images/a/a5.png" width="100%" /></p>
+    <p><img src="{pigcms::RES}/motianlun/images/a/a6.png" width="100%" /></p>
 </div>
 
-<div class="prize-box prize-box-index">
-    <p>特等奖: <span>{pigcms::$teDengJiangCount}</span>名 奖森田面膜20盒</p>
-    <p>一等奖:<span>{pigcms::$yiDengJiangCount}</span>名 奖森田面膜或眼膜一盒,随即发放</p>
-</div>
-<div class="btns-box btns-box-share">
-    <div class="need-vote">还差<span>{pigcms::$leftVote}</span>票</div>
-    <a href="javascript:;" title="投票" class="btn-out" id="toupiao">投票</a>
-</div>
-<ul class="need-vote-panel">
-    <li>还差<span id="need-ticket">{pigcms::$leftVote}</span>票即可抽奖</li>
-    <li>您还有<span id="need-times">{pigcms::$leftDraw}</span>次抽奖机会</li>
-</ul>
+<div class="lottery-page">
+    <dl class="lottery-box">
+        <dt>恭喜您中奖啦</dt>
+        <dd>请中奖者点击以下按钮,于2017年1月xx日24点前填写收货信息,逾期未填写视为自动放弃资格.我们将于2月11日后将奖品寄送给您(春节期间快递因素)。感谢您的参与!</dd>
+    </dl>
 
-
-<div class="advertising">广告</div>
-<div class="common-people"></div>
-<dl class="common-step">
-    <dt>奖池剩余</dt>
-    <dd>森田奖品特等奖<strong>{pigcms::$leftTeDengJiang}</strong>份，一等奖<strong>{pigcms::$leftYiDengJiang}</strong>份（由于可能存在数据延时问题，所以奖池剩余数据仅供参考，特此告知！）</dd>
-</dl>
-
-
-<div class="wheel-box opacity-gray" id="wheel-box">
-    <div class="wheel">
-        <div class="img wheel01"></div>
-        <div class="img wheel02"></div>
-        <div class="img wheel03"></div>
-        <div class="img wheel04"></div>
-        <div class="img wheel05"></div>
-        <div class="img wheel06"></div>
-        <div class="img wheel07"></div>
-        <div class="img wheel08"></div>
-        <div class="img wheel09"></div>
-        <div class="img wheel10"></div>
-        <div class="img wheel11"></div>
-        <div class="img wheel12"></div>
-        <div class="img wheel13"></div>
-        <div class="img wheel14"></div>
-        <div class="img wheel15"></div>
-        <div class="quan"></div>
-        <div class="light"></div>
-        <div class="bright bright1"></div>
-        <div class="bright bright2"></div>
-        <div class="bright bright3"></div>
-        <div class="bright bright4"></div>
-        <div class="bright bright5"></div>
-        <div class="bright bright6"></div>
-        <div class="bright bright7"></div>
-        <div class="bright bright8"></div>
-        <div class="bright bright9"></div>
-        <div class="bright bright10"></div>
-        <div class="bright bright11"></div>
-        <div class="bright bright12"></div>
-        <div class="bright bright13"></div>
-        <div class="bright bright14"></div>
-        <div class="bright bright15"></div>
+    <div class="btns-box">
+        <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Motianlun&a=form" title="填写收获地址" class="btn-out">填写收获地址</a>
     </div>
-    <span class="luck-draw" id="luck-draw"></span>
+
 </div>
-
-
-
-<script type="text/javascript">
-    $(document).ready(function(e) {
-        $("#toupiao").bind('click',function(){
-            $.post(
-                    "{pigcms::$siteurl}/index.php?g=Wap&m=Motianlun&a=saveVote2",
-                    {uid: "{pigcms::$uid}"},
-                    function (data) {
-                        var returnCode = data;
-                        if (returnCode != '') {
-                            if(returnCode == '1'){
-                                Pop.alerts("恭喜您助力成功");
-                                setTimeout(function(){
-                                    goPage();
-                                },2000);
-                            }else if(returnCode == '2'){
-                                Pop.alerts('已投过');
-                            }
-
-                        }else{
-
-                        }
-                    });
-        });
-    });
-    function goPage(){
-        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Motianlun&a=index&gid={pigcms::$gid}';
-    }
-</script>
-
+<div class="advertising">广告</div>
 </body>
 </html>

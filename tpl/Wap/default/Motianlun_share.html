@@ -224,23 +224,34 @@
             $("#luck-draw").bind('click',function(){
                 $.post(
                         "{pigcms::$siteurl}/index.php?g=Wap&m=Motianlun&a=saveDraw",
-                        {uid: "{pigcms::$uid}"},
                         function (data) {
-                            if (data != '') {
-                                if(data == 1){
-                                    Pop.alerts("恭喜您投票成功！距抽奖还差X票,赶快点击“邀请好友助力”好运来!");
-                                    $("#confirms").bind('click',function(){
-                                        goPage();
-                                    });
+                            var dataObj=eval("("+data+")");//转换为json对象
+                            var returnMessage = dataObj[0];
+                            var prize = dataObj[1];
+                            var drawTotal = dataObj[2];
+                            if (returnMessage != '') {
+                                Pop.alerts(returnMessage);
+                                if(drawTotal == '3'){
                                     setTimeout(function(){
-                                        goPage();
-                                    },5000);
-                                }else if(data == 2){
-                                    Pop.alerts('已投过');
+                                        window.location.href = 'http://mp.weixin.qq.com/s/o4Vu9MOSe2dYaUgxV77Dew';
+                                    },2000);
+                                }else{
+                                    if(prize == '1'){
+                                        setTimeout(function(){
+                                            window.location.href = 'http://mp.weixin.qq.com/s/Cqw5hmJtxCrgvyUaVZNEyw';
+                                        },2000);
+                                    }else if(prize == '2'){
+                                        setTimeout(function(){
+                                            window.location.href = 'http://mp.weixin.qq.com/s/Cqw5hmJtxCrgvyUaVZNEyw';
+                                        },2000);
+                                    }else{
+                                        setTimeout(function(){
+                                            window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Motianlun&a=share&gid={pigcms::$gid}';
+                                        },5000);
+                                    }
                                 }
-
                             }else{
-
+                                window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Motianlun&a=index&gid={pigcms::$gid}';
                             }
                         });
             });

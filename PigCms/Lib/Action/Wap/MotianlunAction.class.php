@@ -2,13 +2,13 @@
 
 class MotianlunAction extends SjzAction {
     public $title = '森田新年福利大派送，幸运摩天轮转起来!';
-    public $bonusdesc = '';
+    public $bonusdesc = '您有三次机会领走20盒面膜大奖的机会！还等待什么？';
     public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
     public $endtime="2017-01-30 23:59:59"; //活动结束时间
     public $debug = true; //上线后应该改成false
-    public $defalutGid = 110;
+    public $defalutGid = 115;
 
 
 
@@ -18,6 +18,7 @@ class MotianlunAction extends SjzAction {
     public $yiDengJiangCount = 1000;
     public $eachChouJiangVote = 5;
     public $totalChouJiangVote = 15;
+    public $totalDrawCount = 3;
 
     public function _initialize() {
         parent :: _initialize();
@@ -113,7 +114,7 @@ class MotianlunAction extends SjzAction {
         return $lastInsertId;
     }
     public function setEndTime2(){
-        $endtime =strtotime( "2016-09-25 23:59:59" );
+        $endtime =strtotime( "2017-02-25 23:59:59" );
         if (time() > $endtime) {//活动是否结束
 
             echo <<<HTML
@@ -291,6 +292,9 @@ HTML;
             //已经抽过二次奖了
             $leftVote = $this->eachChouJiangVote*3 - $vote;
         }
+        if($leftVote < 0 ){
+            $leftVote = 0;
+        }
         return $leftVote;
     }
     public function success(){
@@ -309,35 +313,12 @@ HTML;
         if($info){
             $this->setIncViews($info['id']);
         }
-
-        $getPost = null;
-        if(isset($_GET['post'])  && $_GET['post'] == 1   ){
-            //是否满足20票
-            if($info['vote'] < $this->motianlunCount){
-                exit;
-            }
-            //更新phone
-            //更新表 motianlun
-            $id = $info['id'];
-            if($info['phone'] != 1){
-                $m = array();
-                $t = time();
-                $m['phone'] = 1;
-                $m['id'] = $id;
-                $m['phonetime'] = $t;
-                M('motianlun')->save($m);
-            }
-
-            //插入表 motianlun_phonelist
-            $phoneList = M('motianlun_phonelist')->where(array('uid' => $id))->find();
-            if(!$phoneList){
-                $n = array();
-                $n['uid'] = $id;
-                $n['phone'] = 1;
-                $n['createtime'] = time();
-                M('motianlun_phonelist')->add($n);
-            }
+        $prize = $info['prize'];
+        if( !($prize == 1 ||  $prize == 2) ){
+            echo '未中奖';
+            exit;
         }
+
 
 
         //begin 分享出去的URL
@@ -508,7 +489,7 @@ HTML;
     public function share(){
         $this->setEndTime();
         $userOpenId= cookie('user_openid');
-        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $gid = $_GET['gid'];
         if(!$gid){
             $gid = $this->defalutGid;
@@ -616,140 +597,11 @@ HTML;
         }
         $this->assign("leftTeDengJiang",$leftTeDengJiang);
         $this->assign("leftYiDengJiang",$leftYiDengJiang);
+        $this->assign("draw",$draw);
 
         $this->display();
     }
 
-    public function share2(){
-        $this->setEndTime();
-        $userOpenId= cookie('user_openid');
-//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
-        $gid = $_GET['gid'];
-        if(!$gid){
-            $gid = $this->defalutGid;
-        }
-        if(!$userOpenId){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
-            exit();
-        }
-
-        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
-        if(!$info){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
-            exit();
-        }
-        $gid = $info['gid'];
-        //图片是否存在
-//        $savePath = './PUBLIC/imagess/';
-//        $t = $info['uploadimagetime'];
-//        $uploadImageSrc= $savePath."$userOpenId"."_$t".".jpeg";
-//        if(!file_exists($uploadImageSrc)){
-//            //redirect
-//            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
-//            exit();
-//        }
-        //begin 分享出去的URL
-        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
-        $noncestr = "Wm3WZYTPz0wzccnW";
-        $timestamp = time();
-        $url = $this->get_url();;
-        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
-        $signature = sha1($str);
-        $this->assign("appid",$appId);
-        $this->assign("timestamp",$timestamp);
-        $this->assign("nonceStr",$noncestr);
-        $this->assign("signature",$signature);
-        $this->assign("shareurl",$this->getShareUrl());
-        $this->assign('gid', $gid);
-
-        $this->assign('title',$info['name'].$this->title);
-        $this->assign('bonusdesc',$this->bonusdesc);
-        $this->assign("imageUrl",$this->imageUrl);
-        $this->assign("shareimageurl",$this->shareImageUrl);
-        //end
-
-        //begin views
-        if($info){
-            $this->setIncViews($info['id']);
-        }
-        // end views
-
-
-        //获取当前已经有了多少拼图
-        $imgNums = (int)$this->motianlunCount;
-        $vote = $info['vote'];
-        $share = $info['share'];
-        $imgNums = (int)$this->motianlunCount - $vote;
-        if($vote >= $this->motianlunCount && !$info['phone']){
-//            跳转到sharephone
-//            redirect
-//            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=sharephone&gid=$gid");
-//            exit();
-        }
-        if($vote >= $this->motianlunCount && $info['phone']){
-            //form 信息是否已经提交
-            $award = M('motianlun_award')->where(array('openid' => $userOpenId))->find();
-            if($award){
-                //已经提交
-                header("location:$this->url/index.php?g=Wap&m=Motianlun&a=sharephone&gid=$gid");
-                exit();
-            }else{
-                header("location:$this->url/index.php?g=Wap&m=Motianlun&a=sharephone&gid=$gid");
-                exit();
-            }
-
-        }
-
-        if($imgNums < 0 ){
-            $imgNums = 0;
-        }
-        $this->assign('imgnums',$imgNums);
-        if($vote == 0){
-            $vote = 0;
-        }
-        $this->assign('needimgnums',$vote);
-
-        //当天是否访问过
-        $today = time();
-        $start = mktime(0,0,0,date("m",$today),date("d",$today),date("Y",$today));
-        $end = mktime(23,59,59,date("m",$today),date("d",$today),date("Y",$today));
-        $start = date("Y-m-d H:i:s",$start );
-        $end = date("Y-m-d H:i:s",$end );
-//        $uniqueViewSql = "SELECT * from tp_motianlun_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$userOpenId'";
-        $uniqueViewSql = "SELECT * from tp_motianlun_votelist where  fromopenid='$userOpenId' and toopenid='$userOpenId'";
-        $uniqueViewlist = M('motianlun_votelist')->query($uniqueViewSql);
-        $haveVoted = 0;
-
-        //多次投票开启
-        if($uniqueViewlist){
-            $haveVoted = 1;
-            //自己已经给自己投过票，但是未满20票 跳转到分享引导页
-//            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=game1&gid=$gid");
-//            exit();
-        }
-        //多次投票结束
-
-        $this->assign('sharenumberindatabase',$share);
-        $this->assign('havevoted',$haveVoted);
-        if($share <= 3){
-            $leftShare = 3 - $share;
-        }else{
-            $leftShare = 0;
-        }
-        $this->assign('leftshare',$leftShare);
-
-        $phoneExist = 0;
-        if($info['phone']){
-            $phoneExist = 1;
-        }
-        $this->assign('phonexist',$phoneExist);
-        $this->assign("gid",$gid);
-        $this->assign("uid",$info['id']);
-        $this->assign("mainopenid",$userOpenId);
-        $this->display();
-    }
 
     public function sharefriend(){
         $this->setEndTime();
@@ -882,6 +734,9 @@ HTML;
         $voteThisUid = 0;
         if($voteList){
             $voteThisUid = 1;
+            //已经投过票 跳转到自己的主页
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
+            exit();
         }
 
         $this->assign('sharenumberindatabase',$share);
@@ -927,175 +782,6 @@ HTML;
         $this->display();
     }
 
-    public function vote(){
-        $this->setEndTime2();
-        $userOpenId= cookie('user_openid');
-        $gid = $_GET['gid'];
-        if(!$gid){
-            $gid = $this->defalutGid;
-        }
-//        $userOpenId= 'oP9fCt-JvXkTShBQIin7jtYF0i6U';
-        M("motianlun_polldata")->where(array('id' => 1))->setInc('pv');
-        if(!$userOpenId){
-            $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
-            $code = trim($_GET["code"]);
-            $state = trim($_GET['state']);
-
-            $fansInfo = M('customer_service_fans')->field('openid,nickname,headimgurl')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
-            if ($code && $state == 'sentian') {
-                if(empty($fansInfo)){
-                    $webCreatetime = $apidata['web_createtime'];
-                    $web_access_token = '';
-
-                    //重新获取
-                    $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
-                    if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
-                        //code 有错误 需要重定向
-                        $url = $this->url."/index.php?g=Wap&m=Motianlun&a=index&gid=$gid";
-                        header("location:$url");
-                    }
-                    $m['id'] = $apidata['id'];
-                    $m['web_access_token'] = $userinfoFromApi['access_token'];
-                    $m['refresh_token'] = $userinfoFromApi['refresh_token'];
-                    $m['web_createtime'] = time();
-                    $m['refresh_token_createtime'] = time();
-                    M('Diymen_set')->save($m);
-                    $web_access_token = $userinfoFromApi['access_token'];
-                    cookie('user_openid', $userinfoFromApi['openid'], 315360000);
-                    $userOpenId = $userinfoFromApi['openid'];
-
-                }
-            } else {
-                $url = urlencode($this->url."/index.php?g=Wap&m=Motianlun&a=vote&gid=$gid");
-                header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
-                exit;
-            }
-        }
-
-
-        //begin 分享出去的URL
-        $gid = 22;
-        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
-        $noncestr = "Wm3WZYTPz0wzccnW";
-        $timestamp = time();
-        $url = $this->get_url();;
-        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
-        $signature = sha1($str);
-        $this->assign("appid",$appId);
-        $this->assign("timestamp",$timestamp);
-        $this->assign("nonceStr",$noncestr);
-        $this->assign("signature",$signature);
-        $this->assign("shareurl",$this->url."/index.php?g=Wap&m=Motianlun&a=vote");
-        $this->assign('gid', $gid);
-
-        $this->assign('title','“携手森田.找回美丽”第二阶段票选活动');
-        $this->assign('bonusdesc','朋友们快来帮我投票吧！');
-        $this->assign("imageUrl",$this->imageUrl);
-        $this->assign("shareimageurl",$this->shareImageUrl);
-        //end
-
-        $list = M('motianlun_poll')->query( "select * from tp_motianlun_poll order by id asc") ;
-        $slist = array();
-        $savePath = './PUBLIC/imagess/';
-        foreach($list as $each){
-            $tmp = array();
-            $id = $each['uid'];
-            $info = M('motianlun')->where(array('id' => $id))->find();
-            $tmp['name'] = $info['name'];
-
-            $openid = $info['openid'];
-            $t = $info['uploadimagetime'];
-            $uploadImageSrc= $savePath."$openid"."_$t".".jpeg";
-            $tmp['imgsrc'] = $uploadImageSrc;
-
-            $tmp['vote'] = $each['vote'];
-
-            $tmp['id'] = $each['id'];
-            $tmp['uid'] = $each['uid'];
-            $slist[] = $tmp;
-
-        }
-        $this->assign('info', $slist);
-        $this->assign("gid",$gid);
-        $this->display();
-    }
-    public function sharePhone(){
-        $this->setEndTime();
-        $userOpenId= cookie('user_openid');
-//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
-        $gid = $_GET['gid'];
-        if(!$gid){
-            $gid = $this->defalutGid;
-        }
-        if(!$userOpenId){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
-            exit();
-        }
-
-        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
-        $gid = $info['gid'];
-        $vote = $info['vote'];
-//        if($vote >= $this->motianlunCount && isset($info['phone']) && $info['phone']){
-//            //redirect
-//            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share");
-//            exit();
-//        }
-
-        //begin 分享出去的URL
-        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
-        $noncestr = "Wm3WZYTPz0wzccnW";
-        $timestamp = time();
-        $url = $this->get_url();;
-        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
-        $signature = sha1($str);
-        $this->assign("appid",$appId);
-        $this->assign("timestamp",$timestamp);
-        $this->assign("nonceStr",$noncestr);
-        $this->assign("signature",$signature);
-        $this->assign("shareurl",$this->getShareUrl());
-        $this->assign('gid', $gid);
-
-        $this->assign('title',$info['name'].$this->title);
-        $this->assign('bonusdesc',$this->bonusdesc);
-        $this->assign("imageUrl",$this->imageUrl);
-        $this->assign("shareimageurl",$this->shareImageUrl);
-        //end
-
-        //begin views
-        if($info){
-            $this->setIncViews($info['id']);
-        }
-        // end views
-
-        $vote = $info['vote'];
-        if($vote >= $this->motianlunCount){
-            //成功，继续提交手机号
-        }else{
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
-            exit();
-        }
-
-        $phoneExist = 0;
-        $paiming = null;
-        if($info['phone']){
-            //排名已经获取，根据UID获取排名
-            $phoneExist = 1;
-            $paimingArray = M('motianlun_phonelist')->where(array('uid' => $info['id']))->find();
-            $paiming = $paimingArray['id'];
-        }else{
-            //跳转
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&gid=$gid");
-            exit();
-        }
-        $this->assign('paiming',$paiming);
-        $this->assign('phone',$info['phone']);
-        $this->assign('phoneexist',$phoneExist);
-        $this->assign('uid',$info['id']);
-        $this->assign("gid",$gid);
-        $this->display();
-    }
     //根据UID获取OPENID
     public function getOpenIdByUid($uid){
         $openId = M('motianlun')->where("id=$uid")->getField('openid');
@@ -1104,50 +790,6 @@ HTML;
     public function getUidByOpenid($openid){
         $uid = M('motianlun')->where("openid='$openid'")->getField('id');
         return $uid;
-    }
-    public function savePhoneInPage(){
-        $this->setEndTime();
-        $phone = $_POST['phoneinpage'];
-        $fromOpenIdFromPost= cookie('user_openid');
-        if(!$fromOpenIdFromPost){
-            //非法投票
-            exit();
-        }
-        //查看当前提交了手机号数码
-//        $countNum = M('motianlun')->where("phone != ''")->count('id');
-//        if($countNum >= 10000){
-//            echo 2;
-//            return;
-//            exit();
-//        }
-        $id = M('motianlun')->where("openid='$fromOpenIdFromPost'")->getField('id');
-        //判断此用户是否已经提交了手机号
-        $phoneList = M('motianlun_phonelist')->where(array('uid' => $id))->find();
-        if($phoneList){
-            echo 3;
-            //已经存在，不需要保存
-        }else{
-            //更新表 motianlun
-            $m = array();
-            $t = time();
-            $m['phone'] = $phone;
-            $m['id'] =$id;
-            $m['phonetime'] = $t;
-            M('motianlun')->save($m);
-
-            //插入表 motianlun_phonelist
-            $n = array();
-            $n['uid'] = $id;
-            $n['phone'] = $phone;
-            $n['createtime'] = $t;
-            M('motianlun_phonelist')->add($n);
-            echo 1;
-        }
-
-
-
-
-
     }
     public function saveVote2(){
         $this->setEndTime();
@@ -1164,8 +806,8 @@ HTML;
         //检查此 local openid 是否投过票
         $voteList = M('motianlun_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
         //多次投票
-//        if(!$voteList){
-        if(true){
+        if(!$voteList){
+//        if(true){
             //投票
             $d = array();
             $d['fromopenid'] = $fromOpenIdFromPost;
@@ -1175,7 +817,7 @@ HTML;
             M("motianlun")->where(array('id' => $toUid))->setInc('vote');
             $return = 1;
 
-            $info = M('motianlun')->where(array('id' => $toUid))->find();
+//            $info = M('motianlun')->where(array('id' => $toUid))->find();
 
         }else{
             //已经投过票
@@ -1213,7 +855,7 @@ HTML;
 
         //还未抽奖
         if(!$prize){
-            if(!$drawCount){
+            if(!$drawCount && $voteCount>=5){
                 //第一次抽
                 $p = array();
                 $p['uid'] =  $info['id'];
@@ -1228,21 +870,30 @@ HTML;
                     $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
                     if($teDengJiangCount<=9){
                         M('motianlun_jiang')->where('id=1')->setInc('tedengjiang');
-                        $returnMessage = "你已中特等奖";
+                        $returnMessage = "恭喜抽中特等奖！";
                     }else{
                         $prize = 3;//本应获得特等奖 但是 奖没了
+                        $returnMessage = "未中奖";
                     }
 
                 }elseif($prize == 2){
                     $yiDengJiangCount =  M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
                     if($yiDengJiangCount <= 999){
                         M('motianlun_jiang')->where('id=1')->setInc('yidengjiang');
-                        $returnMessage = "你已中一等奖";
+                        $returnMessage = "恭喜抽中一等奖！";
                     }else{
                         $prize = 4;//本应获得一等奖 但是 奖没了
+                        $returnMessage = "未中奖";
                     }
                 }else {
-                    $returnMessage = "请继续还有一次机会";
+                    $returnMessage = "未中奖<br/>";
+                    $yiDengJiangCount =  M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
+                    $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
+                    $leftDraw = $this->totalDrawCount - $drawCount - 1;
+                    if($leftDraw < 0 ){
+                        $leftDraw = 0;
+                    }
+                    $returnMessage .= "奖池剩余".$leftYiDengJiang."盒面膜/眼膜 ,您还有".$leftDraw."次抽奖机会";
                 }
                 $i = array();
                 $i['id'] = $info['id'];
@@ -1250,54 +901,61 @@ HTML;
                 $i['prize'] = $prize;
                 $i['draw'] = 1;
                 M('motianlun')->save($i);
-            }elseif($drawCount == 1){
+            }elseif($drawCount == 1 &&  $voteCount>=10){
                 //第二次抽奖
                 $p = array();
                 $p['uid'] =  $info['id'];
                 $p['position'] =  1;
                 $paiming = M('motianlun_drawlist')->add($p);
-
                 $prize = $this->whetherDraw($paiming);
-
-
                 if($prize == 1){
-                    $returnMessage = "你已中特等奖";
                     $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
                     if($teDengJiangCount<=9){
                         M('motianlun_jiang')->where('id=1')->setInc('tedengjiang');
-                        $returnMessage = "你已中特等奖";
-                        $i = array();
-                        $i['id'] = $info['id'];
-                        $i['rank2'] = $paiming;
-                        $i['prize'] = $prize;
-                        $i['draw'] = 2;
-                        M('motianlun')->save($i);
+                        $returnMessage = "恭喜抽中特等奖！";
+                    }else{
+                        $prize = 3;//本应获得特等奖 但是 奖没了
+                        $returnMessage = "未中奖";
                     }
 
                 }elseif($prize == 2){
-                    $returnMessage = "你已中一等奖";
                     $yiDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
                     if($yiDengJiangCount <= 999){
                         M('motianlun_jiang')->where('id=1')->setInc('yidengjiang');
-                        $returnMessage = "你已中一等奖";
-                        $i = array();
-                        $i['id'] = $info['id'];
-                        $i['rank1'] = $paiming;
-                        $i['prize'] = $prize;
-                        $i['draw'] = 2;
-                        M('motianlun')->save($i);
+                        $returnMessage = "恭喜抽中一等奖！";
+                    }else{
+                        $prize = 4;//本应获得一等奖 但是 奖没了
+                        $returnMessage = "未中奖";
                     }
                 }else {
-                    $returnMessage = "你没有机会了";
+                    $returnMessage = "未中奖<br/>";
+                    $yiDengJiangCount =  M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
+                    $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
+                    $leftDraw = $this->totalDrawCount - $drawCount - 1;
+                    if($leftDraw < 0 ){
+                        $leftDraw = 0;
+                    }
+                    $returnMessage .= "奖池剩余".$leftYiDengJiang."盒面膜/眼膜 ,您还有".$leftDraw."次抽奖机会";
                 }
-            }else if($drawCount == 2){
+                $i = array();
+                $i['id'] = $info['id'];
+                $i['rank2'] = $paiming;
+                $i['prize'] = $prize;
+                $i['draw'] = 2;
+                M('motianlun')->save($i);
+            }else if($drawCount == 2  && $voteCount>= 15){
                 //第三次抽奖
-
+                $i['id'] = $info['id'];
+                $i['draw'] = 3;
+                $i['thirdtime'] = date('Y-m-d H:i:s');
+                M('motianlun')->save($i);
+                $returnMessage = "遗憾错过!";
+            }else{
+                $returnMessage = "提交过于频繁，请稍后再试!";
             }
-
         }
 
-        echo $prize;
+        echo json_encode(array($returnMessage,$prize,$drawCount+1)) ;
     }
 
     function whetherDraw($paiming){
@@ -1339,54 +997,6 @@ HTML;
         }
         $arrTmp = array($return,$leftVote);
         echo json_encode($arrTmp);
-    }
-    public function savePoll(){
-        $this->setEndTime2();
-        $return = 0;
-        $fromOpenIdFromPost= cookie('user_openid');
-//        $fromOpenIdFromPost= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
-        $toId = $_POST['id'];
-        if(!$toId){
-            exit();
-        }
-        //根据ID取得UID
-        $uid = M('motianlun_poll')->where("id=$toId")->getField('uid');
-        if(!$uid){
-            exit();
-        }
-        $userInfo = M('motianlun')->where("id=$uid")->find();
-        if(!$userInfo){
-            //非法投票
-            exit();
-        }
-
-        $toOpenIdFromPost = $userInfo['openid'];
-        //检查此 local openid 是否投过票
-        //当天是否访问过
-        $today = time();
-        $start = mktime(0,0,0,date("m",$today),date("d",$today),date("Y",$today));
-        $end = mktime(23,59,59,date("m",$today),date("d",$today),date("Y",$today));
-//        $start = date("Y-m-d H:i:s",$start );
-//        $end = date("Y-m-d H:i:s",$end );
-
-        $sql = "SELECT id from tp_motianlun_polllist where   createtime >= '$start' and createtime<'$end' and fromopenid='$fromOpenIdFromPost'";
-        $voteList = M('motianlun_polllist')->query($sql);
-//        $voteList = M('motianlun_polllist')->where(array('fromopenid' => $fromOpenIdFromPost, ))->find();//'toopenid'=>$toOpenIdFromPost
-        if(!$voteList){//
-            //投票
-            $d = array();
-            $d['fromopenid'] = $fromOpenIdFromPost;
-            $d['toopenid'] = $toOpenIdFromPost;
-            $d['createtime'] = time();
-            M('motianlun_polllist')->add($d);
-            M("motianlun_poll")->where(array('id' => $toId))->setInc('vote');
-            $return = 1;
-        }else{
-            //已经投过票
-            $return = 2;
-        }
-
-        echo $return;
     }
     public function saveFormInfo(){
         $this->setEndTime2();
@@ -1534,16 +1144,7 @@ HTML;
 
         $vote = $info['vote'];
         $gid = $info['gid'];
-        if($vote < $this->motianlunCount){
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
-            exit();
-        }
-        if(!$info['phone']){
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&gid=$gid");
-            exit();
-        }
 
-        $this->assign("vote",$vote);
         $award = M('motianlun_award')->where(array('openid' => $userOpenId))->find();
         $name = '';
         $phone = '';
