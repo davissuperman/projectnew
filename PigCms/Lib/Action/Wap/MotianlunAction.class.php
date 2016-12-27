@@ -1174,23 +1174,9 @@ HTML;
             M('motianlun_votelist')->add($d);
             M("motianlun")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
             $return = 1;
-            //是否已经有20票
+
             $info = M('motianlun')->where(array('id' => $toUid))->find();
-            if($info['vote'] >= $this->motianlunCount  && !$info['phone']){
-                $pUid = $info['id'];
-                $phoneList = M('motianlun_phonelist')->where(array('uid' => $pUid))->find();
-                if(!$phoneList){
-                    $p = array();
-                    $p['uid'] =  $info['id'];
-                    $p['phone'] =  1;
-                    $p['createtime'] =  time();
-                    $paiming = M('motianlun_phonelist')->add($p);
-                    $i = array();
-                    $i['id'] = $info['id'];
-                    $i['phone'] = 1;
-                    M('motianlun')->save($i);
-                }
-            }
+
         }else{
             //已经投过票
             $return = 2;
