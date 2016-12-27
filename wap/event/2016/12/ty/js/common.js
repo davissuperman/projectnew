@@ -64,6 +64,18 @@ function changeBallStatus(needNums){
 
 function changeLuckDrawStatus(needNums){
 	var $luck_draw = $("#luck-draw");
+	var $need_ticket = $("#need-ticket");
+	var $need_times = $("#need-times");
+	var need_ticket = $need_ticket.html();
+	var need_times = $need_times.html();
+	if(need_ticket == 0){
+		$luck_draw.removeClass("opacity-gray");
+		$luck_draw.addClass("bounceIn animated");
+	}else{
+		$luck_draw.removeClass("bounceIn animated");
+		$luck_draw.addClass("opacity-gray");
+	}
+	/*
 	var r = (15 - needNums) % 5;
 	if(r > 0){
 		$luck_draw.removeClass("bounceIn animated");
@@ -71,7 +83,7 @@ function changeLuckDrawStatus(needNums){
 	}else{
 		$luck_draw.removeClass("opacity-gray");
 		$luck_draw.addClass("bounceIn animated");
-	}
+	}*/
 }
 
 function hideHoverBox(){
