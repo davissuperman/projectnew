@@ -9,7 +9,7 @@ class MotianlunAction  extends BonusAction {
     public function index() {
         //2 - Allinone
         $db = M('npic_twocode');
-        $where = array('token' => $this->token,'channel_type'=>5);
+        $where = array('token' => $this->token,'channel_type'=>6);
 
         $count = $db->where($where)->count();
         $page = new Page($count, 25);
