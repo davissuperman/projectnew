@@ -224,23 +224,22 @@
             $("#luck-draw").bind('click',function(){
                 $.post(
                         "{pigcms::$siteurl}/index.php?g=Wap&m=Motianlun&a=saveDraw",
-                        {uid: "{pigcms::$uid}"},
                         function (data) {
                             if (data != '') {
-                                if(data == 1){
-                                    Pop.alerts("恭喜您投票成功！距抽奖还差X票,赶快点击“邀请好友助力”好运来!");
-                                    $("#confirms").bind('click',function(){
-                                        goPage();
-                                    });
-                                    setTimeout(function(){
-                                        goPage();
-                                    },5000);
-                                }else if(data == 2){
-                                    Pop.alerts('已投过');
-                                }
+//                                if(data == 1){
+                                    Pop.alerts(data);
+//                                    $("#confirms").bind('click',function(){
+//                                        goPage();
+//                                    });
+//                                    setTimeout(function(){
+//                                        goPage();
+//                                    },5000);
+//                                }else if(data == 2){
+//                                    Pop.alerts('已投过');
+//                                }
 
                             }else{
-
+                                window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Motianlun&a=index&gid={pigcms::$gid}';
                             }
                         });
             });

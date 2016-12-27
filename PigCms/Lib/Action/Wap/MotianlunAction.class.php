@@ -1246,7 +1246,7 @@ HTML;
                         $prize = 4;//本应获得一等奖 但是 奖没了
                     }
                 }else {
-                    $returnMessage = "请继续还有一次机会";
+                    $returnMessage = "请继续还有二次机会";
                 }
                 $i = array();
                 $i['id'] = $info['id'];
@@ -1260,7 +1260,6 @@ HTML;
                 $p['uid'] =  $info['id'];
                 $p['position'] =  1;
                 $paiming = M('motianlun_drawlist')->add($p);
-
                 $prize = $this->whetherDraw($paiming);
 
 
@@ -1270,12 +1269,8 @@ HTML;
                     if($teDengJiangCount<=9){
                         M('motianlun_jiang')->where('id=1')->setInc('tedengjiang');
                         $returnMessage = "你已中特等奖";
-                        $i = array();
-                        $i['id'] = $info['id'];
-                        $i['rank2'] = $paiming;
-                        $i['prize'] = $prize;
-                        $i['draw'] = 2;
-                        M('motianlun')->save($i);
+                    }else{
+                        $prize = 3;//本应获得特等奖 但是 奖没了
                     }
 
                 }elseif($prize == 2){
@@ -1284,24 +1279,29 @@ HTML;
                     if($yiDengJiangCount <= 999){
                         M('motianlun_jiang')->where('id=1')->setInc('yidengjiang');
                         $returnMessage = "你已中一等奖";
-                        $i = array();
-                        $i['id'] = $info['id'];
-                        $i['rank1'] = $paiming;
-                        $i['prize'] = $prize;
-                        $i['draw'] = 2;
-                        M('motianlun')->save($i);
+                    }else{
+                        $prize = 4;//本应获得一等奖 但是 奖没了
                     }
                 }else {
-                    $returnMessage = "你没有机会了";
+                    $returnMessage = "请继续还有一次机会";
                 }
+                $i = array();
+                $i['id'] = $info['id'];
+                $i['rank2'] = $paiming;
+                $i['prize'] = $prize;
+                $i['draw'] = 2;
+                M('motianlun')->save($i);
             }else if($drawCount == 2){
                 //第三次抽奖
-
+                $i['id'] = $info['id'];
+                $i['draw'] = 3;
+                $i['thirdtime'] = date('Y-m-d H:i:s');
+                M('motianlun')->save($i);
+                $returnMessage = "没有机会了";
             }
-
         }
 
-        echo $prize;
+        echo $returnMessage;
     }
 
     function whetherDraw($paiming){
