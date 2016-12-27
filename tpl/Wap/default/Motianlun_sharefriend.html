@@ -216,19 +216,13 @@
                     "{pigcms::$siteurl}/index.php?g=Wap&m=Motianlun&a=saveVote2",
                     {uid: "{pigcms::$uid}"},
                     function (data) {
-                        var dataObj=eval("("+data+")");//转换为json对象
-                        var returnCode = dataObj[0];
-                        var leftVote = dataObj[1];
+                        var returnCode = data;
                         if (returnCode != '') {
                             if(returnCode == '1'){
-                                Pop.alerts("恭喜您投票成功！距抽奖还差"+leftVote+"票,赶快点击“邀请好友助力”好运来!");
-                                $("#confirms").bind('click',function(){
-                                    goPage();
-                                });
                                 setTimeout(function(){
                                     goPage();
-                                },5000);
-                            }else if(returnCode == 2){
+                                },2000);
+                            }else if(returnCode == '2'){
                                 Pop.alerts('已投过');
                             }
 
@@ -238,7 +232,9 @@
                     });
         });
     });
-
+    function goPage(){
+        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Motianlun&a=index&gid={pigcms::$gid}';
+    }
 </script>
 
 </body>

@@ -1172,7 +1172,7 @@ HTML;
             $d['toopenid'] = $toOpenIdFromPost;
             $d['createtime'] = time();
             M('motianlun_votelist')->add($d);
-            M("motianlun")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
+            M("motianlun")->where(array('id' => $toUid))->setInc('vote');
             $return = 1;
 
             $info = M('motianlun')->where(array('id' => $toUid))->find();
