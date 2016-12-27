@@ -735,7 +735,7 @@ HTML;
         if($voteList){
             $voteThisUid = 1;
             //已经投过票 跳转到自己的主页
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=inde&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
             exit();
         }
 
