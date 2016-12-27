@@ -307,6 +307,9 @@ input,textarea,select,button{font-size:1em;}
     left: 50%;margin-top:-0.7rem;margin-left:-0.6rem;
     width: 1.2rem;
     height: 1.2rem; cursor:pointer;}
+.wheel-box.opacity-gray .luck-draw,
+.wheel-box .luck-draw.opacity-gray{background: url(../images/a/btn5.png) no-repeat center;
+	 background-size: 100% auto;}
 
 .btn-vote{
 	background: url(../images/a/btn2.png) no-repeat;
