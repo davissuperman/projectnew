@@ -839,8 +839,8 @@ HTML;
         if($userOpenId == $MainOpenId){
             //自己访问自己的主页 跳转到share页面
             //redirect
-//            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&gid=$gid");
-//            exit();
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&gid=$gid");
+            exit();
         }
         $voteListSql = "SELECT * from tp_motianlun_votelist where fromopenid='$userOpenId' and toopenid='$MainOpenId'";
         $voteView = M('motianlun_votelist')->query($voteListSql);
