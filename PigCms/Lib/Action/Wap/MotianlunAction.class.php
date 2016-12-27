@@ -950,6 +950,8 @@ HTML;
                 $i['thirdtime'] = date('Y-m-d H:i:s');
                 M('motianlun')->save($i);
                 $returnMessage = "遗憾错过!";
+            }else{
+                $returnMessage = "提交过于频繁，请稍后再试!";
             }
         }
 
