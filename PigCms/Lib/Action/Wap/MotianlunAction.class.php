@@ -817,16 +817,6 @@ HTML;
         }
         $MainOpenId = $info['openid'];
         $share = $info['share'];
-        //图片是否存在
-//        $savePath = './PUBLIC/imagess/';
-//        $t = $info['uploadimagetime'];
-//        $uploadImageSrc= $savePath."$MainOpenId"."_$t".".jpeg";
-//        if(!file_exists($uploadImageSrc)){
-//            //redirect
-//            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
-//            exit();
-//        }
-//        $this->assign('uploadimagesrc',$uploadImageSrc);
 
         //当天是否访问过
         $today = time();

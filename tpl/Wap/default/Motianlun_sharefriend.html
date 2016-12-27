@@ -138,7 +138,6 @@
     });
 </script>
 </head>
-
 <body id="body">
 <div class="img-box">
     <p><img src="{pigcms::RES}/motianlun/images/a/b1.png" width="100%" /></p>
@@ -151,18 +150,14 @@
 <div class="prize-box prize-box-index">
     <p>特等奖: <span>5</span>名 奖森田面膜20盒</p>
     <p>一等奖:<span>1000</span>名 奖森田面膜或眼膜一盒,随即发放</p>
-    <p class="rule">评比规则:您共有三次抽奖机会,集齐5票抽奖一次, 具体请见活动详情.面膜或眼膜每盒含4-5片,随机发放,以收到的实物为准 !</p>
 </div>
-<div class="btns-box">
-    <a href="javascript:;" title="投票" class="btn-vote" id="btn-vote">
-        <i class="tip"></i>
-        <i class="hand bounceIn animated"></i>
-    </a>
-    <a href="rule.html" title="活动规则" class="btn-rule">活动规则</a>
+<div class="btns-box btns-box-share">
+    <div class="need-vote">还差<span>2</span>票</div>
+    <a href="javascript:;" title="投票" class="btn-out">投票</a>
 </div>
 <ul class="need-vote-panel">
-    <li>还差<span id="need-ticket">0</span>票即可抽奖</li>
-    <li>您还有<span id="need-times">2</span>次抽奖机会</li>
+    <li>还差<span id="need-ticket">5</span>票即可抽奖</li>
+    <li>您还有<span id="need-times">3</span>次抽奖机会</li>
 </ul>
 
 
@@ -212,43 +207,12 @@
     <span class="luck-draw" id="luck-draw"></span>
 </div>
 
+
+
 <script type="text/javascript">
     $(document).ready(function(e) {
-        clickVote();
     });
-    function clickVote(){
-        $("#btn-vote").bind('click',function(){
-            $.post(
-                    "{pigcms::$siteurl}/index.php?g=Wap&m=Motianlun&a=saveVote2",
-                    {uid: "{pigcms::$uid}"},
-                    function (data) {
-                        if (data != '') {
-                            if(data == 1){
-                                Pop.alerts("恭喜您投票成功！距抽奖还差X票,赶快点击“邀请好友助力”好运来!");
-                                $("#confirms").bind('click',function(){
-                                    goPage();
-                                });
-                                setTimeout(function(){
-                                    goPage();
-                                },5000);
-                            }else if(data == 2){
-                                Pop.alerts('已投过');
-                            }
 
-                        }else{
-
-                        }
-                    });
-
-
-
-        });
-    }
-
-    function goPage(){
-      //  window.location.href = 'p2.html';
-        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Motianlun&a=share&gid={pigcms::$gid}';
-    }
 </script>
 
 </body>
