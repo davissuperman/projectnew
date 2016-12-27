@@ -113,7 +113,7 @@ class MotianlunAction extends SjzAction {
         return $lastInsertId;
     }
     public function setEndTime2(){
-        $endtime =strtotime( "2016-09-25 23:59:59" );
+        $endtime =strtotime( "2017-02-25 23:59:59" );
         if (time() > $endtime) {//活动是否结束
 
             echo <<<HTML
@@ -309,35 +309,12 @@ HTML;
         if($info){
             $this->setIncViews($info['id']);
         }
-
-        $getPost = null;
-        if(isset($_GET['post'])  && $_GET['post'] == 1   ){
-            //是否满足20票
-            if($info['vote'] < $this->motianlunCount){
-                exit;
-            }
-            //更新phone
-            //更新表 motianlun
-            $id = $info['id'];
-            if($info['phone'] != 1){
-                $m = array();
-                $t = time();
-                $m['phone'] = 1;
-                $m['id'] = $id;
-                $m['phonetime'] = $t;
-                M('motianlun')->save($m);
-            }
-
-            //插入表 motianlun_phonelist
-            $phoneList = M('motianlun_phonelist')->where(array('uid' => $id))->find();
-            if(!$phoneList){
-                $n = array();
-                $n['uid'] = $id;
-                $n['phone'] = 1;
-                $n['createtime'] = time();
-                M('motianlun_phonelist')->add($n);
-            }
+        $prize = $info['prize'];
+        if( !($prize == 1 ||  $prize == 2) ){
+            echo '未中奖';
+            exit;
         }
+
 
 
         //begin 分享出去的URL
@@ -1538,16 +1515,7 @@ HTML;
 
         $vote = $info['vote'];
         $gid = $info['gid'];
-        if($vote < $this->motianlunCount){
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
-            exit();
-        }
-        if(!$info['phone']){
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&gid=$gid");
-            exit();
-        }
 
-        $this->assign("vote",$vote);
         $award = M('motianlun_award')->where(array('openid' => $userOpenId))->find();
         $name = '';
         $phone = '';
