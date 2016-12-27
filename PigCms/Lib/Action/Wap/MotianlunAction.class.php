@@ -806,8 +806,8 @@ HTML;
         //检查此 local openid 是否投过票
         $voteList = M('motianlun_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
         //多次投票
-//        if(!$voteList){
-        if(true){
+        if(!$voteList){
+//        if(true){
             //投票
             $d = array();
             $d['fromopenid'] = $fromOpenIdFromPost;
@@ -817,7 +817,7 @@ HTML;
             M("motianlun")->where(array('id' => $toUid))->setInc('vote');
             $return = 1;
 
-            $info = M('motianlun')->where(array('id' => $toUid))->find();
+//            $info = M('motianlun')->where(array('id' => $toUid))->find();
 
         }else{
             //已经投过票
@@ -997,54 +997,6 @@ HTML;
         }
         $arrTmp = array($return,$leftVote);
         echo json_encode($arrTmp);
-    }
-    public function savePoll(){
-        $this->setEndTime2();
-        $return = 0;
-        $fromOpenIdFromPost= cookie('user_openid');
-//        $fromOpenIdFromPost= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
-        $toId = $_POST['id'];
-        if(!$toId){
-            exit();
-        }
-        //根据ID取得UID
-        $uid = M('motianlun_poll')->where("id=$toId")->getField('uid');
-        if(!$uid){
-            exit();
-        }
-        $userInfo = M('motianlun')->where("id=$uid")->find();
-        if(!$userInfo){
-            //非法投票
-            exit();
-        }
-
-        $toOpenIdFromPost = $userInfo['openid'];
-        //检查此 local openid 是否投过票
-        //当天是否访问过
-        $today = time();
-        $start = mktime(0,0,0,date("m",$today),date("d",$today),date("Y",$today));
-        $end = mktime(23,59,59,date("m",$today),date("d",$today),date("Y",$today));
-//        $start = date("Y-m-d H:i:s",$start );
-//        $end = date("Y-m-d H:i:s",$end );
-
-        $sql = "SELECT id from tp_motianlun_polllist where   createtime >= '$start' and createtime<'$end' and fromopenid='$fromOpenIdFromPost'";
-        $voteList = M('motianlun_polllist')->query($sql);
-//        $voteList = M('motianlun_polllist')->where(array('fromopenid' => $fromOpenIdFromPost, ))->find();//'toopenid'=>$toOpenIdFromPost
-        if(!$voteList){//
-            //投票
-            $d = array();
-            $d['fromopenid'] = $fromOpenIdFromPost;
-            $d['toopenid'] = $toOpenIdFromPost;
-            $d['createtime'] = time();
-            M('motianlun_polllist')->add($d);
-            M("motianlun_poll")->where(array('id' => $toId))->setInc('vote');
-            $return = 1;
-        }else{
-            //已经投过票
-            $return = 2;
-        }
-
-        echo $return;
     }
     public function saveFormInfo(){
         $this->setEndTime2();
