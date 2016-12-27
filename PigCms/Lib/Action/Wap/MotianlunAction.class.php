@@ -8,7 +8,7 @@ class MotianlunAction extends SjzAction {
     public $shareImageUrl;
     public $endtime="2017-01-30 23:59:59"; //活动结束时间
     public $debug = true; //上线后应该改成false
-    public $defalutGid = 110;
+    public $defalutGid = 115;
 
 
 
