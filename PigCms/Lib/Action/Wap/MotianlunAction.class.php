@@ -152,8 +152,8 @@ HTML;
         $selfUserInfo = array();
         $fansInfo = M('customer_service_fans')->field('openid,nickname,headimgurl')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
         if($userOpenId && $fansInfo){
-            $selfUserInfo['headimgurl'] = $fansInfo['headimgurl'];
-            $selfUserInfo['nickname'] = $fansInfo['nickname'];
+            $selfUserInfo['headimgurl'] ='';
+            $selfUserInfo['nickname'] = '';
         }else{
             $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
             $code = trim($_GET["code"]);
