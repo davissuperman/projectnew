@@ -172,7 +172,6 @@ class MotianlunAction  extends BonusAction {
             $tmp['vote'] = $each['vote'];
             $tmp['joins'] = $each['joins'];
             $tmp['openid'] = $each['openid'];
-            $tmp['number'] = $each['number'];
             $tmp['createtime'] = $each['createtime'];
             $tmp['phonetime'] = $each['phonetime'];
             $tmp['sharetime'] = $each['sharetime'];
@@ -194,24 +193,22 @@ class MotianlunAction  extends BonusAction {
             $tmp['province'] = $fansInfo['province'];
             $savePath = './PUBLIC/imagess/';
             $openid = $each['openid'];
-            $t = $each['uploadimagetime'];
-            $uploadImageSrc= $savePath."$openid"."_$t".".jpeg";
-            if(file_exists($uploadImageSrc)){
-                $tmp['imgsrc'] = $uploadImageSrc;
+            $prize = $each['prize'];
+            if($prize == 1){
+                $tmp['prize']= '特等奖';
+            }elseif($prize == 2){
+                $tmp['prize']= '一等奖';
             }else{
-                $tmp['imgsrc'] = 1;
+                $tmp['prize']= '未中奖';
             }
+            $tmp['first_draw'] = $each['rank1'];
+            $firstDrawTime = M('motianlun_drawlist')->where('uid='. $each['id'] ." and position=1")->getField('createtime');
+            $tmp['first_draw_time'] = $firstDrawTime;
 
-//            //根据openid获取收获地址
-//            $awardInfo = M("countmask_award")->where(array("openid" => $each['openid']))->find();
-//            if($info){
-//                $tmp['awardusername'] = $awardInfo['name'];//收货人姓名
-//                $tmp['awarduserphone'] = $awardInfo['phone'];//收货人手机号
-//                $tmp['awarduserprovince'] = $awardInfo['phone'];//收货人省份
-//                $tmp['awardusercity'] = $awardInfo['phone'];//收货人城市
-//                $tmp['awarduseraddress'] = $awardInfo['phone'];//收货人地址
-//            }
-
+            $tmp['second_draw'] = $each['rank2'];
+            $secondDrawTime = M('motianlun_drawlist')->where('uid='. $each['id'] ." and position=2")->getField('createtime');
+            $tmp['second_draw_time'] = $secondDrawTime;
+            $tmp['third_draw_time'] = $each['thirdtime'];
             $infoList[] = $tmp;
         }
 //        var_dump($infoList);

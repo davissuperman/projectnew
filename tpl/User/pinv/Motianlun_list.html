@@ -44,12 +44,17 @@
                                     <!--<th class="sevenTd">手机号码 </th>-->
                                     <th class="sevenTd">参与游戏时间 </th>
                                     <th class="sevenTd">首次分享时间 </th>
-                                    <th class="sevenTd">总得数</th>
                                     <th class="sevenTd">PV</th>
                                     <th class="sevenTd">UV</th>
                                     <th class="sevenTd">分享数</th>
                                     <th class="sevenTd">得票数</th>
                                     <th class="sevenTd">扩散数</th>
+                                    <th class="sevenTd">奖项</th>
+                                    <th class="sevenTd">第一次抽奖名次</th>
+                                    <th class="sevenTd">第一次抽奖时间</th>
+                                    <th class="sevenTd">第二次抽奖名次</th>
+                                    <th class="sevenTd">第二次抽奖时间</th>
+                                    <th class="sevenTd">第三次抽奖时间</th>
                                     <th class="sevenTd">非法数据</th>
                                 </tr>
                                 <volist name="info" id="o"> 
@@ -64,17 +69,17 @@
                                         <!--<td>{pigcms:$o.telephone}</td>-->
                                         <td><if condition="$o.createtime gt 0">{pigcms:$o.createtime|date="Y-m-d H:i",###}<else/>-------------- --:-- </if></td>
                                         <td><if condition="$o.sharetime gt 0">{pigcms:$o.sharetime|date="Y-m-d H:i",###}<else/>-------------- --:-- </if></td>
-                                    <td>{pigcms:$o.number}</td>
                                     <th class="sevenTd">{pigcms:$o.views}</th>
                                     <th class="sevenTd">{pigcms:$o.uniqueviews}</th>
                                     <th class="sevenTd">{pigcms:$o.share}</th>
                                     <th class="sevenTd">{pigcms:$o.vote}</th>
                                     <th class="sevenTd">{pigcms:$o.joins}</th>
-                                    <!--<th class="sevenTd">{pigcms:$o.awardusername}</th>-->
-                                    <!--<th class="sevenTd">{pigcms:$o.awarduserphone}</th>-->
-                                    <!--<th class="sevenTd">{pigcms:$o.awarduserprovince}</th>-->
-                                    <!--<th class="sevenTd">{pigcms:$o.awardusercity}</th>-->
-                                    <!--<th class="sevenTd">{pigcms:$o.awarduseraddress}</th>-->
+                                    <th class="sevenTd">{pigcms:$o.prize}</th>
+                                    <th class="sevenTd">{pigcms:$o.first_draw}</th>
+                                    <th class="sevenTd">{pigcms:$o.first_draw_time}</th>
+                                    <th class="sevenTd">{pigcms:$o.second_draw}</th>
+                                    <th class="sevenTd">{pigcms:$o.second_draw_time}</th>
+                                    <th class="sevenTd">{pigcms:$o.third_draw_time}</th>
                                     <th class="sevenTd">{pigcms:$o.cheat}</th>
                                     </tr>
                                 </volist>
