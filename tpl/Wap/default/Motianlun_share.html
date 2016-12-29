@@ -9,10 +9,10 @@
     <meta name="keywords" content="" />
     <meta name="description" content="" />
     <title>森田新年福利大派送，幸运摩天轮转起来!</title>
-    <link href="{pigcms::RES}/motianlun/css/animate.css?v=201612271501" rel="stylesheet" type="text/css" />
-    <link href="{pigcms::RES}/motianlun/css/common.css?v=201612271501" rel="stylesheet" type="text/css" />
+    <link href="{pigcms::RES}/motianlun/css/animate.css?v=201612291501" rel="stylesheet" type="text/css" />
+    <link href="{pigcms::RES}/motianlun/css/common.css?v=201612291501" rel="stylesheet" type="text/css" />
     <script src="{pigcms::RES}/motianlun/js/zepto.min.js" type="text/javascript"></script>
-    <script src="{pigcms::RES}/motianlun/js/common.js?v=201612271501" type="text/javascript"></script>
+    <script src="{pigcms::RES}/motianlun/js/common.js?v=201612291501" type="text/javascript"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
 <script>
     wx.config({
@@ -167,7 +167,7 @@
 <div class="common-people"></div>
 <dl class="common-step">
     <dt>奖池剩余</dt>
-    <dd>森田奖品特等奖<strong>{pigcms::$leftTeDengJiang}</strong>份，一等奖<strong>{pigcms::$leftYiDengJiang}</strong>份（由于可能存在数据延时问题，所以奖池剩余数据仅供参考，特此告知！）</dd>
+    <dd>森田奖品特等奖<strong>{pigcms::$leftTeDengJiang}</strong>份，一等奖<strong>{pigcms::$leftYiDengJiang}</strong>份<span>（由于可能存在数据延时问题，所以奖池剩余数据仅供参考，特此告知！）</span></dd>
 </dl>
 
 
@@ -231,7 +231,20 @@
                             var drawTotal = dataObj[2];
                             if (returnMessage != '') {
                                 Pop.alerts(returnMessage);
-                                if(drawTotal == '3'){
+								$("#confirms").bind('click',function(){
+									if(drawTotal == '3'){
+										window.location.href = 'http://mp.weixin.qq.com/s/o4Vu9MOSe2dYaUgxV77Dew';
+									}else{
+										if(prize == '1'){
+											window.location.href = 'http://mp.weixin.qq.com/s/Cqw5hmJtxCrgvyUaVZNEyw';
+										}else if(prize == '2'){
+											window.location.href = 'http://mp.weixin.qq.com/s/Cqw5hmJtxCrgvyUaVZNEyw';
+										}else{
+											window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Motianlun&a=share&gid={pigcms::$gid}';
+										}
+									}
+								});
+                               /* if(drawTotal == '3'){
                                     setTimeout(function(){
                                         window.location.href = 'http://mp.weixin.qq.com/s/o4Vu9MOSe2dYaUgxV77Dew';
                                     },2000);
@@ -249,7 +262,7 @@
                                             window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Motianlun&a=share&gid={pigcms::$gid}';
                                         },5000);
                                     }
-                                }
+                                }*/
                             }else{
                                 window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Motianlun&a=index&gid={pigcms::$gid}';
                             }
