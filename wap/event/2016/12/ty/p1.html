@@ -45,7 +45,7 @@
     <div class="common-people"></div>
     <dl class="common-step">
     	<dt>奖池剩余</dt>
-        <dd>森田奖品特等奖<strong>X</strong>份，一等奖<strong>XXX</strong>份（由于可能存在数据延时问题，所以奖池剩余数据仅供参考，特此告知！）</dd>
+        <dd>森田奖品特等奖<strong>X</strong>份，一等奖<strong>XXX</strong>份<span>（由于可能存在数据延时问题，所以奖池剩余数据仅供参考，特此告知！）</span></dd>
     </dl>
    
     
@@ -97,8 +97,16 @@
 				$("#confirms").bind('click',function(){
 					goPage();
 				});
+				
+				$(".pop-text .text").css({
+					"font-size":"0.35rem",
+					"text-align": "center"
+				});
+				$("#confirms").html("登记领奖收货信息").css({"width":"auto"});
+				
+				
 				setTimeout(function(){
-					goPage();
+					//goPage();
 				},5000);
 			});
 		}
