@@ -270,7 +270,8 @@ HTML;
         if($leftTeDengJiang < 0 ){
             $leftTeDengJiang = 0;
         }
-        $leftYiDengJiang = $this->yiDengJiangCount - $teDengJiangCount;
+        $yiDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
+        $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
         if($leftYiDengJiang < 0 ){
             $leftYiDengJiang = 0;
         }
@@ -591,7 +592,8 @@ HTML;
         if($leftTeDengJiang < 0 ){
             $leftTeDengJiang = 0;
         }
-        $leftYiDengJiang = $this->yiDengJiangCount - $teDengJiangCount;
+        $yiDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
+        $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
         if($leftYiDengJiang < 0 ){
             $leftYiDengJiang = 0;
         }
@@ -772,7 +774,8 @@ HTML;
         if($leftTeDengJiang < 0 ){
             $leftTeDengJiang = 0;
         }
-        $leftYiDengJiang = $this->yiDengJiangCount - $teDengJiangCount;
+        $yiDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
+        $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
         if($leftYiDengJiang < 0 ){
             $leftYiDengJiang = 0;
         }

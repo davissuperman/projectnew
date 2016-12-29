@@ -225,6 +225,11 @@
                                 },2000);
                             }else if(returnCode == '2'){
                                 Pop.alerts('已投过');
+                            }else if(returnCode == '3'){
+                                Pop.alerts('您的好友票数已满,试试自己的运气吧');
+                                setTimeout(function(){
+                                    goPage();
+                                },2000);
                             }
 
                         }else{
