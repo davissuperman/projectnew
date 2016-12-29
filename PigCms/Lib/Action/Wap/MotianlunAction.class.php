@@ -801,7 +801,11 @@ HTML;
             //非法投票
             exit();
         }
-
+        $vote = M('motianlun')->where("id=$toUid")->getField('vote');
+        if($vote > 15){
+            echo 3;
+            return;
+        }
         $toOpenIdFromPost = $this->getOpenIdByUid($toUid);
         //检查此 local openid 是否投过票
         $voteList = M('motianlun_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
