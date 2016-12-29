@@ -163,34 +163,25 @@ HTML;
                     $webCreatetime = $apidata['web_createtime'];
                     $web_access_token = '';
 
-                    if(false){//$webCreatetime>(time()-7200) && $userOpenId
-                        //未过期
-                        //$web_access_token = $apidata['web_access_token'];
-                    }else{
-                        //重新获取
-                        $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
-                        if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
-                            //code 有错误 需要重定向
-                            $url = $this->url."/index.php?g=Wap&m=Motianlun&a=index&gid=$gid";
-                            header("location:$url");
-                        }
-//                        $m['id'] = $apidata['id'];
-//                        $m['web_access_token'] = $userinfoFromApi['access_token'];
-//                        $m['refresh_token'] = $userinfoFromApi['refresh_token'];
-//                        $m['web_createtime'] = time();
-//                        $m['refresh_token_createtime'] = time();
-//                        M('Diymen_set')->save($m);
-                        $web_access_token = $userinfoFromApi['access_token'];
-                        cookie('user_openid', $userinfoFromApi['openid'], 315360000);
-                        $userOpenId = $userinfoFromApi['openid'];
+                    //重新获取
+                    $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
+                    if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
+                        //code 有错误 需要重定向
+                        $url = $this->url."/index.php?g=Wap&m=Motianlun&a=index&gid=$gid";
+                        header("location:$url");
                     }
+                    $m['id'] = $apidata['id'];
+                    $m['web_access_token'] = $userinfoFromApi['access_token'];
+                    $m['refresh_token'] = $userinfoFromApi['refresh_token'];
+                    $m['web_createtime'] = time();
+                    $m['refresh_token_createtime'] = time();
+                    M('Diymen_set')->save($m);
+                    $web_access_token = $userinfoFromApi['access_token'];
+                    cookie('user_openid', $userinfoFromApi['openid'], 315360000);
+                    $userOpenId = $userinfoFromApi['openid'];
 
-                    //根据access_token 拉到用户基本信息
-                    $gUrl = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$web_access_token.'&openid='.$userOpenId.'&lang=zh_CN';
-                    $json = json_decode($this->curlGet($gUrl));
-                    $this->saveUserInfo($json);
-                    $selfUserInfo['headimgurl'] = $json->headimgurl;
-                    $selfUserInfo['nickname'] = $json->nickname;
+//                    $selfUserInfo['headimgurl'] = $json->headimgurl;
+//                    $selfUserInfo['nickname'] = $json->nickname;
                 }
             } else {
                 $url = urlencode($this->url."/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
@@ -202,8 +193,8 @@ HTML;
 
 
 
-        $nickname = $selfUserInfo['nickname'];
-        $imageProfile = $selfUserInfo['headimgurl'];
+        $nickname = '';
+        $imageProfile = '';
 
         //首先判断当前用户是否有玩过第一次
         $info = M('Motianlun')->where(array('openid' => $userOpenId))->find();

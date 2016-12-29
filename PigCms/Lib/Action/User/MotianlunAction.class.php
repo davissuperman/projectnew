@@ -202,11 +202,11 @@ class MotianlunAction  extends BonusAction {
                 $tmp['prize']= '未中奖';
             }
             $tmp['first_draw'] = $each['rank1'];
-            $firstDrawTime = M('motianlun_drawlist')->where('uid='. $each['id'] ." and position=1")->getField('createtime');
+            $firstDrawTime = M('motianlun_drawlist')->where('uid='. $each['id'] ." and position=1")->order('id desc')->getField('createtime');
             $tmp['first_draw_time'] = $firstDrawTime;
 
             $tmp['second_draw'] = $each['rank2'];
-            $secondDrawTime = M('motianlun_drawlist')->where('uid='. $each['id'] ." and position=2")->getField('createtime');
+            $secondDrawTime = M('motianlun_drawlist')->where('uid='. $each['id'] ." and position=2")->order('id desc')->getField('createtime');
             $tmp['second_draw_time'] = $secondDrawTime;
             $tmp['third_draw_time'] = $each['thirdtime'];
             $infoList[] = $tmp;
