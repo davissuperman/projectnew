@@ -978,9 +978,9 @@ HTML;
 
     function whetherDraw($paiming){
         $return = null;
-        if(strrchr((string)"$paiming","66") == "66"){
+        if($paiming*1 == 66 || $paiming*1 == 566 || $paiming*1 == 1166 || $paiming*1 == 3166 || $paiming*1 == 4566 || $paiming*1 == 5966 || $paiming*1 == 6966 || $paiming*1 == 7966 || $paiming*1 == 8966 || $paiming*1 == 9566){
             $return = 1;
-        }if(strrchr((string)"$paiming","7") == "7"){
+        }elseif(strrchr((string)"$paiming","7") == "7"){
             $return = 2;
         }
         return $return;
