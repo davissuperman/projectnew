@@ -805,7 +805,7 @@ HTML;
             exit();
         }
         $vote = M('motianlun')->where("id=$toUid")->getField('vote');
-        if($vote > 15){
+        if($vote >= 15){
             echo 3;
             return;
         }
