@@ -861,17 +861,17 @@ HTML;
         $voteCount = $info['vote'];
         if($prize == 1){
             //已获得特等奖，无法再抽奖
-            $returnMessage = "已获奖,无法再抽奖";
+            $returnMessage = "已获特等奖,无法再抽奖";
             echo json_encode(array($returnMessage,$prize,$drawCount+1)) ;
             return;
         }
         if($prize == 2){
             //已获得特等奖，无法再抽奖
-            $returnMessage = "已获奖,无法再抽奖";
+            $returnMessage = "已获一等奖,无法再抽奖";
             echo json_encode(array($returnMessage,$prize,$drawCount+1)) ;
             return;
         }
-        //还未抽奖
+        //还未抽中奖
         if(!$prize){
             if(!$drawCount && $voteCount>=5){
                 //第一次抽
