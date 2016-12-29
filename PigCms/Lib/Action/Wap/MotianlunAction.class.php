@@ -859,8 +859,19 @@ HTML;
         //查看抽奖次数
         $drawCount = $info['draw'];
         $voteCount = $info['vote'];
-
-        //还未抽奖
+        if($prize == 1){
+            //已获得特等奖，无法再抽奖
+            $returnMessage = "已获特等奖,无法再抽奖";
+            echo json_encode(array($returnMessage,$prize,$drawCount+1)) ;
+            return;
+        }
+        if($prize == 2){
+            //已获得特等奖，无法再抽奖
+            $returnMessage = "已获一等奖,无法再抽奖";
+            echo json_encode(array($returnMessage,$prize,$drawCount+1)) ;
+            return;
+        }
+        //还未抽中奖
         if(!$prize){
             if(!$drawCount && $voteCount>=5){
                 //第一次抽
@@ -967,9 +978,9 @@ HTML;
 
     function whetherDraw($paiming){
         $return = null;
-        if(strrchr((string)"$paiming","66") == "66"){
+        if($paiming*1 == 66 || $paiming*1 == 566 || $paiming*1 == 1166 || $paiming*1 == 3166 || $paiming*1 == 4566 || $paiming*1 == 5966 || $paiming*1 == 6966 || $paiming*1 == 7966 || $paiming*1 == 8966 || $paiming*1 == 9566){
             $return = 1;
-        }if(strrchr((string)"$paiming","7") == "7"){
+        }elseif(strrchr((string)"$paiming","7") == "7"){
             $return = 2;
         }
         return $return;
