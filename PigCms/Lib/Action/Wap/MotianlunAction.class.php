@@ -74,7 +74,7 @@ class MotianlunAction extends SjzAction {
                 echo $userOpenId;
             }
         } else {
-            $url = urlencode($this->url."/index.php?g=Wap&m=Motianlun&a=getOpenId");
+            $url = urlencode($this->url."/index.php?g=Wap&m=Motianlun&a=getInfo");
             header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
             exit;
         }
