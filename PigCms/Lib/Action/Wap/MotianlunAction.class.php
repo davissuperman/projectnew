@@ -912,7 +912,7 @@ HTML;
                 //第二次抽奖
                 $p = array();
                 $p['uid'] =  $info['id'];
-                $p['position'] =  1;
+                $p['position'] =  2;
                 $paiming = M('motianlun_drawlist')->add($p);
                 $prize = $this->whetherDraw($paiming);
                 if($prize == 1){
