@@ -342,14 +342,6 @@ HTML;
             $this->setIncViews($info['id']);
         }
         $prize = $info['prize'];
-        if( !($prize == 1 ||  $prize == 2) ){
-            $html = "亲，未中奖。 若需要联系客服，请提供用户凭证：".$info['openid'];
-            echo $html;
-            exit;
-        }
-
-
-
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
@@ -369,10 +361,22 @@ HTML;
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
+        $this->assign("prize",$prize);
+        $this->assign("openid",$userOpenId);
 
-
-
-
+        $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
+        $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
+        if($leftTeDengJiang < 0 ){
+            $leftTeDengJiang = 0;
+        }
+        $yiDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
+        $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
+        if($leftYiDengJiang < 0 ){
+            $leftYiDengJiang = 0;
+        }
+        $this->assign("leftTeDengJiang",$leftTeDengJiang);
+        $this->assign("leftYiDengJiang",$leftYiDengJiang);
+        $this->assign("draw",$draw);
         $this->display();
     }
 

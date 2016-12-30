@@ -148,17 +148,26 @@
     <p><img src="{pigcms::RES}/motianlun/images/a/a6.png" width="100%" /></p>
 </div>
 
-<div class="lottery-page">
-    <dl class="lottery-box">
-        <dt>恭喜您中奖啦</dt>
-        <dd>请中奖者点击以下按钮,于2017年1月xx日24点前填写收货信息,逾期未填写视为自动放弃资格.我们将于2月11日后将奖品寄送给您(春节期间快递因素)。感谢您的参与!</dd>
-    </dl>
+<if condition="  ($prize eq  1) or ($prize eq  2)">
+        <div class="lottery-page">
+            <dl class="lottery-box">
+                <dt>恭喜您中奖啦</dt>
+                <dd>请中奖者点击以下按钮,于2017年1月xx日24点前填写收货信息,逾期未填写视为自动放弃资格.我们将于2月11日后将奖品寄送给您(春节期间快递因素)。感谢您的参与!</dd>
+            </dl>
 
-    <div class="btns-box">
-        <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Motianlun&a=form" title="填写收获地址" class="btn-out">填写收获地址</a>
+            <div class="btns-box">
+                <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Motianlun&a=form" title="填写收获地址" class="btn-out">填写收获地址</a>
+            </div>
+        </div>
+    <else/>
+    <div class="lottery-page">
+        <dl class="lottery-box">
+            <dt>亲，未中奖。 若需要联系客服，请提供以下用户凭证：</dt>
+            <dd>{pigcms::$openid}</dd>
+        </dl>
+
     </div>
-
-</div>
+    </if>
 <div class="advertising">广告</div>
 <dl class="common-step">
     <dt>奖池剩余</dt>
