@@ -343,7 +343,8 @@ HTML;
         }
         $prize = $info['prize'];
         if( !($prize == 1 ||  $prize == 2) ){
-            echo '未中奖';
+            $html = "亲，未中奖。 若需要联系客服，请提供用户凭证：".$info['openid'];
+            echo $html;
             exit;
         }
 
