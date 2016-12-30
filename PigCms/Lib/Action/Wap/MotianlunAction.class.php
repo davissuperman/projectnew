@@ -1215,6 +1215,21 @@ HTML;
         $this->assign("province",$province);
         $this->assign("gid",$gid);
         $this->assign("whetheraward",$a);
+
+        $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
+        $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
+        if($leftTeDengJiang < 0 ){
+            $leftTeDengJiang = 0;
+        }
+        $yiDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
+        $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
+        if($leftYiDengJiang < 0 ){
+            $leftYiDengJiang = 0;
+        }
+        $this->assign("leftTeDengJiang",$leftTeDengJiang);
+        $this->assign("leftYiDengJiang",$leftYiDengJiang);
+
+
         $this->display();
     }
 
