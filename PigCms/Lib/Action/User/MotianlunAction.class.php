@@ -767,11 +767,6 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 }else{
                     $tmp['sharetime'] = "无";
                 }
-                if($each['phonetime']){
-                    $tmp['phonetime'] = date('Y-m-d H:i:s', $tmp['phonetime']);
-                }else{
-                    $tmp['phonetime'] = "无";
-                }
                 if($each['views']< $each['vote'] || $each['illegal']){
                     $tmp['illegal'] = "是";
                 }else{
@@ -793,25 +788,23 @@ award.address as addres,award.orderid as orderid,award.username as username from
                         $tmp['address'] = $award['address'];
                     }
                 }
-                $phone = $each['phone'];
-                $orderId = null;
-                $orderId = M('motianlun_phonelist')->where(array('uid' => $each['id']) )->getField('id');
-                $tmp['orderid'] = $orderId;
-
                 $level = null;
-//                if((int)$orderId == 2016){
-//                    $level = '特等奖';
-//                }elseif(strrchr((string)"$orderId","18") == "18"){
-//                    $level = 1;
-//                }elseif(strrchr((string)"$orderId","1") == '1'){
-//                    $level = 2;
-//                }elseif(strrchr((string)"$orderId","8") == '8'){
-//                    $level = 2;
-//                }
-                if(strrchr((string)"$orderId","1") == '1' || strrchr((string)"$orderId","6") == '6'){
-                    $level = '已中奖';
+                if($each['prize'] == 1){
+                    $level = '特等奖';
+                }else if($each['prize'] == 2){
+                    $level = '一等奖';
+                }else  {
+                    $level = '未中奖';
                 }
                 $tmp['level'] = $level;
+                $tmp['first_draw'] = $each['rank1'];
+                $firstDrawTime = M('motianlun_drawlist')->where('uid='. $each['id'] ." and position=1")->order('id desc')->getField('createtime');
+                $tmp['first_draw_time'] = $firstDrawTime;
+
+                $tmp['second_draw'] = $each['rank2'];
+                $secondDrawTime = M('motianlun_drawlist')->where('uid='. $each['id'] ." and position=2")->order('id desc')->getField('createtime');
+                $tmp['second_draw_time'] = $secondDrawTime;
+                $tmp['third_draw_time'] = $each['thirdtime'];
                 $listArr[] = $tmp;
             }
         }
@@ -896,27 +889,25 @@ award.address as addres,award.orderid as orderid,award.username as username from
         $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('A1', 'ID')
             ->setCellValue('B1', 'OPENID')
-            ->setCellValue('C1', '微信昵称')
-            ->setCellValue('D1', '是否提交成绩')
-            ->setCellValue('E1', '来源分组')
-            ->setCellValue('F1', '参加游戏时间')
-            ->setCellValue('G1', '首次分享时间')
-            ->setCellValue('H1', '手机号')
-            ->setCellValue('I1', '提交手机号时间')
-            ->setCellValue('J1', 'PV')
-            ->setCellValue('K1', 'UV')
-            ->setCellValue('L1', '分享数')
-            ->setCellValue('M1', '得票数')
-            ->setCellValue('N1', '扩散数')
-            ->setCellValue('O1', '收货姓名')
-            ->setCellValue('P1', '收货手机')
-            ->setCellValue('Q1', '省份')
-            ->setCellValue('R1', '城市')
-            ->setCellValue('S1', '地址')
-            ->setCellValue('T1', '排名')
-            ->setCellValue('U1', '奖项')
-            ->setCellValue('V1', 'UID')
-            ->setCellValue('W1', '获取20票时间')
+            ->setCellValue('C1', '来源分组')
+            ->setCellValue('D1', '参加游戏时间')
+            ->setCellValue('E1', '首次分享时间')
+            ->setCellValue('F1', 'PV')
+            ->setCellValue('G1', 'UV')
+            ->setCellValue('H1', '分享数')
+            ->setCellValue('I1', '得票数')
+            ->setCellValue('J1', '扩散数')
+            ->setCellValue('K1', '收货姓名')
+            ->setCellValue('L1', '收货手机')
+            ->setCellValue('M1', '省份')
+            ->setCellValue('N1', '城市')
+            ->setCellValue('O1', '地址')
+            ->setCellValue('P1', '奖项')
+            ->setCellValue('Q1', '第一次抽奖名次')
+            ->setCellValue('R1', '第一次抽奖时间')
+            ->setCellValue('S1', '第二次抽奖名次')
+            ->setCellValue('T1', '第二次抽奖时间')
+            ->setCellValue('U1', '第三次抽奖时间')
             ;
         //写出内容 UTF-8
         //log :: write( print_r($data,true)  );
@@ -928,27 +919,25 @@ award.address as addres,award.orderid as orderid,award.username as username from
             $objPHPExcel->setActiveSheetIndex(0)
                 ->setCellValue('A' . ($n + 2), $n+1)
                 ->setCellValue('B' . ($n + 2), $data[$n]['openid'])
-                ->setCellValue('C' . ($n + 2),  $name)
-                ->setCellValue('D' . ($n + 2), $data[$n]['phone'])
-                ->setCellValue('E' . ($n + 2), $data[$n]['gidname'])
-                ->setCellValue('F' . ($n + 2), $data[$n]['createtime'])
-                ->setCellValue('G' . ($n + 2), $data[$n]['sharetime'])
-                ->setCellValue('H' . ($n + 2), $data[$n]['phone'])
-                ->setCellValue('I' . ($n + 2), $data[$n]['phonetime'])
-                ->setCellValue('J' . ($n + 2), $data[$n]['views'])
-                ->setCellValue('K' . ($n + 2), $data[$n]['uniqueviews'])
-                ->setCellValue('L' . ($n + 2), $data[$n]['share'])
-                ->setCellValue('M' . ($n + 2), $data[$n]['vote'])
-                ->setCellValue('N' . ($n + 2), $data[$n]['joins'])
-                ->setCellValue('O' . ($n + 2), $data[$n]['username'])
-                ->setCellValue('P' . ($n + 2), $data[$n]['userphone'])
-                ->setCellValue('Q' . ($n + 2), $data[$n]['userprovince'])
-                ->setCellValue('R' . ($n + 2), $data[$n]['city'])
-                ->setCellValue('S' . ($n + 2), $data[$n]['address'])
-                ->setCellValue('T' . ($n + 2), $data[$n]['orderid'])
-                ->setCellValue('U' . ($n + 2), $data[$n]['level'] )
-                ->setCellValue('V' . ($n + 2), $data[$n]['uid'] )
-                ->setCellValue('W' . ($n + 2), $data[$n]['phonecreatetime'] )
+                ->setCellValue('C' . ($n + 2), $data[$n]['gidname'])
+                ->setCellValue('D' . ($n + 2), $data[$n]['createtime'])
+                ->setCellValue('E' . ($n + 2), $data[$n]['sharetime'])
+                ->setCellValue('F' . ($n + 2), $data[$n]['views'])
+                ->setCellValue('G' . ($n + 2), $data[$n]['uniqueviews'])
+                ->setCellValue('H' . ($n + 2), $data[$n]['share'])
+                ->setCellValue('I' . ($n + 2), $data[$n]['vote'])
+                ->setCellValue('J' . ($n + 2), $data[$n]['joins'])
+                ->setCellValue('K' . ($n + 2), $data[$n]['username'])
+                ->setCellValue('L' . ($n + 2), $data[$n]['userphone'])
+                ->setCellValue('M' . ($n + 2), $data[$n]['userprovince'])
+                ->setCellValue('N' . ($n + 2), $data[$n]['city'])
+                ->setCellValue('O' . ($n + 2), $data[$n]['address'])
+                ->setCellValue('P' . ($n + 2), $data[$n]['level'] )
+                ->setCellValue('Q' . ($n + 2), $data[$n]['first_draw'] )
+                ->setCellValue('R' . ($n + 2), $data[$n]['first_draw_time'] )
+                ->setCellValue('S' . ($n + 2), $data[$n]['second_draw'] )
+                ->setCellValue('T' . ($n + 2), $data[$n]['second_draw_time'] )
+                ->setCellValue('U' . ($n + 2), $data[$n]['third_draw_time'] )
                 ;
 
         }
