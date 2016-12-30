@@ -621,25 +621,22 @@ award.address as addres,award.orderid as orderid,award.username as username from
                 $tmp['orderid'] = $orderId;
 
                 $level = null;
-//                if((int)$orderId == 2016){
-//                    $level = '特等奖';
-//                }elseif(strrchr((string)"$orderId","18") == "18"){
-//                    $level = 1;
-//                }elseif(strrchr((string)"$orderId","1") == '1'){
-//                    $level = 2;
-//                }elseif(strrchr((string)"$orderId","8") == '8'){
-//                    $level = 2;
-//                }
-                if(strrchr((string)"$orderId","1") == '1' || strrchr((string)"$orderId","6") == '6'){
-                    $level = '已中奖';
+                if($each['prize'] == 1){
+                    $level = '特等奖';
+                }else if($each['prize'] == 2){
+                    $level = '一等奖';
+                }else  {
+                    $level = '未中奖';
                 }
-                $timePhoneCreate = $orderId = M('motianlun_phonelist')->where(array('uid' => $each['id']) )->getField('createtime');
                 $tmp['level'] = $level;
-                if($timePhoneCreate){
-                    $tmp['phonecreatetime'] = date("Y-m-d H:i:s",$timePhoneCreate);
-                }else{
-                    $tmp['phonecreatetime'] = 0;
-                }
+                $tmp['first_draw'] = $each['rank1'];
+                $firstDrawTime = M('motianlun_drawlist')->where('uid='. $each['id'] ." and position=1")->order('id desc')->getField('createtime');
+                $tmp['first_draw_time'] = $firstDrawTime;
+
+                $tmp['second_draw'] = $each['rank2'];
+                $secondDrawTime = M('motianlun_drawlist')->where('uid='. $each['id'] ." and position=2")->order('id desc')->getField('createtime');
+                $tmp['second_draw_time'] = $secondDrawTime;
+                $tmp['third_draw_time'] = $each['thirdtime'];
 
                 $listArr[] = $tmp;
             }
