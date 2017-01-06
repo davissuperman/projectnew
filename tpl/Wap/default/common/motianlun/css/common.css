@@ -315,8 +315,8 @@ input,textarea,select,button{font-size:1em;}
 .btn-vote{
 	background: url(../images/a/btn2.png) no-repeat;
 	 background-size: 100% auto;
-	     width: 2.5rem;
-    height: 0.6rem;
+	     width: 2rem;
+    height: 0.45rem;
 	display:inline-block; position:relative;vertical-align: top;
 }
 .btn-vote i.hand{background: url(../images/a/img03.png) no-repeat;
@@ -335,11 +335,11 @@ input,textarea,select,button{font-size:1em;}
     left: -0.5rem;}
 .btn-rule{background: url(../images/a/btn3.png) no-repeat;
 	 background-size: 100% auto;
-	     width: 2.5rem;
-    height: 0.6rem;
+	     width: 2rem;
+    height: 0.45rem;
 	display:inline-block;color: #fff;
     text-decoration: none;
-    line-height: 0.6rem;overflow:hidden;}
+    line-height: 0.45rem;overflow:hidden;}
 
 .need-vote-panel{ text-align:center;color:#fdf512; line-height:0.3rem;}
 
