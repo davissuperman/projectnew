@@ -329,9 +329,9 @@ input,textarea,select,button{font-size:1em;}
 .btn-vote i.tip{background: url(../images/a/img04.png) no-repeat;
 	 background-size: auto 100% ;
 	      width: 2rem;
-    height: 1.2rem;
+    height: 1rem;
     position: absolute;
-    bottom: -0.8rem;
+    bottom: -0.6rem;
     left: -0.5rem;}
 .btn-rule{background: url(../images/a/btn3.png) no-repeat;
 	 background-size: 100% auto;
@@ -341,7 +341,7 @@ input,textarea,select,button{font-size:1em;}
     text-decoration: none;
     line-height: 0.6rem;overflow:hidden;}
 
-.need-vote-panel{ text-align:center;color:#fdf512; line-height:0.35rem;}
+.need-vote-panel{ text-align:center;color:#fdf512; line-height:0.3rem;}
 
 /*img-box*/
 .img-box{ text-align:center;}
@@ -359,10 +359,10 @@ input,textarea,select,button{font-size:1em;}
 
 /*首页*/
 
-.prize-box-index{margin-top: -1.35rem;color:#fff;}
-.prize-box-index p{font-size:0.25rem;}
+.prize-box-index{margin: -1.35rem 0 0 0;padding:0.05rem;color:#fff;}
+.prize-box-index p{font-size:0.2rem;}
 .prize-box-index p span{color:#fdf512;}
-.prize-box-index p.rule{margin-top:0.1rem;font-size:0.2rem;}
+.prize-box-index p.rule{margin-top:0rem;font-size:0.2rem;}
 
 .btns-box{ text-align:center; margin:0.1rem 0 0 0;z-index: 12;
     position: relative;}
