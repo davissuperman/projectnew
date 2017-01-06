@@ -2,6 +2,7 @@
 
 class MotianlunAction  extends BonusAction {
 
+    public $defalutGid = 115;
     public function _initialize() {
         parent::_initialize();
     }
@@ -490,6 +491,9 @@ award.address as addres,award.orderid as orderid,award.username as username from
             foreach($list as $key => $each){
                 $tmp = null;
                 $tmp = $each;
+                if($each['gid']*1 < $this->defalutGid){
+                    $each['gid'] = $this->defalutGid;
+                }
                 $gInfo = M("npic_twocode")->where(array('cid'=>$each['gid']))->select();
                 $awardInfo = array();
                 $gidName = $gInfo[0]['cname'];
@@ -564,6 +568,9 @@ award.address as addres,award.orderid as orderid,award.username as username from
             foreach($list as $key => $each){
                 $tmp = null;
                 $tmp = $each;
+                if($each['gid']*1 < $this->defalutGid){
+                    $each['gid'] = $this->defalutGid;
+                }
                 $gInfo = M("npic_twocode")->where(array('cid'=>$each['gid']))->select();
                 $awardInfo = array();
                 $gidName = $gInfo[0]['cname'];
