@@ -206,6 +206,8 @@ class MotianlunAction  extends BonusAction {
                 $tmp['prize']= '特等奖';
             }elseif($prize == 2){
                 $tmp['prize']= '一等奖';
+            }else if( $each['draw'] == 0 ){
+                $tmp['prize'] = '未抽奖';
             }else{
                 $tmp['prize']= '未中奖';
             }
@@ -551,6 +553,8 @@ award.address as addres,award.orderid as orderid,award.username as username from
                     $level = '特等奖';
                 }else if($each['prize'] == 2){
                     $level = '一等奖';
+                }else if( $each['draw'] == 0 ){
+                    $level = '未抽奖';
                 }else  {
                     $level = '未中奖';
                 }
@@ -628,6 +632,8 @@ award.address as addres,award.orderid as orderid,award.username as username from
                     $level = '特等奖';
                 }else if($each['prize'] == 2){
                     $level = '一等奖';
+                }else if( $each['draw'] == 0 ){
+                    $level = '未抽奖';
                 }else  {
                     $level = '未中奖';
                 }
@@ -793,6 +799,8 @@ award.address as addres,award.orderid as orderid,award.username as username from
                     $level = '特等奖';
                 }else if($each['prize'] == 2){
                     $level = '一等奖';
+                }else if( $each['draw'] == 0 ){
+                    $level = '未抽奖';
                 }else  {
                     $level = '未中奖';
                 }
