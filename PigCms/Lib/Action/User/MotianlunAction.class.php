@@ -93,6 +93,13 @@ class MotianlunAction  extends BonusAction {
         $this->display('award');
     }
 
+    public function currentJiang(){
+        $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
+        $yiDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
+        $this->assign('teDengJiangCount', $teDengJiangCount);
+        $this->assign('yiDengJiangCount',$yiDengJiangCount);
+        $this->display('currentJiang');
+    }
     public function statistics() {
         $db = M('doing_info_date');
         $count = $db->count();
