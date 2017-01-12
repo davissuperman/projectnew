@@ -11,9 +11,9 @@ class SecodeAction extends Action {
     }
     public function generateHyFile(){
         //获取当天的数据
-        $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d")-1,date("Y")));
-        $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d")-1,date("Y")));
-        $list = M('customer_service_fans')->query("SELECT * from tp_customer_service_fans WHERE subscribe=1 order by subscribe_time limit 300000");
+        $start = mktime(0,0,0,date("m"),date("d")-1,date("Y"));
+        $end = mktime(23,59,59,date("m"),date("d")-1,date("Y"));
+        $list = M('customer_service_fans')->query("SELECT * from tp_customer_service_fans WHERE subscribe=1   and  subscribe_time >= $start and subscribe_time<=$end order by subscribe_time limit 300000");
         $listArr = array();
         $fileData = $this->fileDate;
         $localfile = DATA_PATH.'HY_'.$fileData.'.txt';
