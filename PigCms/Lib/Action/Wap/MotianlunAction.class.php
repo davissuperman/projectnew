@@ -1,8 +1,8 @@
 <?php
 
 class MotianlunAction extends SjzAction {
-    public $title = '森田新年福利大派送，幸运摩天轮转起来!';
-    public $bonusdesc = '您有三次机会领走20盒面膜大奖的机会！还等待什么？';
+    public $title = '和森田一起点亮幸运摩天轮,旋转新年美丽心愿!';
+    public $bonusdesc = '特等奖20盒面膜,共1200份奖品, 我已经使出洪荒之力,你还在等什么,马上开始吧!';
     public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
