@@ -27,7 +27,7 @@ class MotianlunAction extends SjzAction {
         $this->shareImageUrl = "http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/motianlun/images/logo1.jpg';
 
         $ip=get_client_ip();
-        $userOpenId= cookie('user_openid');
+        $userOpenId= cookie('user_openid_new');
         if($userOpenId){
             $uid = $this->getUidByOpenid($userOpenId);
             if($uid){
@@ -69,7 +69,7 @@ class MotianlunAction extends SjzAction {
                 $m['refresh_token_createtime'] = time();
                 M('Diymen_set')->save($m);
                 $web_access_token = $userinfoFromApi['access_token'];
-                cookie('user_openid', $userinfoFromApi['openid'], 315360000);
+                cookie('user_openid_new', $userinfoFromApi['openid'], 315360000);
                 $userOpenId = $userinfoFromApi['openid'];
                 echo $userOpenId;
             }
@@ -90,7 +90,7 @@ class MotianlunAction extends SjzAction {
                 $mainGid = $_GET['uid'];
             }
         }else{
-            $userOpenId= cookie('user_openid');
+            $userOpenId= cookie('user_openid_new');
             $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
             $mainId = $info['id'];
             $mainGid = $info['gid'];
@@ -182,7 +182,7 @@ HTML;
             $gid = $this->defalutGid;
         }
         $this->setEndTime();
-        $userOpenId= cookie('user_openid');
+        $userOpenId= cookie('user_openid_new');
 //        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         $fansInfo = null;
         $selfUserInfo = array();
@@ -213,7 +213,7 @@ HTML;
                     $m['refresh_token_createtime'] = time();
                     M('Diymen_set')->save($m);
                     $web_access_token = $userinfoFromApi['access_token'];
-                    cookie('user_openid', $userinfoFromApi['openid'], 315360000);
+                    cookie('user_openid_new', $userinfoFromApi['openid'], 315360000);
                     $userOpenId = $userinfoFromApi['openid'];
 
 //                    $selfUserInfo['headimgurl'] = $json->headimgurl;
@@ -327,7 +327,7 @@ HTML;
     }
     public function success(){
         $this->setEndTime();
-        $userOpenId= cookie('user_openid');
+        $userOpenId= cookie('user_openid_new');
         //  $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         if(!$userOpenId){
             //redirect
@@ -336,6 +336,7 @@ HTML;
         }
 
         $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
+        $draw = $info['draw'];
         $gid = $info['gid'];
         //begin views
         if($info){
@@ -382,7 +383,7 @@ HTML;
 
     public function rule(){
         $this->setEndTime();
-        $userOpenId= cookie('user_openid');
+        $userOpenId= cookie('user_openid_new');
 //        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         if(!$userOpenId){
             //redirect
@@ -414,7 +415,7 @@ HTML;
         //end
 
         //begin views
-        $userOpenId= cookie('user_openid');
+        $userOpenId= cookie('user_openid_new');
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         if($info){
             $this->setIncViews($info['id']);
@@ -427,7 +428,7 @@ HTML;
 
     public function rank1(){
         $this->setEndTime();
-        $userOpenId= cookie('user_openid');
+        $userOpenId= cookie('user_openid_new');
         $gid = $_GET['gid'];
         if(!$gid){
             $gid = $this->defalutGid;
@@ -462,7 +463,7 @@ HTML;
         //end
 
         //begin views
-        $userOpenId= cookie('user_openid');
+        $userOpenId= cookie('user_openid_new');
         $info = M('countmask')->where(array('openid' => $userOpenId))->find();
         if($info){
             $this->setIncViews($info['id']);
@@ -496,7 +497,7 @@ HTML;
 
         if($indexSelf){
             //首先查看是否为自己投过票
-            $userOpenId= cookie('user_openid');
+            $userOpenId= cookie('user_openid_new');
            // $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
             $voteListSql = "SELECT id from tp_motianlun_votelist where fromopenid='$userOpenId' and toopenid='$userOpenId'";
             $voteView = M('motianlun_votelist')->query($voteListSql);
@@ -521,7 +522,7 @@ HTML;
     }
     public function share(){
         $this->setEndTime();
-        $userOpenId= cookie('user_openid');
+        $userOpenId= cookie('user_openid_new');
 //        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $gid = $_GET['gid'];
         if(!$gid){
@@ -641,7 +642,7 @@ HTML;
         $this->setEndTime();
         //这里是隐性获取OPENID 是朋友圈里面的人打开这个页面
         //获取OPENID 用户没有感知
-        $userOpenId= cookie('user_openid');
+        $userOpenId= cookie('user_openid_new');
 //        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $gid = $_GET['gid'];
         if(!$gid){
@@ -680,7 +681,7 @@ HTML;
                     $m['refresh_token_createtime'] = time();
                     M('Diymen_set')->save($m);
                     $web_access_token = $userinfoFromApi['access_token'];
-                    cookie('user_openid', $userinfoFromApi['openid'], 315360000);
+                    cookie('user_openid_new', $userinfoFromApi['openid'], 315360000);
                     $userOpenId = $userinfoFromApi['openid'];
 
                 }
@@ -829,7 +830,7 @@ HTML;
     public function saveVote2(){
         $this->setEndTime();
         $return = 0;
-        $fromOpenIdFromPost= cookie('user_openid');
+        $fromOpenIdFromPost= cookie('user_openid_new');
 //        $fromOpenIdFromPost = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         $toUid = $_POST['uid'];
         if(!$fromOpenIdFromPost){
@@ -876,7 +877,7 @@ HTML;
         $paiming = null;
         $prize = null;
         $returnMessage = null;
-        $fromOpenIdFromPost= cookie('user_openid');
+        $fromOpenIdFromPost= cookie('user_openid_new');
      //   $fromOpenIdFromPost = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         $info = M('motianlun')->where(array('openid' => $fromOpenIdFromPost))->find();
         if(!$info){
@@ -1022,7 +1023,7 @@ HTML;
         $this->setEndTime();
         $return = 0;
         $leftVote = 0;
-        $fromOpenIdFromPost= cookie('user_openid');
+        $fromOpenIdFromPost= cookie('user_openid_new');
      //   $fromOpenIdFromPost = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         $toOpenIdFromPost = $fromOpenIdFromPost;
         //检查此 local openid 是否投过票
@@ -1051,7 +1052,7 @@ HTML;
     public function saveFormInfo(){
         $this->setEndTime2();
         $return = 0;
-        $userOpenId= cookie('user_openid');
+        $userOpenId= cookie('user_openid_new');
      //   $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //非法投票
@@ -1090,7 +1091,7 @@ HTML;
         }
     }
     public function rank(){
-        $userOpenId= cookie('user_openid');
+        $userOpenId= cookie('user_openid_new');
         //        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
@@ -1158,7 +1159,7 @@ HTML;
 
     public function form(){
         $this->setEndTime2();
-        $userOpenId= cookie('user_openid');
+        $userOpenId= cookie('user_openid_new');
 //        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $gid = $_GET['gid'];
         if(!$gid){
@@ -1255,7 +1256,7 @@ HTML;
         if(!$gid){
             $gid = $this->defalutGid;
         }
-        $userOpenId= cookie('user_openid');
+        $userOpenId= cookie('user_openid_new');
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
@@ -1308,7 +1309,7 @@ HTML;
 
     public function  saveAward(){
         $return = 0;
-        $userOpenId= cookie('user_openid');
+        $userOpenId= cookie('user_openid_new');
         if(!$userOpenId){
             echo 0;
             return;
@@ -1409,7 +1410,7 @@ HTML;
             echo 0;
             exit;
         }
-        $userOpenId= cookie('user_openid');
+        $userOpenId= cookie('user_openid_new');
         $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
         if($info){
             $id = $info['id'];
@@ -1438,7 +1439,7 @@ HTML;
             echo 0;
             exit;
         }
-        $userOpenId= cookie('user_openid');
+        $userOpenId= cookie('user_openid_new');
         $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
         if($info){
             $id = $info['id'];
@@ -1480,7 +1481,7 @@ HTML;
         //帮忙投票 点击次数
         $toOpenId = $_POST['toopenid'];
         $uid = $_POST['uid'];
-        $userOpenId = cookie('user_openid');
+        $userOpenId = cookie('user_openid_new');
         $voteList = M('motianlun_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toOpenId))->find();
 
         //多次投票开启
@@ -1650,7 +1651,7 @@ HTML;
                     $m['refresh_token_createtime'] = time();
                     M('Diymen_set')->save($m);
                     $web_access_token = $userinfoFromApi['access_token'];
-                    cookie('user_openid', $userinfoFromApi['openid'], 315360000);
+                    cookie('user_openid_new', $userinfoFromApi['openid'], 315360000);
                     $userOpenId = $userinfoFromApi['openid'];
 
             }
