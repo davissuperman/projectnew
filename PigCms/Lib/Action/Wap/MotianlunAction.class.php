@@ -29,6 +29,7 @@ class MotianlunAction extends SjzAction {
         $ip=get_client_ip();
         $userOpenId= cookie('user_openid');
         $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+        cookie('user_openid', $userOpenId, 315360000);
         if($userOpenId){
             $uid = $this->getUidByOpenid($userOpenId);
             if($uid){
