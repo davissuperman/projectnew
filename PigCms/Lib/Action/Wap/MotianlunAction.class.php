@@ -221,7 +221,7 @@ HTML;
                 }
             } else {
                 $url = urlencode($this->url."/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
-                header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_userinfo&state=sentian#wechat_redirect");
+                header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
                 exit;
             }
         }
