@@ -699,27 +699,6 @@ HTML;
             exit();
         }
 
-        //直接跳转
-
-        $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
-        $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
-        if($leftTeDengJiang < 0 ){
-            $leftTeDengJiang = 0;
-        }
-
-        $yiDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
-        $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
-        if($leftYiDengJiang < 0 ){
-            $leftYiDengJiang = 0;
-        }
-        if($leftTeDengJiang == 0 && $leftYiDengJiang == 0){
-            //活动结束
-            $url = "http://mp.weixin.qq.com/s/t1d87DU4hId-5PuIj2YUmQ";
-            header("location:$url");
-            exit();
-        }
-        //直接跳转结束
-
 
         if(!$gid && isset($info['gid']) && $info['gid'] ){
             $gid = $info['gid'];
@@ -751,6 +730,27 @@ HTML;
             header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&gid=$gid");
             exit();
         }
+
+        //直接跳转
+
+        $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
+        $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
+        if($leftTeDengJiang < 0 ){
+            $leftTeDengJiang = 0;
+        }
+
+        $yiDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
+        $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
+        if($leftYiDengJiang < 0 ){
+            $leftYiDengJiang = 0;
+        }
+        if($leftTeDengJiang == 0 && $leftYiDengJiang == 0){
+            //活动结束
+            $url = "http://mp.weixin.qq.com/s/t1d87DU4hId-5PuIj2YUmQ";
+            header("location:$url");
+            exit();
+        }
+        //直接跳转结束
         $voteListSql = "SELECT * from tp_motianlun_votelist where fromopenid='$userOpenId' and toopenid='$MainOpenId'";
         $voteView = M('motianlun_votelist')->query($voteListSql);
 
