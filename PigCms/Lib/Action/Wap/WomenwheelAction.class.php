@@ -1,8 +1,8 @@
 <?php
 
 class WomenwheelAction extends SjzAction {
-    public $title = '和森田一起点亮幸运摩天轮,旋转新年美丽心愿!';
-    public $bonusdesc = '特等奖20盒面膜,共1000份奖品, 我已经使出洪荒之力,你还在等什么,马上开始吧!';
+    public $title = '和森田一起点亮幸运摩天轮!';
+    public $bonusdesc = '特等奖20盒面膜,共1200份奖品, 我已经使出洪荒之力,你还在等什么,马上开始吧!';
     public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
@@ -13,10 +13,10 @@ class WomenwheelAction extends SjzAction {
 
 
     //womenwheel
-    public $womenwheelCount = 15;
-    public $teDengJiangCount = 10;
+    public $womenwheelCount = 24;
+    public $teDengJiangCount = 20;
     public $yiDengJiangCount = 1000;
-    public $eachChouJiangVote = 5;
+    public $eachChouJiangVote = 8;
     public $totalChouJiangVote = 15;
     public $totalDrawCount = 3;
 
