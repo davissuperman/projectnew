@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>和森田一起点亮幸运摩天轮,旋转新年美丽心愿!</title>
+    <link href="{pigcms::RES}/womenwheel/css/animate.css?v=201701060102" rel="stylesheet" type="text/css" />
+    <link href="{pigcms::RES}/womenwheel/css/common.css?v=201701060102" rel="stylesheet" type="text/css" />
+    <script src="{pigcms::RES}/womenwheel/js/zepto.min.js" type="text/javascript"></script>
+    <script src="{pigcms::RES}/womenwheel/js/common.js?v=201701060102" type="text/javascript"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+<script>
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: '{pigcms::$appid}', // 必填，公众号的唯一标识
+        timestamp:  '{pigcms::$timestamp}', // 必填，生成签名的时间戳
+        nonceStr: '{pigcms::$nonceStr}', // 必填，生成签名的随机串
+        signature: '{pigcms::$signature}',// 必填，签名，见附录1
+        jsApiList: ['checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onRecordEnd',
+            'playVoice',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+    wx.ready(function () {
+        // 1 判断当前版本是否支持指定 JS 接口，支持批量判断
+        wx.checkJsApi({
+            jsApiList: [
+                'onMenuShareTimeline',
+                'getNetworkType',
+                'hideMenuItems',
+                'previewImage'
+            ],
+            success: function (res) {
+                //alert(JSON.stringify(res));
+            }
+        });
+
+        // 2. 分享接口
+        // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
+        wx.onMenuShareTimeline({
+            title: '{pigcms::$title}',
+            link: "{pigcms::$shareurl}",
+            imgUrl: "{pigcms::$shareimageurl}",
+            trigger: function (res) {
+                //alert('用户点击分享到朋友圈');
+            },
+            success: function (res) {
+                $.ajax({
+                    url: "{pigcms::$siteurl}/index.php?g=Wap&m=Xiezhuang&a=saveShareNumberToFriends",
+                    type:'GET',
+                    complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
+                    error: function() {},
+                    success: function(data) {
+                        if(data == 1){
+                            mnAlert("分享成功！");
+                        }
+                    }
+                });
+            },
+            cancel: function (res) {
+                //alert('已取消');
+            },
+            fail: function (res) {
+                //alert(JSON.stringify(res));
+            }
+        });
+
+        wx.onMenuShareAppMessage({
+            title: '{pigcms::$title}',
+            desc:  '{pigcms::$bonusdesc}',
+            link: '{pigcms::$shareurl}',
+            imgUrl: '{pigcms::$shareimageurl}',
+            trigger: function (res) {
+                //alert('用户点击发送给朋友');
+            },
+            success: function (res) {
+                $.ajax({
+                    url: "{pigcms::$siteurl}/index.php?g=Wap&m=Xiezhuang&a=saveShareNumberToFriends",
+                    type:'GET',
+                    complete :function(){}, //請求完回調的函數，無論成功與失敗都會調用，在success後
+                    error: function() { },
+                    success: function(data) {
+                        if(data == 1){
+                            mnAlert("分享成功！");
+                        }
+                    }
+                });
+            },
+            cancel: function (res) {
+                //alert('已取消');
+            },
+            fail: function (res) {
+                //alert(JSON.stringify(res));
+            }
+        });
+
+    });
+    wx.error(function (res) {
+       // alert(res.errMsg);
+    });
+
+    $(function(){
+    });
+</script>
+</head>
+<body id="body">
+<div class="img-box">
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/r1.jpg" width="100%" /></p>
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/r2.jpg" width="100%" /></p>
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/r3.jpg" width="100%" /></p>
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/r4.jpg" width="100%" /></p>
+    <p><img src="{pigcms::RES}/xiezhuang/images/p/r5.jpg" width="100%" /></p>
+</div>
+<div class="form-panel">
+    <if condition="$whetheraward eq  0">
+        <ul>
+            <li class="clrfix">
+                <div class="label">收货人姓名：</div>
+                <div class="controls">
+                    <input type="text" class="input-form"  placeholder="请输入收货人姓名" id="username" name="username"/>
+                </div>
+            </li>
+            <li class="clrfix">
+                <div class="label">联系电话：</div>
+                <div class="controls">
+                    <input class="input-form" type="tel" placeholder="请输入您的联系电话"  id="telphone" name="telphone"/>
+                </div>
+            </li>
+            <li class="clrfix">
+                <div class="label">省份：</div>
+                <div class="controls">
+                    <select class="input-form" id="province" name="province">
+
+                    </select>
+                </div>
+            </li>
+            <li class="clrfix">
+                <div class="label">城市：</div>
+                <div class="controls">
+                    <select class="input-form" id="city" name="city">
+
+                    </select>
+                </div>
+            </li>
+            <li class="clrfix">
+                <div class="label">区/县：</div>
+                <div class="controls">
+                    <select class="input-form" id="county" name="county">
+                    </select>
+                </div>
+            </li>
+            <li class="clrfix">
+                <div class="label">详细地址：</div>
+                <div class="controls">
+                    <input type="text" class="input-form" placeholder="请输入详细地址" id="address" name="address"/>
+                </div>
+            </li>
+        </ul>
+        <div class="form-btns">
+            <p>
+                <a href="javascript:;" class="btn-out" onClick="saveUserInfo();" style="width:286px;">确认提交</a>
+            </p>
+        </div>
+      <else/>
+        <ul>
+            <li class="clrfix">
+                <div class="label">收货人姓名：</div>
+                <div class="controls">
+                    <input type="text" class="input-form"  placeholder="请输入收货人姓名"  disabled="true"　readOnly="true" value="{pigcms::$name}"/>
+                </div>
+            </li>
+            <li class="clrfix">
+                <div class="label">联系电话：</div>
+                <div class="controls">
+                    <input class="input-form" type="tel" placeholder="请输入您的联系电话" disabled="true"　readOnly="true" value="{pigcms::$phone}"/>
+                </div>
+            </li>
+            <li class="clrfix">
+                <div class="label">省份：</div>
+                <div class="controls">
+                    <input class="input-form" type="tel" placeholder="请输入您的省份" disabled="true"　readOnly="true" value="{pigcms::$province}"/>
+                </div>
+            </li>
+            <li class="clrfix">
+                <div class="label">城市：</div>
+                <div class="controls">
+                    <input class="input-form" type="tel" placeholder="请输入您的城市" disabled="true"　readOnly="true" value="{pigcms::$city}"/>
+                </div>
+            </li>
+            <li class="clrfix">
+                <div class="label">区/县：</div>
+                <div class="controls">
+                    <input class="input-form" type="tel" placeholder="请输入您的区/县" disabled="true"　readOnly="true" value="{pigcms::$country}"/>
+                </div>
+            </li>
+            <li class="clrfix">
+                <div class="label">详细地址：</div>
+                <div class="controls">
+                    <input type="text" class="input-form" placeholder="请输入详细地址" disabled="true"　readOnly="true"  value="{pigcms::$address}"/>
+                </div>
+            </li>
+        </ul>
+    </if>
+
+</div>
+
+<div class="advertising">广告</div>
+<dl class="common-step">
+    <dt>奖池剩余</dt>
+    <dd>森田奖品特等奖<strong>{pigcms::$leftTeDengJiang}</strong>份，一等奖<strong>{pigcms::$leftYiDengJiang}</strong>份<span>（由于可能存在数据延时问题，所以奖池剩余数据仅供参考，特此告知！）</span></dd>
+</dl>
+
+<script src="{pigcms::RES}/allinone/js/data/area.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function(e) {
+        initArea($("#province"),$("#city"),$("#county"));
+    });
+
+    function saveUserInfo(){
+        var $username = $("#username");
+        var $telphone = $("#telphone");
+        var $province = $("#province");
+        var $city = $("#city");
+        var $county = $("#county");
+        var $address = $("#address");
+
+        var username = $username.val();
+        var telphone = $telphone.val();
+        var province = $province.val();
+        var city = $city.val();
+        var county = $county.val();
+        var address = $address.val();
+
+
+        if(username == ""){
+            Pop.alerts("收货人姓名不能为空");
+            return false;
+        }
+
+        if(telphone == ""){
+            Pop.alerts("联系电话不能为空");
+            return false;
+        }
+
+        if(province == "" || province == "请选择"){
+            Pop.alerts("省份不能为空");
+            return false;
+        }
+
+        if(city == "" || city == "请选择"){
+            Pop.alerts("城市不能为空");
+            return false;
+        }
+
+        if((county == "请选择" || county == "") && $county.css("display") != 'none' ){
+            Pop.alerts("县/区不能为空");
+            return false;
+        }
+
+        if(address == ""){
+            Pop.alerts("详细地址不能为空");
+            return false;
+        }
+
+        Pop.confirms('请您确认您所填写的地址为正确收货地址，确认提交后将无法更改地址。<span class="c3"></span>',function(){
+            var data = {
+                "username" : username,
+                "telphone" : telphone,
+                "province" : province,
+                "city" : city,
+                "county" : county,
+                "address" : address
+            };
+
+            $.ajax({
+                type:'post',
+                url: '{pigcms::$siteurl}/index.php?g=Wap&m=Womenwheel&a=saveFormInfo' ,//接口地址
+                data:data,
+                dataType:'json',
+                timeout : 60000,
+                success:function(data){
+                    var html = '<p>您的收货信息已提交</p>'
+                    html += '<p>主办方将对您的活动数据进行最终审核</p>';
+                    html += '<p>任何违规参与活动都将被取消活动成绩</p>';
+                    html += '<p>如成绩核实有效</p>';
+                    html += '<p>主办方将于2017年2月11日后为您邮寄奖品(春节期间快递因素)</p>';
+                    html += '<p>敬请期待！</p>';
+                    Pop.alerts(html);
+                    setTimeout(function(){
+                        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Womenwheel&a=form&gid={pigcms::$gid}';
+                    },4000);
+                },
+                error : function(XMLHttpRequest, textStatus, errorThrown) {
+                    Pop.alerts("提交失败，网络繁忙！");
+                    return false;
+                }
+            });
+        });
+
+
+
+    }
+</script>
+
+</body>
+</html>
