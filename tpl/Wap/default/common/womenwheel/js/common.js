@@ -20,12 +20,12 @@ function luckDrawClick(){
 }
 
 function brightFlash(){
-	var $wheel_box = $("#wheel-box");
-	$wheel_box.find(".light").addClass("flash");
+	var $wheel_box = $(".wheel-box");
+	$wheel_box.find(".light").addClass("flash1");
 	$wheel_box.find(".bright").each(function(index, element) {
         var $this = $(this);
 		if(index % 2 == 0){
-			$this.addClass("flash");
+			$this.addClass("flash1");
 		}else{
 			$this.addClass("flash1");
 		}
