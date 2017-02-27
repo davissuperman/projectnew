@@ -183,7 +183,7 @@ HTML;
         }
         $this->setEndTime();
         $userOpenId= cookie('user_openid_new');
-        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+//        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         $fansInfo = null;
         $selfUserInfo = array();
         $fansInfo = M('customer_service_fans')->field('openid,nickname,headimgurl')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
@@ -328,7 +328,7 @@ HTML;
     public function success(){
         $this->setEndTime();
         $userOpenId= cookie('user_openid_new');
-        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+//        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Womenwheel&a=index");
@@ -384,7 +384,7 @@ HTML;
     public function rule(){
         $this->setEndTime();
         $userOpenId= cookie('user_openid_new');
-        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+//        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         if(!$userOpenId){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Womenwheel&a=index");
@@ -523,7 +523,7 @@ HTML;
     public function share(){
         $this->setEndTime();
         $userOpenId= cookie('user_openid_new');
-       $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//       $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $gid = $_GET['gid'];
         if(!$gid){
             $gid = $this->defalutGid;
@@ -643,7 +643,7 @@ HTML;
         //这里是隐性获取OPENID 是朋友圈里面的人打开这个页面
         //获取OPENID 用户没有感知
         $userOpenId= cookie('user_openid_new');
-        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $gid = $_GET['gid'];
         if(!$gid){
             $gid = $this->defalutGid;
@@ -1182,7 +1182,7 @@ HTML;
     public function form(){
         $this->setEndTime2();
         $userOpenId= cookie('user_openid_new');
-        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $gid = $_GET['gid'];
         if(!$gid){
             $gid = $this->defalutGid;
