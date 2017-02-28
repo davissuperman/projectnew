@@ -14,8 +14,8 @@ class WomenwheelAction extends SjzAction {
 
     //womenwheel
     public $womenwheelCount = 24;
-    public $teDengJiangCount = 20;
-    public $yiDengJiangCount = 1000;
+    public $teDengJiangCount = 10;
+    public $yiDengJiangCount = 900;
     public $eachChouJiangVote = 8;
     public $totalChouJiangVote = 15;
     public $totalDrawCount = 3;
@@ -900,7 +900,7 @@ HTML;
         $prize = null;
         $returnMessage = null;
         $fromOpenIdFromPost= cookie('user_openid_new');
-     //   $fromOpenIdFromPost = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+//        $fromOpenIdFromPost = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         $info = M('womenwheel')->where(array('openid' => $fromOpenIdFromPost))->find();
         if(!$info){
             exit;
@@ -928,7 +928,7 @@ HTML;
         }
         //还未抽中奖
         if(!$prize){
-            if(!$drawCount && $voteCount>=5){
+            if(!$drawCount && $voteCount>=$this->eachChouJiangVote){
                 //第一次抽
                 $p = array();
                 $p['uid'] =  $info['id'];
@@ -974,7 +974,7 @@ HTML;
                 $i['prize'] = $prize;
                 $i['draw'] = 1;
                 M('womenwheel')->save($i);
-            }elseif($drawCount == 1 &&  $voteCount>=10){
+            }elseif($drawCount == 1 &&  $voteCount>=$this->eachChouJiangVote*2){
                 //第二次抽奖
                 $p = array();
                 $p['uid'] =  $info['id'];
@@ -1016,7 +1016,7 @@ HTML;
                 $i['prize'] = $prize;
                 $i['draw'] = 2;
                 M('womenwheel')->save($i);
-            }else if($drawCount == 2  && $voteCount>= 15){
+            }else if($drawCount == 2  && $voteCount>= $this->eachChouJiangVote*3){
                 //第三次抽奖
                 $i['id'] = $info['id'];
                 $i['draw'] = 3;
