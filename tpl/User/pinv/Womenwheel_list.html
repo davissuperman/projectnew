@@ -1,0 +1,108 @@
+<?php $nav = "FUNCTION"; $side = "INDEX" ?>
+<include file="Public:head"/>
+<link type="text/css" href="./tpl/User/pinv/common/css/Text_add.css" rel="stylesheet"/>
+<script src="./tpl/User/pinv/common/js/date/WdatePicker.js"></script>
+
+<div class="container main">
+    <div class="row">
+        <include file="Doing:left"/>
+
+        <div class="col-md-10 main">
+            <div class="panel panel-success">
+                <div class="panel-heading cfix">
+                    <h3 class="panel-title pull-left">庆新品上市，赢面膜大奖！</h3>
+                    <span class="small"> </span>
+                    <div class="search-box pull-right">
+
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div>
+                    
+                            <div id="choose-date">
+ 
+                                <div id="date-calendar">
+                                    <form method="post" action="{pigcms::U('Womenwheel/export',array('token'=>$token))}">
+                                        <input type="hidden" name="gid" value="{pigcms::$gid}">
+                                        <input type="text" name="start" id="start" value="{pigcms:$start}" onClick="WdatePicker()" class="form-control" style="width:112px"/><span>-</span>
+                                        <input type="text" name="end" id="end" value="{pigcms:$end}" onClick="WdatePicker()" class="form-control" style="width:112px"/>
+
+                                        <!--<input type="checkbox" style="margin-top:10px" name="award"><span>中奖名单</span>-->
+                                        <button type="submit" class="btn btn-default" style="width:50px"/>导出</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                            <table class="table table-striped" cellspacing="1">
+                                <tr>
+                                    <!--<th class="firstTd">ID</th>-->
+                                    <th class="firstTd">微信ID</th>
+                                    <!--<th class="thirdTd">微信昵称</th>-->
+                                    <!--<th class="secondTd">来源渠道</th>-->
+                                    <!--<th class="secondTd">关注</th>-->
+                                    <!--<th class="secondTd">性别</th>-->
+                                    <!--<th class="sevenTd">手机号码 </th>-->
+                                    <th class="sevenTd">参与游戏时间 </th>
+                                    <th class="sevenTd">首次分享时间 </th>
+                                    <th class="sevenTd">PV</th>
+                                    <th class="sevenTd">UV</th>
+                                    <th class="sevenTd">分享数</th>
+                                    <th class="sevenTd">得票数</th>
+                                    <th class="sevenTd">扩散数</th>
+                                    <th class="sevenTd">奖项</th>
+                                    <th class="sevenTd">第一次抽奖名次</th>
+                                    <th class="sevenTd">第一次抽奖时间</th>
+                                    <th class="sevenTd">第二次抽奖名次</th>
+                                    <th class="sevenTd">第二次抽奖时间</th>
+                                    <th class="sevenTd">第三次抽奖时间</th>
+                                    <th class="sevenTd">非法数据</th>
+                                </tr>
+                                <volist name="info" id="o"> 
+                                    <tr>
+                                        <!--<td width="5%">{pigcms:$o.id}</td>-->
+                                        <td width="5%">{pigcms:$o.openid}</td>
+                                        <!--<td>{pigcms:$o.name}</td>-->
+                                        <!--<td>{pigcms:$comefrom}</td>-->
+                                        <!--<td>{pigcms:$o.subscribe}</td>-->
+                                        <!--<td>{pigcms:$o.sex}</td>-->
+                                        <!--<td>{pigcms:$o.province}</td>-->
+                                        <!--<td>{pigcms:$o.telephone}</td>-->
+                                        <td><if condition="$o.createtime gt 0">{pigcms:$o.createtime|date="Y-m-d H:i",###}<else/>-------------- --:-- </if></td>
+                                        <td><if condition="$o.sharetime gt 0">{pigcms:$o.sharetime|date="Y-m-d H:i",###}<else/>-------------- --:-- </if></td>
+                                    <th class="sevenTd">{pigcms:$o.views}</th>
+                                    <th class="sevenTd">{pigcms:$o.uniqueviews}</th>
+                                    <th class="sevenTd">{pigcms:$o.share}</th>
+                                    <th class="sevenTd">{pigcms:$o.vote}</th>
+                                    <th class="sevenTd">{pigcms:$o.joins}</th>
+                                    <th class="sevenTd">{pigcms:$o.prize}</th>
+                                    <th class="sevenTd">{pigcms:$o.first_draw}</th>
+                                    <th class="sevenTd">{pigcms:$o.first_draw_time}</th>
+                                    <th class="sevenTd">{pigcms:$o.second_draw}</th>
+                                    <th class="sevenTd">{pigcms:$o.second_draw_time}</th>
+                                    <th class="sevenTd">{pigcms:$o.third_draw_time}</th>
+                                    <th class="sevenTd">{pigcms:$o.cheat}</th>
+                                    </tr>
+                                </volist>
+                                <td colspan="10" style="text-align:right">{pigcms:$page}</td>
+                            </table>
+                           
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>   
+
+</div>
+<include file="Public:footer"/>
+<script type="text/javascript">
+    $(document).ready(function(e) {
+        $(".imgopenid").click(function(){
+            window.open( this.src,"_blank");
+        });
+    });
+</script>
