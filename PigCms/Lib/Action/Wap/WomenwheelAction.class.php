@@ -1,8 +1,8 @@
 <?php
 
 class WomenwheelAction extends SjzAction {
-    public $title = '和森田一起点亮幸运摩天轮!';
-    public $bonusdesc = '特等奖20盒面膜,共1200份奖品, 我已经使出洪荒之力,你还在等什么,马上开始吧!';
+    public $title = '闪亮女神魅力，转动你的“膜”丽小确幸！';
+    public $bonusdesc = '特等奖10盒面膜,共1000盒奖品,四海八荒>..>摩天轮活动又来了,拼手速的时刻到了!';
     public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
@@ -966,7 +966,7 @@ HTML;
                     if($leftDraw < 0 ){
                         $leftDraw = 0;
                     }
-                    $returnMessage .= "奖池剩余".$leftYiDengJiang."盒面膜/眼膜 ,您还有".$leftDraw."次抽奖机会";
+                    $returnMessage .= "奖池剩余".$leftYiDengJiang."盒面膜 ,您还有".$leftDraw."次抽奖机会";
                 }
                 $i = array();
                 $i['id'] = $info['id'];
@@ -1008,7 +1008,7 @@ HTML;
                     if($leftDraw < 0 ){
                         $leftDraw = 0;
                     }
-                    $returnMessage .= "奖池剩余".$leftYiDengJiang."盒面膜/眼膜 ,您还有".$leftDraw."次抽奖机会";
+                    $returnMessage .= "奖池剩余".$leftYiDengJiang."盒面膜 ,您还有".$leftDraw."次抽奖机会";
                 }
                 $i = array();
                 $i['id'] = $info['id'];
