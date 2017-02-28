@@ -70,7 +70,7 @@ input,textarea,select,button{font-size:1em;}
 .fz40{font-size:40px;}
 
 .advertising{position: absolute;right: 0.1rem;top: 0.1rem; background: #ce292c;color: #fff;padding:0.01rem 0.06rem;-moz-border-radius: 0.03rem;-webkit-border-radius: 0.03rem;border-radius: 0.03rem; z-index:9;font-size: 0.2rem;}
-.common-people{background: url(../images/b/img01.png?v=1) no-repeat; background-size:100% 100%; height: 1.5rem;
+.common-people{background: url(../images/b/img01.png?v=2) no-repeat; background-size:100% 100%; height: 1.5rem;
     width: 100%;
     bottom: 0rem;
     right: 0;
@@ -464,7 +464,7 @@ input,textarea,select,button{font-size:1em;}
     line-height: 0.55rem;color:#000;width:2.5rem;vertical-align: top;}
 .btns-box-share .need-vote span{color:#f14da6;    font-size: 0.45rem;    font-weight: bold;}
 
-.btns-box-share .btn-out .share-notice{background: url(../images/b/img05.png) no-repeat; background-size:100% auto;     height: 4.2rem;
+.btns-box-share .btn-out .share-notice{background: url(../images/b/img05.png?v=1) no-repeat; background-size:100% auto;     height: 4.2rem;
     width: 2.5rem;
     bottom: 0.7rem;
     right: 0;
