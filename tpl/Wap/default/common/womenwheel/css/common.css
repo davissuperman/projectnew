@@ -70,7 +70,7 @@ input,textarea,select,button{font-size:1em;}
 .fz40{font-size:40px;}
 
 .advertising{position: absolute;right: 0.1rem;top: 0.1rem; background: #ce292c;color: #fff;padding:0.01rem 0.06rem;-moz-border-radius: 0.03rem;-webkit-border-radius: 0.03rem;border-radius: 0.03rem; z-index:9;font-size: 0.2rem;}
-.common-people{background: url(../images/b/img01.png) no-repeat; background-size:100% auto; height: 1.5rem;
+.common-people{background: url(../images/b/img01.png?v=1) no-repeat; background-size:100% 100%; height: 1.5rem;
     width: 100%;
     bottom: 0rem;
     right: 0;
@@ -370,16 +370,16 @@ input,textarea,select,button{font-size:1em;}
 	
 .luck-draw-root1{position:absolute;background: url(../images/b/2.png) no-repeat center;
 	 background-size: 100% auto;
-	top: 5.5rem;
+	top: 5.2rem;
     left: 50%;
-    margin-left: .3rem;
+    margin-left: .8rem;
     width: 0.8rem;
     height: 1rem; }
 .luck-draw-root2{position:absolute;background: url(../images/b/3.png) no-repeat center;
 	 background-size: 100% auto;
-	top: 5.5rem;
+	top: 5.2rem;
     left: 50%;
-    margin-left: -1.3rem;
+    margin-left: -1.6rem;
     width: 0.8rem;
     height: 1rem;}
 
@@ -396,7 +396,7 @@ input,textarea,select,button{font-size:1em;}
     height: 1rem;
     position: absolute;
     bottom: -0.6rem;
-    left: 1rem;}
+    left: 0.2rem;}
 .btn-vote i.tip{background: url(../images/b/img04.png) no-repeat;
 	 background-size: auto 100% ;
 	    width: 1.2rem;
@@ -412,8 +412,9 @@ input,textarea,select,button{font-size:1em;}
     text-decoration: none;
     line-height: 0.45rem;overflow:hidden;text-indent: -999px;}
 
-.need-vote-panel{ text-align:center;color:#fff; line-height:0.35rem; font-size:0.3rem;margin-top: 0.1rem;}
-.need-vote-panel >li > span{ color:#f14da6;    font-size: 0.35rem;
+.need-vote-panel{ text-align:center;color:#fff; line-height:0.35rem; font-size:0.3rem;margin-top: 0.1rem;    text-shadow: 1px 2px 3px #000;z-index: 1; font-weight:bold;
+    position: relative;}
+.need-vote-panel >li > span{ color:#f14da6;    font-size: 0.4rem;
     font-weight: bold;}
 
 /*img-box*/
@@ -438,7 +439,7 @@ input,textarea,select,button{font-size:1em;}
 .prize-box-index p.rule{    margin-top: -0.4rem;font-size:0.2rem;    text-align: center;
     padding: 0 0.1rem;}
 
-.prize-panel-index{ background:url(../images/b/1.png) no-repeat center;    background-size: 90% auto;
+.prize-panel-index{ background:url(../images/b/1.png?v=1) no-repeat center;    background-size: 90% auto;
     left: 0;width: 100%;
     height: 1rem;
     top: -1.35rem; position: absolute;}
