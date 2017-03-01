@@ -2,7 +2,7 @@
 
 class WomenwheelAction  extends BonusAction {
 
-    public $defalutGid = 115;
+    public $defalutGid = 120;
     public function _initialize() {
         parent::_initialize();
     }
@@ -500,7 +500,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
             foreach($list as $key => $each){
                 $tmp = null;
                 $tmp = $each;
-                if($each['gid']*1 < $this->defalutGid  ){//|| $each['gid']*1 > ($this->defalutGid+5)
+                if($each['gid']*1 < $this->defalutGid  || $each['gid']*1 > ($this->defalutGid+2)){//
                     $each['gid'] = $this->defalutGid;
                 }
                 $gInfo = M("npic_twocode")->where(array('cid'=>$each['gid']))->select();
