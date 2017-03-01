@@ -8,7 +8,7 @@ class WomenwheelAction extends SjzAction {
     public $shareImageUrl;
     public $endtime="2017-03-30 23:59:59"; //活动结束时间
     public $debug = true; //上线后应该改成false
-    public $defalutGid = 115;
+    public $defalutGid = 120;
 
 
 
