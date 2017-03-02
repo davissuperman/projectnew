@@ -1184,6 +1184,11 @@ HTML;
         $userOpenId= cookie('user_openid_new');
 //        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $gid = $_GET['gid'];
+        $sinurl = null;
+        $url = $this->get_url();
+        if(strstr($url,'&s=1')){
+            $sinurl = 1;
+        }
         if(!$gid){
             $gid = $this->defalutGid;
         }
@@ -1243,6 +1248,7 @@ HTML;
         $this->assign("province",$province);
         $this->assign("gid",$gid);
         $this->assign("whetheraward",$a);
+        $this->assign("sinurl",$sinurl);
 
         $teDengJiangCount = M('womenwheel_jiang')->where('id=1')->getField('tedengjiang');
         $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;

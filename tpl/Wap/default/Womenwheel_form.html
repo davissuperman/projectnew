@@ -141,6 +141,7 @@
 
 </div>
 <div class="form-panel">
+    <input type="hidden"  value="{pigcms::$sinurl}" id="sinurl" name="sinurl"/>
     <if condition="$whetheraward eq  0">
         <ul>
             <li class="clrfix">
@@ -245,6 +246,13 @@
     $(document).ready(function(e) {
         initArea($("#province"),$("#city"),$("#county"));
     });
+    var addressInForm = $("#address").val();
+    var s =$("#sinurl").val();
+
+    if(addressInForm != '' && s == ''){
+        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Womenwheel&a=form&gid={pigcms::$gid}&s=1';
+    }
+
 
     function saveUserInfo(){
         var $username = $("#username");
@@ -317,7 +325,7 @@
                     html += '<p>敬请期待！</p>';
                     Pop.alerts(html);
                     setTimeout(function(){
-                        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Womenwheel&a=form&gid={pigcms::$gid}';
+                        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Womenwheel&a=form&gid={pigcms::$gid}&s=1';
                     },4000);
                 },
                 error : function(XMLHttpRequest, textStatus, errorThrown) {
