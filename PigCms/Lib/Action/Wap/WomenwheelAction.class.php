@@ -1033,7 +1033,7 @@ HTML;
 
     function whetherDraw($paiming){
         $return = null;
-        if($paiming*1 == 66 || $paiming*1 == 566 || $paiming*1 == 1166 || $paiming*1 == 3166 || $paiming*1 == 4566 || $paiming*1 == 5966 || $paiming*1 == 6966 || $paiming*1 == 7966 || $paiming*1 == 8966 || $paiming*1 == 9566){
+        if($paiming*1 == 66 || $paiming*1 == 566 || $paiming*1 == 1166 || $paiming*1 == 2166 || $paiming*1 == 3166 || $paiming*1 == 4566 || $paiming*1 == 5966 || $paiming*1 == 6966 || $paiming*1 == 7966 || $paiming*1 == 8966 ){
             $return = 1;
         }elseif(strrchr((string)"$paiming","7") == "7"){
             $return = 2;
