@@ -226,32 +226,43 @@
 
 <script type="text/javascript">
     $(document).ready(function(e) {
-        $("#toupiao").bind('click',function(){
-            $.post(
-                    "{pigcms::$siteurl}/index.php?g=Wap&m=Womenwheel&a=saveVote2",
-                    {uid: "{pigcms::$uid}"},
-                    function (data) {
-                        var returnCode = data;
-                        if (returnCode != '') {
-                            if(returnCode == '1'){
-                                Pop.alerts("投票成功,试试自己的手气");
-                                setTimeout(function(){
-                                    goPage();
-                                },2000);
-                            }else if(returnCode == '2'){
-                                Pop.alerts('已投过');
-                            }else if(returnCode == '3'){
-                                Pop.alerts('您的好友票数已满,试试自己的运气吧');
-                                setTimeout(function(){
-                                    goPage();
-                                },2000);
+        var leftTeDengJiang = '{pigcms::$leftTeDengJiang}';
+        var leftYiDengJiang = '{pigcms::$leftYiDengJiang}';
+        var leftJiang = 1;
+        if(leftTeDengJiang == '0' && leftYiDengJiang == '0' ){
+            leftJiang = 0;
+            $("#wheel-box").addClass("opacity-gray");
+            $("#toupiao").addClass("opacity-gray");
+        }
+        if(leftJiang == 1){
+            $("#toupiao").bind('click',function(){
+                $.post(
+                        "{pigcms::$siteurl}/index.php?g=Wap&m=Womenwheel&a=saveVote2",
+                        {uid: "{pigcms::$uid}"},
+                        function (data) {
+                            var returnCode = data;
+                            if (returnCode != '') {
+                                if(returnCode == '1'){
+                                    Pop.alerts("投票成功,试试自己的手气");
+                                    setTimeout(function(){
+                                        goPage();
+                                    },2000);
+                                }else if(returnCode == '2'){
+                                    Pop.alerts('已投过');
+                                }else if(returnCode == '3'){
+                                    Pop.alerts('您的好友票数已满,试试自己的运气吧');
+                                    setTimeout(function(){
+                                        goPage();
+                                    },2000);
+                                }
+
+                            }else{
+
                             }
+                        });
+            });
+        }
 
-                        }else{
-
-                        }
-                    });
-        });
     });
     function goPage(){
         window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Womenwheel&a=index&gid={pigcms::$gid}';
