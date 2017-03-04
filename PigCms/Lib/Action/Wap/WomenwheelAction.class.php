@@ -237,11 +237,27 @@ HTML;
         $vote = null;
         $lastInsertId = null;
         $views = null;
+
+        $teDengJiangCount = M('womenwheel_jiang')->where('id=1')->getField('tedengjiang');
+        $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
+        if($leftTeDengJiang < 0 ){
+            $leftTeDengJiang = 0;
+        }
+        $yiDengJiangCount = M('womenwheel_jiang')->where('id=1')->getField('yidengjiang');
+        $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
+        if($leftYiDengJiang < 0 ){
+            $leftYiDengJiang = 0;
+        }
+
         if($info){
             $lastInsertId = $info['id'];
             $vote = $info['vote'];
             $views = $info['views'];
         }else{
+            if($leftYiDengJiang == 0 && $leftTeDengJiang == 0){
+                header("location:http://mp.weixin.qq.com/s/t1d87DU4hId-5PuIj2YUmQ");
+                exit;
+            }
             //此用户不存在
             $lastInsertId = $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
             $info = M('Womenwheel')->where(array('openid' => $userOpenId))->find();
@@ -292,20 +308,7 @@ HTML;
         $this->assign("leftVote",$leftVote);
         $this->assign("leftDraw",$leftDraw);
 
-        $teDengJiangCount = M('womenwheel_jiang')->where('id=1')->getField('tedengjiang');
-        $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
-        if($leftTeDengJiang < 0 ){
-            $leftTeDengJiang = 0;
-        }
-        $yiDengJiangCount = M('womenwheel_jiang')->where('id=1')->getField('yidengjiang');
-        $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
-        if($leftYiDengJiang < 0 ){
-            $leftYiDengJiang = 0;
-        }
-        if($leftYiDengJiang == 0 && $leftTeDengJiang == 0){
-            header("location:http://mp.weixin.qq.com/s/t1d87DU4hId-5PuIj2YUmQ");
-            exit;
-        }
+
         $this->assign("leftTeDengJiang",$leftTeDengJiang);
         $this->assign("leftYiDengJiang",$leftYiDengJiang);
         $this->display();
