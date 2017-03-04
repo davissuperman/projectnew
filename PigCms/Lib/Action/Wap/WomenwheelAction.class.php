@@ -302,6 +302,10 @@ HTML;
         if($leftYiDengJiang < 0 ){
             $leftYiDengJiang = 0;
         }
+        if($leftYiDengJiang == 0 && $leftTeDengJiang == 0){
+            header("location:http://mp.weixin.qq.com/s/t1d87DU4hId-5PuIj2YUmQ");
+            exit;
+        }
         $this->assign("leftTeDengJiang",$leftTeDengJiang);
         $this->assign("leftYiDengJiang",$leftYiDengJiang);
         $this->display();
@@ -643,7 +647,7 @@ HTML;
         //这里是隐性获取OPENID 是朋友圈里面的人打开这个页面
         //获取OPENID 用户没有感知
         $userOpenId= cookie('user_openid_new');
-//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        $userOpenId= 'oP9fCt_8XNH7wF0ERFC2VukVAZXo';
         $gid = $_GET['gid'];
         if(!$gid){
             $gid = $this->defalutGid;
