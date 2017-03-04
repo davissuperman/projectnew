@@ -270,7 +270,9 @@
                         });
             });
         }
-        clickVote();
+        if(leftJiang==1){
+            clickVote();
+        }
     });
     function clickVote(){
         $("#btn-vote").bind('click',function(){
