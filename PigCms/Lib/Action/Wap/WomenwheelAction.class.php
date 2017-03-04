@@ -547,6 +547,7 @@ HTML;
             header("location:$this->url/index.php?g=Wap&m=Womenwheel&a=index&gid=$gid");
             exit();
         }
+
         $gid = $info['gid'];
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
@@ -636,6 +637,10 @@ HTML;
         $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
         if($leftYiDengJiang < 0 ){
             $leftYiDengJiang = 0;
+        }
+        if($leftYiDengJiang == 0 && $leftTeDengJiang == 0){
+            header("location:http://mp.weixin.qq.com/s/t1d87DU4hId-5PuIj2YUmQ");
+            exit;
         }
         $this->assign("leftTeDengJiang",$leftTeDengJiang);
         $this->assign("leftYiDengJiang",$leftYiDengJiang);
@@ -751,7 +756,10 @@ HTML;
         if($leftYiDengJiang < 0 ){
             $leftYiDengJiang = 0;
         }
-
+        if($leftYiDengJiang == 0 && $leftTeDengJiang == 0){
+            header("location:http://mp.weixin.qq.com/s/t1d87DU4hId-5PuIj2YUmQ");
+            exit;
+        }
         //直接跳转结束
         $voteListSql = "SELECT * from tp_womenwheel_votelist where fromopenid='$userOpenId' and toopenid='$MainOpenId'";
         $voteView = M('womenwheel_votelist')->query($voteListSql);
