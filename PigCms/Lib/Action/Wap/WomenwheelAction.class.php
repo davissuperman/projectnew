@@ -650,7 +650,7 @@ HTML;
         //这里是隐性获取OPENID 是朋友圈里面的人打开这个页面
         //获取OPENID 用户没有感知
         $userOpenId= cookie('user_openid_new');
-        $userOpenId= 'oP9fCt_8XNH7wF0ERFC2VukVAZXo';
+//        $userOpenId= 'oP9fCt_8XNH7wF0ERFC2VukVAZXo';
         $gid = $_GET['gid'];
         if(!$gid){
             $gid = $this->defalutGid;
