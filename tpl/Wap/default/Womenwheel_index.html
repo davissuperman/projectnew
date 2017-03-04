@@ -226,7 +226,15 @@
 <script type="text/javascript">
     $(document).ready(function(e) {
         var leftVote = '{pigcms::$leftVote}';
-        if(leftVote == '0'){
+        var leftTeDengJiang = '{pigcms::$leftTeDengJiang}';
+        var leftYiDengJiang = '{pigcms::$leftYiDengJiang}';
+        var leftJiang = 1;
+        if(leftTeDengJiang == '0' && leftYiDengJiang == '0' ){
+            leftJiang = 0;
+            $("#wheel-box").addClass("opacity-gray");
+            $("#btn-vote").addClass("opacity-gray");
+        }
+        if(leftVote == '0' &&  leftJiang==1){
             $("#luck-draw").bind('click',function(){
                 $.post(
                         "{pigcms::$siteurl}/index.php?g=Wap&m=Womenwheel&a=saveDraw",
