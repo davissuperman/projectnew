@@ -228,13 +228,6 @@
     $(document).ready(function(e) {
         var leftTeDengJiang = '{pigcms::$leftTeDengJiang}';
         var leftYiDengJiang = '{pigcms::$leftYiDengJiang}';
-        var leftJiang = 1;
-        if(leftTeDengJiang == '0' && leftYiDengJiang == '0' ){
-            leftJiang = 0;
-            $("#wheel-box").addClass("opacity-gray");
-            $("#toupiao").addClass("opacity-gray");
-        }
-        if(leftJiang == 1){
             $("#toupiao").bind('click',function(){
                 $.post(
                         "{pigcms::$siteurl}/index.php?g=Wap&m=Womenwheel&a=saveVote2",
@@ -261,7 +254,6 @@
                             }
                         });
             });
-        }
 
     });
     function goPage(){

@@ -228,13 +228,8 @@
         var leftVote = '{pigcms::$leftVote}';
         var leftTeDengJiang = '{pigcms::$leftTeDengJiang}';
         var leftYiDengJiang = '{pigcms::$leftYiDengJiang}';
-        var leftJiang = 1;
-        if(leftTeDengJiang == '0' && leftYiDengJiang == '0' ){
-            leftJiang = 0;
-            $("#wheel-box").addClass("opacity-gray");
-            $("#btn-vote").addClass("opacity-gray");
-        }
-        if(leftVote == '0' &&  leftJiang==1){
+
+        if(leftVote == '0'){
             $("#luck-draw").bind('click',function(){
                 $.post(
                         "{pigcms::$siteurl}/index.php?g=Wap&m=Womenwheel&a=saveDraw",
@@ -270,9 +265,7 @@
                         });
             });
         }
-        if(leftJiang==1){
-            clickVote();
-        }
+        clickVote();
     });
     function clickVote(){
         $("#btn-vote").bind('click',function(){
