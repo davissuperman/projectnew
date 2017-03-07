@@ -869,12 +869,16 @@ HTML;
             //非法投票
             exit();
         }
+        $toOpenIdFromPost = $this->getOpenIdByUid($toUid);
+        if(!$toOpenIdFromPost){
+            //非法投票
+            exit();
+        }
         $vote = M('womenwheel')->where("id=$toUid")->getField('vote');
-        if($vote >= 15){
+        if($vote >= $this->womenwheelCount){
             echo 3;
             return;
         }
-        $toOpenIdFromPost = $this->getOpenIdByUid($toUid);
         //检查此 local openid 是否投过票
         $voteList = M('womenwheel_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
         //多次投票
