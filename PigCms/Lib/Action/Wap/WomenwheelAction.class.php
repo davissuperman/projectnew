@@ -965,7 +965,7 @@ HTML;
 
                 }elseif($prize == 2){
                     $yiDengJiangCount =  M('womenwheel_jiang')->where('id=1')->getField('yidengjiang');
-                    if($yiDengJiangCount <= 999){
+                    if($yiDengJiangCount <= ($this->yiDengJiangCount-1)){
                         M('womenwheel_jiang')->where('id=1')->setInc('yidengjiang');
                         $returnMessage = "恭喜抽中一等奖！";
                     }else{
@@ -1007,7 +1007,7 @@ HTML;
 
                 }elseif($prize == 2){
                     $yiDengJiangCount = M('womenwheel_jiang')->where('id=1')->getField('yidengjiang');
-                    if($yiDengJiangCount <= 999){
+                    if($yiDengJiangCount <= ($this->yiDengJiangCount-1)){
                         M('womenwheel_jiang')->where('id=1')->setInc('yidengjiang');
                         $returnMessage = "恭喜抽中一等奖！";
                     }else{
