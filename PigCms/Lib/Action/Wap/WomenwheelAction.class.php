@@ -1196,6 +1196,7 @@ HTML;
     public function form(){
         $this->setEndTime2();
         $userOpenId= cookie('user_openid_new');
+      //  $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $gid = $_GET['gid'];
         $sinurl = null;
         $url = $this->get_url();
@@ -1211,7 +1212,11 @@ HTML;
             exit();
         }
         $info = M('womenwheel')->where(array('openid' => $userOpenId))->find();
-        if($info['prize'] != 1 || $info['prize'] != 2){
+        if($info['prize']*1 == 0){
+            header("location:$this->url/index.php?g=Wap&m=Womenwheel&a=index&gid=$gid");
+            exit();
+        }
+        if($info['prize']*1 > 2){
             header("location:$this->url/index.php?g=Wap&m=Womenwheel&a=index&gid=$gid");
             exit();
         }
