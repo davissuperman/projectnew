@@ -1,8 +1,8 @@
 <?php
 
 class MeibohuiAction extends SjzAction {
-    public $title = '和森田一起点亮幸运摩天轮,旋转新年美丽心愿!';
-    public $bonusdesc = '特等奖20盒面膜,共1000份奖品, 我已经使出洪荒之力,你还在等什么,马上开始吧!';
+    public $title = '美博会';
+    public $bonusdesc = '美博会';
     public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
@@ -183,7 +183,7 @@ HTML;
         }
         $this->setEndTime();
         $userOpenId= cookie('user_openid_new');
-//        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         $fansInfo = null;
         $selfUserInfo = array();
         $fansInfo = M('customer_service_fans')->field('openid,nickname,headimgurl')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
