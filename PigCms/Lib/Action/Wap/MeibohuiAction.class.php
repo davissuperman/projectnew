@@ -23,24 +23,7 @@ class MeibohuiAction extends SjzAction {
     public function _initialize() {
         parent :: _initialize();
         $this->url= C('site_url');
-        $this->imageUrl = "http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/motianlun/images/logo1.jpg';
-        $this->shareImageUrl = "http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/motianlun/images/logo1.jpg';
 
-        $ip=get_client_ip();
-        $userOpenId= cookie('user_openid_new');
-        if($userOpenId){
-            $uid = $this->getUidByOpenid($userOpenId);
-            if($uid){
-                //判断此IP是否访问过
-                $id = M('motianlun_iplist')->where("ip='$ip'")->getField('id');
-                if(!$id){
-                    $n = array();
-                    $n['uid'] = $uid;
-                    $n['ip'] = $ip;
-                    M('motianlun_iplist')->add($n);
-                }
-            }
-        }
     }
 
     public function getInfo(){
@@ -177,78 +160,9 @@ HTML;
         }
 
         public function index() {
-        $gid = $_GET['gid'];
-        if(!$gid){
-            $gid = $this->defalutGid;
-        }
-        $this->setEndTime();
-        $userOpenId= cookie('user_openid_new');
+//        $userOpenId= $_GET['openid'];;
         $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
-        $fansInfo = null;
-        $selfUserInfo = array();
-        $fansInfo = M('customer_service_fans')->field('openid,nickname,headimgurl')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
-        if($userOpenId && $fansInfo){
-            $selfUserInfo['headimgurl'] ='';
-            $selfUserInfo['nickname'] = '';
-        }else{
-            $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
-            $code = trim($_GET["code"]);
-            $state = trim($_GET['state']);
-            if ($code && $state == 'sentian') {
-                if(empty($fansInfo)){
-                    $webCreatetime = $apidata['web_createtime'];
-                    $web_access_token = '';
-
-                    //重新获取
-                    $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
-                    if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
-                        //code 有错误 需要重定向
-                        $url = $this->url."/index.php?g=Wap&m=Motianlun&a=index&gid=$gid";
-                        header("location:$url");
-                    }
-                    $m['id'] = $apidata['id'];
-                    $m['web_access_token'] = $userinfoFromApi['access_token'];
-                    $m['refresh_token'] = $userinfoFromApi['refresh_token'];
-                    $m['web_createtime'] = time();
-                    $m['refresh_token_createtime'] = time();
-                    M('Diymen_set')->save($m);
-                    $web_access_token = $userinfoFromApi['access_token'];
-                    cookie('user_openid_new', $userinfoFromApi['openid'], 315360000);
-                    $userOpenId = $userinfoFromApi['openid'];
-
-//                    $selfUserInfo['headimgurl'] = $json->headimgurl;
-//                    $selfUserInfo['nickname'] = $json->nickname;
-                }
-            } else {
-                $url = urlencode($this->url."/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
-                header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
-                exit;
-            }
-        }
-
-
-
-
         $nickname = '';
-        $imageProfile = '';
-
-        //首先判断当前用户是否有玩过第一次
-        $info = M('Motianlun')->where(array('openid' => $userOpenId))->find();
-        $vote = null;
-        $lastInsertId = null;
-        $views = null;
-        if($info){
-            $lastInsertId = $info['id'];
-            $vote = $info['vote'];
-            $views = $info['views'];
-        }else{
-            //此用户不存在
-            $lastInsertId = $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
-            $info = M('Motianlun')->where(array('openid' => $userOpenId))->find();
-        }
-        //如果VOTE未满5票 调到分享引导页P3
-        $this->haveFinishThreeOrHavePrizeOrVoteSmallThanFive($info,false,true);
-
         //begin 分享出去的URL
         list($ticket,$appId,$testgid) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
@@ -261,49 +175,16 @@ HTML;
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
         $this->assign("shareurl",$this->getShareUrl());
-        $this->assign('gid', $gid);
         $this->assign('title',$nickname.$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
 
-        //view自增
-        if($lastInsertId){
-            $this->setIncViews($lastInsertId);
-        }
 
-        $this->assign("vote",$vote);
-        $this->assign("gid",$gid);
+        $this->assign("openid",$userOpenId);
 
-        $this->assign("teDengJiangCount",$this->teDengJiangCount);
-
-        $draw = $info['draw'];
-        $leftVote = 0;
-        $leftDraw = 3 - $draw;
-
-        $leftVote = $this->getLeftVote($draw,$vote);
-        if($leftVote < 0 ){
-            $leftVote = 0;
-        }
-        if($leftDraw < 0 ){
-            $leftDraw = 0;
-        }
-        $this->assign("leftVote",$leftVote);
-        $this->assign("leftDraw",$leftDraw);
-
-        $teDengJiangCount = M('meibohui_jiang')->where('id=1')->getField('tedengjiang');
-        $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
-        if($leftTeDengJiang < 0 ){
-            $leftTeDengJiang = 0;
-        }
-        $yiDengJiangCount = M('meibohui_jiang')->where('id=1')->getField('yidengjiang');
-        $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
-        if($leftYiDengJiang < 0 ){
-            $leftYiDengJiang = 0;
-        }
-        $this->assign("leftTeDengJiang",$leftTeDengJiang);
-        $this->assign("leftYiDengJiang",$leftYiDengJiang);
+ 
         $this->display();
     }
 
