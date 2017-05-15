@@ -159,6 +159,40 @@ HTML;
             }
         }
 
+    public function saveFormInfo(){
+
+        $openid = $_POST['openid'];
+        $username = $_POST['username'];
+        $telphone = $_POST['telphone'];
+        $storename = $_POST['storename'];
+        $salary = $_POST['salary'];
+        $companytype = $_POST['companytype'];
+
+        $award = M('meibohui_index')->where(array('openid' => $openid))->find();
+        if(!$award){
+            $m = array();
+            $m['openid'] = $openid;
+            $m['username'] = $username;
+            $m['telphone'] =$telphone;
+            $m['storename'] =$storename;
+            $m['salary'] =$salary;
+            $m['companytype'] =$companytype;
+            M('meibohui_index')->add($m);
+        }else{
+            $m = array();
+            $m['id'] = $award['id'];
+            $m['openid'] = $openid;
+            $m['username'] = $username;
+            $m['telphone'] =$telphone;
+            $m['storename'] =$storename;
+            $m['salary'] =$salary;
+            $m['companytype'] =$companytype;
+            M('meibohui_index')->save($m);
+            $return = 1;
+        }
+    }
+
+
         public function index() {
 //        $userOpenId= $_GET['openid'];;
         $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
@@ -184,7 +218,7 @@ HTML;
 
         $this->assign("openid",$userOpenId);
 
- 
+
         $this->display();
     }
 
@@ -193,53 +227,7 @@ HTML;
 
 
 
-    public function haveFinishThreeOrHavePrizeOrVoteSmallThanFive($info,$shareSelf = false,$indexSelf=false){
-        $vote = $info['vote'];
 
-        if(!$info && !$indexSelf){
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
-            exit();
-        }
-        $prize = $info['prize'];
-        $draw = $info['draw'];
-        if($prize == 1 || $prize == 2){//特等奖 or 一等奖
-            //redirect
-            $url = "http://mp.weixin.qq.com/s/Cqw5hmJtxCrgvyUaVZNEyw";
-            header("location:$url");
-            exit();
-        }else{
-            if($draw == 3){
-                $url = "http://mp.weixin.qq.com/s/o4Vu9MOSe2dYaUgxV77Dew";
-                header("location:$url");
-                exit();
-            }
-        }
-
-        if($indexSelf){
-            //首先查看是否为自己投过票
-            $userOpenId= cookie('user_openid_new');
-           // $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
-            $voteListSql = "SELECT id from tp_meibohui_votelist where fromopenid='$userOpenId' and toopenid='$userOpenId'";
-            $voteView = M('meibohui_votelist')->query($voteListSql);
-            if($voteView){
-                //已经为自己投过票
-                if($vote<5 ){
-                    header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&shareclick=1");
-                    exit();
-                }else{
-                    header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share");
-                    exit();
-                }
-            }else{
-                return;
-            }
-        }
-        if($vote<5 && !$shareSelf){
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&shareclick=1");
-            exit();
-        }
-
-    }
     public function share(){
         $this->setEndTime();
         $userOpenId= cookie('user_openid_new');
@@ -575,47 +563,7 @@ HTML;
 
 
 
-    public function saveFormInfo(){
-        $this->setEndTime2();
-        $return = 0;
-        $userOpenId= cookie('user_openid_new');
-     //   $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
-        if(!$userOpenId){
-            //非法投票
-            exit();
-        }
-        $username = $_POST['username'];
-        $telphone = $_POST['telphone'];
-        $province = $_POST['province'];
-        $city = $_POST['city'];
-        $county = $_POST['county'];
-        $address = $_POST['address'];
-        $award = M('meibohui_award')->where(array('openid' => $userOpenId))->find();
-        if(!$award){
-            $m = array();
-            $m['openid'] = $userOpenId;
-            $m['name'] = $username;
-            $m['phone'] =$telphone;
-            $m['province'] =$province;
-            $m['city'] =$city;
-            $m['county'] =$county;
-            $m['address'] =$address;
-            $m['createtime'] = time();
-            M('meibohui_award')->add($m);
-        }else{
-                $m = array();
-                $m['id'] = $award['id'];
-                $m['name'] = $username;
-                $m['phone'] =$telphone;
-                $m['province'] =$province;
-                $m['city'] =$city;
-                $m['county'] =$county;
-                $m['address'] =$address;
-                $m['updatetime'] = time();
-                M('meibohui_award')->save($m);
-                $return = 1;
-        }
-    }
+
     public function rank(){
         $userOpenId= cookie('user_openid_new');
         //        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
