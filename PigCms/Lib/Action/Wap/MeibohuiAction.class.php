@@ -135,7 +135,7 @@ class MeibohuiAction extends SjzAction {
 //            return null;
 //        }
         //首先查看此OPENID 是否存在 无论gid
-        $bonusInfo = M('motianlun')->where(array('openid' => $openId))->find();
+        $bonusInfo = M('meibohui')->where(array('openid' => $openId))->find();
         $lastInsertId = null;
         if(!$bonusInfo){
             //创建个人主页
@@ -145,7 +145,7 @@ class MeibohuiAction extends SjzAction {
             $d['headimgurl'] = $imageProfile;
             $d['views'] = 1;
             $d['createtime'] = time();
-            $lastInsertId = M("motianlun")->add($d);
+            $lastInsertId = M("meibohui")->add($d);
         }
         return $lastInsertId;
     }
@@ -292,12 +292,12 @@ HTML;
         $this->assign("leftVote",$leftVote);
         $this->assign("leftDraw",$leftDraw);
 
-        $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
+        $teDengJiangCount = M('meibohui_jiang')->where('id=1')->getField('tedengjiang');
         $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
         if($leftTeDengJiang < 0 ){
             $leftTeDengJiang = 0;
         }
-        $yiDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
+        $yiDengJiangCount = M('meibohui_jiang')->where('id=1')->getField('yidengjiang');
         $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
         if($leftYiDengJiang < 0 ){
             $leftYiDengJiang = 0;
@@ -307,171 +307,10 @@ HTML;
         $this->display();
     }
 
-    public function getLeftVote($draw,$vote){
-        $leftVote = 0;
-        if($draw == 0){
-            //还未抽过奖
-            $leftVote = $this->eachChouJiangVote - $vote;
-
-        }elseif($draw == 1){
-            //已经抽过一次奖了
-            $leftVote = $this->eachChouJiangVote*2 - $vote;
-        }elseif($draw == 2){
-            //已经抽过二次奖了
-            $leftVote = $this->eachChouJiangVote*3 - $vote;
-        }
-        if($leftVote < 0 ){
-            $leftVote = 0;
-        }
-        return $leftVote;
-    }
-    public function success(){
-        $this->setEndTime();
-        $userOpenId= cookie('user_openid_new');
-        //  $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
-        if(!$userOpenId){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
-            exit();
-        }
-
-        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
-        $draw = $info['draw'];
-        $gid = $info['gid'];
-        //begin views
-        if($info){
-            $this->setIncViews($info['id']);
-        }
-        $prize = $info['prize'];
-        //begin 分享出去的URL
-        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
-        $noncestr = "Wm3WZYTPz0wzccnW";
-        $timestamp = time();
-        $url = $this->get_url();;
-        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
-        $signature = sha1($str);
-        $this->assign("appid",$appId);
-        $this->assign("timestamp",$timestamp);
-        $this->assign("nonceStr",$noncestr);
-        $this->assign("signature",$signature);
-        $this->assign("shareurl",$this->getShareUrl());
-        $this->assign('gid', $gid);
-
-        $this->assign('title',$info['name'].$this->title);
-        $this->assign('bonusdesc',$this->bonusdesc);
-        $this->assign("imageUrl",$this->imageUrl);
-        $this->assign("shareimageurl",$this->shareImageUrl);
-        //end
-        $this->assign("prize",$prize);
-        $this->assign("openid",$userOpenId);
-
-        $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
-        $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
-        if($leftTeDengJiang < 0 ){
-            $leftTeDengJiang = 0;
-        }
-        $yiDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
-        $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
-        if($leftYiDengJiang < 0 ){
-            $leftYiDengJiang = 0;
-        }
-        $this->assign("leftTeDengJiang",$leftTeDengJiang);
-        $this->assign("leftYiDengJiang",$leftYiDengJiang);
-        $this->assign("draw",$draw);
-        $this->display();
-    }
-
-    public function rule(){
-        $this->setEndTime();
-        $userOpenId= cookie('user_openid_new');
-//        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
-        if(!$userOpenId){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
-            exit();
-        }
-
-        //首先判断当前用户是否有玩过第一次
-        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
-        $gid = $info['gid'];
-        //begin 分享出去的URL
-        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
-        $noncestr = "Wm3WZYTPz0wzccnW";
-        $timestamp = time();
-        $url = $this->get_url();;
-        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
-        $signature = sha1($str);
-        $this->assign("appid",$appId);
-        $this->assign("timestamp",$timestamp);
-        $this->assign("nonceStr",$noncestr);
-        $this->assign("signature",$signature);
-        $this->assign("shareurl",$this->getShareUrl());
-        $this->assign('gid', $gid);
-
-        $this->assign('title',$info['name'].$this->title);
-        $this->assign('bonusdesc',$this->bonusdesc);
-        $this->assign("imageUrl",$this->imageUrl);
-        $this->assign("shareimageurl",$this->shareImageUrl);
-        //end
-
-        //begin views
-        $userOpenId= cookie('user_openid_new');
-        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
-        if($info){
-            $this->setIncViews($info['id']);
-        }
-        // end views
-        $this->assign("gid",$gid);
-        $this->display();
-    }
 
 
-    public function rank1(){
-        $this->setEndTime();
-        $userOpenId= cookie('user_openid_new');
-        $gid = $_GET['gid'];
-        if(!$gid){
-            $gid = $this->defalutGid;
-        }
-        if(!$userOpenId){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
-            exit();
-        }
 
-        //首先判断当前用户是否有玩过第一次
-        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
-        $gid = $info['gid'];
-        //begin 分享出去的URL
-        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
-        $noncestr = "Wm3WZYTPz0wzccnW";
-        $timestamp = time();
-        $url = $this->get_url();;
-        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
-        $signature = sha1($str);
-        $this->assign("appid",$appId);
-        $this->assign("timestamp",$timestamp);
-        $this->assign("nonceStr",$noncestr);
-        $this->assign("signature",$signature);
-        $this->assign("shareurl",$this->getShareUrl());
-        $this->assign('gid', $gid);
 
-        $this->assign('title',$info['name'].$this->title);
-        $this->assign('bonusdesc',$this->bonusdesc);
-        $this->assign("imageUrl",$this->imageUrl);
-        $this->assign("shareimageurl",$this->shareImageUrl);
-        //end
-
-        //begin views
-        $userOpenId= cookie('user_openid_new');
-        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
-        if($info){
-            $this->setIncViews($info['id']);
-        }
-        // end views
-        $this->assign("gid",$gid);
-        $this->display();
-    }
 
     public function haveFinishThreeOrHavePrizeOrVoteSmallThanFive($info,$shareSelf = false,$indexSelf=false){
         $vote = $info['vote'];
@@ -499,8 +338,8 @@ HTML;
             //首先查看是否为自己投过票
             $userOpenId= cookie('user_openid_new');
            // $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
-            $voteListSql = "SELECT id from tp_motianlun_votelist where fromopenid='$userOpenId' and toopenid='$userOpenId'";
-            $voteView = M('motianlun_votelist')->query($voteListSql);
+            $voteListSql = "SELECT id from tp_meibohui_votelist where fromopenid='$userOpenId' and toopenid='$userOpenId'";
+            $voteView = M('meibohui_votelist')->query($voteListSql);
             if($voteView){
                 //已经为自己投过票
                 if($vote<5 ){
@@ -534,7 +373,7 @@ HTML;
             exit();
         }
 
-        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
+        $info = M('meibohui')->where(array('openid' => $userOpenId))->find();
         if(!$info){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
@@ -576,9 +415,9 @@ HTML;
         $end = mktime(23,59,59,date("m",$today),date("d",$today),date("Y",$today));
         $start = date("Y-m-d H:i:s",$start );
         $end = date("Y-m-d H:i:s",$end );
-//        $uniqueViewSql = "SELECT * from tp_motianlun_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$userOpenId'";
-        $uniqueViewSql = "SELECT * from tp_motianlun_votelist where  fromopenid='$userOpenId' and toopenid='$userOpenId'";
-        $uniqueViewlist = M('motianlun_votelist')->query($uniqueViewSql);
+//        $uniqueViewSql = "SELECT * from tp_meibohui_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$userOpenId'";
+        $uniqueViewSql = "SELECT * from tp_meibohui_votelist where  fromopenid='$userOpenId' and toopenid='$userOpenId'";
+        $uniqueViewlist = M('meibohui_votelist')->query($uniqueViewSql);
         $haveVoted = 0;
 
 
@@ -620,12 +459,12 @@ HTML;
         $this->assign("leftVote",$leftVote);
         $this->assign("leftDraw",$leftDraw);
 
-        $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
+        $teDengJiangCount = M('meibohui_jiang')->where('id=1')->getField('tedengjiang');
         $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
         if($leftTeDengJiang < 0 ){
             $leftTeDengJiang = 0;
         }
-        $yiDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
+        $yiDengJiangCount = M('meibohui_jiang')->where('id=1')->getField('yidengjiang');
         $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
         if($leftYiDengJiang < 0 ){
             $leftYiDengJiang = 0;
@@ -692,7 +531,7 @@ HTML;
             }
         }
 
-        $info = M('motianlun')->where(array('id' => $uid))->find();
+        $info = M('meibohui')->where(array('id' => $uid))->find();
         if(!$info){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
@@ -712,17 +551,17 @@ HTML;
         $end = mktime(23,59,59,date("m",$today),date("d",$today),date("Y",$today));
         $start = date("Y-m-d H:i:s",$start );
         $end = date("Y-m-d H:i:s",$end );
-        $uniqueViewSql = "SELECT * from tp_motianlun_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$MainOpenId'";
-        $uniqueViewlist = M('motianlun_uniqueviewlist')->query($uniqueViewSql);
+        $uniqueViewSql = "SELECT * from tp_meibohui_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$MainOpenId'";
+        $uniqueViewlist = M('meibohui_uniqueviewlist')->query($uniqueViewSql);
         $haveVoted = 1;
         if($uniqueViewlist){
             //不需要增加uniqueviews
         }else{
-            M("motianlun")->where(array('id' => $info['id']))->setInc('uniqueviews');
+            M("meibohui")->where(array('id' => $info['id']))->setInc('uniqueviews');
             $n = array();
             $n['fromopenid'] = $userOpenId;
             $n['toopenid'] = $MainOpenId;
-            M('motianlun_uniqueviewlist')->add($n);
+            M('meibohui_uniqueviewlist')->add($n);
         }
         if($userOpenId == $MainOpenId){
             //自己访问自己的主页 跳转到share页面
@@ -733,13 +572,13 @@ HTML;
 
         //直接跳转
 
-        $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
+        $teDengJiangCount = M('meibohui_jiang')->where('id=1')->getField('tedengjiang');
         $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
         if($leftTeDengJiang < 0 ){
             $leftTeDengJiang = 0;
         }
 
-        $yiDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
+        $yiDengJiangCount = M('meibohui_jiang')->where('id=1')->getField('yidengjiang');
         $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
         if($leftYiDengJiang < 0 ){
             $leftYiDengJiang = 0;
@@ -751,8 +590,8 @@ HTML;
             exit();
         }
         //直接跳转结束
-        $voteListSql = "SELECT * from tp_motianlun_votelist where fromopenid='$userOpenId' and toopenid='$MainOpenId'";
-        $voteView = M('motianlun_votelist')->query($voteListSql);
+        $voteListSql = "SELECT * from tp_meibohui_votelist where fromopenid='$userOpenId' and toopenid='$MainOpenId'";
+        $voteView = M('meibohui_votelist')->query($voteListSql);
 
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
@@ -787,7 +626,7 @@ HTML;
         $this->assign('gid',$gid);
 
         //判断当前用户是否已经投过票
-        $voteList = M('motianlun_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$MainOpenId  ))->find();
+        $voteList = M('meibohui_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$MainOpenId  ))->find();
         $voteThisUid = 0;
         if($voteList){
             $voteThisUid = 1;
@@ -805,7 +644,7 @@ HTML;
 
 
 
-        //motianlun
+        //meibohui
         $vote = $info['vote'];
         $this->assign("teDengJiangCount",$this->teDengJiangCount);
         $this->assign("yiDengJiangCount",$this->yiDengJiangCountDengJiangCount);
@@ -824,12 +663,12 @@ HTML;
         $this->assign("leftVote",$leftVote);
         $this->assign("leftDraw",$leftDraw);
 
-        $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
+        $teDengJiangCount = M('meibohui_jiang')->where('id=1')->getField('tedengjiang');
         $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
         if($leftTeDengJiang < 0 ){
             $leftTeDengJiang = 0;
         }
-        $yiDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
+        $yiDengJiangCount = M('meibohui_jiang')->where('id=1')->getField('yidengjiang');
         $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
         if($leftYiDengJiang < 0 ){
             $leftYiDengJiang = 0;
@@ -842,235 +681,19 @@ HTML;
 
     //根据UID获取OPENID
     public function getOpenIdByUid($uid){
-        $openId = M('motianlun')->where("id=$uid")->getField('openid');
+        $openId = M('meibohui')->where("id=$uid")->getField('openid');
         return $openId;
     }
     public function getUidByOpenid($openid){
-        $uid = M('motianlun')->where("openid='$openid'")->getField('id');
+        $uid = M('meibohui')->where("openid='$openid'")->getField('id');
         return $uid;
     }
-    public function saveVote2(){
-        $this->setEndTime();
-        $return = 0;
-        $fromOpenIdFromPost= cookie('user_openid_new');
-//        $fromOpenIdFromPost = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
-        $toUid = $_POST['uid'];
-        if(!$fromOpenIdFromPost){
-            //非法投票
-            exit();
-        }
-        $vote = M('motianlun')->where("id=$toUid")->getField('vote');
-        if($vote >= 15){
-            echo 3;
-            return;
-        }
-        $toOpenIdFromPost = $this->getOpenIdByUid($toUid);
-        //检查此 local openid 是否投过票
-        $voteList = M('motianlun_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
-        //多次投票
-        if(!$voteList){
-//        if(true){
-            //投票
-            $d = array();
-            $d['fromopenid'] = $fromOpenIdFromPost;
-            $d['toopenid'] = $toOpenIdFromPost;
-            $d['createtime'] = time();
-            M('motianlun_votelist')->add($d);
-            M("motianlun")->where(array('id' => $toUid))->setInc('vote');
-            $return = 1;
-
-//            $info = M('motianlun')->where(array('id' => $toUid))->find();
-
-        }else{
-            //已经投过票
-            $return = 2;
-        }
-        echo $return;
-    }
-
-    public function test(){
-        $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
-        echo $teDengJiangCount;
-    }
-
-    public function saveDraw(){
-        $this->setEndTime();
-        $return = 0;
-        $paiming = null;
-        $prize = null;
-        $returnMessage = null;
-        $fromOpenIdFromPost= cookie('user_openid_new');
-     //   $fromOpenIdFromPost = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
-        $info = M('motianlun')->where(array('openid' => $fromOpenIdFromPost))->find();
-        if(!$info){
-            exit;
-        }
-        //查看当前的用户的名次
-        $number = $info['number'];
-
-        //用户是否已经获得奖
-        $prize = $info['prize'];
-
-        //查看抽奖次数
-        $drawCount = $info['draw'];
-        $voteCount = $info['vote'];
-        if($prize == 1){
-            //已获得特等奖，无法再抽奖
-            $returnMessage = "已获特等奖,无法再抽奖";
-            echo json_encode(array($returnMessage,$prize,$drawCount+1)) ;
-            return;
-        }
-        if($prize == 2){
-            //已获得特等奖，无法再抽奖
-            $returnMessage = "已获一等奖,无法再抽奖";
-            echo json_encode(array($returnMessage,$prize,$drawCount+1)) ;
-            return;
-        }
-        //还未抽中奖
-        if(!$prize){
-            if(!$drawCount && $voteCount>=5){
-                //第一次抽
-                $p = array();
-                $p['uid'] =  $info['id'];
-                $p['position'] =  1;
-                $paiming = M('motianlun_drawlist')->add($p);
 
 
 
-                $prize = $this->whetherDraw($paiming);
-                if($prize == 1){
-                    //查看已经有多少人获取了特等奖 最多10个
-                    $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
-                    if($teDengJiangCount<=9){
-                        M('motianlun_jiang')->where('id=1')->setInc('tedengjiang');
-                        $returnMessage = "恭喜抽中特等奖！";
-                    }else{
-                        $prize = 3;//本应获得特等奖 但是 奖没了
-                        $returnMessage = "未中奖";
-                    }
 
-                }elseif($prize == 2){
-                    $yiDengJiangCount =  M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
-                    if($yiDengJiangCount <= 999){
-                        M('motianlun_jiang')->where('id=1')->setInc('yidengjiang');
-                        $returnMessage = "恭喜抽中一等奖！";
-                    }else{
-                        $prize = 4;//本应获得一等奖 但是 奖没了
-                        $returnMessage = "未中奖";
-                    }
-                }else {
-                    $returnMessage = "未中奖<br/>";
-                    $yiDengJiangCount =  M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
-                    $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
-                    $leftDraw = $this->totalDrawCount - $drawCount - 1;
-                    if($leftDraw < 0 ){
-                        $leftDraw = 0;
-                    }
-                    $returnMessage .= "奖池剩余".$leftYiDengJiang."盒面膜/眼膜 ,您还有".$leftDraw."次抽奖机会";
-                }
-                $i = array();
-                $i['id'] = $info['id'];
-                $i['rank1'] = $paiming;
-                $i['prize'] = $prize;
-                $i['draw'] = 1;
-                M('motianlun')->save($i);
-            }elseif($drawCount == 1 &&  $voteCount>=10){
-                //第二次抽奖
-                $p = array();
-                $p['uid'] =  $info['id'];
-                $p['position'] =  2;
-                $paiming = M('motianlun_drawlist')->add($p);
-                $prize = $this->whetherDraw($paiming);
-                if($prize == 1){
-                    $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
-                    if($teDengJiangCount<=9){
-                        M('motianlun_jiang')->where('id=1')->setInc('tedengjiang');
-                        $returnMessage = "恭喜抽中特等奖！";
-                    }else{
-                        $prize = 3;//本应获得特等奖 但是 奖没了
-                        $returnMessage = "未中奖";
-                    }
 
-                }elseif($prize == 2){
-                    $yiDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
-                    if($yiDengJiangCount <= 999){
-                        M('motianlun_jiang')->where('id=1')->setInc('yidengjiang');
-                        $returnMessage = "恭喜抽中一等奖！";
-                    }else{
-                        $prize = 4;//本应获得一等奖 但是 奖没了
-                        $returnMessage = "未中奖";
-                    }
-                }else {
-                    $returnMessage = "未中奖<br/>";
-                    $yiDengJiangCount =  M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
-                    $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
-                    $leftDraw = $this->totalDrawCount - $drawCount - 1;
-                    if($leftDraw < 0 ){
-                        $leftDraw = 0;
-                    }
-                    $returnMessage .= "奖池剩余".$leftYiDengJiang."盒面膜/眼膜 ,您还有".$leftDraw."次抽奖机会";
-                }
-                $i = array();
-                $i['id'] = $info['id'];
-                $i['rank2'] = $paiming;
-                $i['prize'] = $prize;
-                $i['draw'] = 2;
-                M('motianlun')->save($i);
-            }else if($drawCount == 2  && $voteCount>= 15){
-                //第三次抽奖
-                $i['id'] = $info['id'];
-                $i['draw'] = 3;
-                $i['thirdtime'] = date('Y-m-d H:i:s');
-                M('motianlun')->save($i);
-                $returnMessage = "遗憾错过!";
-            }else{
-                $returnMessage = "提交过于频繁，请稍后再试!";
-            }
-        }
 
-        echo json_encode(array($returnMessage,$prize,$drawCount+1)) ;
-    }
-
-    function whetherDraw($paiming){
-        $return = null;
-        if($paiming*1 == 66 || $paiming*1 == 566 || $paiming*1 == 1166 || $paiming*1 == 3166 || $paiming*1 == 4566 || $paiming*1 == 5966 || $paiming*1 == 6966 || $paiming*1 == 7966 || $paiming*1 == 8966 || $paiming*1 == 9566){
-            $return = 1;
-        }elseif(strrchr((string)"$paiming","7") == "7"){
-            $return = 2;
-        }
-        return $return;
-    }
-    //TODO add random str to avoid auto submit
-    public function saveVote(){
-        $this->setEndTime();
-        $return = 0;
-        $leftVote = 0;
-        $fromOpenIdFromPost= cookie('user_openid_new');
-     //   $fromOpenIdFromPost = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
-        $toOpenIdFromPost = $fromOpenIdFromPost;
-        //检查此 local openid 是否投过票
-        $voteList = M('motianlun_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
-        if(!$voteList){//
-            //投票
-            $d = array();
-            $d['fromopenid'] = $fromOpenIdFromPost;
-            $d['toopenid'] = $toOpenIdFromPost;
-            $d['createtime'] = time();
-            M('motianlun_votelist')->add($d);
-            M("motianlun")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
-            $info = M('motianlun')->where(array('openid' => $fromOpenIdFromPost))->find();
-            if(!$info){
-                exit;
-            }
-            $leftVote = $this->getLeftVote($info['draw'],$info['vote']);
-            $return = 1;
-        }else{
-            //已经投过票
-            $return = 2;
-        }
-        $arrTmp = array($return,$leftVote);
-        echo json_encode($arrTmp);
-    }
     public function saveFormInfo(){
         $this->setEndTime2();
         $return = 0;
@@ -1086,7 +709,7 @@ HTML;
         $city = $_POST['city'];
         $county = $_POST['county'];
         $address = $_POST['address'];
-        $award = M('motianlun_award')->where(array('openid' => $userOpenId))->find();
+        $award = M('meibohui_award')->where(array('openid' => $userOpenId))->find();
         if(!$award){
             $m = array();
             $m['openid'] = $userOpenId;
@@ -1097,7 +720,7 @@ HTML;
             $m['county'] =$county;
             $m['address'] =$address;
             $m['createtime'] = time();
-            M('motianlun_award')->add($m);
+            M('meibohui_award')->add($m);
         }else{
                 $m = array();
                 $m['id'] = $award['id'];
@@ -1108,7 +731,7 @@ HTML;
                 $m['county'] =$county;
                 $m['address'] =$address;
                 $m['updatetime'] = time();
-                M('motianlun_award')->save($m);
+                M('meibohui_award')->save($m);
                 $return = 1;
         }
     }
@@ -1120,7 +743,7 @@ HTML;
             header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
             exit();
         }
-        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
+        $info = M('meibohui')->where(array('openid' => $userOpenId))->find();
         $gid = $_GET['gid'];
         if(!$gid){
             $gid = $this->defalutGid;
@@ -1132,7 +755,7 @@ HTML;
         }
 
         //如果没有满足16票 跳转到再接再厉
-        if($info['vote'] <$this->motianlunCount){
+        if($info['vote'] <$this->meibohuiCount){
             //redirect
             header("location:$this->url/index.php?g=Wap&m=Motianlun&a=rank1&gid=$gid");
             exit();
@@ -1170,8 +793,8 @@ HTML;
 
         $uid = $info['id'];
         //查询此用户的排名
-        $pValue = M('motianlun_phonelist')->where(array('uid' => $uid))->getField('id');
-        $vote = $this->motianlunCount;
+        $pValue = M('meibohui_phonelist')->where(array('uid' => $uid))->getField('id');
+        $vote = $this->meibohuiCount;
         $this->assign("vote",$vote);
         $this->assign("selforder",$pValue);
         $this->assign("paiming",$pValue);
@@ -1192,7 +815,7 @@ HTML;
             header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
             exit();
         }
-        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
+        $info = M('meibohui')->where(array('openid' => $userOpenId))->find();
         $gid = $info['gid'];
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
@@ -1218,7 +841,7 @@ HTML;
         $vote = $info['vote'];
         $gid = $info['gid'];
 
-        $award = M('motianlun_award')->where(array('openid' => $userOpenId))->find();
+        $award = M('meibohui_award')->where(array('openid' => $userOpenId))->find();
         $name = '';
         $phone = '';
         $address = '';
@@ -1244,12 +867,12 @@ HTML;
         $this->assign("gid",$gid);
         $this->assign("whetheraward",$a);
 
-        $teDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('tedengjiang');
+        $teDengJiangCount = M('meibohui_jiang')->where('id=1')->getField('tedengjiang');
         $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
         if($leftTeDengJiang < 0 ){
             $leftTeDengJiang = 0;
         }
-        $yiDengJiangCount = M('motianlun_jiang')->where('id=1')->getField('yidengjiang');
+        $yiDengJiangCount = M('meibohui_jiang')->where('id=1')->getField('yidengjiang');
         $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
         if($leftYiDengJiang < 0 ){
             $leftYiDengJiang = 0;
@@ -1262,7 +885,7 @@ HTML;
     }
 
     public function getOrderByOpenId($openId=null){
-        $list = M('motianlun')->query("select openid, number,share,phonetime from tp_motianlun where phone != '' order by number desc,share desc,phonetime asc ");
+        $list = M('meibohui')->query("select openid, number,share,phonetime from tp_meibohui where phone != '' order by number desc,share desc,phonetime asc ");
 
         $orderList = array();
         foreach($list as $each){
@@ -1292,7 +915,7 @@ HTML;
         $this->assign("signature",$signature);
         $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', 1);
-        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
+        $info = M('meibohui')->where(array('openid' => $userOpenId))->find();
         $this->assign('title',$info['name'].$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
         $this->assign("imageUrl",$this->imageUrl);
@@ -1309,7 +932,7 @@ HTML;
 
         $this->assign('selfpage',$this->url."/index.php?g=Wap&m=Motianlun&a=sharefriend&gid=$gid");
 
-        $award = M('motianlun_award')->where(array('openid' => $userOpenId))->find();
+        $award = M('meibohui_award')->where(array('openid' => $userOpenId))->find();
         if($award){
             $this->assign('name',$award['name']);
             $this->assign('phone',$award['phone']);
@@ -1323,10 +946,10 @@ HTML;
     }
 
     public function setIncViews($id){
-        M("motianlun")->where(array('id' => $id))->setInc('views');
+        M("meibohui")->where(array('id' => $id))->setInc('views');
         $m = array();
         $m['uid'] = $id;
-        M('motianlun_viewlist')->add($m);
+        M('meibohui_viewlist')->add($m);
     }
 
     public function  saveAward(){
@@ -1336,7 +959,7 @@ HTML;
             echo 0;
             return;
         }
-        $award = M('motianlun_award')->where(array('openid' => $userOpenId))->find();
+        $award = M('meibohui_award')->where(array('openid' => $userOpenId))->find();
         $name = $_POST['name'];
         $phone = $_POST['phone'];
         $province = $_POST['province'];
@@ -1351,7 +974,7 @@ HTML;
             $m['city'] = $city;
             $m['address'] = $address;
             $m['createtime'] = time();
-            M('motianlun_award')->add($m);
+            M('meibohui_award')->add($m);
             $return = 1;
         }else{
             $m = array();
@@ -1363,7 +986,7 @@ HTML;
             $m['city'] = $city;
             $m['address'] = $address;
             $m['createtime'] = time();
-            M('motianlun_award')->save($m);
+            M('meibohui_award')->save($m);
             $return = 1;
         }
 
@@ -1433,16 +1056,16 @@ HTML;
             exit;
         }
         $userOpenId= cookie('user_openid_new');
-        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
+        $info = M('meibohui')->where(array('openid' => $userOpenId))->find();
         if($info){
             $id = $info['id'];
             if(!$info['sharetime']){
                 $m = array();
                 $m['id'] = $info['id'];
                 $m['sharetime'] = time();
-                M("motianlun")->save($m);
+                M("meibohui")->save($m);
             }
-            M("motianlun")->where(array('id' => $id))->setInc('share');
+            M("meibohui")->where(array('id' => $id))->setInc('share');
             echo 1;
         }else{
             echo 0;
@@ -1462,16 +1085,16 @@ HTML;
             exit;
         }
         $userOpenId= cookie('user_openid_new');
-        $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
+        $info = M('meibohui')->where(array('openid' => $userOpenId))->find();
         if($info){
             $id = $info['id'];
             if(!$info['sharetime']){
                 $m = array();
                 $m['id'] = $info['id'];
                 $m['sharetime'] = time();
-                M("motianlun")->save($m);
+                M("meibohui")->save($m);
             }
-            M("motianlun")->where(array('id' => $id))->setInc('share');
+            M("meibohui")->where(array('id' => $id))->setInc('share');
             echo 1;
         }else{
             echo 0;
@@ -1479,14 +1102,14 @@ HTML;
 
     }
     public function saveSharePoll(){
-        M("motianlun_polldata")->where(array('id' => 1))->setInc('sharenumber');
+        M("meibohui_polldata")->where(array('id' => 1))->setInc('sharenumber');
     }
     /*
     * 记录 我也要参加 次数
     */
     public function saveWantJoin(){
         $uid = $_POST['uid'];
-        M("motianlun")->where(array('id' => $uid ))->setInc('joins');
+        M("meibohui")->where(array('id' => $uid ))->setInc('joins');
     }
 
     /*
@@ -1504,14 +1127,14 @@ HTML;
         $toOpenId = $_POST['toopenid'];
         $uid = $_POST['uid'];
         $userOpenId = cookie('user_openid_new');
-        $voteList = M('motianlun_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toOpenId))->find();
+        $voteList = M('meibohui_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toOpenId))->find();
 
         //多次投票开启
         if(!$voteList){
 //        if(true){
         //多次投票结束
-            $info = M('motianlun')->where(array('id' => $uid))->find();
-            M("motianlun")->where(array('id' => $info['id']))->setInc('vote');
+            $info = M('meibohui')->where(array('id' => $uid))->find();
+            M("meibohui")->where(array('id' => $info['id']))->setInc('vote');
 
             //投票
             $d = array();
@@ -1519,7 +1142,7 @@ HTML;
             $d['toopenid'] = $toOpenId;
             $d['sequence'] = $info['sequence'];
             $d['createtime'] = time();
-            M('motianlun_votelist')->add($d);
+            M('meibohui_votelist')->add($d);
             $return = 1;
         }
         echo $return;
