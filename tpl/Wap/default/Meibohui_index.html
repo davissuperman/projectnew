@@ -62,7 +62,8 @@
 
 <script>
     $(function(){
-
+        var openid = '{pigcms:$Think.get.wecha_id}';
+        alert(openid);
     });
 	
 	function saveUserInfo(){
@@ -124,7 +125,7 @@
 
             $.ajax({
                 type:'post',
-                url: '{pigcms::$siteurl}/index.php?g=Wap&m=Womenwheel&a=saveFormInfo' ,//接口地址
+                url: '{pigcms::$siteurl}/index.php?g=Wap&m=Meibohui&a=saveFormInfo' ,//接口地址
                 data:data,
                 dataType:'json',
                 timeout : 60000,
