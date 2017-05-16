@@ -200,7 +200,9 @@ HTML;
         echo $return;
     }
 
-
+        public function first(){
+            $this->display();
+        }
         public function index() {
         $nickname = '';
 
