@@ -26,7 +26,7 @@
         <div class="col-md-10 main">
             <div class="panel panel-success">
                 <div class="panel-heading cfix">
-                    <h3 class="panel-title pull-left">上海美博会等级表</h3>
+                    <h3 class="panel-title pull-left">上海美博会登记表</h3>
                     <span class="small"> </span>
                     <div class="search-box pull-right">
 
@@ -69,6 +69,7 @@
                                     <th class="sevenTd">店铺名称</th>
                                     <th class="sevenTd">店铺年度营业额</th>
                                     <th class="sevenTd">店铺主营产品类型</th>
+                                    <th class="sevenTd">创建时间</th>
                                 </tr>
 
                                 <volist name="info" id="o">
@@ -81,6 +82,7 @@
                                         <td>{pigcms:$o.storename}</td>
                                         <td>{pigcms:$o.salary}</td>
                                         <td>{pigcms:$o.companytype}</td>
+                                        <td>{pigcms:$o.createtime}</td>
                                     </tr>
                                 </volist>
                                 <td colspan="9" style="text-align:right">{pigcms:$page}</td>
