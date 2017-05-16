@@ -252,9 +252,10 @@
                 success:function(data){
 //                    var html = '<p>非常感谢，我们将会与您联系！</p>';
 //                    Pop.alerts(html);
-                    setTimeout(function(){
-                        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Meibohui&a=success';
-                    },4000);
+                    window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Meibohui&a=success';
+//                    setTimeout(function(){
+//                        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Meibohui&a=success';
+//                    },4000);
                 },
                 error : function(XMLHttpRequest, textStatus, errorThrown) {
                     Pop.alerts("提交失败，网络繁忙！");
