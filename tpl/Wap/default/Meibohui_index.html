@@ -120,6 +120,7 @@
 <body>
 
 <div class="form-panel">
+	<h1 style="text-align:center;font-size:0.4rem;margin-bottom:0.2rem;">意向商申请表</h1>
 	<form method="post" action="/index.php?g=Wap&m=Meibohui&a=saveFormInfo">
         <ul>
         	<li class="clrfix">
@@ -134,7 +135,7 @@
                         <else/>
                         <label><input type="checkbox" id="off-line"/>线下意向商</label>
                     </if>
-
+					<span>（可多选）</span>
                 </div>
             </li>
             <li class="clrfix">
@@ -156,7 +157,7 @@
                 </div>
             </li>
             <li class="clrfix">
-                <div class="label">店铺年度营业额：</div>
+                <div class="label">店铺年度营业额：（万元）</div>
                 <div class="controls">
                     <input class="input-form" type="text" placeholder="请输入店铺年度营业额"  id="salary" name="salary"/>
                 </div>

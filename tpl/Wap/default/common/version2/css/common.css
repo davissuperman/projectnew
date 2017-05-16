@@ -559,7 +559,7 @@ input,textarea,select,button{font-size:1em;}
 
 /*form*/
 .input-text{ height:0.6rem;border: none;  background:#fff; width:90%;padding:0 0.1rem; border-radius:5px;color:#ef8775;}
-.form-panel{ position: absolute; width:90%;top:1rem;left:50%; margin-left:-45%;}
+.form-panel{ position: absolute; width:90%;top:0.5rem;left:50%; margin-left:-45%;}
 .form-panel > ul{background:#fff; padding:0.2rem; -moz-border-radius:0.05rem;-webkit-border-radius:0.05rem;border-radius:0.05rem;}
 .form-panel .label{ margin:5px 0 5px 0;color:#333; font-size:0.2rem; float: left;}
 .form-panel .controls{ position:relative; float: left;width:100%;}
