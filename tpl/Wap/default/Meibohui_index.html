@@ -192,14 +192,14 @@
         var salary = $salary.val();
         var companytype = $companytype.val();
 
-		var onLine = false;
+		var onLine = 0;
 		if($onLine.is(':checked')){
-			onLine = true;
+			onLine = 1;
 		}
 		
-		var offLine = false;
+		var offLine = 0;
 		if($offLine.is(':checked')){
-			offLine = true;
+			offLine = 1;
 		}
 		if(!onLine && !offLine){
 			Pop.alerts("请勾选意向商类别");
