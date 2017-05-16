@@ -124,8 +124,17 @@
         <ul>
         	<li class="clrfix">
                 <div class="controls">
-                	<label><input type="checkbox" id="on-line"/>线上意向商</label>
-                    <label><input type="checkbox" id="off-line"/>线下意向商</label>
+                    <if condition="$online eq 1 ">
+                        <label><input type="checkbox" id="on-line" checked/>线上意向商</label>
+                        <else/>
+                        <label><input type="checkbox" id="on-line"/>线上意向商</label>
+                    </if>
+                    <if condition="$offline eq 1 ">
+                        <label><input type="checkbox" id="off-line" checked/>线下意向商</label>
+                        <else/>
+                        <label><input type="checkbox" id="off-line"/>线下意向商</label>
+                    </if>
+
                 </div>
             </li>
             <li class="clrfix">

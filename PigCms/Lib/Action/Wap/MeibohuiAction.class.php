@@ -204,8 +204,15 @@ HTML;
             $this->display();
         }
         public function index() {
-        $nickname = '';
-
+            $nickname = '';
+            $offline = 0;
+            if(isset($_GET['offline']) && $_GET['offline']){
+                $offline = 1;
+            }
+            $online = 0;
+            if(isset($_GET['online']) && $_GET['online']){
+                $online = 1;
+            }
             $userOpenId= cookie('user_openid_new');
 //        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
             $fansInfo = null;
@@ -276,6 +283,8 @@ HTML;
 
 
         $this->assign("openid",$userOpenId);
+        $this->assign("online",$online);
+        $this->assign("offline",$offline);
 
 
         $this->display();

@@ -119,108 +119,11 @@
 </head>
 <body>
 
-内容加这里
+<a href="{pigcms::$siteurl}/index.php?g=Wap&m=Meibohui&a=index&offline=1">线下</a>
+<a href="{pigcms::$siteurl}/index.php?g=Wap&m=Meibohui&a=index&online=1">线上</a>
 
 
 </div>
 
-
-<script>
-//    $(function(){
-//        var openid = '{pigcms::$openid}';
-//        alert(openid);
-//    });
-    var openid = '{pigcms::$openid}';
-	function saveUserInfo(){
-		var $onLine = $("#on-line");
-		var $offLine = $("#off-line");
-        var $username = $("#username");
-        var $telephone = $("#telephone");
-        var $storename = $("#storename");
-        var $salary = $("#salary");
-        var $companytype = $("#companytype");
-
-        var username = $username.val();
-        var telephone = $telephone.val();
-        var storename = $storename.val();
-        var salary = $salary.val();
-        var companytype = $companytype.val();
-
-		var onLine = 0;
-		if($onLine.is(':checked')){
-			onLine = 1;
-		}
-		
-		var offLine = 0;
-		if($offLine.is(':checked')){
-			offLine = 1;
-		}
-		if(!onLine && !offLine){
-			Pop.alerts("请勾选意向商类别");
-            return false;
-		}
-
-        if(username == ""){
-            Pop.alerts("姓名不能为空");
-            return false;
-        }
-
-        if(telephone == ""){
-            Pop.alerts("电话不能为空");
-            return false;
-        }
-       
-	   	if(storename == ""){
-            Pop.alerts("店铺名称不能为空");
-            return false;
-        }
-
-        if(salary == ""){
-            Pop.alerts("店铺年度营业额不能为空");
-            return false;
-        }
-
-        if(companytype == ""){
-            Pop.alerts("店铺主营产品类型不能为空");
-            return false;
-        }
-
-        Pop.confirms('请您确认您所填写的信息是否正确，确认提交后将无法更改。<span class="c3"></span>',function(){
-            var data = {
-				"onLine" : onLine,
-				"offLine" : offLine,
-                "username" : username,
-                "telephone" : telephone,
-                "storename" : storename,
-                "salary" : salary,
-                "companytype" : companytype,
-                "openid":openid
-            };
-
-            $.ajax({
-                type:'post',
-                url: '{pigcms::$siteurl}/index.php?g=Wap&m=Meibohui&a=saveFormInfo' ,//接口地址
-                data:data,
-                dataType:'json',
-                timeout : 60000,
-                success:function(data){
-//                    var html = '<p>非常感谢，我们将会与您联系！</p>';
-//                    Pop.alerts(html);
-                    window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Meibohui&a=success';
-//                    setTimeout(function(){
-//                        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Meibohui&a=success';
-//                    },4000);
-                },
-                error : function(XMLHttpRequest, textStatus, errorThrown) {
-                    Pop.alerts("提交失败，网络繁忙！");
-                    return false;
-                }
-            });
-        });
-
-
-
-    }
-</script>
 </body>
 </html>
