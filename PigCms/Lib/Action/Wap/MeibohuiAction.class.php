@@ -249,10 +249,11 @@ HTML;
                     exit;
                 }
             }
-
-
-
-
+            $award = M('meibohui_index')->where(array('openid' => $userOpenId))->find();
+            if($award){
+                header("location:$this->url/index.php?g=Wap&m=Meibohui&a=success");
+                exit();
+            }
         //begin 分享出去的URL
         list($ticket,$appId,$testgid) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
@@ -620,37 +621,23 @@ HTML;
 
 
 
-    public function rank(){
+    public function success(){
         $userOpenId= cookie('user_openid_new');
-        //        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Meibohui&a=index");
             exit();
         }
-        $info = M('meibohui')->where(array('openid' => $userOpenId))->find();
-        $gid = $_GET['gid'];
-        if(!$gid){
-            $gid = $this->defalutGid;
-        }
+        $info = M('meibohui_index')->where(array('openid' => $userOpenId))->find();
+
         if(!$info){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Meibohui&a=index");
             exit();
         }
 
-        //如果没有满足16票 跳转到再接再厉
-        if($info['vote'] <$this->meibohuiCount){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=rank1");
-            exit();
-        }
 
-        if($info && !$info['phone']){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share");
-            exit();
-        }
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
@@ -663,7 +650,6 @@ HTML;
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
         $this->assign("shareurl",$this->getShareUrl());
-        $this->assign('gid', $gid);
 
         $this->assign('title',$info['name'].$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
@@ -672,18 +658,6 @@ HTML;
         //end
 
 
-        $vote = $info['vote'];
-        $selfPhoneTime = $info['phonetime'];
-        $p = $info['phone'];
-
-        $uid = $info['id'];
-        //查询此用户的排名
-        $pValue = M('meibohui_phonelist')->where(array('uid' => $uid))->getField('id');
-        $vote = $this->meibohuiCount;
-        $this->assign("vote",$vote);
-        $this->assign("selforder",$pValue);
-        $this->assign("paiming",$pValue);
-        $this->assign("gid",$gid);
         $this->display();
     }
 
