@@ -8,22 +8,119 @@
     <meta content="telephone=no" name="format-detection" />
     <meta name="keywords" content="" />
     <meta name="description" content="" />
-    <link href="{pigcms::RES}/version2/css/common2.css?v=4324232333" rel="stylesheet" type="text/css" />
+    <link href="{pigcms::RES}/version2/css/common.css?v=20170515" rel="stylesheet" type="text/css" />
     <script src="{pigcms::RES}/version2/js/zepto.min.js" type="text/javascript"></script>
-    <script src="{pigcms::RES}/version2/js/common.js?v=432433" type="text/javascript"></script>
+    <script src="{pigcms::RES}/version2/js/common.js?v=20170515" type="text/javascript"></script>
     <title>森田美博会</title>
 </head>
-<body class="">
-<form method="post" action="/index.php?g=Wap&m=Meibohui&a=saveFormInfo">
- 姓名<input type="text" name="username"/>
- 电话<input type="text" name="telephone"/>
- 店铺名称<input type="text" name="storename"/>
- 店铺年度营业额<input type="text" name="salary"/>
-</form>
+<body>
+
+<div class="form-panel">
+	<form method="post" action="/index.php?g=Wap&m=Meibohui&a=saveFormInfo">
+        <ul>
+            <li class="clrfix">
+                <div class="label">姓名：</div>
+                <div class="controls">
+                	<input type="text" name="username" class="input-form"  placeholder="请输入姓名" id="username"/>
+                </div>
+            </li>
+            <li class="clrfix">
+                <div class="label">电话：</div>
+                <div class="controls">
+                    <input class="input-form" type="tel" placeholder="请输入电话"  id="telephone" name="telephone"/>
+                </div>
+            </li>
+            <li class="clrfix">
+                <div class="label">店铺名称：</div>
+                <div class="controls">
+                    <input class="input-form" type="text" placeholder="请输入店铺名称"  id="storename" name="storename"/>
+                </div>
+            </li>
+            <li class="clrfix">
+                <div class="label">店铺年度营业额：</div>
+                <div class="controls">
+                    <input class="input-form" type="text" placeholder="请输入店铺年度营业额"  id="salary" name="salary"/>
+                </div>
+            </li>
+            
+        </ul>
+        <div class="form-btns">
+            <p>
+                <a href="javascript:;" class="btn-out" onClick="saveUserInfo();" >确认提交</a>
+            </p>
+        </div>
+    </form>  
+
+</div>
+
+
 <script>
     $(function(){
 
     });
+	
+	function saveUserInfo(){
+        var $username = $("#username");
+        var $telephone = $("#telephone");
+        var $storename = $("#storename");
+        var $salary = $("#salary");
+
+        var username = $username.val();
+        var telephone = $telephone.val();
+        var storename = $storename.val();
+        var salary = $salary.val();
+
+        if(username == ""){
+            Pop.alerts("姓名不能为空");
+            return false;
+        }
+
+        if(telephone == ""){
+            Pop.alerts("电话不能为空");
+            return false;
+        }
+       
+	   	if(storename == ""){
+            Pop.alerts("店铺名称不能为空");
+            return false;
+        }
+
+        if(salary == ""){
+            Pop.alerts("店铺年度营业额不能为空");
+            return false;
+        }
+
+        Pop.confirms('请您确认您所填写的信息是否正确，确认提交后将无法更改。<span class="c3"></span>',function(){
+            var data = {
+                "username" : username,
+                "telephone" : telephone,
+                "storename" : storename,
+                "salary" : salary
+            };
+
+            $.ajax({
+                type:'post',
+                url: '{pigcms::$siteurl}/index.php?g=Wap&m=Womenwheel&a=saveFormInfo' ,//接口地址
+                data:data,
+                dataType:'json',
+                timeout : 60000,
+                success:function(data){
+                    var html = '<p>您的信息已成功提交</p>';
+                    Pop.alerts(html);
+                    /*setTimeout(function(){
+                        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Womenwheel&a=form&gid={pigcms::$gid}&s=1';
+                    },4000);*/
+                },
+                error : function(XMLHttpRequest, textStatus, errorThrown) {
+                    Pop.alerts("提交失败，网络繁忙！");
+                    return false;
+                }
+            });
+        });
+
+
+
+    }
 </script>
 </body>
 </html>
