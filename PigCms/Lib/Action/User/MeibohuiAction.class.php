@@ -11,7 +11,7 @@ class MeibohuiAction  extends BonusAction {
         $count = M('Meibohui_index')->count();
         $page = new Page($count, 25);
         $list = M('Meibohui_index')->query(
-            "SELECT * from tp_meibohui_index  order by createtime desc limit $page->firstRow,$page->listRows"); //第二名和你最近的
+            "SELECT * from tp_meibohui_index  order by createtime asc limit $page->firstRow,$page->listRows"); //第二名和你最近的
         $this->assign('page', $page->show());
         $this->assign('token', $this->token);
         $listArr = array();
