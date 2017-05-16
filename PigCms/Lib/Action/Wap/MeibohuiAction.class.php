@@ -194,9 +194,57 @@ HTML;
 
 
         public function index() {
-//        $userOpenId= $_GET['openid'];;
-        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
         $nickname = '';
+
+            $userOpenId= cookie('user_openid_new');
+//        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+            $fansInfo = null;
+            $selfUserInfo = array();
+//            if($userOpenId){
+//                $fansInfo = M('customer_service_fans')->field('openid,nickname,headimgurl')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
+//            }
+            if(false){// $userOpenId&& $fansInfo
+                $selfUserInfo['headimgurl'] ='';
+                $selfUserInfo['nickname'] = '';
+            }else{
+                $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
+                $code = trim($_GET["code"]);
+                $state = trim($_GET['state']);
+                if ($code && $state == 'sentian') {
+                    if(empty($fansInfo)){
+                        $webCreatetime = $apidata['web_createtime'];
+                        $web_access_token = '';
+
+                        //重新获取
+                        $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
+                        if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
+                            //code 有错误 需要重定向
+                            $url = $this->url."/index.php?g=Wap&m=Meibohui&a=index";
+                            header("location:$url");
+                        }
+                        $m['id'] = $apidata['id'];
+                        $m['web_access_token'] = $userinfoFromApi['access_token'];
+                        $m['refresh_token'] = $userinfoFromApi['refresh_token'];
+                        $m['web_createtime'] = time();
+                        $m['refresh_token_createtime'] = time();
+                        M('Diymen_set')->save($m);
+                        $web_access_token = $userinfoFromApi['access_token'];
+                        cookie('user_openid_new', $userinfoFromApi['openid'], 315360000);
+                        $userOpenId = $userinfoFromApi['openid'];
+
+//                    $selfUserInfo['headimgurl'] = $json->headimgurl;
+//                    $selfUserInfo['nickname'] = $json->nickname;
+                    }
+                } else {
+                    $url = urlencode($this->url."/index.php?g=Wap&m=Meibohui&a=index");
+                    header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
+                    exit;
+                }
+            }
+
+
+
+
         //begin 分享出去的URL
         list($ticket,$appId,$testgid) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
@@ -238,14 +286,14 @@ HTML;
         }
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
             exit();
         }
 
         $info = M('meibohui')->where(array('openid' => $userOpenId))->find();
         if(!$info){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
             exit();
         }
         $gid = $info['gid'];
@@ -359,7 +407,7 @@ HTML;
         $uid = $_GET['uid'];
         if(!is_numeric($uid)){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
             exit();
         }
 
@@ -379,7 +427,7 @@ HTML;
                     $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                     if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                         //code 有错误 需要重定向
-                        $url = $this->url."/index.php?g=Wap&m=Motianlun&a=index&gid=$gid";
+                        $url = $this->url."/index.php?g=Wap&m=Motianlun&a=index";
                         header("location:$url");
                     }
                     $m['id'] = $apidata['id'];
@@ -394,7 +442,7 @@ HTML;
 
                 }
             } else {
-                $url = urlencode($this->url."/index.php?g=Wap&m=Motianlun&a=sharefriend&uid=$uid&gid=$gid");
+                $url = urlencode($this->url."/index.php?g=Wap&m=Motianlun&a=sharefriend&uid=$uid");
                 header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
                 exit;
             }
@@ -403,7 +451,7 @@ HTML;
         $info = M('meibohui')->where(array('id' => $uid))->find();
         if(!$info){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
             exit();
         }
 
@@ -435,7 +483,7 @@ HTML;
         if($userOpenId == $MainOpenId){
             //自己访问自己的主页 跳转到share页面
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share");
             exit();
         }
 
@@ -500,7 +548,7 @@ HTML;
         if($voteList){
             $voteThisUid = 1;
             //已经投过票 跳转到自己的主页
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
             exit();
         }
 
@@ -579,20 +627,20 @@ HTML;
         }
         if(!$info){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
             exit();
         }
 
         //如果没有满足16票 跳转到再接再厉
         if($info['vote'] <$this->meibohuiCount){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=rank1&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=rank1");
             exit();
         }
 
         if($info && !$info['phone']){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share");
             exit();
         }
         //begin 分享出去的URL
@@ -641,7 +689,7 @@ HTML;
         }
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index&gid=$gid");
+            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
             exit();
         }
         $info = M('meibohui')->where(array('openid' => $userOpenId))->find();
@@ -759,7 +807,7 @@ HTML;
         }
         // end views
 
-        $this->assign('selfpage',$this->url."/index.php?g=Wap&m=Motianlun&a=sharefriend&gid=$gid");
+        $this->assign('selfpage',$this->url."/index.php?g=Wap&m=Motianlun&a=sharefriend");
 
         $award = M('meibohui_award')->where(array('openid' => $userOpenId))->find();
         if($award){
