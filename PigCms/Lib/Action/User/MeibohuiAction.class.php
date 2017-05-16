@@ -18,10 +18,19 @@ class MeibohuiAction  extends BonusAction {
         foreach($list as $each){
             $awardInfo = '';
             $tmp = $each;
-            $condition['openid'] = $each['openid'];
-            $tmp['awardlist'] = $awardInfo;
-            $name = M('customer_service_fans')->where(array('openid' => $condition['openid'],'token'=>'rggfsk1394161441'))->getField('nickname');
-            $tmp['name'] = $name;
+            $userOpenId = $each['oepnid'];
+//            $fansInfo = M('customer_service_fans')->field('openid,nickname,headimgurl')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
+//            $tmp['nickname'] = $fansInfo['nickname'];
+            if($each['offline'] == 1){
+               $tmp['offline'] = "是";
+           }else{
+                $tmp['offline'] = "否";
+            }
+            if($each['online'] == 1){
+                $tmp['online'] = "是";
+            }else{
+                $tmp['online'] = "否";
+            }
             $listArr[] = $tmp;
         }
         $this->assign('info', $listArr);
@@ -30,31 +39,39 @@ class MeibohuiAction  extends BonusAction {
     }
 
     public function exportstore() {
-        $start = 1;
-        $end = 100;
-        if(isset($_POST['start']) && $_POST['start']){
-            $start = $_POST['start'];
+        $linetype = $_POST['linetype'];
+
+        if($linetype == 1){
+            $list = M('Meibohui_index')->query(
+                "SELECT * from tp_meibohui_index as h where h.offline=1
+               order by h.createtime asc ");
+        }else if($linetype == 2){
+            $list = M('Meibohui_index')->query(
+                "SELECT * from tp_meibohui_index as h where h.online=1
+               order by h.createtime asc ");
+        }else{
+            $list = M('Meibohui_index')->query(
+                "SELECT * from tp_meibohui_index as h
+               order by h.createtime asc ");
         }
-        if(isset($_POST['end']) && $_POST['end']){
-            $end = $_POST['end'];
-        }
-//        $start = $_POST['start'];
-//        $end = $_POST['end'];
-        $end=$end-$start;
-        $start=$start-1;
-        $list = M('Meibohui_index')->query(
-            "SELECT h.*,f.nickname as name from tp_meibohui_index as h
-              left join tp_customer_service_fans f on (f.openid=h.openid)
-               order by h.createtime desc limit $start,$end");
-        $i = $start+1;
         $listArr = array();
         foreach($list as $key => $each){
             $awardInfo = '';
             $tmp = $each;
+            if($each['offline'] == 1){
+                $tmp['offline'] = "是";
+            }else{
+                $tmp['offline'] = "否";
+            }
+            if($each['online'] == 1){
+                $tmp['online'] = "是";
+            }else{
+                $tmp['online'] = "否";
+            }
 
             $listArr[] = $tmp;
         }
-        $filename = $start . "~" . $end . "统计";
+        $filename = "统计";
         $this->exportexcelx($listArr, $filename);
     }
     public function exportstorebydate() {
@@ -90,38 +107,36 @@ class MeibohuiAction  extends BonusAction {
         $objPHPExcel = new PHPExcel();
         //写出表头
         $objPHPExcel->setActiveSheetIndex(0)
-            ->setCellValue('A1', '排名')
-            ->setCellValue('B1', 'OPENID')
-            ->setCellValue('C1', '昵称')
-            ->setCellValue('D1', '手机号')
-            ->setCellValue('E1', '首次参与时间')
-            ->setCellValue('F1', '发奖按钮点击次数')
-            ->setCellValue('G1', '是否领奖');
+            ->setCellValue('A1', 'OPENID')
+            ->setCellValue('B1', '线上')
+            ->setCellValue('C1', '线下')
+            ->setCellValue('D1', '姓名')
+            ->setCellValue('E1', '电话')
+            ->setCellValue('F1', '店铺名称')
+            ->setCellValue('G1', '店铺年度营业额')
+            ->setCellValue('H1', '店铺主营产品类型')
+            ->setCellValue('I1', '提交时间');
 
         //写出内容 UTF-8
 
         for ($n = 0; $n < count($data); $n++) {
-            $name = $data[$n]['name'];
-            $award =  $data[$n]['award'];
-            $awardDes = 'NO';
-            if($award == 1){
-                $awardDes = "YES";
-            }
-            $name = $this->ReplaceSpecialChar($name);
+
             $objPHPExcel->setActiveSheetIndex(0)
-                ->setCellValue('A' . ($n + 2), $n+1)
-                ->setCellValue('B' . ($n + 2), $data[$n]['openid'])
-                ->setCellValue('C' . ($n + 2), $name)
-                ->setCellValue('D' . ($n + 2), $data[$n]['phone'])
-                ->setCellValue('E' . ($n + 2), $data[$n]['createtime'])
-                ->setCellValue('F' . ($n + 2), $data[$n]['lingjiangsum'])
-                ->setCellValue('G' . ($n + 2), $awardDes)
+                ->setCellValue('A' . ($n + 2),  $data[$n]['openid'])
+                ->setCellValue('B' . ($n + 2), $data[$n]['online'])
+                ->setCellValue('C' . ($n + 2), $data[$n]['offline'])
+                ->setCellValue('D' . ($n + 2), $data[$n]['username'])
+                ->setCellValue('E' . ($n + 2), $data[$n]['telephone'])
+                ->setCellValue('F' . ($n + 2), $data[$n]['storename'])
+                ->setCellValue('G' . ($n + 2), $data[$n]['salary'])
+                ->setCellValue('H' . ($n + 2), $data[$n]['companytype'])
+                ->setCellValue('I' . ($n + 2), $data[$n]['createtime'])
             ;
         }
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
         $objPHPExcel->setActiveSheetIndex(0);
         header('Content-Type: application/vnd.ms-excel');
-        header("Content-Disposition: attachment;filename=" . date("Y-m-d h:i") . "xsl");
+        header("Content-Disposition: attachment;filename=" . date("Y-m-d h:i") .".xsl");
         header('Cache-Control: max-age=0');
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
         $objWriter->save('php://output');
