@@ -11,7 +11,111 @@
     <link href="{pigcms::RES}/version2/css/common.css?v=20170515" rel="stylesheet" type="text/css" />
     <script src="{pigcms::RES}/version2/js/zepto.min.js" type="text/javascript"></script>
     <script src="{pigcms::RES}/version2/js/common.js?v=20170515" type="text/javascript"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" type="text/javascript"></script>
+
     <title>森田美博会</title>
+    <script>
+        wx.config({
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: '{pigcms::$appid}', // 必填，公众号的唯一标识
+            timestamp:  '{pigcms::$timestamp}', // 必填，生成签名的时间戳
+            nonceStr: '{pigcms::$nonceStr}', // 必填，生成签名的随机串
+            signature: '{pigcms::$signature}',// 必填，签名，见附录1
+            jsApiList: ['checkJsApi',
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+                'onMenuShareQQ',
+                'onMenuShareWeibo',
+                'hideMenuItems',
+                'showMenuItems',
+                'hideAllNonBaseMenuItem',
+                'showAllNonBaseMenuItem',
+                'translateVoice',
+                'startRecord',
+                'stopRecord',
+                'onRecordEnd',
+                'playVoice',
+                'pauseVoice',
+                'stopVoice',
+                'uploadVoice',
+                'downloadVoice',
+                'chooseImage',
+                'previewImage',
+                'uploadImage',
+                'downloadImage',
+                'getNetworkType',
+                'openLocation',
+                'getLocation',
+                'hideOptionMenu',
+                'showOptionMenu',
+                'closeWindow',
+                'scanQRCode',
+                'chooseWXPay',
+                'openProductSpecificView',
+                'addCard',
+                'chooseCard',
+                'openCard'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+        wx.ready(function () {
+            // 1 判断当前版本是否支持指定 JS 接口，支持批量判断
+            wx.checkJsApi({
+                jsApiList: [
+                    'onMenuShareTimeline',
+                    'getNetworkType',
+                    'hideMenuItems',
+                    'previewImage'
+                ],
+                success: function (res) {
+                    //alert(JSON.stringify(res));
+                }
+            });
+
+            // 2. 分享接口
+            // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
+            wx.onMenuShareTimeline({
+                title: '{pigcms::$title}',
+                link: "{pigcms::$shareurl}",
+                imgUrl: "{pigcms::$shareimageurl}",
+                trigger: function (res) {
+                    //alert('用户点击分享到朋友圈');
+                },
+                success: function (res) {
+
+                },
+                cancel: function (res) {
+                    //alert('已取消');
+                },
+                fail: function (res) {
+                    //alert(JSON.stringify(res));
+                }
+            });
+
+            wx.onMenuShareAppMessage({
+                title: '{pigcms::$title}',
+                desc:  '{pigcms::$bonusdesc}',
+                link: '{pigcms::$shareurl}',
+                imgUrl: '{pigcms::$shareimageurl}',
+                trigger: function (res) {
+                    //alert('用户点击发送给朋友');
+                },
+                success: function (res) {
+                },
+                cancel: function (res) {
+                    //alert('已取消');
+                },
+                fail: function (res) {
+                    //alert(JSON.stringify(res));
+                }
+            });
+
+        });
+        wx.error(function (res) {
+            // alert(res.errMsg);
+        });
+
+        $(function(){
+        });
+    </script>
 </head>
 <body>
 
@@ -48,7 +152,14 @@
                     <input class="input-form" type="text" placeholder="请输入店铺年度营业额"  id="salary" name="salary"/>
                 </div>
             </li>
-            
+
+            <li class="clrfix">
+                <div class="label">店铺主营产品类型：</div>
+                <div class="controls">
+                    <input class="input-form" type="text" placeholder="请输入店铺主营产品类型"  id="companytype" name="companytype"/>
+                </div>
+            </li>
+
         </ul>
         <div class="form-btns">
             <p>
@@ -61,11 +172,11 @@
 
 
 <script>
-    $(function(){
-        var openid = '{pigcms::$openid}';
-        alert(openid);
-    });
-	
+//    $(function(){
+//        var openid = '{pigcms::$openid}';
+//        alert(openid);
+//    });
+    var openid = '{pigcms::$openid}';
 	function saveUserInfo(){
 		var $onLine = $("#on-line");
 		var $offLine = $("#off-line");
@@ -73,12 +184,14 @@
         var $telephone = $("#telephone");
         var $storename = $("#storename");
         var $salary = $("#salary");
-	
+        var $companytype = $("#companytype");
+
         var username = $username.val();
         var telephone = $telephone.val();
         var storename = $storename.val();
         var salary = $salary.val();
-		
+        var companytype = $companytype.val();
+
 		var onLine = false;
 		if($onLine.is(':checked')){
 			onLine = true;
@@ -113,6 +226,11 @@
             return false;
         }
 
+        if(companytype == ""){
+            Pop.alerts("店铺主营产品类型不能为空");
+            return false;
+        }
+
         Pop.confirms('请您确认您所填写的信息是否正确，确认提交后将无法更改。<span class="c3"></span>',function(){
             var data = {
 				"onLine" : onLine,
@@ -120,7 +238,9 @@
                 "username" : username,
                 "telephone" : telephone,
                 "storename" : storename,
-                "salary" : salary
+                "salary" : salary,
+                "companytype" : companytype,
+                "openid":openid
             };
 
             $.ajax({
@@ -133,7 +253,7 @@
                     var html = '<p>非常感谢，我们将会与您联系！</p>';
                     Pop.alerts(html);
                     /*setTimeout(function(){
-                        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Womenwheel&a=form&gid={pigcms::$gid}&s=1';
+                        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Meibohui&a=form&gid={pigcms::$gid}&s=1';
                     },4000);*/
                 },
                 error : function(XMLHttpRequest, textStatus, errorThrown) {

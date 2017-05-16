@@ -162,26 +162,33 @@ HTML;
     public function saveFormInfo(){
 
         $openid = $_POST['openid'];
+        $onLine = $_POST['onLine'];
+        $offLine = $_POST['offLine'];
         $username = $_POST['username'];
         $telphone = $_POST['telphone'];
         $storename = $_POST['storename'];
         $salary = $_POST['salary'];
         $companytype = $_POST['companytype'];
-
+        $return = 0;
         $award = M('meibohui_index')->where(array('openid' => $openid))->find();
         if(!$award){
             $m = array();
             $m['openid'] = $openid;
+            $m['online'] = $onLine;
+            $m['offline'] = $offLine;
             $m['username'] = $username;
             $m['telphone'] =$telphone;
             $m['storename'] =$storename;
             $m['salary'] =$salary;
             $m['companytype'] =$companytype;
             M('meibohui_index')->add($m);
+            $return = 2;
         }else{
             $m = array();
             $m['id'] = $award['id'];
             $m['openid'] = $openid;
+            $m['online'] = $onLine;
+            $m['offline'] = $offLine;
             $m['username'] = $username;
             $m['telphone'] =$telphone;
             $m['storename'] =$storename;
@@ -190,6 +197,7 @@ HTML;
             M('meibohui_index')->save($m);
             $return = 1;
         }
+        echo $return;
     }
 
 
@@ -203,7 +211,7 @@ HTML;
 //            if($userOpenId){
 //                $fansInfo = M('customer_service_fans')->field('openid,nickname,headimgurl')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
 //            }
-            if(false){// $userOpenId&& $fansInfo
+            if($userOpenId){// $userOpenId&& $fansInfo
                 $selfUserInfo['headimgurl'] ='';
                 $selfUserInfo['nickname'] = '';
             }else{
