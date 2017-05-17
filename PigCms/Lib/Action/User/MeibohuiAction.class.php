@@ -136,7 +136,7 @@ class MeibohuiAction  extends BonusAction {
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
         $objPHPExcel->setActiveSheetIndex(0);
         header('Content-Type: application/vnd.ms-excel');
-        header("Content-Disposition: attachment;filename=" . date("Y-m-d h:i") .".xsl");
+        header("Content-Disposition: attachment;filename=" . date("Y-m-d h:i") .".xlsx");
         header('Cache-Control: max-age=0');
         $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
         $objWriter->save('php://output');
