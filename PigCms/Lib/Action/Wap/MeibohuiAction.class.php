@@ -169,6 +169,7 @@ HTML;
         $storename = $_POST['storename'];
         $salary = $_POST['salary'];
         $companytype = $_POST['companytype'];
+        $qudao = $_POST['qudao'];
         $return = 0;
         $award = M('meibohui_index')->where(array('openid' => $openid))->find();
         if(!$award){
@@ -181,6 +182,7 @@ HTML;
             $m['storename'] =$storename;
             $m['salary'] =$salary;
             $m['companytype'] =$companytype;
+            $m['qudao'] =$qudao;
             M('meibohui_index')->add($m);
             $return = 2;
         }else{
@@ -246,6 +248,12 @@ HTML;
             $online = 0;
             if(isset($_GET['online']) && $_GET['online']){
                 $online = 1;
+            }
+            $qudao = 0;
+            if($offline == 1){
+                $qudao = 2;
+            }else if($online == 1){
+                $qudao = 1;
             }
             $userOpenId= cookie('user_openid_new');
 //        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
@@ -319,6 +327,7 @@ HTML;
         $this->assign("openid",$userOpenId);
         $this->assign("online",$online);
         $this->assign("offline",$offline);
+        $this->assign("qudao",$qudao);
 
 
         $this->display();
