@@ -24,7 +24,7 @@ class MeibohuiAction  extends BonusAction {
             $list = M('meibohui_index')->query($queryGidCount);
 
             if($list){
-                $eachData['date'] = date('Y-m-d',$eachFrom);
+                $eachData['date'] = $eachFrom;
                 $eachData['sumtemplate'] = count($list);
                 $online = 0;
                 $offline = 0;
@@ -43,6 +43,77 @@ class MeibohuiAction  extends BonusAction {
         $this->assign('datareport', $datereport);
         $this->display();
     }
+
+    public function exportDataReport(){
+        set_time_limit(0);
+        //每日数据汇总（记录每天活动所有模板所产生的数据总数）
+
+        //记录从6.20 到 7.20号每天产生的模板总数
+        $fromDate = strtotime("2017-05-16 00:00:00");
+        $endDate = strtotime("2017-06-02 00:00:00");
+        $i = 0;
+        $datereport = array();
+        while($i<35){
+            $eachData = array();
+            $add = 24*3600;
+            $eachFrom =date("Y-m-d H:i:s",$i*$add + $fromDate) ;
+            $eachEnd = date("Y-m-d H:i:s",$i*$add + $fromDate + $add) ;
+
+            $queryGidCount = "SELECT * from tp_meibohui_index where   createtime >= '$eachFrom' and createtime<'$eachEnd'";
+            $list = M('motianlun')->query($queryGidCount);
+
+            if($list){
+                $eachData['date'] = $eachFrom;
+                $eachData['sumtemplate'] = count($list);
+                $online = 0;
+                $offline = 0;
+                foreach($list as $each){
+                    $online += $each['online'];
+                    $offline += $each['offline'];
+                }
+                $eachData['online'] = $online;
+                $eachData['offline'] = $offline;
+                $datereport[] = $eachData;
+            }
+            $i++;
+        }
+
+        $filename = "每日数据汇总" . "统计";
+        $this->exportexcelx1($datereport, $filename);
+    }
+    public function exportexcelx1($data = array(), $filename = 'report') {
+        $str = substr(THINK_PATH, 0, -1);
+        require_once $str . '/PigCms/Lib/Action/User/Classes/PHPExcel.php';
+        $objPHPExcel = new PHPExcel();
+        //写出表头
+        $objPHPExcel->setActiveSheetIndex(0)
+            ->setCellValue('A1', '序号')
+            ->setCellValue('B1', '日期')
+            ->setCellValue('C1', '模板数')
+            ->setCellValue('D1', '线上')
+            ->setCellValue('E1', '线下')
+        ;
+
+        //写出内容 UTF-8
+
+        for ($n = 0; $n < count($data); $n++) {
+            $objPHPExcel->setActiveSheetIndex(0)
+                ->setCellValue('A' . ($n + 2), $n+1)
+                ->setCellValue('B' . ($n + 2), $data[$n]['date'])
+                ->setCellValue('C' . ($n + 2), $data[$n]['sumtemplate'])
+                ->setCellValue('D' . ($n + 2), $data[$n]['online'])
+                ->setCellValue('E' . ($n + 2), $data[$n]['offline'])
+            ;
+        }
+        $objPHPExcel->getActiveSheet()->setTitle('Simple');
+        $objPHPExcel->setActiveSheetIndex(0);
+        header('Content-Type: application/vnd.ms-excel');
+        header("Content-Disposition: attachment;filename=" ."每日数据汇总". date("Y-m-d h:i") . ".xls");
+        header('Cache-Control: max-age=0');
+        $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        $objWriter->save('php://output');
+    }
+
     public function index() {
         // join tp_bonus_award as award on (info.openid=award.openid ) ,award.province as city, award.address as addres
         $count = M('Meibohui_index')->count();
