@@ -28,10 +28,14 @@ class MeibohuiAction  extends BonusAction {
                 $eachData['sumtemplate'] = count($list);
                 $online = 0;
                 $offline = 0;
+                $qudao = '';
 
                 foreach($list as $each){
-                    $online += $each['online'];
-                    $offline += $each['offline'];
+                    if($each['qudao'] == 1 ){
+                        $online++;
+                    }else if($each['qudao'] == 2){
+                        $offline++;
+                    }
                 }
                 $eachData['online'] = $online;
                 $eachData['offline'] = $offline;
@@ -68,8 +72,13 @@ class MeibohuiAction  extends BonusAction {
                 $online = 0;
                 $offline = 0;
                 foreach($list as $each){
-                    $online += $each['online'];
-                    $offline += $each['offline'];
+//                    $online += $each['online'];
+//                    $offline += $each['offline'];
+                    if($each['qudao'] == 1 ){
+                        $online++;
+                    }else if($each['qudao'] == 2){
+                        $offline++;
+                    }
                 }
                 $eachData['online'] = $online;
                 $eachData['offline'] = $offline;
