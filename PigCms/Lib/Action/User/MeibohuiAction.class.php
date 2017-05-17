@@ -5,7 +5,44 @@ class MeibohuiAction  extends BonusAction {
     public function _initialize() {
         parent::_initialize();
     }
+    public function datareport(){
+        set_time_limit(0);
+        //每日数据汇总（记录每天活动所有模板所产生的数据总数）
 
+        //记录从6.20 到 7.20号每天产生的模板总数
+        $fromDate = strtotime("2017-05-16 00:00:00");
+        $endDate = strtotime("2017-06-10 00:00:00");
+        $i = 0;
+        $datereport = array();
+        while($i<35){
+            $eachData = array();
+            $add = 24*3600;
+            $eachFrom =date("Y-m-d H:i:s",$i*$add + $fromDate) ;
+            $eachEnd = date("Y-m-d H:i:s",$i*$add + $fromDate + $add) ;
+
+            $queryGidCount = "SELECT * from tp_meibohui_index where   createtime >= '$eachFrom' and createtime<'$eachEnd'";
+            $list = M('meibohui_index')->query($queryGidCount);
+
+            if($list){
+                $eachData['date'] = date('Y-m-d',$eachFrom);
+                $eachData['sumtemplate'] = count($list);
+                $online = 0;
+                $offline = 0;
+
+                foreach($list as $each){
+                    $online += $each['online'];
+                    $offline += $each['offline'];
+                }
+                $eachData['online'] = $online;
+                $eachData['offline'] = $offline;
+                $datereport[] = $eachData;
+            }
+            $i++;
+        }
+
+        $this->assign('datareport', $datereport);
+        $this->display();
+    }
     public function index() {
         // join tp_bonus_award as award on (info.openid=award.openid ) ,award.province as city, award.address as addres
         $count = M('Meibohui_index')->count();
