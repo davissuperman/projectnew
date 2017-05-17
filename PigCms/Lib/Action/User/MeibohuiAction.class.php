@@ -295,7 +295,7 @@ class MeibohuiAction  extends BonusAction {
                 ->setCellValue('G' . ($n + 2), $data[$n]['storename'])
                 ->setCellValue('H' . ($n + 2), $data[$n]['salary'])
                 ->setCellValue('I' . ($n + 2), $data[$n]['companytype'])
-                ->setCellValue('J' . ($n + 2), $data[$n]['creaJtetime'])
+                ->setCellValue('J' . ($n + 2), $data[$n]['createtime'])
             ;
         }
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
