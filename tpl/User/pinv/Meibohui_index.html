@@ -38,22 +38,27 @@
                         <div id="choose-date">
 
                             <div >
-                                <form method="post" action="{pigcms::U('Meibohui/exportstore',array('token'=>$token))}">
-                                    <span>
-                                        按照线下
-                                        <input type="radio" name="linetype" id="linetype1" value="1" />
-                                    </span>
-                                    <span>
-                                        按照线上
-                                        <input type="radio" name="linetype" id="linetype2" value="2"  />
-                                    </span>
-                                    <span>
-                                        所有
-                                        <input type="radio" name="linetype" id="linetype3" value="3"  />
-                                    </span>
-
-                                    <button type="submit" class="btn btn-default" style="width:50px"/>导出</button>
+                                <form method="post" action="{pigcms::U('Meibohui/datareportall',array('token'=>$token))}">
+                                    <input type="text" name="start" id="start" value="{pigcms:$start}" onClick="WdatePicker()" class="form-control" style="width:112px"/><span>-</span>
+                                    <input type="text" name="end" id="end" value="{pigcms:$end}" onClick="WdatePicker()" class="form-control" style="width:112px"/>
+                                    <button type="submit" class="btn btn-default" style="width:250px"/>导出</button>
                                 </form>
+                                <!--<form method="post" action="{pigcms::U('Meibohui/exportstore',array('token'=>$token))}">-->
+                                    <!--<span>-->
+                                        <!--按照线下-->
+                                        <!--<input type="radio" name="linetype" id="linetype1" value="1" />-->
+                                    <!--</span>-->
+                                    <!--<span>-->
+                                        <!--按照线上-->
+                                        <!--<input type="radio" name="linetype" id="linetype2" value="2"  />-->
+                                    <!--</span>-->
+                                    <!--<span>-->
+                                        <!--所有-->
+                                        <!--<input type="radio" name="linetype" id="linetype3" value="3"  />-->
+                                    <!--</span>-->
+
+                                    <!--<button type="submit" class="btn btn-default" style="width:50px"/>导出</button>-->
+                                <!--</form>-->
                             </div>
 
                             <div class="add-button pull-right">

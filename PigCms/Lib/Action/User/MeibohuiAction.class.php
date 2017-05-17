@@ -189,6 +189,45 @@ class MeibohuiAction  extends BonusAction {
         $filename = "统计";
         $this->exportexcelx($listArr, $filename);
     }
+
+    public function datareportall() {
+        $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d"),date("Y")));
+        $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d"),date("Y")));
+        if(isset($_POST['start']) && $_POST['start']){
+            $start = $_POST['start'];
+        }
+        if(isset($_POST['end']) && $_POST['end']){
+            $end = $_POST['end'];
+        }
+        $list = M('Meibohui_index')->query(
+            "SELECT * from tp_meibohui_index as h
+                where h.createtime >= '$start' and h.createtime<='$end'
+               order by h.createtime asc ");
+        $listArr = array();
+        foreach($list as $key => $each){
+            $awardInfo = '';
+            $tmp = $each;
+            if($each['offline'] == 1){
+                $tmp['offline'] = "是";
+            }else{
+                $tmp['offline'] = "否";
+            }
+            if($each['online'] == 1){
+                $tmp['online'] = "是";
+            }else{
+                $tmp['online'] = "否";
+            }
+            if($each['qudao'] == 1){
+                $tmp['qudao'] = '线上';
+            }elseif($each['qudao'] == 2){
+                $tmp['qudao'] = '线下';
+            }
+            $listArr[] = $tmp;
+        }
+        $filename = "统计";
+        $this->exportexcelx($listArr, $filename);
+    }
+
     public function exportstorebydate() {
         $start = date("Y-m-d H:i:s",mktime(0,0,0,date("m"),date("d"),date("Y")));
         $end = date("Y-m-d H:i:s",mktime(23,59,59,date("m"),date("d"),date("Y")));
@@ -223,14 +262,15 @@ class MeibohuiAction  extends BonusAction {
         //写出表头
         $objPHPExcel->setActiveSheetIndex(0)
             ->setCellValue('A1', 'OPENID')
-            ->setCellValue('B1', '线上')
-            ->setCellValue('C1', '线下')
-            ->setCellValue('D1', '姓名')
-            ->setCellValue('E1', '电话')
-            ->setCellValue('F1', '店铺名称')
-            ->setCellValue('G1', '店铺年度营业额')
-            ->setCellValue('H1', '店铺主营产品类型')
-            ->setCellValue('I1', '提交时间');
+            ->setCellValue('B1', '渠道')
+            ->setCellValue('C1', '线上')
+            ->setCellValue('D1', '线下')
+            ->setCellValue('E1', '姓名')
+            ->setCellValue('F1', '电话')
+            ->setCellValue('G1', '店铺名称')
+            ->setCellValue('H1', '店铺年度营业额')
+            ->setCellValue('I1', '店铺主营产品类型')
+            ->setCellValue('J1', '提交时间');
 
         //写出内容 UTF-8
 
@@ -238,14 +278,15 @@ class MeibohuiAction  extends BonusAction {
 
             $objPHPExcel->setActiveSheetIndex(0)
                 ->setCellValue('A' . ($n + 2),  $data[$n]['openid'])
-                ->setCellValue('B' . ($n + 2), $data[$n]['online'])
-                ->setCellValue('C' . ($n + 2), $data[$n]['offline'])
-                ->setCellValue('D' . ($n + 2), $data[$n]['username'])
-                ->setCellValue('E' . ($n + 2), $data[$n]['telephone'])
-                ->setCellValue('F' . ($n + 2), $data[$n]['storename'])
-                ->setCellValue('G' . ($n + 2), $data[$n]['salary'])
-                ->setCellValue('H' . ($n + 2), $data[$n]['companytype'])
-                ->setCellValue('I' . ($n + 2), $data[$n]['createtime'])
+                ->setCellValue('B' . ($n + 2), $data[$n]['qudao'])
+                ->setCellValue('C' . ($n + 2), $data[$n]['online'])
+                ->setCellValue('D' . ($n + 2), $data[$n]['offline'])
+                ->setCellValue('E' . ($n + 2), $data[$n]['username'])
+                ->setCellValue('F' . ($n + 2), $data[$n]['telephone'])
+                ->setCellValue('G' . ($n + 2), $data[$n]['storename'])
+                ->setCellValue('H' . ($n + 2), $data[$n]['salary'])
+                ->setCellValue('I' . ($n + 2), $data[$n]['companytype'])
+                ->setCellValue('J' . ($n + 2), $data[$n]['creaJtetime'])
             ;
         }
         $objPHPExcel->getActiveSheet()->setTitle('Simple');
