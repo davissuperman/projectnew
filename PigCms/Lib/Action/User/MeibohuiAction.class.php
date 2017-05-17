@@ -139,6 +139,13 @@ class MeibohuiAction  extends BonusAction {
             }else{
                 $tmp['online'] = "否";
             }
+            if($each['qudao'] == 1){
+                $tmp['qudao'] = '线上';
+            }elseif($each['qudao'] == 2){
+                $tmp['qudao'] = '线下';
+            }else{
+                $tmp['qudao'] = '';
+            }
             $listArr[] = $tmp;
         }
         $this->assign('info', $listArr);
