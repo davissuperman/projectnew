@@ -202,6 +202,7 @@ HTML;
 
         public function first(){
             $userOpenId= cookie('user_openid_new');
+//            $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
             if($userOpenId){// $userOpenId&& $fansInfo
 
             }else{
@@ -234,7 +235,7 @@ HTML;
 //                    $selfUserInfo['nickname'] = $json->nickname;
                     }
                 } else {
-                    $url = urlencode($this->url."/index.php?g=Wap&m=Meibohui&a=index");
+                    $url = urlencode($this->url."/index.php?g=Wap&m=Meibohui&a=first");
                     header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
                     exit;
                 }
