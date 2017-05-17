@@ -260,9 +260,14 @@
                 dataType:'json',
                 timeout : 60000,
                 success:function(data){
+                    if(data == 3){
+                        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Meibohui&a=havesubmit';
+                    }else{
+                        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Meibohui&a=success';
+                    }
 //                    var html = '<p>非常感谢，我们将会与您联系！</p>';
 //                    Pop.alerts(html);
-                    window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Meibohui&a=success';
+
 //                    setTimeout(function(){
 //                        window.location.href = '{pigcms::$siteurl}/index.php?g=Wap&m=Meibohui&a=success';
 //                    },4000);

@@ -184,18 +184,7 @@ HTML;
             M('meibohui_index')->add($m);
             $return = 2;
         }else{
-            $m = array();
-            $m['id'] = $award['id'];
-            $m['openid'] = $openid;
-            $m['online'] = $onLine;
-            $m['offline'] = $offLine;
-            $m['username'] = $username;
-            $m['telephone'] =$telephone;
-            $m['storename'] =$storename;
-            $m['salary'] =$salary;
-            $m['companytype'] =$companytype;
-            M('meibohui_index')->save($m);
-            $return = 1;
+            $return = 3;
         }
         echo $return;
     }
@@ -716,6 +705,48 @@ HTML;
 
         $this->display();
     }
+
+    public function havesubmit(){
+        $userOpenId= cookie('user_openid_new');
+//        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+        if(!$userOpenId){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Meibohui&a=first");
+            exit();
+        }
+        $info = M('meibohui_index')->where(array('openid' => $userOpenId))->find();
+
+        if(!$info){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Meibohui&a=first");
+            exit();
+        }
+
+
+        //begin 分享出去的URL
+        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
+        $noncestr = "Wm3WZYTPz0wzccnW";
+        $timestamp = time();
+        $url = $this->get_url();;
+        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
+        $signature = sha1($str);
+        $this->assign("appid",$appId);
+        $this->assign("timestamp",$timestamp);
+        $this->assign("nonceStr",$noncestr);
+        $this->assign("signature",$signature);
+        $this->assign("shareurl",$this->getShareUrl());
+
+        $this->assign('title',$info['name'].$this->title);
+        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign("imageUrl",$this->imageUrl);
+        $this->assign("shareimageurl",$this->shareImageUrl);
+        //end
+
+
+        $this->display();
+    }
+
+
 
     public function form(){
         $this->setEndTime2();
