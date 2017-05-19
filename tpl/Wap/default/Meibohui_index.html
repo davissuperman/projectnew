@@ -139,13 +139,13 @@
                 </div>
             </li>
             <li class="clrfix">
-                <div class="label">姓名：</div>
+                <div class="label">姓名<span style="color:red">*</span>：</div>
                 <div class="controls">
                 	<input type="text" name="username" class="input-form"  placeholder="请输入姓名" id="username"/>
                 </div>
             </li>
             <li class="clrfix">
-                <div class="label">电话：</div>
+                <div class="label">电话<span style="color:red">*</span>：</div>
                 <div class="controls">
                     <input class="input-form" type="tel" placeholder="请输入电话"  id="telephone" name="telephone"/>
                 </div>
@@ -227,20 +227,20 @@
             return false;
         }
        
-	   	if(storename == ""){
-            Pop.alerts("店铺名称不能为空");
-            return false;
-        }
+//	   	if(storename == ""){
+//            Pop.alerts("店铺名称不能为空");
+//            return false;
+//        }
 
-        if(salary == ""){
-            Pop.alerts("店铺年度营业额不能为空");
-            return false;
-        }
+//        if(salary == ""){
+//            Pop.alerts("店铺年度营业额不能为空");
+//            return false;
+//        }
 
-        if(companytype == ""){
-            Pop.alerts("店铺主营产品类型不能为空");
-            return false;
-        }
+//        if(companytype == ""){
+//            Pop.alerts("店铺主营产品类型不能为空");
+//            return false;
+//        }
 
         Pop.confirms('请您确认您所填写的信息是否正确，确认提交后将无法更改。<span class="c3"></span>',function(){
             var data = {
