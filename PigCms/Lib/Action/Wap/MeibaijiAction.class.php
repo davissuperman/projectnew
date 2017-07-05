@@ -1,29 +1,46 @@
 <?php
 
-class MeibohuiAction extends SjzAction {
-    public $title = '美博会';
-    public $bonusdesc = '美博会';
+class MeibaijiAction extends SjzAction {
+    public $title = '闪亮女神魅力，转动你的“膜”丽小确幸！';
+    public $bonusdesc = '特等奖10盒面膜,共1000盒奖品,四海八荒>..>摩天轮活动又来了,拼手速的时刻到了!';
     public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
-    public $endtime="2017-06-30 23:59:59"; //活动结束时间
+    public $endtime="2018-03-13 23:59:59"; //活动结束时间
     public $debug = true; //上线后应该改成false
-    public $defalutGid = 115;
+    public $defalutGid = 120;
 
 
 
-    //motianlun
-    public $motianlunCount = 15;
+    //meibaiji
+    public $meibaijiCount = 24;
     public $teDengJiangCount = 10;
-    public $yiDengJiangCount = 1000;
-    public $eachChouJiangVote = 5;
+    public $yiDengJiangCount = 900;
+    public $eachChouJiangVote = 8;
     public $totalChouJiangVote = 15;
     public $totalDrawCount = 3;
 
     public function _initialize() {
         parent :: _initialize();
         $this->url= C('site_url');
+        $this->imageUrl = "http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/meibaiji/images/logo1.jpg';
+        $this->shareImageUrl = "http://".$this->_server('HTTP_HOST').'/tpl/Wap/default/common/meibaiji/images/logo1.jpg';
 
+        $ip=get_client_ip();
+        $userOpenId= cookie('user_openid_new');
+        if($userOpenId){
+            $uid = $this->getUidByOpenid($userOpenId);
+            if($uid){
+                //判断此IP是否访问过
+                $id = M('meibaiji_iplist')->where("ip='$ip'")->getField('id');
+                if(!$id){
+                    $n = array();
+                    $n['uid'] = $uid;
+                    $n['ip'] = $ip;
+                    M('meibaiji_iplist')->add($n);
+                }
+            }
+        }
     }
 
     public function getInfo(){
@@ -42,7 +59,7 @@ class MeibohuiAction extends SjzAction {
                 $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                 if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                     //code 有错误 需要重定向
-                    $url = $this->url."/index.php?g=Wap&m=Motianlun&a=getInfo";
+                    $url = $this->url."/index.php?g=Wap&m=Meibaiji&a=getInfo";
                     header("location:$url");
                 }
                 $m['id'] = $apidata['id'];
@@ -57,7 +74,7 @@ class MeibohuiAction extends SjzAction {
                 echo $userOpenId;
             }
         } else {
-            $url = urlencode($this->url."/index.php?g=Wap&m=Motianlun&a=getInfo");
+            $url = urlencode($this->url."/index.php?g=Wap&m=Meibaiji&a=getInfo");
             header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
             exit;
         }
@@ -74,11 +91,11 @@ class MeibohuiAction extends SjzAction {
             }
         }else{
             $userOpenId= cookie('user_openid_new');
-            $info = M('motianlun')->where(array('openid' => $userOpenId))->find();
+            $info = M('meibaiji')->where(array('openid' => $userOpenId))->find();
             $mainId = $info['id'];
             $mainGid = $info['gid'];
         }
-        return $this->url."/index.php?g=Wap&m=Motianlun&a=sharefriend&uid=".$mainId."&gid=$mainGid";
+        return $this->url."/index.php?g=Wap&m=Meibaiji&a=sharefriend&uid=".$mainId."&gid=$mainGid";
     }
     public function getDiymenSet(){
         $gid = 1;
@@ -118,7 +135,7 @@ class MeibohuiAction extends SjzAction {
 //            return null;
 //        }
         //首先查看此OPENID 是否存在 无论gid
-        $bonusInfo = M('meibohui')->where(array('openid' => $openId))->find();
+        $bonusInfo = M('meibaiji')->where(array('openid' => $openId))->find();
         $lastInsertId = null;
         if(!$bonusInfo){
             //创建个人主页
@@ -128,12 +145,12 @@ class MeibohuiAction extends SjzAction {
             $d['headimgurl'] = $imageProfile;
             $d['views'] = 1;
             $d['createtime'] = time();
-            $lastInsertId = M("meibohui")->add($d);
+            $lastInsertId = M("meibaiji")->add($d);
         }
         return $lastInsertId;
     }
     public function setEndTime2(){
-        $endtime =strtotime( "2017-02-25 23:59:59" );
+        $endtime =strtotime( "2018-03-13 23:59:59" );
         if (time() > $endtime) {//活动是否结束
 
             echo <<<HTML
@@ -159,152 +176,95 @@ HTML;
             }
         }
 
-    public function saveFormInfo(){
-
-        $openid = $_POST['openid'];
-        $onLine = $_POST['onLine'];
-        $offLine = $_POST['offLine'];
-        $username = $_POST['username'];
-        $telephone = $_POST['telephone'];
-        $storename = $_POST['storename'];
-        $salary = $_POST['salary'];
-        $companytype = $_POST['companytype'];
-        $qudao = $_POST['qudao'];
-        $return = 0;
-        $award = M('meibohui_index')->where(array('openid' => $openid))->find();
-        if(!$award){
-            $m = array();
-            $m['openid'] = $openid;
-            $m['online'] = $onLine;
-            $m['offline'] = $offLine;
-            $m['username'] = $username;
-            $m['telephone'] =$telephone;
-            $m['storename'] =$storename;
-            $m['salary'] =$salary;
-            $m['companytype'] =$companytype;
-            $m['qudao'] =$qudao;
-            M('meibohui_index')->add($m);
-            $return = 2;
-        }else{
-            $return = 3;
-        }
-        echo $return;
-    }
-
-        public function first(){
-            $userOpenId= cookie('user_openid_new');
-//            $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
-            if($userOpenId){// $userOpenId&& $fansInfo
-
-            }else{
-                $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
-                $code = trim($_GET["code"]);
-                $state = trim($_GET['state']);
-                if ($code && $state == 'sentian') {
-                    if(empty($fansInfo)){
-                        $webCreatetime = $apidata['web_createtime'];
-                        $web_access_token = '';
-
-                        //重新获取
-                        $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
-                        if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
-                            //code 有错误 需要重定向
-                            $url = $this->url."/index.php?g=Wap&m=Meibohui&a=index";
-                            header("location:$url");
-                        }
-                        $m['id'] = $apidata['id'];
-                        $m['web_access_token'] = $userinfoFromApi['access_token'];
-                        $m['refresh_token'] = $userinfoFromApi['refresh_token'];
-                        $m['web_createtime'] = time();
-                        $m['refresh_token_createtime'] = time();
-                        M('Diymen_set')->save($m);
-                        $web_access_token = $userinfoFromApi['access_token'];
-                        cookie('user_openid_new', $userinfoFromApi['openid'], 315360000);
-                        $userOpenId = $userinfoFromApi['openid'];
-
-//                    $selfUserInfo['headimgurl'] = $json->headimgurl;
-//                    $selfUserInfo['nickname'] = $json->nickname;
-                    }
-                } else {
-                    $url = urlencode($this->url."/index.php?g=Wap&m=Meibohui&a=first");
-                    header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
-                    exit;
-                }
-            }
-
-            $award = M('meibohui_index')->where(array('openid' => $userOpenId))->find();
-            if($award){
-                header("location:$this->url/index.php?g=Wap&m=Meibohui&a=success");
-                exit();
-            }
-            $this->display();
-        }
         public function index() {
-            $nickname = '';
-            $offline = 0;
-            if(isset($_GET['offline']) && $_GET['offline']){
-                $offline = 1;
-            }
-            $online = 0;
-            if(isset($_GET['online']) && $_GET['online']){
-                $online = 1;
-            }
-            $qudao = 0;
-            if($offline == 1){
-                $qudao = 2;
-            }else if($online == 1){
-                $qudao = 1;
-            }
-            $userOpenId= cookie('user_openid_new');
-        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
-            $fansInfo = null;
-            $selfUserInfo = array();
-//            if($userOpenId){
-//                $fansInfo = M('customer_service_fans')->field('openid,nickname,headimgurl')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
-//            }
-            if($userOpenId){// $userOpenId&& $fansInfo
-                $selfUserInfo['headimgurl'] ='';
-                $selfUserInfo['nickname'] = '';
-            }else{
-                $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
-                $code = trim($_GET["code"]);
-                $state = trim($_GET['state']);
-                if ($code && $state == 'sentian') {
-                    if(empty($fansInfo)){
-                        $webCreatetime = $apidata['web_createtime'];
-                        $web_access_token = '';
+        $gid = $_GET['gid'];
+        if(!$gid){
+            $gid = $this->defalutGid;
+        }
+        $this->setEndTime();
+        $userOpenId= cookie('user_openid_new');
+//        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+        $fansInfo = null;
+        $selfUserInfo = array();
+        $fansInfo = M('customer_service_fans')->field('openid,nickname,headimgurl')->where(array('openid' => $userOpenId,'token'=>'rggfsk1394161441'))->find();
+        if($userOpenId && $fansInfo){
+            $selfUserInfo['headimgurl'] ='';
+            $selfUserInfo['nickname'] = '';
+        }else{
+            $apidata = M('Diymen_set')->where(array('token' => 'rggfsk1394161441'))->find(); //这token 写死了
+            $code = trim($_GET["code"]);
+            $state = trim($_GET['state']);
+            if ($code && $state == 'sentian') {
+                if(empty($fansInfo)){
+                    $webCreatetime = $apidata['web_createtime'];
+                    $web_access_token = '';
 
-                        //重新获取
-                        $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
-                        if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
-                            //code 有错误 需要重定向
-                            $url = $this->url."/index.php?g=Wap&m=Meibohui&a=index";
-                            header("location:$url");
-                        }
-                        $m['id'] = $apidata['id'];
-                        $m['web_access_token'] = $userinfoFromApi['access_token'];
-                        $m['refresh_token'] = $userinfoFromApi['refresh_token'];
-                        $m['web_createtime'] = time();
-                        $m['refresh_token_createtime'] = time();
-                        M('Diymen_set')->save($m);
-                        $web_access_token = $userinfoFromApi['access_token'];
-                        cookie('user_openid_new', $userinfoFromApi['openid'], 315360000);
-                        $userOpenId = $userinfoFromApi['openid'];
+                    //重新获取
+                    $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
+                    if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
+                        //code 有错误 需要重定向
+                        $url = $this->url."/index.php?g=Wap&m=Meibaiji&a=index&gid=$gid";
+                        header("location:$url");
+                    }
+                    $m['id'] = $apidata['id'];
+                    $m['web_access_token'] = $userinfoFromApi['access_token'];
+                    $m['refresh_token'] = $userinfoFromApi['refresh_token'];
+                    $m['web_createtime'] = time();
+                    $m['refresh_token_createtime'] = time();
+                    M('Diymen_set')->save($m);
+                    $web_access_token = $userinfoFromApi['access_token'];
+                    cookie('user_openid_new', $userinfoFromApi['openid'], 315360000);
+                    $userOpenId = $userinfoFromApi['openid'];
 
 //                    $selfUserInfo['headimgurl'] = $json->headimgurl;
 //                    $selfUserInfo['nickname'] = $json->nickname;
-                    }
-                } else {
-                    $url = urlencode($this->url."/index.php?g=Wap&m=Meibohui&a=index");
-                    header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
-                    exit;
                 }
+            } else {
+                $url = urlencode($this->url."/index.php?g=Wap&m=Meibaiji&a=index&gid=$gid");
+                header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
+                exit;
             }
-            $award = M('meibohui_index')->where(array('openid' => $userOpenId))->find();
-            if($award){
-                header("location:$this->url/index.php?g=Wap&m=Meibohui&a=success");
-                exit();
+        }
+
+
+
+
+        $nickname = '';
+        $imageProfile = '';
+
+        //首先判断当前用户是否有玩过第一次
+        $info = M('Meibaiji')->where(array('openid' => $userOpenId))->find();
+        $vote = null;
+        $lastInsertId = null;
+        $views = null;
+
+        $teDengJiangCount = M('meibaiji_jiang')->where('id=1')->getField('tedengjiang');
+        $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
+        if($leftTeDengJiang < 0 ){
+            $leftTeDengJiang = 0;
+        }
+        $yiDengJiangCount = M('meibaiji_jiang')->where('id=1')->getField('yidengjiang');
+        $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
+        if($leftYiDengJiang < 0 ){
+            $leftYiDengJiang = 0;
+        }
+
+        if($info){
+            $lastInsertId = $info['id'];
+            $vote = $info['vote'];
+            $views = $info['views'];
+        }else{
+            if($leftYiDengJiang == 0 && $leftTeDengJiang == 0){
+                header("location:http://mp.weixin.qq.com/s/t1d87DU4hId-5PuIj2YUmQ");
+                exit;
             }
+            //此用户不存在
+            $lastInsertId = $this->saveInfo($gid,$userOpenId,$nickname,$imageProfile);
+            $info = M('Meibaiji')->where(array('openid' => $userOpenId))->find();
+        }
+        //如果VOTE未满5票 调到分享引导页P3
+        $this->haveFinishThreeOrHavePrizeOrVoteSmallThanFive($info,false,true);
+
         //begin 分享出去的URL
         list($ticket,$appId,$testgid) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
@@ -317,48 +277,277 @@ HTML;
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
         $this->assign("shareurl",$this->getShareUrl());
+        $this->assign('gid', $gid);
         $this->assign('title',$nickname.$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
         //end
 
+        //view自增
+        if($lastInsertId){
+            $this->setIncViews($lastInsertId);
+        }
 
+        $this->assign("vote",$vote);
+        $this->assign("gid",$gid);
+
+        $this->assign("teDengJiangCount",$this->teDengJiangCount);
+
+        $draw = $info['draw'];
+        $leftVote = 0;
+        $leftDraw = 3 - $draw;
+
+        $leftVote = $this->getLeftVote($draw,$vote);
+        if($leftVote < 0 ){
+            $leftVote = 0;
+        }
+        if($leftDraw < 0 ){
+            $leftDraw = 0;
+        }
+        $this->assign("leftVote",$leftVote);
+        $this->assign("leftDraw",$leftDraw);
+
+
+        $this->assign("leftTeDengJiang",$leftTeDengJiang);
+        $this->assign("leftYiDengJiang",$leftYiDengJiang);
+        $this->display();
+    }
+
+    public function getLeftVote($draw,$vote){
+        $leftVote = 0;
+        if($draw == 0){
+            //还未抽过奖
+            $leftVote = $this->eachChouJiangVote - $vote;
+
+        }elseif($draw == 1){
+            //已经抽过一次奖了
+            $leftVote = $this->eachChouJiangVote*2 - $vote;
+        }elseif($draw == 2){
+            //已经抽过二次奖了
+            $leftVote = $this->eachChouJiangVote*3 - $vote;
+        }
+        if($leftVote < 0 ){
+            $leftVote = 0;
+        }
+        return $leftVote;
+    }
+    public function success(){
+        $this->setEndTime();
+        $userOpenId= cookie('user_openid_new');
+//        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+        if(!$userOpenId){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=index");
+            exit();
+        }
+
+        $info = M('meibaiji')->where(array('openid' => $userOpenId))->find();
+        $draw = $info['draw'];
+        $gid = $info['gid'];
+        //begin views
+        if($info){
+            $this->setIncViews($info['id']);
+        }
+        $prize = $info['prize'];
+        //begin 分享出去的URL
+        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
+        $noncestr = "Wm3WZYTPz0wzccnW";
+        $timestamp = time();
+        $url = $this->get_url();;
+        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
+        $signature = sha1($str);
+        $this->assign("appid",$appId);
+        $this->assign("timestamp",$timestamp);
+        $this->assign("nonceStr",$noncestr);
+        $this->assign("signature",$signature);
+        $this->assign("shareurl",$this->getShareUrl());
+        $this->assign('gid', $gid);
+
+        $this->assign('title',$info['name'].$this->title);
+        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign("imageUrl",$this->imageUrl);
+        $this->assign("shareimageurl",$this->shareImageUrl);
+        //end
+        $this->assign("prize",$prize);
         $this->assign("openid",$userOpenId);
-        $this->assign("online",$online);
-        $this->assign("offline",$offline);
-        $this->assign("qudao",$qudao);
 
+        $teDengJiangCount = M('meibaiji_jiang')->where('id=1')->getField('tedengjiang');
+        $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
+        if($leftTeDengJiang < 0 ){
+            $leftTeDengJiang = 0;
+        }
+        $yiDengJiangCount = M('meibaiji_jiang')->where('id=1')->getField('yidengjiang');
+        $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
+        if($leftYiDengJiang < 0 ){
+            $leftYiDengJiang = 0;
+        }
+        $this->assign("leftTeDengJiang",$leftTeDengJiang);
+        $this->assign("leftYiDengJiang",$leftYiDengJiang);
+        $this->assign("draw",$draw);
+        $this->display();
+    }
 
+    public function rule(){
+        $this->setEndTime();
+        $userOpenId= cookie('user_openid_new');
+//        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+        if(!$userOpenId){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=index");
+            exit();
+        }
+
+        //首先判断当前用户是否有玩过第一次
+        $info = M('meibaiji')->where(array('openid' => $userOpenId))->find();
+        $gid = $info['gid'];
+        //begin 分享出去的URL
+        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
+        $noncestr = "Wm3WZYTPz0wzccnW";
+        $timestamp = time();
+        $url = $this->get_url();;
+        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
+        $signature = sha1($str);
+        $this->assign("appid",$appId);
+        $this->assign("timestamp",$timestamp);
+        $this->assign("nonceStr",$noncestr);
+        $this->assign("signature",$signature);
+        $this->assign("shareurl",$this->getShareUrl());
+        $this->assign('gid', $gid);
+
+        $this->assign('title',$info['name'].$this->title);
+        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign("imageUrl",$this->imageUrl);
+        $this->assign("shareimageurl",$this->shareImageUrl);
+        //end
+
+        //begin views
+        $userOpenId= cookie('user_openid_new');
+        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        if($info){
+            $this->setIncViews($info['id']);
+        }
+        // end views
+        $this->assign("gid",$gid);
         $this->display();
     }
 
 
-
-
-
-
-
-    public function share(){
+    public function rank1(){
         $this->setEndTime();
         $userOpenId= cookie('user_openid_new');
-//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $gid = $_GET['gid'];
         if(!$gid){
             $gid = $this->defalutGid;
         }
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=index&gid=$gid");
             exit();
         }
 
-        $info = M('meibohui')->where(array('openid' => $userOpenId))->find();
-        if(!$info){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
+        //首先判断当前用户是否有玩过第一次
+        $info = M('meibaiji')->where(array('openid' => $userOpenId))->find();
+        $gid = $info['gid'];
+        //begin 分享出去的URL
+        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
+        $noncestr = "Wm3WZYTPz0wzccnW";
+        $timestamp = time();
+        $url = $this->get_url();;
+        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
+        $signature = sha1($str);
+        $this->assign("appid",$appId);
+        $this->assign("timestamp",$timestamp);
+        $this->assign("nonceStr",$noncestr);
+        $this->assign("signature",$signature);
+        $this->assign("shareurl",$this->getShareUrl());
+        $this->assign('gid', $gid);
+
+        $this->assign('title',$info['name'].$this->title);
+        $this->assign('bonusdesc',$this->bonusdesc);
+        $this->assign("imageUrl",$this->imageUrl);
+        $this->assign("shareimageurl",$this->shareImageUrl);
+        //end
+
+        //begin views
+        $userOpenId= cookie('user_openid_new');
+        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        if($info){
+            $this->setIncViews($info['id']);
+        }
+        // end views
+        $this->assign("gid",$gid);
+        $this->display();
+    }
+
+    public function haveFinishThreeOrHavePrizeOrVoteSmallThanFive($info,$shareSelf = false,$indexSelf=false){
+        $vote = $info['vote'];
+
+        if(!$info && !$indexSelf){
+            header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=index");
             exit();
         }
+        $prize = $info['prize'];
+        $draw = $info['draw'];
+        if($prize == 1 || $prize == 2){//特等奖 or 一等奖
+            //redirect
+            $url = "http://mp.weixin.qq.com/s/Cqw5hmJtxCrgvyUaVZNEyw";
+            header("location:$url");
+            exit();
+        }else{
+            if($draw == 3){
+                $url = "http://mp.weixin.qq.com/s/o4Vu9MOSe2dYaUgxV77Dew";
+                header("location:$url");
+                exit();
+            }
+        }
+
+        if($indexSelf){
+            //首先查看是否为自己投过票
+            $userOpenId= cookie('user_openid_new');
+           // $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+            $voteListSql = "SELECT id from tp_meibaiji_votelist where fromopenid='$userOpenId' and toopenid='$userOpenId'";
+            $voteView = M('meibaiji_votelist')->query($voteListSql);
+            if($voteView){
+                //已经为自己投过票
+                if($vote<5 ){
+                    header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=share&shareclick=1");
+                    exit();
+                }else{
+                    header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=share");
+                    exit();
+                }
+            }else{
+                return;
+            }
+        }
+        if($vote<5 && !$shareSelf){
+            header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=share&shareclick=1");
+            exit();
+        }
+
+    }
+    public function share(){
+        $this->setEndTime();
+        $userOpenId= cookie('user_openid_new');
+//       $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        $gid = $_GET['gid'];
+        if(!$gid){
+            $gid = $this->defalutGid;
+        }
+        if(!$userOpenId){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=index&gid=$gid");
+            exit();
+        }
+
+        $info = M('meibaiji')->where(array('openid' => $userOpenId))->find();
+        if(!$info){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=index&gid=$gid");
+            exit();
+        }
+
         $gid = $info['gid'];
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
@@ -395,9 +584,9 @@ HTML;
         $end = mktime(23,59,59,date("m",$today),date("d",$today),date("Y",$today));
         $start = date("Y-m-d H:i:s",$start );
         $end = date("Y-m-d H:i:s",$end );
-//        $uniqueViewSql = "SELECT * from tp_meibohui_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$userOpenId'";
-        $uniqueViewSql = "SELECT * from tp_meibohui_votelist where  fromopenid='$userOpenId' and toopenid='$userOpenId'";
-        $uniqueViewlist = M('meibohui_votelist')->query($uniqueViewSql);
+//        $uniqueViewSql = "SELECT * from tp_meibaiji_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$userOpenId'";
+        $uniqueViewSql = "SELECT * from tp_meibaiji_votelist where  fromopenid='$userOpenId' and toopenid='$userOpenId'";
+        $uniqueViewlist = M('meibaiji_votelist')->query($uniqueViewSql);
         $haveVoted = 0;
 
 
@@ -439,15 +628,19 @@ HTML;
         $this->assign("leftVote",$leftVote);
         $this->assign("leftDraw",$leftDraw);
 
-        $teDengJiangCount = M('meibohui_jiang')->where('id=1')->getField('tedengjiang');
+        $teDengJiangCount = M('meibaiji_jiang')->where('id=1')->getField('tedengjiang');
         $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
         if($leftTeDengJiang < 0 ){
             $leftTeDengJiang = 0;
         }
-        $yiDengJiangCount = M('meibohui_jiang')->where('id=1')->getField('yidengjiang');
+        $yiDengJiangCount = M('meibaiji_jiang')->where('id=1')->getField('yidengjiang');
         $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
         if($leftYiDengJiang < 0 ){
             $leftYiDengJiang = 0;
+        }
+        if($leftYiDengJiang == 0 && $leftTeDengJiang == 0){
+            header("location:http://mp.weixin.qq.com/s/t1d87DU4hId-5PuIj2YUmQ");
+            exit;
         }
         $this->assign("leftTeDengJiang",$leftTeDengJiang);
         $this->assign("leftYiDengJiang",$leftYiDengJiang);
@@ -462,7 +655,7 @@ HTML;
         //这里是隐性获取OPENID 是朋友圈里面的人打开这个页面
         //获取OPENID 用户没有感知
         $userOpenId= cookie('user_openid_new');
-//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+//        $userOpenId= 'oP9fCt_8XNH7wF0ERFC2VukVAZXo';
         $gid = $_GET['gid'];
         if(!$gid){
             $gid = $this->defalutGid;
@@ -470,7 +663,7 @@ HTML;
         $uid = $_GET['uid'];
         if(!is_numeric($uid)){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=index&gid=$gid");
             exit();
         }
 
@@ -490,7 +683,7 @@ HTML;
                     $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                     if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                         //code 有错误 需要重定向
-                        $url = $this->url."/index.php?g=Wap&m=Motianlun&a=index";
+                        $url = $this->url."/index.php?g=Wap&m=Meibaiji&a=index&gid=$gid";
                         header("location:$url");
                     }
                     $m['id'] = $apidata['id'];
@@ -505,16 +698,16 @@ HTML;
 
                 }
             } else {
-                $url = urlencode($this->url."/index.php?g=Wap&m=Motianlun&a=sharefriend&uid=$uid");
+                $url = urlencode($this->url."/index.php?g=Wap&m=Meibaiji&a=sharefriend&uid=$uid&gid=$gid");
                 header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
                 exit;
             }
         }
 
-        $info = M('meibohui')->where(array('id' => $uid))->find();
+        $info = M('meibaiji')->where(array('id' => $uid))->find();
         if(!$info){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=index&gid=$gid");
             exit();
         }
 
@@ -531,47 +724,45 @@ HTML;
         $end = mktime(23,59,59,date("m",$today),date("d",$today),date("Y",$today));
         $start = date("Y-m-d H:i:s",$start );
         $end = date("Y-m-d H:i:s",$end );
-        $uniqueViewSql = "SELECT * from tp_meibohui_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$MainOpenId'";
-        $uniqueViewlist = M('meibohui_uniqueviewlist')->query($uniqueViewSql);
+        $uniqueViewSql = "SELECT * from tp_meibaiji_uniqueviewlist where   createtime >= '$start' and createtime<'$end' and fromopenid='$userOpenId' and toopenid='$MainOpenId'";
+        $uniqueViewlist = M('meibaiji_uniqueviewlist')->query($uniqueViewSql);
         $haveVoted = 1;
         if($uniqueViewlist){
             //不需要增加uniqueviews
         }else{
-            M("meibohui")->where(array('id' => $info['id']))->setInc('uniqueviews');
+            M("meibaiji")->where(array('id' => $info['id']))->setInc('uniqueviews');
             $n = array();
             $n['fromopenid'] = $userOpenId;
             $n['toopenid'] = $MainOpenId;
-            M('meibohui_uniqueviewlist')->add($n);
+            M('meibaiji_uniqueviewlist')->add($n);
         }
         if($userOpenId == $MainOpenId){
             //自己访问自己的主页 跳转到share页面
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=share");
+            header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=share&gid=$gid");
             exit();
         }
 
         //直接跳转
 
-        $teDengJiangCount = M('meibohui_jiang')->where('id=1')->getField('tedengjiang');
+        $teDengJiangCount = M('meibaiji_jiang')->where('id=1')->getField('tedengjiang');
         $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
         if($leftTeDengJiang < 0 ){
             $leftTeDengJiang = 0;
         }
 
-        $yiDengJiangCount = M('meibohui_jiang')->where('id=1')->getField('yidengjiang');
+        $yiDengJiangCount = M('meibaiji_jiang')->where('id=1')->getField('yidengjiang');
         $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
         if($leftYiDengJiang < 0 ){
             $leftYiDengJiang = 0;
         }
-        if($leftTeDengJiang == 0 && $leftYiDengJiang == 0){
-            //活动结束
-            $url = "http://mp.weixin.qq.com/s/t1d87DU4hId-5PuIj2YUmQ";
-            header("location:$url");
-            exit();
+        if($leftYiDengJiang == 0 && $leftTeDengJiang == 0){
+            header("location:http://mp.weixin.qq.com/s/t1d87DU4hId-5PuIj2YUmQ");
+            exit;
         }
         //直接跳转结束
-        $voteListSql = "SELECT * from tp_meibohui_votelist where fromopenid='$userOpenId' and toopenid='$MainOpenId'";
-        $voteView = M('meibohui_votelist')->query($voteListSql);
+        $voteListSql = "SELECT * from tp_meibaiji_votelist where fromopenid='$userOpenId' and toopenid='$MainOpenId'";
+        $voteView = M('meibaiji_votelist')->query($voteListSql);
 
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
@@ -606,12 +797,12 @@ HTML;
         $this->assign('gid',$gid);
 
         //判断当前用户是否已经投过票
-        $voteList = M('meibohui_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$MainOpenId  ))->find();
+        $voteList = M('meibaiji_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$MainOpenId  ))->find();
         $voteThisUid = 0;
         if($voteList){
             $voteThisUid = 1;
             //已经投过票 跳转到自己的主页
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=index&gid=$gid");
             exit();
         }
 
@@ -624,7 +815,7 @@ HTML;
 
 
 
-        //meibohui
+        //meibaiji
         $vote = $info['vote'];
         $this->assign("teDengJiangCount",$this->teDengJiangCount);
         $this->assign("yiDengJiangCount",$this->yiDengJiangCountDengJiangCount);
@@ -643,12 +834,12 @@ HTML;
         $this->assign("leftVote",$leftVote);
         $this->assign("leftDraw",$leftDraw);
 
-        $teDengJiangCount = M('meibohui_jiang')->where('id=1')->getField('tedengjiang');
+        $teDengJiangCount = M('meibaiji_jiang')->where('id=1')->getField('tedengjiang');
         $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
         if($leftTeDengJiang < 0 ){
             $leftTeDengJiang = 0;
         }
-        $yiDengJiangCount = M('meibohui_jiang')->where('id=1')->getField('yidengjiang');
+        $yiDengJiangCount = M('meibaiji_jiang')->where('id=1')->getField('yidengjiang');
         $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
         if($leftYiDengJiang < 0 ){
             $leftYiDengJiang = 0;
@@ -661,37 +852,311 @@ HTML;
 
     //根据UID获取OPENID
     public function getOpenIdByUid($uid){
-        $openId = M('meibohui')->where("id=$uid")->getField('openid');
+        $openId = M('meibaiji')->where("id=$uid")->getField('openid');
         return $openId;
     }
     public function getUidByOpenid($openid){
-        $uid = M('meibohui')->where("openid='$openid'")->getField('id');
+        $uid = M('meibaiji')->where("openid='$openid'")->getField('id');
         return $uid;
     }
+    public function saveVote2(){
+        $this->setEndTime();
+        $return = 0;
+        $fromOpenIdFromPost= cookie('user_openid_new');
+//        $fromOpenIdFromPost = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+        $toUid = $_POST['uid'];
+        if(!$fromOpenIdFromPost){
+            //非法投票
+            exit();
+        }
+        $toOpenIdFromPost = $this->getOpenIdByUid($toUid);
+        if(!$toOpenIdFromPost){
+            //非法投票
+            exit();
+        }
+        $vote = M('meibaiji')->where("id=$toUid")->getField('vote');
+        if($vote >= $this->meibaijiCount){
+            echo 3;
+            return;
+        }
+        //检查此 local openid 是否投过票
+        $voteList = M('meibaiji_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
+        //多次投票
+        if(!$voteList){
+//        if(true){
+            //投票
+            $d = array();
+            $d['fromopenid'] = $fromOpenIdFromPost;
+            $d['toopenid'] = $toOpenIdFromPost;
+            $d['createtime'] = time();
+            M('meibaiji_votelist')->add($d);
+            M("meibaiji")->where(array('id' => $toUid))->setInc('vote');
+            $return = 1;
+
+//            $info = M('meibaiji')->where(array('id' => $toUid))->find();
+
+        }else{
+            //已经投过票
+            $return = 2;
+        }
+        echo $return;
+    }
+
+    public function test(){
+        $teDengJiangCount = M('meibaiji_jiang')->where('id=1')->getField('tedengjiang');
+        echo $teDengJiangCount;
+    }
+
+    public function saveDraw(){
+        $this->setEndTime();
+        $return = 0;
+        $paiming = null;
+        $prize = null;
+        $returnMessage = null;
+        $fromOpenIdFromPost= cookie('user_openid_new');
+//        $fromOpenIdFromPost = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+        $info = M('meibaiji')->where(array('openid' => $fromOpenIdFromPost))->find();
+        if(!$info){
+            exit;
+        }
+        //查看当前的用户的名次
+        $number = $info['number'];
+
+        //用户是否已经获得奖
+        $prize = $info['prize'];
+
+        //查看抽奖次数
+        $drawCount = $info['draw'];
+        $voteCount = $info['vote'];
+        if($prize == 1){
+            //已获得特等奖，无法再抽奖
+            $returnMessage = "已获特等奖,无法再抽奖";
+            echo json_encode(array($returnMessage,$prize,$drawCount+1)) ;
+            return;
+        }
+        if($prize == 2){
+            //已获得特等奖，无法再抽奖
+            $returnMessage = "已获一等奖,无法再抽奖";
+            echo json_encode(array($returnMessage,$prize,$drawCount+1)) ;
+            return;
+        }
+        //还未抽中奖
+        if(!$prize){
+            if(!$drawCount && $voteCount>=$this->eachChouJiangVote){
+                //第一次抽
+                $p = array();
+                $p['uid'] =  $info['id'];
+                $p['position'] =  1;
+                $paiming = M('meibaiji_drawlist')->add($p);
 
 
 
+                $prize = $this->whetherDraw($paiming);
+                if($prize == 1){
+                    //查看已经有多少人获取了特等奖 最多10个
+                    $teDengJiangCount = M('meibaiji_jiang')->where('id=1')->getField('tedengjiang');
+                    if($teDengJiangCount<=9){
+                        M('meibaiji_jiang')->where('id=1')->setInc('tedengjiang');
+                        $returnMessage = "恭喜抽中特等奖！";
+                    }else{
+                        $prize = 3;//本应获得特等奖 但是 奖没了
+                        $returnMessage = "未中奖";
+                    }
 
+                }elseif($prize == 2){
+                    $yiDengJiangCount =  M('meibaiji_jiang')->where('id=1')->getField('yidengjiang');
+                    if($yiDengJiangCount <= ($this->yiDengJiangCount-1)){
+                        M('meibaiji_jiang')->where('id=1')->setInc('yidengjiang');
+                        $returnMessage = "恭喜抽中一等奖！";
+                    }else{
+                        $prize = 4;//本应获得一等奖 但是 奖没了
+                        $returnMessage = "未中奖";
+                    }
+                }else {
+                    $returnMessage = "未中奖<br/>";
+                    $yiDengJiangCount =  M('meibaiji_jiang')->where('id=1')->getField('yidengjiang');
+                    $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
+                    $leftDraw = $this->totalDrawCount - $drawCount - 1;
+                    if($leftDraw < 0 ){
+                        $leftDraw = 0;
+                    }
+                    $returnMessage .= "奖池剩余".$leftYiDengJiang."盒面膜 ,您还有".$leftDraw."次抽奖机会";
+                }
+                $i = array();
+                $i['id'] = $info['id'];
+                $i['rank1'] = $paiming;
+                $i['prize'] = $prize;
+                $i['draw'] = 1;
+                M('meibaiji')->save($i);
+            }elseif($drawCount == 1 &&  $voteCount>=$this->eachChouJiangVote*2){
+                //第二次抽奖
+                $p = array();
+                $p['uid'] =  $info['id'];
+                $p['position'] =  2;
+                $paiming = M('meibaiji_drawlist')->add($p);
+                $prize = $this->whetherDraw($paiming);
+                if($prize == 1){
+                    $teDengJiangCount = M('meibaiji_jiang')->where('id=1')->getField('tedengjiang');
+                    if($teDengJiangCount<=9){
+                        M('meibaiji_jiang')->where('id=1')->setInc('tedengjiang');
+                        $returnMessage = "恭喜抽中特等奖！";
+                    }else{
+                        $prize = 3;//本应获得特等奖 但是 奖没了
+                        $returnMessage = "未中奖";
+                    }
 
+                }elseif($prize == 2){
+                    $yiDengJiangCount = M('meibaiji_jiang')->where('id=1')->getField('yidengjiang');
+                    if($yiDengJiangCount <= ($this->yiDengJiangCount-1)){
+                        M('meibaiji_jiang')->where('id=1')->setInc('yidengjiang');
+                        $returnMessage = "恭喜抽中一等奖！";
+                    }else{
+                        $prize = 4;//本应获得一等奖 但是 奖没了
+                        $returnMessage = "未中奖";
+                    }
+                }else {
+                    $returnMessage = "未中奖<br/>";
+                    $yiDengJiangCount =  M('meibaiji_jiang')->where('id=1')->getField('yidengjiang');
+                    $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
+                    $leftDraw = $this->totalDrawCount - $drawCount - 1;
+                    if($leftDraw < 0 ){
+                        $leftDraw = 0;
+                    }
+                    $returnMessage .= "奖池剩余".$leftYiDengJiang."盒面膜 ,您还有".$leftDraw."次抽奖机会";
+                }
+                $i = array();
+                $i['id'] = $info['id'];
+                $i['rank2'] = $paiming;
+                $i['prize'] = $prize;
+                $i['draw'] = 2;
+                M('meibaiji')->save($i);
+            }else if($drawCount == 2  && $voteCount>= $this->eachChouJiangVote*3){
+                //第三次抽奖
+                $i['id'] = $info['id'];
+                $i['draw'] = 3;
+                $i['thirdtime'] = date('Y-m-d H:i:s');
+                M('meibaiji')->save($i);
+                $returnMessage = "遗憾错过!";
+            }else{
+                $returnMessage = "提交过于频繁，请稍后再试!";
+            }
+        }
 
+        echo json_encode(array($returnMessage,$prize,$drawCount+1)) ;
+    }
 
-    public function success(){
+    function whetherDraw($paiming){
+        $return = null;
+        if($paiming*1 == 66 || $paiming*1 == 566 || $paiming*1 == 1166 || $paiming*1 == 2166 || $paiming*1 == 3166 || $paiming*1 == 4566 || $paiming*1 == 5966 || $paiming*1 == 6966 || $paiming*1 == 7966 || $paiming*1 == 8966 ){
+            $return = 1;
+        }elseif(strrchr((string)"$paiming","7") == "7"){
+            $return = 2;
+        }
+        return $return;
+    }
+    //TODO add random str to avoid auto submit
+    public function saveVote(){
+        $this->setEndTime();
+        $return = 0;
+        $leftVote = 0;
+        $fromOpenIdFromPost= cookie('user_openid_new');
+     //   $fromOpenIdFromPost = "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+        $toOpenIdFromPost = $fromOpenIdFromPost;
+        //检查此 local openid 是否投过票
+        $voteList = M('meibaiji_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
+        if(!$voteList){//
+            //投票
+            $d = array();
+            $d['fromopenid'] = $fromOpenIdFromPost;
+            $d['toopenid'] = $toOpenIdFromPost;
+            $d['createtime'] = time();
+            M('meibaiji_votelist')->add($d);
+            M("meibaiji")->where(array('openid' => $toOpenIdFromPost))->setInc('vote');
+            $info = M('meibaiji')->where(array('openid' => $fromOpenIdFromPost))->find();
+            if(!$info){
+                exit;
+            }
+            $leftVote = $this->getLeftVote($info['draw'],$info['vote']);
+            $return = 1;
+        }else{
+            //已经投过票
+            $return = 2;
+        }
+        $arrTmp = array($return,$leftVote);
+        echo json_encode($arrTmp);
+    }
+    public function saveFormInfo(){
+        $this->setEndTime2();
+        $return = 0;
         $userOpenId= cookie('user_openid_new');
-//        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
+     //   $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+        if(!$userOpenId){
+            //非法投票
+            exit();
+        }
+        $username = $_POST['username'];
+        $telphone = $_POST['telphone'];
+        $province = $_POST['province'];
+        $city = $_POST['city'];
+        $county = $_POST['county'];
+        $address = $_POST['address'];
+        $award = M('meibaiji_award')->where(array('openid' => $userOpenId))->find();
+        if(!$award){
+            $m = array();
+            $m['openid'] = $userOpenId;
+            $m['name'] = $username;
+            $m['phone'] =$telphone;
+            $m['province'] =$province;
+            $m['city'] =$city;
+            $m['county'] =$county;
+            $m['address'] =$address;
+            $m['createtime'] = time();
+            M('meibaiji_award')->add($m);
+        }else{
+                $m = array();
+                $m['id'] = $award['id'];
+                $m['name'] = $username;
+                $m['phone'] =$telphone;
+                $m['province'] =$province;
+                $m['city'] =$city;
+                $m['county'] =$county;
+                $m['address'] =$address;
+                $m['updatetime'] = time();
+                M('meibaiji_award')->save($m);
+                $return = 1;
+        }
+    }
+    public function rank(){
+        $userOpenId= cookie('user_openid_new');
+        //        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Meibohui&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=index");
             exit();
         }
-        $info = M('meibohui_index')->where(array('openid' => $userOpenId))->find();
-
+        $info = M('meibaiji')->where(array('openid' => $userOpenId))->find();
+        $gid = $_GET['gid'];
+        if(!$gid){
+            $gid = $this->defalutGid;
+        }
         if(!$info){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Meibohui&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=index&gid=$gid");
             exit();
         }
 
+        //如果没有满足16票 跳转到再接再厉
+        if($info['vote'] <$this->meibaijiCount){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=rank1&gid=$gid");
+            exit();
+        }
 
+        if($info && !$info['phone']){
+            //redirect
+            header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=share&gid=$gid");
+            exit();
+        }
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
         $noncestr = "Wm3WZYTPz0wzccnW";
@@ -704,6 +1169,7 @@ HTML;
         $this->assign("nonceStr",$noncestr);
         $this->assign("signature",$signature);
         $this->assign("shareurl",$this->getShareUrl());
+        $this->assign('gid', $gid);
 
         $this->assign('title',$info['name'].$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
@@ -712,65 +1178,48 @@ HTML;
         //end
 
 
+        $vote = $info['vote'];
+        $selfPhoneTime = $info['phonetime'];
+        $p = $info['phone'];
+
+        $uid = $info['id'];
+        //查询此用户的排名
+        $pValue = M('meibaiji_phonelist')->where(array('uid' => $uid))->getField('id');
+        $vote = $this->meibaijiCount;
+        $this->assign("vote",$vote);
+        $this->assign("selforder",$pValue);
+        $this->assign("paiming",$pValue);
+        $this->assign("gid",$gid);
         $this->display();
     }
-
-    public function havesubmit(){
-        $userOpenId= cookie('user_openid_new');
-//        $userOpenId= "oP9fCtxIGfuDZkYTS9PSzhvZuvcs";
-        if(!$userOpenId){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Meibohui&a=first");
-            exit();
-        }
-        $info = M('meibohui_index')->where(array('openid' => $userOpenId))->find();
-
-        if(!$info){
-            //redirect
-            header("location:$this->url/index.php?g=Wap&m=Meibohui&a=first");
-            exit();
-        }
-
-
-        //begin 分享出去的URL
-        list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
-        $noncestr = "Wm3WZYTPz0wzccnW";
-        $timestamp = time();
-        $url = $this->get_url();;
-        $str = 'jsapi_ticket='.$ticket.'&noncestr='.$noncestr.'&timestamp='.$timestamp.'&url='.$url;
-        $signature = sha1($str);
-        $this->assign("appid",$appId);
-        $this->assign("timestamp",$timestamp);
-        $this->assign("nonceStr",$noncestr);
-        $this->assign("signature",$signature);
-        $this->assign("shareurl",$this->getShareUrl());
-
-        $this->assign('title',$info['name'].$this->title);
-        $this->assign('bonusdesc',$this->bonusdesc);
-        $this->assign("imageUrl",$this->imageUrl);
-        $this->assign("shareimageurl",$this->shareImageUrl);
-        //end
-
-
-        $this->display();
-    }
-
-
 
     public function form(){
         $this->setEndTime2();
         $userOpenId= cookie('user_openid_new');
-//        $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
+      //  $userOpenId= 'oP9fCtxIGfuDZkYTS9PSzhvZuvcs';
         $gid = $_GET['gid'];
+        $sinurl = null;
+        $url = $this->get_url();
+        if(strstr($url,'&s=1')){
+            $sinurl = 1;
+        }
         if(!$gid){
             $gid = $this->defalutGid;
         }
         if(!$userOpenId){
             //redirect
-            header("location:$this->url/index.php?g=Wap&m=Motianlun&a=index");
+            header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=index&gid=$gid");
             exit();
         }
-        $info = M('meibohui')->where(array('openid' => $userOpenId))->find();
+        $info = M('meibaiji')->where(array('openid' => $userOpenId))->find();
+        if($info['prize']*1 == 0){
+            header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=index&gid=$gid");
+            exit();
+        }
+        if($info['prize']*1 > 2){
+            header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=index&gid=$gid");
+            exit();
+        }
         $gid = $info['gid'];
         //begin 分享出去的URL
         list($ticket,$appId,$gidFromDiymenset) = $this->getDiymenSet();
@@ -796,7 +1245,7 @@ HTML;
         $vote = $info['vote'];
         $gid = $info['gid'];
 
-        $award = M('meibohui_award')->where(array('openid' => $userOpenId))->find();
+        $award = M('meibaiji_award')->where(array('openid' => $userOpenId))->find();
         $name = '';
         $phone = '';
         $address = '';
@@ -821,13 +1270,14 @@ HTML;
         $this->assign("province",$province);
         $this->assign("gid",$gid);
         $this->assign("whetheraward",$a);
+        $this->assign("sinurl",$sinurl);
 
-        $teDengJiangCount = M('meibohui_jiang')->where('id=1')->getField('tedengjiang');
+        $teDengJiangCount = M('meibaiji_jiang')->where('id=1')->getField('tedengjiang');
         $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
         if($leftTeDengJiang < 0 ){
             $leftTeDengJiang = 0;
         }
-        $yiDengJiangCount = M('meibohui_jiang')->where('id=1')->getField('yidengjiang');
+        $yiDengJiangCount = M('meibaiji_jiang')->where('id=1')->getField('yidengjiang');
         $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
         if($leftYiDengJiang < 0 ){
             $leftYiDengJiang = 0;
@@ -840,7 +1290,7 @@ HTML;
     }
 
     public function getOrderByOpenId($openId=null){
-        $list = M('meibohui')->query("select openid, number,share,phonetime from tp_meibohui where phone != '' order by number desc,share desc,phonetime asc ");
+        $list = M('meibaiji')->query("select openid, number,share,phonetime from tp_meibaiji where phone != '' order by number desc,share desc,phonetime asc ");
 
         $orderList = array();
         foreach($list as $each){
@@ -870,7 +1320,7 @@ HTML;
         $this->assign("signature",$signature);
         $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', 1);
-        $info = M('meibohui')->where(array('openid' => $userOpenId))->find();
+        $info = M('meibaiji')->where(array('openid' => $userOpenId))->find();
         $this->assign('title',$info['name'].$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
         $this->assign("imageUrl",$this->imageUrl);
@@ -885,9 +1335,9 @@ HTML;
         }
         // end views
 
-        $this->assign('selfpage',$this->url."/index.php?g=Wap&m=Motianlun&a=sharefriend");
+        $this->assign('selfpage',$this->url."/index.php?g=Wap&m=Meibaiji&a=sharefriend&gid=$gid");
 
-        $award = M('meibohui_award')->where(array('openid' => $userOpenId))->find();
+        $award = M('meibaiji_award')->where(array('openid' => $userOpenId))->find();
         if($award){
             $this->assign('name',$award['name']);
             $this->assign('phone',$award['phone']);
@@ -901,10 +1351,10 @@ HTML;
     }
 
     public function setIncViews($id){
-        M("meibohui")->where(array('id' => $id))->setInc('views');
+        M("meibaiji")->where(array('id' => $id))->setInc('views');
         $m = array();
         $m['uid'] = $id;
-        M('meibohui_viewlist')->add($m);
+        M('meibaiji_viewlist')->add($m);
     }
 
     public function  saveAward(){
@@ -914,7 +1364,7 @@ HTML;
             echo 0;
             return;
         }
-        $award = M('meibohui_award')->where(array('openid' => $userOpenId))->find();
+        $award = M('meibaiji_award')->where(array('openid' => $userOpenId))->find();
         $name = $_POST['name'];
         $phone = $_POST['phone'];
         $province = $_POST['province'];
@@ -929,7 +1379,7 @@ HTML;
             $m['city'] = $city;
             $m['address'] = $address;
             $m['createtime'] = time();
-            M('meibohui_award')->add($m);
+            M('meibaiji_award')->add($m);
             $return = 1;
         }else{
             $m = array();
@@ -941,7 +1391,7 @@ HTML;
             $m['city'] = $city;
             $m['address'] = $address;
             $m['createtime'] = time();
-            M('meibohui_award')->save($m);
+            M('meibaiji_award')->save($m);
             $return = 1;
         }
 
@@ -1011,16 +1461,16 @@ HTML;
             exit;
         }
         $userOpenId= cookie('user_openid_new');
-        $info = M('meibohui')->where(array('openid' => $userOpenId))->find();
+        $info = M('meibaiji')->where(array('openid' => $userOpenId))->find();
         if($info){
             $id = $info['id'];
             if(!$info['sharetime']){
                 $m = array();
                 $m['id'] = $info['id'];
                 $m['sharetime'] = time();
-                M("meibohui")->save($m);
+                M("meibaiji")->save($m);
             }
-            M("meibohui")->where(array('id' => $id))->setInc('share');
+            M("meibaiji")->where(array('id' => $id))->setInc('share');
             echo 1;
         }else{
             echo 0;
@@ -1040,16 +1490,16 @@ HTML;
             exit;
         }
         $userOpenId= cookie('user_openid_new');
-        $info = M('meibohui')->where(array('openid' => $userOpenId))->find();
+        $info = M('meibaiji')->where(array('openid' => $userOpenId))->find();
         if($info){
             $id = $info['id'];
             if(!$info['sharetime']){
                 $m = array();
                 $m['id'] = $info['id'];
                 $m['sharetime'] = time();
-                M("meibohui")->save($m);
+                M("meibaiji")->save($m);
             }
-            M("meibohui")->where(array('id' => $id))->setInc('share');
+            M("meibaiji")->where(array('id' => $id))->setInc('share');
             echo 1;
         }else{
             echo 0;
@@ -1057,14 +1507,14 @@ HTML;
 
     }
     public function saveSharePoll(){
-        M("meibohui_polldata")->where(array('id' => 1))->setInc('sharenumber');
+        M("meibaiji_polldata")->where(array('id' => 1))->setInc('sharenumber');
     }
     /*
     * 记录 我也要参加 次数
     */
     public function saveWantJoin(){
         $uid = $_POST['uid'];
-        M("meibohui")->where(array('id' => $uid ))->setInc('joins');
+        M("meibaiji")->where(array('id' => $uid ))->setInc('joins');
     }
 
     /*
@@ -1082,14 +1532,14 @@ HTML;
         $toOpenId = $_POST['toopenid'];
         $uid = $_POST['uid'];
         $userOpenId = cookie('user_openid_new');
-        $voteList = M('meibohui_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toOpenId))->find();
+        $voteList = M('meibaiji_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$toOpenId))->find();
 
         //多次投票开启
         if(!$voteList){
 //        if(true){
         //多次投票结束
-            $info = M('meibohui')->where(array('id' => $uid))->find();
-            M("meibohui")->where(array('id' => $info['id']))->setInc('vote');
+            $info = M('meibaiji')->where(array('id' => $uid))->find();
+            M("meibaiji")->where(array('id' => $info['id']))->setInc('vote');
 
             //投票
             $d = array();
@@ -1097,7 +1547,7 @@ HTML;
             $d['toopenid'] = $toOpenId;
             $d['sequence'] = $info['sequence'];
             $d['createtime'] = time();
-            M('meibohui_votelist')->add($d);
+            M('meibaiji_votelist')->add($d);
             $return = 1;
         }
         echo $return;
@@ -1120,7 +1570,7 @@ HTML;
         $appsecret = "79311ea02ea318af5f228492bf119104";
 
         $openId = $_COOKIE['openid'];
-        $url = $this->url."/index.php?g=Wap&m=Motianlun&a=index";
+        $url = $this->url."/index.php?g=Wap&m=Meibaiji&a=index";
         if(!$openId){
             $code =  $_GET['code'];
             $state = $_GET['state'];
@@ -1241,7 +1691,7 @@ HTML;
                     $userinfoFromApi = $this->getUserInfo($code, $apidata['appid'], $apidata['appsecret']);
                     if(isset($userinfoFromApi['errcode']) && $userinfoFromApi['errcode']){
                         //code 有错误 需要重定向
-                        $url = $this->url."/index.php?g=Wap&m=Motianlun&a=getOpenId";
+                        $url = $this->url."/index.php?g=Wap&m=Meibaiji&a=getOpenId";
                         header("location:$url");
                     }
                     $m['id'] = $apidata['id'];
@@ -1256,7 +1706,7 @@ HTML;
 
             }
         } else {
-            $url = urlencode($this->url."/index.php?g=Wap&m=Motianlun&a=getOpenId");
+            $url = urlencode($this->url."/index.php?g=Wap&m=Meibaiji&a=getOpenId");
             header("location:https://open.weixin.qq.com/connect/oauth2/authorize?appid=" . $apidata['appid'] . "&redirect_uri=$url&response_type=code&scope=snsapi_base&state=sentian#wechat_redirect");
             exit;
         }
