@@ -20,12 +20,12 @@ function luckDrawClick(){
 }
 
 function brightFlash(){
-	var $wheel_box = $(".wheel-box");
-	$wheel_box.find(".light").addClass("flash1");
+	var $wheel_box = $("#wheel-box");
+	$wheel_box.find(".light").addClass("flash");
 	$wheel_box.find(".bright").each(function(index, element) {
         var $this = $(this);
 		if(index % 2 == 0){
-			$this.addClass("flash1");
+			$this.addClass("flash");
 		}else{
 			$this.addClass("flash1");
 		}
@@ -39,8 +39,7 @@ function changeWheelStatus(){
 	var need_ticket = $need_ticket.html();
 	var need_times = $need_times.html();
 	var needNums = need_times * 5 - (5-need_ticket);
-	//if(needNums < 15){
-	if(need_ticket == 0){
+	if(needNums < 15){
 		$wheel_box.removeClass("opacity-gray");
 		changeLuckDrawStatus(needNums);
 		changeBallStatus(needNums);

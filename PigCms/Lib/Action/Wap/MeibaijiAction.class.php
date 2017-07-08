@@ -1,8 +1,8 @@
 <?php
 
 class MeibaijiAction extends SjzAction {
-    public $title = '闪亮女神魅力，转动你的“膜”丽小确幸！';
-    public $bonusdesc = '特等奖10盒面膜,共1000盒奖品,四海八荒>..>摩天轮活动又来了,拼手速的时刻到了!';
+    public $title = '焕白行动,分享美丽心愿!';
+    public $bonusdesc = '特等奖10盒面膜,共1000份奖品,是时候开始亮白翻牌看你的!';
     public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
