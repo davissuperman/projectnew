@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="css/animate.css?v=201612241500" rel="stylesheet" type="text/css" />
+<link href="css/common.css?v=201612241500" rel="stylesheet" type="text/css" />
+<script src="js/zepto.min.js" type="text/javascript"></script>
+<script src="js/common.js" type="text/javascript"></script>
+<title>焕白行动,分享美丽心愿!</title>
+</head>
+<body id="body">
+	<dl class="common-step">
+    	<dt>奖池剩余</dt>
+        <dd>森田奖品特等奖<strong>X</strong>份，一等奖<strong>XXX</strong>份<span>（由于可能存在数据延时问题，所以奖池剩余数据仅供参考，特此告知！）</span></dd>
+    </dl>
+    <div class="img-box">
+        <p><img src="images/b/a1.jpg" width="100%" /></p>
+        <p><img src="images/b/a2.jpg" width="100%" /></p>
+        <p><img src="images/b/a3.jpg" width="100%" /></p>
+    </div>
+    
+    <div class="prize-box prize-box-index" style="top:8rem;">
+    	<div class="box">
+            <p>特等奖:<span>10</span>名 奖森田面膜十盒 </p>
+            <p>一等奖:<span>900</span>名 奖森田面膜一盒</p>
+        </div>
+    </div>
+    
+    <div class="btns-box btns-box-share">
+    	<div class="btn-blue">还差<span>2</span>票</div>
+        <a href="javascript:;" title="邀请好友助力" class="btn-red btn-share">邀请好友助力
+        </a>
+    </div>
+    <ul class="need-vote-panel">
+    	<li>还差<span id="need-ticket">0</span>票即可翻面膜，您还有<span id="need-times">2</span>次翻面膜机会</li>
+    </ul>
+    
+    
+    <div class="advertising">广告</div>
+
+	<div class="index-game-panel">
+    	<div class="mianmo mianmo01"><div class="fan"></div></div>
+        <div class="mianmo mianmo02"><div class="fan"></div></div>
+        <div class="mianmo mianmo03"><div class="fan"></div></div>
+        <div class="mianmo mianmo04"><div class="fan"></div></div>
+        <div class="mianmo mianmo05"><div class="fan"></div></div>
+        <div class="mianmo-word mianmo-word01"></div>
+        <div class="mianmo-word mianmo-word02"></div>
+        <div class="mianmo-word mianmo-word03"></div>
+        <div class="mianmo-word mianmo-word04"></div>
+        <div class="mianmo-word mianmo-word05"></div>
+    </div>
+    
+    <div class="share-box" id="share-notice">
+    	<div class="bg"></div>
+         <div class="share-notice"></div>
+    </div>
+    
+   
+    
+    <script type="text/javascript">
+    	$(document).ready(function(e) {
+			showShareTip();
+		});
+		function showShareTip(){
+			$(".btn-share").bind('click',function(){
+				$("#share-notice").show();
+			});
+		};
+		
+    </script>
+    
+</body>
+</html>

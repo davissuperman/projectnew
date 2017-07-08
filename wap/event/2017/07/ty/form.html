@@ -1,0 +1,160 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="css/animate.css?v=201612241500" rel="stylesheet" type="text/css" />
+<link href="css/common.css?v=201612241500" rel="stylesheet" type="text/css" />
+<script src="js/zepto.min.js" type="text/javascript"></script>
+<script src="js/common.js" type="text/javascript"></script>
+<title>焕白行动,分享美丽心愿!</title>
+</head>
+<body id="body">
+	
+    <div class="img-box">
+        <p><img src="images/b/c1.jpg" width="100%" /></p>
+        <p><img src="images/b/c2.jpg" width="100%" /></p>
+        <p><img src="images/b/c3.jpg" width="100%" /></p>
+        <p><img src="images/b/c4.jpg" width="100%" /></p>
+    </div>
+    <div class="form-panel">
+        <ul>
+            <li class="clrfix">
+                <div class="label">收货人姓名：</div>
+                <div class="controls">
+                    <input type="text" class="input-form"  placeholder="请输入收货人姓名" id="username"/>
+                </div>
+            </li>
+            <li class="clrfix">
+                <div class="label">联系电话：</div>
+                <div class="controls">
+                    <input class="input-form" type="tel" placeholder="请输入您的联系电话"  id="telphone"/>
+                </div>
+            </li>
+            <li class="clrfix">
+                <div class="label">省份：</div>
+                <div class="controls">
+                    <select class="input-form" id="province">
+                    	
+                    </select>
+                </div>
+            </li>
+            <li class="clrfix">
+                <div class="label">城市：</div>
+                <div class="controls">
+                    <select class="input-form" id="city">
+                    	
+                    </select>
+                </div>
+            </li>
+            <li class="clrfix">
+                <div class="label">区/县：</div>
+                <div class="controls">
+                    <select class="input-form" id="county">
+                    </select>
+                </div>
+            </li>
+            <li class="clrfix">
+                <div class="label">详细地址：</div>
+                <div class="controls">
+                    <input type="text" class="input-form" placeholder="请输入详细地址" id="address"/>
+                </div>
+            </li>
+        </ul>
+        <div class="form-btns">
+        	<p>
+            	<a href="javascript:;" class="btn-blue-full" onClick="saveUserInfo();">确认提交</a>
+            </p>
+        </div>
+	</div>
+    
+   <script src="js/data/area.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(e) {
+        	initArea($("#province"),$("#city"),$("#county"));
+        });
+		
+		function saveUserInfo(){
+			var $username = $("#username");
+			var $telphone = $("#telphone");
+			var $province = $("#province");
+			var $city = $("#city");
+			var $county = $("#county");
+			var $address = $("#address");
+			
+			var username = $username.val();
+			var telphone = $telphone.val();
+			var province = $province.val();
+			var city = $city.val();
+			var county = $county.val();
+			var address = $address.val();
+			
+			
+			if(username == ""){
+				Pop.alerts("收货人姓名不能为空");
+				return false;
+			}
+			
+			if(telphone == ""){
+				Pop.alerts("联系电话不能为空");
+				return false;
+			}
+			
+			if(province == "" || province == "请选择"){
+				Pop.alerts("省份不能为空");
+				return false;
+			}
+			
+			if(city == "" || city == "请选择"){
+				Pop.alerts("城市不能为空");
+				return false;
+			}
+			
+			if((county == "请选择" || county == "") && $county.css("display") != 'none' ){
+				Pop.alerts("县/区不能为空");
+				return false;
+			}
+			
+			if(address == ""){
+				Pop.alerts("详细地址不能为空");
+				return false;
+			}
+
+			Pop.confirms('请您确认您所填写的地址为正确收货地址，确认提交后将无法更改地址。<span class="c3"></span>',function(){
+				var data = {
+					"username" : username,
+					"telphone" : telphone,
+					"province" : province,
+					"city" : city,
+					"county" : county,
+					"address" : address
+				};
+				
+				$.ajax({
+					type:'get',
+					url: '' ,//接口地址
+					data:data,
+					dataType:'json',	
+					timeout : 60000,	
+					success:function(data){
+						
+					},
+					error : function(XMLHttpRequest, textStatus, errorThrown) {
+						Pop.alerts("提交失败，网络繁忙！");
+						return false;
+					}
+				});	
+			});
+			
+			
+			
+		}
+    </script>
+    
+</body>
+</html>
