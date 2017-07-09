@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="css/animate.css?v=201612241500" rel="stylesheet" type="text/css" />
+<link href="css/common.css?v=201612241500" rel="stylesheet" type="text/css" />
+<script src="js/zepto.min.js" type="text/javascript"></script>
+<script src="js/common.js" type="text/javascript"></script>
+<title>SCHENCK</title>
+</head>
+<body id="body">
+	<div class="product-list-page">
+    	<div class="search">
+        	<input type="search" autocomplete="off" name="baike-search" placeholder="搜索商品" class="input-kw">
+        </div>
+        
+        <div class="box clrfix">
+        	<div class="lf">
+            	<ul class="product-list-menu" id="product-list-menu">
+                    <li class="active">
+                        <a href="javascript:;">动平衡机</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">卧式平衡机</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">传动轴平衡机</a>
+                    </li><li>
+                        <a href="javascript:;">曲轴动平衡机</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">立式平衡机</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">便携式平衡机</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">涡轮增压器</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">平衡服务</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">未分类</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="rg">
+            	<div class="banner">
+                    <div class="banner-box">
+                        <a href="productDetails.html">
+                            <img class="img" src="images/product/product1.png"/>
+                            <p class="name">申克动平衡机</p>
+                            <p class="des">PASIO-平衡新概念</p>
+                        </a>
+                    </div>
+                </div>
+            	<ul class="product-list clrfix">
+                    <li>
+                    	<a href="productDetails.html">
+                            <p class="img">
+                               <img src="images/product/product.png" />
+                            </p>
+                            <p class="name">申克动平衡机</p>
+                        </a>
+                    </li>
+                    <li>
+                    	<a href="productDetails.html">
+                            <p class="img">
+                               <img src="images/product/product.png" />
+                            </p>
+                            <p class="name">申克动平衡机</p>
+                        </a>
+                       
+                    </li>
+                    <li>
+                    	<a href="productDetails.html">
+                            <p class="img">
+                               <img src="images/product/product.png" />
+                            </p>
+                            <p class="name">申克动平衡机</p>
+                        </a>
+                       
+                    </li>
+                    <li>
+                    	<a href="productDetails.html">
+                            <p class="img">
+                               <img src="images/product/product.png" />
+                            </p>
+                            <p class="name">申克动平衡机</p>
+                        </a>
+                       
+                    </li>
+                    <li>
+                    	<a href="productDetails.html">
+                            <p class="img">
+                               <img src="images/product/product.png" />
+                            </p>
+                            <p class="name">申克动平衡机</p>
+                        </a>
+                       
+                    </li>
+                    <li>
+                    	<a href="productDetails.html">
+                            <p class="img">
+                               <img src="images/product/product.png" />
+                            </p>
+                            <p class="name">申克动平衡机</p>
+                        </a>
+                       
+                    </li>
+                </ul>
+            </div>
+        	
+        </div>
+        
+        
+        
+    </div>
+    <script type="text/javascript">
+    	$(document).ready(function(e) {
+            bindProdutMenuEvent();
+        });
+		
+		function bindProdutMenuEvent(){
+			$("#product-list-menu > li").bind('click',function(){
+				var $this = $(this);
+				$this.addClass('active').siblings().removeClass('active');
+			});
+		}
+    </script>
+</body>
+</html>
