@@ -197,8 +197,8 @@
                                 if(returnCode == '1'){
                                     Pop.alerts("投票成功,试试自己的手气");
                                     setTimeout(function(){
-                                        //开启多次投票
-                                       // goPage();
+                                        //注释掉即开启多次投票
+                                        goPage();
                                     },2000);
                                 }else if(returnCode == '2'){
                                     Pop.alerts('已投过');
