@@ -2,7 +2,10 @@
 
 class MeibaijiAction  extends BonusAction {
 
-    public $defalutGid = 120;
+    public $defalutGid = 123;
+    public $startImport = '2017-7-9 00:00:00';
+    public $endImport = '2017-7-29 00:00:00';
+    public $channelType = 8;
     public function _initialize() {
         parent::_initialize();
     }
@@ -961,9 +964,8 @@ award.address as addres,award.orderid as orderid,award.username as username from
         set_time_limit(0);
         //每日数据汇总（记录每天活动所有模板所产生的数据总数）
 
-        //记录从6.20 到 7.20号每天产生的模板总数
-        $fromDate = strtotime("2017-3-2 00:00:00");
-        $endDate = strtotime("2017-3-20 00:00:00");
+        $fromDate = strtotime($this->startImport);
+        $endDate = strtotime($this->endImport);
         $i = 0;
         $datereport = array();
         while($i<35){
@@ -1045,9 +1047,8 @@ award.address as addres,award.orderid as orderid,award.username as username from
         set_time_limit(0);
         //每日数据汇总（记录每天活动所有模板所产生的数据总数）
 
-        //记录从6.20 到 7.20号每天产生的模板总数
-        $fromDate = strtotime("2017-3-2 00:00:00");
-        $endDate = strtotime("2017-3-20 00:00:00");
+        $fromDate = strtotime($this->startImport);
+        $endDate = strtotime($this->endImport);
         $i = 0;
         $datereport = array();
         while($i<35){
@@ -1092,15 +1093,15 @@ award.address as addres,award.orderid as orderid,award.username as username from
         set_time_limit(0);
 
         //获取所有模板
-        $query = "select cid as gid,cname as title from tp_npic_twocode where channel_type=7 order by cid asc";
+        $query = "select cid as gid,cname as title from tp_npic_twocode where channel_type=".$this->channelType." order by cid asc";
         $glist = M('bonus')->query($query);
         $this->assign('glist', $glist);
 
         //每日渠道汇总表
         $m = 0;
         $datereport2 = array();
-        $fromDate2 = strtotime("2017-3-1 00:00:00");
-        $endDate2 = strtotime("2017-3-20 00:00:00");
+        $fromDate2 = strtotime($this->startImport);
+        $endDate2 = strtotime($this->endImport);
         while($m<35){
             $gidArr = array();
             $add = 24*3600;
@@ -1134,8 +1135,8 @@ award.address as addres,award.orderid as orderid,award.username as username from
         //每日渠道汇总表
         $m = 0;
         $datereport2 = array();
-        $fromDate2 = strtotime("2017-3-1  00:00:00");
-        $endDate2 = strtotime("2017-03-20 00:00:00");
+        $fromDate2 = strtotime( $this->startImport );
+        $endDate2 = strtotime( $this->endImport );
         while($m<35){
             $gidArr = array();
             $add = 24*3600;
@@ -1195,7 +1196,7 @@ award.address as addres,award.orderid as orderid,award.username as username from
             $obj2 = $objPHPExcel->setActiveSheetIndex(0)
                 ->setCellValue('A' . ($n + 2), $n+1)
                 ->setCellValue('B' . ($n + 2), $data[$n]['date']);
-            $query = "select cid as gid,cname as title from tp_npic_twocode where channel_type=7 order by cid asc";
+            $query = "select cid as gid,cname as title from tp_npic_twocode where channel_type=".$this->channelType." order by cid asc";
             $glist = M('bonus')->query($query);
             foreach($glist as $key => $each){
                 $obj2 = $obj2->setCellValue($arrayKeyList2[$key+2] . ($n + 2), $data[$n][$each['gid']]);
