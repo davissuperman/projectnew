@@ -1,0 +1,36 @@
+<div class="page-title">
+	<a class="backBg" data-ui-sref="my"><i class="icon-back"></i></a>
+	<div class="tit">{{appPage.title}}</div>
+</div>
+<div class="page-content my-tasks-page">
+	<ul class="ul-box">
+        <li class="clrfix " ng-repeat="task in taskList">
+            <a ui-sref="order_view({taskId:task.id})" title="{{task.name}}">
+            	<div class="clrfix ul-box-con">
+                    <div class="left">
+                        <i class="bg-icon bg-icon-wen" ng-if="task.type == 'wen'"></i>
+                        <i class="bg-icon bg-icon-tu" ng-if="task.type == 'tu'"></i>
+                    </div>
+                    <div class="right">
+                    	<div class="clrfix line01">
+                        	<div class="name t-o-e ">{{task.name}}</div>
+                            <div class="c1 status ">{{task.status | taskStatusFormat}}</div>
+                        </div>
+                        
+                        <div class="clrfix">
+                        	<span class="fl c1">{{task.calStatus | taskCalStatusFormat}}</span>
+                            <span class="fr c2" ng-if="task.startTime && task.endTime">{{task.startTime}}~{{task.endTime}}</span>
+                        </div>
+                    </div>
+                </div>
+               
+            </a>
+        </li>
+    </ul>
+    
+    <div class="more-page" ng-if="!isLoadingTaskList">
+		<span ng-if="taskParams.page > totalPage && totalPage > 0">暂无更多</span>
+		<span ng-if="taskParams.page > totalPage && totalPage == 0">暂无数据</span>
+		<a href="javascript:;" ng-click="loadingNextPage();" ng-if="taskParams.page <= totalPage">点击显示更多...</a>
+	</div>
+</div>

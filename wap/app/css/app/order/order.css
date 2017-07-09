@@ -1,0 +1,17 @@
+.icon-v{background:url(../../../images/order/icon-v.png) no-repeat; background-size:auto 100%; display:inline-block;}
+.order-list-box li{ padding:0; background:#fff; overflow:hidden;}
+.order-list-box li .ul-box-con{ padding:5px;}
+.ul-box.order-list-box  li a{padding:0;}
+.order-list-box .icon-v{    
+	height: 15px;
+    width: 15px;
+    margin-right: 5px;
+}
+.order-list-box .right .btn-share{ position:absolute;bottom: -2px;
+    right: 5px;}
+.order-list-box .ul-box-foot{ background:#fff; padding:5px; border-top:1px solid #eee;}
+.ul-box-foot .item span{margin-right:5px;}
+
+.order-task-details{padding:10px; border-radius:5px;}
+.order-task-details  dt{margin-right:10px;line-height:24px;}
+.order-task-details  dl dd{ line-height:24px;}

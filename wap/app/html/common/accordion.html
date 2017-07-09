@@ -1,0 +1,12 @@
+<ul class="menu-list">
+    <li ng-repeat="m in menuList" ng-class="{'active':currentUrl.indexOf(m.id) != -1}">
+        <a data-ui-sref="{{m.state}}" title="{{m.name}}" ng-if="m.id != 'scan'">
+            <p class="icon-box"><i class="icon-menu icon-menu-{{m.id}}"></i></p>
+            <p>{{m.name}}</p>
+        </a>
+        <a href="javascript:;" title="{{m.name}}" ng-if="m.id == 'scan'" ng-click="scanImage();">
+            <p class="icon-box"><i class="icon-menu icon-menu-{{m.id}}"></i></p>
+            <p>{{m.name}}</p>
+        </a>
+    </li>
+</ul>

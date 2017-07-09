@@ -1,0 +1,85 @@
+<div class="page-title">
+	<div class="tit">{{appPage.title}}</div>
+</div>
+<div class="page-content">
+	<ul class="ul-box order-list-box">
+        <li class="clrfix " ng-repeat="order in orderList">
+            <a ui-sref="order_view({orderId:order.id})" title="{{order.name}}">
+            	<div class="clrfix ul-box-con">
+                    <div class="left">
+                        <div class="money"><span>&yen;</span><strong>{{order.money}}</strong></div>
+                    </div>
+                    <div class="right">
+                        <div class="name t-o-e">{{order.name}}</div>
+                        <!--div class="money c1"><span>&yen;</span><strong>{{order.money}}</strong></div-->
+                        <div class="des t-o-e"><i class="icon-v"></i>官方认证</div>
+                        <span class="btn-share"><i class="icon-share"></i>立即分享</span>
+                    </div>
+                </div>
+                <div class="clrfix ul-box-foot flex">
+                	<div class="item flex-1">
+                    	<span class="icon-people"></span><span>剩余名额</span><span class="c1">{{order.remaining}}</span>
+                   	</div>
+                    <div class="item flex-1">
+                    	<span class="icon-people"></span><span>转发人次</span><span class="c1">{{order.forwardPeople}}</span>
+                   	</div>
+                </div>
+            </a>
+        </li>
+    </ul>
+    
+    <div class="more-page" ng-if="!isLoadingOrderList">
+		<span ng-if="orderParams.page > totalPage && totalPage > 0">暂无更多</span>
+		<span ng-if="orderParams.page > totalPage && totalPage == 0">暂无数据</span>
+		<a href="javascript:;" ng-click="loadingNextPage();" ng-if="orderParams.page <= totalPage">点击显示更多...</a>
+	</div>
+    
+    
+    <!--div class="ul-tab">
+		<a class="active" href="javascript:;">tab1</a>
+		<a href="javascript:;">tab2</a>
+		<a href="javascript:;">tab3</a>
+	</div-->
+	<!--div class="swiper-container">
+		<div class="refreshtip">下拉可以刷新</div>
+		<div class="swiper-wrapper w">
+			<div class="swiper-slide d">
+				<div class="init-loading list-group-item text-center" style="display: none;">下拉可以刷新</div>
+				<div class="swiper-container2">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide list-group">
+						<div class="list-group-item">列表</div>
+						<div class="list-group-item">列表</div>
+						<div class="list-group-item">列表</div>
+						<div class="list-group-item">列表</div>
+						<div class="list-group-item">列表</div>
+						<div class="list-group-item">列表</div>
+					</div>
+					<div class="swiper-slide list-group">
+						<div class="list-group-item">列表</div>
+						<div class="list-group-item">列表</div>
+						<div class="list-group-item">列表</div>
+						<div class="list-group-item">列表</div>
+						<div class="list-group-item">列表</div>
+						<div class="list-group-item">列表</div>
+					</div>
+					<div class="swiper-slide list-group">
+						<div class="list-group-item">列表</div>
+						<div class="list-group-item">列表</div>
+						<div class="list-group-item">列表</div>
+						<div class="list-group-item">列表</div>
+						<div class="list-group-item">列表</div>
+						<div class="list-group-item">列表</div>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="loadtip">上拉加载更多</div>
+		<div class="swiper-scrollbar"></div>
+	</div-->
+
+    
+    
+</div>

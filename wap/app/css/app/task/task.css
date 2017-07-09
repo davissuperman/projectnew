@@ -1,0 +1,9 @@
+.how-copy-href{ position:absolute;height:100%; background:#000;width:100%;}
+.how-copy-href .img{height:100%; background:url(../../../images/task/haoCopy.jpg) no-repeat center 30px; background-size:auto 70%;}
+
+.guize-content{ padding: 10px;
+	line-height: 30px;
+	font-size: 14px;
+}
+.guize-content > li{ text-indent:30px;}
+

@@ -1,0 +1,66 @@
+<div class="page-layer page-current" role="dialog">
+    <div class="page-title ng-scope">
+        <a class="backBg" href="javascript:;" ng-click="$hide();"><i class="icon-back"></i></a>
+        <div class="tit">订单支付</div>
+    </div>
+    <div class="pay-content page-content">
+        <form class="clrfix" name="formHorizontal">
+            <div class="form-custom clrfix">
+                <div class="form-custom-group form-custom-group-inner clrfix">
+                    <div class="flex">
+                        <label class="form-label"><span class="required"></span>应付金额：</label>
+                        <div class="form-controls flex-1">
+                            <span class="c1">{{taskPay.money}}</span>元
+                        </div>
+                    </div>
+                </div>
+                <div class="form-custom-group form-custom-group-inner clrfix">
+                    <div class="flex">
+                        <label class="form-label"><span class="required"></span>账户余额：</label>
+                        <div class="form-controls flex-1">
+                            <span class="c1">{{taskPay.balance}}</span>元
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-custom-group form-custom-group-inner clrfix">
+                    <div class="flex">
+                        <label class="form-label"><span class="required"></span>是否使用账户余额支付：</label>
+                        <div class="form-controls flex-1">
+                            <span>否</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-custom-group form-custom-group-inner clrfix">
+                    <div class="flex">
+                        <label class="form-label form-label-center"><span class="required"></span>其他支付方式：</label>
+                        <div class="form-help flex-1">还需支付：<span class="c1">{{taskPay.needPayMoney}}</span>元</div>
+                    </div>
+                </div>
+                
+                <div class="form-custom-group clrfix">
+                    <div class="form-controls">
+                        <div class="clrfix radio-group">
+                            <label>
+                                <input type="radio" name="payWay" value="1" ng-model="taskPay.payWay">支付宝
+                            </label>
+                            <label>
+                                <input type="radio" name="payWay" value="2" ng-model="taskPay.payWay">微信支付
+                            </label>
+                            <label>
+                                <input type="radio" name="payWay" value="3" ng-model="taskPay.payWay">银联支付
+                            </label>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="form-horizontal-btns clrfix">
+                <span class="btn-blue-h40" type="button" ng-click="savePay(taskPay,formHorizontal)">确认支付</span>
+            </div>
+        </form>
+    </div>
+</div>

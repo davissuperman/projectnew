@@ -1,0 +1,39 @@
+<div class="page-title">
+	<a class="backBg" data-ui-sref="my"><i class="icon-back"></i></a>
+	<div class="tit">{{appPage.title}}</div>
+</div>
+<div class="page-content my-orders-page">
+	<ul class="ul-box">
+        <li class="clrfix " ng-repeat="order in orderList">
+            <a ng-click="showMyOrderDialog(order);">
+            	<div class="clrfix ul-box-con">
+                    <div class="left">
+                        <i class="bg-icon bg-icon-wen" ng-if="order.type == 'wen'"></i>
+                        <i class="bg-icon bg-icon-tu" ng-if="order.type == 'tu'"></i>
+                    </div>
+                    <div class="right">
+                    	<div class="clrfix line01">
+                        	<div class="name t-o-e ">{{order.name}}</div>
+                            <div class="c1 status ">{{order.status | orderStatusFormat}}</div>
+                        </div>
+                        
+                        <div class="clrfix">
+                        	<div class="fl c2"><span>订单号：</span><span>{{order.code}}</span></div>
+                            <span class="fr c2" ng-if="order.time">{{order.time}}</span>
+                        </div>
+                    </div>
+                </div>
+               
+            </a>
+        </li>
+    </ul>
+    
+    <div class="more-page" ng-if="!isLoadingOrderList">
+		<span ng-if="orderParams.page > totalPage && totalPage > 0">暂无更多</span>
+		<span ng-if="orderParams.page > totalPage && totalPage == 0">暂无数据</span>
+		<a href="javascript:;" ng-click="loadingNextPage();" ng-if="orderParams.page <= totalPage">点击显示更多...</a>
+	</div>
+</div>
+
+
+<button data-backdrop="false" class="btn btn-primary fl hide" data-template="html/my/dialog/MyOrderDialog.html" bs-modal="modal" id="btnShowMyOrderDialog"></button>

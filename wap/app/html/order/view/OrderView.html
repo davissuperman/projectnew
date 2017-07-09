@@ -1,0 +1,89 @@
+<div class="page-layer page-current" role="dialog">
+    <div class="page-title ng-scope">
+        <a class="backBg" ng-click="goBackPage();" href="javascript:;"><i class="icon-back"></i></a>
+        <div class="tit">{{appPage.title}}</div>
+        <div class="control"><span ng-click="showTaskExplainPage();">任务说明</span></div>
+    </div>
+    <div class="page-content page-content-bottom-60">
+    	<div class="order-view-page hide">
+        	<div class="list-group">
+                <div class="list-group-item ">
+                    <div class="flex">
+                        <div>任务标题：</div>
+                        <div class="flex-1">
+                            千年等一会
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="flex">
+                        <div>任务类型：</div>
+                        <div class="flex-1">
+                            新手任务
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="flex">
+                        <div>任务平台：</div>
+                        <div class="flex-1">
+                            微信朋友圈/分享链接
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="flex">
+                        <div>认领状态：</div>
+                        <div class="flex-1">
+                            已认领
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <dl class="list-box-dl">
+                <dt>任务要求</dt>
+                <dd class="list-group">
+                    <div class="list-group-item ">
+                        <div class="flex">
+                            <div>分享链接：</div>
+                            <div class="flex-1">
+                                http://ios.hrdd.wechar.com/test/buy.index.html
+                                <div class="flex">复制链接到微信，打开再分享到朋友圈</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="list-group-item">
+                        <div class="flex">
+                            <div>任务要求：</div>
+                            <div class="flex-1">
+                                <ul>
+                                    <li>1.微信朋友圈转发分享语和分享链接</li>
+                                    <li>2.转发对全部好友可见，上传分享截图</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>系统提示：</dt>
+                <dd>
+                    1、请将链接分享到微信朋友圈；
+                </dd>
+                <dd>
+                    2、分享后进入“我的-待提交任务”，上传分享成功的截图。
+                </dd>
+            </dl>
+        </div>
+    	
+    	<iframe src="http://www.ufxiao.com/NewApp/Goods/RedDetail.aspx?acid=1403081733&appid=168227&gid=68082&accountId=10156669" width="100%" frameborder="no" scrolling="no" border="0" name="main-frame" height="100%"></iframe>
+    </div>
+</div>
+
+
+<div class="page-footer">
+	<span class="btn-blue-h40" type="button">立即分享</span>
+</div>
+
+<button data-backdrop="false" class="btn btn-primary fl hide" data-template="html/order/dialog/OrderTaskExplainDialog.html" bs-modal="modal" id="btnShowTaskExplainPage"></button>

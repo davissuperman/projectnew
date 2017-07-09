@@ -1,0 +1,105 @@
+<div class="page-title">
+	<a class="backBg" data-ui-sref="tasks"><i class="icon-back"></i></a>
+	<div class="tit">{{appPage.title}}</div>
+</div>
+<div class="page-content">
+	<form class="clrfix" name="formHorizontal">
+    	<div class="form-custom clrfix">
+        	<div class="form-custom-group form-custom-group-inner clrfix">
+            	<div class="flex">
+                	<label class="form-label"><span class="required"></span>链接地址：</label>
+                    <div class="form-controls flex-1">
+                        <input placeholder="请输入公众号文章链接" class="form-control" type="text" ng-model="task.href" name="href" ng-class="{'ng-dirty ng-valid-parse':!formHorizontal.href.$valid && formHorizontal.href.$dirty}" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-help"  ng-click="showHowCopyHrefPage();">如何复制公众号文中链接</div>
+            <div class="form-custom-group form-custom-group-inner clrfix">
+            	<div class="flex">
+                	<label class="form-label"><span class="required"></span>文章标题：</label>
+                    <div class="form-controls flex-1">
+                        <input placeholder="请输入公众号文章标题" class="form-control" type="text" ng-model="task.name" name="name" ng-class="{'ng-dirty ng-valid-parse':!formHorizontal.name.$valid && formHorizontal.name.$dirty}" required>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="form-custom-group form-custom-group-inner clrfix">
+            	<div class="flex">
+                    <label class="form-label form-label-center"><span class="required"></span>文章阅读量：</label>
+                    <div class="form-controls flex-1">
+                        <input placeholder="请输入文章阅读量" class="form-control" type="number" ng-model="task.number" name="number" ng-class="{'ng-dirty ng-valid-parse':!formHorizontal.number.$valid && formHorizontal.number.$dirty}" ng-blur="checkTaskNumber();" required>
+                    </div>
+                </div>
+                <div class="form-notice">计费标准：活动期间0.1元/阅读，阅读次数最少1000起</div>
+            </div>
+            <div class="form-help">支付金额：{{task.payMoney}}元</div>
+            
+            <div class="form-custom-group clrfix">
+                <div class="form-controls">
+                	<div class="clrfix radio-group">
+                    	<label>
+                            <input type="radio" name="timeType" value="1" ng-model="task.timeType">立即开始，两天后结束
+                        </label>
+                        <label>
+                            <input type="radio" name="timeType" value="2" ng-model="task.timeType">时间自定义
+                        </label>
+                    </div>
+                	
+                </div>
+            </div>
+            
+            <div class="form-custom-group form-custom-group-inner clrfix flex" ng-if="task.timeType == 2">
+                <label class="form-label"><span class="required"></span>开始时间：</label>
+                <div class="form-controls flex-1">
+                    <!--input placeholder="请选择开始时间" class="form-control" type="text" ng-model="task.startTime | DateFormatDefault" name="startTime" ng-class="{'ng-dirty ng-valid-parse':!formHorizontal.startTime.$valid && formHorizontal.startTime.$dirty}" readonly="readonly" required--><!--{{task.startTime | DateFormatDefault}} -->
+                    <div class="form-control lh25">{{task.startTime}}</div>
+                </div>
+            </div>
+            
+            <div class="form-custom-group form-custom-group-inner clrfix flex" ng-if="task.timeType == 2">
+                <label class="form-label"><span class="required"></span>结束时间：</label>
+                <div class="form-controls flex-1">
+                    <!--input placeholder="请选择结束时间" class="form-control" type="text" ng-model="task.endTime" name="endTime" ng-class="{'ng-dirty ng-valid-parse':!formHorizontal.endTime.$valid && formHorizontal.endTime.$dirty}" readonly="readonly" required-->
+                    <div class="form-control lh25">{{task.endTime}}</div>
+                </div>
+            </div>
+            
+            
+            <div class="form-custom-group form-custom-group-inner clrfix flex">
+                <label class="form-label"><span class="required"></span>手机号码：</label>
+                <div class="form-controls flex">
+                    <input placeholder="请输入手机号码" class="form-control flex-1 wd130" type="number" ng-model="task.phone" name="phone" ng-class="{'ng-dirty ng-valid-parse':!formHorizontal.phone.$valid && formHorizontal.phone.$dirty}" required>
+                    <span class="flex-1 btn-color btn-color-h34" ng-click="sendYzCode(task);" ng-show="!startCountDown">获取验证码</span>
+                    <span class="flex-1 btn-color btn-color-h34" ng-show="startCountDown">{{timeCount}}秒后重新发送
+</span>
+                </div>
+            </div>
+            
+            <div class="form-custom-group form-custom-group-inner clrfix flex">
+                <label class="form-label"><span class="required"></span>验证码：</label>
+                <div class="form-controls flex-1">
+                    <input placeholder="请输入验证码" class="form-control" type="number" ng-model="task.yzcode" name="yzcode" ng-class="{'ng-dirty ng-valid-parse':!formHorizontal.yzcode.$valid && formHorizontal.yzcode.$dirty}" required>
+                </div>
+            </div>
+            
+            <div class="radio-group">
+                <label for="guizecheckbox"><input type="radio" checked="">已阅读并同意</label>
+                <a href="javascript:;" ng-click="showGuizePage();">《热文发布规则》</a>
+         	</div>
+            
+        </div>
+        
+        <div class="form-horizontal-btns clrfix">
+            <span class="btn-blue-h40" type="button" ng-click="saveTask(task,formHorizontal)">确认下单</span>
+        </div>
+    </form>
+</div>
+
+
+
+<button data-backdrop="false" class="btn btn-primary fl hide" data-template="html/task/dialog/TaskPayDialog.html" bs-modal="modal" id="btnShowPayPage"></button>
+
+<button data-backdrop="false" class="btn btn-primary fl hide" data-template="html/task/dialog/TaskHowCopyHrefPageDialog.html" bs-modal="modal" id="btnShowHowCopyHrefPageDialog"></button>
+
+<button data-backdrop="false" class="btn btn-primary fl hide" data-template="html/task/dialog/TaskGuizeDialog.html" bs-modal="modal" id="btnShowGuizePage"></button>

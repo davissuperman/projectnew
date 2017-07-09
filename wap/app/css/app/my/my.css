@@ -1,0 +1,51 @@
+/*my-index*/
+.my-index .ul-box .img{ float:left; width:30px; height:30px;}
+.my-index .ul-box .img img{width:100%;height:100%;}
+.my-index .ul-box .img i{display: inline-block;width:100%;height:100%;}
+.my-index .ul-box .img .icon01{background:url(../../../images/my/my-task.png) no-repeat; background-size:auto 100%;}
+.my-index .ul-box .img .icon02{background:url(../../../images/my/my-order.png) no-repeat; background-size:auto 100%;}
+.my-index .ul-box .des{ margin-left:40px; line-height:30px;}
+.my-index .ul-box .des .name{font-size:14px;}
+.my-index .ul-box .profile .img{ float:left; width:60px; height:60px;  /*  border-radius: 50%;
+    overflow: hidden;*/}
+.my-index .ul-box .profile .img img{width:100%;height:100%; background:url(../../../images/my/head.png) no-repeat; background-size:auto 100%; border:none;}
+.my-index .ul-box .profile .des{ margin-left:70px; }
+.my-index .ul-box .profile .des .name{ padding-top:6px;line-height:50px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; padding-bottom:5px;}
+.my-index .ul-box .profile .des .nick-wrap{ display:none;}
+
+/*my-view*/
+.my-view .ul-box .label{float:left; line-height:30px;height:30px; color:#333;}
+.my-view .ul-box .text{ text-align:right;color:#999; padding-right:20px;font-size:12px;line-height:30px; height:30px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; position:relative;}
+.my-view .ul-box .text .input-file{ position:absolute; width:100%; height:100%;left:0;top:0; opacity:0;}
+.my-view .perfect-infor .input-file,
+.my-view .input-fade{ position:absolute; width:100%; height:100%;left:0;top:0; opacity:0;}
+.my-view .birthday{
+	position: absolute;
+	right: 0;
+    top: 0;
+    height: 100%;
+    border: none;
+    width: 100%;
+    opacity: 0;
+}
+
+/*my tasks*/
+.my-tasks-page .ul-box li{ background:#fff;}
+.my-tasks-page .ul-box li a{ padding:0;}
+.my-tasks-page .ul-box .left{width:40px;height:40px;}
+.my-tasks-page .ul-box .left .bg-icon{width:40px;height:40px;}
+.my-tasks-page .ul-box .right{ }
+.my-tasks-page .ul-box .right .line01{ height:22px;}
+.my-tasks-page .ul-box .right .name{float:left; max-width: 65%;margin:0;}
+.my-tasks-page .ul-box .right .status{float:right;}
+
+/*my orders*/
+.my-orders-page .ul-box li{ background:#fff;}
+.my-orders-page .ul-box li a{ padding:0;}
+.my-orders-page .ul-box .left{width:40px;height:40px;}
+.my-orders-page .ul-box .left .bg-icon{width:40px;height:40px;}
+.my-orders-page .ul-box .right{ }
+.my-orders-page .ul-box .right .line01{ height:22px;}
+.my-orders-page .ul-box .right .name{float:left; max-width: 65%;margin:0;}
+.my-orders-page .ul-box .right .status{float:right;}
+

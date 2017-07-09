@@ -1,0 +1,137 @@
+<div class="page-layer page-current" role="dialog">
+    <div class="page-title ng-scope">
+        <a class="backBg" href="javascript:;" ng-click="$hide();"><i class="icon-back"></i></a>
+        <div class="tit">订单详情</div>
+    </div>
+    <div class="page-content page-content-bottom-60">
+    	<div class="order-view-page">
+        	<div class="list-group">
+                <div class="list-group-item ">
+                    <div class="flex">
+                        <div>订单号：</div>
+                        <div class="flex-1">
+                            {{myOrderDetails.code}}
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="flex">
+                        <div>推广设置：</div>
+                        <div class="flex-1">
+                            随机红包
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="flex">
+                        <div>总金额：</div>
+                        <div class="flex-1">
+                            <span class="c1">{{myOrderDetails.money}}</span>元
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="flex">
+                        <div>红包个数：</div>
+                        <div class="flex-1">
+                            <span class="c1">{{myOrderDetails.number}}</span>个
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="flex">
+                        <div>订单状态：</div>
+                        <div class="flex-1">
+                            <span class="c1">{{myOrderDetails.status | orderStatusFormat}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        	
+        
+        	<div class="list-group">
+            	<div class="list-group-item ">
+                    <div class="flex">
+                        <div>订单信息：</div>
+                        <div class="flex-1">
+                            {{myOrderDetails.name}}
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item ">
+                    <div class="flex">
+                        <div>开始时间：</div>
+                        <div class="flex-1">
+                            {{myOrderDetails.startTime}}
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="flex">
+                        <div>结束时间：</div>
+                        <div class="flex-1">
+                            {{myOrderDetails.endTime}}
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="flex">
+                        <div>分享认领：</div>
+                        <div class="flex-1">
+                           0/50
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="flex">
+                        <div>扫图总数：</div>
+                        <div class="flex-1">
+                            0人
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <dl class="list-box-dl">
+                <dt>订单任务要求</dt>
+                <dd class="list-group">
+                	<div class="list-group-item ">
+                        <div class="flex">
+                            <div>分享语：</div>
+                            <div class="flex-1">
+                            	手欠了，为什么非的点一下。
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="list-group-item ">
+                        <div class="flex">
+                            <div>活动链接：</div>
+                            <div class="flex-1">
+                                http://ios.hrdd.wechar.com/test/buy.index.html
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="list-group-item">
+                        <div class="flex">
+                            <div>推广要求：</div>
+                            <div class="flex-1">
+                                <ul>
+                                    <li>1.2小时内，超过5位微信好友点击即可获得红包；</li>
+                                    <li>2.同一微信账户只记录一次有效点击。</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </dd>
+            </dl>
+            
+        </div>
+    </div>
+    
+    <div class="page-footer form-horizontal-btns form-horizontal-btns-column2">
+  		<span class="btn-inner-blue-h40" type="button" ng-click="removeOrder($hide);">删除</span>
+        <span class="btn-blue-h40" type="button" ng-click="payOrder($hide);">支付</span>
+    </div>
+    
+</div>

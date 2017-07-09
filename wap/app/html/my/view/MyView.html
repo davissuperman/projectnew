@@ -1,0 +1,46 @@
+<div class="page-title">
+	<a class="backBg" data-ui-sref="my"><i class="icon-back"></i></a>
+	<div class="tit">{{appPage.title}}</div>
+</div>
+<div class="page-content my-view">
+	<ul class="ul-box">
+        <li class="clrfix head-li" onclick="showUpdateInforLayerItem($(this));">
+            <a href="javascript:;" title="头像">
+                <div class="label">头像：</div>
+                <div class="text ta-r">
+                    <img src="/wap/app/images/my/head.png" width="30px" height="30px" class="photoPath">
+                </div>
+            </a>
+        </li>
+        <li class="clrfix nick-li" onclick="showUpdateInforLayerItem($(this));" id="nick-li">
+            <a href="javascript:;">
+                <div class="label">昵称：</div>
+                <div class="text">
+                    <span class="nick">天下无敌</span>
+                </div>
+            </a>
+        </li>
+        <li class="clrfix sex-li">
+            <a href="javascript:;">
+                <div class="label">性别：</div>
+                <div class="text">
+                    <div>未知</div>
+                    <select id="sex" class="select input-fade" onchange="updateUserDetail(this);">
+                        <option value="male">男</option>
+                        <option value="female">女</option>
+                    </select>
+                </div>
+            </a>
+        </li>
+        <li class="clrfix date-li">
+            <a href="javascript:;">
+                <div class="label">出生日期：</div>
+                <div class="text">
+                    <span>1980-09-22</span>
+                    <input type="text" class="birthday" onchange="onchangeDateToUpdateProfile();" readonly="">
+                </div>
+            </a>
+        </li>
+        
+    </ul>
+</div>

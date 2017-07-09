@@ -1,0 +1,240 @@
+<div class="page-title">
+	<a class="backBg" data-ui-sref="tasks"><i class="icon-back"></i></a>
+	<div class="tit">{{appPage.title}}</div>
+</div>
+<div class="page-content">
+	<form class="clrfix" name="formHorizontal">
+    	<div class="form-custom clrfix" ng-show="taskSaoPage.step == 1">
+        
+        	<div class="form-custom-group form-custom-group-inner clrfix">
+            	<div class="flex">
+                	<label class="form-label"><span class="required"></span>广告图片：</label>
+                    <div class="form-controls flex-1">
+                    	<ul class="upload-image-list">
+                        	<li class="upload-section" ng-repeat="o in task.uploadedImages">
+                            	<div class="img-box">
+                                	<img ng-src="{{o.dataImg}}" />
+                                </div>
+                                <i class="icon-del" ng-click="removeUploadedImage($index);"></i>
+                            </li>
+                        	<li class="add-img">
+                            	<div class="form-control-file icon-add-img"></div>
+                            	<input type="file" name="file" id="file" class="file" accept="image/jpg,image/jpeg,image/png,image/bmp" multiple=""  placeholder="请选择图片" ng-model="selectedImages" name="selectedImages" onchange="angular.element(this).scope().uploadSelectedImages(this);">
+                                
+                            </li>
+                        </ul>
+                        
+                    </div>
+                </div>
+                 <div class="form-notice">请上传您的宣传海报，通过APP扫您的海报后，观看您的广告内容。</div>
+            </div>
+        
+        	<div class="form-custom-group form-custom-group-inner clrfix">
+            	<div class="flex">
+                	<label class="form-label"><span class="required"></span>推广链接：</label>
+                    <div class="form-controls flex-1">
+                        <input placeholder="请输入推广链接" class="form-control" type="text" ng-model="task.href" name="href" ng-class="{'ng-dirty ng-valid-parse':!formHorizontal.href.$valid && formHorizontal.href.$dirty}" required>
+                    </div>
+                </div>
+                 <div class="form-notice">请输入营销推广链接，扫图成功后，观看您的推广内容</div>
+            </div>
+            
+            <div class="form-custom-group form-custom-group-inner clrfix ">
+            	<div class="flex">
+                	<label class="form-label"><span class="required"></span>是否需要用户转发：</label>
+                    <div class="form-controls flex-1">
+                        
+                        <div class="clrfix radio-group">
+                            <label style="margin-right:30px;">
+                                <input type="radio" name="needForward" value="1" ng-model="task.needForward">是
+                            </label>
+                            <label>
+                                <input type="radio" name="needForward" value="2" ng-model="task.needForward">否
+                            </label>
+                        </div>
+                        
+                    </div>
+                </div>
+            	
+                
+                <div class="form-notice" ng-if="task.needForward == 1">观看您的广告内容后,转发分享至朋友圈,增加广告曝光量;</div>
+                <div class="form-notice" ng-if="task.needForward == 2">观看您的广告内容后不需要转发分析.</div>
+                
+            </div>
+            
+            
+        </div>
+        
+        <div class="form-horizontal-btns clrfix" ng-show="taskSaoPage.step == 1">
+        	<span class="btn-blue-h40" type="button" ng-click="nextStepTask(task,formHorizontal)" ng-if="task.needForward == 1">下一步</span>
+            <span class="btn-blue-h40" type="button" ng-click="saveTask(task,formHorizontal)" ng-if="task.needForward == 2">确定</span>
+        </div>
+        
+        
+        <div class="form-custom clrfix" ng-show="taskSaoPage.step == 2">
+        	<div class="form-custom-group form-custom-group-inner clrfix ">
+            	<div class="flex">
+                	<label class="form-label"><span class="required"></span>奖励类型：</label>
+                    <div class="form-controls flex-1">
+                        
+                        <div class="clrfix radio-group">
+                            <label ng-click="changeRewardType();">
+                                <input type="radio" name="rewardType" value="1" ng-model="task.rewardType">随机红包
+                            </label>
+                            <label ng-click="changeRewardType();">
+                                <input type="radio" name="rewardType" value="2" ng-model="task.rewardType">普通红包
+                            </label>
+                        </div>
+                        
+                    </div>
+                </div>
+            	
+            </div>
+            
+            <div class="form-custom-group form-custom-group-inner clrfix">
+            	<div class="flex" ng-if="task.rewardType == 1">
+                    <label class="form-label form-label-center"><span class="required"></span>总金额（元）：</label>
+                    <div class="form-controls flex-1">
+                        <input placeholder="请输入总金额" class="form-control" type="number" ng-model="task.payMoney" name="payMoney" ng-class="{'ng-dirty ng-valid-parse':!formHorizontal.payMoney.$valid && formHorizontal.payMoney.$dirty}" ng-blur="calPayMoney();" required>
+                    </div>
+                </div>
+                <div class="flex" ng-if="task.rewardType == 2">
+                    <label class="form-label form-label-center"><span class="required"></span>单个金额（元）：</label>
+                    <div class="form-controls flex-1">
+                        <input placeholder="请输入单个金额" class="form-control" type="number" ng-model="task.paySingleMoney" name="paySingleMoney" ng-blur="checkPaySingleMoney();" required>
+                    </div>
+                </div>
+            	<div class="flex">
+                    <label class="form-label form-label-center"><span class="required"></span>红包个数（个）：</label>
+                    <div class="form-controls flex-1">
+                        <input placeholder="请输入红包个数" class="form-control" type="number" ng-model="task.number" name="number" ng-class="{'ng-dirty ng-valid-parse':!formHorizontal.number.$valid && formHorizontal.number.$dirty}" ng-blur="checkTaskNumber();" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-help">本次活动金额：{{task.payMoney}}元</div>
+            
+            
+            <div class="form-custom-group clrfix">
+                <div class="form-controls">
+                	<div class="clrfix radio-group">
+                    	<label>
+                            <input type="radio" name="timeType" value="1" ng-model="task.timeType">立即开始，两天后结束
+                        </label>
+                        <label>
+                            <input type="radio" name="timeType" value="2" ng-model="task.timeType">时间自定义
+                        </label>
+                    </div>
+                	
+                </div>
+            </div>
+            
+            <div class="form-custom-group form-custom-group-inner clrfix flex" ng-if="task.timeType == 2">
+                <label class="form-label"><span class="required"></span>开始时间：</label>
+                <div class="form-controls flex-1">
+                    <div class="form-control lh25">{{task.startTime}}</div>
+                </div>
+            </div>
+            
+            <div class="form-custom-group form-custom-group-inner clrfix flex" ng-if="task.timeType == 2">
+                <label class="form-label"><span class="required"></span>结束时间：</label>
+                <div class="form-controls flex-1">
+                    <div class="form-control lh25">{{task.endTime}}</div>
+                </div>
+            </div>
+            
+            
+            <div class="form-custom-group form-custom-group-inner clrfix flex">
+                <label class="form-label"><span class="required"></span>手机号码：</label>
+                <div class="form-controls flex">
+                    <input placeholder="请输入手机号码" class="form-control flex-1 wd130" type="number" ng-model="task.phone" name="phone" ng-class="{'ng-dirty ng-valid-parse':!formHorizontal.phone.$valid && formHorizontal.phone.$dirty}" required>
+                    <span class="flex-1 btn-color btn-color-h34" ng-click="sendYzCode(task);" ng-show="!startCountDown">获取验证码</span>
+                    <span class="flex-1 btn-color btn-color-h34" ng-show="startCountDown">{{timeCount}}秒后重新发送
+</span>
+                </div>
+            </div>
+            
+            <div class="form-custom-group form-custom-group-inner clrfix flex">
+                <label class="form-label"><span class="required"></span>验证码：</label>
+                <div class="form-controls flex-1">
+                    <input placeholder="请输入验证码" class="form-control" type="number" ng-model="task.yzcode" name="yzcode" ng-class="{'ng-dirty ng-valid-parse':!formHorizontal.yzcode.$valid && formHorizontal.yzcode.$dirty}" required>
+                </div>
+            </div>
+        	
+   		</div>
+        
+        <div class="form-horizontal-btns form-horizontal-btns-column2 clrfix" ng-show="taskSaoPage.step == 2">
+        	<span class="btn-inner-blue-h40" type="button" ng-click="prevStepTask()">上一步</span>
+            <span class="btn-blue-h40" type="button" ng-click="nextStepTask(task,formHorizontal)">下一步</span>
+        </div>
+        
+        
+        
+        <dl class="custom-panel clrfix" ng-show="taskSaoPage.step == 3">
+        	<dt class="flex">
+                <label class="form-label">扫易得订单</label>
+                <div class="form-controls flex-1">
+                    <div class="fr">订单金额：<span class="c1">{{task.payMoney}}</span>元</div>
+                </div>
+            </dt>
+        	<dd>
+            	<ul>
+                	<li class="flex">
+                    	<label class="form-label">推广设置：</label>
+                        <div class="form-controls flex-1">
+                            <div ng-if="task.rewardType == 1">随机红包</div>
+                            <div ng-if="task.rewardType == 2">普通红包</div>
+                        </div>
+                    </li>
+                    <li class="flex" ng-if="task.rewardType == 2">
+                    	<label class="form-label">单个金额：</label>
+                        <div class="form-controls flex-1">
+                            <div><span class="c1">{{task.paySingleMoney}}</span>元</div>
+                        </div>
+                    </li>
+                    <li class="flex">
+                    	<label class="form-label">红包个数：</label>
+                        <div class="form-controls flex-1">
+                            <div><span class="c1">{{task.number}}</span>个</div>
+                        </div>
+                    </li>
+                    <li class="flex">
+                    	<label class="form-label">开始时间：</label>
+                        <div class="form-controls flex-1">
+                            <div>{{task.startTime}}</div>
+                        </div>
+                    </li>
+                    <li class="flex">
+                    	<label class="form-label">结束时间：</label>
+                        <div class="form-controls flex-1">
+                            <div>{{task.endTime}}</div>
+                        </div>
+                    </li>
+                    <li class="flex">
+                    	<label class="form-label">手机号码：</label>
+                        <div class="form-controls flex-1">
+                            <div>{{task.phone}}</div>
+                        </div>
+                    </li>
+                    <li>
+                    	<label class="form-label">任务说明：</label>
+                        <div class="form-controls flex-1">
+                            <div>1.2小时内，超过5位微信好友点击即可获得红包；</div>
+                            <div>2.同一微信账号只记录一次有效点击。</div>
+                        </div>
+                    </li>
+                </ul>
+            </dd>
+   		</dl>
+        
+        <div class="form-horizontal-btns form-horizontal-btns-column2 clrfix" ng-show="taskSaoPage.step == 3">
+        	<span class="btn-inner-blue-h40" type="button" ng-click="prevStepTask()">上一步</span>
+            <span class="btn-blue-h40" type="button" ng-click="saveTask(task,formHorizontal)">确认下单</span>
+        </div>
+        
+    </form>
+</div>
+
+
+
+
+<button data-backdrop="false" class="btn btn-primary fl hide" data-template="html/task/dialog/TaskPayDialog.html" bs-modal="modal" id="btnShowPayPage"></button>
