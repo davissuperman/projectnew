@@ -817,7 +817,8 @@ HTML;
         //判断当前用户是否已经投过票
         $voteList = M('meibaiji_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$MainOpenId  ))->find();
         $voteThisUid = 0;
-        if($voteList){
+//        if($voteList){
+        if(false){    //多次投票开启
             $voteThisUid = 1;
             //已经投过票 跳转到自己的主页
             header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=index&gid=$gid");
@@ -900,9 +901,9 @@ HTML;
         //检查此 local openid 是否投过票
         $voteList = M('meibaiji_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
         //多次投票
-        if(!$voteList){
-//        if(true){
-            //投票
+//        if(!$voteList){
+        if(true){
+            //多次投票开启
             $d = array();
             $d['fromopenid'] = $fromOpenIdFromPost;
             $d['toopenid'] = $toOpenIdFromPost;
