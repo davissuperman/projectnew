@@ -364,7 +364,7 @@ HTML;
         $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
 
-        $this->assign('title',$info['name'].$this->title);
+        $this->assign('title',$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
