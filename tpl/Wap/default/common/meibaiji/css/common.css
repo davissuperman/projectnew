@@ -72,7 +72,7 @@ input,textarea,select,button{font-size:1em;}
 .advertising{position: absolute;right: 0.1rem;top: 0.1rem; background: #ce292c;color: #fff;padding:0.01rem 0.06rem;-moz-border-radius: 0.03rem;-webkit-border-radius: 0.03rem;border-radius: 0.03rem; z-index:9;font-size: 0.2rem;}
 .common-people{background: url(../images/a/img01.png) no-repeat; background-size:100% auto;    height: 1.1rem;
     width: 1.8rem;bottom: 0rem;right: 0; position:fixed;}
-.common-step{background:#fff;position:relative;top:0;left:0;padding:0.15rem 0.1rem 0.1rem 0.2rem;font-size:0.2rem;color:#ce292c;}
+.common-step{background:#fff;position:relative;top:0;left:0;padding:0.1rem;font-size:0.2rem;color:#ce292c;}
 .common-step dd span{color:#333;}
 
 
@@ -346,11 +346,11 @@ input,textarea,select,button{font-size:1em;}
     line-height: 0.3rem;
     position: absolute;
     width: 90%;
-    top: 10rem;
+    top: 9.8rem;
     border-top: 1px solid #6d7d91;
     left: 50%;
     margin-left: -45%;
-    padding-top: 0.15rem;
+    padding-top: 0.1rem;
 }
 
 /*img-box*/
@@ -408,7 +408,7 @@ input,textarea,select,button{font-size:1em;}
 .ranking-box .control-box{ position:absolute;top:4rem;left:50%; margin-left:-2.25rem;}
 
 /*rule-box*/
-.rule-box{ position:absolute;top:2.4rem;left:0;padding: 0;}
+.rule-box{ position:absolute;top:1.8rem;left:0;padding: 0;}
 .rule-top{}
 
 .rule-center{-moz-border-radius: 0.05rem;
@@ -418,7 +418,7 @@ input,textarea,select,button{font-size:1em;}
 .rule-center > ul > li{ margin-bottom:0.1rem;}
 .rule-center > ul > li > dl > dt{}
 .rule-bottom{}
-.rule-btn{ margin:0.2rem 0;}
+.rule-btn{ margin: 0;}
 
 .rule-center .c1{color:#fff;}
 
@@ -620,7 +620,7 @@ input,textarea,select,button{font-size:1em;}
     padding: 0;
     color: #cfffff;
     position: absolute;
-    top: 8.6rem;
+    top: 8.5rem;
     left: 0;
     width: 100%;
     text-align: center;}
@@ -651,7 +651,7 @@ input,textarea,select,button{font-size:1em;}
 }
 .btns-box-share .need-vote span{color:#fdc812;    font-size: 0.45rem;}
 	
-.btns-box-index{ position:absolute; top: 9.3rem;}
+.btns-box-index{ position:absolute; top: 9.05rem;}
 
 .btn-blue{
 	background: url(../images/b/btn-blue.png) no-repeat;
@@ -705,8 +705,8 @@ input,textarea,select,button{font-size:1em;}
 .page-tip{    background: url(../images/b/page-tip.png) no-repeat center;
     background-size: auto 100%;
     width: 100%;
-    height: 1rem;
-    line-height: 1rem;
+    height: 0.85rem;
+    line-height: 0.85rem;
     display: inline-block;
     position: absolute;
     color: #fff;
@@ -714,4 +714,4 @@ input,textarea,select,button{font-size:1em;}
     font-size: 0.45rem;
     top: 3rem;}
 .page-tip-lottery{ top: 2rem;}
-.page-tip-rule{top:1.4rem;}
+.page-tip-rule{top:1.2rem;}
