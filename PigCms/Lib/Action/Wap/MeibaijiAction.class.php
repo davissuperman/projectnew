@@ -364,7 +364,7 @@ HTML;
         $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
 
-        $this->assign('title',$info['name'].$this->title);
+        $this->assign('title',$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
@@ -581,7 +581,7 @@ HTML;
         $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
 
-        $this->assign('title',$info['name'].$this->title);
+        $this->assign('title',$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
@@ -796,7 +796,7 @@ HTML;
         $this->assign("shareurl",$this->getShareUrl());
         $this->assign('gid', $gid);
 
-        $this->assign('title',$info['name'].$this->title);
+        $this->assign('title',$this->title);
         $this->assign('bonusdesc',$this->bonusdesc);
         $this->assign("imageUrl",$this->imageUrl);
         $this->assign("shareimageurl",$this->shareImageUrl);
@@ -817,8 +817,8 @@ HTML;
         //判断当前用户是否已经投过票
         $voteList = M('meibaiji_votelist')->where(array('fromopenid' => $userOpenId,'toopenid'=>$MainOpenId  ))->find();
         $voteThisUid = 0;
-//        if($voteList){
-        if(false){    //多次投票开启
+        if($voteList){
+//        if(false){    //多次投票开启
             $voteThisUid = 1;
             //已经投过票 跳转到自己的主页
             header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=index&gid=$gid");
@@ -901,8 +901,8 @@ HTML;
         //检查此 local openid 是否投过票
         $voteList = M('meibaiji_votelist')->where(array('fromopenid' => $fromOpenIdFromPost,'toopenid'=>$toOpenIdFromPost  ))->find();
         //多次投票
-//        if(!$voteList){
-        if(true){
+        if(!$voteList){
+//        if(true){
             //多次投票开启
             $d = array();
             $d['fromopenid'] = $fromOpenIdFromPost;
@@ -1303,6 +1303,7 @@ HTML;
         }
         $this->assign("leftTeDengJiang",$leftTeDengJiang);
         $this->assign("leftYiDengJiang",$leftYiDengJiang);
+        $this->assign("title",$this->title);
 
 
         $this->display();

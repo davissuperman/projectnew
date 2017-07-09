@@ -174,11 +174,11 @@
 
 
 <div class="index-game-panel" style="top:3.8rem;">
-    <div class="mianmo mianmo01"><div class="fan"></div></div>
-    <div class="mianmo mianmo02"><div class="fan"></div></div>
-    <div class="mianmo mianmo03"><div class="fan"></div></div>
-    <div class="mianmo mianmo04"><div class="fan"></div></div>
-    <div class="mianmo mianmo05"><div class="fan"></div></div>
+    <div class="mianmo mianmo01"><div class="fan luck-draw"></div></div>
+    <div class="mianmo mianmo02"><div class="fan luck-draw"></div></div>
+    <div class="mianmo mianmo03"><div class="fan luck-draw"></div></div>
+    <div class="mianmo mianmo04"><div class="fan luck-draw"></div></div>
+    <div class="mianmo mianmo05"><div class="fan luck-draw"></div></div>
     <div class="mianmo-word mianmo-word01"></div>
     <div class="mianmo-word mianmo-word02"></div>
     <div class="mianmo-word mianmo-word03"></div>
@@ -193,7 +193,7 @@
         var leftYiDengJiang = '{pigcms::$leftYiDengJiang}';
 
         if(leftVote == '0'){
-            $("#luck-draw").bind('click',function(){
+            $(".luck-draw").bind('click',function(){
                 $.post(
                         "{pigcms::$siteurl}/index.php?g=Wap&m=Meibaiji&a=saveDraw",
                         function (data) {

@@ -8,7 +8,7 @@
     <meta content="telephone=no" name="format-detection" />
     <meta name="keywords" content="" />
     <meta name="description" content="" />
-    <title>闪亮女神魅力，转动你的“膜”丽小确幸！</title>
+    <title>{pigcms::$title}</title>
     <link href="{pigcms::RES}/meibaiji/css/animate.css?v=20170709001" rel="stylesheet" type="text/css" />
     <link href="{pigcms::RES}/meibaiji/css/common.css?v=20170709001" rel="stylesheet" type="text/css" />
     <script src="{pigcms::RES}/meibaiji/js/zepto.min.js" type="text/javascript"></script>
@@ -197,8 +197,8 @@
                                 if(returnCode == '1'){
                                     Pop.alerts("投票成功,试试自己的手气");
                                     setTimeout(function(){
-                                        //开启多次投票
-                                       // goPage();
+                                        //注释掉即开启多次投票
+                                        goPage();
                                     },2000);
                                 }else if(returnCode == '2'){
                                     Pop.alerts('已投过');
