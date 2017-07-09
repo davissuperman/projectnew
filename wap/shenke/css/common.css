@@ -316,10 +316,10 @@ white-space: nowrap; padding:0.1rem 0;}
 /*公司简介*/
 .company-des{    
 	position: absolute;
-    padding: 3.5rem 0.3rem 0 0.3rem;
+    padding: 3.2rem 0.3rem 0 0.3rem;
     top: 2rem;
 }
-.company-des li{ text-indent:0.5rem;}
+.company-des li{ text-indent:0.5rem; line-height:0.4rem;}
 
 /*联系我们*/
 .contact-detail{
