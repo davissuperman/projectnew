@@ -423,12 +423,30 @@ HTML;
 
         //begin views
         $userOpenId= cookie('user_openid_new');
-        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $info = M('meibaiji')->where(array('openid' => $userOpenId))->find();
         if($info){
             $this->setIncViews($info['id']);
         }
         // end views
         $this->assign("gid",$gid);
+        $this->assign("title",$this->title);
+
+        $teDengJiangCount = M('meibaiji_jiang')->where('id=1')->getField('tedengjiang');
+        $leftTeDengJiang = $this->teDengJiangCount - $teDengJiangCount;
+        if($leftTeDengJiang < 0 ){
+            $leftTeDengJiang = 0;
+        }
+
+        $yiDengJiangCount = M('meibaiji_jiang')->where('id=1')->getField('yidengjiang');
+        $leftYiDengJiang = $this->yiDengJiangCount - $yiDengJiangCount;
+        if($leftYiDengJiang < 0 ){
+            $leftYiDengJiang = 0;
+        }
+        $this->assign("leftTeDengJiang",$leftTeDengJiang);
+        $this->assign("leftYiDengJiang",$leftYiDengJiang);
+
+
+
         $this->display();
     }
 
