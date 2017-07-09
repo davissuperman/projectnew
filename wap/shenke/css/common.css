@@ -312,3 +312,22 @@ white-space: nowrap; padding:0.1rem 0;}
     background: url(../images/user/icon-history.png) no-repeat center;
     background-size: 100% auto;
 }
+
+/*公司简介*/
+.company-des{    
+	position: absolute;
+    padding: 3.5rem 0.3rem 0 0.3rem;
+    top: 2rem;
+}
+.company-des li{ text-indent:0.5rem;}
+
+/*联系我们*/
+.contact-detail{
+	position: absolute;
+    padding: 0;
+    top: 7rem; padding-left:1rem;
+}
+.contact-detail dt{font-size:0.4rem;    margin-bottom: 0.1rem;}
+.contact-detail dd{ line-height:0.35rem;}
+.contact-detail dd.people{ margin-bottom:0.2rem;}
+
