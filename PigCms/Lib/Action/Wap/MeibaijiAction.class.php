@@ -8,7 +8,7 @@ class MeibaijiAction extends SjzAction {
     public $shareImageUrl;
     public $endtime="2018-03-13 23:59:59"; //活动结束时间
     public $debug = true; //上线后应该改成false
-    public $defalutGid = 120;
+    public $defalutGid = 123;
 
 
 

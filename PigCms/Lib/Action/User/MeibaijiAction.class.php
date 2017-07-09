@@ -10,7 +10,7 @@ class MeibaijiAction  extends BonusAction {
     public function index() {
         //2 - Allinone
         $db = M('npic_twocode');
-        $where = array('token' => $this->token,'channel_type'=>7);
+        $where = array('token' => $this->token,'channel_type'=>8);
 
         $count = $db->where($where)->count();
         $page = new Page($count, 25);
