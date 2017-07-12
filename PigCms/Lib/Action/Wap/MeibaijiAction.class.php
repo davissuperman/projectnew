@@ -728,7 +728,12 @@ HTML;
             header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=index&gid=$gid");
             exit();
         }
-
+        
+        //判断当前用户是否满票 如果满了直接跳转到自己的首页
+        if( isset($info['vote']) &&  $info['vote']>= $this->eachChouJiangVote*3 ){
+            header("location:$this->url/index.php?g=Wap&m=Meibaiji&a=index&gid=$gid");
+            exit();
+        }
 
         if(!$gid && isset($info['gid']) && $info['gid'] ){
             $gid = $info['gid'];
