@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
+<meta content="telephone=no" name="format-detection" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="css/animate.css?v=201612241500" rel="stylesheet" type="text/css" />
+<link href="css/common.css?v=201612241500" rel="stylesheet" type="text/css" />
+<link href="css/font-awesome.min.css?v=201612241500" rel="stylesheet" type="text/css" />
+<script src="js/zepto.min.js" type="text/javascript"></script>
+<script src="js/common.js" type="text/javascript"></script>
+<title>SCHENCK</title>
+</head>
+<body id="body" style="background:#1a1a1a;">
+	<div class="img-box">
+        <p><img src="images/login/img01.jpg" width="100%" /></p>
+        <p><img src="images/login/img02.jpg" width="100%" /></p>
+        <p><img src="images/login/img03.jpg" width="100%" /></p>
+        <p><img src="images/login/img04.jpg" width="100%" /></p>
+    </div>
+	<div class="login-register-page">
+        <div class="form-panel">
+        	<h2>登录</h2>
+            <input type="tel" placeholder="手机号" class="input input-tel" id="telphone"/>
+            <input type="text" placeholder="验证码" class="input input-code" id="v-code"/>
+            <span class="get-code" onClick="getValidCode(this);">获取验证码</span>
+            <div class="form-btns">
+                <p>
+                    <a href="javascript:;" class="btn-out" onClick="saveInfo();">登录</a>
+                </p>
+            </div>
+            
+        </div>
+        
+    </div>
+	<script type="text/javascript">
+		function getValidCode(elem){
+			var $telphone = $("#telphone");
+			var telphone = $telphone.val();
+			var isMb = checkPhone(telphone);
+			if(isMb){
+				get_phone_code(elem,60);
+			}else{
+				Pop.alerts("请输入正确的手机号");
+			}
+		}
+		
+		function saveInfo(){
+			var $telphone = $("#telphone");
+			var $vCode = $("#v-code");
+			
+			var telphone = $telphone.val();
+			var vCode = $vCode.val();
+			var isMb = checkPhone(telphone);
+			if(!isMb){
+				Pop.alerts("请输入正确的手机号");
+				return false;
+			}
+			
+			if(!vCode){
+				Pop.alerts("验证码不能为空");
+				return false;
+			}
+			
+			var data = {
+				"telphone":telphone,
+				"vCode":vCode
+			};
+			
+			$.ajax({
+				type:'get',
+				url: '' ,//接口地址
+				data:data,
+				dataType:'json',	
+				timeout : 60000,	
+				success:function(data){
+					
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					Pop.alerts("提交失败，网络繁忙！");
+					return false;
+				}
+			});	
+			
+		}
+    </script>
+</body>
+</html>

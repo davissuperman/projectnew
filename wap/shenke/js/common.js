@@ -100,6 +100,15 @@ function playAudio(){
  	audio.play();
 }
 
+function get_phone_code(elem,time){
+	var $elem = $(elem);
+	if(!$elem.hasClass("disabled")){
+		$elem.addClass("disabled");
+		var cd = new countdown($elem,time);
+		cd.doTiming();
+	}
+}
+
 function countdown ($elem,time){
 	var obj = $elem;
 	this.doTiming = function (){
@@ -107,19 +116,11 @@ function countdown ($elem,time){
 		if (time<=0){
 			clearTimeout(st);
 		} else {
-			
 			time--;
 			st=setTimeout (arguments.callee, 1000);
-			obj.html(time);
-			if(time == 2){
-				$("#time-page1").hide();
-				$("#time-page2").show();
-				$("#time-page3").hide();
-			}else if(time == 0){
-				//gameover();
-				$("#time-page1").hide();
-				$("#time-page2").hide();
-				$("#time-page3").show();
+			obj.html(time+'秒重新获取');
+			if(time == 0){
+				obj.html('重新获取').removeClass('disabled');
 			}
 		}
 	}
@@ -162,7 +163,15 @@ function checkPhone(mb){
 	}
 	return false;
 }
-
+function checkIsEmail(email){//验证邮箱
+	var email_reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+	//var email_reg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{1,}$/;
+	if(email_reg.test(email)){
+		return true;
+	}else{
+		return false;
+	}
+}
 
 /*close layer*/
 function closeLayer(){
