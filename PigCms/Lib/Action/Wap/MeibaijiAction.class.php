@@ -489,7 +489,7 @@ HTML;
 
         //begin views
         $userOpenId= cookie('user_openid_new');
-        $info = M('countmask')->where(array('openid' => $userOpenId))->find();
+        $info = M('meibaiji')->where(array('openid' => $userOpenId))->find();
         if($info){
             $this->setIncViews($info['id']);
         }

@@ -138,26 +138,33 @@
     });
 </script>
 </head>
-<body id="body" style="background:#e4efff;">
-<div class="img-box">
-   
-</div>
-
+<body id="body">
+    <dl class="common-step">
+        <dt>奖池剩余</dt>
+        <dd>森田奖品特等奖<strong>{pigcms::$leftTeDengJiang}</strong>份，一等奖<strong>{pigcms::$leftYiDengJiang}</strong>份<span>（由于可能存在数据延时问题，所以奖池剩余数据仅供参考，特此告知！）</span></dd>
+    </dl>
+    <div class="img-box">
+        <p><img src="{pigcms::RES}/meibaiji/images/b/c1.jpg" width="100%" /></p>
+        <p><img src="{pigcms::RES}/meibaiji/images/b/c2.jpg" width="100%" /></p>
+        <p><img src="{pigcms::RES}/meibaiji/images/b/c3.jpg" width="100%" /></p>
+        <p><img src="{pigcms::RES}/meibaiji/images/b/c4.jpg" width="100%" /></p>
+    </div>
+    <div class="advertising">广告</div>
 <if condition="  ($prize eq  1) or ($prize eq  2)">
         <div class="lottery-page">
             <dl class="lottery-box">
-                <dt>恭喜您中奖啦</dt>
-                <dd>请中奖者点击以下按钮,于2017年3月12日24点前填写收货信息,逾期未填写视为自动放弃资格,我们将于3月20日后将奖品寄送给您,感谢您的参与!</dd>
+                <dd>请中奖者点击以下按钮,于2017年7月30日24点前填写收货信息,逾期未填写视为自动放弃资格,我们将于8月7日后将奖品寄送给您,感谢您的参与!</dd>
             </dl>
 
             <div class="btns-box">
                 <a href="{pigcms::$siteurl}/index.php?g=Wap&m=Meibaiji&a=form" title="填写收货地址" class="btn-out">填写收货地址</a>
             </div>
         </div>
+        <div class="page-tip page-tip-lottery">恭喜您中奖啦!</div>
     <else/>
     <div class="lottery-page">
         <dl class="lottery-box">
-            <dt>亲，未中奖。 </dt>
+            <dt>亲，您未中奖。 </dt>
             <dd>若需要联系客服，请提供以下用户凭证：</dd>
             <dd>{pigcms::$openid}</dd>
         </dl>
@@ -166,9 +173,5 @@
     </if>
 <div class="advertising">广告</div>
 <div class="common-people"></div>
-<dl class="common-step">
-    <dt>奖池剩余</dt>
-    <dd>森田奖品特等奖<strong>{pigcms::$leftTeDengJiang}</strong>份，一等奖<strong>{pigcms::$leftYiDengJiang}</strong>份<span>（由于可能存在数据延时问题，所以奖池剩余数据仅供参考，特此告知！）</span></dd>
-</dl>
 </body>
 </html>
