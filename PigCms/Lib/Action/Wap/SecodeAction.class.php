@@ -97,10 +97,10 @@ class SecodeAction extends Action {
             $this->generateFile();
             $this->generateHyFile();
             $ftp = new Ftp();//实例化对象
-            $data['server'] = '116.236.205.203';//服务器地址(IP or domain)
+            $data['server'] = '114.215.188.89';//服务器地址(IP or domain)
             $data['username'] = 'crm';//ftp帐户
             $data['password'] = 'Drjou.1934-2015';//ftp密码
-            $data['port'] = 21;//ftp端口,默认为21
+            $data['port'] = 9090;//ftp端口,默认为21
             $data['pasv'] = false;//是否开启被动模式,true开启,默认不开启
             $data['ssl'] = false;//ssl连接,默认不开启
             $data['timeout'] = 60;//超时时间,默认60,单位 s
