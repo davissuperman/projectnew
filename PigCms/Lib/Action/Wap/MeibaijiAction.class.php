@@ -6,7 +6,7 @@ class MeibaijiAction extends SjzAction {
     public $eachVote = 10;
     public $imageUrl;
     public $shareImageUrl;
-    public $endtime="2018-03-13 23:59:59"; //活动结束时间
+    public $endtime="2017-07-30 23:59:59"; //活动结束时间
     public $debug = true; //上线后应该改成false
     public $defalutGid = 123;
 
@@ -150,7 +150,7 @@ class MeibaijiAction extends SjzAction {
         return $lastInsertId;
     }
     public function setEndTime2(){
-        $endtime =strtotime( "2018-03-13 23:59:59" );
+        $endtime =strtotime( "2017-07-30 23:59:59" );
         if (time() > $endtime) {//活动是否结束
 
             echo <<<HTML
