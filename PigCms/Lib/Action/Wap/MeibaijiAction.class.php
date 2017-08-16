@@ -20,6 +20,7 @@ class MeibaijiAction extends SjzAction {
     public $totalChouJiangVote = 15;
     public $totalDrawCount = 3;
 
+
     public function _initialize() {
         parent :: _initialize();
         $this->url= C('site_url');
@@ -41,6 +42,10 @@ class MeibaijiAction extends SjzAction {
                 }
             }
         }
+    }
+
+    public function sao(){
+        $this->display();
     }
 
     public function getInfo(){
